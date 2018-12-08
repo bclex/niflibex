@@ -1,0 +1,6 @@
+[submodule "niflib/nifxml"]
+	path = niflib/nifxml
+	url = git@github.com:niftools/nifxml.git
+[submodule "niflib/kfmxml"]
+	path = niflib/kfmxml
+	url = git@github.com:niftools/kfmxml.git
