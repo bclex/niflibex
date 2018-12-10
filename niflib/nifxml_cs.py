@@ -1637,83 +1637,31 @@ class Compound(Basic):
                     first = False
         return result
 
-    def code_include_h(self):
+    def code_using(self):
         if self.niflibtype: return ""
 
-        result = ""
+        result = "using System;\n"
+        result += "using System.IO;\n"
+        result += "using System.Collections.Generic;\n"
 
         # include all required structures
-        used_structs = []
-        for y in self.members:
-            file_name = None
-            if y.type != self.name:
-                if y.type in compound_names:
-                    if not compound_types[y.type].niflibtype:
-                        file_name = "%s%s.h"%(self.gen_file_prefix, y.ctype)
-                elif y.type in basic_names:
-                    if basic_types[y.type].niflibtype == "Ref":
-                        file_name = "%sRef.h"%(self.root_file_prefix)
-            if file_name and file_name not in used_structs:
-                used_structs.append( file_name )
-        if used_structs:
-            result += "\n// Include structures\n"
-        for file_name in used_structs:
-            result += '#include "%s"\n'%file_name
+        #used_structs = []
+        #for y in self.members:
+        #    file_name = None
+        #    if y.type != self.name:
+        #        if y.type in compound_names:
+        #            if not compound_types[y.type].niflibtype:
+        #                file_name = "%s%s.h"%(self.gen_file_prefix, y.ctype)
+        #        elif y.type in basic_names:
+        #            if basic_types[y.type].niflibtype == "Ref":
+        #                file_name = "%sRef.h"%(self.root_file_prefix)
+        #    if file_name and file_name not in used_structs:
+        #        used_structs.append( file_name )
+        #if used_structs:
+        #    result += "\n// Include structures\n"
+        #for file_name in used_structs:
+        #    result += 'using %s\n'%file_name
         return result
-        
-    def code_fwd_decl(self):
-        if self.niflibtype: return ""
-        
-        result = ""
-
-        # forward declaration of blocks
-        used_blocks = []
-        for y in self.members:
-            if y.template in block_names and y.template != self.name:
-                if not y.ctemplate in used_blocks:
-                    used_blocks.append( y.ctemplate )
-        if used_blocks:
-            result += '\n// Forward define of referenced NIF objects\n'
-        for fwd_class in used_blocks:
-            result += 'class %s;\n'%fwd_class
-        
-        return result
-
-    def code_include_cpp_set(self, usedirs=False, gen_dir=None, obj_dir=None):
-        if self.niflibtype: return ""
-        
-        if not usedirs:
-          gen_dir = self.gen_file_prefix
-          obj_dir = self.obj_file_prefix
-
-        result = []
-
-        if self.name in compound_names:
-            result.append('#include "%s%s.h"\n'%(gen_dir, self.cname))
-        elif self.name in block_names:
-            result.append('#include "%s%s.h"\n'%(obj_dir, self.cname))
-        else: assert(False) # bug
-
-        # include referenced blocks
-        used_blocks = []
-        for y in self.members:
-            if y.template in block_names and y.template != self.name:
-                file_name = '#include "%s%s.h"\n'%(obj_dir, y.ctemplate)
-                if file_name not in used_blocks:
-                    used_blocks.append( file_name )
-            if y.type in compound_names:
-                subblock = compound_types[y.type]
-                used_blocks.extend(subblock.code_include_cpp_set(True, gen_dir, obj_dir))
-            for terminal in y.cond.get_terminals():
-                if terminal in block_types:
-                    used_blocks.append('#include "%s%s.h"\n'%(obj_dir, terminal))
-        for file_name in sorted(set(used_blocks)):
-            result.append(file_name)
-
-        return result
-
-    def code_include_cpp(self, usedirs=False, gen_dir=None, obj_dir=None):
-        return ''.join(self.code_include_cpp_set(True, gen_dir, obj_dir))
 
     # find member by name
     def find_member(self, name, inherit=False):

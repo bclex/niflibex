@@ -1,3 +1,10 @@
 .vs/
+.vscode/
 __pycache__/
 _build/
+_/
+
+# Visual Studio
+obj
+bin
+*.user
