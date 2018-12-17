@@ -4,6 +4,7 @@ All rights reserved.  Please see niflib.h for license. */
 using System;
 using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace Niflib
 {
@@ -150,43 +151,46 @@ namespace Niflib
 
         //--Basic Types--//
         //int
-        public static void NifStream(ref int val, IStream s, NifInfo info) => val = ReadInt(s);
+        public static void NifStream(out int val, IStream s, NifInfo info) => val = ReadInt(s);
         public static void NifStream(int val, OStream s, NifInfo info) => WriteInt(val, s);
 
         //unsigned int
-        public static void NifStream(ref uint val, IStream s, NifInfo info) => val = ReadUInt(s);
+        public static void NifStream(out uint val, IStream s, NifInfo info) => val = ReadUInt(s);
         public static void NifStream(uint val, OStream s, NifInfo info) => WriteUInt(val, s);
 
         //unsigned short
-        public static void NifStream(ref ushort val, IStream s, NifInfo info) => val = ReadUShort(s);
+        public static void NifStream(out ushort val, IStream s, NifInfo info) => val = ReadUShort(s);
         public static void NifStream(ushort val, OStream s, NifInfo info) => WriteUShort(val, s);
 
         //short
-        public static void NifStream(ref short val, IStream s, NifInfo info) => val = ReadShort(s);
+        public static void NifStream(out short val, IStream s, NifInfo info) => val = ReadShort(s);
         public static void NifStream(short val, OStream s, NifInfo info) => WriteShort(val, s);
 
         //byte
-        public static void NifStream(ref byte val, IStream s, NifInfo info) => val = ReadByte(s);
+        public static void NifStream(out byte val, IStream s, NifInfo info) => val = ReadByte(s);
         public static void NifStream(byte val, OStream s, NifInfo info) => WriteByte(val, s);
 
         //bool
-        public static void NifStream(ref bool val, IStream s, NifInfo info) => val = ReadBool(s, info.version);
+        public static void NifStream(out bool val, IStream s, NifInfo info) => val = ReadBool(s, info.version);
         public static void NifStream(bool val, OStream s, NifInfo info) => WriteBool(val, s, info.version);
 
         //float
-        public static void NifStream(ref float val, IStream s, NifInfo info) => val = ReadFloat(s);
+        public static void NifStream(out float val, IStream s, NifInfo info) => val = ReadFloat(s);
         public static void NifStream(float val, OStream s, NifInfo info) => WriteFloat(val, s);
 
         //string
-        public static void NifStream(ref string val, IStream s, NifInfo info) => val = ReadString(s);
+        public static void NifStream(out string val, IStream s, NifInfo info) => val = ReadString(s);
         public static void NifStream(string val, OStream s, NifInfo info) => WriteString(val, s);
 
         //--Structs--//
         //TexCoord
-        public static void NifStream(ref TexCoord val, IStream s, NifInfo info)
+        public static void NifStream(out TexCoord val, IStream s, NifInfo info)
         {
-            val.u = ReadFloat(s);
-            val.v = ReadFloat(s);
+            val = new TexCoord
+            {
+                u = ReadFloat(s),
+                v = ReadFloat(s),
+            };
         }
         public static void NifStream(TexCoord val, OStream s, NifInfo info)
         {
@@ -195,11 +199,14 @@ namespace Niflib
         }
 
         //Triangle
-        public static void NifStream(ref Triangle val, IStream s, NifInfo info)
+        public static void NifStream(out Triangle val, IStream s, NifInfo info)
         {
-            val.v1 = ReadUShort(s);
-            val.v2 = ReadUShort(s);
-            val.v3 = ReadUShort(s);
+            val = new Triangle
+            {
+                v1 = ReadUShort(s),
+                v2 = ReadUShort(s),
+                v3 = ReadUShort(s),
+            };
         }
         public static void NifStream(Triangle val, OStream s, NifInfo info)
         {
@@ -209,11 +216,14 @@ namespace Niflib
         }
 
         //Vector3
-        public static void NifStream(ref Vector3 val, IStream s, NifInfo info)
+        public static void NifStream(out Vector3 val, IStream s, NifInfo info)
         {
-            val.x = ReadFloat(s);
-            val.y = ReadFloat(s);
-            val.z = ReadFloat(s);
+            val = new Vector3
+            {
+                x = ReadFloat(s),
+                y = ReadFloat(s),
+                z = ReadFloat(s),
+            };
         }
         public static void NifStream(Vector3 val, OStream s, NifInfo info)
         {
@@ -223,12 +233,15 @@ namespace Niflib
         }
 
         //Vector4
-        public static void NifStream(ref Vector4 val, IStream s, NifInfo info)
+        public static void NifStream(out Vector4 val, IStream s, NifInfo info)
         {
-            val.x = ReadFloat(s);
-            val.y = ReadFloat(s);
-            val.z = ReadFloat(s);
-            val.w = ReadFloat(s);
+            val = new Vector4
+            {
+                x = ReadFloat(s),
+                y = ReadFloat(s),
+                z = ReadFloat(s),
+                w = ReadFloat(s),
+            };
         }
         public static void NifStream(Vector4 val, OStream s, NifInfo info)
         {
@@ -239,8 +252,9 @@ namespace Niflib
         }
 
         //Float2
-        public static void NifStream(ref Float2 val, IStream s, NifInfo info)
+        public static void NifStream(out Float2 val, IStream s, NifInfo info)
         {
+            val = new Float2();
             val.data[0] = ReadFloat(s);
             val.data[1] = ReadFloat(s);
         }
@@ -251,8 +265,9 @@ namespace Niflib
         }
 
         //Matrix22
-        public static void NifStream(ref Matrix22 val, IStream s, NifInfo info)
+        public static void NifStream(out Matrix22 val, IStream s, NifInfo info)
         {
+            val = new Matrix22();
             for (int c = 0; c < 2; ++c)
                 for (int r = 0; r < 2; ++r)
                     val[r][c] = ReadFloat(s);
@@ -265,8 +280,9 @@ namespace Niflib
         }
 
         //Float3
-        public static void NifStream(ref Float3 val, IStream s, NifInfo info)
+        public static void NifStream(out Float3 val, IStream s, NifInfo info)
         {
+            val = new Float3();
             val.data[0] = ReadFloat(s);
             val.data[1] = ReadFloat(s);
             val.data[2] = ReadFloat(s);
@@ -279,8 +295,9 @@ namespace Niflib
         }
 
         //Matrix33
-        public static void NifStream(ref Matrix33 val, IStream s, NifInfo info)
+        public static void NifStream(out Matrix33 val, IStream s, NifInfo info)
         {
+            val = new Matrix33();
             for (int c = 0; c < 3; ++c)
                 for (int r = 0; r < 3; ++r)
                     val[r][c] = ReadFloat(s);
@@ -293,8 +310,9 @@ namespace Niflib
         }
 
         //Float4
-        public static void NifStream(ref Float4 val, IStream s, NifInfo info)
+        public static void NifStream(out Float4 val, IStream s, NifInfo info)
         {
+            val = new Float4();
             val.data[0] = ReadFloat(s);
             val.data[1] = ReadFloat(s);
             val.data[2] = ReadFloat(s);
@@ -309,8 +327,9 @@ namespace Niflib
         }
 
         //Matrix44
-        public static void NifStream(ref Matrix44 val, IStream s, NifInfo info)
+        public static void NifStream(out Matrix44 val, IStream s, NifInfo info)
         {
+            val = new Matrix44();
             for (int c = 0; c < 4; ++c)
                 for (int r = 0; r < 4; ++r)
                     val[r][c] = ReadFloat(s);
@@ -323,11 +342,14 @@ namespace Niflib
         }
 
         //Color3
-        public static void NifStream(ref Color3 val, IStream s, NifInfo info)
+        public static void NifStream(out Color3 val, IStream s, NifInfo info)
         {
-            val.r = ReadFloat(s);
-            val.g = ReadFloat(s);
-            val.b = ReadFloat(s);
+            val = new Color3
+            {
+                r = ReadFloat(s),
+                g = ReadFloat(s),
+                b = ReadFloat(s),
+            };
         }
         public static void NifStream(Color3 val, OStream s, NifInfo info)
         {
@@ -337,12 +359,15 @@ namespace Niflib
         }
 
         //Color4
-        public static void NifStream(ref Color4 val, IStream s, NifInfo info)
+        public static void NifStream(out Color4 val, IStream s, NifInfo info)
         {
-            val.r = ReadFloat(s);
-            val.g = ReadFloat(s);
-            val.b = ReadFloat(s);
-            val.a = ReadFloat(s);
+            val = new Color4
+            {
+                r = ReadFloat(s),
+                g = ReadFloat(s),
+                b = ReadFloat(s),
+                a = ReadFloat(s),
+            };
         }
         public static void NifStream(Color4 val, OStream s, NifInfo info)
         {
@@ -353,12 +378,15 @@ namespace Niflib
         }
 
         //Quaternion
-        public static void NifStream(ref Quaternion val, IStream s, NifInfo info)
+        public static void NifStream(out Quaternion val, IStream s, NifInfo info)
         {
-            val.w = ReadFloat(s);
-            val.x = ReadFloat(s);
-            val.y = ReadFloat(s);
-            val.z = ReadFloat(s);
+            val = new Quaternion
+            {
+                w = ReadFloat(s),
+                x = ReadFloat(s),
+                y = ReadFloat(s),
+                z = ReadFloat(s),
+            };
         }
         public static void NifStream(Quaternion val, OStream s, NifInfo info)
         {
@@ -369,9 +397,12 @@ namespace Niflib
         }
 
         //HeaderString
-        public static void NifStream(ref HeaderString val, IStream s, NifInfo info)
+        public static void NifStream(out HeaderString val, IStream s, NifInfo info)
         {
-            val.header = s.GetLine(Buf, 256);
+            val = new HeaderString
+            {
+                header = s.GetLine(Buf, 256)
+            };
             // make sure this is a NIF file
             int ver_start = 0;
             if (val.header.Substring(0, 22) == "NetImmerse File Format") ver_start = 32;
@@ -389,11 +420,11 @@ namespace Niflib
         }
 
         //LineString
-        public static void NifStream(ref LineString val, IStream s, NifInfo info) => val.line = s.GetLine(Buf, 256);
+        public static void NifStream(out LineString val, IStream s, NifInfo info) => val = new LineString { line = s.GetLine(Buf, 256) };
         public static void NifStream(LineString val, OStream s, NifInfo info) => s += val.line + "\n";
 
         //ShortString
-        public static void NifStream(ref ShortString val, IStream s, NifInfo info) { var buf = new byte[ReadByte(s)]; if (s.Read(buf, 0, buf.Length) != buf.Length) throw ConvertException; val.str = Encoding.ASCII.GetString(buf); }
+        public static void NifStream(out ShortString val, IStream s, NifInfo info) { var buf = new byte[ReadByte(s)]; if (s.Read(buf, 0, buf.Length) != buf.Length) throw ConvertException; val = new ShortString { str = Encoding.ASCII.GetString(buf) }; }
         public static void NifStream(ShortString val, OStream s, NifInfo info)
         {
             var buf = Encoding.ASCII.GetBytes(val.str);
@@ -403,14 +434,15 @@ namespace Niflib
         }
 
         //IndexString
-        public static void NifStream(ref IndexString val, IStream s, NifInfo info)
+        public static void NifStream(out IndexString val, IStream s, NifInfo info)
         {
+            val = new IndexString();
             if (info.version >= Niflib.VER_20_1_0_3)
             {
                 var pos = s.tellg();
                 ToIndexString(ReadUInt(s), hdrInfo::getInfo(s), val);
             }
-            else val = ReadString(s);
+            else val.val = ReadString(s);
         }
         static void ToIndexString(uint idx, Header header, IndexString value)
         {
@@ -428,10 +460,11 @@ namespace Niflib
                 FromIndexString(val, hdrInfo::getInfo(s), idx);
                 WriteInt(idx, s);
             }
-            else WriteString(val, s);
+            else WriteString(val.val, s);
         }
-        static void FromIndexString(ref IndexString value, Header header, uint idx)
+        static void FromIndexString(out IndexString value, Header header, uint idx)
         {
+            value = new IndexString();
             if (header == null)
                 throw ConfigureException;
             if (value.empty())
@@ -453,8 +486,9 @@ namespace Niflib
         }
 
         //Char8String
-        public static void NifStream(ref Char8String val, IStream s, NifInfo info)
+        public static void NifStream(out Char8String val, IStream s, NifInfo info)
         {
+            val = new Char8String();
             for (int i = 0; i < 8; ++i)
                 s.Read(Nif.Buf, i, 1);
             val.val = Encoding.ASCII.GetString(Nif.Buf, 0, 8);
@@ -470,13 +504,14 @@ namespace Niflib
         }
 
         //InertiaMatrix
-        public static void NifStream(ref InertiaMatrix val, IStream s, NifInfo info)
+        public static void NifStream(out InertiaMatrix val, IStream s, NifInfo info)
         {
+            val = new InertiaMatrix();
             for (int r = 0; r < 3; ++r)
                 for (int c = 0; c < 4; ++c)
                     val[r][c] = ReadFloat(s);
         }
-        void NifStream(InertiaMatrix val, OStream s, NifInfo info)
+        public static void NifStream(InertiaMatrix val, OStream s, NifInfo info)
         {
             for (int r = 0; r < 3; ++r)
                 for (int c = 0; c < 4; ++c)
@@ -484,14 +519,17 @@ namespace Niflib
         }
 
         //ByteColor4
-        void NifStream(ref ByteColor4 val, IStream s, NifInfo info)
+        public static void NifStream(out ByteColor4 val, IStream s, NifInfo info)
         {
-            val.r = ReadByte(s);
-            val.g = ReadByte(s);
-            val.b = ReadByte(s);
-            val.a = ReadByte(s);
+            val = new ByteColor4
+            {
+                r = ReadByte(s),
+                g = ReadByte(s),
+                b = ReadByte(s),
+                a = ReadByte(s),
+            };
         }
-        void NifStream(ByteColor4 val, OStream s, NifInfo info)
+        public static void NifStream(ByteColor4 val, OStream s, NifInfo info)
         {
             WriteByte(val.r, s);
             WriteByte(val.g, s);
@@ -499,21 +537,18 @@ namespace Niflib
             WriteByte(val.a, s);
         }
 
-
-
         //--Templates--//
-
-        public static void NifStream(ref Key<Quaternion> key, IStream file, NifInfo info, KeyType type)
+        public static void NifStream(out Key<Quaternion> key, IStream file, NifInfo info, KeyType type)
         {
-            key.time = ReadFloat(file);
+            key = new Key<Quaternion>
+            {
+                time = ReadFloat(file)
+            };
             //If key type is not 1, 2, or 3, throw an exception
             if ((int)type < 1 || (int)type > 3)
-            {
                 type = KeyType.LINEAR_KEY;
-                //throw runtime_error("Invalid key type.");
-            }
             //Read data based on the type of key
-            NifStream(key.data, file, info);
+            NifStream(out key.data, file, info);
             if (type == KeyType.TBC_KEY)
             {
                 //Uses TBC interpolation
@@ -527,10 +562,7 @@ namespace Niflib
             WriteFloat(key.time, file);
             //If key type is not 1, 2, or 3, throw an exception
             if ((int)type < 1 || (int)type > 3)
-            {
                 type = KeyType.LINEAR_KEY;
-                //throw runtime_error("Invalid key type.");
-            }
             //Read data based on the type of key
             NifStream(key.data, file, info);
             if (type == KeyType.TBC_KEY)
@@ -543,8 +575,9 @@ namespace Niflib
         }
 
         //Key<T>
-        public static void NifStream<T>(Key<T> key, IStream file, NifInfo info, KeyType type)
+        public static void NifStream<T>(out Key<T> key, IStream file, NifInfo info, KeyType type)
         {
+            key = new Key<T>();
             key.time = ReadFloat(file);
             //If key type is not 1, 2, or 3, throw an exception
             if ((int)type < 1 || (int)type > 3)
@@ -553,12 +586,12 @@ namespace Niflib
                 //throw runtime_error("Invalid key type.");
             }
             //Read data based on the type of key
-            NifStream(key.data, file, info);
+            NifStream(out key.data, file, info);
             if (type == KeyType.QUADRATIC_KEY)
             {
                 //Uses Quadratic interpolation
-                NifStream(key.forward_tangent, file, info);
-                NifStream(key.backward_tangent, file, info);
+                NifStream(out key.forward_tangent, file, info);
+                NifStream(out key.backward_tangent, file, info);
             }
             else if (type == KeyType.TBC_KEY)
             {
@@ -568,7 +601,7 @@ namespace Niflib
                 key.continuity = ReadFloat(file);
             }
         }
-        public static void NifStream<T>(ref Key<T> key, IStream file, NifInfo info, int type) => NifStream(key, file, info, (KeyType)type);
+        public static void NifStream<T>(out Key<T> key, IStream file, NifInfo info, int type) => NifStream(out key, file, info, (KeyType)type);
         public static void NifStream<T>(Key<T> key, OStream file, NifInfo info, KeyType type)
         {
             WriteFloat(key.time, file);
@@ -596,14 +629,15 @@ namespace Niflib
         }
         public static void NifStream<T>(Key<T> key, OStream file, NifInfo info, int type) => NifStream(key, file, info, (KeyType)type);
 
-        public static void NifStream(ref Key<IndexString> key, IStream file, NifInfo info, KeyType type)
+        public static void NifStream(out Key<IndexString> key, IStream file, NifInfo info, KeyType type)
         {
-            if (info.version >= Nif.VER_20_1_0_3)
+            key = new Key<IndexString>();
+            if (info.version >= Niflib.VER_20_1_0_3)
             {
                 Key<int> ikey;
-                NifStream(ikey, file, info, type);
+                NifStream(out ikey, file, info, type);
                 key.time = ikey.time;
-                ToIndexString(ikey.data, hdrInfo::getInfo(file), key.data);
+                ToIndexString(ikey.data, hdrInfo.getInfo(file), key.data);
                 key.tension = ikey.tension;
                 key.bias = ikey.bias;
                 key.continuity = ikey.continuity;
@@ -611,7 +645,7 @@ namespace Niflib
             else
             {
                 Key<string> skey;
-                NifStream(skey, file, info, type);
+                NifStream(out skey, file, info, type);
                 key.time = skey.time;
                 key.data = skey.data;
                 key.tension = skey.tension;
@@ -621,14 +655,14 @@ namespace Niflib
         }
         public static void NifStream(Key<IndexString> key, OStream file, NifInfo info, KeyType type)
         {
-            if (info.version >= Nif.VER_20_1_0_3)
+            if (info.version >= Niflib.VER_20_1_0_3)
             {
                 Key<uint> ikey;
                 ikey.time = key.time;
                 ikey.tension = key.tension;
                 ikey.bias = key.bias;
                 ikey.continuity = key.continuity;
-                FromIndexString(key.data, hdrInfo::getInfo(file), ikey.data);
+                FromIndexString(key.data, hdrInfo.getInfo(file), ikey.data);
                 NifStream(ikey, file, info, type);
             }
             else

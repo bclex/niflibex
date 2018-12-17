@@ -129,11 +129,9 @@ namespace Niflib
          */
         public static List<Ref<NiObject>> ResolveMissingLinkStack(NiObject root, List<NiObject> missing_link_stack)
         {
-            List<NiObjectRef> result;
-            for (list<NiObject*>::const_iterator obj = missing_link_stack.begin(); obj != missing_link_stack.end(); ++obj)
-            {
-                result.push_back(_ResolveMissingLinkStackHelper(root, *obj));
-            }
+            List<NiObjectRef> result = new List<NiObjectRef>();
+            foreach (var obj in missing_link_stack)
+                result.Add(_ResolveMissingLinkStackHelper(root, obj));
             return result;
         }
 
