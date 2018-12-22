@@ -135,7 +135,7 @@ NATIVETYPES = {
     'hfloat' : 'hfloat',
     'HeaderString' : 'HeaderString',
     'LineString' : 'LineString',
-    'Ptr' : '',
+    'Ptr' : '*',
     'Ref' : 'Ref',
     'StringOffset' : 'uint',
     'StringIndex' : 'IndexString',
@@ -272,23 +272,25 @@ class CSFile(io.TextIOWrapper):
         @param block: The class or struct to generate member functions for.
         @type block: Block, Compound
         """
+        keyword = ''
+        # branch
         if isinstance(block, Block):
-            #self.code('protected:')
+            keyword = 'public'
             prot_mode = True
         for y in block.members:
             if not y.is_duplicate:
                 if isinstance(block, Block):
                     if y.is_public and prot_mode:
-                        self.code('public:')
+                        keyword = 'public'
                         prot_mode = False
                     elif not y.is_public and not prot_mode:
-                        self.code('protected:')
+                        keyword = 'protected'
                         prot_mode = True
                 self.comment(y.description)
                 self.code(y.code_declare())
                 if y.func:
                   self.comment(y.description)
-                  self.code("%s %s();"%(y.ctype,y.func))
+                  self.code("%s %s %s();"%(keyword,y.ctype,y.func))
 
     def stream(self, block, action, localprefix = "", prefix = "", arg_prefix = "", arg_member = None):
         """
@@ -330,31 +332,30 @@ class CSFile(io.TextIOWrapper):
                 if block.has_links or block.has_crossrefs:
                     self.code("uint block_num;")
             if action == ACTION_OUT:
-                self.code("stringstream s;")
+                self.code("var s = new MStream();")
                 # declare array_output_count, only if it will actually be used
                 if block.has_arr():
                     self.code("uint array_output_count = 0;")
-
-            if action == ACTION_GETREFS:
-                self.code("List<Ref<NiObject>> refs;")
-            if action == ACTION_GETPTRS:
-                self.code("List<NiObject> ptrs;")
+            #if action == ACTION_GETREFS:
+            #    self.code("List<NiObject> refs;")
+            #if action == ACTION_GETPTRS:
+            #    self.code("List<NiObject> ptrs;")
 
         # stream the ancestor
         if isinstance(block, Block):
             if block.inherit:
                 if action == ACTION_READ:
-                    self.code("base.Read(%s, link_stack, info);"%(block.inherit.cname, stream))
+                    self.code("base.Read(%s, link_stack, info);"%(stream))
                 elif action == ACTION_WRITE:
-                    self.code("base.Write(%s, link_map, missing_link_stack, info);"%(block.inherit.cname, stream))
+                    self.code("base.Write(%s, link_map, missing_link_stack, info);"%(stream))
                 elif action == ACTION_OUT:
-                    self.code("%s += %s.asString();"%(stream, block.inherit.cname))
+                    self.code("%s += base.asString();"%(stream))
                 elif action == ACTION_FIXLINKS:
-                    self.code("%s.FixLinks(objects, link_stack, missing_link_stack, info);"%block.inherit.cname)
+                    self.code("base.FixLinks(objects, link_stack, missing_link_stack, info);")
                 elif action == ACTION_GETREFS:
-                    self.code("refs = %s.GetRefs();"%block.inherit.cname)
+                    self.code("var refs = base.GetRefs();")
                 elif action == ACTION_GETPTRS:
-                    self.code("ptrs = %s.GetPtrs();"%block.inherit.cname)
+                    self.code("var ptrs = base.GetPtrs();")
 
         # declare and calculate local variables (TODO: GET RID OF THIS; PREFERABLY NO LOCAL VARIABLES AT ALL)
         if action in [ACTION_READ, ACTION_WRITE, ACTION_OUT]:
@@ -382,7 +383,7 @@ class CSFile(io.TextIOWrapper):
                       self.code('%s%s = (%s)((%s%s.Count > 0) ? %s%s[0].Count : 0);'%(prefix, y.cname, y.ctype, prefix, cref.cname, prefix, cref.cname))
                     else:
                         # index of dynamically sized array
-                        self.code('for (uint i%i = 0; i%i < %s%s.Count; i%i++)'%(self.indent, self.indent, prefix, cref.cname, self.indent))
+                        self.code('for (var i%i = 0; i%i < %s%s.Count; i%i++)'%(self.indent, self.indent, prefix, cref.cname, self.indent))
                         self.code('\t%s%s[i%i] = (%s)%s%s[i%i].Count;'%(prefix, y.cname, self.indent, y.ctype, prefix, cref.cname, self.indent))
                   # else: #has duplicates needs to be selective based on version
                     # self.code('assert(!"%s");'%(y.name))
@@ -528,14 +529,14 @@ class CSFile(io.TextIOWrapper):
                       self.code(memcode)
                       
                     self.code(\
-                        "for (uint i%i = 0; i%i < %s%s.Count; i%i++) {"%(self.indent, self.indent, y_prefix, y.cname, self.indent))
+                        "for (var i%i = 0; i%i < %s%s.Count; i%i++) {"%(self.indent, self.indent, y_prefix, y.cname, self.indent))
                 else:
                     self.code(\
-                        "for (uint i%i = 0; i%i < %s; i%i++) {"\
+                        "for (var i%i = 0; i%i < %s; i%i++) {"\
                         %(self.indent, self.indent, y.arr1.code(y_arr1_prefix), self.indent))
                 if action == ACTION_OUT:
                         self.code('if (!verbose && (array_output_count > MAXARRAYDUMP)) {')
-                        self.code('%s += "<Data Truncated. Use verbose mode to see complete listing.>" + endl;'%stream)
+                        self.code('%s += "<Data Truncated. Use verbose mode to see complete listing.>" + Environment.NewLine;'%stream)
                         self.code('break;')
                         self.code('}')
                         
@@ -547,17 +548,17 @@ class CSFile(io.TextIOWrapper):
                             if action == ACTION_READ:
                                 self.code("%s%s[i%i].Resize(%s);"%(y_prefix, y.cname, self.indent-1, y.arr2.code(y_arr2_prefix)))
                             self.code(\
-                                "for (uint i%i = 0; i%i < %s%s[i%i].Count; i%i++) {"\
+                                "for (var i%i = 0; i%i < %s%s[i%i].Count; i%i++) {"\
                                 %(self.indent, self.indent, y_prefix, y.cname, self.indent-1, self.indent))
                         else:
                             self.code(\
-                                "for (uint i%i = 0; i%i < %s; i%i++) {"\
+                                "for (var i%i = 0; i%i < %s; i%i++) {"\
                                 %(self.indent, self.indent, y.arr2.code(y_arr2_prefix), self.indent))
                     else:
                         if action == ACTION_READ:
                             self.code("%s%s[i%i].Resize(%s[i%i]);"%(y_prefix, y.cname, self.indent-1, y.arr2.code(y_arr2_prefix), self.indent-1))
                         self.code(\
-                            "for (uint i%i = 0; i%i < %s[i%i]; i%i++) {"\
+                            "for (var i%i = 0; i%i < %s[i%i]; i%i++) {"\
                             %(self.indent, self.indent, y.arr2.code(y_arr2_prefix), self.indent-1, self.indent))
                     z = "%s%s[i%i][i%i]"%(y_prefix, y.cname, self.indent-2, self.indent-1)
     
@@ -566,7 +567,10 @@ class CSFile(io.TextIOWrapper):
                 if action in [ACTION_READ, ACTION_WRITE, ACTION_FIXLINKS, ACTION_GETREFS, ACTION_GETPTRS]:
                     if (not subblock.is_link) and (not subblock.is_crossref):
                         # not a ref
+                        outprefix = ""
                         if action in [ACTION_READ, ACTION_WRITE] and y.is_abstract is False:
+                            if action == ACTION_READ:
+                                outprefix = "out "                                
                             # hack required for vector<bool>
                             if y.type == "bool" and y.arr1.lhs:
                                 self.code("{");
@@ -583,9 +587,9 @@ class CSFile(io.TextIOWrapper):
                                 cast = ""
                                 if ( y.is_duplicate ):
                                     cast = "(%s)" % y.ctype
-                                self.code("Nif.NifStream(%s%s, %s, info);"%(cast, z, stream))
+                                self.code("Nif.NifStream(%s%s%s, %s, info);"%(outprefix, cast, z, stream))
                             else:
-                                self.code("Nif.NifStream(%s, %s, info, %s%s);"%(z, stream, y_prefix, y.carg))
+                                self.code("Nif.NifStream(%s%s, %s, info, %s%s);"%(outprefix, z, stream, y_prefix, y.carg))
                     else:
                         # a ref
                         if action == ACTION_READ:
@@ -605,12 +609,12 @@ class CSFile(io.TextIOWrapper):
                 # the following actions don't distinguish between refs and non-refs
                 elif action == ACTION_OUT:
                     if not y.arr1.lhs:
-                        self.code('%s += "%*s%s:  " + %s + endl;'%(stream, 2*self.indent, "", y.name, z))
+                        self.code('%s += "%*s%s:  " + %s + Environment.NewLine;'%(stream, 2*self.indent, "", y.name, z))
                     else:
                         self.code('if (!verbose && (array_output_count > MAXARRAYDUMP)) {')
                         self.code('break;')
                         self.code('}')
-                        self.code('%s += "%*s%s[" + i%i + "]:  " + %s + endl;'%(stream, 2*self.indent, "", y.name, self.indent-1, z))
+                        self.code('%s += "%*s%s[" + i%i + "]:  " + %s + Environment.NewLine;'%(stream, 2*self.indent, "", y.name, self.indent-1, z))
                         self.code('array_output_count++;')
             else:
                 subblock = compound_types[y.type]
@@ -643,8 +647,8 @@ class CSFile(io.TextIOWrapper):
 
         # the end
         if isinstance(block, Block) or block.name in ["Header", "Footer"]:
-            if action == ACTION_OUT:
-                self.code("return s.str();")
+            if action == ACTION_OUT: 
+                self.code("return s.ToString();")
             if action == ACTION_GETREFS:
                 self.code("return refs;")
             if action == ACTION_GETPTRS:
@@ -1400,15 +1404,15 @@ class Member:
         result = self.ctype
         suffix1 = ""
         suffix2 = ""
-        keyword = ""
-        if not self.is_duplicate: # is dimension for one or more arrays
-          if self.arr1_ref:
-            if not self.arr1 or not self.arr1.lhs: # Simple Scalar
-              keyword = "mutable "
-          elif self.arr2_ref: # 1-dimensional dynamic array
-              keyword = "mutable "
-          elif self.is_calculated:
-              keyword = "mutable "
+        keyword = "public "
+        #if not self.is_duplicate: # is dimension for one or more arrays
+        #  if self.arr1_ref:
+        #    if not self.arr1 or not self.arr1.lhs: # Simple Scalar
+        #      keyword = "mutable "
+        #  elif self.arr2_ref: # 1-dimensional dynamic array
+        #      keyword = "mutable "
+        #  elif self.is_calculated:
+        #      keyword = "mutable "
 
         if self.ctemplate:
             if result != "*":
@@ -1625,15 +1629,10 @@ class Compound(Basic):
     def code_construct(self):
         # constructor
         result = ''
-        first = True
         for y in self.members:
             y_code_construct = y.code_construct()
             if y_code_construct:
-                if not first:
-                    result += ';\n' + y_code_construct
-                else:
-                    result += ';\n' + y_code_construct
-                    first = False
+                result += y_code_construct + ';\n'
         return result
 
     def code_using(self):
@@ -1755,35 +1754,41 @@ else:
 
 for element in doc.getElementsByTagName('version'):
     x = Version(element)
+    #print("version_types:%s" % x.num)
     version_types[x.num] = x
     version_names.append(x.num)
 
 for element in doc.getElementsByTagName('basic'):
     x = Basic(element)
     assert not x.name in basic_types
+    #print("basic_types:%s" % x.name)
     basic_types[x.name] = x
     basic_names.append(x.name)
 
 for element in doc.getElementsByTagName('enum'):
     x = Enum(element)
     assert not x.name in enum_types
+    #print("enum_types:%s" % x.name)
     enum_types[x.name] = x
     enum_names.append(x.name)
 
 for element in doc.getElementsByTagName('bitflags'):
     x = Flag(element)
     assert not x.name in flag_types
+    #print("flag_types:%s" % x.name)
     flag_types[x.name] = x
     flag_names.append(x.name)
     
 for element in doc.getElementsByTagName("compound"):
     x = Compound(element)
     assert not x.name in compound_types
+    #print("compound:%s" % x.name)
     compound_types[x.name] = x
     compound_names.append(x.name)
 
 for element in doc.getElementsByTagName("niobject"):
     x = Block(element)
     assert not x.name in block_types
+    #print("niobject:%s" % x.name)
     block_types[x.name] = x
     block_names.append(x.name)

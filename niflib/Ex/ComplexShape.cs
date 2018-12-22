@@ -11,61 +11,49 @@ namespace Niflib
      * Used by the ComplexShape::WeightedVertex strut to store a single
      * skin-weight/bone influence combination for a vertex.
      */
-    public struct SkinInfluence
+    public class SkinInfluence
     {
-        /*! Constructor */
-        public SkinInfluence()
-        {
-            influenceIndex = ComplexShape.CS_NO_INDEX;
-        }
         /*! 
          * Index into the ComplexShape::skinInfluences array of the bone
          * influence for this skin weight.
          */
-        uint influenceIndex;
+        public uint influenceIndex = ComplexShape.CS_NO_INDEX;
         /*! 
          * The amount of influence the indexed bone has on this vertex, between
          * 0.0 and 1.0
          */
-        float weight;
+        public float weight;
     }
 
     /*!
      * Used by the ComplexShape class to store a single vertex and any
      * Associated skin weights
      */
-    public struct WeightedVertex
+    public class WeightedVertex
     {
         /*! The 3D position of this vertex. */
-        Vector3 position;
+        public Vector3 position;
         /*! A list of weight/influence index pairs for this vertex. */
-        List<SkinInfluence> weights;
+        public List<SkinInfluence> weights;
     }
 
     /*!
      * Used by the ComplexShape::ComplexPoint struct to store a single texture
      * cooridinate set/texture coordinate pair of indices.
      */
-    public struct TexCoordIndex
+    public class TexCoordIndex
     {
-        /*! Constructor */
-        public TexCoordIndex()
-        {
-            texCoordSetIndex = ComplexShape.CS_NO_INDEX;
-            texCoordIndex = ComplexShape.CS_NO_INDEX;
-        }
-
         /*!
          * Index into the ComplexShape::texCoordSets array of texture
          * coordinate sets.
          */
-        uint texCoordSetIndex;
+        public uint texCoordSetIndex = ComplexShape.CS_NO_INDEX;
 
         /*!
          * Index into the ComplexShape::TexCoordSet::texCoords array of the
          * texture coordinate set referenced by texCoordSetIndex.
          */
-        uint texCoordIndex;
+        public uint texCoordIndex = ComplexShape.CS_NO_INDEX;
     }
 
     /*!
@@ -74,35 +62,28 @@ namespace Niflib
      * information, such as position, normal vector, texture coordinates, etc.,
      * are stored as indices into the asociated data arrays.
      */
-    public struct ComplexPoint
+    public class ComplexPoint
     {
-        /*! Constructor */
-        public ComplexPoint()
-        {
-            vertexIndex = ComplexShape.CS_NO_INDEX;
-            normalIndex = ComplexShape.CS_NO_INDEX;
-            colorIndex = ComplexShape.CS_NO_INDEX;
-        }
         /*! 
          * Index into the ComplexShape::vertices array which stores the
          * position and any associated skin weights for this point.
          */
-        uint vertexIndex;
+        public uint vertexIndex = ComplexShape.CS_NO_INDEX;
         /*! 
          * Index into the ComplexShape::normals array which stores the normal
          * vector for this point.
          */
-        uint normalIndex;
+        public uint normalIndex = ComplexShape.CS_NO_INDEX;
         /*!
          * Index into the ComplexShape::colors array which stores the vertex
          * color for this point
          */
-        uint colorIndex;
+        public uint colorIndex = ComplexShape.CS_NO_INDEX;
         /*!
          * An array of texture coordinate set/texture coordinate index pairs
          * describing all the UV coordinates for this point.
          */
-        List<TexCoordIndex> texCoordIndices;
+        public List<TexCoordIndex> texCoordIndices;
     }
 
     /*! 
@@ -112,37 +93,31 @@ namespace Niflib
      * different set of NiProperty classes, enabling each face to have unique
      * material settings.
      */
-    public struct ComplexFace
+    public class ComplexFace
     {
-        /*! Constructor */
-        public ComplexFace()
-        {
-            propGroupIndex = ComplexShape.CS_NO_INDEX;
-        }
-
         /*! A list of points which make up this polygon */
-        List<ComplexPoint> points;
+        public List<ComplexPoint> points;
         /*!
          * Index into the ComplexShape::propGroups array which specifies which
          * set of NiProperty classes to apply to this face.
          */
-        uint propGroupIndex;
+        public uint propGroupIndex = ComplexShape.CS_NO_INDEX;
     }
 
     /*!
      * Used by ComplexShape to store texture coordinate data and the
      * associated type of texture, such as base, detail, or dark map.
      */
-    public struct TexCoordSet
+    public class TexCoordSet
     {
         /*!
          * The type of the texture such as base, detail, bump, etc.
          */
-        TexType texType;
+        public TexType texType;
         /*!
          * A list of all the texture cooridnates for this texture set.
          */
-        List<TexCoord> texCoords;
+        public List<TexCoord> texCoords;
     }
 
     /*!
@@ -158,7 +133,7 @@ namespace Niflib
     public class ComplexShape
     {
         /*! Marks empty data indices */
-        const uint CS_NO_INDEX = 0xFFFFFFFF;
+        public const uint CS_NO_INDEX = 0xFFFFFFFF;
 
         /*!
          * This function splits the contents of the ComplexShape into multiple
@@ -176,13 +151,13 @@ namespace Niflib
          * \param use_dismember_partitions Uses BSDismemberSkinInstance with custom partitions for dismember
          * \return A reference to the root NiAVObject that was created.
          */
-        public Ref<NiAVObject> Split(NiNode parent, Matrix44 transform, int max_bones_per_partition = 4, bool stripify = false, bool tangent_space = false, float min_vertex_weight = 0.001f, byte tspace_flags = 0)
+        public NiAVObject Split(NiNode parent, Matrix44 transform, int max_bones_per_partition = 4, bool stripify = false, bool tangent_space = false, float min_vertex_weight = 0.001f, byte tspace_flags = 0)
         {
             //Make sure parent is not NULL
             if (parent == null)
                 throw new InvalidOperationException("A parent is necessary to split a complex shape.");
 
-            bool use_dismember_partitions = false;
+            var use_dismember_partitions = false;
             if (DismemberPartitionsFaces.Count > 0)
             {
                 if (DismemberPartitionsFaces.Count != Faces.Count)
@@ -194,37 +169,37 @@ namespace Niflib
 
             //There will be one NiTriShape per property group
             //with a minimum of 1
-            uint num_shapes = (uint)propGroups.Count;
+            var num_shapes = PropGroups.Count;
             if (num_shapes == 0)
                 num_shapes = 1;
 
-            vector<NiTriBasedGeomRef> shapes(num_shapes);
+            var shapes = new NiTriBasedGeom[num_shapes];
             //Loop through each shape slot and create a NiTriShape
-            for (uint shape_num = 0; shape_num < Shapes.Count; ++shape_num)
-                Shapes[shape_num] = stripify ? new NiTriStrips() : new NiTriShape();
+            for (var shape_num = 0; shape_num < shapes.Length; ++shape_num)
+                shapes[shape_num] = stripify ? (NiTriBasedGeom)new NiTriStrips() : new NiTriShape();
 
-            NiAVObjectRef root;
+            NiAVObject root;
             //If there is just one shape, return it.  Otherwise
             //create a node, parent all shapes to it, and return
             // that
-            if (Shapes.Count == 1)
+            if (shapes.Length == 1)
             {
                 //One shape
-                Shapes[0].Name = Name;
-                root = (NiAVObject)Shapes[0];
+                shapes[0].Name = Name;
+                root = shapes[0];
             }
             else
             {
                 //Multiple shapes
-                NiNodeRef niNode = new NiNode();
-                niNode.Name(Name);
-                for (uint i = 0; i < Shapes.Count; ++i)
+                var niNode = new NiNode();
+                niNode.Name = Name;
+                for (var i = 0; i < shapes.Length; ++i)
                 {
-                    niNode.AddChild((NiAVObject)Shapes[i]);
+                    niNode.AddChild(shapes[i]);
                     //Set Shape Name
-                    Shapes[i].Name = $"{ShapeName}{Name} {i}";
+                    shapes[i].Name = $"{Name} {i}";
                 }
-                root = (NiAVObject)niNode;
+                root = niNode;
             }
             parent.AddChild(root);
 
@@ -233,74 +208,74 @@ namespace Niflib
 
             //Create NiTriShapeData and fill it out with all data that is relevant
             //to this shape based on the material.
-            for (uint shape_num = 0; shape_num < Shapes.size(); ++shape_num)
+            for (var shape_num = 0; shape_num < shapes.Length; ++shape_num)
             {
-                NiTriBasedGeomDataRef niData = stripify ? new NiTriStripsData() : new NiTriShapeData();
-                shapes[shape_num].SetData((NiGeometryData)niData);
+                var niData = stripify ? (NiTriBasedGeomData)new NiTriStripsData() : new NiTriShapeData();
+                shapes[shape_num].Data = (NiGeometryData)niData;
 
                 //Create a list of CompoundVertex to make it easier to
                 //test for the need to clone a vertex
-                List<CompoundVertex> compVerts = new List<CompoundVertex>();
+                var compVerts = new List<CompoundVertex>();
 
                 //List of triangles for the final shape to use
-                List<Triangle> shapeTriangles = new List<Triangle>();
+                var shapeTriangles = new List<Triangle>();
 
                 //a vector that holds in what dismember groups or skin partition does each face belong
-                List<BodyPartList> current_dismember_partitions = DismemberPartitionsBodyParts;
+                var current_dismember_partitions = DismemberPartitionsBodyParts;
 
                 //create a map betweem the faces and the dismember groups
-                List<uint> current_dismember_partitions_faces = new List<uint>();
+                var current_dismember_partitions_faces = new List<uint>();
 
                 //since we might have dismember partitions the face index is also required
-                int current_face_index = 0;
+                var current_face_index = 0;
 
                 //Loop through all faces, and all points on each face
                 //to set the vertices in the CompoundVertex list
-                foreach (face in Faces)
+                foreach (var face in Faces)
                 {
                     //Ignore faces with less than 3 vertices
-                    if (face.Points.Count < 3)
+                    if (face.points.Count < 3)
                         continue;
 
                     //Skip this face if the material does not relate to this shape
-                    if (face.PropGroupIndex != shape_num)
+                    if (face.propGroupIndex != shape_num)
                         continue;
 
-                    List<ushort> shapeFacePoints = new List<ushort>();
-                    foreach (var point in face.Points)
+                    var shapeFacePoints = new List<ushort>();
+                    foreach (var point in face.points)
                     {
                         //--Set up Compound vertex--//
-                        CompoundVertex cv;
+                        var cv = new CompoundVertex();
                         if (Vertices.Count > 0)
                         {
-                            WeightedVertex wv = vertices[point.VertexIndex];
-                            cv.Position = wv.Position;
+                            var wv = Vertices[(int)point.vertexIndex];
+                            cv.position = wv.position;
                             if (SkinInfluences.Count > 0)
-                                for (uint i = 0; i < wv.Weights.Count; ++i)
+                                for (var i = 0; i < wv.weights.Count; ++i)
                                 {
-                                    SkinInfluence inf = wv.Weights[i];
-                                    cv.Weights[skinInfluences[inf.InfluenceIndex]] = inf.Weight;
+                                    var inf = wv.weights[i];
+                                    cv.weights[SkinInfluences[(int)inf.influenceIndex]] = inf.weight;
                                 }
                         }
                         if (Normals.Count > 0)
-                            cv.Normal = Normals[point.NormalIndex];
-                        if (colors.Count > 0)
-                            cv.Color = Colors[point.ColorIndex];
-                        if (texCoordSets.size() > 0)
-                            for (uint i = 0; i < point.TexCoordIndices.Count; ++i)
+                            cv.normal = Normals[(int)point.normalIndex];
+                        if (Colors.Count > 0)
+                            cv.color = Colors[(int)point.colorIndex];
+                        if (TexCoordSets.Count > 0)
+                            for (var i = 0; i < point.texCoordIndices.Count; ++i)
                             {
-                                TexCoordSet set = texCoordSets[point.TexCoordIndices[i].TexCoordSetIndex];
-                                cv.TexCoords[set.TexType] = set.TexCoords[point.TexCoordIndices[i].TexCoordIndex];
+                                var set = TexCoordSets[(int)point.texCoordIndices[i].texCoordSetIndex];
+                                cv.texCoords[set.texType] = set.texCoords[(int)point.texCoordIndices[i].texCoordIndex];
                             }
 
-                        bool found_match = false;
+                        var found_match = false;
                         //Search for an identical vertex in the list
-                        for (ushort cv_index = 0; cv_index < compVerts.Count; ++cv_index)
+                        for (var cv_index = 0; cv_index < compVerts.Count; ++cv_index)
                             if (compVerts[cv_index] == cv)
                             {
                                 //We found a match, push its index into the face list
                                 found_match = true;
-                                shapeFacePoints.Add(cv_index);
+                                shapeFacePoints.Add((ushort)cv_index);
                                 break;
                             }
 
@@ -309,7 +284,7 @@ namespace Niflib
                         {
                             compVerts.Add(cv);
                             //put the new vertex into the face point list
-                            shapeFacePoints.Add((uint)compVerts.Count - 1);
+                            shapeFacePoints.Add((ushort)(compVerts.Count - 1));
                         }
                         //Next Point
                     }
@@ -318,8 +293,8 @@ namespace Niflib
                     {
                         //Starting from vertex 0, create a fan of triangles to fill
                         //in non-triangle polygons
-                        Triangle new_face;
-                        for (uint i = 0; i < shapeFacePoints.Count - 2; ++i)
+                        var new_face = new Triangle();
+                        for (var i = 0; i < shapeFacePoints.Count - 2; ++i)
                         {
                             new_face[0] = shapeFacePoints[0];
                             new_face[1] = shapeFacePoints[i + 1];
@@ -333,8 +308,8 @@ namespace Niflib
                     {
                         //Starting from vertex 0, create a fan of triangles to fill
                         //in non-triangle polygons
-                        Triangle new_face;
-                        for (uint i = 0; i < shapeFacePoints.Count - 2; ++i)
+                        var new_face = new Triangle();
+                        for (var i = 0; i < shapeFacePoints.Count - 2; ++i)
                         {
                             new_face[0] = shapeFacePoints[0];
                             new_face[1] = shapeFacePoints[i + 1];
@@ -344,7 +319,7 @@ namespace Niflib
                             shapeTriangles.Add(new_face);
 
                             //all the resulting triangles belong in the the same dismember partition or better said skin partition
-                            current_dismember_partitions_faces.Add(dismemberPartitionsFaces[current_face_index]);
+                            current_dismember_partitions_faces.Add(DismemberPartitionsFaces[current_face_index]);
                         }
                     }
                     current_face_index++;
@@ -354,15 +329,15 @@ namespace Niflib
                 //if no face points to a certain dismember partition then that dismember partition must be removed
                 if (use_dismember_partitions)
                 {
-                    List<bool> used_dismember_groups = new List<bool>(current_dismember_partitions.Count); //: (, false);
-                    for (uint x = 0; x < current_dismember_partitions_faces.Count; x++)
-                        if (!used_dismember_groups[current_dismember_partitions_faces[x]])
-                            used_dismember_groups[current_dismember_partitions_faces[x]] = true;
-                    List<BodyPartList> cleaned_up_dismember_partitions = new List<BodyPartList>();
-                    for (uint x = 0; x < current_dismember_partitions.Count; x++)
+                    var used_dismember_groups = new List<bool>(current_dismember_partitions.Count); //: (, false);
+                    for (var x = 0; x < current_dismember_partitions_faces.Count; x++)
+                        if (!used_dismember_groups[(int)current_dismember_partitions_faces[x]])
+                            used_dismember_groups[(int)current_dismember_partitions_faces[x]] = true;
+                    var cleaned_up_dismember_partitions = new List<BodyPartList>();
+                    for (var x = 0; x < current_dismember_partitions.Count; x++)
                         if (!used_dismember_groups[x])
                         {
-                            for (uint y = 0; y < current_dismember_partitions_faces.Count; y++)
+                            for (var y = 0; y < current_dismember_partitions_faces.Count; y++)
                                 if (current_dismember_partitions_faces[y] > x)
                                     current_dismember_partitions_faces[y]--;
                         }
@@ -373,13 +348,12 @@ namespace Niflib
 
                 //Attatch properties if any
                 //Check if the properties are skyrim specific in which case attach them in the 2 special slots called bs_properties
-                if (propGroups.Count > 0)
+                if (PropGroups.Count > 0)
                 {
-                    BSLightingShaderPropertyRef shader_property = null;
-
-                    foreach (var prop in propGroups[shape_num])
+                    BSLightingShaderProperty shader_property = null;
+                    foreach (var prop in PropGroups[shape_num])
                     {
-                        NiPropertyRef current_property = prop;
+                        var current_property = prop;
                         if (current_property.GetType().IsSameType(BSLightingShaderProperty.TYPE))
                         {
                             shader_property = (BSLightingShaderProperty)current_property;
@@ -389,21 +363,19 @@ namespace Niflib
 
                     if (shader_property == null)
                     {
-                        foreach (var prop in propGroups)
-                            Shapes[shape_num]->AddProperty(prop);
+                        foreach (var prop in PropGroups)
+                            shapes[shape_num].AddProperty(prop);
                     }
                     else
                     {
-                        NiAlphaPropertyRef alpha_property = null;
-                        foreach (var prop in propGroups[shape_num])
-                        {
+                        NiAlphaProperty alpha_property = null;
+                        foreach (var prop in PropGroups[shape_num])
                             if (prop.GetType().IsSameType(NiAlphaProperty.TYPE))
                                 alpha_property = (NiAlphaProperty)prop;
-                        }
-                        NiPropertyRef[] bs_properties = new NiPropertyRef[2];
+                        var bs_properties = new NiProperty[2];
                         bs_properties[0] = shader_property;
                         bs_properties[1] = alpha_property;
-                        Shapes[shape_num].SetBSProperties(bs_properties);
+                        shapes[shape_num].BSProperties = bs_properties;
                     }
                 }
 
@@ -419,19 +391,19 @@ namespace Niflib
 
                 //Search for a NiTexturingProperty to build list of
                 //texture coordinates sets to create
-                NiPropertyRef niProp = Shapes[shape_num].GetPropertyByType(NiTexturingProperty.TYPE);
-                NiTexturingPropertyRef niTexProp;
+                NiProperty niProp = shapes[shape_num].GetPropertyByType(NiTexturingProperty.TYPE);
+                NiTexturingProperty niTexProp;
                 if (niProp != null)
                     niTexProp = (NiTexturingProperty)niProp;
                 if (niTexProp != null)
                 {
-                    for (int tex_num = 0; tex_num < 8; ++tex_num)
+                    for (var tex_num = 0; tex_num < 8; ++tex_num)
                         if (niTexProp.HasTexture(tex_num))
                         {
                             shapeTexCoordSets.Add(tex_num);
                             TexDesc td = niTexProp.GetTexture(tex_num);
                             td.uvSet = (int)shapeTexCoordSets.Count - 1;
-                            niTexProp->SetTexture(tex_num, td);
+                            niTexProp.SetTexture(tex_num, td);
                         }
                 }
                 else
@@ -516,25 +488,20 @@ namespace Niflib
 
                     if (use_dismember_partitions)
                     {
-                        int face_map = new int[current_dismember_partitions_faces.Count];
-                        for (uint x = 0; x < current_dismember_partitions_faces.Count; x++)
+                        var face_map = new int[current_dismember_partitions_faces.Count];
+                        for (var x = 0; x < current_dismember_partitions_faces.Count; x++)
                             face_map[x] = current_dismember_partitions_faces[x];
                         shapes[shape_num].GenHardwareSkinInfo(max_bones_per_partition, 4, stripify, face_map);
-                        //delete[] face_map;
 
-                        BSDismemberSkinInstanceRef dismember_skin = (BSDismemberSkinInstance)shapes[shape_num].GetSkinInstance();
+                        var dismember_skin = (BSDismemberSkinInstance)shapes[shape_num].GetSkinInstance();
                         dismember_skin.SetPartitions(current_dismember_partitions);
                     }
                     else if (max_bones_per_partition > 0)
-                    {
                         shapes[shape_num].GenHardwareSkinInfo(max_bones_per_partition, 4, stripify);
-                    }
 
                     //NiSkinInstanceRef skinInst = shapes[shape_num].GetSkinInstance();
-
                     //if ( skinInst != null) {
                     //	NiSkinDataRef skinData = skinInst.GetSkinData();
-
                     //	if ( skinData != NULL ) {
                     //		for ( uint inf = 0; inf < shapeInfluences.Count; ++inf ) {
                     //			skinData.SetBoneWeights( inf, shapeWeights[ shapeInfluences[inf] ] );
@@ -547,18 +514,16 @@ namespace Niflib
                 if (tangent_space)
                 {
                     if (tspace_flags == 0)
-                        Shapes[shape_num].UpdateTangentSpace();
-                    else if (Shapes[shape_num].GetData() != null)
+                        shapes[shape_num].UpdateTangentSpace();
+                    else if (shapes[shape_num].GetData() != null)
                     {
-                        Shapes[shape_num].GetData().SetUVSetCount(1);
-                        Shapes[shape_num].GetData().SetTspaceFlag(tspace_flags);
-                        Shapes[shape_num].UpdateTangentSpace(1);
+                        shapes[shape_num].GetData().SetUVSetCount(1);
+                        shapes[shape_num].GetData().SetTspaceFlag(tspace_flags);
+                        shapes[shape_num].UpdateTangentSpace(1);
                     }
                 }
-
                 //Next Shape
             }
-
             return root;
         }
 
@@ -575,7 +540,7 @@ namespace Niflib
             if (root == null)
                 throw new ArgumentNullException("Called ComplexShape::Merge with a null root reference.");
 
-            List<NiTriBasedGeomRef> shapes = new List<NiTriBasedGeomRef>();
+            var shapes = new List<NiTriBasedGeom>();
             //Determine root type
             if (root.IsDerivedType(NiTriBasedGeom.TYPE))
                 //The function was called on a single shape.
@@ -701,9 +666,9 @@ namespace Niflib
 
                     //Search for matching color
                     bool match_found = false;
-                    for (uint c_index = 0; c_index < colors.Count; ++c_index)
+                    for (uint c_index = 0; c_index < Colors.Count; ++c_index)
                     {
-                        if (colors[c_index].r == newColor.r && colors[c_index].g == newColor.g && colors[c_index].b == newColor.b && colors[c_index].a == newColor.a)
+                        if (Colors[c_index].r == newColor.r && Colors[c_index].g == newColor.g && Colors[c_index].b == newColor.b && Colors[c_index].a == newColor.a)
                         {
                             //Match found, use existing index
                             lookUp[c].colorIndex = c_index;
@@ -716,9 +681,9 @@ namespace Niflib
                     if (!match_found)
                     {
                         //No match found, add this color to the list
-                        colors.Add(newColor);
+                        Colors.Add(newColor);
                         //Record new index
-                        lookUp[c].colorIndex = (uint)colors.Count - 1;
+                        lookUp[c].colorIndex = (uint)Colors.Count - 1;
                     }
                 }
 
@@ -1015,25 +980,25 @@ namespace Niflib
 
             //Copy vns data to vertices and normals
             if (has_any_verts)
-                vertices.resize(vns.Count);
+                Vertices.resize(vns.Count);
             if (has_any_norms)
-                normals.resize(vns.Count);
+                Normals.resize(vns.Count);
             for (uint v = 0; v < vns.Count; ++v)
             {
                 if (has_any_verts)
                 {
-                    vertices[v].position = vns[v].position;
-                    vertices[v].weights.resize(vns[v].weights.size());
+                    Vertices[v].position = vns[v].position;
+                    Vertices[v].weights.resize(vns[v].weights.size());
                     uint weight_index = 0;
                     foreach (var w in vns[v].weights)
                     {
-                        vertices[v].weights[weight_index].influenceIndex = boneLookUp[w.Key];
-                        vertices[v].weights[weight_index].weight = w.Value;
+                        Vertices[v].weights[weight_index].influenceIndex = boneLookUp[w.Key];
+                        Vertices[v].weights[weight_index].weight = w.Value;
                         ++weight_index;
                     }
                 }
                 if (has_any_norms)
-                    normals[v] = vns[v].normal;
+                    Normals[v] = vns[v].normal;
             }
             //Done Merging
         }
@@ -1043,16 +1008,16 @@ namespace Niflib
          */
         public void Clear()
         {
-            vertices.clear();
-            colors.clear();
-            normals.clear();
-            texCoordSets.clear();
-            faces.clear();
-            propGroups.clear();
-            skinInfluences.clear();
-            name.clear();
-            dismemberPartitionsBodyParts.clear();
-            dismemberPartitionsFaces.clear();
+            Vertices.Clear();
+            Colors.Clear();
+            Normals.Clear();
+            TexCoordSets.Clear();
+            Faces.Clear();
+            PropGroups.Clear();
+            SkinInfluences.Clear();
+            Name = null;
+            DismemberPartitionsBodyParts.Clear();
+            DismemberPartitionsFaces.Clear();
         }
 
         /*
@@ -1089,13 +1054,13 @@ namespace Niflib
         /*
          * Gets or Sets the property groups used by the Complex Shape.  Each group of NiProperty values can be assigned by vector index to a face in the ComplexShape by index, allowing for material and other properties to be specified on a per-face basis.  If the ComplexShape is split, each property group that is used by faces in the mesh will result in a separate NiTriBasedGeom with the specified propreties attached.
          */
-        public List<List<Ref<NiProperty>>> PropGroups { get; set; }
+        public List<List<NiProperty>> PropGroups { get; set; }
 
         /*
          * Gets or Sets the skin influences used by the Complex Shape.  These are the NiNode objects which cause deformations in skin meshes.  They are referenced in the vertex data by vector index.
          * \param[in] n The new skin influences.  Will replace any existing data.
          */
-        public List<Ref<NiNode>> SkinInfluences { get; set; }
+        public List<NiNode> SkinInfluences { get; set; }
 
         /*
          * Gets or Sets the association between the faces in the complex shape and the corresponding body parts
@@ -1108,89 +1073,54 @@ namespace Niflib
         public List<BodyPartList> DismemberPartitionsBodyParts { get; set; }
     }
 
-
-
-
-    struct VertNorm
+    public class VertNorm
     {
-        Vector3 position;
-        Vector3 normal;
-        Dictionary<NiNodeRef, float> weights;
+        public Vector3 position;
+        public Vector3 normal;
+        public Dictionary<NiNode, float> weights;
 
-        //VertNorm() {}
-        //VertNorm(VertNorm n ) {
-        //	this = n;
-        //}
-        //public static VertNorm operator=( VertNorm  n ) {
-        //	position = n.position;
-        //	normal = n.normal;
-        //	weights = n.weights;
-        //	return *this;
-        //}
-        //bool operator==( const VertNorm & n ) {
-        //	if ( abs(position.x - n.position.x) > 0.001 || abs(position.y - n.position.y) > 0.001 || abs(position.z - n.position.z) > 0.001 ) {
-        //		return false;
-        //	}
-        //	if ( abs(normal.x - n.normal.x) > 0.001 || abs(normal.y - n.normal.y) > 0.001 || abs(normal.z - n.normal.z) > 0.001 ) {
-        //		return false;
-        //	}
-        //	//if ( weights != n.weights ) {
-        //	//	return false;
-        //	//}
+        public static bool operator ==(VertNorm t, VertNorm n)
+        {
+            if (Math.Abs(t.position.x - n.position.x) > 0.001 || Math.Abs(t.position.y - n.position.y) > 0.001 || Math.Abs(t.position.z - n.position.z) > 0.001) return false;
+            if (Math.Abs(t.normal.x - n.normal.x) > 0.001 || Math.Abs(t.normal.y - n.normal.y) > 0.001 || Math.Abs(t.normal.z - n.normal.z) > 0.001) return false;
+            return true;
+        }
+        public static bool operator !=(VertNorm t, VertNorm n) => !(t == n);
 
-        //	return true;
+        //public override bool Equals(object obj)
+        //{
+        //    var n = (VertNorm)obj;
+        //    if (Math.Abs(position.x - n.position.x) > 0.001 || Math.Abs(position.y - n.position.y) > 0.001 || Math.Abs(position.z - n.position.z) > 0.001) return false;
+        //    if (Math.Abs(normal.x - n.normal.x) > 0.001 || Math.Abs(normal.y - n.normal.y) > 0.001 || Math.Abs(normal.z - n.normal.z) > 0.001) return false;
+        //    return true;
         //}
     }
 
-    struct CompoundVertex
+    public class CompoundVertex
     {
-        Vector3 position;
-        Vector3 normal;
-        Color4 color;
-        Dictionary<TexType, TexCoord> texCoords;
-        Dictionary<NiNodeRef, float> weights;
+        public Vector3 position;
+        public Vector3 normal;
+        public Color4 color;
+        public Dictionary<TexType, TexCoord> texCoords;
+        public Dictionary<NiNode, float> weights;
 
-        //CompoundVertex() {}
-        //~CompoundVertex() {}
-        //CompoundVertex( const CompoundVertex & n ) {
-        //	*this = n;
-        //}
-        //CompoundVertex & operator=( const CompoundVertex & n ) {
-        //	position = n.position;
-        //	normal = n.normal;
-        //	color = n.color;
-        //	texCoords = n.texCoords;
-        //	weights = n.weights;
-        //	return *this;
-        //}
-        //bool operator==( const CompoundVertex & n ) {
-        //	if ( position != n.position ) {
-        //		return false;
-        //	}
-        //	if ( normal != n.normal ) {
-        //		return false;
-        //	}
-        //	if ( color != n.color ) {
-        //		return false;
-        //	}
-        //	if ( texCoords != n.texCoords ) {
-        //		return false;
-        //	}
-        //	if ( weights != n.weights ) {
-        //		return false;
-        //	}
-
-        //	return true;
-        //}
+        public static bool operator ==(CompoundVertex t, CompoundVertex n)
+        {
+            if (t.position != n.position) return false;
+            if (t.normal != n.normal) return false;
+            if (t.color != n.color) return false;
+            if (t.texCoords != n.texCoords) return false;
+            if (t.weights != n.weights) return false;
+            return true;
+        }
+        public static bool operator !=(CompoundVertex t, CompoundVertex n) => !(t == n);
     }
 
-    struct MergeLookUp
+    public class MergeLookUp
     {
-        uint vertIndex;
-        uint normIndex;
-        uint colorIndex;
-        Dictionary<uint, uint> uvIndices; //TexCoordSet Index, TexCoord Index
+        public uint vertIndex;
+        public uint normIndex;
+        public uint colorIndex;
+        public Dictionary<uint, uint> uvIndices; //TexCoordSet Index, TexCoord Index
     }
-
-
 }

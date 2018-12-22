@@ -244,18 +244,18 @@ for n in compound_names:
     cs.code()
     cs.code('//To change this file, alter the /niflib/gen_niflib_cs Python script.')
     cs.code()
-    cs.code('using mylib;')
-    if n in ["Header", "Footer"]:
-        cs.code('using mylib2')
+    #cs.code('using System;')
+    #if n in ["Header", "Footer"]:
+    #    cs.code('using mylib2')
     cs.code(x.code_using())
     cs.write("namespace Niflib {\n")
     cs.code()
     # header
     cs.comment(x.description)
-    hdr = "struct %s" % x.cname
-    if x.template: hdr = "template <class T >\n%s" % hdr
-    hdr += " {"
-    cs.code(hdr)
+    if x.template:
+        cs.code('public class %s<T> {' % x.cname)
+    else:
+        cs.code('public class %s {' % x.cname)
     
     #constructor/destructor/assignment
     #if not x.template:
@@ -274,14 +274,14 @@ for n in compound_names:
 
     # header and footer functions
     if n == "Header":
-        cs.code( 'internal NifInfo Read(IStream s);' )
-        cs.code( 'internal override void Write(OStream s, NifInfo info = null);' )
-        cs.code( 'internal override string asString(bool verbose = false);' )
+        cs.code('internal override NifInfo Read(IStream s);')
+        cs.code('internal override void Write(OStream s, NifInfo info = null);')
+        cs.code('internal override string asString(bool verbose = false);')
     
     if n == "Footer":
-        cs.code( 'internal override void Read(ISstream s, List<uint> link_stack, NifInfo info);' )
-        cs.code( 'internal override void Write(OStream s, Dictionary<NiObjectRef, uint> link_map, List<NiObject> missing_link_stack, NifInfo info);' )
-        cs.code( 'internal string asString(bool verbose = false);' )
+        cs.code('internal override void Read(IStream s, List<uint> link_stack, NifInfo info);')
+        cs.code('internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info);')
+        cs.code('internal string asString(bool verbose = false);')
 
     if not x.template:
 
@@ -290,7 +290,7 @@ for n in compound_names:
         # constructor
         x_code_construct = x.code_construct()
         #if x_code_construct:
-        cs.code("public %s() {\n" % (x.cname) + x_code_construct + "}")
+        cs.code("public %s() {\n%s\n}" % (x.cname,x_code_construct))
         cs.code()
 
         #cs.code('//Copy Constructor')
@@ -300,7 +300,8 @@ for n in compound_names:
         #cs.code()
 
         #cs.code('//Copy Operator')
-        #cs.code('%s & %s::operator=( const %s & src ) {' % (x.cname,x.cname,x.cname))
+        #cs.code('%s & %s::operator=( const %s & src ) {' %
+        #(x.cname,x.cname,x.cname))
         #for m in x.members:
         #    if not m.is_duplicate:
         #        cs.code('this->%s = src.%s;' % (m.cname, m.cname))
@@ -308,56 +309,50 @@ for n in compound_names:
         #cs.code('}')
         #cs.code()
 
-        ## header and footer functions
-        #if n == "Header":
-        #    cs.code( 'NifInfo ' + x.cname + '::Read( istream& in ) {' )
-        #    cs.code( '//Declare NifInfo structure' )
-        #    cs.code( 'NifInfo info;' )
-        #    cs.code()
-        #    cs.stream(x, ACTION_READ)
-        #    cs.code()
-        #    cs.code( '//Copy info.version to local version var.' )
-        #    cs.code( 'version = info.version;' )
-        #    cs.code()
-        #    cs.code( '//Fill out and return NifInfo structure.' )
-        #    cs.code( 'info.userVersion = userVersion;' )
-        #    cs.code( 'info.userVersion2 = userVersion2;' )
-        #    cs.code( 'info.endian = EndianType(endianType);' )
-        #    cs.code( 'info.creator = exportInfo.creator.str;' )
-        #    cs.code( 'info.exportInfo1 = exportInfo.exportInfo1.str;' )
-        #    cs.code( 'info.exportInfo2 = exportInfo.exportInfo2.str;' )
-        #    cs.code()
-        #    cs.code( 'return info;' )
-        #    cs.code()
-        #    cs.code( '}' )
-        #    cs.code()
-        #    cs.code( 'void ' + x.cname + '::Write( ostream& out, const NifInfo
-        #    & info ) const {' )
-        #    cs.stream(x, ACTION_WRITE)
-        #    cs.code( '}' )
-        #    cs.code()
-        #    cs.code( 'string ' + x.cname + '::asString( bool verbose ) const
-        #    {' )
-        #    cs.stream(x, ACTION_OUT)
-        #    cs.code( '}' )
+        # header and footer functions
+        if n == "Header":
+            cs.code('public NifInfo Read(IStream s) {')
+            cs.code('//Declare NifInfo structure')
+            cs.code('NifInfo info;')
+            cs.code()
+            cs.stream(x, ACTION_READ)
+            cs.code()
+            cs.code('//Copy info.version to local version var.')
+            cs.code('version = info.version;')
+            cs.code()
+            cs.code('//Fill out and return NifInfo structure.')
+            cs.code('info.userVersion = userVersion;')
+            cs.code('info.userVersion2 = userVersion2;')
+            cs.code('info.endian = EndianType(endianType);')
+            cs.code('info.creator = exportInfo.creator.str;')
+            cs.code('info.exportInfo1 = exportInfo.exportInfo1.str;')
+            cs.code('info.exportInfo2 = exportInfo.exportInfo2.str;')
+            cs.code()
+            cs.code('return info;')
+            cs.code()
+            cs.code('}')
+            cs.code()
+            cs.code('public void Write(OStream s, NifInfo info) {')
+            cs.stream(x, ACTION_WRITE)
+            cs.code('}')
+            cs.code()
+            cs.code('public string asString(bool verbose) {')
+            cs.stream(x, ACTION_OUT)
+            cs.code('}')
         
-        #if n == "Footer":
-        #    cs.code()
-        #    cs.code( 'void ' + x.cname + '::Read( istream& in, list<unsigned
-        #    int> & link_stack, const NifInfo & info ) {' )
-        #    cs.stream(x, ACTION_READ)
-        #    cs.code( '}' )
-        #    cs.code()
-        #    cs.code( 'void ' + x.cname + '::Write( ostream& out, const
-        #    map<NiObjectRef,unsigned int> & link_map, list<NiObject *> &
-        #    missing_link_stack, const NifInfo & info ) const {' )
-        #    cs.stream(x, ACTION_WRITE)
-        #    cs.code( '}' )
-        #    cs.code()
-        #    cs.code( 'string ' + x.cname + '::asString( bool verbose ) const
-        #    {' )
-        #    cs.stream(x, ACTION_OUT)
-        #    cs.code( '}' )
+        if n == "Footer":
+            cs.code()
+            cs.code('public void Read(IStream s, List<uint> link_stack, NifInfo info) {')
+            cs.stream(x, ACTION_READ)
+            cs.code('}')
+            cs.code()
+            cs.code('public void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {')
+            cs.stream(x, ACTION_WRITE)
+            cs.code('}')
+            cs.code()
+            cs.code('public string asString(bool verbose) {')
+            cs.stream(x, ACTION_OUT)
+            cs.code('}')
 
     cs.code('//--BEGIN MISC CUSTOM CODE--//')
 
@@ -437,7 +432,7 @@ if GENALLFILES:
     cs.code()
     cs.code('//To change this file, alter the /niflib/gen_niflib_cs.py Python script.')
     cs.code()
-    cs.code('using std;')
+    cs.code('using System;')
     cs.code()
     cs.write('namespace Niflib {\n')
     cs.code()
@@ -447,8 +442,8 @@ if GENALLFILES:
             cs.code()
             cs.code('//---' + x.cname + '---//')
             cs.code()
-        cs.code('void NifStream( %s & val, istream& in, const NifInfo & info = NifInfo() );' % x.cname)
-        cs.code('void NifStream( %s const & val, ostream& out, const NifInfo & info = NifInfo() );' % x.cname)
+        cs.code('void NifStream(%s val, IStream s, NifInfo info = null);' % x.cname)
+        cs.code('void NifStream(%s val, OStream s, NifInfo info = null);' % x.cname)
         cs.code()
 
     cs.write('}\n')
@@ -476,11 +471,6 @@ if GENALLFILES:
     cs.code('}')
     cs.code('}')
     cs.close()
-    
-
-
-
-
 
 
 
@@ -495,7 +485,7 @@ for n in block_names:
 
     if not GENALLFILES and not x.cname in GENBLOCKS:
         continue
-    
+
     #
     # NiObject Header File
     #
@@ -516,7 +506,7 @@ for n in block_names:
     cs.code('//-----------------------------------NOTICE----------------------------------//')
     cs.code()
     cs.code(x.code_using())
-    cs.code('using NiObjectRef = Niflib.Ref<Niflib.NiObject>;')
+    #cs.code('using NiObjectRef = Niflib.Ref<Niflib.NiObject>;')
     #cs.code('using ' + x.cname + 'Ref = Niflib.Ref<Niflib.' + x.cname + '>;')
     cs.code()
     #Preserve Custom code from before
@@ -529,14 +519,14 @@ for n in block_names:
     cs.code()
     cs.comment(x.description)
     if x.inherit:
-        cs.code('public class ' + x.cname + ' : ' + x.inherit.cname + ' {')
+        cs.code('public class %s : %s {' % (x.cname, x.inherit.cname))
     else:
-        cs.code('public class ' + x.cname + ' : RefObject {')
+        cs.code('public class %s : RefObject {' % x.cname)
     cs.code('//Definition of TYPE constant')
     if x.inherit:
-        cs.code('public static readonly Type_ TYPE = new Type_(\"' + x.name + '\", ' + x.inherit.cname + '.TYPE);')
+        cs.code('public static readonly Type_ TYPE = new Type_("%s", %s.TYPE);' % (x.name, x.inherit.cname))
     else:
-        cs.code('public static readonly Type_ TYPE = new Type_(\"' + x.name + '\", RefObject.TYPE);')
+        cs.code('public static readonly Type_ TYPE = new Type_("%s", RefObject.TYPE);' % x.name)
 
     #
     # Show example naive implementation if requested
@@ -581,9 +571,9 @@ for n in block_names:
     cs.code()
     x_code_construct = x.code_construct()
     if x_code_construct:
-        cs.code('public ' + x.cname + '()' + x_code_construct + ' {')
+        cs.code('public %s() {\n%s' % (x.cname,x_code_construct))
     else:
-        cs.code('public ' + x.cname + '() {')
+        cs.code('public %s() {' % x.cname)
     
     #Preserve Custom code from before
     cs.code('//--BEGIN CONSTRUCTOR CUSTOM CODE--//')
@@ -627,7 +617,7 @@ for n in block_names:
     cs.code()
       
     cs.code('/*! NIFLIB_HIDDEN function.  For internal use only. */')
-    cs.code("internal override void Write(OStream s, Dictionary<NiObjectRef, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {")
+    cs.code("internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {")
 
     #Preserve Custom code from before
     cs.code('//--BEGIN PRE-WRITE CUSTOM CODE--//')
@@ -670,7 +660,7 @@ for n in block_names:
     cs.code()
 
     cs.code('/*! NIFLIB_HIDDEN function.  For internal use only. */')
-    cs.code("internal override void FixLinks(Dictionary<uint, NiObjectRef> objects, List<uint> link_stack, List<NiObjectRef> missing_link_stack, NifInfo info) {")
+    cs.code("internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {")
 
     #Preserve Custom code from before
     cs.code('//--BEGIN PRE-FIXLINKS CUSTOM CODE--//')
@@ -690,7 +680,7 @@ for n in block_names:
     cs.code()
 
     cs.code('/*! NIFLIB_HIDDEN function.  For internal use only. */')
-    cs.code("internal override List<NiObjectRef> GetRefs() {")
+    cs.code("internal override List<NiObject> GetRefs() {")
     cs.stream(x, ACTION_GETREFS)
     cs.code("}")
     cs.code()

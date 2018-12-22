@@ -43,6 +43,11 @@ namespace Niflib
         public void Write(byte[] buffer, int offset, int count) => B.Write(buffer, offset, count);
     }
 
+    public class MStream : BStream<MStream>
+    {
+        public MStream() : base(new MemoryStream()) { }
+    }
+
     public class IStream : BStream<IStream>
     {
         public IStream(Stream stream) : base(stream) { }

@@ -74,7 +74,11 @@ namespace Niflib
          * \param[in] n The index into the data array.  Should be 0, 1, or 2.
          * \return The value at the given array index by reference so it can be read or set via the bracket operator.
          */
-        public ushort this[int n] { get { switch (n) { case 0: return v1; case 1: return v2; case 2: return v3; default: throw new IndexOutOfRangeException("Index out of range for Triangle"); } } }
+        public ushort this[int n]
+        {
+            get { switch (n) { case 0: return v1; case 1: return v2; case 2: return v3; default: throw new IndexOutOfRangeException("Index out of range for Triangle"); } }
+            set { switch (n) { case 0: v1 = value; break; case 1: v2 = value; break; case 2: v3 = value; break; default: throw new IndexOutOfRangeException("Index out of range for Triangle"); } }
+        }
     }
 
     /*!Represents a position or direction in 3D space*/
@@ -622,13 +626,13 @@ namespace Niflib
             for (int r = 0; r < 3; r++)
                 for (int c = 0; c < 3; c++)
                 {
-                   m3[r][c] = t[r]
-                   [0] * m[0]
-                   [c] + t[r]
-                   [1] * m[1]
-                   [c] + t[r]
-                   [2] * m[2]
-                   [c];
+                    m3[r][c] = t[r]
+                    [0] * m[0]
+                    [c] + t[r]
+                    [1] * m[1]
+                    [c] + t[r]
+                    [2] * m[2]
+                    [c];
                 }
             return m3;
         }
