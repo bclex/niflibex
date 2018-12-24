@@ -87,6 +87,8 @@ public class TallGrassShaderProperty : BSShaderProperty {
 	}
 
 	//--BEGIN:FILE FOOT--//
+    // Gets or sets the texture file name.
+    // \param[in] value The new value.
     public string FileName
     {
         get => fileName;

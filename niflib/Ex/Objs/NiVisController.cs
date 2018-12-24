@@ -97,6 +97,35 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the visibility data used by this controller.
+* \param[in] n The new visibility data.
+*/
+public NiVisData Data
+{
+    get => data;
+    set => data = value;
+}
+
+/*!
+* This function will adjust the times in all the keys in the data objects
+* referenced by this controller and any of its interpolators such that the
+* phase will equal 0 and frequency will equal one.  In other words, it
+* will cause the key times to be in seconds starting from zero.
+*/
+public virtual void NormalizeKeys()
+{
+    //Normalize any keys that are stored any NiVisData
+    //Future NIF versions use BoolData to store this,
+    //so no comparison to the Interpolator data is necessary.
+    if (data != null)
+        data.NormalizeKeys(phase, frequency);
+
+    //Call the parent version of this function to finish up
+    NiSingleInterpController.NormalizeKeys();
+}
+//--END:CUSTOM--//
 
 }
 

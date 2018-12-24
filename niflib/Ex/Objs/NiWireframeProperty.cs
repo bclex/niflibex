@@ -94,6 +94,10 @@ internal override List<NiObject> GetPtrs() {
 }
 
 //--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+* \param[in] n The new flag data.  Will overwrite any existing flag data.
+*/
 public ushort Flags
 {
     get => flags;

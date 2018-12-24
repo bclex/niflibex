@@ -120,6 +120,22 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the floating point values stored in this object.
+* \param[in] n The new floating point values to store in this object.
+*/
+public float[] Data
+{
+    get => weight;
+    set
+    {
+        numVertices = (ushort)value.Length;
+        numBytes = (uint)numVertices + 2;
+        weight = value;
+    }
+}
+//--END:CUSTOM--//
 
 }
 

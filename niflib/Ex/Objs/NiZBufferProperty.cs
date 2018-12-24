@@ -104,12 +104,20 @@ internal override List<NiObject> GetPtrs() {
 }
 
 //--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+* \param[in] value The new flag data.  Will overwrite any existing flag data.
+*/
 public ushort Flags
 {
     get => flags;
     set => flags = value;
 }
 
+/*!
+* Gets or sets the depth buffer (Z-Buffer) test function, which determine whether a pixel is drawn based on the value of the depth buffer at the same location.
+* \param[in] value The new depth buffer test function.
+*/
 public ZCompareMode DepthFunction
 {
     get => function;

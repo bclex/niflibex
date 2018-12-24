@@ -86,6 +86,15 @@ public class TileShaderProperty : BSShaderLightingProperty {
 		return ptrs;
 	}
 
+	//--BEGIN:FILE FOOT--//
+    // Gets or sets the texture file name.
+    // \param[in] value The new value.
+    public string FileName
+    {
+        get => fileName;
+        set => fileName = value;
+    }
+	//--END:CUSTOM--//
 
 }
 

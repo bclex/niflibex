@@ -35,9 +35,9 @@ Continuity:  {continuity}\n";
          * \param[in] frequency The original frequency of the keys which will be
          * normalized to 1.
          */
-        public static void NormalizeKeyVector<T>(List<Key<T>> keys, float phase, float frequency)
+        public static void NormalizeKeyVector<T>(Key<T>[] keys, float phase, float frequency)
         {
-            for (var i = 0; i < keys.Count; ++i)
+            for (var i = 0; i < keys.Length; ++i)
                 keys[i].time = (keys[i].time - phase) / frequency;
         }
 

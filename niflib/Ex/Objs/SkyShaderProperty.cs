@@ -93,6 +93,8 @@ internal override List<NiObject> GetPtrs() {
 }
 
 //--BEGIN:FILE FOOT--//
+// Gets or sets the texture.
+// \param[in] value The new value.
 public string FileName
 {
     get => fileName;

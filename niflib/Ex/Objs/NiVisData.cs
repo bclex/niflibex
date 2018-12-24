@@ -113,6 +113,29 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+/*! Gets or sets the visibility key data.
+* \param keys A vector containing new visibility data which will replace any existing data.
+* \sa NiBoolData::GetKeys, Key
+*/
+public Key<byte>[] Keys
+{
+    get => keys;
+    set => keys = value;
+}
+
+/*!
+* This function will adjust the times in all the keys stored in this data
+* object such that phase will equal 0 and frequency will equal one.  In
+* other words, it will cause the key times to be in seconds starting from
+* zero.
+* \param[in] frequency The frequency to normalize to 1.0 for any keys
+* stored in this object
+* \param[in] phase The phase shift to remove from any keys stored in this
+* object.
+*/
+public void NormalizeKeys(float phase, float frequency) => Key.NormalizeKeyVector(keys, phase, frequency);
+//--END:CUSTOM--//
 
 }
 

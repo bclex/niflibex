@@ -110,6 +110,37 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+* \param[in] value The new flag data.  Will overwrite any existing flag data.
+*/
+public ushort Flags
+{
+    get => flags;
+    set => flags = value;
+}
+
+/*!
+* Gets or sets the vertex mode.  This seems to specify how to apply vertex colors.
+* \param[in] value The new vertex mode.
+*/
+public VertMode VertexMode
+{
+    get => vertexMode;
+    set => vertexMode = value;
+}
+
+/*!
+* Gets or sets the lighting mode.  This seems to specify how vertex colors influence lighting.
+* \param[in] value The new lighting mode.
+*/
+public LightMode LightingMode
+{
+    get => lightingMode;
+    set => lightingMode = value;
+}
+//--END:CUSTOM--//
 
 }
 
