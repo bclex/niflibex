@@ -155,15 +155,15 @@ namespace Niflib
         {
             //Make sure parent is not NULL
             if (parent == null)
-                throw new InvalidOperationException("A parent is necessary to split a complex shape.");
+                throw new Exception("A parent is necessary to split a complex shape.");
 
             var use_dismember_partitions = false;
             if (DismemberPartitionsFaces.Count > 0)
             {
                 if (DismemberPartitionsFaces.Count != Faces.Count)
-                    throw new InvalidOperationException("The number of faces mapped to skin partitions is different from the actual face count.");
+                    throw new Exception("The number of faces mapped to skin partitions is different from the actual face count.");
                 if (DismemberPartitionsBodyParts.Count == 0)
-                    throw new InvalidOperationException("The number of dismember partition body parts can't be 0.");
+                    throw new Exception("The number of dismember partition body parts can't be 0.");
                 use_dismember_partitions = true;
             }
 
@@ -185,19 +185,19 @@ namespace Niflib
             if (shapes.Length == 1)
             {
                 //One shape
-                shapes[0].Name = Name;
+                shapes[0].name = Name;
                 root = shapes[0];
             }
             else
             {
                 //Multiple shapes
                 var niNode = new NiNode();
-                niNode.Name = Name;
+                niNode.name = Name;
                 for (var i = 0; i < shapes.Length; ++i)
                 {
                     niNode.AddChild(shapes[i]);
                     //Set Shape Name
-                    shapes[i].Name = $"{Name} {i}";
+                    shapes[i].name = $"{Name} {i}";
                 }
                 root = niNode;
             }

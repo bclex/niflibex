@@ -21,8 +21,17 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="custom_all.py" />
     <Compile Include="gen_niflib_cs.py" />
     <Compile Include="nifxml_cs.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="kfmxml\" />
+    <Folder Include="nifxml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="kfmxml\kfm.xml" />
+    <Content Include="nifxml\nif.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

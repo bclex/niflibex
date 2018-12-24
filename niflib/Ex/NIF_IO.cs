@@ -15,6 +15,7 @@ namespace Niflib
         public int ReadByte() => B.ReadByte();
         public void Write(byte[] buffer, int offset, int count) => B.Write(buffer, offset, count);
         public void WriteByte(byte value) => B.WriteByte(value);
+        public long Position => B.Position;
         public bool IsEof => B.Position == B.Length;
         public void Close() => B.Close();
     }
@@ -41,6 +42,8 @@ namespace Niflib
 
     public class OStream : BStream
     {
+        //public OStream() : base(new MemoryStream()) { }
+        public OStream(Stream stream) : base(stream) { }
         public static OStream operator +(OStream s, string val) { var buf = Encoding.ASCII.GetBytes(val); s.B.Write(buf, 0, buf.Length); return s; }
         public static OStream operator +(OStream s, HeaderString val) => s + val.header;
         public static OStream operator +(OStream s, LineString val) => s + val.line;
@@ -48,22 +51,16 @@ namespace Niflib
         public static OStream operator +(OStream s, byte val) { s.B.WriteByte(val); return s; }
         public static OStream operator +(OStream s, IndexString val) => s + val.val;
         public static OStream operator +(OStream s, Char8String val) => s + val.val;
-        //public static OStream operator +(OStream s, ByteColor4 val) => s + $"RGBA: {val.r} {val.g} {val.b} {val.a}";
+        public static OStream operator +(OStream s, ByteColor4 val) => s + $"RGBA: {val.r} {val.g} {val.b} {val.a}";
         public static OStream operator +(OStream s, Nif.hdrInfo val) => throw new NotImplementedException();
         public static OStream operator +(OStream s, Nif.strInfo val) => throw new NotImplementedException();
-
-        public OStream(Stream stream) : base(stream) { }
-    }
-
-    public class MStream : OStream
-    {
-        public MStream() : base(new MemoryStream()) { }
     }
 
     public static partial class Nif
     {
         ////Constant that stores the detected endian storage type of the current system
         //const EndianType sys_endian = BitConverter.IsLittleEndian ? EndianType.ENDIAN_LITTLE : EndianType.ENDIAN_BIG;
+        public const int MAXARRAYDUMP = 20;
 
         internal static byte[] Buf = new byte[256];
         internal static Exception NotImplementedException = new NotImplementedException();
@@ -404,14 +401,14 @@ namespace Niflib
             if (val.header.Substring(0, 22) == "NetImmerse File Format") ver_start = 32;
             else if (val.header.Substring(0, 20) == "Gamebryo File Format") ver_start = 30;
             else if (val.header.Substring(0, 6) == "NDSNIF") ver_start = 30;
-            else info.version = Nif.VER_INVALID; //Not a NIF file
+            else info.version = VER_INVALID; //Not a NIF file
             //Parse version string and return result.
-            info.version = Nif.ParseVersionString(val.header.Substring(ver_start));
+            info.version = ParseVersionString(val.header.Substring(ver_start));
         }
         public static void NifStream(HeaderString val, OStream s, NifInfo info)
         {
-            s += (info.version <= Nif.VER_10_0_1_0 ? "NetImmerse File Format, Version " : "Gamebryo File Format, Version ");
-            s += Nif.FormatVersionString(info.version);
+            s += (info.version <= VER_10_0_1_0 ? "NetImmerse File Format, Version " : "Gamebryo File Format, Version ");
+            s += FormatVersionString(info.version);
             s += "\n";
         }
 
@@ -420,7 +417,12 @@ namespace Niflib
         public static void NifStream(LineString val, OStream s, NifInfo info) => s += val.line + "\n";
 
         //ShortString
-        public static void NifStream(out ShortString val, IStream s, NifInfo info) { var buf = new byte[ReadByte(s)]; if (s.Read(buf, 0, buf.Length) != buf.Length) throw ConvertException; val = new ShortString { str = Encoding.ASCII.GetString(buf) }; }
+        public static void NifStream(out ShortString val, IStream s, NifInfo info)
+        {
+            var buf = new byte[ReadByte(s)];
+            if (s.Read(buf, 0, buf.Length) != buf.Length) throw ConvertException;
+            val = new ShortString { str = Encoding.ASCII.GetString(buf) };
+        }
         public static void NifStream(ShortString val, OStream s, NifInfo info)
         {
             var buf = Encoding.ASCII.GetBytes(val.str);
@@ -433,28 +435,24 @@ namespace Niflib
         public static void NifStream(out IndexString val, IStream s, NifInfo info)
         {
             val = new IndexString();
-            if (info.version >= Nif.VER_20_1_0_3)
-            {
-                var pos = s.tellg();
-                ToIndexString(ReadUInt(s), hdrInfo::getInfo(s), val);
-            }
+            if (info.version >= VER_20_1_0_3) ToIndexString(ReadUInt(s), hdrInfo.getInfo(s), val);
             else val.val = ReadString(s);
         }
         static void ToIndexString(uint idx, Header header, IndexString value)
         {
             if (header == null)
                 throw ConfigureException;
-            if (idx == 0xffffffff) value.clear();
-            else if (idx >= 0 && idx <= header.strings.size()) value = header.strings[idx];
+            if (idx == 0xffffffff) value.val = string.Empty;
+            else if (idx >= 0 && idx <= header.strings.Length) value = header.strings[idx];
             else throw new InvalidOperationException("invalid string index");
         }
         public static void NifStream(IndexString val, OStream s, NifInfo info)
         {
-            if (info.version >= Nif.VER_20_1_0_3)
+            if (info.version >= VER_20_1_0_3)
             {
                 uint idx = 0xffffffff;
-                FromIndexString(val, hdrInfo::getInfo(s), idx);
-                WriteInt(idx, s);
+                FromIndexString(val, hdrInfo.getInfo(s), idx);
+                WriteUInt(idx, s);
             }
             else WriteString(val.val, s);
         }
@@ -486,8 +484,8 @@ namespace Niflib
         {
             val = new Char8String();
             for (int i = 0; i < 8; ++i)
-                s.Read(Nif.Buf, i, 1);
-            val.val = Encoding.ASCII.GetString(Nif.Buf, 0, 8);
+                s.Read(Buf, i, 1);
+            val.val = Encoding.ASCII.GetString(Buf, 0, 8);
         }
         public static void NifStream(Char8String val, OStream s, NifInfo info)
         {
@@ -699,30 +697,23 @@ namespace Niflib
         }
 
         // strInfo
-        //const int strInfo::infoIdx = ios_base::xalloc();
         public class strInfo
         {
             NifInfo info;
-            static const int infoIdx;
+            static NifInfo infoIdx;
 
             public strInfo(NifInfo value) { info = value; }
-
-            //friend ostream & operator<<(ostream & out, strInfo const & val );
-            //friend istream & operator>>(istream & out, strInfo & val );
-            //public static NifInfo* getInfo(ios_base& str) => (NifInfo*) str.pword(infoIdx);
+            public static NifInfo getInfo(BStream s) => infoIdx;
         }
 
         // hdrInfo
-        //const int hdrInfo::infoIdx = ios_base::xalloc();
         public class hdrInfo
         {
             Header info;
-            static const int infoIdx;
+            static Header infoIdx;
 
             public hdrInfo(Header value) { info = value; }
-            //friend ostream & operator<<(ostream & out, hdrInfo const & val );
-            //friend istream & operator>>(istream & out, hdrInfo & val );
-            //public static Header getInfo(ios_base& str) => (Header*)str.pword(infoIdx);
+            public static Header getInfo(BStream s) => infoIdx;
         }
 
         //std::streamsize NifStreamBuf::xsputn(const char_type* _Ptr, std::streamsize _Count)

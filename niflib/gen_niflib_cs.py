@@ -56,6 +56,7 @@
 # ***** END LICENSE BLOCK *****
 # --------------------------------------------------------------------------
 from __future__ import unicode_literals
+from custom_all import *
 from nifxml_cs import *
 from distutils.dir_util import mkpath
 import os
@@ -65,7 +66,7 @@ import itertools
 #
 # global data
 #
-ROOT_DIR = "Ex/_"
+ROOT_DIR = "Ex/"
 BOOTSTRAP = True
 GENIMPL = True
 GENACCESSORS = False
@@ -88,140 +89,16 @@ for i in sys.argv:
         
     prev = i
 
-
 # Fix known manual update attributes.  For now hard code here.
 block_types["NiKeyframeData"].find_member("Num Rotation Keys").is_manual_update = True
 #block_types["NiTriStripsData"].find_member("Num Triangles").is_manual_update =
 #True
-
-#
-# Function to extract custom code from existing file
-#
-def ExtractCustomCode(file_name):
-    custom_lines = {}
-    custom_lines['MISC'] = []
-    custom_lines['FILE HEAD'] = []
-    custom_lines['FILE FOOT'] = []
-    custom_lines['PRE-READ'] = []
-    custom_lines['POST-READ'] = []
-    custom_lines['PRE-WRITE'] = []
-    custom_lines['POST-WRITE'] = []
-    custom_lines['PRE-STRING'] = []
-    custom_lines['POST-STRING'] = []
-    custom_lines['PRE-FIXLINKS'] = []
-    custom_lines['POST-FIXLINKS'] = []
-    custom_lines['CONSTRUCTOR'] = []
-    custom_lines['DESTRUCTOR'] = []
-    
-    if True: # | os.path.isfile(file_name) == False:
-        custom_lines['MISC'].append("\n")
-        custom_lines['FILE HEAD'].append("\n")
-        custom_lines['FILE FOOT'].append("\n")
-        custom_lines['PRE-READ'].append("\n")
-        custom_lines['POST-READ'].append("\n")
-        custom_lines['PRE-WRITE'].append("\n")
-        custom_lines['POST-WRITE'].append("\n")
-        custom_lines['PRE-STRING'].append("\n")
-        custom_lines['POST-STRING'].append("\n")
-        custom_lines['PRE-FIXLINKS'].append("\n")
-        custom_lines['POST-FIXLINKS'].append("\n")
-        custom_lines['CONSTRUCTOR'].append("\n")
-        custom_lines['DESTRUCTOR'].append("\n")
-        return custom_lines
-    
-    f = io.open(file_name, 'rt', 1, 'utf-8')
-    lines = f.readlines()
-    f.close()
-   
-    custom_flag = False
-    custom_name = ""
-    
-    for l in lines:
-        if custom_flag == True:
-            if l.find('//--END CUSTOM CODE--//') != -1:
-                custom_flag = False
-            else:
-                if not custom_lines[custom_name]:
-                    custom_lines[custom_name] = [l]
-                else:
-                    custom_lines[custom_name].append(l)
-        if l.find('//--BEGIN MISC CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'MISC'
-        elif l.find('//--BEGIN FILE HEAD CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'FILE HEAD'
-        elif l.find('//--BEGIN FILE FOOT CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'FILE FOOT'
-        elif l.find('//--BEGIN PRE-READ CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'PRE-READ'
-        elif l.find('//--BEGIN POST-READ CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'POST-READ'
-        elif l.find('//--BEGIN PRE-WRITE CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'PRE-WRITE'
-        elif l.find('//--BEGIN POST-WRITE CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'POST-WRITE'
-        elif l.find('//--BEGIN PRE-STRING CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'PRE-STRING'
-        elif l.find('//--BEGIN POST-STRING CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'POST-STRING'
-        elif l.find('//--BEGIN PRE-FIXLINKS CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'PRE-FIXLINKS'
-        elif l.find('//--BEGIN POST-FIXLINKS CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'POST-FIXLINKS'
-        elif l.find('//--BEGIN CONSTRUCTOR CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'CONSTRUCTOR'
-        elif l.find('//--BEGIN DESTRUCTOR CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'DESTRUCTOR'
-        elif l.find('//--BEGIN INCLUDE CUSTOM CODE--//') != -1:
-            custom_flag = True
-            custom_name = 'INCLUDE'
-    
-    return custom_lines
-
-#
-# Function to compare two files
-#
-def OverwriteIfChanged(original_file, candidate_file):
-    files_differ = False
-
-    if os.path.isfile(original_file):
-        f1 = file(original_file, 'r')
-        f2 = file(candidate_file, 'r')
-
-        s1 = f1.read()
-        s2 = f2.read()
-
-        f1.close()
-        f2.close()
-        
-        if s1 != s2:
-            files_differ = True
-            #remove original file
-            os.unlink(original_file)
-    else:
-        files_differ = True
-
-    if files_differ:
-        #Files differ, so overwrite original with candidate
-        os.rename(candidate_file, original_file)
    
 #
 # generate compound code
 #
-mkpath(os.path.join(ROOT_DIR, "obj"))
-mkpath(os.path.join(ROOT_DIR, "gen"))
+mkpath(os.path.join(ROOT_DIR, "Objs"))
+mkpath(os.path.join(ROOT_DIR, "Gen"))
 
 for n in compound_names:
     x = compound_types[n]
@@ -231,10 +108,10 @@ for n in compound_names:
     
     if not GENALLFILES and not x.cname in GENBLOCKS:
             continue
-        
+
     #Get existing custom code
-    file_name = ROOT_DIR + '/gen/' + x.cname + '.cs'
-    custom_lines = ExtractCustomCode(file_name)
+    file_name = ROOT_DIR + '/Gen/' + x.cname + '.cs'
+    customCtx = ExtractCustomCode(file_name)
 
     cs = CSFile(io.open(file_name, 'wb'))
     cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
@@ -244,7 +121,6 @@ for n in compound_names:
     cs.code()
     cs.code('//To change this file, alter the /niflib/gen_niflib_cs Python script.')
     cs.code()
-    #cs.code('using System;')
     #if n in ["Header", "Footer"]:
     #    cs.code('using mylib2')
     cs.code(x.code_using())
@@ -278,16 +154,15 @@ for n in compound_names:
         
         # constructor
         x_code_construct = x.code_construct()
-        #if x_code_construct:
-        cs.code("public %s() {\n%s\n}" % (x.cname,x_code_construct))
-        cs.code()
+        if x_code_construct:
+            cs.code("public %s() { unchecked {\n%s\n} }" % (x.cname,x_code_construct))
+            cs.code()
 
         #cs.code('//Copy Constructor')
         #cs.code( '%s(%s src) {'%(x.cname,x.cname) )
         #cs.code( '*this = src;' )
         #cs.code('}')
         #cs.code()
-
         #cs.code('//Copy Operator')
         #cs.code('%s & %s::operator=( const %s & src ) {' %
         #(x.cname,x.cname,x.cname))
@@ -300,7 +175,7 @@ for n in compound_names:
 
         # header and footer functions
         if n == "Header":
-            cs.code('public override NifInfo Read(IStream s) {')
+            cs.code('public NifInfo Read(IStream s) {')
             cs.code('//Declare NifInfo structure')
             cs.code('var info = new NifInfo();')
             cs.code()
@@ -316,39 +191,33 @@ for n in compound_names:
             cs.code('info.author = exportInfo.author.str;')
             cs.code('info.processScript = exportInfo.processScript.str;')
             cs.code('info.exportScript = exportInfo.exportScript.str;')
-            cs.code()
             cs.code('return info;')
             cs.code('}')
             cs.code()
-            cs.code('public override void Write(OStream s, NifInfo info) {')
+            cs.code('public void Write(OStream s, NifInfo info) {')
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public override string asString(bool verbose) {')
+            cs.code('public string asString(bool verbose) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
         
         if n == "Footer":
             cs.code()
-            cs.code('public override void Read(IStream s, List<uint> link_stack, NifInfo info) {')
+            cs.code('public void Read(IStream s, List<uint> link_stack, NifInfo info) {')
             cs.stream(x, ACTION_READ)
             cs.code('}')
             cs.code()
-            cs.code('public override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {')
+            cs.code('public void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {')
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public override string asString(bool verbose) {')
+            cs.code('public string asString(bool verbose) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
 
-    cs.code('//--BEGIN MISC CUSTOM CODE--//')
-
     #Preserve Custom code from before
-    for l in custom_lines['MISC']:
-        cs.write(l)
-        
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'MISC')
 
     # done
     cs.code("}")
@@ -359,7 +228,7 @@ for n in compound_names:
 
     # Write out Public Enumeration header Enumerations
 if GENALLFILES:
-    cs = CSFile(io.open(ROOT_DIR + '/gen/Enums.cs', 'wb'))
+    cs = CSFile(io.open(ROOT_DIR + '/Gen/Enums.cs', 'wb'))
     cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
     cs.code('All rights reserved.  Please see niflib.h for license. */')
     cs.code()
@@ -379,69 +248,25 @@ if GENALLFILES:
         for o in x.options:
           cs.code('%s = %s, /*!< %s */' % (o.cname, o.value, o.description))
         cs.code('}')
+        #: cs
+        cs.code('static partial class Nif { //--' + x.cname + '--//')
+        cs.code('public static void NifStream(out %s val, IStream s, NifInfo info) { %s temp; NifStream(out temp, s, info); val = (%s)temp; }' % (x.cname, x.storage, x.cname))
+        cs.code('public static void NifStream(%s val, OStream s, NifInfo info) => NifStream((%s)val, s, info);' % (x.cname,x.storage))
+        cs.code('public static string ToString(%s val) { switch (val) {' % (x.cname))
+        for o in x.options:
+          cs.code('case %s.%s: return "%s";' % (x.cname, o.cname, o.name))
+        cs.code('default: return $"Invalid Value! - {val}";')
+        cs.code('}}}')
         cs.code()
-        #: cpp
-        #cs.code()
-        #cs.code('//--' + x.cname + '--//')
-        #cs.code()
-        #cs.code('void NifStream( %s & val, istream& in, const NifInfo & info )
-        #{' % (x.cname))
-        #cs.code('%s temp;' % (x.storage))
-        #cs.code('NifStream( temp, in, info );')
-        #cs.code('val = %s(temp);' % (x.cname))
-        #cs.code('}')
-        #cs.code()
-        #cs.code('void NifStream( %s const & val, ostream& out, const NifInfo &
-        #info ) {' % (x.cname))
-        #cs.code('NifStream( (%s)(val), out, info );' % (x.storage))
-        #cs.code('}')
-        #cs.code()
-        #cs.code('ostream & operator<<( ostream & out, %s const & val ) { ' %
-        #(x.cname))
-        #cs.code('switch ( val ) {')
-        #for o in x.options:
-        #  cs.code('case %s: return out << "%s";' % (o.cname, o.name))
-        #cs.code('default: return out << "Invalid Value!  - " << (unsigned
-        #int)(val);')
-        #cs.code('}')
-        #cs.code('}')
-        #cs.code()
 
     cs.write('}\n')
     cs.close()
-        
-#    # Write out Internal Enumeration header (NifStream functions)
-#if GENALLFILES:
-#    cs = CSFile(io.open(ROOT_DIR + '/gen/Enums_intl.cs', 'wb'))
-#    cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
-#    cs.code('All rights reserved.  Please see niflib.h for license. */')
-#    cs.code()
-#    cs.code('//---THIS FILE WAS AUTOMATICALLY GENERATED.  DO NOT EDIT---//')
-#    cs.code()
-#    cs.code('//To change this file, alter the /niflib/gen_niflib_cs.py Python script.')
-#    cs.code()
-#    cs.code('using System;')
-#    cs.code()
-#    cs.write('namespace Niflib {\n')
-#    cs.code()
-#    for n, x in itertools.chain(enum_types.items(), flag_types.items()):
-#      if x.options:
-#        if x.description:
-#            cs.code()
-#            cs.code('//---' + x.cname + '---//')
-#            cs.code()
-#        cs.code('void NifStream(%s val, IStream s, NifInfo info = null);' % x.cname)
-#        cs.code('void NifStream(%s val, OStream s, NifInfo info = null);' % x.cname)
-#        cs.code()
-
-#    cs.write('}\n')
-#    cs.close()
 
 
     #
     # NiObject Registration Function
     #
-    cs = CSFile(io.open(ROOT_DIR + '/gen/Register.cs', 'wb'))
+    cs = CSFile(io.open(ROOT_DIR + '/Gen/Register.cs', 'wb'))
     cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
     cs.code('All rights reserved.  Please see niflib.h for license. */')
     cs.code()
@@ -465,7 +290,6 @@ if GENALLFILES:
     cs.close()
 
 
-
 #
 # NiObject Files
 #
@@ -481,8 +305,8 @@ for n in block_names:
     #
 
     #Get existing custom code
-    file_name = ROOT_DIR + '/obj/' + x.cname + '.cs'
-    custom_lines = ExtractCustomCode(file_name)
+    file_name = ROOT_DIR + '/Objs/' + x.cname + '.cs'
+    customCtx = ExtractCustomCode(file_name)
 
     #output new file
     cs = CSFile(io.open(file_name, 'wb'))
@@ -496,14 +320,9 @@ for n in block_names:
     cs.code('//-----------------------------------NOTICE----------------------------------//')
     cs.code()
     cs.code(x.code_using())
-    #cs.code('using NiObjectRef = Niflib.Ref<Niflib.NiObject>;')
-    #cs.code('using ' + x.cname + 'Ref = Niflib.Ref<Niflib.' + x.cname + '>;')
     cs.code()
     #Preserve Custom code from before
-    cs.code('//--BEGIN FILE HEAD CUSTOM CODE--//')
-    for l in custom_lines['FILE HEAD']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'FILE HEAD')
     cs.code()
     cs.write("namespace Niflib {\n")
     cs.code()
@@ -549,13 +368,8 @@ for n in block_names:
     #    cs.code()
     
     #Preserve Custom code from before
-    cs.code('//--BEGIN MISC CUSTOM CODE--//')
-    for l in custom_lines['MISC']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'MISC')
 
-    #if x.members:
-    #    cs.code('protected:')
     cs.declare(x)
 
     cs.code()
@@ -566,10 +380,7 @@ for n in block_names:
         cs.code('public %s() {' % x.cname)
     
     #Preserve Custom code from before
-    cs.code('//--BEGIN CONSTRUCTOR CUSTOM CODE--//')
-    for l in custom_lines['CONSTRUCTOR']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'CONSTRUCTOR')
     cs.code('}')
     cs.code()
 
@@ -590,19 +401,13 @@ for n in block_names:
     cs.code("internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {")
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN PRE-READ CUSTOM CODE--//')
-    for l in custom_lines['PRE-READ']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'PRE-READ')
     cs.code()
     cs.stream(x, ACTION_READ)
     cs.code()
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN POST-READ CUSTOM CODE--//')
-    for l in custom_lines['POST-READ']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'POST-READ')
     cs.code("}")
     cs.code()
       
@@ -610,18 +415,12 @@ for n in block_names:
     cs.code("internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {")
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN PRE-WRITE CUSTOM CODE--//')
-    for l in custom_lines['PRE-WRITE']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'PRE-WRITE')
     cs.code()
     cs.stream(x, ACTION_WRITE)
     cs.code()
     #Preserve Custom code from before
-    cs.code('//--BEGIN POST-WRITE CUSTOM CODE--//')
-    for l in custom_lines['POST-WRITE']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'POST-WRITE')
     cs.code("}")
     cs.code()
       
@@ -633,19 +432,13 @@ for n in block_names:
     cs.code("public override string asString(bool verbose = false) {")
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN PRE-STRING CUSTOM CODE--//')
-    for l in custom_lines['PRE-STRING']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'PRE-STRING')
     cs.code()
     cs.stream(x, ACTION_OUT)
     cs.code()
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN POST-STRING CUSTOM CODE--//')
-    for l in custom_lines['POST-STRING']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'POST-STRING')
     cs.code("}")
     cs.code()
 
@@ -653,19 +446,13 @@ for n in block_names:
     cs.code("internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {")
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN PRE-FIXLINKS CUSTOM CODE--//')
-    for l in custom_lines['PRE-FIXLINKS']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'PRE-FIXLINKS')
     cs.code()
     cs.stream(x, ACTION_FIXLINKS)
     cs.code()
 
     #Preserve Custom code from before
-    cs.code('//--BEGIN POST-FIXLINKS CUSTOM CODE--//')
-    for l in custom_lines['POST-FIXLINKS']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'POST-FIXLINKS')
     cs.code("}")
     cs.code()
 
@@ -708,18 +495,9 @@ for n in block_names:
     #        cs.code('//--This object has no eligable attributes.  No example
     #        implementation generated--//')
     #    cs.code()
-        
+
     #Preserve Custom code from before
-    cs.code('//--BEGIN MISC CUSTOM CODE--//')
-    for l in custom_lines['MISC']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
-    
-    #Preserve Custom code from before
-    cs.code('//--BEGIN FILE FOOT CUSTOM CODE--//')
-    for l in custom_lines['FILE FOOT']:
-        cs.write(l)
-    cs.code('//--END CUSTOM CODE--//')
+    WriteCustomCode(customCtx, cs, 'FILE FOOT')
     cs.code()
 
     cs.code('}')
@@ -729,4 +507,4 @@ for n in block_names:
     cs.close()
 
     ##Check if the temp file is identical to the target file
-    #OverwriteIfChanged( file_name, 'temp' )
+    #OverwriteIfChanged(file_name, 'temp')

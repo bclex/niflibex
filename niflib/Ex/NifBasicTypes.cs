@@ -26,10 +26,9 @@ namespace Niflib
         //public IndexString() { val = null; }
         public IndexString(IndexString r) { val = r.val; }
         public IndexString(string r) { val = r; }
-        //IndexString& operator=( const IndexString & ref ) { assign((std::string const &)ref); return *this; }
-        //IndexString& operator=( const std::string & ref ) { assign(ref); return *this; }
-        //operator std::string const &() const { return *this; }
-        //operator std::string &() { return *this; }
+
+        //public static implicit operator string(IndexString r) => r.val;
+        public static implicit operator IndexString(string r) => new IndexString(r);
     }
 
     public struct Char8String
@@ -38,10 +37,6 @@ namespace Niflib
         //public Char8String() { val = null; }
         public Char8String(Char8String r) { val = r.val; }
         public Char8String(string r) { val = r; }
-        //Char8String& operator=( const Char8String & ref ) { assign((std::string const &)ref); return *this; }
-        //   Char8String& operator=( const std::string & ref ) { assign(ref); return *this; }
-        //   operator std::string const &() const { return *this; }
-        //   operator std::string &() { return *this; }
     }
 
     /*!
@@ -74,5 +69,54 @@ namespace Niflib
         public string processScript;
         /*! This is only supported in Oblivion.  It seems to contain the more specific script or options of the above. */
         public string exportScript;
-    };
+    }
+
+    /*! Used to enable static arrays to be members of vectors */
+    public class Array1<T>
+    {
+        public T[] data = new T[1];
+        public Array1(T t0 = default(T)) { data[0] = t0; }
+    }
+    public class Array2<T>
+    {
+        public T[] data = new T[2];
+        public Array2(T t0 = default(T), T t1 = default(T)) { data[0] = t0; data[1] = t1; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array3<T>
+    {
+        public T[] data = new T[3];
+        public Array3(T t0 = default(T), T t1 = default(T), T t2 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array4<T>
+    {
+        public T[] data = new T[4];
+        public Array4(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array5<T>
+    {
+        public T[] data = new T[5];
+        public Array5(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T), T t4 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; data[4] = t4; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array6<T>
+    {
+        public T[] data = new T[6];
+        public Array6(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T), T t4 = default(T), T t5 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; data[4] = t4; data[5] = t5; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array7<T>
+    {
+        public T[] data = new T[7];
+        public Array7(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T), T t4 = default(T), T t5 = default(T), T t6 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; data[4] = t4; data[5] = t5; data[6] = t6; }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+    public class Array8<T>
+    {
+        public T[] data = new T[7];
+        public Array8(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T), T t4 = default(T), T t5 = default(T), T t6 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; data[4] = t4; data[5] = t5; data[6] = t6; data[7] = default(T); }
+        public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
 }
