@@ -17,7 +17,7 @@ namespace Niflib
         KF_DAOC = 1, /*!< keyframe files: NiNode header, .kfa extension */
         KF_CIV4 = 2, /*!< keyframe files: NiControllerSequence header, .kf extension */
         KF_FFVT3R = 3, /*!< keyframe files: NiControllerSequence header, .kf extension */
-    };
+    }
 
     /*! Export options. */
     public enum ExportOptions
@@ -27,10 +27,10 @@ namespace Niflib
         EXPORT_NIF_KF_MULTI = 2, /*!< NIF + multiple KF + KFM */
         EXPORT_KF = 3, /*!< single KF */
         EXPORT_KF_MULTI = 4 /*!< multiple KF */
-    };
+    }
 
     //--Main Functions--//
-    public static class Niflib
+    public static partial class Nif
     {
         internal const uint VER_2_3 = 0x02030000; /*!< NIF Version 2.3 */
         internal const uint VER_3_0 = 0x03000000; /*!< NIF Version 3.0 */
@@ -87,9 +87,8 @@ namespace Niflib
             //--Open File--//
             var s = new IStream(File.OpenRead(file_name));
             //--Read Header String--//
-            HeaderString header = new HeaderString();
-            NifInfo info = new NifInfo();
-            Nif.NifStream(ref header, s, info);
+            var info = new NifInfo();
+            Nif.NifStream(out HeaderString header, s, info);
             return info.version;
         }
 
@@ -104,9 +103,8 @@ namespace Niflib
             //--Open File--//
             var s = new IStream(File.OpenRead(file_name));
             //--Read Header Info--//
-            Header nif_header = new Header();
-            NifInfo info;
-            info = nif_header.Read(s);
+            var nif_header = new Header();
+            var info = nif_header.Read(s);
             return info;
         }
 
@@ -119,7 +117,7 @@ namespace Niflib
         {
             var s = new IStream(File.OpenRead(file_name));
             //--Read Header Info--//
-            Header nif_header = new Header();
+            var nif_header = new Header();
             nif_header.Read(s);
             return nif_header;
         }
@@ -127,12 +125,12 @@ namespace Niflib
         /*!
          * Return the missing link stack with objects replaced from nif trees at specified root.
          */
-        public static List<Ref<NiObject>> ResolveMissingLinkStack(NiObject root, List<NiObject> missing_link_stack)
+        public static List<NiObject> ResolveMissingLinkStack(NiObject root, List<NiObject> missing_link_stack)
         {
-            List<NiObjectRef> result = new List<NiObjectRef>();
+            var r = new List<NiObject>();
             foreach (var obj in missing_link_stack)
-                result.Add(_ResolveMissingLinkStackHelper(root, obj));
-            return result;
+                r.Add(_ResolveMissingLinkStackHelper(root, obj));
+            return r;
         }
 
         /*!
@@ -142,7 +140,7 @@ namespace Niflib
          * \param info Optionally, a NifInfo structure pointer can be passed in, and it will be filled with information from the header of the NIF file.
          * \return All the NIF objects read from the stream.
          */
-        public static List<Ref<NiObject>> ReadNifList(IStream s, List<Ref<NiObject>> missing_link_stack, NifInfo info)
+        public static List<NiObject> ReadNifList(IStream s, List<NiObject> missing_link_stack, NifInfo info)
         {
             //Ensure that objects are registered
             if (!g_objects_registered)
@@ -189,8 +187,8 @@ namespace Niflib
 
             //--Read Objects--//
             var numObjects = header.numBlocks;
-            Dictionary<uint, NiObjectRef> objects; //Map to hold objects by number
-            IEnumerable<NiObjectRef> obj_list; //Vector to hold links in the order they were created.
+            Dictionary<uint, NiObject> objects; //Map to hold objects by number
+            IEnumerable<NiObject> obj_list; //Vector to hold links in the order they were created.
             List<uint> link_stack; //List to add link values to as they're read in from the file
             string objectType;
             stringstream errStream;
@@ -432,12 +430,12 @@ namespace Niflib
          * \return All the NIF objects read from the Nif file. 
          * \sa ReadNifTree, WriteNifTree
          */
-        public static List<Ref<NiObject>> ReadNifList(string file_name, NifInfo info = null)
+        public static List<NiObject> ReadNifList(string file_name, NifInfo info = null)
         {
             //--Open File--//
             var s = new IStream(File.OpenRead(file_name));
-            List<NiObjectRef> ret = ReadNifList(s, info);
-            s.close();
+            var ret = ReadNifList(s, info);
+            s.Close();
             return ret;
         }
 
@@ -447,18 +445,18 @@ namespace Niflib
          * \param info Optionally, a NifInfo structure pointer can be passed in, and it will be filled with information from the header of the NIF file.
          * \return All the NIF objects read from the stream.
          */
-        public static List<Ref<NiObject>> ReadNifList(IStream s, NifInfo info = null)
+        public static List<NiObject> ReadNifList(IStream s, NifInfo info = null)
         {
-            List<NiObjectRef> missing_link_stack;
+            List<NiObject> missing_link_stack;
             return ReadNifList(s, missing_link_stack, info);
         }
 
         /*!
          * Like ReadNifList but returns root.
          */
-        public static Ref<NiObject> ReadNifTree(IStream s, List<Ref<NiObject>> missing_link_stack, NifInfo info = null)
+        public static NiObject ReadNifTree(IStream s, List<NiObject> missing_link_stack, NifInfo info = null)
         {
-            List<NiObjectRef> objects = ReadNifList(s, missing_link_stack, info);
+            var objects = ReadNifList(s, missing_link_stack, info);
             return FindRoot(objects);
         }
 
@@ -469,10 +467,10 @@ namespace Niflib
          * \return The root of tree of NIF objects contained in the NIF file.
          * \sa ReadNifList, WriteNifTree
          */
-        public static Ref<NiObject> ReadNifTree(string file_name, NifInfo info = null)
+        public static NiObject ReadNifTree(string file_name, NifInfo info = null)
         {
             //Read object list
-            List<NiObjectRef> objects = ReadNifList(file_name, info);
+            var objects = ReadNifList(file_name, info);
             return FindRoot(objects);
         }
 
@@ -482,71 +480,61 @@ namespace Niflib
          * \param[out] info Optionally, a NifInfo structure pointer can be passed in, and it will be filled with information from the header of the NIF file.
          * \return The root of the tree of NIF Objects contained in the NIF file.
          */
-        public static Ref<NiObject> ReadNifTree(IStream s, NifInfo info = null)
+        public static NiObject ReadNifTree(IStream s, NifInfo info = null)
         {
             //Read object list
-            vector<NiObjectRef> objects = ReadNifList(s, info);
+            var objects = ReadNifList(s, info);
             return FindRoot(objects);
         }
 
         // Writes a valid Nif File given an OStream, a list to the root objects of a file tree
         // (missing_link_stack stores a stack of links which are referred to but which
         // are not inside the tree rooted by roots)
-        static void WriteNifTree(OStream s, List<NiObjectRef> roots, List<NiObject> missing_link_stack, NifInfo info)
+        static void WriteNifTree(OStream s, List<NiObject> roots, List<NiObject> missing_link_stack, NifInfo info)
         {
             //Enumerate all objects in tree
             Dictionary<Type_, uint> type_map;
-            Dictionary<NiObjectRef, uint> link_map;
+            Dictionary<NiObject, uint> link_map;
 
-            for (list<NiObjectRef>::const_iterator it = roots.begin(); it != roots.end(); ++it)
-            {
-                EnumerateObjects((*it), type_map, link_map);
-            }
+            foreach (var it in roots)
+                EnumerateObjects(it, type_map, link_map);
 
             //Build vectors for reverse look-up
-            vector<NiObjectRef> objects(link_map.size());
-            for (map < NiObjectRef, unsigned int >::iterator it = link_map.begin(); it != link_map.end(); ++it)
-            {
-                objects[it.second] = it.first;
-            }
+            var objects = new NiObject[link_map.Count];
+            foreach (var it in link_map)
+                objects[it.Value] = it.Key;
 
-            vector<Type_> types(type_map.size());
-            for (map<Type_, uint>::iterator it = type_map.begin(); it != type_map.end(); ++it)
-            {
-                types[it.second] = it.first;
-            }
+            var types = new Type_[type_map.Count];
+            foreach (var it in type_map)
+                types[it.Value] = it.Key;
 
             uint version = info.version;
 
             //--Write Header--//
-            Header header;
+            var header = new Header();
             header.version = info.version;
             header.userVersion = info.userVersion;
             header.userVersion2 = info.userVersion2;
             header.endianType = info.endian;
-            header.exportInfo.creator.str = info.creator;
-            header.exportInfo.exportInfo1.str = info.exportInfo1;
-            header.exportInfo.exportInfo2.str = info.exportInfo2;
+            header.exportInfo.author.str = info.author;
+            header.exportInfo.processScript.str = info.processScript;
+            header.exportInfo.exportScript.str = info.exportScript;
             header.copyright[0].line = "Numerical Design Limited, Chapel Hill, NC 27514";
             header.copyright[1].line = "Copyright (c) 1996-2000";
             header.copyright[2].line = "All Rights Reserved";
 
             // set the header pointer in the stream
-            s << hdrInfo(&header);
+            s += new hdrInfo(header);
 
             //Set Type Names
-            header.blockTypes.resize(types.size());
-            for (uint i = 0; i < types.size(); ++i)
-            {
+            header.blockTypes = new string[types.Length];
+            for (var i = 0; i < types.Length; ++i)
                 header.blockTypes[i] = types[i].GetTypeName();
-            }
 
             //Set type number of each object
-            header.blockTypeIndex.resize(objects.size());
-            for (uint i = 0; i < objects.size(); ++i)
-            {
+            header.blockTypeIndex = new ushort[objects.Length];
+            for (var i = 0; i < objects.Length; ++i)
                 header.blockTypeIndex[i] = type_map[(Type_) & (objects[i].GetType())];
-            }
 
             // Set object sizes and accumulate string types
             if (version >= VER_20_1_0_3)
@@ -559,8 +547,8 @@ namespace Niflib
                 NifSizeStream ostr;
                 ostr << hdrInfo(&header);
 
-                header.blockSize.resize(objects.size());
-                for (uint i = 0; i < objects.size(); ++i)
+                header.blockSize = new uint[objects.Length];
+                for (var i = 0; i < objects.Length; ++i)
                 {
                     ostr.reset();
                     objects[i].Write(ostr, link_map, missing_link_stack, info);
@@ -584,7 +572,7 @@ namespace Niflib
 		cout << endl << i << ":  " << objects[i].GetType().GetTypeName();
 #endif
 
-                if (version < Nif.VER_3_3_0_13)
+                if (version < VER_3_3_0_13)
                 {
                     //Check if this object is one of the roots.
                     for (list<NiObjectRef>::const_iterator it = roots.begin(); it != roots.end(); ++it)
@@ -630,10 +618,10 @@ namespace Niflib
                 if (roots.size() == 1)
                 {
                     const NiObjectRef&root = roots.front();
-                    if (root.IsDerivedType(NiControllerSequence::TYPE))
+                    if (root.IsDerivedType(NiControllerSequence.TYPE))
                     {
                         // KF animation files allow for multiple roots of type NiControllerSequence
-                        for (unsigned int i = 0; i < objects.size(); ++i)
+                        for (var i = 0; i < objects.size(); ++i)
                         {
                             if (objects[i].IsDerivedType(NiControllerSequence::TYPE))
                             {
@@ -676,18 +664,18 @@ namespace Niflib
          */
         public static void WriteNifTree(OStream s, NiObject root, List<NiObject> missing_link_stack, NifInfo info = null)
         {
-            List<NiObjectRef> roots;
-            roots.push_back(root);
+            var roots = new List<NiObject>();
+            roots.Add(root);
             WriteNifTree(s, roots, missing_link_stack, info ?? NifInfo.Empty);
         }
 
-        static void WriteNifTree(string file_name, List<NiObjectRef> roots, NifInfo info)
+        static void WriteNifTree(string file_name, List<NiObject> roots, NifInfo info)
         {
             //Open output file
             var s = new OStream(File.OpenWrite(file_name));
             WriteNifTree(s, roots, info);
             //Close file
-            s.B.Close();
+            s.Close();
         }
 
         /*!
@@ -701,11 +689,11 @@ namespace Niflib
         {
             //Open output file
             var s = new OStream(File.OpenWrite(file_name));
-            List<NiObjectRef> roots;
-            roots.push_back(root);
+            var roots = new List<NiObject>();
+            roots.Add(root);
             WriteNifTree(s, roots, info ?? NifInfo.Empty);
             //Close file
-            s.B.Close();
+            s.Close();
         }
 
         /*!
@@ -716,8 +704,8 @@ namespace Niflib
          */
         public static void WriteNifTree(OStream s, NiObject root, NifInfo info = null)
         {
-            List<NiObjectRef> roots;
-            roots.push_back(root);
+            var roots = new List<NiObject>();
+            roots.Add(root);
             WriteNifTree(s, roots, info ?? NifInfo.Empty);
         }
 
@@ -743,7 +731,7 @@ namespace Niflib
          * \param[in] target_root The root of the nif tree in which the cloned tree will be embedded. If specified, missing links will be resolved to that tree.
          * \return The root of the new cloned tree.
          */
-        public static Ref<NiObject> CloneNifTree(NiObject root, uint version = 0xFFFFFFFF, uint user_version = 0, NiObject target_root = null)
+        public static NiObject CloneNifTree(NiObject root, uint version = 0xFFFFFFFF, uint user_version = 0, NiObject target_root = null)
         {
             throw new NotImplementedException();
         }
@@ -780,7 +768,7 @@ namespace Niflib
          * \param[in] objects The list of NiAVObjects to try to find the commen ancestor of.
          * \return The common anscestor if one is found, otherwise a null reference.
          */
-        public static Ref<NiNode> FindCommonAncestor(List<Ref<NiAVObject>> objects)
+        public static NiNode FindCommonAncestor(List<NiAVObject> objects)
         {
             throw new NotImplementedException();
         }
@@ -790,7 +778,7 @@ namespace Niflib
          * \param[in] leaf The NiAVObject to list the ancestors of.
          * \return A list containing all the ancestors of the given NiAVObject
          */
-        public static List<Ref<NiNode>> ListAncestors(NiAVObject leaf)
+        public static List<NiNode> ListAncestors(NiAVObject leaf)
         {
             throw new NotImplementedException();
         }
@@ -828,10 +816,8 @@ namespace Niflib
             throw new NotImplementedException();
         }
 
-        ////Object Registration
-        //bool g_objects_registered = false;
-        //void RegisterObjects();
-
+        //Object Registration
+        static bool g_objects_registered = false;
 
 
 
@@ -839,15 +825,15 @@ namespace Niflib
 
         //--Function Bodies--//
 
-        static NiObjectRef FindRoot(List<NiObjectRef> objects)
+        static NiObject FindRoot(List<NiObject> objects)
         {
             //--Look for a NiNode that has no parents--//
 
             //Find the first NiObjectNET derived object
-            NiAVObjectRef root;
-            for (uint i = 0; i < objects.Count; ++i)
+            NiAVObject root = null;
+            for (var i = 0; i < objects.Count; ++i)
             {
-                root = DynamicCast<NiAVObject>(objects[i]);
+                root = (NiAVObject)objects[i];
                 if (root != null)
                     break;
             }
@@ -856,11 +842,11 @@ namespace Niflib
                 return objects[0];
             //Move up the chain to the root node
             while (root.GetParent() != null)
-                root = StaticCast<NiAVObject>(root.GetParent());
-            return StaticCast<NiObject>(root);
+                root = (NiAVObject)root.GetParent();
+            return (NiObject)root;
         }
 
-        static NiObjectRef _ResolveMissingLinkStackHelper(NiObject root, NiObject obj)
+        static NiObjectf _ResolveMissingLinkStackHelper(NiObject root, NiObject obj)
         {
             // search by name
             NiNodeRef rootnode = DynamicCast<NiNode>(root);
@@ -891,7 +877,7 @@ namespace Niflib
 
         // This is a helper function for write to set up the list of all blocks,
         // the block index map, and the block type map.
-        static void EnumerateObjects(NiObject root, map<Type*, unsigned int> & type_map, map<NiObjectRef, unsigned int> & link_map )
+        static void EnumerateObjects(NiObject root, Dictionary<Type_, uint> type_map, Dictionary<NiObject, uint> link_map)
         {
             // Ensure that this object has not already been visited
             if (link_map.find(root) != link_map.end())
@@ -952,39 +938,37 @@ namespace Niflib
 
         //TODO: Should this be returning an object of a derived type too?
         // Searches for the first object in the hierarchy of type.
-        static NiObjectRef GetObjectByType(NiObject root, Type_ type)
+        static NiObject GetObjectByType(NiObject root, Type_ type)
         {
             if (root.IsSameType(type))
                 return root;
-            list<NiObjectRef> links = root.GetRefs();
-            for (list<NiObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
+            var links = root.GetRefs();
+            foreach (var it in links)
             {
                 // Can no longer guarantee that some objects won't be visited twice.  Oh well.
-                NiObjectRef result = GetObjectByType(*it, type);
-                if (result != null)
-                    return result;
+                var r = GetObjectByType(it, type);
+                if (r != null)
+                    return r;
             }
             return null; // return null reference
         }
 
         //TODO: Should this be returning all objects of a derived type too?
         // Returns all in the in the tree of type.
-        static List<NiObjectRef> GetAllObjectsByType(NiObject root, Type_ type)
+        static List<NiObject> GetAllObjectsByType(NiObject root, Type_ type)
         {
-            list<NiObjectRef> result;
+            var r = new List<NiObject>();
             if (root.IsSameType(type))
-            {
-                result.push_back(root);
-            }
-            list<NiObjectRef> links = root.GetRefs();
-            for (list<NiObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
+                r.Add(root);
+            var links = root.GetRefs();
+            foreach (var it in links)
             {
                 // Can no longer guarantee that some objects won't be visited twice.  Oh well.
-                list<NiObjectRef> childresult = GetAllObjectsByType(*it, type);
-                result.merge(childresult);
-            };
-            return result;
-        };
+                var childresult = GetAllObjectsByType(it, type);
+                r.merge(childresult);
+            }
+            return r;
+        }
 
         // Create a valid file name
         static string CreateFileName(string name)
@@ -1012,16 +996,14 @@ namespace Niflib
          * \param kf_type What type of keyframe tree to write (Morrowind style, DAoC style, ...).
          * \param info A NifInfo structure that contains information such as the version of the NIF file to create.
          */
-        static void SplitNifTree(NiObject root_object, NiObjectRef xnif_root, List<NiObjectRef> xkf_roots, Kfm kfm, int kf_type, NifInfo info)
+        static void SplitNifTree(NiObject root_object, NiObject xnif_root, List<NiObject> xkf_roots, Kfm kfm, int kf_type, NifInfo info)
         {
             // Do we have animation groups (a NiTextKeyExtraData object)?
             // If so, create XNif and XKf trees.
-            NiObjectRef txtkey = GetObjectByType(root_object, NiTextKeyExtraData::TYPE);
-            NiTextKeyExtraDataRef txtkey_obj;
+            var txtkey = GetObjectByType(root_object, NiTextKeyExtraData.TYPE);
+            NiTextKeyExtraData txtkey_obj = null;
             if (txtkey != null)
-            {
-                txtkey_obj = DynamicCast<NiTextKeyExtraData>(txtkey);
-            }
+                txtkey_obj = (NiTextKeyExtraData)txtkey;
             if (txtkey_obj != null)
             {
                 if (kf_type == KF_MW)
@@ -1030,7 +1012,7 @@ namespace Niflib
                     xnif_root = CloneNifTree(root_object, info.version, info.userVersion);
 
                     // Now search and locate newer timeframe controllers and convert to keyframecontrollers
-                    list<NiObjectRef> mgrs = GetAllObjectsByType(xnif_root, NiControllerManager::TYPE);
+                    list<NiObjectRef> mgrs = GetAllObjectsByType(xnif_root, NiControllerManager.TYPE);
                     for (list<NiObjectRef>::iterator it = mgrs.begin(); it != mgrs.end(); ++it)
                     {
                         NiControllerManagerRef mgr = DynamicCast<NiControllerManager>(*it);
@@ -1220,7 +1202,7 @@ static void WriteFileGroup(string const file_name, NiObject root_object, NifInfo
     if (export_files == EXPORT_NIF)
         WriteNifTree(file_name_path + file_name_base + ".nif", root_object, info); // simply export the NIF file!
                                                                                    // Now consider all other cases
-    else if (kf_type == KF_MW)
+    else if (kf_type == Niflib.NifGame.KF_MW)
     {
         if (export_files == EXPORT_NIF_KF)
         {

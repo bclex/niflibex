@@ -272,17 +272,6 @@ for n in compound_names:
     # declaration
     cs.declare(x)
 
-    # header and footer functions
-    if n == "Header":
-        cs.code('internal override NifInfo Read(IStream s);')
-        cs.code('internal override void Write(OStream s, NifInfo info = null);')
-        cs.code('internal override string asString(bool verbose = false);')
-    
-    if n == "Footer":
-        cs.code('internal override void Read(IStream s, List<uint> link_stack, NifInfo info);')
-        cs.code('internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info);')
-        cs.code('internal string asString(bool verbose = false);')
-
     if not x.template:
 
         cs.code('//Constructor')
@@ -311,9 +300,9 @@ for n in compound_names:
 
         # header and footer functions
         if n == "Header":
-            cs.code('public NifInfo Read(IStream s) {')
+            cs.code('public override NifInfo Read(IStream s) {')
             cs.code('//Declare NifInfo structure')
-            cs.code('NifInfo info;')
+            cs.code('var info = new NifInfo();')
             cs.code()
             cs.stream(x, ACTION_READ)
             cs.code()
@@ -323,34 +312,33 @@ for n in compound_names:
             cs.code('//Fill out and return NifInfo structure.')
             cs.code('info.userVersion = userVersion;')
             cs.code('info.userVersion2 = userVersion2;')
-            cs.code('info.endian = EndianType(endianType);')
-            cs.code('info.creator = exportInfo.creator.str;')
-            cs.code('info.exportInfo1 = exportInfo.exportInfo1.str;')
-            cs.code('info.exportInfo2 = exportInfo.exportInfo2.str;')
+            cs.code('info.endian = (EndianType)endianType;')
+            cs.code('info.author = exportInfo.author.str;')
+            cs.code('info.processScript = exportInfo.processScript.str;')
+            cs.code('info.exportScript = exportInfo.exportScript.str;')
             cs.code()
             cs.code('return info;')
-            cs.code()
             cs.code('}')
             cs.code()
-            cs.code('public void Write(OStream s, NifInfo info) {')
+            cs.code('public override void Write(OStream s, NifInfo info) {')
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public string asString(bool verbose) {')
+            cs.code('public override string asString(bool verbose) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
         
         if n == "Footer":
             cs.code()
-            cs.code('public void Read(IStream s, List<uint> link_stack, NifInfo info) {')
+            cs.code('public override void Read(IStream s, List<uint> link_stack, NifInfo info) {')
             cs.stream(x, ACTION_READ)
             cs.code('}')
             cs.code()
-            cs.code('public void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {')
+            cs.code('public override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {')
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public string asString(bool verbose) {')
+            cs.code('public override string asString(bool verbose) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
 
@@ -422,32 +410,32 @@ if GENALLFILES:
     cs.write('}\n')
     cs.close()
         
-    # Write out Internal Enumeration header (NifStream functions)
-if GENALLFILES:
-    cs = CSFile(io.open(ROOT_DIR + '/gen/Enums_intl.cs', 'wb'))
-    cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
-    cs.code('All rights reserved.  Please see niflib.h for license. */')
-    cs.code()
-    cs.code('//---THIS FILE WAS AUTOMATICALLY GENERATED.  DO NOT EDIT---//')
-    cs.code()
-    cs.code('//To change this file, alter the /niflib/gen_niflib_cs.py Python script.')
-    cs.code()
-    cs.code('using System;')
-    cs.code()
-    cs.write('namespace Niflib {\n')
-    cs.code()
-    for n, x in itertools.chain(enum_types.items(), flag_types.items()):
-      if x.options:
-        if x.description:
-            cs.code()
-            cs.code('//---' + x.cname + '---//')
-            cs.code()
-        cs.code('void NifStream(%s val, IStream s, NifInfo info = null);' % x.cname)
-        cs.code('void NifStream(%s val, OStream s, NifInfo info = null);' % x.cname)
-        cs.code()
+#    # Write out Internal Enumeration header (NifStream functions)
+#if GENALLFILES:
+#    cs = CSFile(io.open(ROOT_DIR + '/gen/Enums_intl.cs', 'wb'))
+#    cs.code('/* Copyright (c) 2006, NIF File Format Library and Tools')
+#    cs.code('All rights reserved.  Please see niflib.h for license. */')
+#    cs.code()
+#    cs.code('//---THIS FILE WAS AUTOMATICALLY GENERATED.  DO NOT EDIT---//')
+#    cs.code()
+#    cs.code('//To change this file, alter the /niflib/gen_niflib_cs.py Python script.')
+#    cs.code()
+#    cs.code('using System;')
+#    cs.code()
+#    cs.write('namespace Niflib {\n')
+#    cs.code()
+#    for n, x in itertools.chain(enum_types.items(), flag_types.items()):
+#      if x.options:
+#        if x.description:
+#            cs.code()
+#            cs.code('//---' + x.cname + '---//')
+#            cs.code()
+#        cs.code('void NifStream(%s val, IStream s, NifInfo info = null);' % x.cname)
+#        cs.code('void NifStream(%s val, OStream s, NifInfo info = null);' % x.cname)
+#        cs.code()
 
-    cs.write('}\n')
-    cs.close()
+#    cs.write('}\n')
+#    cs.close()
 
 
     #
@@ -462,17 +450,19 @@ if GENALLFILES:
     cs.code('//To change this file, alter the /niflib/gen_niflib_cs.py Python script.')
     cs.code()
     cs.code('namespace Niflib {')
-    cs.code('void RegisterObjects() {')
+    cs.code('public partial class ObjectRegistry {')
+    cs.code()
+    cs.code('public static void RegisterObjects() {')
     cs.code()
     for n in block_names:
         x = block_types[n]
-        cs.code('ObjectRegistry.RegisterObject( "' + x.name + '", ' + x.cname + '.Create );')
+        cs.code('RegisterObject("' + x.name + '", ' + x.cname + '.Create);')
+    cs.code()
+    cs.code('}')
     cs.code()
     cs.code('}')
     cs.code('}')
     cs.close()
-
-
 
 
 

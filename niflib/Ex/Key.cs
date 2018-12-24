@@ -37,7 +37,7 @@ Continuity:  {continuity}\n";
          */
         public static void NormalizeKeyVector<T>(List<Key<T>> keys, float phase, float frequency)
         {
-            for (int i = 0; i < keys.Count; ++i)
+            for (var i = 0; i < keys.Count; ++i)
                 keys[i].time = (keys[i].time - phase) / frequency;
         }
 
@@ -47,17 +47,17 @@ Continuity:  {continuity}\n";
          */
         public static List<Key<T>> ExtractKeySlice<T>(List<Key<T>> keys, float slice_start, float slice_stop, float keys_start, float keys_stop, CycleType cycle = CycleType.CYCLE_CLAMP)
         {
-            List<Key<T>> o = new List<Key<T>>();
+            var o = new List<Key<T>>();
             //Get first set of keys
-            for (int i = 0; i < keys.Count; ++i)
+            for (var i = 0; i < keys.Count; ++i)
                 if (keys[i].time >= slice_start && keys[i].time <= slice_stop)
                     o.Add(keys[i]);
             //Get additional keys based on cycle type.
             if (cycle == CycleType.CYCLE_LOOP || cycle == CycleType.CYCLE_REVERSE)
             {
-                float c = (float)Math.Floor(slice_start / (keys_stop - keys_start)) + 1.0f;
-                bool reverse = false;
-                bool failed = false;
+                var c = (float)Math.Floor(slice_start / (keys_stop - keys_start)) + 1.0f;
+                var reverse = false;
+                var failed = false;
                 while (!failed)
                 {
                     if (cycle == CycleType.CYCLE_REVERSE)
@@ -75,14 +75,14 @@ Continuity:  {continuity}\n";
                         last = keys.Count;
                         vec = 1;
                     }
-                    for (int i = first; i != last; i += vec)
+                    for (var i = first; i != last; i += vec)
                     {
-                        float time = keys[i].time;
+                        var time = keys[i].time;
                         time = keys_start + (keys_stop - time) + c * (keys_stop - keys_start);
                         if (time >= slice_start && time <= slice_stop)
                         {
-                            bool add_key = true;
-                            int prev_key = o.Count - 1;
+                            var add_key = true;
+                            var prev_key = o.Count - 1;
                             if (o.Count > 0 && o[prev_key].time == keys[i].time)
                                 add_key = false;
                             if (add_key)

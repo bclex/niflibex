@@ -51,17 +51,16 @@ namespace Niflib
     public class NifInfo
     {
         public static NifInfo Empty = new NifInfo();
-        public NifInfo()
-        : this(Niflib.VER_4_0_0_2, 0, 0) { }
+        public NifInfo() : this(Nif.VER_4_0_0_2, 0, 0) { }
         public NifInfo(uint version, uint userVersion = 0, uint userVersion2 = 0)
         {
             this.version = version;
             this.userVersion = userVersion;
             this.userVersion2 = userVersion2;
             endian = EndianType.ENDIAN_LITTLE;
-            creator = null;
-            exportInfo1 = null;
-            exportInfo2 = null;
+            author = null;
+            processScript = null;
+            exportScript = null;
         }
 
         public uint version;
@@ -70,10 +69,10 @@ namespace Niflib
         /*! Specifies which low-level number storage format to use. Should match the processor type for the target system. */
         public EndianType endian;
         /*! This is only supported in Oblivion.  It contains the name of the person who created the NIF file. */
-        public string creator;
+        public string author;
         /*! This is only supported in Oblivion.  It seems to contain the type of script or program used to export the file. */
-        public string exportInfo1;
+        public string processScript;
         /*! This is only supported in Oblivion.  It seems to contain the more specific script or options of the above. */
-        public string exportInfo2;
+        public string exportScript;
     };
 }
