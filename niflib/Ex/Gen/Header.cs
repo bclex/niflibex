@@ -340,6 +340,42 @@ public class Header {
 		}
 		return s.ToString();
 	}
+	//--BEGIN:MISC--//
+    /*! HeaderString
+	 * \return The header string
+	 */
+    public HeaderString HeaderString { get => headerString; }
+
+    /*! Nif Version
+	 * \return The current nif version
+	 */
+    public uint Version { get => version; }
+
+    /*! Endian type
+	 * \return The endian type. Intel machines use small endian
+	 */
+    public EndianType EndianType { get => endianType; }
+
+    /*! User version
+     * \return The user version of this file which refers to the company/game that used the netimmerse/gamebryo engine
+     */
+    public uint UserVersion { get => userVersion; }
+
+    /*! User version2
+	 * \return The user version of this file which refers to the company/game that used the netimmerse/gamebryo engine
+	 */
+    public uint getUserVersion2 { get => userVersion2; }
+
+    /*! Block type
+	 * \return A vector containing all the names of the block types in the nif file. Useful for determing what does the nif contain
+	 */
+    public string[] BlockTypes { get => blockTypes; }
+
+    /*! Block type
+	 * \return A vector containing all the indexes in the block types list that denote the type of each block in the nif
+	 */
+    public ushort[] getBlockTypeIndex { get => blockTypeIndex; }
+	//--END:CUSTOM--//
 }
 
 }

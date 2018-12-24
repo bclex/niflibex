@@ -75,6 +75,26 @@ public class SkinPartition {
 	
 	} }
 
+	//--BEGIN:MISC--//
+    /*! Calculate proper value of numTriangles field. */
+    public ushort numTrianglesCalc()
+    {
+        int len = 0;
+        if (numStrips == 0)
+            len = triangles.Length;
+        else
+            foreach (var itr in stripLengths)
+                len += itr - 2;
+        // ensure proper unsigned short range
+        if (len < 0)
+            len = 0;
+        if (len > 65535)
+            len = 65535; // or raise runtime error?
+        return (ushort)len;
+    }
+
+    public ushort numTrianglesCalc(NifInfo info) => numTrianglesCalc();
+	//--END:CUSTOM--//
 }
 
 }
