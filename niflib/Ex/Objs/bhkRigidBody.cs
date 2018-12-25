@@ -512,7 +512,275 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
 
-}
+        /*!
+         * Retrieves what appears to be a copy of the layer value.
+         * \return The duplicate layer value.
+         */
+        NIFLIB_API OblivionLayer GetLayerCopy() const;
+
+        /*!
+         * Sets what appears to be a copy of the layer value.
+         * \param[in] value The new duplicate layer value.
+         */
+        NIFLIB_API void SetLayerCopy(OblivionLayer value);
+
+        NIFLIB_API SkyrimLayer GetSkyrimLayerCopy() const;
+        NIFLIB_API void SetSkyrimLayerCopy(SkyrimLayer value);
+
+        /*!
+         * Gets the current translation of this rigid body.
+         * \return The translation of this rigid body.
+         */
+        NIFLIB_API Vector4 GetTranslation() const;
+
+        /*!
+         * Sets a new translation for this rigid body.
+         * \param[in] value  The new translation for this rigid body.
+         */
+        NIFLIB_API void SetTranslation( const Vector4 & value );
+
+	/*!
+	 * Gets the current rotation of this rigid body.
+	 * \return The rotation of this rigid body.
+	 */
+	NIFLIB_API QuaternionXYZW GetRotation() const;
+
+        /*!
+         * Sets a new rotation for this rigid body.
+         * \param[in] value The new rotation for this rigid body.
+         */
+        NIFLIB_API void SetRotation( const QuaternionXYZW & value );
+
+	/*!
+	 * Gets the current linear velocity of this rigid body.
+	 * \return The linear velocity of this rigid body.
+	 */
+	NIFLIB_API Vector4 GetLinearVelocity() const;
+
+        /*!
+         * Sets a new linear velocity for this rigid body.
+         * \param[in] value The new linear velocity for this rigid body.
+         */
+        NIFLIB_API void SetLinearVelocity( const Vector4 & value );
+
+	/*!
+	 * Gets the current angular velocity of this rigid body.
+	 * \return The angular velocity of this rigid body.
+	 */
+	NIFLIB_API Vector4 GetAngularVelocity() const;
+
+        /*!
+         * Sets a new angular velocity for this rigid body.
+         * \param[in] value The new angular velocity for this rigid body.
+         */
+        NIFLIB_API void SetAngularVelocity( const Vector4 & value );
+
+	/*!
+	 * Gets the current inertia of this rigid body.
+	 * \return The inertia of this rigid body.
+	 */
+	NIFLIB_API InertiaMatrix GetInertia() const;
+
+        /*!
+         * Sets a new inertia for this rigid body.
+         * \param[in] value The new inertia for this rigid body.
+         */
+        NIFLIB_API void SetInertia( const InertiaMatrix & value );
+
+	/*!
+	 * Gets the current center point of this rigid body.
+	 * \return The center point of this rigid body.
+	 */
+	NIFLIB_API Vector4 GetCenter() const;
+
+        /*!
+         * Sets a new center point for this rigid body.
+         * \param[in] value The new center point for this rigid body.
+         */
+        NIFLIB_API void SetCenter( const Vector4 & value );
+
+	/*!
+	 * Gets the current mass of this rigid body.
+	 * \return The mass of this rigid body.
+	 */
+	NIFLIB_API float GetMass() const;
+
+        /*!
+         * Sets a new mass for this rigid body.
+         * \param[in] value The new mass for this rigid body.
+         */
+        NIFLIB_API void SetMass(float value);
+
+        /*!
+         * Gets the current linear damping level of this rigid body.
+         * \return The linear damping level of this rigid body.
+         */
+        NIFLIB_API float GetLinearDamping() const;
+
+        /*!
+         * Sets a new linear damping level for this rigid body.
+         * \param[in] value The new linear damping level for this rigid body.
+         */
+        NIFLIB_API void SetLinearDamping(float value);
+
+        /*!
+         * Gets the current angular damping level of this rigid body.
+         * \return The angular damping level of this rigid body.
+         */
+        NIFLIB_API float GetAngularDamping() const;
+
+        /*!
+         * Sets a new angular damping level for this rigid body.
+         * \param[in] value The new angular damping level for this rigid body.
+         */
+        NIFLIB_API void SetAngularDamping(float value);
+
+        /*!
+         * Gets the current friction of this rigid body.
+         * \return The friction of this rigid body.
+         */
+        NIFLIB_API float GetFriction() const;
+
+        /*!
+         * Sets a new friction for this rigid body.
+         * \param[in] value The new friction for this rigid body.
+         */
+        NIFLIB_API void SetFriction(float value);
+
+        /*!
+         * Gets the current restitution of this rigid body.
+         * \return The restitution of this rigid body.
+         */
+        NIFLIB_API float GetRestitution() const;
+
+        /*!
+         * Sets a new restitution for this rigid body.
+         * \param[in] value The new restitution for this rigid body.
+         */
+        NIFLIB_API void SetRestitution(float value);
+
+        /*!
+         * Gets the current maximum linear velocity of this rigid body.
+         * \return The maximum linear velocity of this rigid body.
+         */
+        NIFLIB_API float GetMaxLinearVelocity() const;
+
+        /*!
+         * Sets a new maximum linear velocit for this rigid body.
+         * \param[in] value The new maximum linear velocity for this rigid body.
+         */
+        NIFLIB_API void SetMaxLinearVelocity(float value);
+
+        /*!
+         * Gets the current maximum angular velocity of this rigid body.
+         * \return The maximum angular velocity of this rigid body.
+         */
+        NIFLIB_API float GetMaxAngularVelocity() const;
+
+        /*!
+         * Sets a new maximum angular velocity for this rigid body.
+         * \param[in] value The new maximum angular velocit for this rigid body.
+         */
+        NIFLIB_API void SetMaxAngularVelocity(float value);
+
+        /*!
+         * Gets the current allowable penetration depth of this rigid body.
+         * \return The allowable penetration depth of this rigid body.
+         */
+        NIFLIB_API float GetPenetrationDepth() const;
+
+        /*!
+         * Sets a new allowable penetration depth for this rigid body.
+         * \param[in] value The new allowable penetration depth for this rigid body.
+         */
+        NIFLIB_API void SetPenetrationDepth(float value);
+
+        /*!
+         * Sets the current motion system for this rigid body.  Seems to override motion quality when set to keyframed.
+         * \return The current motion system setting of this rigid body.
+         */
+        NIFLIB_API MotionSystem GetMotionSystem() const;
+
+        /*!
+         * Gets the current motion system of this rigid body.  Seems to override motion quality when set to keyframed.
+         * \param[in] value The new motion system setting for this rigid body.
+         */
+        NIFLIB_API void SetMotionSystem(MotionSystem value);
+
+        /*!
+         * Sets the quality of the calculations used to detect collisions for this object.  Essentially, the faster the object goes, the higher quality of motion it will require.
+         * \return The current motion quality setting of this rigid body.
+         */
+        NIFLIB_API MotionQuality GetQualityType() const;
+
+        /*!
+         * Gets the quality of the calculations used to detect collisions for this object.  Essentially, the faster the object goes, the higher quality of motion it will require.
+         * \param[in] value The new motion quality setting for this rigid body.
+         */
+        NIFLIB_API void SetQualityType(MotionQuality value);
+
+        // The initial deactivator type of the body.
+        // \return The current value.
+        NIFLIB_API DeactivatorType GetDeactivatorType() const;
+
+        // The initial deactivator type of the body.
+        // \param[in] value The new value.
+        NIFLIB_API void SetDeactivatorType( const DeactivatorType & value );
+
+	// Usually set to 1 for fixed objects, or set to 2 for moving ones.  Seems to
+	// always be same as Unknown Byte 1.
+	// \return The current value.
+	NIFLIB_API SolverDeactivation GetSolverDeactivation() const;
+
+        // Usually set to 1 for fixed objects, or set to 2 for moving ones.  Seems to
+        // always be same as Unknown Byte 1.
+        // \param[in] value The new value.
+        NIFLIB_API void SetSolverDeactivation( const SolverDeactivation & value );
+
+	/*!
+	 * Adds a constraint to this bhkRigidBody.
+	 */
+	NIFLIB_API void AddConstraint(bhkSerializable* obj);
+
+        /*!
+         * Removes a constraint from this bhkRigidBody.
+         */
+        NIFLIB_API void RemoveConstraint(bhkSerializable* obj);
+
+        /*!
+         * Removes all constraints from this bhkRigidBody.
+         */
+        NIFLIB_API void ClearConstraints();
+
+        /*!
+         * Retrieves all the constraints attached to this bhkRigidBody.
+         */
+        NIFLIB_API vector<Ref<bhkSerializable> > GetConstraints() const;
+
+        // Apply scale factor <scale> on data.
+        // \param[in] scale Factor to scale by
+        NIFLIB_API void ApplyScale(float scale);
+
+        // Look at all the objects under this rigid body and update the mass
+        //  center of gravity, and inertia tensor accordingly. If the mass parameter
+        //  is given then the density argument is ignored.
+        NIFLIB_API void UpdateMassProperties(float density = 1.0f, bool solid = true, float mass = 0.0f);
+
+        /*!
+         * Returns the unknown 7 shorts
+         * \return An array containing the 7 unknown shorts within this object.
+         */
+        NIFLIB_API virtual array<7, unsigned short> GetUnknown7Shorts() const;
+
+        /*! Replaces the unknown 7 shorts with new data
+         * \param in An array containing the new data.  Size is 7.
+         */
+        NIFLIB_API virtual void SetUnknown7Shorts( const array<7, unsigned short> & in );
+
+
+        //--END:CUSTOM--//
+    }
 
 }

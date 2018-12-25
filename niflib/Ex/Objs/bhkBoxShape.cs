@@ -118,6 +118,31 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+/*!
+* Gets or sets the dimensions of the box.
+* \param value The new dimensions for the bounding box.
+*/
+public Vector3 Dimensions
+{
+    get => dimensions;
+    set
+    {
+        dimensions = value;
+        //minimumSize = Math.Min(Math.Min(value.x, value.y), value.z);
+    }
+}
+
+/*! Helper routine for calculating mass properties.
+*  \param[in]  density Uniform density of object
+*  \param[in]  solid Determines whether the object is assumed to be solid or not
+*  \param[out] mass Calculated mass of the object
+*  \param[out] center Center of mass
+*  \param[out] inertia Mass Inertia Tensor
+*  \return Return mass, center, and inertia tensor.
+*/
+public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia) => Inertia.CalcMassPropertiesBox(dimensions, density, solid, mass, volume, center, inertia);
+//--END:CUSTOM--//
 
 }
 

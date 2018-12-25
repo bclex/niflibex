@@ -80,7 +80,22 @@ public class bhkConvexTransformShape : bhkTransformShape {
 		return ptrs;
 	}
 
-
-}
+        //--BEGIN:FILE FOOT--//
+        /*! Helper routine for calculating mass properties.
+         *  \param[in]  density Uniform density of object
+         *  \param[in]  solid Determines whether the object is assumed to be solid or not
+         *  \param[out] mass Calculated mass of the object
+         *  \param[out] center Center of mass
+         *  \param[out] inertia Mass Inertia Tensor
+         *  \return Return mass, center, and inertia tensor.
+         */
+        public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
+        {
+            center = new Vector3(0, 0, 0);
+            mass = 0.0f; volume = 0.0f;
+            inertia = InertiaMatrix.IDENTITY;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

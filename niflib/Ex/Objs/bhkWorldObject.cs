@@ -188,7 +188,36 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
 
-}
+        /*!
+         * Retrieves the shape object that this body is using.
+         * \return The shape object being used by this body.
+         */
+        NIFLIB_API Ref<bhkShape> GetShape() const;
+
+        /*!
+         * Sets the shape object that this body will use.
+         * \param[in] value The new shape object for this body to use.
+         */
+        NIFLIB_API void SetShape(bhkShape* value);
+
+        /*!
+         * Gets the current Oblivion layer, which seems to determine the mesh color displayed by the Oblivion Construction Set.
+         * \return The current Oblivion Layer.
+         */
+        NIFLIB_API OblivionLayer GetLayer() const;
+
+        /*!
+         * Sets the Oblivion layer, which seems to determine the mesh color displayed by the Oblivion Construction Set.
+         * \param[in] value The new Oblivoin layer to use.
+         */
+        NIFLIB_API void SetLayer(OblivionLayer value);
+
+        NIFLIB_API SkyrimLayer GetSkyrimLayer() const;
+        NIFLIB_API void SetSkyrimLayer(SkyrimLayer value);
+
+        //--END:CUSTOM--//
+    }
 
 }

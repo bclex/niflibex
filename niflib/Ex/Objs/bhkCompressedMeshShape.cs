@@ -137,7 +137,27 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-
-}
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or set target 
+         * \param[in] value target
+         */
+        public NiAVObject Target
+        {
+            get => target;
+            set => target = value;
+        }
+        
+        /*!
+         * Gets or sets data
+         * \param[in] value data
+         */
+        public bhkCompressedMeshShapeData Data
+        {
+            get => data;
+            set => data = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

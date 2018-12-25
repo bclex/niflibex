@@ -118,8 +118,56 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
 
+        /*!
+         * Get the shape's material.  This determines the type of noises the object makes as it collides in Oblivion.
+         * \return The Oblivion material used by this collision shape.
+         */
+        NIFLIB_API HavokMaterial GetMaterial() const;
 
-}
+        /*!
+         * Sets the shape's material.  This determines the type of noises the object makes as it collides in Oblivion.
+         * \param[in] value The new material for this shape to use.
+         */
+        NIFLIB_API void SetMaterial(HavokMaterial value);
+
+        /*!
+         * Get the shape's material (Skyrim version).  This determines the type of noises the object makes as it collides in Oblivion.
+         * \return The Oblivion material used by this collision shape.
+         */
+        NIFLIB_API SkyrimHavokMaterial GetSkyrimMaterial() const;
+
+        /*!
+         * Sets the shape's material (Skyrim version).  This determines the type of noises the object makes as it collides in Oblivion.
+         * \param[in] value The new material for this shape to use.
+         */
+        NIFLIB_API void SetSkyrimMaterial(SkyrimHavokMaterial value);
+
+        /*!
+        * Gets the capsule's radius.
+        * \return The radius of the capsule.
+        */
+        NIFLIB_API float GetRadius() const;
+
+        /*!
+        * Sets the capsule's radius.
+        * \param[in] value The new radius for the capsule.
+        */
+        NIFLIB_API void SetRadius(float value);
+
+        /*! Helper routine for calculating mass properties.
+         *  \param[in]  density Uniform density of object
+         *  \param[in]  solid Determines whether the object is assumed to be solid or not
+         *  \param[out] mass Calculated mass of the object
+         *  \param[out] center Center of mass
+         *  \param[out] inertia Mass Inertia Tensor
+         *  \return Return mass, center, and inertia tensor.
+         */
+        NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
+
+        //--END:CUSTOM--//
+
+    }
 
 }
