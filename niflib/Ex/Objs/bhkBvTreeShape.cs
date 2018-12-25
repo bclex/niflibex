@@ -80,7 +80,7 @@ public class bhkBvTreeShape : bhkShape {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
         /*! Helper routine for calculating mass properties.
         *  \param[in]  density Uniform density of object
         *  \param[in]  solid Determines whether the object is assumed to be solid or not
@@ -95,7 +95,8 @@ public class bhkBvTreeShape : bhkShape {
             mass = 0.0f; volume = 0.0f;
             inertia = InertiaMatrix.IDENTITY;
         }
-        //--END:CUSTOM--//
-    }
+	//--END:CUSTOM--//
+
+}
 
 }

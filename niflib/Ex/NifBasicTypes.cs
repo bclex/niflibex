@@ -8,16 +8,19 @@ namespace Niflib
     public struct HeaderString
     {
         public string header;
+        public static implicit operator HeaderString(string r) => new HeaderString { header = r };
     }
 
     public struct ShortString
     {
         public string str;
+        public static implicit operator ShortString(string r) => new ShortString { str = r };
     }
 
     public struct LineString
     {
         public string line;
+        public static implicit operator LineString(string r) => new LineString { line = r };
     }
 
     public struct IndexString
@@ -26,7 +29,6 @@ namespace Niflib
         //public IndexString() { val = null; }
         public IndexString(IndexString r) { val = r.val; }
         public IndexString(string r) { val = r; }
-
         //public static implicit operator string(IndexString r) => r.val;
         public static implicit operator IndexString(string r) => new IndexString(r);
     }
@@ -37,6 +39,7 @@ namespace Niflib
         //public Char8String() { val = null; }
         public Char8String(Char8String r) { val = r.val; }
         public Char8String(string r) { val = r; }
+        public static implicit operator Char8String(string r) => new Char8String(r);
     }
 
     /*!

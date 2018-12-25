@@ -1,6 +1,9 @@
 /* Copyright (c) 2006, NIF File Format Library and Tools
 All rights reserved.  Please see niflib.h for license. */
 
+#define DEBUG_HEADER_FOOTER
+#define PRINT_OBJECT_NAMES
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,7 +91,7 @@ namespace Niflib
             var s = new IStream(File.OpenRead(file_name));
             //--Read Header String--//
             var info = new NifInfo();
-            Nif.NifStream(out HeaderString header, s, info);
+            NifStream(out HeaderString header, s, info);
             return info.version;
         }
 
@@ -146,18 +149,18 @@ namespace Niflib
             if (!g_objects_registered)
             {
                 g_objects_registered = true;
-                RegisterObjects();
+                ObjectRegistry.RegisterObjects();
             }
 
             //--Read Header--//
-            Header header;
-            hdrInfo hinfo(header);
+            var header = new Header();
+            var hinfo = new hdrInfo(header);
 
             // set the header pointer in the stream
-            s >> hinfo;
+            hdrInfo.Set(s, header);
 
             //Create a new NifInfo if one isn't given.
-            bool delete_info = false;
+            var delete_info = false;
             if (info == null)
             {
                 info = new NifInfo();
@@ -171,86 +174,82 @@ namespace Niflib
             info.version = header.version;
             info.userVersion = header.userVersion;
             info.userVersion2 = header.userVersion2;
-            info.endian = EndianType(header.endianType);
-            info.creator = header.exportInfo.creator.str;
-            info.exportInfo1 = header.exportInfo.exportInfo1.str;
-            info.exportInfo2 = header.exportInfo.exportInfo2.str;
+            info.endian = header.endianType;
+            info.author = header.exportInfo.author.str;
+            info.processScript = header.exportInfo.processScript.str;
+            info.exportScript = header.exportInfo.exportScript.str;
 
 #if DEBUG_HEADER_FOOTER
             //Print debug output for header
-            cout << header.asString();
+            Console.Write(header.asString());
 #endif
 
 #if PRINT_OBJECT_NAMES
-            cout << endl << "Reading Objects:";
+            Console.Write("\nReading Objects:");
 #endif
 
             //--Read Objects--//
             var numObjects = header.numBlocks;
-            Dictionary<uint, NiObject> objects; //Map to hold objects by number
-            IEnumerable<NiObject> obj_list; //Vector to hold links in the order they were created.
-            List<uint> link_stack; //List to add link values to as they're read in from the file
+            var objects = new Dictionary<uint, NiObject>(); //Map to hold objects by number
+            var obj_list = new List<NiObject>(); //Vector to hold links in the order they were created.
+            var link_stack = new List<uint>(); //List to add link values to as they're read in from the file
             string objectType;
-            stringstream errStream;
+            var err = new StringBuilder();
 
-            std::streampos headerpos = s.tellg();
-            std::streampos nextobjpos = headerpos;
+            var headerpos = s.Position;
+            var nextobjpos = headerpos;
 
             //Loop through all objects in the file
             uint i = 0;
-            NiObjectRef new_obj;
+            NiObject new_obj = null;
             while (true)
             {
                 // Check if the size information matches in version 20.3 and greater
                 if (header.version >= VER_20_3_0_3)
                 {
-                    if (nextobjpos != s.tellg())
-                        // incorrect positioning seek to expected location
-                        s.seekg(nextobjpos);
+                    if (nextobjpos != s.Position)
+                        s.Position = nextobjpos; // incorrect positioning seek to expected location
                     // update next location
                     nextobjpos += header.blockSize[i];
                 }
 
                 //Check for EOF
-                if (s.IsEof())
+                if (s.IsEof)
                 {
-                    errStream << "End of file reached prematurely.  This NIF may be corrupt or improperly supported." << endl;
+                    err.AppendLine("End of file reached prematurely.  This NIF may be corrupt or improperly supported.");
                     if (new_obj != null)
                     {
-                        errStream << "Last successfuly read object was:  " << endl;
-                        errStream << "====[ " << "Object " << i - 1 << " | " << new_obj.GetType().GetTypeName() << " ]====" << endl;
-                        errStream << new_obj.asString();
+                        err.AppendLine("Last successfuly read object was:  ");
+                        err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
+                        err.AppendLine(new_obj.asString());
                     }
-                    else
-                        errStream << "No objects were read successfully." << endl;
-                    throw runtime_error(errStream.str());
+                    else err.AppendLine("No objects were read successfully.");
+                    throw new Exception(err.ToString());
                 }
 
                 // Starting position of block in stream
-                std::streampos startobjpos = s.tellg();
+                var startobjpos = s.Position;
 
                 //There are two main ways to read objects
                 //One before version 5.0.0.1 and one after
                 if (header.version >= 0x05000001)
                 {
                     //From version 5.0.0.1 to version 10.0.1.106  there is a zero byte at the begining of each object
-
-                    if (header.version <= Nif.VER_10_1_0_106)
+                    if (header.version <= VER_10_1_0_106)
                     {
-                        uint checkValue = Nif.ReadUInt(s);
+                        var checkValue = ReadUInt(s);
                         if (checkValue != 0)
                         {
                             //Throw an exception if it's not zero
-                            errStream << "Read failue - Bad object position.  Invalid check value:  " << checkValue << endl;
+                            err.AppendLine($"Read failue - Bad object position.  Invalid check value:  {checkValue}");
                             if (new_obj != null)
                             {
-                                errStream << "Last successfuly read object was:  " << endl;
-                                errStream << "====[ " << "Object " << i - 1 << " | " << new_obj.GetType().GetTypeName() << " ]====" << endl;
-                                errStream << new_obj.asString();
+                                err.AppendLine("Last successfuly read object was:  ");
+                                err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
+                                err.AppendLine(new_obj.asString());
                             }
-                            else
-                                errStream << "No objects were read successfully." << endl;
-                            throw runtime_error(errStream.str());
+                            else err.AppendLine("No objects were read successfully.");
+                            throw new Exception(err.ToString());
                         }
                     }
 
@@ -258,25 +257,24 @@ namespace Niflib
                     objectType = header.blockTypes[header.blockTypeIndex[i]];
 
 #if PRINT_OBJECT_NAMES
-                    cout << endl << i << ":  " << objectType;
+                    Console.WriteLine($"\n{i}:  {objectType}");
 #endif
                 }
                 else
                 {
                     // Find which object type this is by reading the string at this location
-                    uint objectTypeLength = Nif.ReadUInt(s);
+                    var objectTypeLength = ReadUInt(s);
                     if (objectTypeLength > 30 || objectTypeLength < 6)
                     {
-                        errStream << "Read failue - Bad object position.  Invalid Type Name Length:  " << objectTypeLength << endl;
+                        err.AppendLine($"Read failue - Bad object position.  Invalid Type Name Length:  {objectTypeLength}");
                         if (new_obj != null)
                         {
-                            errStream << "Last successfuly read object was:  " << endl;
-                            errStream << "====[ " << "Object " << i - 1 << " | " << new_obj.GetType().GetTypeName() << " ]====" << endl;
-                            errStream << new_obj.asString();
+                            err.AppendLine("Last successfuly read object was:  ");
+                            err.AppendLine("====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
+                            err.Append(new_obj.asString());
                         }
-                        else
-                            errStream << "No objects were read successfully." << endl;
-                        throw runtime_error(errStream.str());
+                        else err.AppendLine("No objects were read successfully.");
+                        throw new Exception(err.ToString());
                     }
                     var charobjectType = new byte[objectTypeLength + 1];
                     s.Read(charobjectType, 0, (int)objectTypeLength);
@@ -284,10 +282,10 @@ namespace Niflib
                     objectType = Encoding.ASCII.GetString(charobjectType);
 
 #if PRINT_OBJECT_NAMES
-                    cout << endl << i << ":  " << objectType;
+                    Console.WriteLine($"\n{i}:  {objectType}");
 #endif
 
-                    if (header.version < Nif.VER_3_3_0_13)
+                    if (header.version < VER_3_3_0_13)
                     {
                         //There can be special commands instead of object names
                         //in these versions
@@ -302,24 +300,23 @@ namespace Niflib
                 //Check for an unknown object type
                 if (new_obj == null)
                 {
-                    errStream << "Unknown object type encountered during file read:  " << objectType << endl;
+                    err.AppendLine("Unknown object type encountered during file read:  ", objectType);
                     if (new_obj != null)
                     {
-                        errStream << "Last successfully read object was:  " << endl;
-                        errStream << "====[ " << "Object " << i - 1 << " | " << new_obj.GetType().GetTypeName() << " ]====" << endl;
-                        errStream << new_obj.asString();
+                        err.AppendLine("Last successfully read object was:  ");
+                        err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
+                        err.AppendLine(new_obj.asString());
                     }
-                    else
-                        errStream << "No objects were read successfully." << endl;
-                    throw runtime_error(errStream.str());
+                    else err.AppendLine("No objects were read successfully.");
+                    throw new Exception(err.ToString());
                 }
 
                 uint index;
-                if (header.version < Nif.VER_3_3_0_13)
+                if (header.version < VER_3_3_0_13)
                 {
                     //These old versions have a pointer value after the name
                     //which is used as the index
-                    index = Nif.ReadUInt(s);
+                    index = ReadUInt(s);
                 }
                 else
                 {
@@ -349,10 +346,10 @@ namespace Niflib
                     uint objsize = header.blockSize[i];
                     if (calcobjsize != objsize)
                     {
-                        errStream << "Object size mismatch occurred during file read:" << endl;
-                        errStream << "====[ " << "Object " << i << " | " << objectType << " ]====" << endl;
-                        errStream << "  Start: " << startobjpos << "  Expected Size: " << objsize << "  Read Size: " << calcobjsize << endl;
-                        errStream << endl;
+                        err << "Object size mismatch occurred during file read:" << endl;
+                        err << "====[ " << "Object " << i << " | " << objectType << " ]====" << endl;
+                        err << "  Start: " << startobjpos << "  Expected Size: " << objsize << "  Read Size: " << calcobjsize << endl;
+                        err << endl;
                     }
                 }
 
@@ -382,9 +379,9 @@ namespace Niflib
 #endif
 
             // Check for accumulated warnings
-            if (errStream.tellp() > 0)
+            if (err.tellp() > 0)
             {
-                throw runtime_error(errStream.str());
+                throw runtime_error(err.str());
             }
 
 #if DEBUG_LINK_PHASE
@@ -516,15 +513,15 @@ namespace Niflib
             header.userVersion = info.userVersion;
             header.userVersion2 = info.userVersion2;
             header.endianType = info.endian;
-            header.exportInfo.author.str = info.author;
-            header.exportInfo.processScript.str = info.processScript;
-            header.exportInfo.exportScript.str = info.exportScript;
-            header.copyright[0].line = "Numerical Design Limited, Chapel Hill, NC 27514";
-            header.copyright[1].line = "Copyright (c) 1996-2000";
-            header.copyright[2].line = "All Rights Reserved";
+            header.exportInfo.author = info.author;
+            header.exportInfo.processScript = info.processScript;
+            header.exportInfo.exportScript = info.exportScript;
+            header.copyright[0] = "Numerical Design Limited, Chapel Hill, NC 27514";
+            header.copyright[1] = "Copyright (c) 1996-2000";
+            header.copyright[2] = "All Rights Reserved";
 
             // set the header pointer in the stream
-            s += new hdrInfo(header);
+            hdrInfo.Set(s, header);
 
             //Set Type Names
             header.blockTypes = new string[types.Length];
@@ -561,7 +558,7 @@ namespace Niflib
             header.Write(s, info);
 
 #if PRINT_OBJECT_NAMES
-	cout << endl << "Writing Objects:";
+            cout << endl << "Writing Objects:";
 #endif
 
             //--Write Objects--//
@@ -569,7 +566,7 @@ namespace Niflib
             {
 
 #if PRINT_OBJECT_NAMES
-		cout << endl << i << ":  " << objects[i].GetType().GetTypeName();
+                cout << endl << i << ":  " << objects[i].GetType().GetTypeName();
 #endif
 
                 if (version < VER_3_3_0_13)

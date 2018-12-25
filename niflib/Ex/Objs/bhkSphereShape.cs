@@ -80,7 +80,7 @@ public class bhkSphereShape : bhkConvexShape {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
 
         /*!
          * Retrieves the radius of the sphere.
@@ -104,8 +104,8 @@ public class bhkSphereShape : bhkConvexShape {
          */
         NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
 
-        //--END:CUSTOM--//
+	//--END:CUSTOM--//
 
-    }
+}
 
 }

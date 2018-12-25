@@ -118,7 +118,8 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
 
         /*!
          * Get the shape's material.  This determines the type of noises the object makes as it collides in Oblivion.
@@ -166,8 +167,8 @@ internal override List<NiObject> GetPtrs() {
          */
         NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
 
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }

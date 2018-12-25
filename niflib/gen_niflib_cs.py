@@ -198,7 +198,7 @@ for n in compound_names:
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public string asString(bool verbose) {')
+            cs.code('public string AsString(bool verbose = false) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
         
@@ -212,7 +212,7 @@ for n in compound_names:
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public string asString(bool verbose) {')
+            cs.code('public string AsString(bool verbose) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
 
@@ -252,7 +252,7 @@ if GENALLFILES:
         cs.code('static partial class Nif { //--' + x.cname + '--//')
         cs.code('public static void NifStream(out %s val, IStream s, NifInfo info) { %s temp; NifStream(out temp, s, info); val = (%s)temp; }' % (x.cname, x.storage, x.cname))
         cs.code('public static void NifStream(%s val, OStream s, NifInfo info) => NifStream((%s)val, s, info);' % (x.cname,x.storage))
-        cs.code('public static string ToString(%s val) { switch (val) {' % (x.cname))
+        cs.code('public static string AsString(%s val) { switch (val) {' % (x.cname))
         for o in x.options:
           cs.code('case %s.%s: return "%s";' % (x.cname, o.cname, o.name))
         cs.code('default: return $"Invalid Value! - {val}";')
@@ -429,7 +429,7 @@ for n in block_names:
     cs.code(' * \\param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.')
     cs.code(' * \\return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.')
     cs.code(' */')
-    cs.code("public override string asString(bool verbose = false) {")
+    cs.code("public override string AsString(bool verbose = false) {")
 
     #Preserve Custom code from before
     WriteCustomCode(customCtx, cs, 'PRE-STRING')

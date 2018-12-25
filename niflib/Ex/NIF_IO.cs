@@ -15,7 +15,11 @@ namespace Niflib
         public int ReadByte() => B.ReadByte();
         public void Write(byte[] buffer, int offset, int count) => B.Write(buffer, offset, count);
         public void WriteByte(byte value) => B.WriteByte(value);
-        public long Position => B.Position;
+        public long Position
+        {
+            get => B.Position;
+            set => B.Position = value;
+        }
         public bool IsEof => B.Position == B.Length;
         public void Close() => B.Close();
     }
@@ -703,6 +707,7 @@ namespace Niflib
             static NifInfo infoIdx;
 
             public strInfo(NifInfo value) { info = value; }
+            public static void Set(BStream s, NifInfo value) { infoIdx = value; }
             public static NifInfo getInfo(BStream s) => infoIdx;
         }
 
@@ -713,6 +718,7 @@ namespace Niflib
             static Header infoIdx;
 
             public hdrInfo(Header value) { info = value; }
+            public static void Set(BStream s, Header value) { infoIdx = value; }
             public static Header getInfo(BStream s) => infoIdx;
         }
 

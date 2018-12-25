@@ -188,7 +188,7 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-        //--BEGIN:FILE FOOT--//
+//--BEGIN:FILE FOOT--//
 
         /*!
          * Retrieves the shape object that this body is using.
@@ -217,7 +217,8 @@ internal override List<NiObject> GetPtrs() {
         NIFLIB_API SkyrimLayer GetSkyrimLayer() const;
         NIFLIB_API void SetSkyrimLayer(SkyrimLayer value);
 
-        //--END:CUSTOM--//
-    }
+//--END:CUSTOM--//
+
+}
 
 }

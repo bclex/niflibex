@@ -512,7 +512,7 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-        //--BEGIN:FILE FOOT--//
+//--BEGIN:FILE FOOT--//
 
         /*!
          * Retrieves what appears to be a copy of the layer value.
@@ -780,7 +780,8 @@ internal override List<NiObject> GetPtrs() {
         NIFLIB_API virtual void SetUnknown7Shorts( const array<7, unsigned short> & in );
 
 
-        //--END:CUSTOM--//
-    }
+//--END:CUSTOM--//
+
+}
 
 }

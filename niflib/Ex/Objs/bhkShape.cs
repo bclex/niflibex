@@ -80,7 +80,7 @@ public class bhkShape : bhkSerializable {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
 
         /*! Helper routine for calculating mass properties.
          *  \param[in]  density Uniform density of object
@@ -92,7 +92,8 @@ public class bhkShape : bhkSerializable {
          */
         NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
 
-        //--END:CUSTOM--//
-    }
+	//--END:CUSTOM--//
+
+}
 
 }

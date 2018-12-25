@@ -227,7 +227,7 @@ public class Header {
 		}
 	}
 
-	public string asString(bool verbose) {
+	public string asString(bool verbose = false) {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		numGroups = (uint)groups.Length;

@@ -137,7 +137,7 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-        //--BEGIN:FILE FOOT--//
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or set target 
          * \param[in] value target
@@ -157,7 +157,8 @@ internal override List<NiObject> GetPtrs() {
             get => data;
             set => data = value;
         }
-        //--END:CUSTOM--//
-    }
+//--END:CUSTOM--//
+
+}
 
 }
