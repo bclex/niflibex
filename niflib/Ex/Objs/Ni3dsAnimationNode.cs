@@ -19,21 +19,21 @@ public class Ni3dsAnimationNode : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsAnimationNode", NiObject.TYPE);
 	/*! Name of this object. */
-	public IndexString name;
+	IndexString name;
 	/*! Unknown. */
-	public bool hasData;
+	bool hasData;
 	/*! Unknown. Matrix? */
-	public Array21<float> unknownFloats1;
+	Array21<float> unknownFloats1;
 	/*! Unknown. */
-	public ushort unknownShort;
+	ushort unknownShort;
 	/*! Child? */
-	public NiObject child;
+	NiObject child;
 	/*! Unknown. */
-	public Array12<float> unknownFloats2;
+	Array12<float> unknownFloats2;
 	/*! A count. */
-	public uint count;
+	uint count;
 	/*! Unknown. */
-	public Array5<byte>[] unknownArray;
+	Array5<byte>[] unknownArray;
 
 	public Ni3dsAnimationNode() {
 	hasData = false;
@@ -113,11 +113,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	count = (uint)unknownArray.Length;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Has Data:  {hasData}");

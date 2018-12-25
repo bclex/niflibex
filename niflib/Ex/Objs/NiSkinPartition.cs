@@ -23,19 +23,19 @@ public class NiSkinPartition : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinPartition", NiObject.TYPE);
 	/*!  */
-	public uint numSkinPartitionBlocks;
+	uint numSkinPartitionBlocks;
 	/*! Skin partition objects. */
-	public SkinPartition[] skinPartitionBlocks;
+	SkinPartition[] skinPartitionBlocks;
 	/*!  */
-	public uint dataSize;
+	uint dataSize;
 	/*!  */
-	public uint vertexSize;
+	uint vertexSize;
 	/*!  */
-	public BSVertexDesc vertexDesc;
+	BSVertexDesc vertexDesc;
 	/*!  */
-	public BSVertexData[] vertexData;
+	BSVertexData[] vertexData;
 	/*!  */
-	public SkinPartition[] partition;
+	SkinPartition[] partition;
 
 	public NiSkinPartition() {
 	numSkinPartitionBlocks = (uint)0;
@@ -576,11 +576,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSkinPartitionBlocks = (uint)skinPartitionBlocks.Length;
 	s.AppendLine($"  Num Skin Partition Blocks:  {numSkinPartitionBlocks}");
 	array_output_count = 0;

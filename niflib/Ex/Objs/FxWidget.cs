@@ -19,9 +19,9 @@ public class FxWidget : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("FxWidget", NiNode.TYPE);
 	/*! Unknown. */
-	public byte unknown3;
+	byte unknown3;
 	/*! Looks like 9 links and some string data. */
-	public Array292<byte> unknown292Bytes;
+	Array292<byte> unknown292Bytes;
 
 	public FxWidget() {
 	unknown3 = (byte)0;
@@ -66,11 +66,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Unknown 3:  {unknown3}");
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 292; i1++) {

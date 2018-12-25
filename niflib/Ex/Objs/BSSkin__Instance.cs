@@ -19,17 +19,17 @@ public class BSSkin__Instance : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSkin::Instance", NiObject.TYPE);
 	/*!  */
-	public NiAVObject skeletonRoot;
+	NiAVObject skeletonRoot;
 	/*!  */
-	public BSSkin__BoneData data;
+	BSSkin__BoneData data;
 	/*!  */
-	public uint numBones;
+	uint numBones;
 	/*!  */
-	public NiNode[] bones;
+	NiNode[] bones;
 	/*!  */
-	public uint numUnknown;
+	uint numUnknown;
 	/*! Unknown. */
-	public Vector3[] unknown;
+	Vector3[] unknown;
 
 	public BSSkin__Instance() {
 	skeletonRoot = null;
@@ -97,11 +97,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numUnknown = (uint)unknown.Length;
 	numBones = (uint)bones.Length;
 	s.AppendLine($"  Skeleton Root:  {skeletonRoot}");

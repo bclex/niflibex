@@ -19,16 +19,16 @@ public class NiTriStripsData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriStripsData", NiTriBasedGeomData.TYPE);
 	/*! Number of OpenGL triangle strips that are present. */
-	public ushort numStrips;
+	ushort numStrips;
 	/*! The number of points in each triangle strip. */
-	public ushort[] stripLengths;
+	ushort[] stripLengths;
 	/*! Do we have strip point data? */
-	public bool hasPoints;
+	bool hasPoints;
 	/*!
 	 * The points in the Triangle strips.  Size is the sum of all entries in Strip
 	 * Lengths.
 	 */
-	public ushort[][] points;
+	ushort[][] points;
 
 	public NiTriStripsData() {
 	numStrips = (ushort)0;
@@ -120,11 +120,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	for (var i1 = 0; i1 < points.Length; i1++)
 		stripLengths[i1] = (ushort)points[i1].Length;
 	numStrips = (ushort)stripLengths.Length;

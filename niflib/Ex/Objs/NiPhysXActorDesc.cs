@@ -19,37 +19,37 @@ public class NiPhysXActorDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXActorDesc", NiObject.TYPE);
 	/*!  */
-	public IndexString actorName;
+	IndexString actorName;
 	/*!  */
-	public uint numPoses;
+	uint numPoses;
 	/*!  */
-	public Matrix34[] poses;
+	Matrix34[] poses;
 	/*!  */
-	public NiPhysXBodyDesc bodyDesc;
+	NiPhysXBodyDesc bodyDesc;
 	/*!  */
-	public float density;
+	float density;
 	/*!  */
-	public uint actorFlags;
+	uint actorFlags;
 	/*!  */
-	public ushort actorGroup;
+	ushort actorGroup;
 	/*!  */
-	public ushort dominanceGroup;
+	ushort dominanceGroup;
 	/*!  */
-	public uint contactReportFlags;
+	uint contactReportFlags;
 	/*!  */
-	public ushort forceFieldMaterial;
+	ushort forceFieldMaterial;
 	/*!  */
-	public uint dummy;
+	uint dummy;
 	/*!  */
-	public uint numShapeDescs;
+	uint numShapeDescs;
 	/*!  */
-	public NiPhysXShapeDesc[] shapeDescriptions;
+	NiPhysXShapeDesc[] shapeDescriptions;
 	/*!  */
-	public NiPhysXActorDesc actorParent;
+	NiPhysXActorDesc actorParent;
 	/*!  */
-	public NiPhysXRigidBodySrc source;
+	NiPhysXRigidBodySrc source;
 	/*!  */
-	public NiPhysXRigidBodyDest dest;
+	NiPhysXRigidBodyDest dest;
 
 	public NiPhysXActorDesc() {
 	numPoses = (uint)0;
@@ -156,11 +156,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numShapeDescs = (uint)shapeDescriptions.Length;
 	numPoses = (uint)poses.Length;
 	s.AppendLine($"  Actor Name:  {actorName}");

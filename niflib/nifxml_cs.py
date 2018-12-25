@@ -74,7 +74,7 @@ POSSIBILITY OF SUCH DAMAGE.
 @var ACTION_WRITE: Constant for use with CFile::stream.  Causes it to generate Niflib's Write function.
 @type ACTION_WRITE: C{int}
 
-@var ACTION_OUT: Constant for use with CFile::stream.  Causes it to generate Niflib's asString function.
+@var ACTION_OUT: Constant for use with CFile::stream.  Causes it to generate Niflib's AsString function.
 @type ACTION_OUT: C{int}
 
 @var ACTION_FIXLINKS: Constant for use with CFile::stream.  Causes it to generate Niflib's FixLinks function.
@@ -272,7 +272,7 @@ class CSFile(io.TextIOWrapper):
         keyword = ''
         # branch
         if isinstance(block, Block):
-            keyword = 'public'
+            #keyword = 'protected'
             prot_mode = True
         for y in block.members:
             if not y.is_duplicate:
@@ -297,7 +297,7 @@ class CSFile(io.TextIOWrapper):
         @param action: The type of function to generate, valid values are::
             ACTION_READ - Read function.
             ACTION_WRITE - Write function
-            ACTION_OUT - asString function
+            ACTION_OUT - AsString function
             ACTION_FIXLINKS - FixLinks function
             ACTION_GETREFS - GetRefs function
             ACTION_GETPTRS - GetPtrs function
@@ -346,7 +346,7 @@ class CSFile(io.TextIOWrapper):
                 elif action == ACTION_WRITE:
                     self.code("base.Write(%s, link_map, missing_link_stack, info);" % (stream))
                 elif action == ACTION_OUT:
-                    self.code("%s.Append(base.asString());" % (stream))
+                    self.code("%s.Append(base.AsString());" % (stream))
                 elif action == ACTION_FIXLINKS:
                     self.code("base.FixLinks(objects, link_stack, missing_link_stack, info);")
                 elif action == ACTION_GETREFS:
@@ -365,7 +365,7 @@ class CSFile(io.TextIOWrapper):
                   elif y.is_calculated:
                       if action in [ACTION_READ, ACTION_WRITE]:
                           self.code('%s%s = %s%sCalc(info);' % (prefix, y.cname, prefix, y.cname))
-                      # ACTION_OUT is in asString(), which doesn't take version
+                      # ACTION_OUT is in AsString(), which doesn't take version
                       # info
                       # so let's simply not print the field in this case
                   elif y.arr1_ref:
@@ -1411,7 +1411,7 @@ class Member:
         result = self.ctype
         suffix1 = ""
         suffix2 = ""
-        keyword = "public "
+        keyword = "" #"public "
         #if not self.is_duplicate: # is dimension for one or more arrays
         #  if self.arr1_ref:
         #    if not self.arr1 or not self.arr1.lhs: # Simple Scalar

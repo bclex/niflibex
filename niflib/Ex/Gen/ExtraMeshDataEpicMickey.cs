@@ -13,17 +13,17 @@ namespace Niflib {
 /*!  */
 public class ExtraMeshDataEpicMickey {
 	/*! Unknown. */
-	public int unknownInt1;
+	int unknownInt1;
 	/*! Unknown. */
-	public int unknownInt2;
+	int unknownInt2;
 	/*! Unknown. */
-	public int unknownInt3;
+	int unknownInt3;
 	/*! Unknown. */
-	public float unknownInt4;
+	float unknownInt4;
 	/*! Unknown. */
-	public float unknownInt5;
+	float unknownInt5;
 	/*! Unknown. */
-	public float unknownInt6;
+	float unknownInt6;
 	//Constructor
 	public ExtraMeshDataEpicMickey() { unchecked {
 	unknownInt1 = (int)0;

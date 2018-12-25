@@ -19,9 +19,9 @@ public class BSWArray : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSWArray", NiExtraData.TYPE);
 	/*!  */
-	public int numItems;
+	int numItems;
 	/*!  */
-	public int[] items;
+	int[] items;
 
 	public BSWArray() {
 	numItems = (int)0;
@@ -68,11 +68,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numItems = (int)items.Length;
 	s.AppendLine($"  Num Items:  {numItems}");
 	array_output_count = 0;

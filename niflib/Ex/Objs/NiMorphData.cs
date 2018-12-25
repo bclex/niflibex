@@ -22,13 +22,13 @@ public class NiMorphData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMorphData", NiObject.TYPE);
 	/*! Number of morphing object. */
-	public uint numMorphs;
+	uint numMorphs;
 	/*! Number of vertices. */
-	public uint numVertices;
+	uint numVertices;
 	/*! This byte is always 1 in all official files. */
-	public byte relativeTargets;
+	byte relativeTargets;
 	/*! The geometry morphing objects. */
-	public Morph[] morphs;
+	Morph[] morphs;
 
 	public NiMorphData() {
 	numMorphs = (uint)0;
@@ -114,11 +114,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numMorphs = (uint)morphs.Length;
 	s.AppendLine($"  Num Morphs:  {numMorphs}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");

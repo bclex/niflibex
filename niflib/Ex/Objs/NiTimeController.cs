@@ -22,7 +22,7 @@ public class NiTimeController : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTimeController", NiObject.TYPE);
 	/*! Index of the next controller. */
-	public NiTimeController nextController;
+	NiTimeController nextController;
 	/*!
 	 * Controller flags.
 	 *             Bit 0 : Anim type, 0=APP_TIME 1=APP_INIT
@@ -33,22 +33,22 @@ public class NiTimeController : NiObject {
 	 *             Bit 6 : Compute scaled time (take frequency and phase into account)
 	 *             Bit 7 : Force update
 	 */
-	public ushort flags;
+	ushort flags;
 	/*! Frequency (is usually 1.0). */
-	public float frequency;
+	float frequency;
 	/*! Phase (usually 0.0). */
-	public float phase;
+	float phase;
 	/*! Controller start time. */
-	public float startTime;
+	float startTime;
 	/*! Controller stop time. */
-	public float stopTime;
+	float stopTime;
 	/*!
 	 * Controller target (object index of the first controllable ancestor of this
 	 * object).
 	 */
-	public NiObjectNET target;
+	NiObjectNET target;
 	/*! Unknown integer. */
-	public uint unknownInteger;
+	uint unknownInteger;
 
 	public NiTimeController() {
 	nextController = null;
@@ -119,10 +119,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Next Controller:  {nextController}");
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Frequency:  {frequency}");

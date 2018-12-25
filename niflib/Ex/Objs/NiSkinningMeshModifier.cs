@@ -22,22 +22,22 @@ public class NiSkinningMeshModifier : NiMeshModifier {
 	 * USE_SOFTWARE_SKINNING = 0x0001
 	 *             RECOMPUTE_BOUNDS = 0x0002
 	 */
-	public ushort flags;
+	ushort flags;
 	/*! The root bone of the skeleton. */
-	public NiAVObject skeletonRoot;
+	NiAVObject skeletonRoot;
 	/*!
 	 * The transform that takes the root bone parent coordinate system into the skin
 	 * coordinate system.
 	 */
-	public NiTransform skeletonTransform;
+	NiTransform skeletonTransform;
 	/*! The number of bones referenced by this mesh modifier. */
-	public uint numBones;
+	uint numBones;
 	/*! Pointers to the bone nodes that affect this skin. */
-	public NiAVObject[] bones;
+	NiAVObject[] bones;
 	/*! The transforms that go from bind-pose space to bone space. */
-	public NiTransform[] boneTransforms;
+	NiTransform[] boneTransforms;
 	/*! The bounds of the bones.  Only stored if the RECOMPUTE_BOUNDS bit is set. */
-	public NiBound[] boneBounds;
+	NiBound[] boneBounds;
 
 	public NiSkinningMeshModifier() {
 	flags = (ushort)0;
@@ -123,11 +123,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numBones = (uint)bones.Length;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Skeleton Root:  {skeletonRoot}");

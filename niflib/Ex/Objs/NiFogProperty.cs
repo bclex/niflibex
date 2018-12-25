@@ -29,14 +29,14 @@ public class NiFogProperty : NiProperty {
 	 *             If Bit 1 and Bit 2 are not set, but fog is enabled, Fog function is
 	 * FOG_Z_LINEAR.
 	 */
-	public ushort flags;
+	ushort flags;
 	/*!
 	 * Depth of the fog in normalized units. 1.0 = begins at near plane. 0.5 = begins
 	 * halfway between the near and far planes.
 	 */
-	public float fogDepth;
+	float fogDepth;
 	/*! The color of the fog. */
-	public Color3 fogColor;
+	Color3 fogColor;
 
 	public NiFogProperty() {
 	flags = (ushort)0;
@@ -80,10 +80,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Fog Depth:  {fogDepth}");
 	s.AppendLine($"  Fog Color:  {fogColor}");

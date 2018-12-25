@@ -22,7 +22,7 @@ public class NiPSBoundUpdater : NiObject {
 	 * Number of particle bounds to skip updating every frame. Higher = more updates
 	 * each frame.
 	 */
-	public ushort updateSkip;
+	ushort updateSkip;
 
 	public NiPSBoundUpdater() {
 	updateSkip = (ushort)0;
@@ -61,10 +61,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Update Skip:  {updateSkip}");
 	return s.ToString();
 

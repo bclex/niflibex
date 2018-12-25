@@ -29,112 +29,112 @@ public class bhkRigidBody : bhkEntity {
 	 * How the body reacts to collisions. See hkResponseType for hkpWorld default
 	 * implementations.
 	 */
-	public hkResponseType collisionResponse;
+	hkResponseType collisionResponse;
 	/*! Skipped over when writing Collision Response and Callback Delay. */
-	public byte unusedByte1;
+	byte unusedByte1;
 	/*!
 	 * Lowers the frequency for processContactCallbacks. A value of 5 means that a
 	 * callback is raised every 5th frame. The default is once every 65535 frames.
 	 */
-	public ushort processContactCallbackDelay;
+	ushort processContactCallbackDelay;
 	/*! Unknown. */
-	public uint unknownInt1;
+	uint unknownInt1;
 	/*! Copy of Havok Filter */
-	public HavokFilter havokFilterCopy;
+	HavokFilter havokFilterCopy;
 	/*! Garbage data from memory. Matches previous Unused value. */
-	public Array4<byte> unused2;
+	Array4<byte> unused2;
 	/*! Unknown. */
-	public uint unknownInt2;
+	uint unknownInt2;
 	/*!  */
-	public hkResponseType collisionResponse2;
+	hkResponseType collisionResponse2;
 	/*! Skipped over when writing Collision Response and Callback Delay. */
-	public byte unusedByte2;
+	byte unusedByte2;
 	/*!  */
-	public ushort processContactCallbackDelay2;
+	ushort processContactCallbackDelay2;
 	/*!
 	 * A vector that moves the body by the specified amount. Only enabled in
 	 * bhkRigidBodyT objects.
 	 */
-	public Vector4 translation;
+	Vector4 translation;
 	/*!
 	 * The rotation Yaw/Pitch/Roll to apply to the body. Only enabled in bhkRigidBodyT
 	 * objects.
 	 */
-	public hkQuaternion rotation;
+	hkQuaternion rotation;
 	/*! Linear velocity. */
-	public Vector4 linearVelocity;
+	Vector4 linearVelocity;
 	/*! Angular velocity. */
-	public Vector4 angularVelocity;
+	Vector4 angularVelocity;
 	/*!
 	 * Defines how the mass is distributed among the body, i.e. how difficult it is to
 	 * rotate around any given axis.
 	 */
-	public InertiaMatrix inertiaTensor;
+	InertiaMatrix inertiaTensor;
 	/*! The body's center of mass. */
-	public Vector4 center;
+	Vector4 center;
 	/*! The body's mass in kg. A mass of zero represents an immovable object. */
-	public float mass;
+	float mass;
 	/*!
 	 * Reduces the movement of the body over time. A value of 0.1 will remove 10% of
 	 * the linear velocity every second.
 	 */
-	public float linearDamping;
+	float linearDamping;
 	/*!
 	 * Reduces the movement of the body over time. A value of 0.05 will remove 5% of
 	 * the angular velocity every second.
 	 */
-	public float angularDamping;
+	float angularDamping;
 	/*!  */
-	public float timeFactor;
+	float timeFactor;
 	/*!  */
-	public float gravityFactor;
+	float gravityFactor;
 	/*! How smooth its surfaces is and how easily it will slide along other bodies. */
-	public float friction;
+	float friction;
 	/*!  */
-	public float rollingFrictionMultiplier;
+	float rollingFrictionMultiplier;
 	/*!
 	 * How "bouncy" the body is, i.e. how much energy it has after colliding. Less than
 	 * 1.0 loses energy, greater than 1.0 gains energy.
 	 *             If the restitution is not 0.0 the object will need extra CPU for all
 	 * new collisions.
 	 */
-	public float restitution;
+	float restitution;
 	/*! Maximal linear velocity. */
-	public float maxLinearVelocity;
+	float maxLinearVelocity;
 	/*! Maximal angular velocity. */
-	public float maxAngularVelocity;
+	float maxAngularVelocity;
 	/*!
 	 * The maximum allowed penetration for this object.
 	 *             This is a hint to the engine to see how much CPU the engine should
 	 * invest to keep this object from penetrating.
 	 *             A good choice is 5% - 20% of the smallest diameter of the object.
 	 */
-	public float penetrationDepth;
+	float penetrationDepth;
 	/*! Motion system? Overrides Quality when on Keyframed? */
-	public hkMotionType motionSystem;
+	hkMotionType motionSystem;
 	/*! The initial deactivator type of the body. */
-	public hkDeactivatorType deactivatorType;
+	hkDeactivatorType deactivatorType;
 	/*!  */
-	public bool enableDeactivation;
+	bool enableDeactivation;
 	/*!
 	 * How aggressively the engine will try to zero the velocity for slow objects. This
 	 * does not save CPU.
 	 */
-	public hkSolverDeactivation solverDeactivation;
+	hkSolverDeactivation solverDeactivation;
 	/*! The type of interaction with other objects. */
-	public hkQualityType qualityType;
+	hkQualityType qualityType;
 	/*! Unknown. */
-	public float unknownFloat1;
+	float unknownFloat1;
 	/*! Unknown. */
-	public Array12<byte> unknownBytes1;
+	Array12<byte> unknownBytes1;
 	/*! Unknown. Skyrim only. */
-	public Array4<byte> unknownBytes2;
+	Array4<byte> unknownBytes2;
 	/*!  */
-	public uint numConstraints;
+	uint numConstraints;
 	/*!  */
-	public bhkSerializable[] constraints;
+	bhkSerializable[] constraints;
 	/*! 1 = respond to wind */
-	public uint bodyFlags;
+	uint bodyFlags;
 
 	public bhkRigidBody() {
 	collisionResponse = hkResponseType.RESPONSE_SIMPLE_CONTACT;
@@ -385,11 +385,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numConstraints = (uint)constraints.Length;
 	s.AppendLine($"  Collision Response:  {collisionResponse}");
 	s.AppendLine($"  Unused Byte 1:  {unusedByte1}");

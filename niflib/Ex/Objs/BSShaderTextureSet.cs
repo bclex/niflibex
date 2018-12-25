@@ -19,7 +19,7 @@ public class BSShaderTextureSet : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderTextureSet", NiObject.TYPE);
 	/*!  */
-	public int numTextures;
+	int numTextures;
 	/*!
 	 * Textures.
 	 *             0: Diffuse
@@ -31,7 +31,7 @@ public class BSShaderTextureSet : NiObject {
 	 *             6: Subsurface for Multilayer Parallax
 	 *             7: Back Lighting Map (SLSF2_Back_Lighting)
 	 */
-	public string[] textures;
+	string[] textures;
 
 	public BSShaderTextureSet() {
 	numTextures = (int)6;
@@ -78,11 +78,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numTextures = (int)textures.Length;
 	s.AppendLine($"  Num Textures:  {numTextures}");
 	array_output_count = 0;

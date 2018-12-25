@@ -16,58 +16,58 @@ namespace Niflib {
  */
 public class RagdollDescriptor {
 	/*! The point where the constraint is attached to its parent rigidbody. */
-	public Vector4 pivotA;
+	Vector4 pivotA;
 	/*!
 	 * Defines the orthogonal plane in which the body can move, the orthogonal
 	 * directions in which the shape can be controlled (the direction orthogonal on
 	 * this one and Twist A).
 	 */
-	public Vector4 planeA;
+	Vector4 planeA;
 	/*!
 	 * Central directed axis of the cone in which the object can rotate. Orthogonal on
 	 * Plane A.
 	 */
-	public Vector4 twistA;
+	Vector4 twistA;
 	/*! The point where the constraint is attached to the other rigidbody. */
-	public Vector4 pivotB;
+	Vector4 pivotB;
 	/*!
 	 * Defines the orthogonal plane in which the shape can be controlled (the direction
 	 * orthogonal on this one and Twist B).
 	 */
-	public Vector4 planeB;
+	Vector4 planeB;
 	/*!
 	 * Central directed axis of the cone in which the object can rotate. Orthogonal on
 	 * Plane B.
 	 */
-	public Vector4 twistB;
+	Vector4 twistB;
 	/*!
 	 * Defines the orthogonal directions in which the shape can be controlled (namely
 	 * in this direction, and in the direction orthogonal on this one and Twist A).
 	 */
-	public Vector4 motorA;
+	Vector4 motorA;
 	/*!
 	 * Defines the orthogonal directions in which the shape can be controlled (namely
 	 * in this direction, and in the direction orthogonal on this one and Twist A).
 	 */
-	public Vector4 motorB;
+	Vector4 motorB;
 	/*!
 	 * Maximum angle the object can rotate around the vector orthogonal on Plane A and
 	 * Twist A relative to the Twist A vector. Note that Cone Min Angle is not stored,
 	 * but is simply minus this angle.
 	 */
-	public float coneMaxAngle;
+	float coneMaxAngle;
 	/*! Minimum angle the object can rotate around Plane A, relative to Twist A. */
-	public float planeMinAngle;
+	float planeMinAngle;
 	/*! Maximum angle the object can rotate around Plane A, relative to Twist A. */
-	public float planeMaxAngle;
+	float planeMaxAngle;
 	/*! Minimum angle the object can rotate around Twist A, relative to Plane A. */
-	public float twistMinAngle;
+	float twistMinAngle;
 	/*! Maximum angle the object can rotate around Twist A, relative to Plane A. */
-	public float twistMaxAngle;
+	float twistMaxAngle;
 	/*! Maximum friction, typically 0 or 10. In Fallout 3, typically 100. */
-	public float maxFriction;
+	float maxFriction;
 	/*!  */
-	public MotorDescriptor motor;
+	MotorDescriptor motor;
 	//Constructor
 	public RagdollDescriptor() { unchecked {
 	coneMaxAngle = 0.0f;

@@ -22,9 +22,9 @@ public class bhkNiCollisionObject : NiCollisionObject {
 	 * Set to 1 for most objects, and to 41 for animated objects (ANIM_STATIC). Bits:
 	 * 0=Active 2=Notify 3=Set Local 6=Reset.
 	 */
-	public bhkCOFlags flags;
+	bhkCOFlags flags;
 	/*!  */
-	public bhkWorldObject body;
+	bhkWorldObject body;
 
 	public bhkNiCollisionObject() {
 	flags = (bhkCOFlags)1;
@@ -68,10 +68,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Body:  {body}");
 	return s.ToString();

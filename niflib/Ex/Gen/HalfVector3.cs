@@ -13,11 +13,11 @@ namespace Niflib {
 /*! A vector in 3D space (x,y,z). */
 public class HalfVector3 {
 	/*! First coordinate. */
-	public hfloat x;
+	hfloat x;
 	/*! Second coordinate. */
-	public hfloat y;
+	hfloat y;
 	/*! Third coordinate. */
-	public hfloat z;
+	hfloat z;
 	//Constructor
 	public HalfVector3() { unchecked {
 	x = (hfloat)0;

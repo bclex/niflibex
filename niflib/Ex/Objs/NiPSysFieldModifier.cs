@@ -19,18 +19,18 @@ public class NiPSysFieldModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysFieldModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the field. */
-	public NiAVObject fieldObject;
+	NiAVObject fieldObject;
 	/*! Magnitude of the force. */
-	public float magnitude;
+	float magnitude;
 	/*! How the magnitude diminishes with distance from the Field Object. */
-	public float attenuation;
+	float attenuation;
 	/*!
 	 * Whether or not to use a distance from the Field Object after which there is no
 	 * effect.
 	 */
-	public bool useMaxDistance;
+	bool useMaxDistance;
 	/*! Maximum distance after which there is no effect. */
-	public float maxDistance;
+	float maxDistance;
 
 	public NiPSysFieldModifier() {
 	fieldObject = null;
@@ -83,10 +83,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Field Object:  {fieldObject}");
 	s.AppendLine($"  Magnitude:  {magnitude}");
 	s.AppendLine($"  Attenuation:  {attenuation}");

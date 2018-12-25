@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A set of NiNode references. */
 public class NodeSet {
 	/*! Number of node references that follow. */
-	public uint numNodes;
+	uint numNodes;
 	/*! The list of NiNode references. */
-	public NiNode[] nodes;
+	NiNode[] nodes;
 	//Constructor
 	public NodeSet() { unchecked {
 	numNodes = (uint)0;

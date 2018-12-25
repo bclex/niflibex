@@ -27,19 +27,19 @@ public class bhkListShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkListShape", bhkShapeCollection.TYPE);
 	/*! The number of sub shapes referenced. */
-	public uint numSubShapes;
+	uint numSubShapes;
 	/*! List of shapes. */
-	public bhkShape[] subShapes;
+	bhkShape[] subShapes;
 	/*! The material of the shape. */
-	public HavokMaterial material;
+	HavokMaterial material;
 	/*!  */
-	public hkWorldObjCinfoProperty childShapeProperty;
+	hkWorldObjCinfoProperty childShapeProperty;
 	/*!  */
-	public hkWorldObjCinfoProperty childFilterProperty;
+	hkWorldObjCinfoProperty childFilterProperty;
 	/*! Count. */
-	public uint numUnknownInts;
+	uint numUnknownInts;
 	/*! Unknown. */
-	public uint[] unknownInts;
+	uint[] unknownInts;
 
 	public bhkListShape() {
 	numSubShapes = (uint)0;
@@ -135,11 +135,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numUnknownInts = (uint)unknownInts.Length;
 	numSubShapes = (uint)subShapes.Length;
 	s.AppendLine($"  Num Sub Shapes:  {numSubShapes}");

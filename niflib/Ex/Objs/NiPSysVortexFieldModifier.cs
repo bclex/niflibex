@@ -19,7 +19,7 @@ public class NiPSysVortexFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysVortexFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! Direction of the vortex field in Field Object's space. */
-	public Vector3 direction;
+	Vector3 direction;
 
 	public NiPSysVortexFieldModifier() {
 	}
@@ -57,10 +57,10 @@ public class NiPSysVortexFieldModifier : NiPSysFieldModifier {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Direction:  {direction}");
 		return s.ToString();
 

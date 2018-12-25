@@ -13,15 +13,15 @@ namespace Niflib {
 /*!  */
 public class bhkSpringDamperConstraintMotor {
 	/*! Minimum motor force */
-	public float minForce;
+	float minForce;
 	/*! Maximum motor force */
-	public float maxForce;
+	float maxForce;
 	/*! The spring constant in N/m */
-	public float springConstant;
+	float springConstant;
 	/*! The spring damping in Nsec/m */
-	public float springDamping;
+	float springDamping;
 	/*! Is Motor enabled */
-	public bool motorEnabled;
+	bool motorEnabled;
 	//Constructor
 	public bhkSpringDamperConstraintMotor() { unchecked {
 	minForce = -1000000.0f;

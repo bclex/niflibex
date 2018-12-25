@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Stores Bone Level of Detail info in a BSBoneLODExtraData */
 public class BoneLOD {
 	/*!  */
-	public uint distance;
+	uint distance;
 	/*!  */
-	public IndexString boneName;
+	IndexString boneName;
 	//Constructor
 	public BoneLOD() { unchecked {
 	distance = (uint)0;

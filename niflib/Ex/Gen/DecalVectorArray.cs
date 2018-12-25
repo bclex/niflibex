@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Array of Vectors for Decal placement in BSDecalPlacementVectorExtraData. */
 public class DecalVectorArray {
 	/*!  */
-	public short numVectors;
+	short numVectors;
 	/*! Vector XYZ coords */
-	public Vector3[] points;
+	Vector3[] points;
 	/*! Vector Normals */
-	public Vector3[] normals;
+	Vector3[] normals;
 	//Constructor
 	public DecalVectorArray() { unchecked {
 	numVectors = (short)0;

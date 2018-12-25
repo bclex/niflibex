@@ -19,28 +19,28 @@ public class NiDataStream : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDataStream", NiObject.TYPE);
 	/*!  */
-	public DataStreamUsage usage;
+	DataStreamUsage usage;
 	/*!  */
-	public DataStreamAccess access;
+	DataStreamAccess access;
 	/*! The size in bytes of this data stream. */
-	public uint numBytes;
+	uint numBytes;
 	/*!  */
-	public CloningBehavior cloningBehavior;
+	CloningBehavior cloningBehavior;
 	/*! Number of regions (such as submeshes). */
-	public uint numRegions;
+	uint numRegions;
 	/*!
 	 * The regions in the mesh. Regions can be used to mark off submeshes which are
 	 * independent draw calls.
 	 */
-	public Region[] regions;
+	Region[] regions;
 	/*! Number of components of the data (matches corresponding field in MeshData). */
-	public uint numComponents;
+	uint numComponents;
 	/*! The format of each component in this data stream. */
-	public ComponentFormat[] componentFormats;
+	ComponentFormat[] componentFormats;
 	/*!  */
-	public byte[] data;
+	byte[] data;
 	/*!  */
-	public bool streamable;
+	bool streamable;
 
 	public NiDataStream() {
 	usage = (DataStreamUsage)0;
@@ -119,11 +119,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numComponents = (uint)componentFormats.Length;
 	numRegions = (uint)regions.Length;
 	numBytes = (uint)data.Length;

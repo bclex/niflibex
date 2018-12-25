@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class NxJointLimitSoftDesc {
 	/*!  */
-	public float value;
+	float value;
 	/*!  */
-	public float restitution;
+	float restitution;
 	/*!  */
-	public float spring;
+	float spring;
 	/*!  */
-	public float damping;
+	float damping;
 	//Constructor
 	public NxJointLimitSoftDesc() { unchecked {
 	value = 0.0f;

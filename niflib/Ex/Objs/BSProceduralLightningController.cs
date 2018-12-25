@@ -23,47 +23,47 @@ public class BSProceduralLightningController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSProceduralLightningController", NiTimeController.TYPE);
 	/*! References generation interpolator. */
-	public NiInterpolator interpolator1_Generation;
+	NiInterpolator interpolator1_Generation;
 	/*! References interpolator for Mutation of strips */
-	public NiInterpolator interpolator2_Mutation;
+	NiInterpolator interpolator2_Mutation;
 	/*! References subdivision interpolator. */
-	public NiInterpolator interpolator3_Subdivision;
+	NiInterpolator interpolator3_Subdivision;
 	/*! References branches interpolator. */
-	public NiInterpolator interpolator4_NumBranches;
+	NiInterpolator interpolator4_NumBranches;
 	/*! References branches variation interpolator. */
-	public NiInterpolator interpolator5_NumBranchesVar;
+	NiInterpolator interpolator5_NumBranchesVar;
 	/*! References length interpolator. */
-	public NiInterpolator interpolator6_Length;
+	NiInterpolator interpolator6_Length;
 	/*! References length variation interpolator. */
-	public NiInterpolator interpolator7_LengthVar;
+	NiInterpolator interpolator7_LengthVar;
 	/*! References width interpolator. */
-	public NiInterpolator interpolator8_Width;
+	NiInterpolator interpolator8_Width;
 	/*! References interpolator for amplitude control. 0=straight, 50=wide */
-	public NiInterpolator interpolator9_ArcOffset;
+	NiInterpolator interpolator9_ArcOffset;
 	/*!  */
-	public ushort subdivisions;
+	ushort subdivisions;
 	/*!  */
-	public ushort numBranches;
+	ushort numBranches;
 	/*!  */
-	public ushort numBranchesVariation;
+	ushort numBranchesVariation;
 	/*! How far lightning will stretch to. */
-	public float length;
+	float length;
 	/*! How far lightning variation will stretch to. */
-	public float lengthVariation;
+	float lengthVariation;
 	/*! How wide the bolt will be. */
-	public float width;
+	float width;
 	/*! Influences forking behavior with a multiplier. */
-	public float childWidthMult;
+	float childWidthMult;
 	/*!  */
-	public float arcOffset;
+	float arcOffset;
 	/*!  */
-	public bool fadeMainBolt;
+	bool fadeMainBolt;
 	/*!  */
-	public bool fadeChildBolts;
+	bool fadeChildBolts;
 	/*!  */
-	public bool animateArcOffset;
+	bool animateArcOffset;
 	/*! Reference to a shader property. */
-	public BSShaderProperty shaderProperty;
+	BSShaderProperty shaderProperty;
 
 	public BSProceduralLightningController() {
 	interpolator1_Generation = null;
@@ -173,10 +173,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Interpolator 1: Generation:  {interpolator1_Generation}");
 	s.AppendLine($"  Interpolator 2: Mutation:  {interpolator2_Mutation}");
 	s.AppendLine($"  Interpolator 3: Subdivision:  {interpolator3_Subdivision}");

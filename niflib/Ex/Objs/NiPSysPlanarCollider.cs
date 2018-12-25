@@ -19,13 +19,13 @@ public class NiPSysPlanarCollider : NiPSysCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysPlanarCollider", NiPSysCollider.TYPE);
 	/*! Width of the plane along the X Axis. */
-	public float width;
+	float width;
 	/*! Height of the plane along the Y Axis. */
-	public float height;
+	float height;
 	/*! Axis defining a plane, relative to Collider Object. */
-	public Vector3 xAxis;
+	Vector3 xAxis;
 	/*! Axis defining a plane, relative to Collider Object. */
-	public Vector3 yAxis;
+	Vector3 yAxis;
 
 	public NiPSysPlanarCollider() {
 	width = 0.0f;
@@ -71,10 +71,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Width:  {width}");
 	s.AppendLine($"  Height:  {height}");
 	s.AppendLine($"  X Axis:  {xAxis}");

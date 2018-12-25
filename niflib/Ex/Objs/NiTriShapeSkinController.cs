@@ -19,13 +19,13 @@ public class NiTriShapeSkinController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriShapeSkinController", NiTimeController.TYPE);
 	/*! The number of node bones referenced as influences. */
-	public uint numBones;
+	uint numBones;
 	/*! The number of vertex weights stored for each bone. */
-	public uint[] vertexCounts;
+	uint[] vertexCounts;
 	/*! List of all armature bones. */
-	public NiBone[] bones;
+	NiBone[] bones;
 	/*! Contains skin weight data for each node that this skin is influenced by. */
-	public OldSkinData[][] boneData;
+	OldSkinData[][] boneData;
 
 	public NiTriShapeSkinController() {
 	numBones = (uint)0;
@@ -99,11 +99,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	for (var i1 = 0; i1 < boneData.Length; i1++)
 		vertexCounts[i1] = (uint)boneData[i1].Length;
 	numBones = (uint)vertexCounts.Length;

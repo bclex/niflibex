@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Bethesda Havok. Havok Information for packed TriStrip shapes. */
 public class OblivionSubShape {
 	/*!  */
-	public HavokFilter havokFilter;
+	HavokFilter havokFilter;
 	/*! The number of vertices that form this sub shape. */
-	public uint numVertices;
+	uint numVertices;
 	/*! The material of the subshape. */
-	public HavokMaterial material;
+	HavokMaterial material;
 	//Constructor
 	public OblivionSubShape() { unchecked {
 	numVertices = (uint)0;

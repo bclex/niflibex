@@ -19,17 +19,17 @@ public class NiPSBombForce : NiPSForce {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSBombForce", NiPSForce.TYPE);
 	/*!  */
-	public Vector3 bombAxis;
+	Vector3 bombAxis;
 	/*!  */
-	public float decay;
+	float decay;
 	/*!  */
-	public float deltaV;
+	float deltaV;
 	/*!  */
-	public DecayType decayType;
+	DecayType decayType;
 	/*!  */
-	public SymmetryType symmetryType;
+	SymmetryType symmetryType;
 	/*!  */
-	public NiAVObject bombObject;
+	NiAVObject bombObject;
 
 	public NiPSBombForce() {
 	decay = 0.0f;
@@ -84,10 +84,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Bomb Axis:  {bombAxis}");
 	s.AppendLine($"  Decay:  {decay}");
 	s.AppendLine($"  Delta V:  {deltaV}");

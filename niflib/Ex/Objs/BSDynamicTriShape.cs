@@ -19,9 +19,9 @@ public class BSDynamicTriShape : BSTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSDynamicTriShape", BSTriShape.TYPE);
 	/*!  */
-	public uint vertexDataSize;
+	uint vertexDataSize;
 	/*!  */
-	public Vector4[] vertices;
+	Vector4[] vertices;
 
 	public BSDynamicTriShape() {
 	vertexDataSize = (uint)0;
@@ -71,11 +71,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Vertex Data Size:  {vertexDataSize}");
 	if ((vertexDataSize > 0)) {
 		array_output_count = 0;

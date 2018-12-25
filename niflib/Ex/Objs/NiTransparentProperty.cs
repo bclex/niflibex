@@ -19,7 +19,7 @@ public class NiTransparentProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTransparentProperty", NiProperty.TYPE);
 	/*! Unknown. */
-	public Array6<byte> unknown;
+	Array6<byte> unknown;
 
 	public NiTransparentProperty() {
 	}
@@ -61,11 +61,11 @@ public class NiTransparentProperty : NiProperty {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		array_output_count = 0;
 		for (var i2 = 0; i2 < 6; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

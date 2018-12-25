@@ -23,19 +23,19 @@ public class NiPathController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPathController", NiTimeController.TYPE);
 	/*!  */
-	public PathFlags pathFlags;
+	PathFlags pathFlags;
 	/*! -1 = Negative, 1 = Positive */
-	public int bankDir;
+	int bankDir;
 	/*! Max angle in radians. */
-	public float maxBankAngle;
+	float maxBankAngle;
 	/*!  */
-	public float smoothing;
+	float smoothing;
 	/*! 0, 1, or 2 representing X, Y, or Z. */
-	public short followAxis;
+	short followAxis;
 	/*!  */
-	public NiPosData pathData;
+	NiPosData pathData;
 	/*!  */
-	public NiFloatData percentData;
+	NiFloatData percentData;
 
 	public NiPathController() {
 	pathFlags = (PathFlags)0;
@@ -99,10 +99,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Path Flags:  {pathFlags}");
 	s.AppendLine($"  Bank Dir:  {bankDir}");
 	s.AppendLine($"  Max Bank Angle:  {maxBankAngle}");

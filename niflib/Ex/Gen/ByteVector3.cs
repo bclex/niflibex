@@ -13,11 +13,11 @@ namespace Niflib {
 /*! A vector in 3D space (x,y,z). */
 public class ByteVector3 {
 	/*! First coordinate. */
-	public byte x;
+	byte x;
 	/*! Second coordinate. */
-	public byte y;
+	byte y;
 	/*! Third coordinate. */
-	public byte z;
+	byte z;
 	//Constructor
 	public ByteVector3() { unchecked {
 	x = (byte)0;

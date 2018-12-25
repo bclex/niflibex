@@ -13,29 +13,29 @@ namespace Niflib {
 /*! Defines subshape chunks in bhkCompressedMeshShapeData */
 public class bhkCMSDChunk {
 	/*!  */
-	public Vector4 translation;
+	Vector4 translation;
 	/*! Index of material in bhkCompressedMeshShapeData::Chunk Materials */
-	public uint materialIndex;
+	uint materialIndex;
 	/*! Always 65535? */
-	public ushort reference;
+	ushort reference;
 	/*! Index of transformation in bhkCompressedMeshShapeData::Chunk Transforms */
-	public ushort transformIndex;
+	ushort transformIndex;
 	/*!  */
-	public uint numVertices;
+	uint numVertices;
 	/*!  */
-	public ushort[] vertices;
+	ushort[] vertices;
 	/*!  */
-	public uint numIndices;
+	uint numIndices;
 	/*!  */
-	public ushort[] indices;
+	ushort[] indices;
 	/*!  */
-	public uint numStrips;
+	uint numStrips;
 	/*!  */
-	public ushort[] strips;
+	ushort[] strips;
 	/*!  */
-	public uint numWeldingInfo;
+	uint numWeldingInfo;
 	/*!  */
-	public ushort[] weldingInfo;
+	ushort[] weldingInfo;
 	//Constructor
 	public bhkCMSDChunk() { unchecked {
 	materialIndex = (uint)0;

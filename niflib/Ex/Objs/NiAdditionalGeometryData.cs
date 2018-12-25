@@ -19,15 +19,15 @@ public class NiAdditionalGeometryData : AbstractAdditionalGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiAdditionalGeometryData", AbstractAdditionalGeometryData.TYPE);
 	/*! Number of vertices */
-	public ushort numVertices;
+	ushort numVertices;
 	/*! Information about additional data blocks */
-	public uint numBlockInfos;
+	uint numBlockInfos;
 	/*! Number of additional data blocks */
-	public AdditionalDataInfo[] blockInfos;
+	AdditionalDataInfo[] blockInfos;
 	/*! Number of additional data blocks */
-	public int numBlocks;
+	int numBlocks;
 	/*! Number of additional data blocks */
-	public AdditionalDataBlock[] blocks;
+	AdditionalDataBlock[] blocks;
 
 	public NiAdditionalGeometryData() {
 	numVertices = (ushort)0;
@@ -139,11 +139,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numBlocks = (int)blocks.Length;
 	numBlockInfos = (uint)blockInfos.Length;
 	s.AppendLine($"  Num Vertices:  {numVertices}");

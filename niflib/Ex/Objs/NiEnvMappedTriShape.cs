@@ -19,17 +19,17 @@ public class NiEnvMappedTriShape : NiObjectNET {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiEnvMappedTriShape", NiObjectNET.TYPE);
 	/*! unknown (=4 - 5) */
-	public ushort unknown1;
+	ushort unknown1;
 	/*! unknown */
-	public Matrix44 unknownMatrix;
+	Matrix44 unknownMatrix;
 	/*! The number of child objects. */
-	public uint numChildren;
+	uint numChildren;
 	/*! List of child node object indices. */
-	public NiAVObject[] children;
+	NiAVObject[] children;
 	/*! unknown */
-	public NiObject child2;
+	NiObject child2;
 	/*! unknown */
-	public NiObject child3;
+	NiObject child3;
 
 	public NiEnvMappedTriShape() {
 	unknown1 = (ushort)0;
@@ -91,11 +91,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numChildren = (uint)children.Length;
 	s.AppendLine($"  Unknown 1:  {unknown1}");
 	s.AppendLine($"  Unknown Matrix:  {unknownMatrix}");

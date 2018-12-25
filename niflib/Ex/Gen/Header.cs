@@ -17,50 +17,50 @@ public class Header {
 	 * x.x.x.x' (versions >= 10.1.0.0), with x.x.x.x the version written out. Ends with
 	 * a newline character (0x0A).
 	 */
-	public HeaderString headerString;
+	HeaderString headerString;
 	/*!  */
-	public Array3<LineString> copyright;
+	Array3<LineString> copyright;
 	/*!
 	 * The NIF version, in hexadecimal notation: 0x04000002, 0x0401000C, 0x04020002,
 	 * 0x04020100, 0x04020200, 0x0A000100, 0x0A010000, 0x0A020000, 0x14000004, ...
 	 */
-	public uint version;
+	uint version;
 	/*! Determines the endianness of the data in the file. */
-	public EndianType endianType;
+	EndianType endianType;
 	/*! An extra version number, for companies that decide to modify the file format. */
-	public uint userVersion;
+	uint userVersion;
 	/*! Number of file objects. */
-	public uint numBlocks;
+	uint numBlocks;
 	/*!  */
-	public uint userVersion2;
+	uint userVersion2;
 	/*!  */
-	public ExportInfo exportInfo;
+	ExportInfo exportInfo;
 	/*!  */
-	public ShortString maxFilepath;
+	ShortString maxFilepath;
 	/*!  */
-	public ByteArray metadata;
+	ByteArray metadata;
 	/*! Number of object types in this NIF file. */
-	public ushort numBlockTypes;
+	ushort numBlockTypes;
 	/*! List of all object types used in this NIF file. */
-	public string[] blockTypes;
+	string[] blockTypes;
 	/*!
 	 * Maps file objects on their corresponding type: first file object is of type
 	 * object_types[object_type_index[0]], the second of
 	 * object_types[object_type_index[1]], etc.
 	 */
-	public ushort[] blockTypeIndex;
+	ushort[] blockTypeIndex;
 	/*! Array of block sizes? */
-	public uint[] blockSize;
+	uint[] blockSize;
 	/*! Number of strings. */
-	public uint numStrings;
+	uint numStrings;
 	/*! Maximum string length. */
-	public uint maxStringLength;
+	uint maxStringLength;
 	/*! Strings. */
-	public string[] strings;
+	string[] strings;
 	/*!  */
-	public uint numGroups;
+	uint numGroups;
 	/*!  */
-	public uint[] groups;
+	uint[] groups;
 	//Constructor
 	public Header() { unchecked {
 	version = (uint)0x04000002;
@@ -227,7 +227,7 @@ public class Header {
 		}
 	}
 
-	public string asString(bool verbose = false) {
+	public string AsString(bool verbose = false) {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		numGroups = (uint)groups.Length;

@@ -19,71 +19,71 @@ public class bhkCompressedMeshShapeData : bhkRefObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkCompressedMeshShapeData", bhkRefObject.TYPE);
 	/*! Number of bits in the shape-key reserved for a triangle index */
-	public uint bitsPerIndex;
+	uint bitsPerIndex;
 	/*! Number of bits in the shape-key reserved for a triangle index and its winding */
-	public uint bitsPerWIndex;
+	uint bitsPerWIndex;
 	/*!
 	 * Mask used to get the triangle index and winding from a shape-key (common: 262143
 	 * = 0x3ffff)
 	 */
-	public uint maskWIndex;
+	uint maskWIndex;
 	/*! Mask used to get the triangle index from a shape-key (common: 131071 = 0x1ffff) */
-	public uint maskIndex;
+	uint maskIndex;
 	/*! The radius of the storage mesh shape? Quantization error? */
-	public float error;
+	float error;
 	/*!
 	 * The minimum boundary of the AABB (the coordinates of the corner with the lowest
 	 * numerical values)
 	 */
-	public Vector4 boundsMin;
+	Vector4 boundsMin;
 	/*!
 	 * The maximum boundary of the AABB (the coordinates of the corner with the highest
 	 * numerical values)
 	 */
-	public Vector4 boundsMax;
+	Vector4 boundsMax;
 	/*!  */
-	public byte weldingType;
+	byte weldingType;
 	/*!  */
-	public byte materialType;
+	byte materialType;
 	/*!  */
-	public uint numMaterials32;
+	uint numMaterials32;
 	/*! Does not appear to be used. */
-	public uint[] materials32;
+	uint[] materials32;
 	/*!  */
-	public uint numMaterials16;
+	uint numMaterials16;
 	/*! Does not appear to be used. */
-	public uint[] materials16;
+	uint[] materials16;
 	/*!  */
-	public uint numMaterials8;
+	uint numMaterials8;
 	/*! Does not appear to be used. */
-	public uint[] materials8;
+	uint[] materials8;
 	/*! Number of chunk materials */
-	public uint numMaterials;
+	uint numMaterials;
 	/*! Table (array) with sets of materials. Chunks refers to this table by index. */
-	public bhkCMSDMaterial[] chunkMaterials;
+	bhkCMSDMaterial[] chunkMaterials;
 	/*!  */
-	public uint numNamedMaterials;
+	uint numNamedMaterials;
 	/*! Number of chunk transformations */
-	public uint numTransforms;
+	uint numTransforms;
 	/*!
 	 * Table (array) with sets of transformations. Chunks refers to this table by
 	 * index.
 	 */
-	public bhkCMSDTransform[] chunkTransforms;
+	bhkCMSDTransform[] chunkTransforms;
 	/*!  */
-	public uint numBigVerts;
+	uint numBigVerts;
 	/*! Compressed Vertices? */
-	public Vector4[] bigVerts;
+	Vector4[] bigVerts;
 	/*!  */
-	public uint numBigTris;
+	uint numBigTris;
 	/*!  */
-	public bhkCMSDBigTris[] bigTris;
+	bhkCMSDBigTris[] bigTris;
 	/*!  */
-	public uint numChunks;
+	uint numChunks;
 	/*!  */
-	public bhkCMSDChunk[] chunks;
+	bhkCMSDChunk[] chunks;
 	/*! Does not appear to be used. Needs array. */
-	public uint numConvexPieceA;
+	uint numConvexPieceA;
 
 	public bhkCompressedMeshShapeData() {
 	bitsPerIndex = (uint)0;
@@ -322,11 +322,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numChunks = (uint)chunks.Length;
 	numBigTris = (uint)bigTris.Length;
 	numBigVerts = (uint)bigVerts.Length;

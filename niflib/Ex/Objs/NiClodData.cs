@@ -25,23 +25,23 @@ public class NiClodData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiClodData", NiTriBasedGeomData.TYPE);
 	/*! Unknown. */
-	public ushort unknownShorts;
+	ushort unknownShorts;
 	/*! Unknown. */
-	public ushort unknownCount1;
+	ushort unknownCount1;
 	/*! Unknown. */
-	public ushort unknownCount2;
+	ushort unknownCount2;
 	/*! Unknown. */
-	public ushort unknownCount3;
+	ushort unknownCount3;
 	/*! Unknown. */
-	public float unknownFloat;
+	float unknownFloat;
 	/*! Unknown. */
-	public ushort unknownShort;
+	ushort unknownShort;
 	/*! Unknown. */
-	public Array6<ushort>[] unknownClodShorts1;
+	Array6<ushort>[] unknownClodShorts1;
 	/*! Unknown. */
-	public ushort[] unknownClodShorts2;
+	ushort[] unknownClodShorts2;
 	/*! Unknown. */
-	public Array6<ushort>[] unknownClodShorts3;
+	Array6<ushort>[] unknownClodShorts3;
 
 	public NiClodData() {
 	unknownShorts = (ushort)0;
@@ -127,11 +127,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	unknownCount3 = (ushort)unknownClodShorts3.Length;
 	unknownCount2 = (ushort)unknownClodShorts2.Length;
 	unknownCount1 = (ushort)unknownClodShorts1.Length;

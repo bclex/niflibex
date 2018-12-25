@@ -19,7 +19,7 @@ public class BSLightingShaderPropertyFloatController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLightingShaderPropertyFloatController", NiFloatInterpController.TYPE);
 	/*! Which float variable in BSLightingShaderProperty to animate: */
-	public LightingShaderControlledVariable typeOfControlledVariable;
+	LightingShaderControlledVariable typeOfControlledVariable;
 
 	public BSLightingShaderPropertyFloatController() {
 	typeOfControlledVariable = (LightingShaderControlledVariable)0;
@@ -58,10 +58,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Type of Controlled Variable:  {typeOfControlledVariable}");
 	return s.ToString();
 

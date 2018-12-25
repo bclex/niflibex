@@ -16,11 +16,11 @@ namespace Niflib {
  */
 public class HavokFilter {
 	/*! The layer the collision belongs to. */
-	public OblivionLayer layer_ob;
+	OblivionLayer layer_ob;
 	/*! The layer the collision belongs to. */
-	public Fallout3Layer layer_fo;
+	Fallout3Layer layer_fo;
 	/*! The layer the collision belongs to. */
-	public SkyrimLayer layer_sk;
+	SkyrimLayer layer_sk;
 	/*!
 	 * FLAGS are stored in highest 3 bits:
 	 *                 Bit 7: sets the LINK property and controls whether this body is
@@ -63,9 +63,9 @@ public class HavokFilter {
 	 *                 28 - ADDONLEG
 	 *                 29-31 - NULL
 	 */
-	public byte flagsAndPartNumber;
+	byte flagsAndPartNumber;
 	/*!  */
-	public ushort group;
+	ushort group;
 	//Constructor
 	public HavokFilter() { unchecked {
 	layer_ob = OblivionLayer.OL_STATIC;

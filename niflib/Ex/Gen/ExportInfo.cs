@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Information about how the file was exported */
 public class ExportInfo {
 	/*!  */
-	public ShortString author;
+	ShortString author;
 	/*!  */
-	public ShortString processScript;
+	ShortString processScript;
 	/*!  */
-	public ShortString exportScript;
+	ShortString exportScript;
 	//Constructor
 }
 

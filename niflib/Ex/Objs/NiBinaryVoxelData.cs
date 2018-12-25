@@ -19,25 +19,25 @@ public class NiBinaryVoxelData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBinaryVoxelData", NiObject.TYPE);
 	/*! Unknown. */
-	public ushort unknownShort1;
+	ushort unknownShort1;
 	/*! Unknown. */
-	public ushort unknownShort2;
+	ushort unknownShort2;
 	/*! Unknown. Is this^3 the Unknown Bytes 1 size? */
-	public ushort unknownShort3;
+	ushort unknownShort3;
 	/*! Unknown. */
-	public Array7<float> unknown7Floats;
+	Array7<float> unknown7Floats;
 	/*! Unknown. Always a multiple of 7. */
-	public Array7<Array12<byte>> unknownBytes1;
+	Array7<Array12<byte>> unknownBytes1;
 	/*! Unknown. */
-	public uint numUnknownVectors;
+	uint numUnknownVectors;
 	/*! Vectors on the unit sphere. */
-	public Vector4[] unknownVectors;
+	Vector4[] unknownVectors;
 	/*! Unknown. */
-	public uint numUnknownBytes2;
+	uint numUnknownBytes2;
 	/*! Unknown. */
-	public byte[] unknownBytes2;
+	byte[] unknownBytes2;
 	/*! Unknown. */
-	public Array5<uint> unknown5Ints;
+	Array5<uint> unknown5Ints;
 
 	public NiBinaryVoxelData() {
 	unknownShort1 = (ushort)0;
@@ -126,11 +126,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numUnknownBytes2 = (uint)unknownBytes2.Length;
 	numUnknownVectors = (uint)unknownVectors.Length;
 	s.AppendLine($"  Unknown Short 1:  {unknownShort1}");

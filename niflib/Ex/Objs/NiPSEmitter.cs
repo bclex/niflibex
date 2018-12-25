@@ -19,47 +19,47 @@ public class NiPSEmitter : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSEmitter", NiObject.TYPE);
 	/*!  */
-	public IndexString name;
+	IndexString name;
 	/*!  */
-	public float speed;
+	float speed;
 	/*!  */
-	public float speedVar;
+	float speedVar;
 	/*!  */
-	public float speedFlipRatio;
+	float speedFlipRatio;
 	/*!  */
-	public float declination;
+	float declination;
 	/*!  */
-	public float declinationVar;
+	float declinationVar;
 	/*!  */
-	public float planarAngle;
+	float planarAngle;
 	/*!  */
-	public float planarAngleVar;
+	float planarAngleVar;
 	/*!  */
-	public ByteColor4 color;
+	ByteColor4 color;
 	/*!  */
-	public float size;
+	float size;
 	/*!  */
-	public float sizeVar;
+	float sizeVar;
 	/*!  */
-	public float lifespan;
+	float lifespan;
 	/*!  */
-	public float lifespanVar;
+	float lifespanVar;
 	/*!  */
-	public float rotationAngle;
+	float rotationAngle;
 	/*!  */
-	public float rotationAngleVar;
+	float rotationAngleVar;
 	/*!  */
-	public float rotationSpeed;
+	float rotationSpeed;
 	/*!  */
-	public float rotationSpeedVar;
+	float rotationSpeedVar;
 	/*!  */
-	public Vector3 rotationAxis;
+	Vector3 rotationAxis;
 	/*!  */
-	public bool randomRotSpeedSign;
+	bool randomRotSpeedSign;
 	/*!  */
-	public bool randomRotAxis;
+	bool randomRotAxis;
 	/*! Unknown. */
-	public bool unknown;
+	bool unknown;
 
 	public NiPSEmitter() {
 	speed = 0.0f;
@@ -173,11 +173,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Speed:  {speed}");
 	s.AppendLine($"  Speed Var:  {speedVar}");

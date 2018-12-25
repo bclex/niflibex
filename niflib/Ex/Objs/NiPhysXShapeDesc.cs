@@ -19,37 +19,37 @@ public class NiPhysXShapeDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXShapeDesc", NiObject.TYPE);
 	/*!  */
-	public NxShapeType shapeType;
+	NxShapeType shapeType;
 	/*!  */
-	public Matrix34 localPose;
+	Matrix34 localPose;
 	/*!  */
-	public uint shapeFlags;
+	uint shapeFlags;
 	/*!  */
-	public ushort collisionGroup;
+	ushort collisionGroup;
 	/*!  */
-	public ushort materialIndex;
+	ushort materialIndex;
 	/*!  */
-	public float density;
+	float density;
 	/*!  */
-	public float mass;
+	float mass;
 	/*!  */
-	public float skinWidth;
+	float skinWidth;
 	/*!  */
-	public IndexString shapeName;
+	IndexString shapeName;
 	/*!  */
-	public uint non_interactingCompartmentTypes;
+	uint non_interactingCompartmentTypes;
 	/*!  */
-	public Array4<uint> collisionBits;
+	Array4<uint> collisionBits;
 	/*!  */
-	public NxPlane plane;
+	NxPlane plane;
 	/*!  */
-	public float sphereRadius;
+	float sphereRadius;
 	/*!  */
-	public Vector3 boxHalfExtents;
+	Vector3 boxHalfExtents;
 	/*!  */
-	public NxCapsule capsule;
+	NxCapsule capsule;
 	/*!  */
-	public NiPhysXMeshDesc mesh;
+	NiPhysXMeshDesc mesh;
 
 	public NiPhysXShapeDesc() {
 	shapeType = (NxShapeType)0;
@@ -163,11 +163,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shape Type:  {shapeType}");
 	s.AppendLine($"  Local Pose:  {localPose}");
 	s.AppendLine($"  Shape Flags:  {shapeFlags}");

@@ -19,21 +19,21 @@ public class bhkRagdollTemplateData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkRagdollTemplateData", NiObject.TYPE);
 	/*!  */
-	public IndexString name;
+	IndexString name;
 	/*!  */
-	public float mass;
+	float mass;
 	/*!  */
-	public float restitution;
+	float restitution;
 	/*!  */
-	public float friction;
+	float friction;
 	/*!  */
-	public float radius;
+	float radius;
 	/*!  */
-	public HavokMaterial material;
+	HavokMaterial material;
 	/*!  */
-	public uint numConstraints;
+	uint numConstraints;
 	/*!  */
-	public ConstraintData[] constraint;
+	ConstraintData[] constraint;
 
 	public bhkRagdollTemplateData() {
 	mass = 9.0f;
@@ -895,11 +895,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numConstraints = (uint)constraint.Length;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Mass:  {mass}");

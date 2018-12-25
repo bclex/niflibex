@@ -19,19 +19,19 @@ public class NiInstancingMeshModifier : NiMeshModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiInstancingMeshModifier", NiMeshModifier.TYPE);
 	/*!  */
-	public bool hasInstanceNodes;
+	bool hasInstanceNodes;
 	/*!  */
-	public bool perInstanceCulling;
+	bool perInstanceCulling;
 	/*!  */
-	public bool hasStaticBounds;
+	bool hasStaticBounds;
 	/*!  */
-	public NiMesh affectedMesh;
+	NiMesh affectedMesh;
 	/*!  */
-	public NiBound bound;
+	NiBound bound;
 	/*!  */
-	public uint numInstanceNodes;
+	uint numInstanceNodes;
 	/*!  */
-	public NiMeshHWInstance[] instanceNodes;
+	NiMeshHWInstance[] instanceNodes;
 
 	public NiInstancingMeshModifier() {
 	hasInstanceNodes = false;
@@ -105,11 +105,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numInstanceNodes = (uint)instanceNodes.Length;
 	s.AppendLine($"  Has Instance Nodes:  {hasInstanceNodes}");
 	s.AppendLine($"  Per Instance Culling:  {perInstanceCulling}");

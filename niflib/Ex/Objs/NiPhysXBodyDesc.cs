@@ -19,39 +19,39 @@ public class NiPhysXBodyDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXBodyDesc", NiObject.TYPE);
 	/*!  */
-	public Matrix34 localPose;
+	Matrix34 localPose;
 	/*!  */
-	public Vector3 spaceInertia;
+	Vector3 spaceInertia;
 	/*!  */
-	public float mass;
+	float mass;
 	/*!  */
-	public uint numVels;
+	uint numVels;
 	/*!  */
-	public PhysXBodyStoredVels[] vels;
+	PhysXBodyStoredVels[] vels;
 	/*!  */
-	public float wakeUpCounter;
+	float wakeUpCounter;
 	/*!  */
-	public float linearDamping;
+	float linearDamping;
 	/*!  */
-	public float angularDamping;
+	float angularDamping;
 	/*!  */
-	public float maxAngularVelocity;
+	float maxAngularVelocity;
 	/*!  */
-	public float ccdMotionThreshold;
+	float ccdMotionThreshold;
 	/*!  */
-	public uint flags;
+	uint flags;
 	/*!  */
-	public float sleepLinearVelocity;
+	float sleepLinearVelocity;
 	/*!  */
-	public float sleepAngularVelocity;
+	float sleepAngularVelocity;
 	/*!  */
-	public uint solverIterationCount;
+	uint solverIterationCount;
 	/*!  */
-	public float sleepEnergyThreshold;
+	float sleepEnergyThreshold;
 	/*!  */
-	public float sleepDamping;
+	float sleepDamping;
 	/*!  */
-	public float contactReportThreshold;
+	float contactReportThreshold;
 
 	public NiPhysXBodyDesc() {
 	mass = 0.0f;
@@ -157,11 +157,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numVels = (uint)vels.Length;
 	s.AppendLine($"  Local Pose:  {localPose}");
 	s.AppendLine($"  Space Inertia:  {spaceInertia}");

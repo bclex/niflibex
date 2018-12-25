@@ -19,63 +19,63 @@ public class NiMesh : NiRenderObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMesh", NiRenderObject.TYPE);
 	/*! The primitive type of the mesh, such as triangles or lines. */
-	public MeshPrimitiveType primitiveType;
+	MeshPrimitiveType primitiveType;
 	/*! Unknown. */
-	public int unknown51;
+	int unknown51;
 	/*! Unknown. */
-	public int unknown52;
+	int unknown52;
 	/*! Unknown. */
-	public int unknown53;
+	int unknown53;
 	/*! Unknown. */
-	public int unknown54;
+	int unknown54;
 	/*! Unknown. */
-	public float unknown55;
+	float unknown55;
 	/*! Unknown. */
-	public int unknown56;
+	int unknown56;
 	/*! The number of submeshes contained in this mesh. */
-	public ushort numSubmeshes;
+	ushort numSubmeshes;
 	/*! Sets whether hardware instancing is being used. */
-	public bool instancingEnabled;
+	bool instancingEnabled;
 	/*! The combined bounding volume of all submeshes. */
-	public NiBound bound;
+	NiBound bound;
 	/*!  */
-	public uint numDatastreams;
+	uint numDatastreams;
 	/*!  */
-	public DataStreamRef[] datastreams;
+	DataStreamRef[] datastreams;
 	/*!  */
-	public uint numModifiers;
+	uint numModifiers;
 	/*!  */
-	public NiMeshModifier[] modifiers;
+	NiMeshModifier[] modifiers;
 	/*! Unknown. */
-	public byte unknown100;
+	byte unknown100;
 	/*! Unknown. */
-	public int unknown101;
+	int unknown101;
 	/*! Size of additional data. */
-	public uint unknown102;
+	uint unknown102;
 	/*! Unknown. */
-	public float[] unknown103;
+	float[] unknown103;
 	/*! Unknown. */
-	public int unknown200;
+	int unknown200;
 	/*! Unknown. */
-	public ExtraMeshDataEpicMickey[] unknown201;
+	ExtraMeshDataEpicMickey[] unknown201;
 	/*! Unknown. */
-	public int unknown250;
+	int unknown250;
 	/*! Unknown. */
-	public int[] unknown251;
+	int[] unknown251;
 	/*! Unknown. */
-	public int unknown300;
+	int unknown300;
 	/*! Unknown. */
-	public short unknown301;
+	short unknown301;
 	/*! Unknown. */
-	public int unknown302;
+	int unknown302;
 	/*! Unknown. */
-	public byte[] unknown303;
+	byte[] unknown303;
 	/*! Unknown. */
-	public int unknown350;
+	int unknown350;
 	/*! Unknown. */
-	public ExtraMeshDataEpicMickey2[] unknown351;
+	ExtraMeshDataEpicMickey2[] unknown351;
 	/*! Unknown. */
-	public int unknown400;
+	int unknown400;
 
 	public NiMesh() {
 	primitiveType = (MeshPrimitiveType)0;
@@ -287,11 +287,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	unknown350 = (int)unknown351.Length;
 	unknown302 = (int)unknown303.Length;
 	unknown250 = (int)unknown251.Length;

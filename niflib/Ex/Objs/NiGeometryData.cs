@@ -19,48 +19,48 @@ public class NiGeometryData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGeometryData", NiObject.TYPE);
 	/*! Always zero. */
-	public int groupId;
+	int groupId;
 	/*! Number of vertices. */
-	public ushort numVertices;
+	ushort numVertices;
 	/*! Bethesda uses this for max number of particles in NiPSysData. */
-	public ushort bsMaxVertices;
+	ushort bsMaxVertices;
 	/*! Used with NiCollision objects when OBB or TRI is set. */
-	public byte keepFlags;
+	byte keepFlags;
 	/*! Unknown. */
-	public byte compressFlags;
+	byte compressFlags;
 	/*! Is the vertex array present? (Always non-zero.) */
-	public bool hasVertices;
+	bool hasVertices;
 	/*! The mesh vertices. */
-	public Vector3[] vertices;
+	Vector3[] vertices;
 	/*!  */
-	public VectorFlags vectorFlags;
+	VectorFlags vectorFlags;
 	/*!  */
-	public BSVectorFlags bsVectorFlags;
+	BSVectorFlags bsVectorFlags;
 	/*!  */
-	public uint materialCrc;
+	uint materialCrc;
 	/*!
 	 * Do we have lighting normals? These are essential for proper lighting: if not
 	 * present, the model will only be influenced by ambient light.
 	 */
-	public bool hasNormals;
+	bool hasNormals;
 	/*! The lighting normals. */
-	public Vector3[] normals;
+	Vector3[] normals;
 	/*! Tangent vectors. */
-	public Vector3[] tangents;
+	Vector3[] tangents;
 	/*! Bitangent vectors. */
-	public Vector3[] bitangents;
+	Vector3[] bitangents;
 	/*!
 	 * Center of the bounding box (smallest box that contains all vertices) of the
 	 * mesh.
 	 */
-	public Vector3 center;
+	Vector3 center;
 	/*!
 	 * Radius of the mesh: maximal Euclidean distance between the center and all
 	 * vertices.
 	 */
-	public float radius;
+	float radius;
 	/*! Unknown, always 0? */
-	public Array13<short> unknown13Shorts;
+	Array13<short> unknown13Shorts;
 	/*!
 	 * Do we have vertex colors? These are usually used to fine-tune the lighting of
 	 * the model.
@@ -71,31 +71,31 @@ public class NiGeometryData : NiObject {
 	 * 
 	 *             Note 2: set to either 0 or 0xFFFFFFFF for NifTexture compatibility.
 	 */
-	public bool hasVertexColors;
+	bool hasVertexColors;
 	/*! The vertex colors. */
-	public Color4[] vertexColors;
+	Color4[] vertexColors;
 	/*!
 	 * The lower 6 (or less?) bits of this field represent the number of UV texture
 	 * sets. The other bits are probably flag bits. For versions 10.1.0.0 and up, if
 	 * bit 12 is set then extra vectors are present after the normals.
 	 */
-	public ushort numUvSets;
+	ushort numUvSets;
 	/*!
 	 * Do we have UV coordinates?
 	 * 
 	 *             Note: for compatibility with NifTexture, set this value to either
 	 * 0x00000000 or 0xFFFFFFFF.
 	 */
-	public bool hasUv;
+	bool hasUv;
 	/*!
 	 * The UV texture coordinates. They follow the OpenGL standard: some programs may
 	 * require you to flip the second coordinate.
 	 */
-	public TexCoord[][] uvSets;
+	TexCoord[][] uvSets;
 	/*! Consistency Flags */
-	public ConsistencyType consistencyFlags;
+	ConsistencyType consistencyFlags;
 	/*! Unknown. */
-	public AbstractAdditionalGeometryData additionalData;
+	AbstractAdditionalGeometryData additionalData;
 
 	public NiGeometryData() {
 	groupId = (int)0;
@@ -319,11 +319,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numVertices = (ushort)vertices.Length;
 	s.AppendLine($"  Group ID:  {groupId}");
 	if ((!IsDerivedType(NiPSysData.TYPE))) {

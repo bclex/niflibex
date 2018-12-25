@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class NiPhysXJointActor {
 	/*!  */
-	public NiPhysXActorDesc actor;
+	NiPhysXActorDesc actor;
 	/*!  */
-	public Vector3 localNormal;
+	Vector3 localNormal;
 	/*!  */
-	public Vector3 localAxis;
+	Vector3 localAxis;
 	/*!  */
-	public Vector3 localAnchor;
+	Vector3 localAnchor;
 	//Constructor
 	public NiPhysXJointActor() { unchecked {
 	actor = null;

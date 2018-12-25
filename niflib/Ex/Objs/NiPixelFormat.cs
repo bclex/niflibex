@@ -19,17 +19,17 @@ public class NiPixelFormat : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPixelFormat", NiObject.TYPE);
 	/*! The format of the pixels in this internally stored image. */
-	public PixelFormat pixelFormat;
+	PixelFormat pixelFormat;
 	/*! 0x000000ff (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	public uint redMask;
+	uint redMask;
 	/*! 0x0000ff00 (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	public uint greenMask;
+	uint greenMask;
 	/*! 0x00ff0000 (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	public uint blueMask;
+	uint blueMask;
 	/*! 0xff000000 (for 32bpp) or 0x00000000 (for 24bpp and 8bpp) */
-	public uint alphaMask;
+	uint alphaMask;
 	/*! Bits per pixel, 0 (Compressed), 8, 24 or 32. */
-	public uint bitsPerPixel;
+	uint bitsPerPixel;
 	/*!
 	 * [96,8,130,0,0,65,0,0] if 24 bits per pixel
 	 *             [129,8,130,32,0,65,12,0] if 32 bits per pixel
@@ -37,19 +37,19 @@ public class NiPixelFormat : NiObject {
 	 *             [X,0,0,0,0,0,0,0] if 0 (Compressed) bits per pixel where X =
 	 * PixelFormat
 	 */
-	public Array8<byte> oldFastCompare;
+	Array8<byte> oldFastCompare;
 	/*! Seems to always be zero. */
-	public PixelTiling tiling;
+	PixelTiling tiling;
 	/*!  */
-	public uint rendererHint;
+	uint rendererHint;
 	/*!  */
-	public uint extraData;
+	uint extraData;
 	/*!  */
-	public byte flags;
+	byte flags;
 	/*!  */
-	public bool srgbSpace;
+	bool srgbSpace;
 	/*! Channel Data */
-	public Array4<PixelFormatComponent> channels;
+	Array4<PixelFormatComponent> channels;
 
 	public NiPixelFormat() {
 	pixelFormat = (PixelFormat)0;
@@ -160,11 +160,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Pixel Format:  {pixelFormat}");
 	s.AppendLine($"  Red Mask:  {redMask}");
 	s.AppendLine($"  Green Mask:  {greenMask}");

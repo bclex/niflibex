@@ -22,41 +22,41 @@ public class NiPSAlignedQuadGenerator : NiMeshModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSAlignedQuadGenerator", NiMeshModifier.TYPE);
 	/*!  */
-	public float scaleAmountU;
+	float scaleAmountU;
 	/*!  */
-	public float scaleLimitU;
+	float scaleLimitU;
 	/*!  */
-	public float scaleRestU;
+	float scaleRestU;
 	/*!  */
-	public float scaleAmountV;
+	float scaleAmountV;
 	/*!  */
-	public float scaleLimitV;
+	float scaleLimitV;
 	/*!  */
-	public float scaleRestV;
+	float scaleRestV;
 	/*!  */
-	public float centerU;
+	float centerU;
 	/*!  */
-	public float centerV;
+	float centerV;
 	/*!  */
-	public bool uvScrolling;
+	bool uvScrolling;
 	/*!  */
-	public ushort numFramesAcross;
+	ushort numFramesAcross;
 	/*!  */
-	public ushort numFramesDown;
+	ushort numFramesDown;
 	/*!  */
-	public bool pingPong;
+	bool pingPong;
 	/*!  */
-	public ushort initialFrame;
+	ushort initialFrame;
 	/*!  */
-	public float initialFrameVariation;
+	float initialFrameVariation;
 	/*!  */
-	public ushort numFrames;
+	ushort numFrames;
 	/*!  */
-	public float numFramesVariation;
+	float numFramesVariation;
 	/*!  */
-	public float initialTime;
+	float initialTime;
 	/*!  */
-	public float finalTime;
+	float finalTime;
 
 	public NiPSAlignedQuadGenerator() {
 	scaleAmountU = 0.0f;
@@ -146,10 +146,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Scale Amount U:  {scaleAmountU}");
 	s.AppendLine($"  Scale Limit U:  {scaleLimitU}");
 	s.AppendLine($"  Scale Rest U:  {scaleRestU}");

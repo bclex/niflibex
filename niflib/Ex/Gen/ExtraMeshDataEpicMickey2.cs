@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class ExtraMeshDataEpicMickey2 {
 	/*!  */
-	public int start;
+	int start;
 	/*!  */
-	public int end;
+	int end;
 	/*! Unknown. */
-	public Array10<short> unknownShorts;
+	Array10<short> unknownShorts;
 	//Constructor
 	public ExtraMeshDataEpicMickey2() { unchecked {
 	start = (int)0;

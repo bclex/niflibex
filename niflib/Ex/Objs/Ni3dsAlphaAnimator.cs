@@ -19,15 +19,15 @@ public class Ni3dsAlphaAnimator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsAlphaAnimator", NiObject.TYPE);
 	/*! Unknown. */
-	public Array40<byte> unknown1;
+	Array40<byte> unknown1;
 	/*! The parent? */
-	public NiObject parent;
+	NiObject parent;
 	/*! Unknown. */
-	public uint num1;
+	uint num1;
 	/*! Unknown. */
-	public uint num2;
+	uint num2;
 	/*! Unknown. */
-	public uint[][] unknown2;
+	uint[][] unknown2;
 
 	public Ni3dsAlphaAnimator() {
 	parent = null;
@@ -94,11 +94,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	num2 = (uint)((unknown2.Length > 0) ? unknown2[0].Length : 0);
 	num1 = (uint)unknown2.Length;
 	array_output_count = 0;

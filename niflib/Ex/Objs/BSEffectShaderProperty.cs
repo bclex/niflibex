@@ -19,54 +19,54 @@ public class BSEffectShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSEffectShaderProperty", BSShaderProperty.TYPE);
 	/*!  */
-	public SkyrimShaderPropertyFlags1 shaderFlags1_sk;
+	SkyrimShaderPropertyFlags1 shaderFlags1_sk;
 	/*!  */
-	public SkyrimShaderPropertyFlags2 shaderFlags2_sk;
+	SkyrimShaderPropertyFlags2 shaderFlags2_sk;
 	/*!  */
-	public Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
+	Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
 	/*!  */
-	public Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
+	Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
 	/*! Offset UVs */
-	public TexCoord uvOffset;
+	TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures */
-	public TexCoord uvScale;
+	TexCoord uvScale;
 	/*! points to an external texture. */
-	public string sourceTexture;
+	string sourceTexture;
 	/*! How to handle texture borders. */
-	public byte textureClampMode;
+	byte textureClampMode;
 	/*!  */
-	public byte lightingInfluence;
+	byte lightingInfluence;
 	/*!  */
-	public byte envMapMinLod;
+	byte envMapMinLod;
 	/*! Unknown. */
-	public byte unknownByte;
+	byte unknownByte;
 	/*! At this cosine of angle falloff will be equal to Falloff Start Opacity */
-	public float falloffStartAngle;
+	float falloffStartAngle;
 	/*! At this cosine of angle falloff will be equal to Falloff Stop Opacity */
-	public float falloffStopAngle;
+	float falloffStopAngle;
 	/*! Alpha falloff multiplier at start angle */
-	public float falloffStartOpacity;
+	float falloffStartOpacity;
 	/*! Alpha falloff multiplier at end angle */
-	public float falloffStopOpacity;
+	float falloffStopOpacity;
 	/*! Emissive color */
-	public Color4 emissiveColor;
+	Color4 emissiveColor;
 	/*! Multiplier for Emissive Color (RGB part) */
-	public float emissiveMultiple;
+	float emissiveMultiple;
 	/*!  */
-	public float softFalloffDepth;
+	float softFalloffDepth;
 	/*!
 	 * Points to an external texture, used as palette for
 	 * SLSF1_Greyscale_To_PaletteColor/SLSF1_Greyscale_To_PaletteAlpha.
 	 */
-	public string greyscaleTexture;
+	string greyscaleTexture;
 	/*!  */
-	public string envMapTexture;
+	string envMapTexture;
 	/*!  */
-	public string normalTexture;
+	string normalTexture;
 	/*!  */
-	public string envMaskTexture;
+	string envMaskTexture;
 	/*!  */
-	public float environmentMapScale;
+	float environmentMapScale;
 
 	public BSEffectShaderProperty() {
 	shaderFlags1_sk = (SkyrimShaderPropertyFlags1)2147483648;
@@ -176,11 +176,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shader Flags 1:  {shaderFlags1_sk}");
 	s.AppendLine($"  Shader Flags 2:  {shaderFlags2_sk}");
 	s.AppendLine($"  Shader Flags 1:  {shaderFlags1_fo4}");

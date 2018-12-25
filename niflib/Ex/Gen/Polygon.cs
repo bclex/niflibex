@@ -13,13 +13,13 @@ namespace Niflib {
 /*! Two dimensional screen elements. */
 public class Polygon {
 	/*!  */
-	public ushort numVertices;
+	ushort numVertices;
 	/*! Offset in vertex array. */
-	public ushort vertexOffset;
+	ushort vertexOffset;
 	/*!  */
-	public ushort numTriangles;
+	ushort numTriangles;
 	/*! Offset in indices array. */
-	public ushort triangleOffset;
+	ushort triangleOffset;
 	//Constructor
 	public Polygon() { unchecked {
 	numVertices = (ushort)0;

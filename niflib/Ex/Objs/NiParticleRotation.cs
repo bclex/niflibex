@@ -19,11 +19,11 @@ public class NiParticleRotation : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleRotation", NiParticleModifier.TYPE);
 	/*!  */
-	public byte randomInitialAxis;
+	byte randomInitialAxis;
 	/*!  */
-	public Vector3 initialAxis;
+	Vector3 initialAxis;
 	/*!  */
-	public float rotationSpeed;
+	float rotationSpeed;
 
 	public NiParticleRotation() {
 	randomInitialAxis = (byte)0;
@@ -67,10 +67,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Random Initial Axis:  {randomInitialAxis}");
 	s.AppendLine($"  Initial Axis:  {initialAxis}");
 	s.AppendLine($"  Rotation Speed:  {rotationSpeed}");

@@ -19,36 +19,36 @@ public class bhkBallSocketConstraintChain : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBallSocketConstraintChain", bhkSerializable.TYPE);
 	/*! Number of pivot points. Divide by 2 to get the number of constraints. */
-	public uint numPivots;
+	uint numPivots;
 	/*! Two pivot points A and B for each constraint. */
-	public ConstraintInfo[] pivots;
+	ConstraintInfo[] pivots;
 	/*! High values are harder and more reactive, lower values are smoother. */
-	public float tau;
+	float tau;
 	/*! Defines damping strength for the current velocity. */
-	public float damping;
+	float damping;
 	/*!
 	 * Restitution (amount of elasticity) of constraints. Added to the diagonal of the
 	 * constraint matrix. A value of 0.0 can result in a division by zero with some
 	 * chain configurations.
 	 */
-	public float constraintForceMixing;
+	float constraintForceMixing;
 	/*!
 	 * Maximum distance error in constraints allowed before stabilization algorithm
 	 * kicks in. A smaller distance causes more resistance.
 	 */
-	public float maxErrorDistance;
+	float maxErrorDistance;
 	/*! Number of links in the chain */
-	public uint numEntitiesA;
+	uint numEntitiesA;
 	/*!  */
-	public bhkRigidBody[] entitiesA;
+	bhkRigidBody[] entitiesA;
 	/*! Hardcoded to 2. Don't change. */
-	public uint numEntities;
+	uint numEntities;
 	/*!  */
-	public bhkRigidBody entityA;
+	bhkRigidBody entityA;
 	/*!  */
-	public bhkRigidBody entityB;
+	bhkRigidBody entityB;
 	/*!  */
-	public uint priority;
+	uint priority;
 
 	public bhkBallSocketConstraintChain() {
 	numPivots = (uint)0;
@@ -136,11 +136,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numEntitiesA = (uint)entitiesA.Length;
 	numPivots = (uint)pivots.Length;
 	s.AppendLine($"  Num Pivots:  {numPivots}");

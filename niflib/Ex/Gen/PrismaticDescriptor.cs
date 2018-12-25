@@ -13,35 +13,35 @@ namespace Niflib {
 /*!  */
 public class PrismaticDescriptor {
 	/*! Pivot. */
-	public Vector4 pivotA;
+	Vector4 pivotA;
 	/*! Rotation axis. */
-	public Vector4 rotationA;
+	Vector4 rotationA;
 	/*! Plane normal. Describes the plane the object is able to move on. */
-	public Vector4 planeA;
+	Vector4 planeA;
 	/*! Describes the axis the object is able to travel along. Unit vector. */
-	public Vector4 slidingA;
+	Vector4 slidingA;
 	/*!
 	 * Describes the axis the object is able to travel along in B coordinates. Unit
 	 * vector.
 	 */
-	public Vector4 slidingB;
+	Vector4 slidingB;
 	/*! Pivot in B coordinates. */
-	public Vector4 pivotB;
+	Vector4 pivotB;
 	/*! Rotation axis. */
-	public Vector4 rotationB;
+	Vector4 rotationB;
 	/*!
 	 * Plane normal. Describes the plane the object is able to move on in B
 	 * coordinates.
 	 */
-	public Vector4 planeB;
+	Vector4 planeB;
 	/*! Describe the min distance the object is able to travel. */
-	public float minDistance;
+	float minDistance;
 	/*! Describe the max distance the object is able to travel. */
-	public float maxDistance;
+	float maxDistance;
 	/*! Friction. */
-	public float friction;
+	float friction;
 	/*!  */
-	public MotorDescriptor motor;
+	MotorDescriptor motor;
 	//Constructor
 	public PrismaticDescriptor() { unchecked {
 	minDistance = 0.0f;

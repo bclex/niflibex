@@ -13,9 +13,9 @@ namespace Niflib {
 /*! NiBoneLODController::SkinInfo. Reference to shape and skin instance. */
 public class SkinInfo {
 	/*!  */
-	public NiTriBasedGeom shape;
+	NiTriBasedGeom shape;
 	/*!  */
-	public NiSkinInstance skinInstance;
+	NiSkinInstance skinInstance;
 	//Constructor
 	public SkinInfo() { unchecked {
 	shape = null;

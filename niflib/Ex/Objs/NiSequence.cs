@@ -19,24 +19,24 @@ public class NiSequence : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSequence", NiObject.TYPE);
 	/*! The sequence name by which the animation system finds and manages this sequence. */
-	public IndexString name;
+	IndexString name;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	public IndexString accumRootName;
+	IndexString accumRootName;
 	/*!  */
-	public NiTextKeyExtraData textKeys;
+	NiTextKeyExtraData textKeys;
 	/*! Divinity 2 */
-	public int unknownInt4;
+	int unknownInt4;
 	/*! Divinity 2 */
-	public int unknownInt5;
+	int unknownInt5;
 	/*!  */
-	public uint numControlledBlocks;
+	uint numControlledBlocks;
 	/*!  */
-	public uint arrayGrowBy;
+	uint arrayGrowBy;
 	/*!  */
-	public ControlledBlock[] controlledBlocks;
+	ControlledBlock[] controlledBlocks;
 
 	public NiSequence() {
 	textKeys = null;
@@ -191,11 +191,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numControlledBlocks = (uint)controlledBlocks.Length;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Accum Root Name:  {accumRootName}");

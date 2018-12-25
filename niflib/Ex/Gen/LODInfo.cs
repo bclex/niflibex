@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class LODInfo {
 	/*!  */
-	public uint numBones;
+	uint numBones;
 	/*!  */
-	public uint numActiveSkins;
+	uint numActiveSkins;
 	/*!  */
-	public uint[] skinIndices;
+	uint[] skinIndices;
 	//Constructor
 	public LODInfo() { unchecked {
 	numBones = (uint)0;

@@ -22,74 +22,74 @@ public class NiTexturingProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTexturingProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	public ushort flags;
+	ushort flags;
 	/*!
 	 * Determines how the texture will be applied.  Seems to have special functions in
 	 * Oblivion.
 	 */
-	public ApplyMode applyMode;
+	ApplyMode applyMode;
 	/*! Number of textures. */
-	public uint textureCount;
+	uint textureCount;
 	/*! Do we have a base texture? */
-	public bool hasBaseTexture;
+	bool hasBaseTexture;
 	/*! The base texture. */
-	public TexDesc baseTexture;
+	TexDesc baseTexture;
 	/*! Do we have a dark texture? */
-	public bool hasDarkTexture;
+	bool hasDarkTexture;
 	/*! The dark texture. */
-	public TexDesc darkTexture;
+	TexDesc darkTexture;
 	/*! Do we have a detail texture? */
-	public bool hasDetailTexture;
+	bool hasDetailTexture;
 	/*! The detail texture. */
-	public TexDesc detailTexture;
+	TexDesc detailTexture;
 	/*! Do we have a gloss texture? */
-	public bool hasGlossTexture;
+	bool hasGlossTexture;
 	/*! The gloss texture. */
-	public TexDesc glossTexture;
+	TexDesc glossTexture;
 	/*! Do we have a glow texture? */
-	public bool hasGlowTexture;
+	bool hasGlowTexture;
 	/*! The glowing texture. */
-	public TexDesc glowTexture;
+	TexDesc glowTexture;
 	/*! Do we have a bump map texture? */
-	public bool hasBumpMapTexture;
+	bool hasBumpMapTexture;
 	/*! The bump map texture. */
-	public TexDesc bumpMapTexture;
+	TexDesc bumpMapTexture;
 	/*!  */
-	public float bumpMapLumaScale;
+	float bumpMapLumaScale;
 	/*!  */
-	public float bumpMapLumaOffset;
+	float bumpMapLumaOffset;
 	/*!  */
-	public Matrix22 bumpMapMatrix;
+	Matrix22 bumpMapMatrix;
 	/*! Do we have a normal texture? */
-	public bool hasNormalTexture;
+	bool hasNormalTexture;
 	/*! Normal texture. */
-	public TexDesc normalTexture;
+	TexDesc normalTexture;
 	/*!  */
-	public bool hasParallaxTexture;
+	bool hasParallaxTexture;
 	/*!  */
-	public TexDesc parallaxTexture;
+	TexDesc parallaxTexture;
 	/*!  */
-	public float parallaxOffset;
+	float parallaxOffset;
 	/*! Do we have a decal 0 texture? */
-	public bool hasDecal0Texture;
+	bool hasDecal0Texture;
 	/*! The decal texture. */
-	public TexDesc decal0Texture;
+	TexDesc decal0Texture;
 	/*! Do we have a decal 1 texture? */
-	public bool hasDecal1Texture;
+	bool hasDecal1Texture;
 	/*! Another decal texture. */
-	public TexDesc decal1Texture;
+	TexDesc decal1Texture;
 	/*! Do we have a decal 2 texture? */
-	public bool hasDecal2Texture;
+	bool hasDecal2Texture;
 	/*! Another decal texture. */
-	public TexDesc decal2Texture;
+	TexDesc decal2Texture;
 	/*! Do we have a decal 3 texture? */
-	public bool hasDecal3Texture;
+	bool hasDecal3Texture;
 	/*! Another decal texture. Who knows the limit. */
-	public TexDesc decal3Texture;
+	TexDesc decal3Texture;
 	/*! Number of Shader textures that follow. */
-	public uint numShaderTextures;
+	uint numShaderTextures;
 	/*! Shader textures. */
-	public ShaderTexDesc[] shaderTextures;
+	ShaderTexDesc[] shaderTextures;
 
 	public NiTexturingProperty() {
 	flags = (ushort)0;
@@ -1323,11 +1323,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numShaderTextures = (uint)shaderTextures.Length;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Apply Mode:  {applyMode}");

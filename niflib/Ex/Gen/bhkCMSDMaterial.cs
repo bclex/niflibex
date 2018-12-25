@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Per-chunk material, used in bhkCompressedMeshShapeData */
 public class bhkCMSDMaterial {
 	/*!  */
-	public SkyrimHavokMaterial material;
+	SkyrimHavokMaterial material;
 	/*!  */
-	public HavokFilter filter;
+	HavokFilter filter;
 	//Constructor
 	public bhkCMSDMaterial() { unchecked {
 	material = (SkyrimHavokMaterial)0;

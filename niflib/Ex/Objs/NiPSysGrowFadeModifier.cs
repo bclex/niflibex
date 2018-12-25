@@ -19,21 +19,21 @@ public class NiPSysGrowFadeModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysGrowFadeModifier", NiPSysModifier.TYPE);
 	/*! The time taken to grow from 0 to their specified size. */
-	public float growTime;
+	float growTime;
 	/*!
 	 * Specifies the particle generation to which the grow effect should be applied.
 	 * This is usually generation 0, so that newly created particles will grow.
 	 */
-	public ushort growGeneration;
+	ushort growGeneration;
 	/*! The time taken to shrink from their specified size to 0. */
-	public float fadeTime;
+	float fadeTime;
 	/*!
 	 * Specifies the particle generation to which the shrink effect should be applied.
 	 * This is usually the highest supported generation for the particle system.
 	 */
-	public ushort fadeGeneration;
+	ushort fadeGeneration;
 	/*! A multiplier on the base particle scale. */
-	public float baseScale;
+	float baseScale;
 
 	public NiPSysGrowFadeModifier() {
 	growTime = 0.0f;
@@ -88,10 +88,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Grow Time:  {growTime}");
 	s.AppendLine($"  Grow Generation:  {growGeneration}");
 	s.AppendLine($"  Fade Time:  {fadeTime}");

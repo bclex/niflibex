@@ -19,7 +19,7 @@ public class bhkHingeConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkHingeConstraint", bhkConstraint.TYPE);
 	/*! Hinge constraing. */
-	public HingeDescriptor hinge;
+	HingeDescriptor hinge;
 
 	public bhkHingeConstraint() {
 	}
@@ -89,10 +89,10 @@ public class bhkHingeConstraint : bhkConstraint {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Pivot A:  {hinge.pivotA}");
 		s.AppendLine($"    Perp Axis In A1:  {hinge.perpAxisInA1}");
 		s.AppendLine($"    Perp Axis In A2:  {hinge.perpAxisInA2}");

@@ -19,27 +19,27 @@ public class NiPhysXJointDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXJointDesc", NiObject.TYPE);
 	/*!  */
-	public NxJointType jointType;
+	NxJointType jointType;
 	/*!  */
-	public IndexString jointName;
+	IndexString jointName;
 	/*!  */
-	public Array2<NiPhysXJointActor> actors;
+	Array2<NiPhysXJointActor> actors;
 	/*!  */
-	public float maxForce;
+	float maxForce;
 	/*!  */
-	public float maxTorque;
+	float maxTorque;
 	/*!  */
-	public float solverExtrapolationFactor;
+	float solverExtrapolationFactor;
 	/*!  */
-	public uint useAccelerationSpring;
+	uint useAccelerationSpring;
 	/*!  */
-	public uint jointFlags;
+	uint jointFlags;
 	/*!  */
-	public Vector3 limitPoint;
+	Vector3 limitPoint;
 	/*!  */
-	public uint numLimits;
+	uint numLimits;
 	/*!  */
-	public NiPhysXJointLimit[] limits;
+	NiPhysXJointLimit[] limits;
 
 	public NiPhysXJointDesc() {
 	jointType = (NxJointType)0;
@@ -134,11 +134,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numLimits = (uint)limits.Length;
 	s.AppendLine($"  Joint Type:  {jointType}");
 	s.AppendLine($"  Joint Name:  {jointName}");

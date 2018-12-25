@@ -19,57 +19,57 @@ public class NiPhysXD6JointDesc : NiPhysXJointDesc {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXD6JointDesc", NiPhysXJointDesc.TYPE);
 	/*!  */
-	public NxD6JointMotion xMotion;
+	NxD6JointMotion xMotion;
 	/*!  */
-	public NxD6JointMotion yMotion;
+	NxD6JointMotion yMotion;
 	/*!  */
-	public NxD6JointMotion zMotion;
+	NxD6JointMotion zMotion;
 	/*!  */
-	public NxD6JointMotion swing1Motion;
+	NxD6JointMotion swing1Motion;
 	/*!  */
-	public NxD6JointMotion swing2Motion;
+	NxD6JointMotion swing2Motion;
 	/*!  */
-	public NxD6JointMotion twistMotion;
+	NxD6JointMotion twistMotion;
 	/*!  */
-	public NxJointLimitSoftDesc linearLimit;
+	NxJointLimitSoftDesc linearLimit;
 	/*!  */
-	public NxJointLimitSoftDesc swing1Limit;
+	NxJointLimitSoftDesc swing1Limit;
 	/*!  */
-	public NxJointLimitSoftDesc swing2Limit;
+	NxJointLimitSoftDesc swing2Limit;
 	/*!  */
-	public NxJointLimitSoftDesc twistLowLimit;
+	NxJointLimitSoftDesc twistLowLimit;
 	/*!  */
-	public NxJointLimitSoftDesc twistHighLimit;
+	NxJointLimitSoftDesc twistHighLimit;
 	/*!  */
-	public NxJointDriveDesc xDrive;
+	NxJointDriveDesc xDrive;
 	/*!  */
-	public NxJointDriveDesc yDrive;
+	NxJointDriveDesc yDrive;
 	/*!  */
-	public NxJointDriveDesc zDrive;
+	NxJointDriveDesc zDrive;
 	/*!  */
-	public NxJointDriveDesc swingDrive;
+	NxJointDriveDesc swingDrive;
 	/*!  */
-	public NxJointDriveDesc twistDrive;
+	NxJointDriveDesc twistDrive;
 	/*!  */
-	public NxJointDriveDesc slerpDrive;
+	NxJointDriveDesc slerpDrive;
 	/*!  */
-	public Vector3 drivePosition;
+	Vector3 drivePosition;
 	/*!  */
-	public Quaternion driveOrientation;
+	Quaternion driveOrientation;
 	/*!  */
-	public Vector3 driveLinearVelocity;
+	Vector3 driveLinearVelocity;
 	/*!  */
-	public Vector3 driveAngularVelocity;
+	Vector3 driveAngularVelocity;
 	/*!  */
-	public NxJointProjectionMode projectionMode;
+	NxJointProjectionMode projectionMode;
 	/*!  */
-	public float projectionDistance;
+	float projectionDistance;
 	/*!  */
-	public float projectionAngle;
+	float projectionAngle;
 	/*!  */
-	public float gearRatio;
+	float gearRatio;
 	/*!  */
-	public uint flags;
+	uint flags;
 
 	public NiPhysXD6JointDesc() {
 	xMotion = (NxD6JointMotion)0;
@@ -234,10 +234,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  X Motion:  {xMotion}");
 	s.AppendLine($"  Y Motion:  {yMotion}");
 	s.AppendLine($"  Z Motion:  {zMotion}");

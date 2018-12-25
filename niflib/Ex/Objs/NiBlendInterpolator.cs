@@ -22,37 +22,37 @@ public class NiBlendInterpolator : NiInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendInterpolator", NiInterpolator.TYPE);
 	/*!  */
-	public InterpBlendFlags flags;
+	InterpBlendFlags flags;
 	/*!  */
-	public ushort arraySize;
+	ushort arraySize;
 	/*!  */
-	public ushort arrayGrowBy;
+	ushort arrayGrowBy;
 	/*!  */
-	public float weightThreshold;
+	float weightThreshold;
 	/*!  */
-	public byte interpCount;
+	byte interpCount;
 	/*!  */
-	public byte singleIndex;
+	byte singleIndex;
 	/*!  */
-	public byte highPriority;
+	byte highPriority;
 	/*!  */
-	public byte nextHighPriority;
+	byte nextHighPriority;
 	/*!  */
-	public float singleTime;
+	float singleTime;
 	/*!  */
-	public float highWeightsSum;
+	float highWeightsSum;
 	/*!  */
-	public float nextHighWeightsSum;
+	float nextHighWeightsSum;
 	/*!  */
-	public float highEaseSpinner;
+	float highEaseSpinner;
 	/*!  */
-	public InterpBlendItem[] interpArrayItems;
+	InterpBlendItem[] interpArrayItems;
 	/*!  */
-	public bool managedControlled;
+	bool managedControlled;
 	/*!  */
-	public bool onlyUseHighestWeight;
+	bool onlyUseHighestWeight;
 	/*!  */
-	public NiInterpolator singleInterpolator;
+	NiInterpolator singleInterpolator;
 
 	public NiBlendInterpolator() {
 	flags = (InterpBlendFlags)0;
@@ -254,11 +254,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	arraySize = (ushort)interpArrayItems.Length;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Array Size:  {arraySize}");

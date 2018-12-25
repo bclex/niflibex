@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class BSPackedGeomDataCombined {
 	/*!  */
-	public float grayscaleToPaletteScale;
+	float grayscaleToPaletteScale;
 	/*!  */
-	public NiTransform transform;
+	NiTransform transform;
 	/*!  */
-	public NiBound boundingSphere;
+	NiBound boundingSphere;
 	//Constructor
 	public BSPackedGeomDataCombined() { unchecked {
 	grayscaleToPaletteScale = 0.0f;

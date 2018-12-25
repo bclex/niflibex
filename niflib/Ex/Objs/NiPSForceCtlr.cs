@@ -19,7 +19,7 @@ public class NiPSForceCtlr : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSForceCtlr", NiSingleInterpController.TYPE);
 	/*!  */
-	public IndexString forceName;
+	IndexString forceName;
 
 	public NiPSForceCtlr() {
 	}
@@ -57,11 +57,11 @@ public class NiPSForceCtlr : NiSingleInterpController {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Force Name:  {forceName}");
 		return s.ToString();
 

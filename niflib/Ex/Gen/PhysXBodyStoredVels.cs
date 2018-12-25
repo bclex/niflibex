@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class PhysXBodyStoredVels {
 	/*!  */
-	public Vector3 linearVelocity;
+	Vector3 linearVelocity;
 	/*!  */
-	public Vector3 angularVelocity;
+	Vector3 angularVelocity;
 	/*!  */
-	public bool sleep;
+	bool sleep;
 	//Constructor
 	public PhysXBodyStoredVels() { unchecked {
 	sleep = false;

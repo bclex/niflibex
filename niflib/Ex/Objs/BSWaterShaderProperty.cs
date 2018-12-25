@@ -22,25 +22,25 @@ public class BSWaterShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSWaterShaderProperty", BSShaderProperty.TYPE);
 	/*!  */
-	public SkyrimShaderPropertyFlags1 shaderFlags1;
+	SkyrimShaderPropertyFlags1 shaderFlags1;
 	/*!  */
-	public SkyrimShaderPropertyFlags2 shaderFlags2;
+	SkyrimShaderPropertyFlags2 shaderFlags2;
 	/*!
 	 * Offset UVs. Seems to be unused, but it fits with the other Skyrim shader
 	 * properties.
 	 */
-	public TexCoord uvOffset;
+	TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures, see above. */
-	public TexCoord uvScale;
+	TexCoord uvScale;
 	/*! Defines attributes for the water shader (will use SkyrimWaterShaderFlags) */
-	public SkyrimWaterShaderFlags waterShaderFlags;
+	SkyrimWaterShaderFlags waterShaderFlags;
 	/*!
 	 * A bitflag, only the first/second bit controls water flow positive or negative
 	 * along UVs.
 	 */
-	public byte waterDirection;
+	byte waterDirection;
 	/*! Unknown, flag? */
-	public ushort unknownShort3;
+	ushort unknownShort3;
 
 	public BSWaterShaderProperty() {
 	shaderFlags1 = (SkyrimShaderPropertyFlags1)0;
@@ -96,10 +96,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shader Flags 1:  {shaderFlags1}");
 	s.AppendLine($"  Shader Flags 2:  {shaderFlags2}");
 	s.AppendLine($"  UV Offset:  {uvOffset}");

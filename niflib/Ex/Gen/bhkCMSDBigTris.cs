@@ -13,15 +13,15 @@ namespace Niflib {
 /*! Triangle indices used in pair with "Big Verts" in a bhkCompressedMeshShapeData. */
 public class bhkCMSDBigTris {
 	/*!  */
-	public ushort triangle1;
+	ushort triangle1;
 	/*!  */
-	public ushort triangle2;
+	ushort triangle2;
 	/*!  */
-	public ushort triangle3;
+	ushort triangle3;
 	/*! Always 0? */
-	public uint material;
+	uint material;
 	/*!  */
-	public ushort weldingInfo;
+	ushort weldingInfo;
 	//Constructor
 	public bhkCMSDBigTris() { unchecked {
 	triangle1 = (ushort)0;

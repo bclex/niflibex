@@ -19,11 +19,11 @@ public class NiRoomGroup : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRoomGroup", NiNode.TYPE);
 	/*! Object that represents the room group as seen from the outside. */
-	public NiNode shell;
+	NiNode shell;
 	/*!  */
-	public int numRooms;
+	int numRooms;
 	/*!  */
-	public NiRoom[] rooms;
+	NiRoom[] rooms;
 
 	public NiRoomGroup() {
 	shell = null;
@@ -76,11 +76,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numRooms = (int)rooms.Length;
 	s.AppendLine($"  Shell:  {shell}");
 	s.AppendLine($"  Num Rooms:  {numRooms}");

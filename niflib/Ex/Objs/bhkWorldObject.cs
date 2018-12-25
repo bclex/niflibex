@@ -19,19 +19,19 @@ public class bhkWorldObject : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkWorldObject", bhkSerializable.TYPE);
 	/*! Link to the body for this collision object. */
-	public bhkShape shape;
+	bhkShape shape;
 	/*! Unknown. */
-	public uint unknownInt;
+	uint unknownInt;
 	/*!  */
-	public HavokFilter havokFilter;
+	HavokFilter havokFilter;
 	/*! Garbage data from memory. */
-	public Array4<byte> unused;
+	Array4<byte> unused;
 	/*!  */
-	public BroadPhaseType broadPhaseType;
+	BroadPhaseType broadPhaseType;
 	/*!  */
-	public Array3<byte> unusedBytes;
+	Array3<byte> unusedBytes;
 	/*!  */
-	public hkWorldObjCinfoProperty cinfoProperty;
+	hkWorldObjCinfoProperty cinfoProperty;
 
 	public bhkWorldObject() {
 	shape = null;
@@ -122,11 +122,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shape:  {shape}");
 	s.AppendLine($"  Unknown Int:  {unknownInt}");
 	s.AppendLine($"  Layer:  {havokFilter.layer_ob}");

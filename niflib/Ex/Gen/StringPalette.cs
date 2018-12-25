@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A list of \\0 terminated strings. */
 public class StringPalette {
 	/*! A bunch of 0x00 seperated strings. */
-	public string palette;
+	string palette;
 	/*! Length of the palette string is repeated here. */
-	public uint length;
+	uint length;
 	//Constructor
 	public StringPalette() { unchecked {
 	length = (uint)0;

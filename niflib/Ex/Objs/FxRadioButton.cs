@@ -19,18 +19,18 @@ public class FxRadioButton : FxWidget {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("FxRadioButton", FxWidget.TYPE);
 	/*! Unknown. */
-	public uint unknownInt1;
+	uint unknownInt1;
 	/*! Unknown. */
-	public uint unknownInt2;
+	uint unknownInt2;
 	/*! Unknown. */
-	public uint unknownInt3;
+	uint unknownInt3;
 	/*! Number of unknown links. */
-	public uint numButtons;
+	uint numButtons;
 	/*!
 	 * Unknown pointers to other buttons.  Maybe other buttons in a group so they can
 	 * be switch off if this one is switched on?
 	 */
-	public FxRadioButton[] buttons;
+	FxRadioButton[] buttons;
 
 	public FxRadioButton() {
 	unknownInt1 = (uint)0;
@@ -88,11 +88,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numButtons = (uint)buttons.Length;
 	s.AppendLine($"  Unknown Int 1:  {unknownInt1}");
 	s.AppendLine($"  Unknown Int  2:  {unknownInt2}");

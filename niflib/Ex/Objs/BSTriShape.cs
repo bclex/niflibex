@@ -19,31 +19,31 @@ public class BSTriShape : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSTriShape", NiAVObject.TYPE);
 	/*!  */
-	public NiBound boundingSphere;
+	NiBound boundingSphere;
 	/*!  */
-	public NiObject skin;
+	NiObject skin;
 	/*!  */
-	public BSShaderProperty shaderProperty;
+	BSShaderProperty shaderProperty;
 	/*!  */
-	public NiAlphaProperty alphaProperty;
+	NiAlphaProperty alphaProperty;
 	/*!  */
-	public BSVertexDesc vertexDesc;
+	BSVertexDesc vertexDesc;
 	/*!  */
-	public uint numTriangles;
+	uint numTriangles;
 	/*!  */
-	public ushort numVertices;
+	ushort numVertices;
 	/*!  */
-	public uint dataSize;
+	uint dataSize;
 	/*!  */
-	public BSVertexData[] vertexData;
+	BSVertexData[] vertexData;
 	/*!  */
-	public Triangle[] triangles;
+	Triangle[] triangles;
 	/*!  */
-	public uint particleDataSize;
+	uint particleDataSize;
 	/*!  */
-	public Vector3[] vertices;
+	Vector3[] vertices;
 	/*!  */
-	public Triangle[] trianglesCopy;
+	Triangle[] trianglesCopy;
 
 	public BSTriShape() {
 	skin = null;
@@ -197,11 +197,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numVertices = (ushort)vertexData.Length;
 	numTriangles = (uint)triangles.Length;
 	s.AppendLine($"  Center:  {boundingSphere.center}");

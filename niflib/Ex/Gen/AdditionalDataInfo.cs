@@ -13,28 +13,28 @@ namespace Niflib {
 /*!  */
 public class AdditionalDataInfo {
 	/*! Type of data in this channel */
-	public int dataType;
+	int dataType;
 	/*! Number of bytes per element of this channel */
-	public int numChannelBytesPerElement;
+	int numChannelBytesPerElement;
 	/*! Total number of bytes of this channel (num vertices times num bytes per element) */
-	public int numChannelBytes;
+	int numChannelBytes;
 	/*!
 	 * Number of bytes per element in all channels together. Sum of num channel bytes
 	 * per element over all block infos.
 	 */
-	public int numTotalBytesPerElement;
+	int numTotalBytesPerElement;
 	/*!
 	 * Unsure. The block in which this channel is stored? Usually there is only one
 	 * block, and so this is zero.
 	 */
-	public int blockIndex;
+	int blockIndex;
 	/*!
 	 * Offset (in bytes) of this channel. Sum of all num channel bytes per element of
 	 * all preceeding block infos.
 	 */
-	public int channelOffset;
+	int channelOffset;
 	/*! Unknown, usually equal to 2. */
-	public byte unknownByte1;
+	byte unknownByte1;
 	//Constructor
 	public AdditionalDataInfo() { unchecked {
 	dataType = (int)0;

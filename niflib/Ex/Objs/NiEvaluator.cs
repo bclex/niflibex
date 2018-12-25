@@ -19,21 +19,21 @@ public class NiEvaluator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiEvaluator", NiObject.TYPE);
 	/*! The name of the animated NiAVObject. */
-	public IndexString nodeName;
+	IndexString nodeName;
 	/*! The RTTI type of the NiProperty the controller is attached to, if applicable. */
-	public IndexString propertyType;
+	IndexString propertyType;
 	/*! The RTTI type of the NiTimeController. */
-	public IndexString controllerType;
+	IndexString controllerType;
 	/*!
 	 * An ID that can uniquely identify the controller among others of the same type on
 	 * the same NiObjectNET.
 	 */
-	public IndexString controllerId;
+	IndexString controllerId;
 	/*!
 	 * An ID that can uniquely identify the interpolator among others of the same type
 	 * on the same NiObjectNET.
 	 */
-	public IndexString interpolatorId;
+	IndexString interpolatorId;
 	/*!
 	 * Channel Indices are BASE/POS = 0, ROT = 1, SCALE = 2, FLAG = 3
 	 *             Channel Types are:
@@ -43,7 +43,7 @@ public class NiEvaluator : NiObject {
 	 *              REFERENCED = 0x1, TRANSFORM = 0x2, ALWAYSUPDATE = 0x4, SHUTDOWN =
 	 * 0x8
 	 */
-	public Array4<byte> channelTypes;
+	Array4<byte> channelTypes;
 
 	public NiEvaluator() {
 	}
@@ -95,11 +95,11 @@ public class NiEvaluator : NiObject {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Node Name:  {nodeName}");
 		s.AppendLine($"    Property Type:  {propertyType}");
 		s.AppendLine($"    Controller Type:  {controllerType}");

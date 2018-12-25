@@ -16,23 +16,23 @@ public class DataStreamRef {
 	 * Reference to a data stream object which holds the data used by
 	 *             this reference.
 	 */
-	public NiDataStream stream;
+	NiDataStream stream;
 	/*!
 	 * Sets whether this stream data is per-instance data for use in
 	 *             hardware instancing.
 	 */
-	public bool isPerInstance;
+	bool isPerInstance;
 	/*!
 	 * The number of submesh-to-region mappings that this data stream
 	 *             has.
 	 */
-	public ushort numSubmeshes;
+	ushort numSubmeshes;
 	/*!  */
-	public ushort[] submeshToRegionMap;
+	ushort[] submeshToRegionMap;
 	/*!  */
-	public uint numComponents;
+	uint numComponents;
 	/*! Describes the semantic of each component. */
-	public SemanticData[] componentSemantics;
+	SemanticData[] componentSemantics;
 	//Constructor
 	public DataStreamRef() { unchecked {
 	stream = null;

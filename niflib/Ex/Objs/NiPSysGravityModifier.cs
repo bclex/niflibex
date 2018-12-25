@@ -19,21 +19,21 @@ public class NiPSysGravityModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysGravityModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the force. */
-	public NiAVObject gravityObject;
+	NiAVObject gravityObject;
 	/*! The local direction of the force. */
-	public Vector3 gravityAxis;
+	Vector3 gravityAxis;
 	/*! How the force diminishes by distance. */
-	public float decay;
+	float decay;
 	/*! The acceleration of the force. */
-	public float strength;
+	float strength;
 	/*! The type of gravitational force. */
-	public ForceType forceType;
+	ForceType forceType;
 	/*! Adds a degree of randomness. */
-	public float turbulence;
+	float turbulence;
 	/*! Scale for turbulence. */
-	public float turbulenceScale;
+	float turbulenceScale;
 	/*!  */
-	public bool worldAligned;
+	bool worldAligned;
 
 	public NiPSysGravityModifier() {
 	gravityObject = null;
@@ -99,10 +99,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Gravity Object:  {gravityObject}");
 	s.AppendLine($"  Gravity Axis:  {gravityAxis}");
 	s.AppendLine($"  Decay:  {decay}");

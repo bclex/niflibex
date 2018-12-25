@@ -19,27 +19,27 @@ public class NiPSysTrailEmitter : NiPSysEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysTrailEmitter", NiPSysEmitter.TYPE);
 	/*! Unknown */
-	public int unknownInt1;
+	int unknownInt1;
 	/*! Unknown */
-	public float unknownFloat1;
+	float unknownFloat1;
 	/*! Unknown */
-	public float unknownFloat2;
+	float unknownFloat2;
 	/*! Unknown */
-	public float unknownFloat3;
+	float unknownFloat3;
 	/*! Unknown */
-	public int unknownInt2;
+	int unknownInt2;
 	/*! Unknown */
-	public float unknownFloat4;
+	float unknownFloat4;
 	/*! Unknown */
-	public int unknownInt3;
+	int unknownInt3;
 	/*! Unknown */
-	public float unknownFloat5;
+	float unknownFloat5;
 	/*! Unknown */
-	public int unknownInt4;
+	int unknownInt4;
 	/*! Unknown */
-	public float unknownFloat6;
+	float unknownFloat6;
 	/*! Unknown */
-	public float unknownFloat7;
+	float unknownFloat7;
 
 	public NiPSysTrailEmitter() {
 	unknownInt1 = (int)0;
@@ -108,10 +108,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Unknown Int 1:  {unknownInt1}");
 	s.AppendLine($"  Unknown Float 1:  {unknownFloat1}");
 	s.AppendLine($"  Unknown Float 2:  {unknownFloat2}");

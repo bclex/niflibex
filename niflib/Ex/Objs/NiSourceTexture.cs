@@ -19,32 +19,32 @@ public class NiSourceTexture : NiTexture {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSourceTexture", NiTexture.TYPE);
 	/*! Is the texture external? */
-	public byte useExternal;
+	byte useExternal;
 	/*! The external texture file name. */
-	public IndexString fileName;
+	IndexString fileName;
 	/*! Unknown. */
-	public NiObject unknownLink;
+	NiObject unknownLink;
 	/*! Unknown. Seems to be set if Pixel Data is present? */
-	public byte unknownByte;
+	byte unknownByte;
 	/*! NiPixelData or NiPersistentSrcTextureRendererData */
-	public NiPixelFormat pixelData;
+	NiPixelFormat pixelData;
 	/*!
 	 * A set of preferences for the texture format. They are a request only and the
 	 * renderer may ignore them.
 	 */
-	public FormatPrefs formatPrefs;
+	FormatPrefs formatPrefs;
 	/*!
 	 * If set, then the application cannot assume that any dynamic changes to the pixel
 	 * data will show in the rendered image.
 	 */
-	public byte isStatic;
+	byte isStatic;
 	/*!
 	 * A hint to the renderer that the texture can be loaded directly from a texture
 	 * file into a renderer-specific resource, bypassing the NiPixelData object.
 	 */
-	public bool directRender;
+	bool directRender;
 	/*! Pixel Data is NiPersistentSrcTextureRendererData instead of NiPixelData. */
-	public bool persistRenderData;
+	bool persistRenderData;
 
 	public NiSourceTexture() {
 	useExternal = (byte)1;
@@ -154,11 +154,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Use External:  {useExternal}");
 	if ((useExternal == 1)) {
 		s.AppendLine($"    File Name:  {fileName}");

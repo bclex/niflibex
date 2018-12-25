@@ -19,9 +19,9 @@ public class BSSegmentedTriShape : NiTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSegmentedTriShape", NiTriShape.TYPE);
 	/*! Number of segments in the square grid */
-	public int numSegments;
+	int numSegments;
 	/*! Configuration of each segment */
-	public BSGeometrySegmentData[] segment;
+	BSGeometrySegmentData[] segment;
 
 	public BSSegmentedTriShape() {
 	numSegments = (int)0;
@@ -102,11 +102,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSegments = (int)segment.Length;
 	s.AppendLine($"  Num Segments:  {numSegments}");
 	array_output_count = 0;

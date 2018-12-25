@@ -22,23 +22,23 @@ public class NiScreenElementsData : NiTriShapeData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiScreenElementsData", NiTriShapeData.TYPE);
 	/*!  */
-	public ushort maxPolygons;
+	ushort maxPolygons;
 	/*!  */
-	public Polygon[] polygons;
+	Polygon[] polygons;
 	/*!  */
-	public ushort[] polygonIndices;
+	ushort[] polygonIndices;
 	/*!  */
-	public ushort polygonGrowBy;
+	ushort polygonGrowBy;
 	/*!  */
-	public ushort numPolygons;
+	ushort numPolygons;
 	/*!  */
-	public ushort maxVertices;
+	ushort maxVertices;
 	/*!  */
-	public ushort verticesGrowBy;
+	ushort verticesGrowBy;
 	/*!  */
-	public ushort maxIndices;
+	ushort maxIndices;
 	/*!  */
-	public ushort indicesGrowBy;
+	ushort indicesGrowBy;
 
 	public NiScreenElementsData() {
 	maxPolygons = (ushort)0;
@@ -116,11 +116,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	maxPolygons = (ushort)polygons.Length;
 	s.AppendLine($"  Max Polygons:  {maxPolygons}");
 	array_output_count = 0;

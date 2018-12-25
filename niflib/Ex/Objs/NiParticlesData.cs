@@ -19,50 +19,50 @@ public class NiParticlesData : NiGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticlesData", NiGeometryData.TYPE);
 	/*! The maximum number of particles (matches the number of vertices). */
-	public ushort numParticles;
+	ushort numParticles;
 	/*! The particles' size. */
-	public float particleRadius;
+	float particleRadius;
 	/*! Is the particle size array present? */
-	public bool hasRadii;
+	bool hasRadii;
 	/*! The individual particle sizes. */
-	public float[] radii;
+	float[] radii;
 	/*!
 	 * The number of active particles at the time the system was saved. This is also
 	 * the number of valid entries in the following arrays.
 	 */
-	public ushort numActive;
+	ushort numActive;
 	/*! Is the particle size array present? */
-	public bool hasSizes;
+	bool hasSizes;
 	/*! The individual particle sizes. */
-	public float[] sizes;
+	float[] sizes;
 	/*! Is the particle rotation array present? */
-	public bool hasRotations;
+	bool hasRotations;
 	/*! The individual particle rotations. */
-	public Quaternion[] rotations;
+	Quaternion[] rotations;
 	/*! Are the angles of rotation present? */
-	public bool hasRotationAngles;
+	bool hasRotationAngles;
 	/*! Angles of rotation */
-	public float[] rotationAngles;
+	float[] rotationAngles;
 	/*! Are axes of rotation present? */
-	public bool hasRotationAxes;
+	bool hasRotationAxes;
 	/*! Axes of rotation. */
-	public Vector3[] rotationAxes;
+	Vector3[] rotationAxes;
 	/*!  */
-	public bool hasTextureIndices;
+	bool hasTextureIndices;
 	/*! How many quads to use in BSPSysSubTexModifier for texture atlasing */
-	public uint numSubtextureOffsets;
+	uint numSubtextureOffsets;
 	/*! Defines UV offsets */
-	public Vector4[] subtextureOffsets;
+	Vector4[] subtextureOffsets;
 	/*! Sets aspect ratio for Subtexture Offset UV quads */
-	public float aspectRatio;
+	float aspectRatio;
 	/*!  */
-	public ushort aspectFlags;
+	ushort aspectFlags;
 	/*!  */
-	public float speedToAspectAspect2;
+	float speedToAspectAspect2;
 	/*!  */
-	public float speedToAspectSpeed1;
+	float speedToAspectSpeed1;
 	/*!  */
-	public float speedToAspectSpeed2;
+	float speedToAspectSpeed2;
 
 	public NiParticlesData() {
 	numParticles = (ushort)0;
@@ -272,11 +272,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSubtextureOffsets = (uint)subtextureOffsets.Length;
 	s.AppendLine($"  Num Particles:  {numParticles}");
 	s.AppendLine($"  Particle Radius:  {particleRadius}");

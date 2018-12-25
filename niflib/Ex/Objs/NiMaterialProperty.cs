@@ -22,24 +22,24 @@ public class NiMaterialProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMaterialProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	public ushort flags;
+	ushort flags;
 	/*! How much the material reflects ambient light. */
-	public Color3 ambientColor;
+	Color3 ambientColor;
 	/*! How much the material reflects diffuse light. */
-	public Color3 diffuseColor;
+	Color3 diffuseColor;
 	/*! How much light the material reflects in a specular manner. */
-	public Color3 specularColor;
+	Color3 specularColor;
 	/*! How much light the material emits. */
-	public Color3 emissiveColor;
+	Color3 emissiveColor;
 	/*! The material glossiness. */
-	public float glossiness;
+	float glossiness;
 	/*!
 	 * The material transparency (1=non-transparant). Refer to a NiAlphaProperty object
 	 * in this material's parent NiTriShape object, when alpha is not 1.
 	 */
-	public float alpha;
+	float alpha;
 	/*!  */
-	public float emissiveMult;
+	float emissiveMult;
 
 	public NiMaterialProperty() {
 	flags = (ushort)0;
@@ -111,10 +111,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Ambient Color:  {ambientColor}");
 	s.AppendLine($"  Diffuse Color:  {diffuseColor}");

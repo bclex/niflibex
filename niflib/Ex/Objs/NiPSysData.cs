@@ -19,15 +19,15 @@ public class NiPSysData : NiParticlesData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysData", NiParticlesData.TYPE);
 	/*!  */
-	public ParticleDesc[] particleDescriptions;
+	ParticleDesc[] particleDescriptions;
 	/*!  */
-	public bool hasRotationSpeeds;
+	bool hasRotationSpeeds;
 	/*!  */
-	public float[] rotationSpeeds;
+	float[] rotationSpeeds;
 	/*!  */
-	public ushort numAddedParticles;
+	ushort numAddedParticles;
 	/*!  */
-	public ushort addedParticlesBase;
+	ushort addedParticlesBase;
 
 	public NiPSysData() {
 	hasRotationSpeeds = false;
@@ -124,11 +124,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	array_output_count = 0;
 	for (var i1 = 0; i1 < particleDescriptions.Length; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

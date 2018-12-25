@@ -22,44 +22,44 @@ public class NiPSSimulatorGeneralStep : NiPSSimulatorStep {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulatorGeneralStep", NiPSSimulatorStep.TYPE);
 	/*!  */
-	public byte numSizeKeys;
+	byte numSizeKeys;
 	/*! The particle size keys. */
-	public Key<float>[] sizeKeys;
+	Key<float>[] sizeKeys;
 	/*! The loop behavior for the size keys. */
-	public PSLoopBehavior sizeLoopBehavior;
+	PSLoopBehavior sizeLoopBehavior;
 	/*!  */
-	public byte numColorKeys;
+	byte numColorKeys;
 	/*! The particle color keys. */
-	public Key<ByteColor4>[] colorKeys;
+	Key<ByteColor4>[] colorKeys;
 	/*! The loop behavior for the color keys. */
-	public PSLoopBehavior colorLoopBehavior;
+	PSLoopBehavior colorLoopBehavior;
 	/*!  */
-	public byte numRotationKeys;
+	byte numRotationKeys;
 	/*! The particle rotation keys. */
-	public Key<Quaternion>[] rotationKeys;
+	Key<Quaternion>[] rotationKeys;
 	/*! The loop behavior for the rotation keys. */
-	public PSLoopBehavior rotationLoopBehavior;
+	PSLoopBehavior rotationLoopBehavior;
 	/*!
 	 * The the amount of time over which a particle's size is ramped from 0.0 to 1.0 in
 	 * seconds
 	 */
-	public float growTime;
+	float growTime;
 	/*!
 	 * The the amount of time over which a particle's size is ramped from 1.0 to 0.0 in
 	 * seconds
 	 */
-	public float shrinkTime;
+	float shrinkTime;
 	/*!
 	 * Specifies the particle generation to which the grow effect should be applied.
 	 * This is usually generation 0, so that newly created particles will grow.
 	 */
-	public ushort growGeneration;
+	ushort growGeneration;
 	/*!
 	 * Specifies the particle generation to which the shrink effect should be applied.
 	 * This is usually the highest supported generation for the particle system, so
 	 * that particles will shrink immediately before getting killed.
 	 */
-	public ushort shrinkGeneration;
+	ushort shrinkGeneration;
 
 	public NiPSSimulatorGeneralStep() {
 	numSizeKeys = (byte)0;
@@ -157,11 +157,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numRotationKeys = (byte)rotationKeys.Length;
 	numColorKeys = (byte)colorKeys.Length;
 	numSizeKeys = (byte)sizeKeys.Length;

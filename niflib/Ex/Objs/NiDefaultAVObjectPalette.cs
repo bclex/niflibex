@@ -19,11 +19,11 @@ public class NiDefaultAVObjectPalette : NiAVObjectPalette {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDefaultAVObjectPalette", NiAVObjectPalette.TYPE);
 	/*! Scene root of the object palette. */
-	public NiAVObject scene;
+	NiAVObject scene;
 	/*! Number of objects. */
-	public uint numObjs;
+	uint numObjs;
 	/*! The objects. */
-	public AVObject[] objs;
+	AVObject[] objs;
 
 	public NiDefaultAVObjectPalette() {
 	scene = null;
@@ -78,11 +78,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numObjs = (uint)objs.Length;
 	s.AppendLine($"  Scene:  {scene}");
 	s.AppendLine($"  Num Objs:  {numObjs}");

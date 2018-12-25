@@ -19,9 +19,9 @@ public class NiIntegersExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiIntegersExtraData", NiExtraData.TYPE);
 	/*! Number of integers. */
-	public uint numIntegers;
+	uint numIntegers;
 	/*! Integers. */
-	public uint[] data;
+	uint[] data;
 
 	public NiIntegersExtraData() {
 	numIntegers = (uint)0;
@@ -68,11 +68,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numIntegers = (uint)data.Length;
 	s.AppendLine($"  Num Integers:  {numIntegers}");
 	array_output_count = 0;

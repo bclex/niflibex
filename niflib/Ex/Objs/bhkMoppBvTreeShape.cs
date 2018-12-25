@@ -19,29 +19,29 @@ public class bhkMoppBvTreeShape : bhkBvTreeShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMoppBvTreeShape", bhkBvTreeShape.TYPE);
 	/*! The shape. */
-	public bhkShape shape;
+	bhkShape shape;
 	/*! Garbage data from memory. Referred to as User Data, Shape Collection, and Code. */
-	public Array3<uint> unused;
+	Array3<uint> unused;
 	/*! Scale. */
-	public float shapeScale;
+	float shapeScale;
 	/*! Number of bytes for MOPP data. */
-	public uint moppDataSize;
+	uint moppDataSize;
 	/*!
 	 * Origin of the object in mopp coordinates. This is the minimum of all vertices in
 	 * the packed shape along each axis, minus 0.1.
 	 */
-	public Vector3 origin;
+	Vector3 origin;
 	/*!
 	 * The scaling factor to quantize the MOPP: the quantization factor is equal to
 	 * 256*256 divided by this number. In Oblivion files, scale is taken equal to
 	 * 256*256*254 / (size + 0.2) where size is the largest dimension of the bounding
 	 * box of the packed shape.
 	 */
-	public float scale;
+	float scale;
 	/*! Tells if MOPP Data was organized into smaller chunks (PS3) or not (PC) */
-	public MoppDataBuildType buildType;
+	MoppDataBuildType buildType;
 	/*! The tree of bounding volume data. */
-	public byte[] moppData;
+	byte[] moppData;
 
 	public bhkMoppBvTreeShape() {
 	shape = null;
@@ -118,11 +118,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shape:  {shape}");
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 3; i1++) {

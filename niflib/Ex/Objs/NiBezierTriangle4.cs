@@ -22,23 +22,23 @@ public class NiBezierTriangle4 : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBezierTriangle4", NiObject.TYPE);
 	/*! unknown */
-	public Array6<uint> unknown1;
+	Array6<uint> unknown1;
 	/*! unknown */
-	public ushort unknown2;
+	ushort unknown2;
 	/*! unknown */
-	public Matrix33 matrix;
+	Matrix33 matrix;
 	/*! unknown */
-	public Vector3 vector1;
+	Vector3 vector1;
 	/*! unknown */
-	public Vector3 vector2;
+	Vector3 vector2;
 	/*! unknown */
-	public Array4<short> unknown3;
+	Array4<short> unknown3;
 	/*! unknown */
-	public byte unknown4;
+	byte unknown4;
 	/*! unknown */
-	public uint unknown5;
+	uint unknown5;
 	/*! unknown */
-	public Array24<short> unknown6;
+	Array24<short> unknown6;
 
 	public NiBezierTriangle4() {
 	unknown2 = (ushort)0;
@@ -107,11 +107,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 6; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

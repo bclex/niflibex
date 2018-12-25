@@ -19,15 +19,15 @@ public class NiPSPlanarCollider : NiPSCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSPlanarCollider", NiPSCollider.TYPE);
 	/*!  */
-	public float width;
+	float width;
 	/*!  */
-	public float height;
+	float height;
 	/*!  */
-	public Vector3 xAxis;
+	Vector3 xAxis;
 	/*!  */
-	public Vector3 yAxis;
+	Vector3 yAxis;
 	/*!  */
-	public NiAVObject colliderObject;
+	NiAVObject colliderObject;
 
 	public NiPSPlanarCollider() {
 	width = 0.0f;
@@ -78,10 +78,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Width:  {width}");
 	s.AppendLine($"  Height:  {height}");
 	s.AppendLine($"  X Axis:  {xAxis}");

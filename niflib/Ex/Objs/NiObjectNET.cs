@@ -22,27 +22,27 @@ public class NiObjectNET : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiObjectNET", NiObject.TYPE);
 	/*! Configures the main shader path */
-	public BSLightingShaderPropertyShaderType skyrimShaderType;
+	BSLightingShaderPropertyShaderType skyrimShaderType;
 	/*! Name of this controllable object, used to refer to the object in .kf files. */
-	public IndexString name;
+	IndexString name;
 	/*! Extra data for pre-3.0 versions. */
-	public bool hasOldExtraData;
+	bool hasOldExtraData;
 	/*! (=NiStringExtraData) */
-	public IndexString oldExtraPropName;
+	IndexString oldExtraPropName;
 	/*! ref */
-	public uint oldExtraInternalId;
+	uint oldExtraInternalId;
 	/*! Extra string data. */
-	public IndexString oldExtraString;
+	IndexString oldExtraString;
 	/*! Always 0. */
-	public byte unknownByte;
+	byte unknownByte;
 	/*! Extra data object index. (The first in a chain) */
-	public NiExtraData extraData;
+	NiExtraData extraData;
 	/*! The number of Extra Data objects referenced through the list. */
-	public uint numExtraDataList;
+	uint numExtraDataList;
 	/*! List of extra data indices. */
-	public NiExtraData[] extraDataList;
+	NiExtraData[] extraDataList;
 	/*! Controller object index. (The first in a chain) */
-	public NiTimeController controller;
+	NiTimeController controller;
 
 	public NiObjectNET() {
 	skyrimShaderType = (BSLightingShaderPropertyShaderType)0;
@@ -145,11 +145,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numExtraDataList = (uint)extraDataList.Length;
 	if (IsDerivedType(BSLightingShaderProperty.TYPE)) {
 		s.AppendLine($"    Skyrim Shader Type:  {skyrimShaderType}");

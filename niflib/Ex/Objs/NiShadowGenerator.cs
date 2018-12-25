@@ -22,29 +22,29 @@ public class NiShadowGenerator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiShadowGenerator", NiObject.TYPE);
 	/*!  */
-	public IndexString name;
+	IndexString name;
 	/*!  */
-	public ushort flags;
+	ushort flags;
 	/*!  */
-	public uint numShadowCasters;
+	uint numShadowCasters;
 	/*!  */
-	public NiNode[] shadowCasters;
+	NiNode[] shadowCasters;
 	/*!  */
-	public uint numShadowReceivers;
+	uint numShadowReceivers;
 	/*!  */
-	public NiNode[] shadowReceivers;
+	NiNode[] shadowReceivers;
 	/*!  */
-	public NiDynamicEffect target;
+	NiDynamicEffect target;
 	/*!  */
-	public float depthBias;
+	float depthBias;
 	/*!  */
-	public ushort sizeHint;
+	ushort sizeHint;
 	/*!  */
-	public float nearClippingDistance;
+	float nearClippingDistance;
 	/*!  */
-	public float farClippingDistance;
+	float farClippingDistance;
 	/*!  */
-	public float directionalLightFrustumWidth;
+	float directionalLightFrustumWidth;
 
 	public NiShadowGenerator() {
 	flags = (ushort)0;
@@ -133,11 +133,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numShadowReceivers = (uint)shadowReceivers.Length;
 	numShadowCasters = (uint)shadowCasters.Length;
 	s.AppendLine($"  Name:  {name}");

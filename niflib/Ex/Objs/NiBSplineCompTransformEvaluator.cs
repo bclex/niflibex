@@ -19,17 +19,17 @@ public class NiBSplineCompTransformEvaluator : NiBSplineTransformEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompTransformEvaluator", NiBSplineTransformEvaluator.TYPE);
 	/*!  */
-	public float translationOffset;
+	float translationOffset;
 	/*!  */
-	public float translationHalfRange;
+	float translationHalfRange;
 	/*!  */
-	public float rotationOffset;
+	float rotationOffset;
 	/*!  */
-	public float rotationHalfRange;
+	float rotationHalfRange;
 	/*!  */
-	public float scaleOffset;
+	float scaleOffset;
 	/*!  */
-	public float scaleHalfRange;
+	float scaleHalfRange;
 
 	public NiBSplineCompTransformEvaluator() {
 	translationOffset = 3.402823466e+38f;
@@ -83,10 +83,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Translation Offset:  {translationOffset}");
 	s.AppendLine($"  Translation Half Range:  {translationHalfRange}");
 	s.AppendLine($"  Rotation Offset:  {rotationOffset}");

@@ -13,17 +13,17 @@ namespace Niflib {
 /*!  */
 public class BSGeometrySegmentSharedData {
 	/*!  */
-	public uint numSegments;
+	uint numSegments;
 	/*!  */
-	public uint totalSegments;
+	uint totalSegments;
 	/*!  */
-	public uint[] segmentStarts;
+	uint[] segmentStarts;
 	/*!  */
-	public BSGeometryPerSegmentSharedData[] perSegmentData;
+	BSGeometryPerSegmentSharedData[] perSegmentData;
 	/*!  */
-	public ushort ssfLength;
+	ushort ssfLength;
 	/*!  */
-	public byte[] ssfFile;
+	byte[] ssfFile;
 	//Constructor
 	public BSGeometrySegmentSharedData() { unchecked {
 	numSegments = (uint)0;

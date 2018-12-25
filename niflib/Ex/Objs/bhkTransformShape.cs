@@ -19,15 +19,15 @@ public class bhkTransformShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkTransformShape", bhkShape.TYPE);
 	/*! The shape that this object transforms. */
-	public bhkShape shape;
+	bhkShape shape;
 	/*! The material of the shape. */
-	public HavokMaterial material;
+	HavokMaterial material;
 	/*!  */
-	public float radius;
+	float radius;
 	/*! Garbage data from memory. */
-	public Array8<byte> unused;
+	Array8<byte> unused;
 	/*! A transform matrix. */
-	public Matrix44 transform;
+	Matrix44 transform;
 
 	public bhkTransformShape() {
 	shape = null;
@@ -103,11 +103,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shape:  {shape}");
 	s.AppendLine($"  Unknown Int:  {material.unknownInt}");
 	s.AppendLine($"  Material:  {material.material_ob}");

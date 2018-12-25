@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class NiPhysXJointLimit {
 	/*!  */
-	public Vector3 limitPlaneNormal;
+	Vector3 limitPlaneNormal;
 	/*!  */
-	public float limitPlaneD;
+	float limitPlaneD;
 	/*!  */
-	public float limitPlaneR;
+	float limitPlaneR;
 	//Constructor
 	public NiPhysXJointLimit() { unchecked {
 	limitPlaneD = 0.0f;

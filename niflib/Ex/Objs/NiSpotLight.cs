@@ -19,11 +19,11 @@ public class NiSpotLight : NiPointLight {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSpotLight", NiPointLight.TYPE);
 	/*!  */
-	public float outerSpotAngle;
+	float outerSpotAngle;
 	/*!  */
-	public float innerSpotAngle;
+	float innerSpotAngle;
 	/*! Describes the distribution of light. (see: glLight) */
-	public float exponent;
+	float exponent;
 
 	public NiSpotLight() {
 	outerSpotAngle = 0.0f;
@@ -72,10 +72,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Outer Spot Angle:  {outerSpotAngle}");
 	s.AppendLine($"  Inner Spot Angle:  {innerSpotAngle}");
 	s.AppendLine($"  Exponent:  {exponent}");

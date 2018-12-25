@@ -19,15 +19,15 @@ public class NiTriShapeData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriShapeData", NiTriBasedGeomData.TYPE);
 	/*! Num Triangles times 3. */
-	public uint numTrianglePoints;
+	uint numTrianglePoints;
 	/*! Do we have triangle data? */
-	public bool hasTriangles;
+	bool hasTriangles;
 	/*! Triangle data. */
-	public Triangle[] triangles;
+	Triangle[] triangles;
 	/*! Number of shared normals groups. */
-	public ushort numMatchGroups;
+	ushort numMatchGroups;
 	/*! The shared normals. */
-	public MatchGroup[] matchGroups;
+	MatchGroup[] matchGroups;
 
 	public NiTriShapeData() {
 	numTrianglePoints = (uint)0;
@@ -123,11 +123,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numMatchGroups = (ushort)matchGroups.Length;
 	s.AppendLine($"  Num Triangle Points:  {numTrianglePoints}");
 	s.AppendLine($"  Has Triangles:  {hasTriangles}");

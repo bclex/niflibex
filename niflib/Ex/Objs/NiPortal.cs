@@ -23,15 +23,15 @@ public class NiPortal : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPortal", NiAVObject.TYPE);
 	/*!  */
-	public ushort portalFlags;
+	ushort portalFlags;
 	/*! Unused in 20.x, possibly also 10.x. */
-	public ushort planeCount;
+	ushort planeCount;
 	/*!  */
-	public ushort numVertices;
+	ushort numVertices;
 	/*!  */
-	public Vector3[] vertices;
+	Vector3[] vertices;
 	/*! Root of the scenegraph which is to be seen through this portal. */
-	public NiNode adjoiner;
+	NiNode adjoiner;
 
 	public NiPortal() {
 	portalFlags = (ushort)0;
@@ -89,11 +89,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numVertices = (ushort)vertices.Length;
 	s.AppendLine($"  Portal Flags:  {portalFlags}");
 	s.AppendLine($"  Plane Count:  {planeCount}");

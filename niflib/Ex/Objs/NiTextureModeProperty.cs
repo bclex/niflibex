@@ -19,13 +19,13 @@ public class NiTextureModeProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureModeProperty", NiProperty.TYPE);
 	/*! Unknown. */
-	public Array3<uint> unknownInts;
+	Array3<uint> unknownInts;
 	/*! Unknown. Either 210 or 194. */
-	public short unknownShort;
+	short unknownShort;
 	/*! 0? */
-	public short ps2L;
+	short ps2L;
 	/*! -75? */
-	public short ps2K;
+	short ps2K;
 
 	public NiTextureModeProperty() {
 	unknownShort = (short)0;
@@ -88,11 +88,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 3; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

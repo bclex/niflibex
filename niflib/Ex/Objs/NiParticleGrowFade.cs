@@ -22,9 +22,9 @@ public class NiParticleGrowFade : NiParticleModifier {
 	 * The time from the beginning of the particle lifetime during which the particle
 	 * grows.
 	 */
-	public float grow;
+	float grow;
 	/*! The time from the end of the particle lifetime during which the particle fades. */
-	public float fade;
+	float fade;
 
 	public NiParticleGrowFade() {
 	grow = 0.0f;
@@ -66,10 +66,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Grow:  {grow}");
 	s.AppendLine($"  Fade:  {fade}");
 	return s.ToString();

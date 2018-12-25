@@ -19,20 +19,20 @@ public class BSShaderPPLightingProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderPPLightingProperty", BSShaderLightingProperty.TYPE);
 	/*! Texture Set */
-	public BSShaderTextureSet textureSet;
+	BSShaderTextureSet textureSet;
 	/*!
 	 * The amount of distortion. **Not based on physically accurate refractive index**
 	 * (0=none) (0-1)
 	 */
-	public float refractionStrength;
+	float refractionStrength;
 	/*! Rate of texture movement for refraction shader. */
-	public int refractionFirePeriod;
+	int refractionFirePeriod;
 	/*! The number of passes the parallax shader can apply. */
-	public float parallaxMaxPasses;
+	float parallaxMaxPasses;
 	/*! The strength of the parallax. */
-	public float parallaxScale;
+	float parallaxScale;
 	/*! Glow color and alpha */
-	public Color4 emissiveColor;
+	Color4 emissiveColor;
 
 	public BSShaderPPLightingProperty() {
 	textureSet = null;
@@ -99,10 +99,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Texture Set:  {textureSet}");
 	s.AppendLine($"  Refraction Strength:  {refractionStrength}");
 	s.AppendLine($"  Refraction Fire Period:  {refractionFirePeriod}");

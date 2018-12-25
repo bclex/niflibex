@@ -13,20 +13,20 @@ namespace Niflib {
 /*! Geometry morphing data component. */
 public class Morph {
 	/*! Name of the frame. */
-	public IndexString frameName;
+	IndexString frameName;
 	/*! The number of morph keys that follow. */
-	public uint numKeys;
+	uint numKeys;
 	/*!
 	 * Unlike most objects, the presense of this value is not conditional on there
 	 * being keys.
 	 */
-	public KeyType interpolation;
+	KeyType interpolation;
 	/*! The morph key frames. */
-	public Key<float>[] keys;
+	Key<float>[] keys;
 	/*!  */
-	public float legacyWeight;
+	float legacyWeight;
 	/*! Morph vectors. */
-	public Vector3[] vectors;
+	Vector3[] vectors;
 	//Constructor
 	public Morph() { unchecked {
 	numKeys = (uint)0;

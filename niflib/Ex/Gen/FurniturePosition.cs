@@ -13,25 +13,25 @@ namespace Niflib {
 /*! Bethesda Animation. Describes a furniture position? */
 public class FurniturePosition {
 	/*! Offset of furniture marker. */
-	public Vector3 offset;
+	Vector3 offset;
 	/*! Furniture marker orientation. */
-	public ushort orientation;
+	ushort orientation;
 	/*!
 	 * Refers to a furnituremarkerxx.nif file. Always seems to be the same as Position
 	 * Ref 2.
 	 */
-	public byte positionRef1;
+	byte positionRef1;
 	/*!
 	 * Refers to a furnituremarkerxx.nif file. Always seems to be the same as Position
 	 * Ref 1.
 	 */
-	public byte positionRef2;
+	byte positionRef2;
 	/*! Similar to Orientation, in float form. */
-	public float heading;
+	float heading;
 	/*! Unknown */
-	public AnimationType animationType;
+	AnimationType animationType;
 	/*! Unknown/unused in nif? */
-	public FurnitureEntryPoints entryProperties;
+	FurnitureEntryPoints entryProperties;
 	//Constructor
 	public FurniturePosition() { unchecked {
 	orientation = (ushort)0;

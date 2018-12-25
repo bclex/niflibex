@@ -22,25 +22,25 @@ public class NiPSSpawner : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSpawner", NiObject.TYPE);
 	/*!  */
-	public NiPSParticleSystem masterParticleSystem;
+	NiPSParticleSystem masterParticleSystem;
 	/*!  */
-	public float percentageSpawned;
+	float percentageSpawned;
 	/*!  */
-	public float spawnSpeedFactor;
+	float spawnSpeedFactor;
 	/*!  */
-	public float spawnSpeedFactorVar;
+	float spawnSpeedFactorVar;
 	/*!  */
-	public float spawnDirChaos;
+	float spawnDirChaos;
 	/*!  */
-	public float lifeSpan;
+	float lifeSpan;
 	/*!  */
-	public float lifeSpanVar;
+	float lifeSpanVar;
 	/*!  */
-	public ushort numSpawnGenerations;
+	ushort numSpawnGenerations;
 	/*!  */
-	public uint minToSpawn;
+	uint minToSpawn;
 	/*!  */
-	public uint maxToSpawn;
+	uint maxToSpawn;
 
 	public NiPSSpawner() {
 	masterParticleSystem = null;
@@ -116,10 +116,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Master Particle System:  {masterParticleSystem}");
 	s.AppendLine($"  Percentage Spawned:  {percentageSpawned}");
 	s.AppendLine($"  Spawn Speed Factor:  {spawnSpeedFactor}");

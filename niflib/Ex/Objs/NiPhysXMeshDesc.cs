@@ -19,21 +19,21 @@ public class NiPhysXMeshDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXMeshDesc", NiObject.TYPE);
 	/*!  */
-	public bool isConvex;
+	bool isConvex;
 	/*!  */
-	public IndexString meshName;
+	IndexString meshName;
 	/*!  */
-	public ByteArray meshData;
+	ByteArray meshData;
 	/*!  */
-	public ushort meshSize;
+	ushort meshSize;
 	/*!  */
-	public uint meshFlags;
+	uint meshFlags;
 	/*!  */
-	public uint meshPagingMode;
+	uint meshPagingMode;
 	/*!  */
-	public bool isHardware;
+	bool isHardware;
 	/*!  */
-	public byte flags;
+	byte flags;
 
 	public NiPhysXMeshDesc() {
 	isConvex = false;
@@ -127,11 +127,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	meshSize = (ushort)meshData.Length;
 	s.AppendLine($"  Is Convex:  {isConvex}");
 	s.AppendLine($"  Mesh Name:  {meshName}");

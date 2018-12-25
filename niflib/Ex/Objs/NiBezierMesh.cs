@@ -22,27 +22,27 @@ public class NiBezierMesh : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBezierMesh", NiAVObject.TYPE);
 	/*! references. */
-	public uint numBezierTriangles;
+	uint numBezierTriangles;
 	/*! unknown */
-	public NiBezierTriangle4[] bezierTriangle;
+	NiBezierTriangle4[] bezierTriangle;
 	/*! Unknown. */
-	public uint unknown3;
+	uint unknown3;
 	/*! Data count. */
-	public ushort count1;
+	ushort count1;
 	/*! Unknown. */
-	public ushort unknown4;
+	ushort unknown4;
 	/*! data. */
-	public Vector3[] points1;
+	Vector3[] points1;
 	/*! Unknown (illegal link?). */
-	public uint unknown5;
+	uint unknown5;
 	/*! data. */
-	public Array2<float>[] points2;
+	Array2<float>[] points2;
 	/*! unknown */
-	public uint unknown6;
+	uint unknown6;
 	/*! data count 2. */
-	public ushort count2;
+	ushort count2;
 	/*! data count. */
-	public Array4<ushort>[] data2;
+	Array4<ushort>[] data2;
 
 	public NiBezierMesh() {
 	numBezierTriangles = (uint)0;
@@ -140,11 +140,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	count2 = (ushort)data2.Length;
 	count1 = (ushort)points1.Length;
 	numBezierTriangles = (uint)bezierTriangle.Length;

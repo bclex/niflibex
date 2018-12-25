@@ -23,15 +23,15 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConvexVerticesShape", bhkConvexShape.TYPE);
 	/*!  */
-	public hkWorldObjCinfoProperty verticesProperty;
+	hkWorldObjCinfoProperty verticesProperty;
 	/*!  */
-	public hkWorldObjCinfoProperty normalsProperty;
+	hkWorldObjCinfoProperty normalsProperty;
 	/*! Number of vertices. */
-	public uint numVertices;
+	uint numVertices;
 	/*! Vertices. Fourth component is 0. Lexicographically sorted. */
-	public Vector4[] vertices;
+	Vector4[] vertices;
 	/*! The number of half spaces. */
-	public uint numNormals;
+	uint numNormals;
 	/*!
 	 * Half spaces as determined by the set of vertices above. First three components
 	 * define the normal pointing to the exterior, fourth component is the signed
@@ -39,7 +39,7 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	 * and n, where v is any vertex on the separating plane, and n is the normal.
 	 * Lexicographically sorted.
 	 */
-	public Vector4[] normals;
+	Vector4[] normals;
 
 	public bhkConvexVerticesShape() {
 	numVertices = (uint)0;
@@ -109,11 +109,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numNormals = (uint)normals.Length;
 	numVertices = (uint)vertices.Length;
 	s.AppendLine($"  Data:  {verticesProperty.data}");

@@ -19,15 +19,15 @@ public class BSShaderNoLightingProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderNoLightingProperty", BSShaderLightingProperty.TYPE);
 	/*! The texture glow map. */
-	public string fileName;
+	string fileName;
 	/*! At this cosine of angle falloff will be equal to Falloff Start Opacity */
-	public float falloffStartAngle;
+	float falloffStartAngle;
 	/*! At this cosine of angle falloff will be equal to Falloff Stop Opacity */
-	public float falloffStopAngle;
+	float falloffStopAngle;
 	/*! Alpha falloff multiplier at start angle */
-	public float falloffStartOpacity;
+	float falloffStartOpacity;
 	/*! Alpha falloff multiplier at end angle */
-	public float falloffStopOpacity;
+	float falloffStopOpacity;
 
 	public BSShaderNoLightingProperty() {
 	falloffStartAngle = 1.0f;
@@ -81,11 +81,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  File Name:  {fileName}");
 	s.AppendLine($"  Falloff Start Angle:  {falloffStartAngle}");
 	s.AppendLine($"  Falloff Stop Angle:  {falloffStopAngle}");

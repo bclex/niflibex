@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class NxJointDriveDesc {
 	/*!  */
-	public NxD6JointDriveType driveType;
+	NxD6JointDriveType driveType;
 	/*!  */
-	public float restitution;
+	float restitution;
 	/*!  */
-	public float spring;
+	float spring;
 	/*!  */
-	public float damping;
+	float damping;
 	//Constructor
 	public NxJointDriveDesc() { unchecked {
 	driveType = (NxD6JointDriveType)0;

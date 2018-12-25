@@ -19,13 +19,13 @@ public class NiNode : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiNode", NiAVObject.TYPE);
 	/*! The number of child objects. */
-	public uint numChildren;
+	uint numChildren;
 	/*! List of child node object indices. */
-	public NiAVObject[] children;
+	NiAVObject[] children;
 	/*! The number of references to effect objects that follow. */
-	public uint numEffects;
+	uint numEffects;
 	/*! List of node effects. ADynamicEffect? */
-	public NiDynamicEffect[] effects;
+	NiDynamicEffect[] effects;
 
 	public NiNode() {
 	numChildren = (uint)0;
@@ -90,11 +90,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numEffects = (uint)effects.Length;
 	numChildren = (uint)children.Length;
 	s.AppendLine($"  Num Children:  {numChildren}");

@@ -13,20 +13,20 @@ namespace Niflib {
 /*! NiSkinData::BoneData. Skinning data component. */
 public class BoneData {
 	/*! Offset of the skin from this bone in bind position. */
-	public NiTransform skinTransform;
+	NiTransform skinTransform;
 	/*!
 	 * Translation offset of a bounding sphere holding all vertices. (Note that its a
 	 * Sphere Containing Axis Aligned Box not a minimum volume Sphere)
 	 */
-	public Vector3 boundingSphereOffset;
+	Vector3 boundingSphereOffset;
 	/*! Radius for bounding sphere holding all vertices. */
-	public float boundingSphereRadius;
+	float boundingSphereRadius;
 	/*! Unknown, always 0? */
-	public Array13<short> unknown13Shorts;
+	Array13<short> unknown13Shorts;
 	/*! Number of weighted vertices. */
-	public ushort numVertices;
+	ushort numVertices;
 	/*! The vertex weights. */
-	public BoneVertData[] vertexWeights;
+	BoneVertData[] vertexWeights;
 	//Constructor
 	public BoneData() { unchecked {
 	boundingSphereRadius = 0.0f;

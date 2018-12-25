@@ -22,20 +22,20 @@ public class NiDynamicEffect : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDynamicEffect", NiAVObject.TYPE);
 	/*! If true, then the dynamic effect is applied to affected nodes during rendering. */
-	public bool switchState;
+	bool switchState;
 	/*!  */
-	public uint numAffectedNodes;
+	uint numAffectedNodes;
 	/*!
 	 * If a node appears in this list, then its entire subtree will be affected by the
 	 * effect.
 	 */
-	public NiNode[] affectedNodes;
+	NiNode[] affectedNodes;
 	/*!
 	 * As of 4.0 the pointer hash is no longer stored alongside each NiObject on disk,
 	 * yet this node list still refers to the pointer hashes. Cannot leave the type as
 	 * Ptr because the link will be invalid.
 	 */
-	public uint[] affectedNodePointers;
+	uint[] affectedNodePointers;
 
 	public NiDynamicEffect() {
 	switchState = 1;
@@ -124,11 +124,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numAffectedNodes = (uint)affectedNodes.Length;
 	s.AppendLine($"  Switch State:  {switchState}");
 	s.AppendLine($"  Num Affected Nodes:  {numAffectedNodes}");

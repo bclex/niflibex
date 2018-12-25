@@ -19,13 +19,13 @@ public class bhkMultiSphereShape : bhkSphereRepShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMultiSphereShape", bhkSphereRepShape.TYPE);
 	/*! Unknown. */
-	public float unknownFloat1;
+	float unknownFloat1;
 	/*! Unknown. */
-	public float unknownFloat2;
+	float unknownFloat2;
 	/*! The number of spheres in this multi sphere shape. */
-	public uint numSpheres;
+	uint numSpheres;
 	/*! This array holds the spheres which make up the multi sphere shape. */
-	public NiBound[] spheres;
+	NiBound[] spheres;
 
 	public bhkMultiSphereShape() {
 	unknownFloat1 = 0.0f;
@@ -80,11 +80,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSpheres = (uint)spheres.Length;
 	s.AppendLine($"  Unknown Float 1:  {unknownFloat1}");
 	s.AppendLine($"  Unknown Float 2:  {unknownFloat2}");

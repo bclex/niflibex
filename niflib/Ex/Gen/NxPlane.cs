@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class NxPlane {
 	/*!  */
-	public float val1;
+	float val1;
 	/*!  */
-	public Vector3 point1;
+	Vector3 point1;
 	//Constructor
 	public NxPlane() { unchecked {
 	val1 = 0.0f;

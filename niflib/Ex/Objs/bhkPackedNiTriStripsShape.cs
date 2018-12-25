@@ -19,25 +19,25 @@ public class bhkPackedNiTriStripsShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkPackedNiTriStripsShape", bhkShapeCollection.TYPE);
 	/*!  */
-	public ushort numSubShapes;
+	ushort numSubShapes;
 	/*!  */
-	public OblivionSubShape[] subShapes;
+	OblivionSubShape[] subShapes;
 	/*!  */
-	public uint userData;
+	uint userData;
 	/*! Looks like a memory pointer and may be garbage. */
-	public uint unused1;
+	uint unused1;
 	/*!  */
-	public float radius;
+	float radius;
 	/*! Looks like a memory pointer and may be garbage. */
-	public uint unused2;
+	uint unused2;
 	/*!  */
-	public Vector4 scale;
+	Vector4 scale;
 	/*! Same as radius */
-	public float radiusCopy;
+	float radiusCopy;
 	/*! Same as scale. */
-	public Vector4 scaleCopy;
+	Vector4 scaleCopy;
 	/*!  */
-	public hkPackedNiTriStripsData data;
+	hkPackedNiTriStripsData data;
 
 	public bhkPackedNiTriStripsShape() {
 	numSubShapes = (ushort)0;
@@ -160,11 +160,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSubShapes = (ushort)subShapes.Length;
 	s.AppendLine($"  Num Sub Shapes:  {numSubShapes}");
 	array_output_count = 0;

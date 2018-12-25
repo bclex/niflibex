@@ -19,29 +19,29 @@ public class NiPhysXPropDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXPropDesc", NiObject.TYPE);
 	/*!  */
-	public int numActors;
+	int numActors;
 	/*!  */
-	public NiPhysXActorDesc[] actors;
+	NiPhysXActorDesc[] actors;
 	/*!  */
-	public uint numJoints;
+	uint numJoints;
 	/*!  */
-	public NiPhysXJointDesc[] joints;
+	NiPhysXJointDesc[] joints;
 	/*!  */
-	public uint numClothes;
+	uint numClothes;
 	/*!  */
-	public NiObject[] clothes;
+	NiObject[] clothes;
 	/*!  */
-	public uint numMaterials;
+	uint numMaterials;
 	/*!  */
-	public PhysXMaterialRef[] materials;
+	PhysXMaterialRef[] materials;
 	/*!  */
-	public uint numStates;
+	uint numStates;
 	/*!  */
-	public uint numStateNames;
+	uint numStateNames;
 	/*!  */
-	public PhysXStateName[] stateNames;
+	PhysXStateName[] stateNames;
 	/*!  */
-	public byte flags;
+	byte flags;
 
 	public NiPhysXPropDesc() {
 	numActors = (int)0;
@@ -155,11 +155,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numStateNames = (uint)stateNames.Length;
 	numMaterials = (uint)materials.Length;
 	numClothes = (uint)clothes.Length;

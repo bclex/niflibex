@@ -23,11 +23,11 @@ public class NiVertWeightsExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiVertWeightsExtraData", NiExtraData.TYPE);
 	/*! Number of bytes in this data object. */
-	public uint numBytes;
+	uint numBytes;
 	/*! Number of vertices. */
-	public ushort numVertices;
+	ushort numVertices;
 	/*! The vertex weights. */
-	public float[] weight;
+	float[] weight;
 
 	public NiVertWeightsExtraData() {
 	numBytes = (uint)0;
@@ -77,11 +77,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numVertices = (ushort)weight.Length;
 	s.AppendLine($"  Num Bytes:  {numBytes}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");

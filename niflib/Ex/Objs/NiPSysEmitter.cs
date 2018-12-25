@@ -19,27 +19,27 @@ public class NiPSysEmitter : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysEmitter", NiPSysModifier.TYPE);
 	/*! Speed / Inertia of particle movement. */
-	public float speed;
+	float speed;
 	/*! Adds an amount of randomness to Speed. */
-	public float speedVariation;
+	float speedVariation;
 	/*! Declination / First axis. */
-	public float declination;
+	float declination;
 	/*! Declination randomness / First axis. */
-	public float declinationVariation;
+	float declinationVariation;
 	/*! Planar Angle / Second axis. */
-	public float planarAngle;
+	float planarAngle;
 	/*! Planar Angle randomness / Second axis . */
-	public float planarAngleVariation;
+	float planarAngleVariation;
 	/*! Defines color of a birthed particle. */
-	public Color4 initialColor;
+	Color4 initialColor;
 	/*! Size of a birthed particle. */
-	public float initialRadius;
+	float initialRadius;
 	/*! Particle Radius randomness. */
-	public float radiusVariation;
+	float radiusVariation;
 	/*! Duration until a particle dies. */
-	public float lifeSpan;
+	float lifeSpan;
 	/*! Adds randomness to Life Span. */
-	public float lifeSpanVariation;
+	float lifeSpanVariation;
 
 	public NiPSysEmitter() {
 	speed = 0.0f;
@@ -111,10 +111,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Speed:  {speed}");
 	s.AppendLine($"  Speed Variation:  {speedVariation}");
 	s.AppendLine($"  Declination:  {declination}");

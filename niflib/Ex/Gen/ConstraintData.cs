@@ -13,29 +13,29 @@ namespace Niflib {
 /*!  */
 public class ConstraintData {
 	/*! Type of constraint. */
-	public hkConstraintType type;
+	hkConstraintType type;
 	/*! Always 2 (Hardcoded). Number of bodies affected by this constraint. */
-	public uint numEntities2;
+	uint numEntities2;
 	/*! Usually NONE. The entity affected by this constraint. */
-	public bhkEntity entityA;
+	bhkEntity entityA;
 	/*! Usually NONE. The entity affected by this constraint. */
-	public bhkEntity entityB;
+	bhkEntity entityB;
 	/*! Usually 1. Higher values indicate higher priority of this constraint? */
-	public uint priority;
+	uint priority;
 	/*!  */
-	public BallAndSocketDescriptor ballAndSocket;
+	BallAndSocketDescriptor ballAndSocket;
 	/*!  */
-	public HingeDescriptor hinge;
+	HingeDescriptor hinge;
 	/*!  */
-	public LimitedHingeDescriptor limitedHinge;
+	LimitedHingeDescriptor limitedHinge;
 	/*!  */
-	public PrismaticDescriptor prismatic;
+	PrismaticDescriptor prismatic;
 	/*!  */
-	public RagdollDescriptor ragdoll;
+	RagdollDescriptor ragdoll;
 	/*!  */
-	public StiffSpringDescriptor stiffSpring;
+	StiffSpringDescriptor stiffSpring;
 	/*!  */
-	public MalleableDescriptor malleable;
+	MalleableDescriptor malleable;
 	//Constructor
 	public ConstraintData() { unchecked {
 	type = (hkConstraintType)0;

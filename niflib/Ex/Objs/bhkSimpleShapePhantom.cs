@@ -19,9 +19,9 @@ public class bhkSimpleShapePhantom : bhkShapePhantom {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkSimpleShapePhantom", bhkShapePhantom.TYPE);
 	/*! Garbage data from memory. */
-	public Array8<byte> unused2;
+	Array8<byte> unused2;
 	/*!  */
-	public Matrix44 transform;
+	Matrix44 transform;
 
 	public bhkSimpleShapePhantom() {
 	}
@@ -65,11 +65,11 @@ public class bhkSimpleShapePhantom : bhkShapePhantom {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		array_output_count = 0;
 		for (var i2 = 0; i2 < 8; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

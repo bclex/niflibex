@@ -22,29 +22,29 @@ public class NiAVObject : NiObjectNET {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiAVObject", NiObjectNET.TYPE);
 	/*! Basic flags for AV objects. For Bethesda streams above 26 only. */
-	public uint flags;
+	uint flags;
 	/*! The translation vector. */
-	public Vector3 translation;
+	Vector3 translation;
 	/*! The rotation part of the transformation matrix. */
-	public Matrix33 rotation;
+	Matrix33 rotation;
 	/*! Scaling part (only uniform scaling is supported). */
-	public float scale;
+	float scale;
 	/*! Unknown function. Always seems to be (0, 0, 0) */
-	public Vector3 velocity;
+	Vector3 velocity;
 	/*!  */
-	public uint numProperties;
+	uint numProperties;
 	/*! All rendering properties attached to this object. */
-	public NiProperty[] properties;
+	NiProperty[] properties;
 	/*! Always 2,0,2,0. */
-	public Array4<uint> unknown1;
+	Array4<uint> unknown1;
 	/*! 0 or 1. */
-	public byte unknown2;
+	byte unknown2;
 	/*!  */
-	public bool hasBoundingVolume;
+	bool hasBoundingVolume;
 	/*!  */
-	public BoundingVolume boundingVolume;
+	BoundingVolume boundingVolume;
 	/*!  */
-	public NiCollisionObject collisionObject;
+	NiCollisionObject collisionObject;
 
 	public NiAVObject() {
 	flags = (uint)14;
@@ -201,11 +201,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numProperties = (uint)properties.Length;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Translation:  {translation}");

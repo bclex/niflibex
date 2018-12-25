@@ -22,19 +22,19 @@ public class BSPSysSubTexModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysSubTexModifier", NiPSysModifier.TYPE);
 	/*! Starting frame/position on atlas */
-	public uint startFrame;
+	uint startFrame;
 	/*! Random chance to start on a different frame? */
-	public float startFrameFudge;
+	float startFrameFudge;
 	/*! Ending frame/position on atlas */
-	public float endFrame;
+	float endFrame;
 	/*! Frame to start looping */
-	public float loopStartFrame;
+	float loopStartFrame;
 	/*!  */
-	public float loopStartFrameFudge;
+	float loopStartFrameFudge;
 	/*!  */
-	public float frameCount;
+	float frameCount;
 	/*!  */
-	public float frameCountFudge;
+	float frameCountFudge;
 
 	public BSPSysSubTexModifier() {
 	startFrame = (uint)0;
@@ -91,10 +91,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Start Frame:  {startFrame}");
 	s.AppendLine($"  Start Frame Fudge:  {startFrameFudge}");
 	s.AppendLine($"  End Frame:  {endFrame}");

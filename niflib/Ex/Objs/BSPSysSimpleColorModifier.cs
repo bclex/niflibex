@@ -19,19 +19,19 @@ public class BSPSysSimpleColorModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysSimpleColorModifier", NiPSysModifier.TYPE);
 	/*!  */
-	public float fadeInPercent;
+	float fadeInPercent;
 	/*!  */
-	public float fadeOutPercent;
+	float fadeOutPercent;
 	/*!  */
-	public float color1EndPercent;
+	float color1EndPercent;
 	/*!  */
-	public float color1StartPercent;
+	float color1StartPercent;
 	/*!  */
-	public float color2EndPercent;
+	float color2EndPercent;
 	/*!  */
-	public float color2StartPercent;
+	float color2StartPercent;
 	/*!  */
-	public Array3<Color4> colors;
+	Array3<Color4> colors;
 
 	public BSPSysSimpleColorModifier() {
 	fadeInPercent = 0.0f;
@@ -91,11 +91,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Fade In Percent:  {fadeInPercent}");
 	s.AppendLine($"  Fade out Percent:  {fadeOutPercent}");
 	s.AppendLine($"  Color 1 End Percent:  {color1EndPercent}");

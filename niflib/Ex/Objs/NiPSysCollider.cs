@@ -19,19 +19,19 @@ public class NiPSysCollider : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysCollider", NiObject.TYPE);
 	/*! Amount of bounce for the collider. */
-	public float bounce;
+	float bounce;
 	/*! Spawn particles on impact? */
-	public bool spawnOnCollide;
+	bool spawnOnCollide;
 	/*! Kill particles on impact? */
-	public bool dieOnCollide;
+	bool dieOnCollide;
 	/*! Spawner to use for the collider. */
-	public NiPSysSpawnModifier spawnModifier;
+	NiPSysSpawnModifier spawnModifier;
 	/*! Link to parent. */
-	public NiPSysColliderManager parent;
+	NiPSysColliderManager parent;
 	/*! The next collider. */
-	public NiPSysCollider nextCollider;
+	NiPSysCollider nextCollider;
 	/*! The object whose position and orientation are the basis of the collider. */
-	public NiAVObject colliderObject;
+	NiAVObject colliderObject;
 
 	public NiPSysCollider() {
 	bounce = 1.0f;
@@ -93,10 +93,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Bounce:  {bounce}");
 	s.AppendLine($"  Spawn on Collide:  {spawnOnCollide}");
 	s.AppendLine($"  Die on Collide:  {dieOnCollide}");

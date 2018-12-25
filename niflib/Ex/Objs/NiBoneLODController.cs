@@ -23,25 +23,25 @@ public class NiBoneLODController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBoneLODController", NiTimeController.TYPE);
 	/*! Unknown. */
-	public uint lod;
+	uint lod;
 	/*! Number of LODs. */
-	public uint numLods;
+	uint numLods;
 	/*! Number of node arrays. */
-	public uint numNodeGroups;
+	uint numNodeGroups;
 	/*! A list of node sets (each set a sequence of bones). */
-	public NodeSet[] nodeGroups;
+	NodeSet[] nodeGroups;
 	/*! Number of shape groups. */
-	public uint numShapeGroups;
+	uint numShapeGroups;
 	/*! List of shape groups. */
-	public SkinInfoSet[] shapeGroups1;
+	SkinInfoSet[] shapeGroups1;
 	/*! The size of the second list of shape groups. */
-	public uint numShapeGroups2;
+	uint numShapeGroups2;
 	/*! Group of NiTriShape indices. */
-	public NiTriBasedGeom[] shapeGroups2;
+	NiTriBasedGeom[] shapeGroups2;
 	/*! Unknown. */
-	public int unknownInt2;
+	int unknownInt2;
 	/*! Unknown. */
-	public int unknownInt3;
+	int unknownInt3;
 
 	public NiBoneLODController() {
 	lod = (uint)0;
@@ -212,11 +212,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numShapeGroups2 = (uint)shapeGroups2.Length;
 	numShapeGroups = (uint)shapeGroups1.Length;
 	numLods = (uint)nodeGroups.Length;

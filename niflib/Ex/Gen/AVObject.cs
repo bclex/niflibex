@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Used in NiDefaultAVObjectPalette. */
 public class AVObject {
 	/*! Object name. */
-	public string name;
+	string name;
 	/*! Object reference. */
-	public NiAVObject avObject;
+	NiAVObject avObject;
 	//Constructor
 	public AVObject() { unchecked {
 	avObject = null;

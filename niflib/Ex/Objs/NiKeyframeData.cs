@@ -26,22 +26,22 @@ public class NiKeyframeData : NiObject {
 	 * then this *must* be set to 1, and in this case the actual number of keys is
 	 * stored in the XYZ Rotations field.
 	 */
-	public uint numRotationKeys;
+	uint numRotationKeys;
 	/*!
 	 * The type of interpolation to use for rotation.  Can also be 4 to indicate that
 	 * separate X, Y, and Z values are used for the rotation instead of Quaternions.
 	 */
-	public KeyType rotationType;
+	KeyType rotationType;
 	/*! The rotation keys if Quaternion rotation is used. */
-	public Key<Quaternion>[] quaternionKeys;
+	Key<Quaternion>[] quaternionKeys;
 	/*!  */
-	public float order;
+	float order;
 	/*! Individual arrays of keys for rotating X, Y, and Z individually. */
-	public Array3<KeyGroup<float>> xyzRotations;
+	Array3<KeyGroup<float>> xyzRotations;
 	/*! Translation keys. */
-	public KeyGroup<Vector3> translations;
+	KeyGroup<Vector3> translations;
 	/*! Scale keys. */
-	public KeyGroup<float> scales;
+	KeyGroup<float> scales;
 
 	public NiKeyframeData() {
 	numRotationKeys = (uint)0;
@@ -165,11 +165,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Num Rotation Keys:  {numRotationKeys}");
 	if ((numRotationKeys != 0)) {
 		s.AppendLine($"    Rotation Type:  {rotationType}");

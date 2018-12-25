@@ -22,21 +22,21 @@ public class NiGeomMorpherController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGeomMorpherController", NiInterpController.TYPE);
 	/*! 1 = UPDATE NORMALS */
-	public ushort extraFlags;
+	ushort extraFlags;
 	/*! Geometry morphing data index. */
-	public NiMorphData data;
+	NiMorphData data;
 	/*!  */
-	public byte alwaysUpdate;
+	byte alwaysUpdate;
 	/*!  */
-	public uint numInterpolators;
+	uint numInterpolators;
 	/*!  */
-	public NiInterpolator[] interpolators;
+	NiInterpolator[] interpolators;
 	/*!  */
-	public MorphWeight[] interpolatorWeights;
+	MorphWeight[] interpolatorWeights;
 	/*!  */
-	public uint numUnknownInts;
+	uint numUnknownInts;
 	/*! Unknown. */
-	public uint[] unknownInts;
+	uint[] unknownInts;
 
 	public NiGeomMorpherController() {
 	extraFlags = (ushort)0;
@@ -140,11 +140,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numUnknownInts = (uint)unknownInts.Length;
 	numInterpolators = (uint)interpolators.Length;
 	s.AppendLine($"  Extra Flags:  {extraFlags}");

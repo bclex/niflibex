@@ -20,7 +20,7 @@ public enum ApplyMode : uint {
 static partial class Nif { //--ApplyMode--//
 public static void NifStream(out ApplyMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ApplyMode)temp; }
 public static void NifStream(ApplyMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ApplyMode val) { switch (val) {
+public static string AsString(ApplyMode val) { switch (val) {
 	case ApplyMode.APPLY_REPLACE: return "APPLY_REPLACE";
 	case ApplyMode.APPLY_DECAL: return "APPLY_DECAL";
 	case ApplyMode.APPLY_MODULATE: return "APPLY_MODULATE";
@@ -47,7 +47,7 @@ public enum TexType : uint {
 static partial class Nif { //--TexType--//
 public static void NifStream(out TexType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TexType)temp; }
 public static void NifStream(TexType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TexType val) { switch (val) {
+public static string AsString(TexType val) { switch (val) {
 	case TexType.BASE_MAP: return "BASE_MAP";
 	case TexType.DARK_MAP: return "DARK_MAP";
 	case TexType.DETAIL_MAP: return "DETAIL_MAP";
@@ -77,7 +77,7 @@ public enum KeyType : uint {
 static partial class Nif { //--KeyType--//
 public static void NifStream(out KeyType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (KeyType)temp; }
 public static void NifStream(KeyType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(KeyType val) { switch (val) {
+public static string AsString(KeyType val) { switch (val) {
 	case KeyType.LINEAR_KEY: return "LINEAR_KEY";
 	case KeyType.QUADRATIC_KEY: return "QUADRATIC_KEY";
 	case KeyType.TBC_KEY: return "TBC_KEY";
@@ -124,7 +124,7 @@ public enum OblivionHavokMaterial : uint {
 static partial class Nif { //--OblivionHavokMaterial--//
 public static void NifStream(out OblivionHavokMaterial val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (OblivionHavokMaterial)temp; }
 public static void NifStream(OblivionHavokMaterial val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(OblivionHavokMaterial val) { switch (val) {
+public static string AsString(OblivionHavokMaterial val) { switch (val) {
 	case OblivionHavokMaterial.OB_HAV_MAT_STONE: return "OB_HAV_MAT_STONE";
 	case OblivionHavokMaterial.OB_HAV_MAT_CLOTH: return "OB_HAV_MAT_CLOTH";
 	case OblivionHavokMaterial.OB_HAV_MAT_DIRT: return "OB_HAV_MAT_DIRT";
@@ -297,7 +297,7 @@ public enum Fallout3HavokMaterial : uint {
 static partial class Nif { //--Fallout3HavokMaterial--//
 public static void NifStream(out Fallout3HavokMaterial val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (Fallout3HavokMaterial)temp; }
 public static void NifStream(Fallout3HavokMaterial val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(Fallout3HavokMaterial val) { switch (val) {
+public static string AsString(Fallout3HavokMaterial val) { switch (val) {
 	case Fallout3HavokMaterial.FO_HAV_MAT_STONE: return "FO_HAV_MAT_STONE";
 	case Fallout3HavokMaterial.FO_HAV_MAT_CLOTH: return "FO_HAV_MAT_CLOTH";
 	case Fallout3HavokMaterial.FO_HAV_MAT_DIRT: return "FO_HAV_MAT_DIRT";
@@ -496,7 +496,7 @@ public enum SkyrimHavokMaterial : uint {
 static partial class Nif { //--SkyrimHavokMaterial--//
 public static void NifStream(out SkyrimHavokMaterial val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SkyrimHavokMaterial)temp; }
 public static void NifStream(SkyrimHavokMaterial val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SkyrimHavokMaterial val) { switch (val) {
+public static string AsString(SkyrimHavokMaterial val) { switch (val) {
 	case SkyrimHavokMaterial.SKY_HAV_MAT_BROKEN_STONE: return "SKY_HAV_MAT_BROKEN_STONE";
 	case SkyrimHavokMaterial.SKY_HAV_MAT_LIGHT_WOOD: return "SKY_HAV_MAT_LIGHT_WOOD";
 	case SkyrimHavokMaterial.SKY_HAV_MAT_SNOW: return "SKY_HAV_MAT_SNOW";
@@ -625,7 +625,7 @@ public enum OblivionLayer : uint {
 static partial class Nif { //--OblivionLayer--//
 public static void NifStream(out OblivionLayer val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (OblivionLayer)temp; }
 public static void NifStream(OblivionLayer val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(OblivionLayer val) { switch (val) {
+public static string AsString(OblivionLayer val) { switch (val) {
 	case OblivionLayer.OL_UNIDENTIFIED: return "OL_UNIDENTIFIED";
 	case OblivionLayer.OL_STATIC: return "OL_STATIC";
 	case OblivionLayer.OL_ANIM_STATIC: return "OL_ANIM_STATIC";
@@ -740,7 +740,7 @@ public enum Fallout3Layer : uint {
 static partial class Nif { //--Fallout3Layer--//
 public static void NifStream(out Fallout3Layer val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (Fallout3Layer)temp; }
 public static void NifStream(Fallout3Layer val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(Fallout3Layer val) { switch (val) {
+public static string AsString(Fallout3Layer val) { switch (val) {
 	case Fallout3Layer.FOL_UNIDENTIFIED: return "FOL_UNIDENTIFIED";
 	case Fallout3Layer.FOL_STATIC: return "FOL_STATIC";
 	case Fallout3Layer.FOL_ANIM_STATIC: return "FOL_ANIM_STATIC";
@@ -842,7 +842,7 @@ public enum SkyrimLayer : uint {
 static partial class Nif { //--SkyrimLayer--//
 public static void NifStream(out SkyrimLayer val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (SkyrimLayer)temp; }
 public static void NifStream(SkyrimLayer val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(SkyrimLayer val) { switch (val) {
+public static string AsString(SkyrimLayer val) { switch (val) {
 	case SkyrimLayer.SKYL_UNIDENTIFIED: return "SKYL_UNIDENTIFIED";
 	case SkyrimLayer.SKYL_STATIC: return "SKYL_STATIC";
 	case SkyrimLayer.SKYL_ANIMSTATIC: return "SKYL_ANIMSTATIC";
@@ -907,7 +907,7 @@ public enum MoppDataBuildType : uint {
 static partial class Nif { //--MoppDataBuildType--//
 public static void NifStream(out MoppDataBuildType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (MoppDataBuildType)temp; }
 public static void NifStream(MoppDataBuildType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(MoppDataBuildType val) { switch (val) {
+public static string AsString(MoppDataBuildType val) { switch (val) {
 	case MoppDataBuildType.BUILT_WITH_CHUNK_SUBDIVISION: return "BUILT_WITH_CHUNK_SUBDIVISION";
 	case MoppDataBuildType.BUILT_WITHOUT_CHUNK_SUBDIVISION: return "BUILT_WITHOUT_CHUNK_SUBDIVISION";
 	case MoppDataBuildType.BUILD_NOT_SET: return "BUILD_NOT_SET";
@@ -926,7 +926,7 @@ public enum PlatformID : uint {
 static partial class Nif { //--PlatformID--//
 public static void NifStream(out PlatformID val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PlatformID)temp; }
 public static void NifStream(PlatformID val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PlatformID val) { switch (val) {
+public static string AsString(PlatformID val) { switch (val) {
 	case PlatformID.PLATFORM_ANY: return "PLATFORM_ANY";
 	case PlatformID.PLATFORM_XENON: return "PLATFORM_XENON";
 	case PlatformID.PLATFORM_PS3: return "PLATFORM_PS3";
@@ -949,7 +949,7 @@ public enum RendererID : uint {
 static partial class Nif { //--RendererID--//
 public static void NifStream(out RendererID val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (RendererID)temp; }
 public static void NifStream(RendererID val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(RendererID val) { switch (val) {
+public static string AsString(RendererID val) { switch (val) {
 	case RendererID.RENDERER_XBOX360: return "RENDERER_XBOX360";
 	case RendererID.RENDERER_PS3: return "RENDERER_PS3";
 	case RendererID.RENDERER_DX9: return "RENDERER_DX9";
@@ -983,7 +983,7 @@ public enum PixelFormat : uint {
 static partial class Nif { //--PixelFormat--//
 public static void NifStream(out PixelFormat val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PixelFormat)temp; }
 public static void NifStream(PixelFormat val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PixelFormat val) { switch (val) {
+public static string AsString(PixelFormat val) { switch (val) {
 	case PixelFormat.PX_FMT_RGB: return "PX_FMT_RGB";
 	case PixelFormat.PX_FMT_RGBA: return "PX_FMT_RGBA";
 	case PixelFormat.PX_FMT_PAL: return "PX_FMT_PAL";
@@ -1017,7 +1017,7 @@ public enum PixelTiling : uint {
 static partial class Nif { //--PixelTiling--//
 public static void NifStream(out PixelTiling val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PixelTiling)temp; }
 public static void NifStream(PixelTiling val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PixelTiling val) { switch (val) {
+public static string AsString(PixelTiling val) { switch (val) {
 	case PixelTiling.PX_TILE_NONE: return "PX_TILE_NONE";
 	case PixelTiling.PX_TILE_XENON: return "PX_TILE_XENON";
 	case PixelTiling.PX_TILE_WII: return "PX_TILE_WII";
@@ -1051,7 +1051,7 @@ public enum PixelComponent : uint {
 static partial class Nif { //--PixelComponent--//
 public static void NifStream(out PixelComponent val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PixelComponent)temp; }
 public static void NifStream(PixelComponent val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PixelComponent val) { switch (val) {
+public static string AsString(PixelComponent val) { switch (val) {
 	case PixelComponent.PX_COMP_RED: return "PX_COMP_RED";
 	case PixelComponent.PX_COMP_GREEN: return "PX_COMP_GREEN";
 	case PixelComponent.PX_COMP_BLUE: return "PX_COMP_BLUE";
@@ -1088,7 +1088,7 @@ public enum PixelRepresentation : uint {
 static partial class Nif { //--PixelRepresentation--//
 public static void NifStream(out PixelRepresentation val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PixelRepresentation)temp; }
 public static void NifStream(PixelRepresentation val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PixelRepresentation val) { switch (val) {
+public static string AsString(PixelRepresentation val) { switch (val) {
 	case PixelRepresentation.PX_REP_NORM_INT: return "PX_REP_NORM_INT";
 	case PixelRepresentation.PX_REP_HALF: return "PX_REP_HALF";
 	case PixelRepresentation.PX_REP_FLOAT: return "PX_REP_FLOAT";
@@ -1122,7 +1122,7 @@ public enum PixelLayout : uint {
 static partial class Nif { //--PixelLayout--//
 public static void NifStream(out PixelLayout val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PixelLayout)temp; }
 public static void NifStream(PixelLayout val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PixelLayout val) { switch (val) {
+public static string AsString(PixelLayout val) { switch (val) {
 	case PixelLayout.PX_LAY_PALETTIZED_8: return "PX_LAY_PALETTIZED_8";
 	case PixelLayout.PX_LAY_HIGH_COLOR_16: return "PX_LAY_HIGH_COLOR_16";
 	case PixelLayout.PX_LAY_TRUE_COLOR_32: return "PX_LAY_TRUE_COLOR_32";
@@ -1152,7 +1152,7 @@ public enum MipMapFormat : uint {
 static partial class Nif { //--MipMapFormat--//
 public static void NifStream(out MipMapFormat val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (MipMapFormat)temp; }
 public static void NifStream(MipMapFormat val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(MipMapFormat val) { switch (val) {
+public static string AsString(MipMapFormat val) { switch (val) {
 	case MipMapFormat.MIP_FMT_NO: return "MIP_FMT_NO";
 	case MipMapFormat.MIP_FMT_YES: return "MIP_FMT_YES";
 	case MipMapFormat.MIP_FMT_DEFAULT: return "MIP_FMT_DEFAULT";
@@ -1169,7 +1169,7 @@ public enum AlphaFormat : uint {
 static partial class Nif { //--AlphaFormat--//
 public static void NifStream(out AlphaFormat val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (AlphaFormat)temp; }
 public static void NifStream(AlphaFormat val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(AlphaFormat val) { switch (val) {
+public static string AsString(AlphaFormat val) { switch (val) {
 	case AlphaFormat.ALPHA_NONE: return "ALPHA_NONE";
 	case AlphaFormat.ALPHA_BINARY: return "ALPHA_BINARY";
 	case AlphaFormat.ALPHA_SMOOTH: return "ALPHA_SMOOTH";
@@ -1190,7 +1190,7 @@ public enum TexClampMode : uint {
 static partial class Nif { //--TexClampMode--//
 public static void NifStream(out TexClampMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TexClampMode)temp; }
 public static void NifStream(TexClampMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TexClampMode val) { switch (val) {
+public static string AsString(TexClampMode val) { switch (val) {
 	case TexClampMode.CLAMP_S_CLAMP_T: return "CLAMP_S_CLAMP_T";
 	case TexClampMode.CLAMP_S_WRAP_T: return "CLAMP_S_WRAP_T";
 	case TexClampMode.WRAP_S_CLAMP_T: return "WRAP_S_CLAMP_T";
@@ -1214,7 +1214,7 @@ public enum TexFilterMode : uint {
 static partial class Nif { //--TexFilterMode--//
 public static void NifStream(out TexFilterMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TexFilterMode)temp; }
 public static void NifStream(TexFilterMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TexFilterMode val) { switch (val) {
+public static string AsString(TexFilterMode val) { switch (val) {
 	case TexFilterMode.FILTER_NEAREST: return "FILTER_NEAREST";
 	case TexFilterMode.FILTER_BILERP: return "FILTER_BILERP";
 	case TexFilterMode.FILTER_TRILERP: return "FILTER_TRILERP";
@@ -1234,7 +1234,7 @@ public enum VertMode : uint {
 static partial class Nif { //--VertMode--//
 public static void NifStream(out VertMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (VertMode)temp; }
 public static void NifStream(VertMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(VertMode val) { switch (val) {
+public static string AsString(VertMode val) { switch (val) {
 	case VertMode.VERT_MODE_SRC_IGNORE: return "VERT_MODE_SRC_IGNORE";
 	case VertMode.VERT_MODE_SRC_EMISSIVE: return "VERT_MODE_SRC_EMISSIVE";
 	case VertMode.VERT_MODE_SRC_AMB_DIF: return "VERT_MODE_SRC_AMB_DIF";
@@ -1252,7 +1252,7 @@ public enum LightMode : uint {
 static partial class Nif { //--LightMode--//
 public static void NifStream(out LightMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (LightMode)temp; }
 public static void NifStream(LightMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(LightMode val) { switch (val) {
+public static string AsString(LightMode val) { switch (val) {
 	case LightMode.LIGHT_MODE_EMISSIVE: return "LIGHT_MODE_EMISSIVE";
 	case LightMode.LIGHT_MODE_EMI_AMB_DIF: return "LIGHT_MODE_EMI_AMB_DIF";
 	default: return $"Invalid Value! - {val}";
@@ -1267,7 +1267,7 @@ public enum CycleType : uint {
 static partial class Nif { //--CycleType--//
 public static void NifStream(out CycleType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (CycleType)temp; }
 public static void NifStream(CycleType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(CycleType val) { switch (val) {
+public static string AsString(CycleType val) { switch (val) {
 	case CycleType.CYCLE_LOOP: return "CYCLE_LOOP";
 	case CycleType.CYCLE_REVERSE: return "CYCLE_REVERSE";
 	case CycleType.CYCLE_CLAMP: return "CYCLE_CLAMP";
@@ -1282,7 +1282,7 @@ public enum FieldType : uint {
 static partial class Nif { //--FieldType--//
 public static void NifStream(out FieldType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (FieldType)temp; }
 public static void NifStream(FieldType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(FieldType val) { switch (val) {
+public static string AsString(FieldType val) { switch (val) {
 	case FieldType.FIELD_WIND: return "FIELD_WIND";
 	case FieldType.FIELD_POINT: return "FIELD_POINT";
 	default: return $"Invalid Value! - {val}";
@@ -1305,7 +1305,7 @@ public enum BillboardMode : uint {
 static partial class Nif { //--BillboardMode--//
 public static void NifStream(out BillboardMode val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (BillboardMode)temp; }
 public static void NifStream(BillboardMode val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(BillboardMode val) { switch (val) {
+public static string AsString(BillboardMode val) { switch (val) {
 	case BillboardMode.ALWAYS_FACE_CAMERA: return "ALWAYS_FACE_CAMERA";
 	case BillboardMode.ROTATE_ABOUT_UP: return "ROTATE_ABOUT_UP";
 	case BillboardMode.RIGID_FACE_CAMERA: return "RIGID_FACE_CAMERA";
@@ -1330,7 +1330,7 @@ public enum StencilCompareMode : uint {
 static partial class Nif { //--StencilCompareMode--//
 public static void NifStream(out StencilCompareMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (StencilCompareMode)temp; }
 public static void NifStream(StencilCompareMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(StencilCompareMode val) { switch (val) {
+public static string AsString(StencilCompareMode val) { switch (val) {
 	case StencilCompareMode.TEST_NEVER: return "TEST_NEVER";
 	case StencilCompareMode.TEST_LESS: return "TEST_LESS";
 	case StencilCompareMode.TEST_EQUAL: return "TEST_EQUAL";
@@ -1357,7 +1357,7 @@ public enum StencilAction : uint {
 static partial class Nif { //--StencilAction--//
 public static void NifStream(out StencilAction val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (StencilAction)temp; }
 public static void NifStream(StencilAction val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(StencilAction val) { switch (val) {
+public static string AsString(StencilAction val) { switch (val) {
 	case StencilAction.ACTION_KEEP: return "ACTION_KEEP";
 	case StencilAction.ACTION_ZERO: return "ACTION_ZERO";
 	case StencilAction.ACTION_REPLACE: return "ACTION_REPLACE";
@@ -1377,7 +1377,7 @@ public enum StencilDrawMode : uint {
 static partial class Nif { //--StencilDrawMode--//
 public static void NifStream(out StencilDrawMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (StencilDrawMode)temp; }
 public static void NifStream(StencilDrawMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(StencilDrawMode val) { switch (val) {
+public static string AsString(StencilDrawMode val) { switch (val) {
 	case StencilDrawMode.DRAW_CCW_OR_BOTH: return "DRAW_CCW_OR_BOTH";
 	case StencilDrawMode.DRAW_CCW: return "DRAW_CCW";
 	case StencilDrawMode.DRAW_CW: return "DRAW_CW";
@@ -1402,7 +1402,7 @@ public enum ZCompareMode : uint {
 static partial class Nif { //--ZCompareMode--//
 public static void NifStream(out ZCompareMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ZCompareMode)temp; }
 public static void NifStream(ZCompareMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ZCompareMode val) { switch (val) {
+public static string AsString(ZCompareMode val) { switch (val) {
 	case ZCompareMode.ZCOMP_ALWAYS: return "ZCOMP_ALWAYS";
 	case ZCompareMode.ZCOMP_LESS: return "ZCOMP_LESS";
 	case ZCompareMode.ZCOMP_EQUAL: return "ZCOMP_EQUAL";
@@ -1433,7 +1433,7 @@ public enum hkMotionType : uint {
 static partial class Nif { //--hkMotionType--//
 public static void NifStream(out hkMotionType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (hkMotionType)temp; }
 public static void NifStream(hkMotionType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(hkMotionType val) { switch (val) {
+public static string AsString(hkMotionType val) { switch (val) {
 	case hkMotionType.MO_SYS_INVALID: return "MO_SYS_INVALID";
 	case hkMotionType.MO_SYS_DYNAMIC: return "MO_SYS_DYNAMIC";
 	case hkMotionType.MO_SYS_SPHERE_INERTIA: return "MO_SYS_SPHERE_INERTIA";
@@ -1460,7 +1460,7 @@ public enum hkDeactivatorType : uint {
 static partial class Nif { //--hkDeactivatorType--//
 public static void NifStream(out hkDeactivatorType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (hkDeactivatorType)temp; }
 public static void NifStream(hkDeactivatorType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(hkDeactivatorType val) { switch (val) {
+public static string AsString(hkDeactivatorType val) { switch (val) {
 	case hkDeactivatorType.DEACTIVATOR_INVALID: return "DEACTIVATOR_INVALID";
 	case hkDeactivatorType.DEACTIVATOR_NEVER: return "DEACTIVATOR_NEVER";
 	case hkDeactivatorType.DEACTIVATOR_SPATIAL: return "DEACTIVATOR_SPATIAL";
@@ -1485,7 +1485,7 @@ public enum hkSolverDeactivation : uint {
 static partial class Nif { //--hkSolverDeactivation--//
 public static void NifStream(out hkSolverDeactivation val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (hkSolverDeactivation)temp; }
 public static void NifStream(hkSolverDeactivation val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(hkSolverDeactivation val) { switch (val) {
+public static string AsString(hkSolverDeactivation val) { switch (val) {
 	case hkSolverDeactivation.SOLVER_DEACTIVATION_INVALID: return "SOLVER_DEACTIVATION_INVALID";
 	case hkSolverDeactivation.SOLVER_DEACTIVATION_OFF: return "SOLVER_DEACTIVATION_OFF";
 	case hkSolverDeactivation.SOLVER_DEACTIVATION_LOW: return "SOLVER_DEACTIVATION_LOW";
@@ -1523,7 +1523,7 @@ public enum hkQualityType : uint {
 static partial class Nif { //--hkQualityType--//
 public static void NifStream(out hkQualityType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (hkQualityType)temp; }
 public static void NifStream(hkQualityType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(hkQualityType val) { switch (val) {
+public static string AsString(hkQualityType val) { switch (val) {
 	case hkQualityType.MO_QUAL_INVALID: return "MO_QUAL_INVALID";
 	case hkQualityType.MO_QUAL_FIXED: return "MO_QUAL_FIXED";
 	case hkQualityType.MO_QUAL_KEYFRAMED: return "MO_QUAL_KEYFRAMED";
@@ -1546,7 +1546,7 @@ public enum ForceType : uint {
 static partial class Nif { //--ForceType--//
 public static void NifStream(out ForceType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ForceType)temp; }
 public static void NifStream(ForceType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ForceType val) { switch (val) {
+public static string AsString(ForceType val) { switch (val) {
 	case ForceType.FORCE_PLANAR: return "FORCE_PLANAR";
 	case ForceType.FORCE_SPHERICAL: return "FORCE_SPHERICAL";
 	case ForceType.FORCE_UNKNOWN: return "FORCE_UNKNOWN";
@@ -1567,7 +1567,7 @@ public enum TransformMember : uint {
 static partial class Nif { //--TransformMember--//
 public static void NifStream(out TransformMember val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TransformMember)temp; }
 public static void NifStream(TransformMember val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TransformMember val) { switch (val) {
+public static string AsString(TransformMember val) { switch (val) {
 	case TransformMember.TT_TRANSLATE_U: return "TT_TRANSLATE_U";
 	case TransformMember.TT_TRANSLATE_V: return "TT_TRANSLATE_V";
 	case TransformMember.TT_ROTATE: return "TT_ROTATE";
@@ -1585,7 +1585,7 @@ public enum DecayType : uint {
 static partial class Nif { //--DecayType--//
 public static void NifStream(out DecayType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (DecayType)temp; }
 public static void NifStream(DecayType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(DecayType val) { switch (val) {
+public static string AsString(DecayType val) { switch (val) {
 	case DecayType.DECAY_NONE: return "DECAY_NONE";
 	case DecayType.DECAY_LINEAR: return "DECAY_LINEAR";
 	case DecayType.DECAY_EXPONENTIAL: return "DECAY_EXPONENTIAL";
@@ -1601,7 +1601,7 @@ public enum SymmetryType : uint {
 static partial class Nif { //--SymmetryType--//
 public static void NifStream(out SymmetryType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SymmetryType)temp; }
 public static void NifStream(SymmetryType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SymmetryType val) { switch (val) {
+public static string AsString(SymmetryType val) { switch (val) {
 	case SymmetryType.SPHERICAL_SYMMETRY: return "SPHERICAL_SYMMETRY";
 	case SymmetryType.CYLINDRICAL_SYMMETRY: return "CYLINDRICAL_SYMMETRY";
 	case SymmetryType.PLANAR_SYMMETRY: return "PLANAR_SYMMETRY";
@@ -1620,7 +1620,7 @@ public enum VelocityType : uint {
 static partial class Nif { //--VelocityType--//
 public static void NifStream(out VelocityType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (VelocityType)temp; }
 public static void NifStream(VelocityType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(VelocityType val) { switch (val) {
+public static string AsString(VelocityType val) { switch (val) {
 	case VelocityType.VELOCITY_USE_NORMALS: return "VELOCITY_USE_NORMALS";
 	case VelocityType.VELOCITY_USE_RANDOM: return "VELOCITY_USE_RANDOM";
 	case VelocityType.VELOCITY_USE_DIRECTION: return "VELOCITY_USE_DIRECTION";
@@ -1638,7 +1638,7 @@ public enum EmitFrom : uint {
 static partial class Nif { //--EmitFrom--//
 public static void NifStream(out EmitFrom val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (EmitFrom)temp; }
 public static void NifStream(EmitFrom val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(EmitFrom val) { switch (val) {
+public static string AsString(EmitFrom val) { switch (val) {
 	case EmitFrom.EMIT_FROM_VERTICES: return "EMIT_FROM_VERTICES";
 	case EmitFrom.EMIT_FROM_FACE_CENTER: return "EMIT_FROM_FACE_CENTER";
 	case EmitFrom.EMIT_FROM_EDGE_CENTER: return "EMIT_FROM_EDGE_CENTER";
@@ -1657,7 +1657,7 @@ public enum TextureType : uint {
 static partial class Nif { //--TextureType--//
 public static void NifStream(out TextureType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TextureType)temp; }
 public static void NifStream(TextureType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TextureType val) { switch (val) {
+public static string AsString(TextureType val) { switch (val) {
 	case TextureType.TEX_PROJECTED_LIGHT: return "TEX_PROJECTED_LIGHT";
 	case TextureType.TEX_PROJECTED_SHADOW: return "TEX_PROJECTED_SHADOW";
 	case TextureType.TEX_ENVIRONMENT_MAP: return "TEX_ENVIRONMENT_MAP";
@@ -1676,7 +1676,7 @@ public enum CoordGenType : uint {
 static partial class Nif { //--CoordGenType--//
 public static void NifStream(out CoordGenType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (CoordGenType)temp; }
 public static void NifStream(CoordGenType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(CoordGenType val) { switch (val) {
+public static string AsString(CoordGenType val) { switch (val) {
 	case CoordGenType.CG_WORLD_PARALLEL: return "CG_WORLD_PARALLEL";
 	case CoordGenType.CG_WORLD_PERSPECTIVE: return "CG_WORLD_PERSPECTIVE";
 	case CoordGenType.CG_SPHERE_MAP: return "CG_SPHERE_MAP";
@@ -1692,7 +1692,7 @@ public enum EndianType : uint {
 static partial class Nif { //--EndianType--//
 public static void NifStream(out EndianType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (EndianType)temp; }
 public static void NifStream(EndianType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(EndianType val) { switch (val) {
+public static string AsString(EndianType val) { switch (val) {
 	case EndianType.ENDIAN_BIG: return "ENDIAN_BIG";
 	case EndianType.ENDIAN_LITTLE: return "ENDIAN_LITTLE";
 	default: return $"Invalid Value! - {val}";
@@ -1711,7 +1711,7 @@ public enum MaterialColor : uint {
 static partial class Nif { //--MaterialColor--//
 public static void NifStream(out MaterialColor val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (MaterialColor)temp; }
 public static void NifStream(MaterialColor val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(MaterialColor val) { switch (val) {
+public static string AsString(MaterialColor val) { switch (val) {
 	case MaterialColor.TC_AMBIENT: return "TC_AMBIENT";
 	case MaterialColor.TC_DIFFUSE: return "TC_DIFFUSE";
 	case MaterialColor.TC_SPECULAR: return "TC_SPECULAR";
@@ -1730,7 +1730,7 @@ public enum LightColor : uint {
 static partial class Nif { //--LightColor--//
 public static void NifStream(out LightColor val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (LightColor)temp; }
 public static void NifStream(LightColor val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(LightColor val) { switch (val) {
+public static string AsString(LightColor val) { switch (val) {
 	case LightColor.LC_DIFFUSE: return "LC_DIFFUSE";
 	case LightColor.LC_AMBIENT: return "LC_AMBIENT";
 	default: return $"Invalid Value! - {val}";
@@ -1749,7 +1749,7 @@ public enum ConsistencyType : uint {
 static partial class Nif { //--ConsistencyType--//
 public static void NifStream(out ConsistencyType val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (ConsistencyType)temp; }
 public static void NifStream(ConsistencyType val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(ConsistencyType val) { switch (val) {
+public static string AsString(ConsistencyType val) { switch (val) {
 	case ConsistencyType.CT_MUTABLE: return "CT_MUTABLE";
 	case ConsistencyType.CT_STATIC: return "CT_STATIC";
 	case ConsistencyType.CT_VOLATILE: return "CT_VOLATILE";
@@ -1767,7 +1767,7 @@ public enum SortingMode : uint {
 static partial class Nif { //--SortingMode--//
 public static void NifStream(out SortingMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SortingMode)temp; }
 public static void NifStream(SortingMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SortingMode val) { switch (val) {
+public static string AsString(SortingMode val) { switch (val) {
 	case SortingMode.SORTING_INHERIT: return "SORTING_INHERIT";
 	case SortingMode.SORTING_OFF: return "SORTING_OFF";
 	default: return $"Invalid Value! - {val}";
@@ -1786,7 +1786,7 @@ public enum PropagationMode : uint {
 static partial class Nif { //--PropagationMode--//
 public static void NifStream(out PropagationMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PropagationMode)temp; }
 public static void NifStream(PropagationMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PropagationMode val) { switch (val) {
+public static string AsString(PropagationMode val) { switch (val) {
 	case PropagationMode.PROPAGATE_ON_SUCCESS: return "PROPAGATE_ON_SUCCESS";
 	case PropagationMode.PROPAGATE_ON_FAILURE: return "PROPAGATE_ON_FAILURE";
 	case PropagationMode.PROPAGATE_ALWAYS: return "PROPAGATE_ALWAYS";
@@ -1808,7 +1808,7 @@ public enum CollisionMode : uint {
 static partial class Nif { //--CollisionMode--//
 public static void NifStream(out CollisionMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (CollisionMode)temp; }
 public static void NifStream(CollisionMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(CollisionMode val) { switch (val) {
+public static string AsString(CollisionMode val) { switch (val) {
 	case CollisionMode.CM_USE_OBB: return "CM_USE_OBB";
 	case CollisionMode.CM_USE_TRI: return "CM_USE_TRI";
 	case CollisionMode.CM_USE_ABV: return "CM_USE_ABV";
@@ -1828,7 +1828,7 @@ public enum BoundVolumeType : uint {
 static partial class Nif { //--BoundVolumeType--//
 public static void NifStream(out BoundVolumeType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BoundVolumeType)temp; }
 public static void NifStream(BoundVolumeType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BoundVolumeType val) { switch (val) {
+public static string AsString(BoundVolumeType val) { switch (val) {
 	case BoundVolumeType.BASE_BV: return "BASE_BV";
 	case BoundVolumeType.SPHERE_BV: return "SPHERE_BV";
 	case BoundVolumeType.BOX_BV: return "BOX_BV";
@@ -1848,7 +1848,7 @@ public enum hkResponseType : uint {
 static partial class Nif { //--hkResponseType--//
 public static void NifStream(out hkResponseType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (hkResponseType)temp; }
 public static void NifStream(hkResponseType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(hkResponseType val) { switch (val) {
+public static string AsString(hkResponseType val) { switch (val) {
 	case hkResponseType.RESPONSE_INVALID: return "RESPONSE_INVALID";
 	case hkResponseType.RESPONSE_SIMPLE_CONTACT: return "RESPONSE_SIMPLE_CONTACT";
 	case hkResponseType.RESPONSE_REPORTING: return "RESPONSE_REPORTING";
@@ -1959,7 +1959,7 @@ public enum BSDismemberBodyPartType : uint {
 static partial class Nif { //--BSDismemberBodyPartType--//
 public static void NifStream(out BSDismemberBodyPartType val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (BSDismemberBodyPartType)temp; }
 public static void NifStream(BSDismemberBodyPartType val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(BSDismemberBodyPartType val) { switch (val) {
+public static string AsString(BSDismemberBodyPartType val) { switch (val) {
 	case BSDismemberBodyPartType.BP_TORSO: return "BP_TORSO";
 	case BSDismemberBodyPartType.BP_HEAD: return "BP_HEAD";
 	case BSDismemberBodyPartType.BP_HEAD2: return "BP_HEAD2";
@@ -2082,7 +2082,7 @@ public enum BSLightingShaderPropertyShaderType : uint {
 static partial class Nif { //--BSLightingShaderPropertyShaderType--//
 public static void NifStream(out BSLightingShaderPropertyShaderType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BSLightingShaderPropertyShaderType)temp; }
 public static void NifStream(BSLightingShaderPropertyShaderType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BSLightingShaderPropertyShaderType val) { switch (val) {
+public static string AsString(BSLightingShaderPropertyShaderType val) { switch (val) {
 	case BSLightingShaderPropertyShaderType.ST_DEFAULT: return "ST_Default";
 	case BSLightingShaderPropertyShaderType.ST_ENVIRONMENT_MAP: return "ST_Environment Map";
 	case BSLightingShaderPropertyShaderType.ST_GLOW_SHADER: return "ST_Glow Shader";
@@ -2126,7 +2126,7 @@ public enum EffectShaderControlledVariable : uint {
 static partial class Nif { //--EffectShaderControlledVariable--//
 public static void NifStream(out EffectShaderControlledVariable val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (EffectShaderControlledVariable)temp; }
 public static void NifStream(EffectShaderControlledVariable val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(EffectShaderControlledVariable val) { switch (val) {
+public static string AsString(EffectShaderControlledVariable val) { switch (val) {
 	case EffectShaderControlledVariable.ESCV_EMISSIVEMULTIPLE: return "ESCV_EmissiveMultiple";
 	case EffectShaderControlledVariable.ESCV_FALLOFF_START_ANGLE: return "ESCV_Falloff Start Angle";
 	case EffectShaderControlledVariable.ESCV_FALLOFF_STOP_ANGLE: return "ESCV_Falloff Stop Angle";
@@ -2150,7 +2150,7 @@ public enum EffectShaderControlledColor : uint {
 static partial class Nif { //--EffectShaderControlledColor--//
 public static void NifStream(out EffectShaderControlledColor val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (EffectShaderControlledColor)temp; }
 public static void NifStream(EffectShaderControlledColor val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(EffectShaderControlledColor val) { switch (val) {
+public static string AsString(EffectShaderControlledColor val) { switch (val) {
 	case EffectShaderControlledColor.ECSC_EMISSIVE_COLOR: return "ECSC_Emissive Color";
 	default: return $"Invalid Value! - {val}";
 }}}
@@ -2174,7 +2174,7 @@ public enum LightingShaderControlledVariable : uint {
 static partial class Nif { //--LightingShaderControlledVariable--//
 public static void NifStream(out LightingShaderControlledVariable val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (LightingShaderControlledVariable)temp; }
 public static void NifStream(LightingShaderControlledVariable val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(LightingShaderControlledVariable val) { switch (val) {
+public static string AsString(LightingShaderControlledVariable val) { switch (val) {
 	case LightingShaderControlledVariable.LSCV_REFRACTION_STRENGTH: return "LSCV_Refraction Strength";
 	case LightingShaderControlledVariable.LSCV_ENVIRONMENT_MAP_SCALE: return "LSCV_Environment Map Scale";
 	case LightingShaderControlledVariable.LSCV_GLOSSINESS: return "LSCV_Glossiness";
@@ -2199,7 +2199,7 @@ public enum LightingShaderControlledColor : uint {
 static partial class Nif { //--LightingShaderControlledColor--//
 public static void NifStream(out LightingShaderControlledColor val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (LightingShaderControlledColor)temp; }
 public static void NifStream(LightingShaderControlledColor val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(LightingShaderControlledColor val) { switch (val) {
+public static string AsString(LightingShaderControlledColor val) { switch (val) {
 	case LightingShaderControlledColor.LSCC_SPECULAR_COLOR: return "LSCC_Specular Color";
 	case LightingShaderControlledColor.LSCC_EMISSIVE_COLOR: return "LSCC_Emissive Color";
 	default: return $"Invalid Value! - {val}";
@@ -2218,7 +2218,7 @@ public enum hkConstraintType : uint {
 static partial class Nif { //--hkConstraintType--//
 public static void NifStream(out hkConstraintType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (hkConstraintType)temp; }
 public static void NifStream(hkConstraintType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(hkConstraintType val) { switch (val) {
+public static string AsString(hkConstraintType val) { switch (val) {
 	case hkConstraintType.BALLANDSOCKET: return "BallAndSocket";
 	case hkConstraintType.HINGE: return "Hinge";
 	case hkConstraintType.LIMITED_HINGE: return "Limited Hinge";
@@ -2243,7 +2243,7 @@ public enum TransformMethod : uint {
 static partial class Nif { //--TransformMethod--//
 public static void NifStream(out TransformMethod val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (TransformMethod)temp; }
 public static void NifStream(TransformMethod val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(TransformMethod val) { switch (val) {
+public static string AsString(TransformMethod val) { switch (val) {
 	case TransformMethod.TM_MAYA_DEPRECATED: return "TM_Maya Deprecated";
 	case TransformMethod.TM_MAX: return "TM_Max";
 	case TransformMethod.TM_MAYA: return "TM_Maya";
@@ -2262,7 +2262,7 @@ public enum AnimationType : uint {
 static partial class Nif { //--AnimationType--//
 public static void NifStream(out AnimationType val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (AnimationType)temp; }
 public static void NifStream(AnimationType val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(AnimationType val) { switch (val) {
+public static string AsString(AnimationType val) { switch (val) {
 	case AnimationType.SIT: return "Sit";
 	case AnimationType.SLEEP: return "Sleep";
 	case AnimationType.LEAN: return "Lean";
@@ -2278,7 +2278,7 @@ public enum MotorType : uint {
 static partial class Nif { //--MotorType--//
 public static void NifStream(out MotorType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (MotorType)temp; }
 public static void NifStream(MotorType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(MotorType val) { switch (val) {
+public static string AsString(MotorType val) { switch (val) {
 	case MotorType.MOTOR_NONE: return "MOTOR_NONE";
 	case MotorType.MOTOR_POSITION: return "MOTOR_POSITION";
 	case MotorType.MOTOR_VELOCITY: return "MOTOR_VELOCITY";
@@ -2294,7 +2294,7 @@ public enum ImageType : uint {
 static partial class Nif { //--ImageType--//
 public static void NifStream(out ImageType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ImageType)temp; }
 public static void NifStream(ImageType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ImageType val) { switch (val) {
+public static string AsString(ImageType val) { switch (val) {
 	case ImageType.RGB: return "RGB";
 	case ImageType.RGBA: return "RGBA";
 	default: return $"Invalid Value! - {val}";
@@ -2309,7 +2309,7 @@ public enum BroadPhaseType : uint {
 static partial class Nif { //--BroadPhaseType--//
 public static void NifStream(out BroadPhaseType val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (BroadPhaseType)temp; }
 public static void NifStream(BroadPhaseType val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(BroadPhaseType val) { switch (val) {
+public static string AsString(BroadPhaseType val) { switch (val) {
 	case BroadPhaseType.BROAD_PHASE_INVALID: return "BROAD_PHASE_INVALID";
 	case BroadPhaseType.BROAD_PHASE_ENTITY: return "BROAD_PHASE_ENTITY";
 	case BroadPhaseType.BROAD_PHASE_PHANTOM: return "BROAD_PHASE_PHANTOM";
@@ -2323,7 +2323,7 @@ public enum InterpBlendFlags : uint {
 static partial class Nif { //--InterpBlendFlags--//
 public static void NifStream(out InterpBlendFlags val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (InterpBlendFlags)temp; }
 public static void NifStream(InterpBlendFlags val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(InterpBlendFlags val) { switch (val) {
+public static string AsString(InterpBlendFlags val) { switch (val) {
 	case InterpBlendFlags.MANAGER_CONTROLLED: return "MANAGER_CONTROLLED";
 	default: return $"Invalid Value! - {val}";
 }}}
@@ -2343,7 +2343,7 @@ public enum NxJointType : uint {
 static partial class Nif { //--NxJointType--//
 public static void NifStream(out NxJointType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxJointType)temp; }
 public static void NifStream(NxJointType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxJointType val) { switch (val) {
+public static string AsString(NxJointType val) { switch (val) {
 	case NxJointType.NX_JOINT_PRISMATIC: return "NX_JOINT_PRISMATIC";
 	case NxJointType.NX_JOINT_REVOLUTE: return "NX_JOINT_REVOLUTE";
 	case NxJointType.NX_JOINT_CYLINDRICAL: return "NX_JOINT_CYLINDRICAL";
@@ -2365,7 +2365,7 @@ public enum NxD6JointMotion : uint {
 static partial class Nif { //--NxD6JointMotion--//
 public static void NifStream(out NxD6JointMotion val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxD6JointMotion)temp; }
 public static void NifStream(NxD6JointMotion val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxD6JointMotion val) { switch (val) {
+public static string AsString(NxD6JointMotion val) { switch (val) {
 	case NxD6JointMotion.NX_D6JOINT_MOTION_LOCKED: return "NX_D6JOINT_MOTION_LOCKED";
 	case NxD6JointMotion.NX_D6JOINT_MOTION_LIMITED: return "NX_D6JOINT_MOTION_LIMITED";
 	case NxD6JointMotion.NX_D6JOINT_MOTION_FREE: return "NX_D6JOINT_MOTION_FREE";
@@ -2379,7 +2379,7 @@ public enum NxD6JointDriveType : uint {
 static partial class Nif { //--NxD6JointDriveType--//
 public static void NifStream(out NxD6JointDriveType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxD6JointDriveType)temp; }
 public static void NifStream(NxD6JointDriveType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxD6JointDriveType val) { switch (val) {
+public static string AsString(NxD6JointDriveType val) { switch (val) {
 	case NxD6JointDriveType.NX_D6JOINT_DRIVE_POSITION: return "NX_D6JOINT_DRIVE_POSITION";
 	case NxD6JointDriveType.NX_D6JOINT_DRIVE_VELOCITY: return "NX_D6JOINT_DRIVE_VELOCITY";
 	default: return $"Invalid Value! - {val}";
@@ -2393,7 +2393,7 @@ public enum NxJointProjectionMode : uint {
 static partial class Nif { //--NxJointProjectionMode--//
 public static void NifStream(out NxJointProjectionMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxJointProjectionMode)temp; }
 public static void NifStream(NxJointProjectionMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxJointProjectionMode val) { switch (val) {
+public static string AsString(NxJointProjectionMode val) { switch (val) {
 	case NxJointProjectionMode.NX_JPM_NONE: return "NX_JPM_NONE";
 	case NxJointProjectionMode.NX_JPM_POINT_MINDIST: return "NX_JPM_POINT_MINDIST";
 	case NxJointProjectionMode.NX_JPM_LINEAR_MINDIST: return "NX_JPM_LINEAR_MINDIST";
@@ -2415,7 +2415,7 @@ public enum NxShapeType : uint {
 static partial class Nif { //--NxShapeType--//
 public static void NifStream(out NxShapeType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxShapeType)temp; }
 public static void NifStream(NxShapeType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxShapeType val) { switch (val) {
+public static string AsString(NxShapeType val) { switch (val) {
 	case NxShapeType.NX_SHAPE_PLANE: return "NX_SHAPE_PLANE";
 	case NxShapeType.NX_SHAPE_SPHERE: return "NX_SHAPE_SPHERE";
 	case NxShapeType.NX_SHAPE_BOX: return "NX_SHAPE_BOX";
@@ -2438,7 +2438,7 @@ public enum NxCombineMode : uint {
 static partial class Nif { //--NxCombineMode--//
 public static void NifStream(out NxCombineMode val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxCombineMode)temp; }
 public static void NifStream(NxCombineMode val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxCombineMode val) { switch (val) {
+public static string AsString(NxCombineMode val) { switch (val) {
 	case NxCombineMode.NX_CM_AVERAGE: return "NX_CM_AVERAGE";
 	case NxCombineMode.NX_CM_MIN: return "NX_CM_MIN";
 	case NxCombineMode.NX_CM_MULTIPLY: return "NX_CM_MULTIPLY";
@@ -2463,7 +2463,7 @@ public enum BSShaderType : uint {
 static partial class Nif { //--BSShaderType--//
 public static void NifStream(out BSShaderType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BSShaderType)temp; }
 public static void NifStream(BSShaderType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BSShaderType val) { switch (val) {
+public static string AsString(BSShaderType val) { switch (val) {
 	case BSShaderType.SHADER_TALL_GRASS: return "SHADER_TALL_GRASS";
 	case BSShaderType.SHADER_DEFAULT: return "SHADER_DEFAULT";
 	case BSShaderType.SHADER_SKY: return "SHADER_SKY";
@@ -2490,7 +2490,7 @@ public enum SkyObjectType : uint {
 static partial class Nif { //--SkyObjectType--//
 public static void NifStream(out SkyObjectType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SkyObjectType)temp; }
 public static void NifStream(SkyObjectType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SkyObjectType val) { switch (val) {
+public static string AsString(SkyObjectType val) { switch (val) {
 	case SkyObjectType.BSSM_SKY_TEXTURE: return "BSSM_SKY_TEXTURE";
 	case SkyObjectType.BSSM_SKY_SUNGLARE: return "BSSM_SKY_SUNGLARE";
 	case SkyObjectType.BSSM_SKY: return "BSSM_SKY";
@@ -2509,7 +2509,7 @@ public enum AnimNoteType : uint {
 static partial class Nif { //--AnimNoteType--//
 public static void NifStream(out AnimNoteType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (AnimNoteType)temp; }
 public static void NifStream(AnimNoteType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(AnimNoteType val) { switch (val) {
+public static string AsString(AnimNoteType val) { switch (val) {
 	case AnimNoteType.ANT_INVALID: return "ANT_INVALID";
 	case AnimNoteType.ANT_GRABIK: return "ANT_GRABIK";
 	case AnimNoteType.ANT_LOOKIK: return "ANT_LOOKIK";
@@ -2527,7 +2527,7 @@ public enum BSCPCullingType : uint {
 static partial class Nif { //--BSCPCullingType--//
 public static void NifStream(out BSCPCullingType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BSCPCullingType)temp; }
 public static void NifStream(BSCPCullingType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BSCPCullingType val) { switch (val) {
+public static string AsString(BSCPCullingType val) { switch (val) {
 	case BSCPCullingType.BSCP_CULL_NORMAL: return "BSCP_CULL_NORMAL";
 	case BSCPCullingType.BSCP_CULL_ALLPASS: return "BSCP_CULL_ALLPASS";
 	case BSCPCullingType.BSCP_CULL_ALLFAIL: return "BSCP_CULL_ALLFAIL";
@@ -2545,7 +2545,7 @@ public enum CloningBehavior : uint {
 static partial class Nif { //--CloningBehavior--//
 public static void NifStream(out CloningBehavior val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (CloningBehavior)temp; }
 public static void NifStream(CloningBehavior val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(CloningBehavior val) { switch (val) {
+public static string AsString(CloningBehavior val) { switch (val) {
 	case CloningBehavior.CLONING_SHARE: return "CLONING_SHARE";
 	case CloningBehavior.CLONING_COPY: return "CLONING_COPY";
 	case CloningBehavior.CLONING_BLANK_COPY: return "CLONING_BLANK_COPY";
@@ -2621,7 +2621,7 @@ public enum ComponentFormat : uint {
 static partial class Nif { //--ComponentFormat--//
 public static void NifStream(out ComponentFormat val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ComponentFormat)temp; }
 public static void NifStream(ComponentFormat val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ComponentFormat val) { switch (val) {
+public static string AsString(ComponentFormat val) { switch (val) {
 	case ComponentFormat.F_UNKNOWN: return "F_UNKNOWN";
 	case ComponentFormat.F_INT8_1: return "F_INT8_1";
 	case ComponentFormat.F_INT8_2: return "F_INT8_2";
@@ -2698,7 +2698,7 @@ public enum DataStreamUsage : uint {
 static partial class Nif { //--DataStreamUsage--//
 public static void NifStream(out DataStreamUsage val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (DataStreamUsage)temp; }
 public static void NifStream(DataStreamUsage val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(DataStreamUsage val) { switch (val) {
+public static string AsString(DataStreamUsage val) { switch (val) {
 	case DataStreamUsage.USAGE_VERTEX_INDEX: return "USAGE_VERTEX_INDEX";
 	case DataStreamUsage.USAGE_VERTEX: return "USAGE_VERTEX";
 	case DataStreamUsage.USAGE_SHADER_CONSTANT: return "USAGE_SHADER_CONSTANT";
@@ -2718,7 +2718,7 @@ public enum MeshPrimitiveType : uint {
 static partial class Nif { //--MeshPrimitiveType--//
 public static void NifStream(out MeshPrimitiveType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (MeshPrimitiveType)temp; }
 public static void NifStream(MeshPrimitiveType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(MeshPrimitiveType val) { switch (val) {
+public static string AsString(MeshPrimitiveType val) { switch (val) {
 	case MeshPrimitiveType.MESH_PRIMITIVE_TRIANGLES: return "MESH_PRIMITIVE_TRIANGLES";
 	case MeshPrimitiveType.MESH_PRIMITIVE_TRISTRIPS: return "MESH_PRIMITIVE_TRISTRIPS";
 	case MeshPrimitiveType.MESH_PRIMITIVE_LINES: return "MESH_PRIMITIVE_LINES";
@@ -2742,7 +2742,7 @@ public enum SyncPoint : uint {
 static partial class Nif { //--SyncPoint--//
 public static void NifStream(out SyncPoint val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (SyncPoint)temp; }
 public static void NifStream(SyncPoint val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(SyncPoint val) { switch (val) {
+public static string AsString(SyncPoint val) { switch (val) {
 	case SyncPoint.SYNC_ANY: return "SYNC_ANY";
 	case SyncPoint.SYNC_UPDATE: return "SYNC_UPDATE";
 	case SyncPoint.SYNC_POST_UPDATE: return "SYNC_POST_UPDATE";
@@ -2769,7 +2769,7 @@ public enum AlignMethod : uint {
 static partial class Nif { //--AlignMethod--//
 public static void NifStream(out AlignMethod val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (AlignMethod)temp; }
 public static void NifStream(AlignMethod val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(AlignMethod val) { switch (val) {
+public static string AsString(AlignMethod val) { switch (val) {
 	case AlignMethod.ALIGN_INVALID: return "ALIGN_INVALID";
 	case AlignMethod.ALIGN_PER_PARTICLE: return "ALIGN_PER_PARTICLE";
 	case AlignMethod.ALIGN_LOCAL_FIXED: return "ALIGN_LOCAL_FIXED";
@@ -2789,7 +2789,7 @@ public enum PSLoopBehavior : uint {
 static partial class Nif { //--PSLoopBehavior--//
 public static void NifStream(out PSLoopBehavior val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PSLoopBehavior)temp; }
 public static void NifStream(PSLoopBehavior val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PSLoopBehavior val) { switch (val) {
+public static string AsString(PSLoopBehavior val) { switch (val) {
 	case PSLoopBehavior.PS_LOOP_CLAMP_BIRTH: return "PS_LOOP_CLAMP_BIRTH";
 	case PSLoopBehavior.PS_LOOP_CLAMP_DEATH: return "PS_LOOP_CLAMP_DEATH";
 	case PSLoopBehavior.PS_LOOP_AGESCALE: return "PS_LOOP_AGESCALE";
@@ -2816,7 +2816,7 @@ public enum PSForceType : uint {
 static partial class Nif { //--PSForceType--//
 public static void NifStream(out PSForceType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (PSForceType)temp; }
 public static void NifStream(PSForceType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(PSForceType val) { switch (val) {
+public static string AsString(PSForceType val) { switch (val) {
 	case PSForceType.FORCE_BOMB: return "FORCE_BOMB";
 	case PSForceType.FORCE_DRAG: return "FORCE_DRAG";
 	case PSForceType.FORCE_AIR_FIELD: return "FORCE_AIR_FIELD";
@@ -2840,7 +2840,7 @@ public enum ColliderType : uint {
 static partial class Nif { //--ColliderType--//
 public static void NifStream(out ColliderType val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (ColliderType)temp; }
 public static void NifStream(ColliderType val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(ColliderType val) { switch (val) {
+public static string AsString(ColliderType val) { switch (val) {
 	case ColliderType.COLLIDER_PLANAR: return "COLLIDER_PLANAR";
 	case ColliderType.COLLIDER_SPHERICAL: return "COLLIDER_SPHERICAL";
 	default: return $"Invalid Value! - {val}";
@@ -2862,7 +2862,7 @@ public enum AccumFlags : uint {
 static partial class Nif { //--AccumFlags--//
 public static void NifStream(out AccumFlags val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (AccumFlags)temp; }
 public static void NifStream(AccumFlags val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(AccumFlags val) { switch (val) {
+public static string AsString(AccumFlags val) { switch (val) {
 	case AccumFlags.ACCUM_X_TRANS: return "ACCUM_X_TRANS";
 	case AccumFlags.ACCUM_Y_TRANS: return "ACCUM_Y_TRANS";
 	case AccumFlags.ACCUM_Z_TRANS: return "ACCUM_Z_TRANS";
@@ -2892,7 +2892,7 @@ public enum VertexFlags : uint {
 static partial class Nif { //--VertexFlags--//
 public static void NifStream(out VertexFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (VertexFlags)temp; }
 public static void NifStream(VertexFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(VertexFlags val) { switch (val) {
+public static string AsString(VertexFlags val) { switch (val) {
 	case VertexFlags.VF_VERTEX: return "VF_Vertex";
 	case VertexFlags.VF_UVS: return "VF_UVs";
 	case VertexFlags.VF_UVS_2: return "VF_UVs_2";
@@ -2921,7 +2921,7 @@ public enum FurnitureEntryPoints : uint {
 static partial class Nif { //--FurnitureEntryPoints--//
 public static void NifStream(out FurnitureEntryPoints val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (FurnitureEntryPoints)temp; }
 public static void NifStream(FurnitureEntryPoints val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(FurnitureEntryPoints val) { switch (val) {
+public static string AsString(FurnitureEntryPoints val) { switch (val) {
 	case FurnitureEntryPoints.FRONT: return "Front";
 	case FurnitureEntryPoints.BEHIND: return "Behind";
 	case FurnitureEntryPoints.RIGHT: return "Right";
@@ -2938,7 +2938,7 @@ public enum BSPartFlag : uint {
 static partial class Nif { //--BSPartFlag--//
 public static void NifStream(out BSPartFlag val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (BSPartFlag)temp; }
 public static void NifStream(BSPartFlag val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(BSPartFlag val) { switch (val) {
+public static string AsString(BSPartFlag val) { switch (val) {
 	case BSPartFlag.PF_EDITOR_VISIBLE: return "PF_EDITOR_VISIBLE";
 	case BSPartFlag.PF_START_NET_BONESET: return "PF_START_NET_BONESET";
 	default: return $"Invalid Value! - {val}";
@@ -2956,7 +2956,7 @@ public enum PathFlags : uint {
 static partial class Nif { //--PathFlags--//
 public static void NifStream(out PathFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (PathFlags)temp; }
 public static void NifStream(PathFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(PathFlags val) { switch (val) {
+public static string AsString(PathFlags val) { switch (val) {
 	case PathFlags.NIPI_CVDATANEEDSUPDATE: return "NIPI_CVDataNeedsUpdate";
 	case PathFlags.NIPI_CURVETYPEOPEN: return "NIPI_CurveTypeOpen";
 	case PathFlags.NIPI_ALLOWFLIP: return "NIPI_AllowFlip";
@@ -2985,7 +2985,7 @@ public enum bhkCOFlags : uint {
 static partial class Nif { //--bhkCOFlags--//
 public static void NifStream(out bhkCOFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (bhkCOFlags)temp; }
 public static void NifStream(bhkCOFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(bhkCOFlags val) { switch (val) {
+public static string AsString(bhkCOFlags val) { switch (val) {
 	case bhkCOFlags.BHKCO_ACTIVE: return "BHKCO_ACTIVE";
 	case bhkCOFlags.BHKCO_NOTIFY: return "BHKCO_NOTIFY";
 	case bhkCOFlags.BHKCO_SET_LOCAL: return "BHKCO_SET_LOCAL";
@@ -3019,7 +3019,7 @@ public enum VectorFlags : uint {
 static partial class Nif { //--VectorFlags--//
 public static void NifStream(out VectorFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (VectorFlags)temp; }
 public static void NifStream(VectorFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(VectorFlags val) { switch (val) {
+public static string AsString(VectorFlags val) { switch (val) {
 	case VectorFlags.VF_UV_1: return "VF_UV_1";
 	case VectorFlags.VF_UV_2: return "VF_UV_2";
 	case VectorFlags.VF_UV_4: return "VF_UV_4";
@@ -3060,7 +3060,7 @@ public enum BSVectorFlags : uint {
 static partial class Nif { //--BSVectorFlags--//
 public static void NifStream(out BSVectorFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (BSVectorFlags)temp; }
 public static void NifStream(BSVectorFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(BSVectorFlags val) { switch (val) {
+public static string AsString(BSVectorFlags val) { switch (val) {
 	case BSVectorFlags.BSVF_HAS_UV: return "BSVF_Has_UV";
 	case BSVectorFlags.BSVF_UNK2: return "BSVF_Unk2";
 	case BSVectorFlags.BSVF_UNK4: return "BSVF_Unk4";
@@ -3088,7 +3088,7 @@ public enum LookAtFlags : uint {
 static partial class Nif { //--LookAtFlags--//
 public static void NifStream(out LookAtFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (LookAtFlags)temp; }
 public static void NifStream(LookAtFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(LookAtFlags val) { switch (val) {
+public static string AsString(LookAtFlags val) { switch (val) {
 	case LookAtFlags.LOOK_FLIP: return "LOOK_FLIP";
 	case LookAtFlags.LOOK_Y_AXIS: return "LOOK_Y_AXIS";
 	case LookAtFlags.LOOK_Z_AXIS: return "LOOK_Z_AXIS";
@@ -3103,7 +3103,7 @@ public enum NiSwitchFlags : uint {
 static partial class Nif { //--NiSwitchFlags--//
 public static void NifStream(out NiSwitchFlags val, IStream s, NifInfo info) { ushort temp; NifStream(out temp, s, info); val = (NiSwitchFlags)temp; }
 public static void NifStream(NiSwitchFlags val, OStream s, NifInfo info) => NifStream((ushort)val, s, info);
-public static string ToString(NiSwitchFlags val) { switch (val) {
+public static string AsString(NiSwitchFlags val) { switch (val) {
 	case NiSwitchFlags.UPDATEONLYACTIVECHILD: return "UpdateOnlyActiveChild";
 	case NiSwitchFlags.UPDATECONTROLLERS: return "UpdateControllers";
 	default: return $"Invalid Value! - {val}";
@@ -3120,7 +3120,7 @@ public enum NxMaterialFlag : uint {
 static partial class Nif { //--NxMaterialFlag--//
 public static void NifStream(out NxMaterialFlag val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (NxMaterialFlag)temp; }
 public static void NifStream(NxMaterialFlag val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(NxMaterialFlag val) { switch (val) {
+public static string AsString(NxMaterialFlag val) { switch (val) {
 	case NxMaterialFlag.NX_MF_ANISOTROPIC: return "NX_MF_ANISOTROPIC";
 	case NxMaterialFlag.NX_MF_DUMMY1: return "NX_MF_DUMMY1";
 	case NxMaterialFlag.NX_MF_DUMMY2: return "NX_MF_DUMMY2";
@@ -3168,7 +3168,7 @@ public enum BSShaderFlags : uint {
 static partial class Nif { //--BSShaderFlags--//
 public static void NifStream(out BSShaderFlags val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BSShaderFlags)temp; }
 public static void NifStream(BSShaderFlags val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BSShaderFlags val) { switch (val) {
+public static string AsString(BSShaderFlags val) { switch (val) {
 	case BSShaderFlags.F3SF1_SPECULAR: return "F3SF1_Specular";
 	case BSShaderFlags.F3SF1_SKINNED: return "F3SF1_Skinned";
 	case BSShaderFlags.F3SF1_LOWDETAIL: return "F3SF1_LowDetail";
@@ -3242,7 +3242,7 @@ public enum BSShaderFlags2 : uint {
 static partial class Nif { //--BSShaderFlags2--//
 public static void NifStream(out BSShaderFlags2 val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (BSShaderFlags2)temp; }
 public static void NifStream(BSShaderFlags2 val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(BSShaderFlags2 val) { switch (val) {
+public static string AsString(BSShaderFlags2 val) { switch (val) {
 	case BSShaderFlags2.F3SF2_ZBUFFER_WRITE: return "F3SF2_ZBuffer_Write";
 	case BSShaderFlags2.F3SF2_LOD_LANDSCAPE: return "F3SF2_LOD_Landscape";
 	case BSShaderFlags2.F3SF2_LOD_BUILDING: return "F3SF2_LOD_Building";
@@ -3316,7 +3316,7 @@ public enum SkyrimShaderPropertyFlags1 : uint {
 static partial class Nif { //--SkyrimShaderPropertyFlags1--//
 public static void NifStream(out SkyrimShaderPropertyFlags1 val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SkyrimShaderPropertyFlags1)temp; }
 public static void NifStream(SkyrimShaderPropertyFlags1 val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SkyrimShaderPropertyFlags1 val) { switch (val) {
+public static string AsString(SkyrimShaderPropertyFlags1 val) { switch (val) {
 	case SkyrimShaderPropertyFlags1.SLSF1_SPECULAR: return "SLSF1_Specular";
 	case SkyrimShaderPropertyFlags1.SLSF1_SKINNED: return "SLSF1_Skinned";
 	case SkyrimShaderPropertyFlags1.SLSF1_TEMP_REFRACTION: return "SLSF1_Temp_Refraction";
@@ -3390,7 +3390,7 @@ public enum SkyrimShaderPropertyFlags2 : uint {
 static partial class Nif { //--SkyrimShaderPropertyFlags2--//
 public static void NifStream(out SkyrimShaderPropertyFlags2 val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (SkyrimShaderPropertyFlags2)temp; }
 public static void NifStream(SkyrimShaderPropertyFlags2 val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(SkyrimShaderPropertyFlags2 val) { switch (val) {
+public static string AsString(SkyrimShaderPropertyFlags2 val) { switch (val) {
 	case SkyrimShaderPropertyFlags2.SLSF2_ZBUFFER_WRITE: return "SLSF2_ZBuffer_Write";
 	case SkyrimShaderPropertyFlags2.SLSF2_LOD_LANDSCAPE: return "SLSF2_LOD_Landscape";
 	case SkyrimShaderPropertyFlags2.SLSF2_LOD_OBJECTS: return "SLSF2_LOD_Objects";
@@ -3464,7 +3464,7 @@ public enum Fallout4ShaderPropertyFlags1 : uint {
 static partial class Nif { //--Fallout4ShaderPropertyFlags1--//
 public static void NifStream(out Fallout4ShaderPropertyFlags1 val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (Fallout4ShaderPropertyFlags1)temp; }
 public static void NifStream(Fallout4ShaderPropertyFlags1 val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(Fallout4ShaderPropertyFlags1 val) { switch (val) {
+public static string AsString(Fallout4ShaderPropertyFlags1 val) { switch (val) {
 	case Fallout4ShaderPropertyFlags1.F4SF1_SPECULAR: return "F4SF1_Specular";
 	case Fallout4ShaderPropertyFlags1.F4SF1_SKINNED: return "F4SF1_Skinned";
 	case Fallout4ShaderPropertyFlags1.F4SF1_TEMP_REFRACTION: return "F4SF1_Temp_Refraction";
@@ -3538,7 +3538,7 @@ public enum Fallout4ShaderPropertyFlags2 : uint {
 static partial class Nif { //--Fallout4ShaderPropertyFlags2--//
 public static void NifStream(out Fallout4ShaderPropertyFlags2 val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (Fallout4ShaderPropertyFlags2)temp; }
 public static void NifStream(Fallout4ShaderPropertyFlags2 val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(Fallout4ShaderPropertyFlags2 val) { switch (val) {
+public static string AsString(Fallout4ShaderPropertyFlags2 val) { switch (val) {
 	case Fallout4ShaderPropertyFlags2.F4SF2_ZBUFFER_WRITE: return "F4SF2_ZBuffer_Write";
 	case Fallout4ShaderPropertyFlags2.F4SF2_LOD_LANDSCAPE: return "F4SF2_LOD_Landscape";
 	case Fallout4ShaderPropertyFlags2.F4SF2_LOD_OBJECTS: return "F4SF2_LOD_Objects";
@@ -3588,7 +3588,7 @@ public enum SkyrimWaterShaderFlags : uint {
 static partial class Nif { //--SkyrimWaterShaderFlags--//
 public static void NifStream(out SkyrimWaterShaderFlags val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (SkyrimWaterShaderFlags)temp; }
 public static void NifStream(SkyrimWaterShaderFlags val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(SkyrimWaterShaderFlags val) { switch (val) {
+public static string AsString(SkyrimWaterShaderFlags val) { switch (val) {
 	case SkyrimWaterShaderFlags.SWSF1_UNKNOWN0: return "SWSF1_UNKNOWN0";
 	case SkyrimWaterShaderFlags.SWSF1_BYPASS_REFRACTION_MAP: return "SWSF1_Bypass_Refraction_Map";
 	case SkyrimWaterShaderFlags.SWSF1_WATER_TOGGLE: return "SWSF1_Water_Toggle";
@@ -3608,7 +3608,7 @@ public enum BSValueNodeFlags : uint {
 static partial class Nif { //--BSValueNodeFlags--//
 public static void NifStream(out BSValueNodeFlags val, IStream s, NifInfo info) { byte temp; NifStream(out temp, s, info); val = (BSValueNodeFlags)temp; }
 public static void NifStream(BSValueNodeFlags val, OStream s, NifInfo info) => NifStream((byte)val, s, info);
-public static string ToString(BSValueNodeFlags val) { switch (val) {
+public static string AsString(BSValueNodeFlags val) { switch (val) {
 	case BSValueNodeFlags.BILLBOARDWORLDZ: return "BillboardWorldZ";
 	case BSValueNodeFlags.USEPLAYERADJUST: return "UsePlayerAdjust";
 	default: return $"Invalid Value! - {val}";
@@ -3627,7 +3627,7 @@ public enum DataStreamAccess : uint {
 static partial class Nif { //--DataStreamAccess--//
 public static void NifStream(out DataStreamAccess val, IStream s, NifInfo info) { uint temp; NifStream(out temp, s, info); val = (DataStreamAccess)temp; }
 public static void NifStream(DataStreamAccess val, OStream s, NifInfo info) => NifStream((uint)val, s, info);
-public static string ToString(DataStreamAccess val) { switch (val) {
+public static string AsString(DataStreamAccess val) { switch (val) {
 	case DataStreamAccess.CPU_READ: return "CPU Read";
 	case DataStreamAccess.CPU_WRITE_STATIC: return "CPU Write Static";
 	case DataStreamAccess.CPU_WRITE_MUTABLE: return "CPU Write Mutable";

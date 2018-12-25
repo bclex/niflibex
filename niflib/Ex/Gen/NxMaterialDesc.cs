@@ -13,27 +13,27 @@ namespace Niflib {
 /*!  */
 public class NxMaterialDesc {
 	/*!  */
-	public float dynamicFriction;
+	float dynamicFriction;
 	/*!  */
-	public float staticFriction;
+	float staticFriction;
 	/*!  */
-	public float restitution;
+	float restitution;
 	/*!  */
-	public float dynamicFrictionV;
+	float dynamicFrictionV;
 	/*!  */
-	public float staticFrictionV;
+	float staticFrictionV;
 	/*!  */
-	public Vector3 directionOfAnisotropy;
+	Vector3 directionOfAnisotropy;
 	/*!  */
-	public NxMaterialFlag flags;
+	NxMaterialFlag flags;
 	/*!  */
-	public NxCombineMode frictionCombineMode;
+	NxCombineMode frictionCombineMode;
 	/*!  */
-	public NxCombineMode restitutionCombineMode;
+	NxCombineMode restitutionCombineMode;
 	/*!  */
-	public bool hasSpring;
+	bool hasSpring;
 	/*!  */
-	public NxSpringDesc spring;
+	NxSpringDesc spring;
 	//Constructor
 	public NxMaterialDesc() { unchecked {
 	dynamicFriction = 0.0f;

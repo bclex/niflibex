@@ -19,15 +19,15 @@ public class NiPSDragForce : NiPSForce {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSDragForce", NiPSForce.TYPE);
 	/*!  */
-	public Vector3 dragAxis;
+	Vector3 dragAxis;
 	/*!  */
-	public float percentage;
+	float percentage;
 	/*!  */
-	public float range;
+	float range;
 	/*!  */
-	public float rangeFalloff;
+	float rangeFalloff;
 	/*!  */
-	public NiAVObject dragObject;
+	NiAVObject dragObject;
 
 	public NiPSDragForce() {
 	percentage = 0.0f;
@@ -79,10 +79,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Drag Axis:  {dragAxis}");
 	s.AppendLine($"  Percentage:  {percentage}");
 	s.AppendLine($"  Range:  {range}");

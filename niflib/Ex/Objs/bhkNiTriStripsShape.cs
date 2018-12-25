@@ -19,26 +19,26 @@ public class bhkNiTriStripsShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkNiTriStripsShape", bhkShapeCollection.TYPE);
 	/*! The material of the shape. */
-	public HavokMaterial material;
+	HavokMaterial material;
 	/*!  */
-	public float radius;
+	float radius;
 	/*!
 	 * Garbage data from memory though the last 3 are referred to as maxSize, size, and
 	 * eSize.
 	 */
-	public Array5<uint> unused;
+	Array5<uint> unused;
 	/*!  */
-	public uint growBy;
+	uint growBy;
 	/*! Scale. Usually (1.0, 1.0, 1.0, 0.0). */
-	public Vector4 scale;
+	Vector4 scale;
 	/*! The number of strips data objects referenced. */
-	public uint numStripsData;
+	uint numStripsData;
 	/*! Refers to a bunch of NiTriStripsData objects that make up this shape. */
-	public NiTriStripsData[] stripsData;
+	NiTriStripsData[] stripsData;
 	/*! Number of Havok Layers, equal to Number of strips data objects. */
-	public uint numDataLayers;
+	uint numDataLayers;
 	/*! Havok Layers for each strip data. */
-	public HavokFilter[] dataLayers;
+	HavokFilter[] dataLayers;
 
 	public bhkNiTriStripsShape() {
 	radius = 0.1f;
@@ -161,11 +161,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numDataLayers = (uint)dataLayers.Length;
 	numStripsData = (uint)stripsData.Length;
 	s.AppendLine($"  Unknown Int:  {material.unknownInt}");

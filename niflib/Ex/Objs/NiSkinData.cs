@@ -19,15 +19,15 @@ public class NiSkinData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinData", NiObject.TYPE);
 	/*! Offset of the skin from this bone in bind position. */
-	public NiTransform skinTransform;
+	NiTransform skinTransform;
 	/*! Number of bones. */
-	public uint numBones;
+	uint numBones;
 	/*! This optionally links a NiSkinPartition for hardware-acceleration information. */
-	public NiSkinPartition skinPartition;
+	NiSkinPartition skinPartition;
 	/*! Enables Vertex Weights for this NiSkinData. */
-	public byte hasVertexWeights;
+	byte hasVertexWeights;
 	/*! Contains offset data for each node that this skin is influenced by. */
-	public BoneData[] boneList;
+	BoneData[] boneList;
 
 	public NiSkinData() {
 	numBones = (uint)0;
@@ -147,11 +147,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numBones = (uint)boneList.Length;
 	s.AppendLine($"  Rotation:  {skinTransform.rotation}");
 	s.AppendLine($"  Translation:  {skinTransform.translation}");

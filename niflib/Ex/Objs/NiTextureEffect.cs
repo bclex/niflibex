@@ -22,33 +22,33 @@ public class NiTextureEffect : NiDynamicEffect {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureEffect", NiDynamicEffect.TYPE);
 	/*! Model projection matrix.  Always identity? */
-	public Matrix33 modelProjectionMatrix;
+	Matrix33 modelProjectionMatrix;
 	/*! Model projection transform.  Always (0,0,0)? */
-	public Vector3 modelProjectionTransform;
+	Vector3 modelProjectionTransform;
 	/*! Texture Filtering mode. */
-	public TexFilterMode textureFiltering;
+	TexFilterMode textureFiltering;
 	/*!  */
-	public ushort maxAnisotropy;
+	ushort maxAnisotropy;
 	/*! Texture Clamp mode. */
-	public TexClampMode textureClamping;
+	TexClampMode textureClamping;
 	/*! The type of effect that the texture is used for. */
-	public TextureType textureType;
+	TextureType textureType;
 	/*! The method that will be used to generate UV coordinates for the texture effect. */
-	public CoordGenType coordinateGenerationType;
+	CoordGenType coordinateGenerationType;
 	/*! Image index. */
-	public NiImage image;
+	NiImage image;
 	/*! Source texture index. */
-	public NiSourceTexture sourceTexture;
+	NiSourceTexture sourceTexture;
 	/*! Determines whether a clipping plane is used. */
-	public byte enablePlane;
+	byte enablePlane;
 	/*!  */
-	public NiPlane plane;
+	NiPlane plane;
 	/*!  */
-	public short ps2L;
+	short ps2L;
 	/*!  */
-	public short ps2K;
+	short ps2K;
 	/*! Unknown: 0. */
-	public ushort unknownShort;
+	ushort unknownShort;
 
 	public NiTextureEffect() {
 	textureFiltering = TexFilterMode.FILTER_TRILERP;
@@ -148,10 +148,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Model Projection Matrix:  {modelProjectionMatrix}");
 	s.AppendLine($"  Model Projection Transform:  {modelProjectionTransform}");
 	s.AppendLine($"  Texture Filtering:  {textureFiltering}");

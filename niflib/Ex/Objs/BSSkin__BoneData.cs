@@ -19,9 +19,9 @@ public class BSSkin__BoneData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSkin::BoneData", NiObject.TYPE);
 	/*!  */
-	public uint numBones;
+	uint numBones;
 	/*!  */
-	public BSSkinBoneTrans[] boneList;
+	BSSkinBoneTrans[] boneList;
 
 	public BSSkin__BoneData() {
 	numBones = (uint)0;
@@ -76,11 +76,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numBones = (uint)boneList.Length;
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;

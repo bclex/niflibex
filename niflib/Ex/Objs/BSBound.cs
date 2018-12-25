@@ -19,9 +19,9 @@ public class BSBound : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSBound", NiExtraData.TYPE);
 	/*! Center of the bounding box. */
-	public Vector3 center;
+	Vector3 center;
 	/*! Dimensions of the bounding box from center. */
-	public Vector3 dimensions;
+	Vector3 dimensions;
 
 	public BSBound() {
 	}
@@ -61,10 +61,10 @@ public class BSBound : NiExtraData {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Center:  {center}");
 		s.AppendLine($"    Dimensions:  {dimensions}");
 		return s.ToString();

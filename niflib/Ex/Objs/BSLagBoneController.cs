@@ -19,11 +19,11 @@ public class BSLagBoneController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLagBoneController", NiTimeController.TYPE);
 	/*! How long it takes to rotate about an actor back to rest position. */
-	public float linearVelocity;
+	float linearVelocity;
 	/*! How the bone lags rotation */
-	public float linearRotation;
+	float linearRotation;
 	/*! How far bone will tail an actor. */
-	public float maximumDistance;
+	float maximumDistance;
 
 	public BSLagBoneController() {
 	linearVelocity = 0.0f;
@@ -68,10 +68,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Linear Velocity:  {linearVelocity}");
 	s.AppendLine($"  Linear Rotation:  {linearRotation}");
 	s.AppendLine($"  Maximum Distance:  {maximumDistance}");

@@ -19,104 +19,104 @@ public class BSLightingShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLightingShaderProperty", BSShaderProperty.TYPE);
 	/*! Skyrim Shader Flags for setting render/shader options. */
-	public SkyrimShaderPropertyFlags1 shaderFlags1_sk;
+	SkyrimShaderPropertyFlags1 shaderFlags1_sk;
 	/*! Skyrim Shader Flags for setting render/shader options. */
-	public SkyrimShaderPropertyFlags2 shaderFlags2_sk;
+	SkyrimShaderPropertyFlags2 shaderFlags2_sk;
 	/*!
 	 * Fallout 4 Shader Flags. Mostly overridden if "Name" is a path to a BGSM/BGEM
 	 * file.
 	 */
-	public Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
+	Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
 	/*!
 	 * Fallout 4 Shader Flags. Mostly overridden if "Name" is a path to a BGSM/BGEM
 	 * file.
 	 */
-	public Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
+	Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
 	/*! Offset UVs */
-	public TexCoord uvOffset;
+	TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures, see above. */
-	public TexCoord uvScale;
+	TexCoord uvScale;
 	/*! Texture Set, can have override in an esm/esp */
-	public BSShaderTextureSet textureSet;
+	BSShaderTextureSet textureSet;
 	/*! Glow color and alpha */
-	public Color3 emissiveColor;
+	Color3 emissiveColor;
 	/*! Multiplied emissive colors */
-	public float emissiveMultiple;
+	float emissiveMultiple;
 	/*!  */
-	public IndexString wetMaterial;
+	IndexString wetMaterial;
 	/*! How to handle texture borders. */
-	public TexClampMode textureClampMode;
+	TexClampMode textureClampMode;
 	/*! The material opacity (1=non-transparent). */
-	public float alpha;
+	float alpha;
 	/*!
 	 * The amount of distortion. **Not based on physically accurate refractive index**
 	 * (0=none) (0-1)
 	 */
-	public float refractionStrength;
+	float refractionStrength;
 	/*! The material specular power, or glossiness (0-999). */
-	public float glossiness;
+	float glossiness;
 	/*! The base roughness (0.0-1.0), multiplied by the smoothness map. */
-	public float smoothness;
+	float smoothness;
 	/*! Adds a colored highlight. */
-	public Color3 specularColor;
+	Color3 specularColor;
 	/*! Brightness of specular highlight. (0=not visible) (0-999) */
-	public float specularStrength;
+	float specularStrength;
 	/*! Controls strength for envmap/backlight/rim/softlight lighting effect? */
-	public float lightingEffect1;
+	float lightingEffect1;
 	/*! Controls strength for envmap/backlight/rim/softlight lighting effect? */
-	public float lightingEffect2;
+	float lightingEffect2;
 	/*!  */
-	public float subsurfaceRolloff;
+	float subsurfaceRolloff;
 	/*!  */
-	public float rimlightPower;
+	float rimlightPower;
 	/*!  */
-	public float backlightPower;
+	float backlightPower;
 	/*!  */
-	public float grayscaleToPaletteScale;
+	float grayscaleToPaletteScale;
 	/*!  */
-	public float fresnelPower;
+	float fresnelPower;
 	/*!  */
-	public float wetnessSpecScale;
+	float wetnessSpecScale;
 	/*!  */
-	public float wetnessSpecPower;
+	float wetnessSpecPower;
 	/*!  */
-	public float wetnessMinVar;
+	float wetnessMinVar;
 	/*!  */
-	public float wetnessEnvMapScale;
+	float wetnessEnvMapScale;
 	/*!  */
-	public float wetnessFresnelPower;
+	float wetnessFresnelPower;
 	/*!  */
-	public float wetnessMetalness;
+	float wetnessMetalness;
 	/*! Scales the intensity of the environment/cube map. (0-1) */
-	public float environmentMapScale;
+	float environmentMapScale;
 	/*! Unknown. */
-	public ushort unknownEnvMapShort;
+	ushort unknownEnvMapShort;
 	/*! Tints the base texture. Overridden by game settings. */
-	public Color3 skinTintColor;
+	Color3 skinTintColor;
 	/*! Unknown. */
-	public uint unknownSkinTintInt;
+	uint unknownSkinTintInt;
 	/*! Tints the base texture. Overridden by game settings. */
-	public Color3 hairTintColor;
+	Color3 hairTintColor;
 	/*! Max Passes */
-	public float maxPasses;
+	float maxPasses;
 	/*! Scale */
-	public float scale;
+	float scale;
 	/*! How far from the surface the inner layer appears to be. */
-	public float parallaxInnerLayerThickness;
+	float parallaxInnerLayerThickness;
 	/*! Depth of inner parallax layer effect. */
-	public float parallaxRefractionScale;
+	float parallaxRefractionScale;
 	/*! Scales the inner parallax layer texture. */
-	public TexCoord parallaxInnerLayerTextureScale;
+	TexCoord parallaxInnerLayerTextureScale;
 	/*! How strong the environment/cube map is. (0-??) */
-	public float parallaxEnvmapStrength;
+	float parallaxEnvmapStrength;
 	/*! CK lists "snow material" when used. */
-	public Vector4 sparkleParameters;
+	Vector4 sparkleParameters;
 	/*! Eye cubemap scale */
-	public float eyeCubemapScale;
+	float eyeCubemapScale;
 	/*! Offset to set center for left eye cubemap */
-	public Vector3 leftEyeReflectionCenter;
+	Vector3 leftEyeReflectionCenter;
 	/*! Offset to set center for right eye cubemap */
-	public Vector3 rightEyeReflectionCenter;
+	Vector3 rightEyeReflectionCenter;
 
 	public BSLightingShaderProperty() {
 	shaderFlags1_sk = (SkyrimShaderPropertyFlags1)2185233153;
@@ -356,11 +356,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Shader Flags 1:  {shaderFlags1_sk}");
 	s.AppendLine($"  Shader Flags 2:  {shaderFlags2_sk}");
 	s.AppendLine($"  Shader Flags 1:  {shaderFlags1_fo4}");

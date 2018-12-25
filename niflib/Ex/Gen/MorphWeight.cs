@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class MorphWeight {
 	/*!  */
-	public NiInterpolator interpolator;
+	NiInterpolator interpolator;
 	/*!  */
-	public float weight;
+	float weight;
 	//Constructor
 	public MorphWeight() { unchecked {
 	interpolator = null;

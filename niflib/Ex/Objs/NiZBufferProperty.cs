@@ -26,9 +26,9 @@ public class NiZBufferProperty : NiProperty {
 	 *             Bit 1 controls wether the Z buffer is read only (0) or read/write
 	 * (1)
 	 */
-	public ushort flags;
+	ushort flags;
 	/*! Z-Test function (see: glDepthFunc). In Flags from 20.1.0.3 on. */
-	public ZCompareMode function;
+	ZCompareMode function;
 
 	public NiZBufferProperty() {
 	flags = (ushort)3;
@@ -74,10 +74,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Function:  {function}");
 	return s.ToString();

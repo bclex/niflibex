@@ -19,9 +19,9 @@ public class BSBehaviorGraphExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSBehaviorGraphExtraData", NiExtraData.TYPE);
 	/*! Name of the hkx file. */
-	public IndexString behaviourGraphFile;
+	IndexString behaviourGraphFile;
 	/*! Unknown, has to do with blending appended bones onto an actor. */
-	public bool controlsBaseSkeleton;
+	bool controlsBaseSkeleton;
 
 	public BSBehaviorGraphExtraData() {
 	controlsBaseSkeleton = false;
@@ -62,11 +62,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Behaviour Graph File:  {behaviourGraphFile}");
 	s.AppendLine($"  Controls Base Skeleton:  {controlsBaseSkeleton}");
 	return s.ToString();

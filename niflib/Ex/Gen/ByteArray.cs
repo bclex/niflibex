@@ -13,9 +13,9 @@ namespace Niflib {
 /*! An array of bytes. */
 public class ByteArray {
 	/*! The number of bytes in this array */
-	public uint dataSize;
+	uint dataSize;
 	/*! The bytes which make up the array */
-	public byte[] data;
+	byte[] data;
 	//Constructor
 	public ByteArray() { unchecked {
 	dataSize = (uint)0;

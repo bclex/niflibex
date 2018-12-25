@@ -19,23 +19,23 @@ public class bhkMeshShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMeshShape", bhkShape.TYPE);
 	/*! Unknown. */
-	public Array2<uint> unknowns;
+	Array2<uint> unknowns;
 	/*!  */
-	public float radius;
+	float radius;
 	/*!  */
-	public Array8<byte> unused2;
+	Array8<byte> unused2;
 	/*!  */
-	public Vector4 scale;
+	Vector4 scale;
 	/*!  */
-	public uint numShapeProperties;
+	uint numShapeProperties;
 	/*!  */
-	public hkWorldObjCinfoProperty[] shapeProperties;
+	hkWorldObjCinfoProperty[] shapeProperties;
 	/*! Unknown. */
-	public Array3<int> unknown2;
+	Array3<int> unknown2;
 	/*! The number of strips data objects referenced. */
-	public uint numStripsData;
+	uint numStripsData;
 	/*! Refers to a bunch of NiTriStripsData objects that make up this shape. */
-	public NiTriStripsData[] stripsData;
+	NiTriStripsData[] stripsData;
 
 	public bhkMeshShape() {
 	radius = 0.0f;
@@ -126,11 +126,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numStripsData = (uint)stripsData.Length;
 	numShapeProperties = (uint)shapeProperties.Length;
 	array_output_count = 0;

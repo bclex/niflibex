@@ -13,27 +13,27 @@ namespace Niflib {
 /*!  */
 public class BSPackedSharedGeomData {
 	/*!  */
-	public uint numVerts;
+	uint numVerts;
 	/*!  */
-	public uint lodLevels;
+	uint lodLevels;
 	/*!  */
-	public uint triCountLod0;
+	uint triCountLod0;
 	/*!  */
-	public uint triOffsetLod0;
+	uint triOffsetLod0;
 	/*!  */
-	public uint triCountLod1;
+	uint triCountLod1;
 	/*!  */
-	public uint triOffsetLod1;
+	uint triOffsetLod1;
 	/*!  */
-	public uint triCountLod2;
+	uint triCountLod2;
 	/*!  */
-	public uint triOffsetLod2;
+	uint triOffsetLod2;
 	/*!  */
-	public uint numCombined;
+	uint numCombined;
 	/*!  */
-	public BSPackedGeomDataCombined[] combined;
+	BSPackedGeomDataCombined[] combined;
 	/*!  */
-	public BSVertexDesc vertexDesc;
+	BSVertexDesc vertexDesc;
 	//Constructor
 	public BSPackedSharedGeomData() { unchecked {
 	numVerts = (uint)0;

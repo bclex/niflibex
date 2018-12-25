@@ -19,17 +19,17 @@ public class bhkBoxShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBoxShape", bhkConvexShape.TYPE);
 	/*! Not used. The following wants to be aligned at 16 bytes. */
-	public Array8<byte> unused;
+	Array8<byte> unused;
 	/*!
 	 * A cube stored in Half Extents. A unit cube (1.0, 1.0, 1.0) would be stored as
 	 * 0.5, 0.5, 0.5.
 	 */
-	public Vector3 dimensions;
+	Vector3 dimensions;
 	/*!
 	 * Unused as Havok stores the Half Extents as hkVector4 with the W component
 	 * unused.
 	 */
-	public float unusedFloat;
+	float unusedFloat;
 
 	public bhkBoxShape() {
 	unusedFloat = 0.0f;
@@ -76,11 +76,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 8; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

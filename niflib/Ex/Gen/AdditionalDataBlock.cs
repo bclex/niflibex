@@ -13,19 +13,19 @@ namespace Niflib {
 /*!  */
 public class AdditionalDataBlock {
 	/*! Has data */
-	public bool hasData;
+	bool hasData;
 	/*! Size of Block */
-	public int blockSize;
+	int blockSize;
 	/*!  */
-	public int numBlocks;
+	int numBlocks;
 	/*!  */
-	public int[] blockOffsets;
+	int[] blockOffsets;
 	/*!  */
-	public int numData;
+	int numData;
 	/*!  */
-	public int[] dataSizes;
+	int[] dataSizes;
 	/*!  */
-	public byte[][] data;
+	byte[][] data;
 	//Constructor
 	public AdditionalDataBlock() { unchecked {
 	hasData = false;

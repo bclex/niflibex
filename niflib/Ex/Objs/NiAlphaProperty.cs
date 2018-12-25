@@ -49,13 +49,13 @@ public class NiAlphaProperty : NiProperty {
 	 *             110 GL_GEQUAL
 	 *             111 GL_NEVER
 	 */
-	public ushort flags;
+	ushort flags;
 	/*! Threshold for alpha testing (see: glAlphaFunc) */
-	public byte threshold;
+	byte threshold;
 	/*! Unknown */
-	public ushort unknownShort1;
+	ushort unknownShort1;
 	/*! Unknown */
-	public uint unknownInt2;
+	uint unknownInt2;
 
 	public NiAlphaProperty() {
 	flags = (ushort)4844;
@@ -107,10 +107,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Threshold:  {threshold}");
 	s.AppendLine($"  Unknown Short 1:  {unknownShort1}");

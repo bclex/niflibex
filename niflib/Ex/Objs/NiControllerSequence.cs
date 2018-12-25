@@ -22,38 +22,38 @@ public class NiControllerSequence : NiSequence {
 	 * The weight of a sequence describes how it blends with other sequences at the
 	 * same priority.
 	 */
-	public float weight;
+	float weight;
 	/*!  */
-	public NiTextKeyExtraData textKeys;
+	NiTextKeyExtraData textKeys;
 	/*!  */
-	public CycleType cycleType;
+	CycleType cycleType;
 	/*!  */
-	public float frequency;
+	float frequency;
 	/*!  */
-	public float phase;
+	float phase;
 	/*!  */
-	public float startTime;
+	float startTime;
 	/*!  */
-	public float stopTime;
+	float stopTime;
 	/*!  */
-	public bool playBackwards;
+	bool playBackwards;
 	/*! The owner of this sequence. */
-	public NiControllerManager manager;
+	NiControllerManager manager;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	public IndexString accumRootName;
+	IndexString accumRootName;
 	/*!  */
-	public AccumFlags accumFlags;
+	AccumFlags accumFlags;
 	/*!  */
-	public NiStringPalette stringPalette;
+	NiStringPalette stringPalette;
 	/*!  */
-	public BSAnimNotes animNotes;
+	BSAnimNotes animNotes;
 	/*!  */
-	public ushort numAnimNoteArrays;
+	ushort numAnimNoteArrays;
 	/*!  */
-	public BSAnimNotes[] animNoteArrays;
+	BSAnimNotes[] animNoteArrays;
 
 	public NiControllerSequence() {
 	weight = 1.0f;
@@ -180,11 +180,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numAnimNoteArrays = (ushort)animNoteArrays.Length;
 	s.AppendLine($"  Weight:  {weight}");
 	s.AppendLine($"  Text Keys:  {textKeys}");

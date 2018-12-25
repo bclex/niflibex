@@ -19,11 +19,11 @@ public class bhkConstraint : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConstraint", bhkSerializable.TYPE);
 	/*! Number of bodies affected by this constraint. */
-	public uint numEntities;
+	uint numEntities;
 	/*! The entities affected by this constraint. */
-	public bhkEntity[] entities;
+	bhkEntity[] entities;
 	/*! Usually 1. Higher values indicate higher priority of this constraint? */
-	public uint priority;
+	uint priority;
 
 	public bhkConstraint() {
 	numEntities = (uint)0;
@@ -75,11 +75,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numEntities = (uint)entities.Length;
 	s.AppendLine($"  Num Entities:  {numEntities}");
 	array_output_count = 0;

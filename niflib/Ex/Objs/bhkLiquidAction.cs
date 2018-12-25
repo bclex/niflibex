@@ -19,19 +19,19 @@ public class bhkLiquidAction : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkLiquidAction", bhkSerializable.TYPE);
 	/*!  */
-	public uint userData;
+	uint userData;
 	/*! Unknown */
-	public int unknownInt2;
+	int unknownInt2;
 	/*! Unknown */
-	public int unknownInt3;
+	int unknownInt3;
 	/*!  */
-	public float initialStickForce;
+	float initialStickForce;
 	/*!  */
-	public float stickStrength;
+	float stickStrength;
 	/*!  */
-	public float neighborDistance;
+	float neighborDistance;
 	/*!  */
-	public float neighborStrength;
+	float neighborStrength;
 
 	public bhkLiquidAction() {
 	userData = (uint)0;
@@ -88,10 +88,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  User Data:  {userData}");
 	s.AppendLine($"  Unknown Int 2:  {unknownInt2}");
 	s.AppendLine($"  Unknown Int 3:  {unknownInt3}");

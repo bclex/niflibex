@@ -19,39 +19,39 @@ public class NiCamera : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiCamera", NiAVObject.TYPE);
 	/*! Obsolete flags. */
-	public ushort cameraFlags;
+	ushort cameraFlags;
 	/*! Frustrum left. */
-	public float frustumLeft;
+	float frustumLeft;
 	/*! Frustrum right. */
-	public float frustumRight;
+	float frustumRight;
 	/*! Frustrum top. */
-	public float frustumTop;
+	float frustumTop;
 	/*! Frustrum bottom. */
-	public float frustumBottom;
+	float frustumBottom;
 	/*! Frustrum near. */
-	public float frustumNear;
+	float frustumNear;
 	/*! Frustrum far. */
-	public float frustumFar;
+	float frustumFar;
 	/*! Determines whether perspective is used.  Orthographic means no perspective. */
-	public bool useOrthographicProjection;
+	bool useOrthographicProjection;
 	/*! Viewport left. */
-	public float viewportLeft;
+	float viewportLeft;
 	/*! Viewport right. */
-	public float viewportRight;
+	float viewportRight;
 	/*! Viewport top. */
-	public float viewportTop;
+	float viewportTop;
 	/*! Viewport bottom. */
-	public float viewportBottom;
+	float viewportBottom;
 	/*! Level of detail adjust. */
-	public float lodAdjust;
+	float lodAdjust;
 	/*!  */
-	public NiAVObject scene;
+	NiAVObject scene;
 	/*! Deprecated. Array is always zero length on disk write. */
-	public uint numScreenPolygons;
+	uint numScreenPolygons;
 	/*! Deprecated. Array is always zero length on disk write. */
-	public uint numScreenTextures;
+	uint numScreenTextures;
 	/*! Unknown. */
-	public uint unknownInt3;
+	uint unknownInt3;
 
 	public NiCamera() {
 	cameraFlags = (ushort)0;
@@ -156,10 +156,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Camera Flags:  {cameraFlags}");
 	s.AppendLine($"  Frustum Left:  {frustumLeft}");
 	s.AppendLine($"  Frustum Right:  {frustumRight}");

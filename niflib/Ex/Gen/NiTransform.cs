@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class NiTransform {
 	/*! The rotation part of the transformation matrix. */
-	public Matrix33 rotation;
+	Matrix33 rotation;
 	/*! The translation vector. */
-	public Vector3 translation;
+	Vector3 translation;
 	/*! Scaling part (only uniform scaling is supported). */
-	public float scale;
+	float scale;
 	//Constructor
 	public NiTransform() { unchecked {
 	scale = 1.0f;

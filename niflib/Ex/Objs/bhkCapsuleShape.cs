@@ -19,15 +19,15 @@ public class bhkCapsuleShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkCapsuleShape", bhkConvexShape.TYPE);
 	/*! Not used. The following wants to be aligned at 16 bytes. */
-	public Array8<byte> unused;
+	Array8<byte> unused;
 	/*! First point on the capsule's axis. */
-	public Vector3 firstPoint;
+	Vector3 firstPoint;
 	/*! Matches first capsule radius. */
-	public float radius1;
+	float radius1;
 	/*! Second point on the capsule's axis. */
-	public Vector3 secondPoint;
+	Vector3 secondPoint;
 	/*! Matches second capsule radius. */
-	public float radius2;
+	float radius2;
 
 	public bhkCapsuleShape() {
 	radius1 = 0.0f;
@@ -79,11 +79,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 8; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {

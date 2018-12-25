@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Two Vector4 for pivot in A and B. */
 public class ConstraintInfo {
 	/*!  */
-	public Vector4 pivotInA;
+	Vector4 pivotInA;
 	/*!  */
-	public Vector4 pivotInB;
+	Vector4 pivotInB;
 	//Constructor
 }
 

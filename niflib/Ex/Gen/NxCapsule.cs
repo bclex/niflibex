@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class NxCapsule {
 	/*!  */
-	public float val1;
+	float val1;
 	/*!  */
-	public float val2;
+	float val2;
 	/*!  */
-	public uint capsuleFlags;
+	uint capsuleFlags;
 	//Constructor
 	public NxCapsule() { unchecked {
 	val1 = 0.0f;

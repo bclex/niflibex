@@ -13,13 +13,13 @@ namespace Niflib {
 /*! This is only defined because of recursion issues. */
 public class BSGeometrySubSegment {
 	/*!  */
-	public uint startIndex;
+	uint startIndex;
 	/*!  */
-	public uint numPrimitives;
+	uint numPrimitives;
 	/*!  */
-	public uint parentArrayIndex;
+	uint parentArrayIndex;
 	/*!  */
-	public uint unused;
+	uint unused;
 	//Constructor
 	public BSGeometrySubSegment() { unchecked {
 	startIndex = (uint)0;

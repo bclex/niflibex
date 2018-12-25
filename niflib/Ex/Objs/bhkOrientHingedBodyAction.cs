@@ -19,23 +19,23 @@ public class bhkOrientHingedBodyAction : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkOrientHingedBodyAction", bhkSerializable.TYPE);
 	/*!  */
-	public bhkRigidBody body;
+	bhkRigidBody body;
 	/*! Unknown. */
-	public uint unknownInt1;
+	uint unknownInt1;
 	/*! Unknown. */
-	public uint unknownInt2;
+	uint unknownInt2;
 	/*!  */
-	public Array8<byte> unused1;
+	Array8<byte> unused1;
 	/*!  */
-	public Vector4 hingeAxisLs;
+	Vector4 hingeAxisLs;
 	/*!  */
-	public Vector4 forwardLs;
+	Vector4 forwardLs;
 	/*!  */
-	public float strength;
+	float strength;
 	/*!  */
-	public float damping;
+	float damping;
 	/*!  */
-	public Array8<byte> unused2;
+	Array8<byte> unused2;
 
 	public bhkOrientHingedBodyAction() {
 	body = null;
@@ -104,11 +104,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Body:  {body}");
 	s.AppendLine($"  Unknown Int 1:  {unknownInt1}");
 	s.AppendLine($"  Unknown Int 2:  {unknownInt2}");

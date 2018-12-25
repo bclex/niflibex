@@ -13,17 +13,17 @@ namespace Niflib {
 /*!  */
 public class bhkVelocityConstraintMotor {
 	/*! Minimum motor force */
-	public float minForce;
+	float minForce;
 	/*! Maximum motor force */
-	public float maxForce;
+	float maxForce;
 	/*! Relative stiffness */
-	public float tau;
+	float tau;
 	/*!  */
-	public float targetVelocity;
+	float targetVelocity;
 	/*!  */
-	public bool useVelocityTarget;
+	bool useVelocityTarget;
 	/*! Is Motor enabled */
-	public bool motorEnabled;
+	bool motorEnabled;
 	//Constructor
 	public bhkVelocityConstraintMotor() { unchecked {
 	minForce = -1000000.0f;

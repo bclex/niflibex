@@ -19,47 +19,47 @@ public class NiPSParticleSystem : NiMesh {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSParticleSystem", NiMesh.TYPE);
 	/*!  */
-	public NiPSSimulator simulator;
+	NiPSSimulator simulator;
 	/*!  */
-	public NiPSBoundUpdater generator;
+	NiPSBoundUpdater generator;
 	/*!  */
-	public uint numEmitters;
+	uint numEmitters;
 	/*!  */
-	public NiPSEmitter[] emitters;
+	NiPSEmitter[] emitters;
 	/*!  */
-	public uint numSpawners;
+	uint numSpawners;
 	/*!  */
-	public NiPSSpawner[] spawners;
+	NiPSSpawner[] spawners;
 	/*!  */
-	public NiPSSpawner deathSpawner;
+	NiPSSpawner deathSpawner;
 	/*!  */
-	public uint maxNumParticles;
+	uint maxNumParticles;
 	/*!  */
-	public bool hasColors;
+	bool hasColors;
 	/*!  */
-	public bool hasRotations;
+	bool hasRotations;
 	/*!  */
-	public bool hasRotationAxes;
+	bool hasRotationAxes;
 	/*!  */
-	public bool hasAnimatedTextures;
+	bool hasAnimatedTextures;
 	/*!  */
-	public bool worldSpace;
+	bool worldSpace;
 	/*!  */
-	public AlignMethod normalMethod;
+	AlignMethod normalMethod;
 	/*!  */
-	public Vector3 normalDirection;
+	Vector3 normalDirection;
 	/*!  */
-	public AlignMethod upMethod;
+	AlignMethod upMethod;
 	/*!  */
-	public Vector3 upDirection;
+	Vector3 upDirection;
 	/*!  */
-	public NiPSSpawner livingSpawner;
+	NiPSSpawner livingSpawner;
 	/*!  */
-	public byte numSpawnRateKeys;
+	byte numSpawnRateKeys;
 	/*!  */
-	public PSSpawnRateKey[] spawnRateKeys;
+	PSSpawnRateKey[] spawnRateKeys;
 	/*!  */
-	public bool pre_rpi;
+	bool pre_rpi;
 
 	public NiPSParticleSystem() {
 	simulator = null;
@@ -188,11 +188,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSpawnRateKeys = (byte)spawnRateKeys.Length;
 	numSpawners = (uint)spawners.Length;
 	numEmitters = (uint)emitters.Length;

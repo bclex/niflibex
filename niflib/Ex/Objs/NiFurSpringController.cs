@@ -19,17 +19,17 @@ public class NiFurSpringController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFurSpringController", NiTimeController.TYPE);
 	/*! Unknown. */
-	public float unknownFloat;
+	float unknownFloat;
 	/*! Unknown. */
-	public float unknownFloat2;
+	float unknownFloat2;
 	/*! The number of node bones referenced as influences. */
-	public uint numBones;
+	uint numBones;
 	/*! List of all armature bones. */
-	public NiNode[] bones;
+	NiNode[] bones;
 	/*! The number of node bones referenced as influences. */
-	public uint numBones2;
+	uint numBones2;
 	/*! List of all armature bones. */
-	public NiNode[] bones2;
+	NiNode[] bones2;
 
 	public NiFurSpringController() {
 	unknownFloat = 0.0f;
@@ -96,11 +96,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numBones2 = (uint)bones2.Length;
 	numBones = (uint)bones.Length;
 	s.AppendLine($"  Unknown Float:  {unknownFloat}");

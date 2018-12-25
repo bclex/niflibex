@@ -25,32 +25,32 @@ public class NiSequenceData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSequenceData", NiObject.TYPE);
 	/*!  */
-	public IndexString name;
+	IndexString name;
 	/*!  */
-	public uint numControlledBlocks;
+	uint numControlledBlocks;
 	/*!  */
-	public uint arrayGrowBy;
+	uint arrayGrowBy;
 	/*!  */
-	public ControlledBlock[] controlledBlocks;
+	ControlledBlock[] controlledBlocks;
 	/*!  */
-	public uint numEvaluators;
+	uint numEvaluators;
 	/*!  */
-	public NiEvaluator[] evaluators;
+	NiEvaluator[] evaluators;
 	/*!  */
-	public NiTextKeyExtraData textKeys;
+	NiTextKeyExtraData textKeys;
 	/*!  */
-	public float duration;
+	float duration;
 	/*!  */
-	public CycleType cycleType;
+	CycleType cycleType;
 	/*!  */
-	public float frequency;
+	float frequency;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	public IndexString accumRootName;
+	IndexString accumRootName;
 	/*!  */
-	public AccumFlags accumFlags;
+	AccumFlags accumFlags;
 
 	public NiSequenceData() {
 	numControlledBlocks = (uint)0;
@@ -219,11 +219,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numEvaluators = (uint)evaluators.Length;
 	numControlledBlocks = (uint)controlledBlocks.Length;
 	s.AppendLine($"  Name:  {name}");

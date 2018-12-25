@@ -13,13 +13,13 @@ namespace Niflib {
 /*! The NIF file footer. */
 public class Footer {
 	/*! The number of root references. */
-	public uint numRoots;
+	uint numRoots;
 	/*!
 	 * List of root NIF objects. If there is a camera, for 1st person view, then this
 	 * NIF object is referred to as well in this list, even if it is not a root object
 	 * (usually we want the camera to be attached to the Bip Head node).
 	 */
-	public NiObject[] roots;
+	NiObject[] roots;
 	//Constructor
 	public Footer() { unchecked {
 	numRoots = (uint)0;
@@ -49,7 +49,7 @@ public class Footer {
 		}
 	}
 
-	public string asString(bool verbose) {
+	public string AsString(bool verbose = false) {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		numRoots = (uint)roots.Length;

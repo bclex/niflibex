@@ -22,15 +22,15 @@ public class NiGravity : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGravity", NiParticleModifier.TYPE);
 	/*! Unknown. */
-	public float unknownFloat1;
+	float unknownFloat1;
 	/*! The strength/force of this gravity. */
-	public float force;
+	float force;
 	/*! The force field type. */
-	public FieldType type;
+	FieldType type;
 	/*! The position of the mass point relative to the particle system. */
-	public Vector3 position;
+	Vector3 position;
 	/*! The direction of the applied acceleration. */
-	public Vector3 direction;
+	Vector3 direction;
 
 	public NiGravity() {
 	unknownFloat1 = 0.0f;
@@ -83,10 +83,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Unknown Float 1:  {unknownFloat1}");
 	s.AppendLine($"  Force:  {force}");
 	s.AppendLine($"  Type:  {type}");

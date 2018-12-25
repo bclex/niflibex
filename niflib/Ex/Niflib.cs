@@ -3,6 +3,8 @@ All rights reserved.  Please see niflib.h for license. */
 
 #define DEBUG_HEADER_FOOTER
 #define PRINT_OBJECT_NAMES
+#define PRINT_OBJECT_CONTENTS
+#define DEBUG_LINK_PHASE
 
 using System;
 using System.Collections.Generic;
@@ -181,7 +183,7 @@ namespace Niflib
 
 #if DEBUG_HEADER_FOOTER
             //Print debug output for header
-            Console.Write(header.asString());
+            Console.Write(header.AsString());
 #endif
 
 #if PRINT_OBJECT_NAMES
@@ -221,7 +223,7 @@ namespace Niflib
                     {
                         err.AppendLine("Last successfuly read object was:  ");
                         err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
-                        err.AppendLine(new_obj.asString());
+                        err.AppendLine(new_obj.AsString());
                     }
                     else err.AppendLine("No objects were read successfully.");
                     throw new Exception(err.ToString());
@@ -246,7 +248,7 @@ namespace Niflib
                             {
                                 err.AppendLine("Last successfuly read object was:  ");
                                 err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
-                                err.AppendLine(new_obj.asString());
+                                err.AppendLine(new_obj.AsString());
                             }
                             else err.AppendLine("No objects were read successfully.");
                             throw new Exception(err.ToString());
@@ -271,7 +273,7 @@ namespace Niflib
                         {
                             err.AppendLine("Last successfuly read object was:  ");
                             err.AppendLine("====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
-                            err.Append(new_obj.asString());
+                            err.Append(new_obj.AsString());
                         }
                         else err.AppendLine("No objects were read successfully.");
                         throw new Exception(err.ToString());
@@ -300,12 +302,12 @@ namespace Niflib
                 //Check for an unknown object type
                 if (new_obj == null)
                 {
-                    err.AppendLine("Unknown object type encountered during file read:  ", objectType);
+                    err.AppendLine($"Unknown object type encountered during file read:  {objectType}");
                     if (new_obj != null)
                     {
                         err.AppendLine("Last successfully read object was:  ");
                         err.AppendLine($"====[ Object {i - 1} | {new_obj.GetType().GetTypeName()} ]====");
-                        err.AppendLine(new_obj.asString());
+                        err.AppendLine(new_obj.AsString());
                     }
                     else err.AppendLine("No objects were read successfully.");
                     throw new Exception(err.ToString());
@@ -318,11 +320,8 @@ namespace Niflib
                     //which is used as the index
                     index = ReadUInt(s);
                 }
-                else
-                {
-                    //These newer verisons use their position in the file as their index
-                    index = i;
-                }
+                //These newer verisons use their position in the file as their index
+                else index = i;
 
                 //Read new object
                 new_obj.Read(s, link_stack, info);
@@ -331,30 +330,30 @@ namespace Niflib
                 objects[index] = new_obj;
 
                 //Add object to list
-                obj_list.push_back(new_obj);
+                obj_list.Add(new_obj);
 
                 //Store block number
                 new_obj.internal_block_number = index;
 
                 // Ending position of block in stream
-                std::streampos endobjpos = s.tellg();
+                var endobjpos = s.Position;
 
                 // Check if the size information matches
-                if (header.version >= Nif.VER_20_3_0_3)
+                if (header.version >= VER_20_3_0_3)
                 {
-                    std::streamsize calcobjsize = endobjpos - startobjpos;
-                    uint objsize = header.blockSize[i];
+                    var calcobjsize = endobjpos - startobjpos;
+                    var objsize = header.blockSize[i];
                     if (calcobjsize != objsize)
                     {
-                        err << "Object size mismatch occurred during file read:" << endl;
-                        err << "====[ " << "Object " << i << " | " << objectType << " ]====" << endl;
-                        err << "  Start: " << startobjpos << "  Expected Size: " << objsize << "  Read Size: " << calcobjsize << endl;
-                        err << endl;
+                        err.AppendLine("Object size mismatch occurred during file read:");
+                        err.AppendLine($"====[ Object {i} | {objectType} ]====");
+                        err.AppendLine($"  Start: {startobjpos}  Expected Size: {objsize}  Read Size: {calcobjsize}");
+                        err.AppendLine();
                     }
                 }
 
 #if PRINT_OBJECT_CONTENTS
-                cout << endl << new_obj.asString() << endl;
+                Console.WriteLine($"\n{new_obj.AsString()}");
 #endif
 
                 if (header.version >= VER_3_3_0_13)
@@ -363,58 +362,44 @@ namespace Niflib
                     //and break if we've finished
                     ++i;
                     if (i >= numObjects)
-                    {
                         break;
-                    }
                 }
             }
 
             //--Read Footer--//
-            Footer footer;
+            var footer = new Footer();
             footer.Read(s, link_stack, info);
 
 #if DEBUG_HEADER_FOOTER
             //Print footer debug output
-            footer.asString();
+            Console.WriteLine(footer.AsString());
 #endif
-
             // Check for accumulated warnings
-            if (err.tellp() > 0)
-            {
-                throw runtime_error(err.str());
-            }
+            if (err.Length > 0)
+                throw new Exception(err.ToString());
 
 #if DEBUG_LINK_PHASE
-            cout << "Link Stack:" << endl;
-            list < unsigned int>::iterator it;
-            for (it = link_stack.begin(); it != link_stack.end(); ++it)
-            {
-                cout << *it << endl;
-            }
-
-            cout << "Fixing Links:" << endl;
+            Console.WriteLine("Link Stack:");
+            foreach (var it in link_stack)
+                Console.WriteLine(it);
+            Console.WriteLine("Fixing Links:");
 #endif
             //--Now that all objects are read, go back and fix the links--//
-
-
-            for (uint i = 0; i < obj_list.size(); ++i)
+            for (var i2 = 0; i2 < obj_list.Count; ++i)
             {
 #if DEBUG_LINK_PHASE
-                cout << "   " << i << ":  " << obj_list[i] << endl;
+                Console.WriteLine($"   {i2}:  {obj_list[i2]}");
 #endif
                 //Fix links & other pre-processing
-                obj_list[i].FixLinks(objects, link_stack, missing_link_stack, *info);
+                obj_list[i].FixLinks(objects, link_stack, missing_link_stack, info);
             }
 
             //delete info if it was dynamically allocated
-            if (delete_info)
-            {
-                delete info;
-            }
+            //if (delete_info)
+            //    info.Dispose();
 
             // clear the header pointer in the stream.  Should be in try/catch block
-            hdrInfo hinfo2(null);
-            s >> hinfo2;
+            hdrInfo.Set(s, null);
 
             //Return completed object list
             return obj_list;
@@ -444,7 +429,7 @@ namespace Niflib
          */
         public static List<NiObject> ReadNifList(IStream s, NifInfo info = null)
         {
-            List<NiObject> missing_link_stack;
+            var missing_link_stack = new List<NiObject>();
             return ReadNifList(s, missing_link_stack, info);
         }
 
@@ -490,8 +475,8 @@ namespace Niflib
         static void WriteNifTree(OStream s, List<NiObject> roots, List<NiObject> missing_link_stack, NifInfo info)
         {
             //Enumerate all objects in tree
-            Dictionary<Type_, uint> type_map;
-            Dictionary<NiObject, uint> link_map;
+            var type_map = new Dictionary<Type_, uint>();
+            var link_map = new Dictionary<NiObject, uint>();
 
             foreach (var it in roots)
                 EnumerateObjects(it, type_map, link_map);
@@ -505,7 +490,7 @@ namespace Niflib
             foreach (var it in type_map)
                 types[it.Value] = it.Key;
 
-            uint version = info.version;
+            var version = info.version;
 
             //--Write Header--//
             var header = new Header();
@@ -539,92 +524,80 @@ namespace Niflib
                 // Zero string information
                 header.maxStringLength = 0;
                 header.numStrings = 0;
-                header.strings.clear();
+                header.strings = new string[0];
 
-                NifSizeStream ostr;
-                ostr << hdrInfo(&header);
+                //NifSizeStream ostr;
+                hdrInfo.Set(s, header);
 
                 header.blockSize = new uint[objects.Length];
                 for (var i = 0; i < objects.Length; ++i)
                 {
-                    ostr.reset();
+                    ostr.Reset();
                     objects[i].Write(ostr, link_map, missing_link_stack, info);
-                    header.blockSize[i] = (uint)ostr.tellp();
+                    header.blockSize[i] = (uint)ostr.Position();
                 }
-                header.numStrings = header.strings.size();
+                header.numStrings = (uint)header.strings.Length;
             }
 
             //Write header to file
             header.Write(s, info);
 
 #if PRINT_OBJECT_NAMES
-            cout << endl << "Writing Objects:";
+            Console.Write("\nWriting Objects:");
 #endif
 
             //--Write Objects--//
-            for (uint i = 0; i < objects.size(); ++i)
+            for (var i = 0; i < objects.Length; ++i)
             {
 
 #if PRINT_OBJECT_NAMES
-                cout << endl << i << ":  " << objects[i].GetType().GetTypeName();
+                Console.Write($"\n{i}:  {objects[i].GetType().GetTypeName()}");
 #endif
 
                 if (version < VER_3_3_0_13)
                 {
                     //Check if this object is one of the roots.
-                    for (list<NiObjectRef>::const_iterator it = roots.begin(); it != roots.end(); ++it)
-                    {
-                        if (objects[i] == *it)
+                    foreach (var it in roots)
+                        if (objects[i] == it)
                         {
                             //Write "Top Level Object"
-                            Nif.WriteString("Top Level Object", s);
+                            WriteString("Top Level Object", s);
                             break;
                         }
-                    }
 
                     //Write Object Type
                     WriteString(objects[i].GetType().GetTypeName(), s);
                     //Write pointer number of object
-                    WritePtr32(&(*objects[i]), s);
-
+                    WritePtr32(objects[i], s);
                 }
                 else if (version < 0x05000001)
-                {
                     //Write Object Type
-                    Nif.WriteString(objects[i].GetType().GetTypeName(), out );
-                }
+                    WriteString(objects[i].GetType().GetTypeName(), s);
                 else if (version >= 0x05000001 && version <= VER_10_1_0_106)
-                {
-                    Nif.WriteUInt(0, s);
-                }
+                    WriteUInt(0, s);
 
                 objects[i].Write(s, link_map, missing_link_stack, info);
             }
 
             //--Write Footer--//
-
             if (version < VER_3_3_0_13)
             {
                 //Write "End Of File"
-                WriteString("End Of File", out );
+                WriteString("End Of File", s);
             }
             else
             {
-                Footer footer;
+                var footer = new Footer();
                 footer.numRoots = 0;
-                if (roots.size() == 1)
+                if (roots.Count == 1)
                 {
-                    const NiObjectRef&root = roots.front();
+                    var root = roots[0];
                     if (root.IsDerivedType(NiControllerSequence.TYPE))
                     {
                         // KF animation files allow for multiple roots of type NiControllerSequence
-                        for (var i = 0; i < objects.size(); ++i)
-                        {
-                            if (objects[i].IsDerivedType(NiControllerSequence::TYPE))
-                            {
-                                footer.roots.push_back(objects[i]);
-                            }
-                        }
+                        for (var i = 0; i < objects.Length; ++i)
+                            if (objects[i].IsDerivedType(NiControllerSequence.TYPE))
+                                footer.roots.Add(objects[i]);
                     }
                     else
                     { // just assume its correctly passed in 
@@ -642,12 +615,12 @@ namespace Niflib
             }
 
             // clear the header pointer in the stream.  Should be in try/catch block
-            s << hdrInfo(null);
+            hdrInfo.Set(s, null);
         }
 
-        public static void WriteNifTree(OStream s, List<NiObjectRef> roots, NifInfo info)
+        public static void WriteNifTree(OStream s, List<NiObject> roots, NifInfo info)
         {
-            List<NiObject> missing_link_stack;
+            var missing_link_stack = new List<NiObject>();
             WriteNifTree(s, roots, missing_link_stack, info);
         }
 
@@ -816,21 +789,16 @@ namespace Niflib
         //Object Registration
         static bool g_objects_registered = false;
 
-
-
-        //static void SplitNifTree(NiObject* root_object, NiObjectRef& xnif_root, list<NiObjectRef> & xkf_roots, Kfm & kfm, int kf_type, const NifInfo & info );
-
         //--Function Bodies--//
 
         static NiObject FindRoot(List<NiObject> objects)
         {
             //--Look for a NiNode that has no parents--//
-
             //Find the first NiObjectNET derived object
             NiAVObject root = null;
             for (var i = 0; i < objects.Count; ++i)
             {
-                root = (NiAVObject)objects[i];
+                root = objects[i] as NiAVObject;
                 if (root != null)
                     break;
             }
@@ -840,36 +808,36 @@ namespace Niflib
             //Move up the chain to the root node
             while (root.GetParent() != null)
                 root = (NiAVObject)root.GetParent();
-            return (NiObject)root;
+            return root;
         }
 
-        static NiObjectf _ResolveMissingLinkStackHelper(NiObject root, NiObject obj)
+        static NiObject _ResolveMissingLinkStackHelper(NiObject root, NiObject obj)
         {
             // search by name
-            NiNodeRef rootnode = DynamicCast<NiNode>(root);
-            NiNodeRef objnode = DynamicCast<NiNode>(obj);
+            var rootnode = root as NiNode;
+            var objnode = obj as NiNode;
             if (rootnode != null && objnode != null)
             {
                 if (!(rootnode.GetName().empty()) && rootnode.GetName() == objnode.GetName())
-                    return StaticCast<NiObject>(rootnode);
-                list<NiObjectRef> children = root.GetRefs();
-                for (list<NiObjectRef>::iterator child = children.begin(); child != children.end(); ++child)
+                    return rootnode;
+                var children = root.GetRefs();
+                foreach (var child in children)
                 {
-                    NiObjectRef result = _ResolveMissingLinkStackHelper(*child, obj);
-                    if (result != null)
-                        return result;
+                    var r = _ResolveMissingLinkStackHelper(child, obj);
+                    if (r != null)
+                        return r;
                 }
             }
             // nothing found
-            return NiObjectRef();
+            return new NiObject();
         }
 
         // Determine whether block comes before its parent or not, depending on the block type.
         // return: 'True' if child should come first, 'False' otherwise.
         static bool BlockChildBeforeParent(NiObject root)
         {
-            Type* t = (Type*)&(root.GetType());
-            return (t.IsDerivedType(bhkRefObject::TYPE) && !t.IsDerivedType(bhkConstraint::TYPE));
+            var t = root.GetType();
+            return t.IsDerivedType(bhkRefObject.TYPE) && !t.IsDerivedType(bhkConstraint.TYPE);
         }
 
         // This is a helper function for write to set up the list of all blocks,
@@ -878,59 +846,38 @@ namespace Niflib
         {
             // Ensure that this object has not already been visited
             if (link_map.find(root) != link_map.end())
-            {
                 //This object has already been visited.  Return.
                 return;
-            }
 
-            list<NiObjectRef> links = root.GetRefs();
-            Type* t = (Type*)&(root.GetType());
+            var links = root.GetRefs();
+            var t = root.GetType();
 
             // special case: add bhkConstraint entities before bhkConstraint
             // (these are actually links, not refs)
-            if (t.IsDerivedType(bhkConstraint::TYPE))
-            {
-                vector<bhkEntity*> entities = ((bhkConstraint*)root).GetEntities();
-                for (vector<bhkEntity*>::iterator it = entities.begin(); it != entities.end(); ++it)
-                {
-                    if (*it != null)
-                    {
-                        EnumerateObjects((NiObject*)(*it), type_map, link_map);
-                    }
-                }
-            }
+            if (t.IsDerivedType(bhkConstraint.TYPE))
+                foreach (var it in ((bhkConstraint)root).Entities)
+                    if (it != null)
+                        EnumerateObjects(it, type_map, link_map);
 
             // Call this function on all links of this object
             // add children that come before the block
-            for (list<NiObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
-            {
-                if (*it != null && BlockChildBeforeParent(*it))
-                {
-                    EnumerateObjects(*it, type_map, link_map);
-                }
-            }
+            foreach (var it in links)
+                if (it != null && BlockChildBeforeParent(it))
+                    EnumerateObjects(it, type_map, link_map);
 
             // Add this object type to the map if it isn't there already
             // TODO: add support for NiDataStreams
             if (type_map.find(t) == type_map.end())
-            {
                 //The type has not yet been registered, so register it
-                unsigned int n = type_map.size();
-                type_map[t] = n;
-            }
+                type_map[t] = (uint)type_map.Count;
 
             // add the block
-            unsigned int n = link_map.size();
-            link_map[root] = n;
+            link_map[root] = (uint)link_map.Count;
 
             // add children that come after the block
-            for (list<NiObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
-            {
-                if (*it != null && !BlockChildBeforeParent(*it))
-                {
-                    EnumerateObjects(*it, type_map, link_map);
-                }
-            }
+            foreach (var it in links)
+                if (it != null && !BlockChildBeforeParent(it))
+                    EnumerateObjects(it, type_map, link_map);
         }
 
         //TODO: Should this be returning an object of a derived type too?
@@ -993,77 +940,68 @@ namespace Niflib
          * \param kf_type What type of keyframe tree to write (Morrowind style, DAoC style, ...).
          * \param info A NifInfo structure that contains information such as the version of the NIF file to create.
          */
-        static void SplitNifTree(NiObject root_object, NiObject xnif_root, List<NiObject> xkf_roots, Kfm kfm, int kf_type, NifInfo info)
+        static void SplitNifTree(NiObject root_object, out NiObject xnif_root, out List<NiObject> xkf_roots, out Kfm kfm, NifGame kf_type, NifInfo info)
         {
+            xkf_roots = new List<NiObject>();
             // Do we have animation groups (a NiTextKeyExtraData object)?
             // If so, create XNif and XKf trees.
             var txtkey = GetObjectByType(root_object, NiTextKeyExtraData.TYPE);
             NiTextKeyExtraData txtkey_obj = null;
             if (txtkey != null)
-                txtkey_obj = (NiTextKeyExtraData)txtkey;
+                txtkey_obj = txtkey as NiTextKeyExtraData;
             if (txtkey_obj != null)
             {
-                if (kf_type == KF_MW)
+                if (kf_type == NifGame.KF_MW)
                 {
                     // Construct the XNif file...
                     xnif_root = CloneNifTree(root_object, info.version, info.userVersion);
 
                     // Now search and locate newer timeframe controllers and convert to keyframecontrollers
-                    list<NiObjectRef> mgrs = GetAllObjectsByType(xnif_root, NiControllerManager.TYPE);
-                    for (list<NiObjectRef>::iterator it = mgrs.begin(); it != mgrs.end(); ++it)
+                    var mgrs = GetAllObjectsByType(xnif_root, NiControllerManager.TYPE);
+                    foreach (var it in mgrs)
                     {
-                        NiControllerManagerRef mgr = DynamicCast<NiControllerManager>(*it);
+                        var mgr = it as NiControllerManager;
                         if (mgr == null)
-                        {
                             continue;
-                        }
-                        NiObjectNETRef target = mgr.GetTarget();
-                        target.RemoveController(StaticCast<NiTimeController>(mgr));
-                        vector<NiControllerSequenceRef> seqs = mgr.GetControllerSequences();
-                        for (vector<NiControllerSequenceRef>::iterator itr = seqs.begin(); itr != seqs.end(); ++itr)
-                        {
-                            NiControllerSequenceRef seq = (*itr);
-                            MergeNifTrees(DynamicCast<NiNode>(target), seq, info.version, info.userVersion);
-                        }
+                        var target = mgr.GetTarget();
+                        target.RemoveController((NiTimeController)mgr);
+                        var seqs = mgr.GetControllerSequences();
+                        foreach (var itr in seqs)
+                            MergeNifTrees(target as NiNode, itr, info.version, info.userVersion);
                     }
 
                     // Now the XKf file...
                     // Create xkf root header.
-                    NiSequenceStreamHelperRef xkf_stream_helper = new NiSequenceStreamHelper;
-                    xkf_roots.push_back(StaticCast<NiObject>(xkf_stream_helper));
+                    var xkf_stream_helper = new NiSequenceStreamHelper();
+                    xkf_roots.Add(xkf_stream_helper);
 
                     // Append NiNodes with a NiKeyFrameController as NiStringExtraData objects.
-                    list<pair<NiNodeRef, NiKeyframeControllerRef>> node_controllers;
+                    var node_controllers = new List<Tuple<NiNode, NiKeyframeController>>();
 
-                    list<NiObjectRef> nodes = GetAllObjectsByType(xnif_root, NiNode::TYPE);
-                    for (list<NiObjectRef>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+                    var nodes = GetAllObjectsByType(xnif_root, NiNode.TYPE);
+                    foreach (var it2 in nodes)
                     {
-                        NiNodeRef node = DynamicCast<NiNode>(*it);
+                        var node = it2 as NiNode;
                         if (node == null)
-                        {
                             continue;
-                        }
 
                         //Find the first NiKeyframeController in the controller list, if any
-                        list<NiTimeControllerRef> controllers = node.GetControllers();
-                        NiKeyframeControllerRef key_controller;
-                        for (list<NiTimeControllerRef>::iterator it = controllers.begin(); it != controllers.end(); ++it)
+                        var controllers = node.GetControllers();
+                        NiKeyframeController key_controller = null;
+                        foreach (var it in controllers)
                         {
-
-                            if ((*it).IsDerivedType(NiKeyframeController::TYPE))
+                            if (it.IsDerivedType(NiKeyframeController.TYPE))
+                                key_controller = (NiKeyframeController)it;
+                            else if (it.IsDerivedType(NiTransformController.TYPE))
                             {
-                                key_controller = StaticCast<NiKeyframeController>(*it);
-                            }
-                            else if ((*it).IsDerivedType(NiTransformController::TYPE))
-                            {
-                                NiTransformControllerRef trans = StaticCast<NiTransformController>(*it);
-                                NiTransformInterpolatorRef interp = DynamicCast<NiTransformInterpolator>(trans.GetInterpolator());
+                                var trans = (NiTransformController)it;
+                                var interp = trans.GetInterpolator() as NiTransformInterpolator;
                                 if (interp != null)
                                 {
-                                    NiTransformDataRef transData = interp.GetData();
+                                    var transData = interp.Data;
                                     if (transData != null)
                                     {
-                                        NiKeyframeDataRef data = new NiKeyframeData();
+                                        var data = new NiKeyframeData();
                                         data.SetRotateType(transData.GetRotateType());
                                         data.SetTranslateType(transData.GetTranslateType());
                                         data.SetScaleType(transData.GetScaleType());
@@ -1092,647 +1030,600 @@ namespace Niflib
 
                         //If this node has a keyframe controller, put it in the list
                         if (key_controller != null)
-                        {
-                            node_controllers.push_back(pair<NiNodeRef, NiKeyframeControllerRef>(node, key_controller));
-                        }
+                            node_controllers.Add(new Tuple<NiNode, NiKeyframeController>(node, key_controller));
                     }
 
-                    for (list<pair<NiNodeRef, NiKeyframeControllerRef>>::reverse_iterator it = node_controllers.rbegin(); it != node_controllers.rend(); ++it)
+                    foreach (var it in node_controllers.Reverse())
                     {
                         //Add string data				
-                        NiStringExtraDataRef nodextra = new NiStringExtraData;
+                        var nodextra = new NiStringExtraData();
                         nodextra.SetData(it.first.GetName());
-                        xkf_stream_helper.AddExtraData(StaticCast<NiExtraData>(nodextra), info.version);
+                        xkf_stream_helper.AddExtraData((NiExtraData)nodextra, info.version);
 
-                        NiKeyframeControllerRef controller = it.second;
-                        (it.first).RemoveController(StaticCast<NiTimeController>(controller));
-
-                        xkf_stream_helper.AddController(StaticCast<NiTimeController>(controller));
+                        var controller = it.second;
+                        it.first.RemoveController((NiTimeController)controller);
+                        xkf_stream_helper.AddController((NiTimeController)controller);
                     }
 
                     // Add a copy of the NiTextKeyExtraData object to the XKf header.
-                    NiTextKeyExtraDataRef xkf_txtkey_obj = new NiTextKeyExtraData;
-                    xkf_stream_helper.AddExtraData(StaticCast<NiExtraData>(xkf_txtkey_obj), info.version);
+                    var xkf_txtkey_obj = new NiTextKeyExtraData();
+                    xkf_stream_helper.AddExtraData((NiExtraData)xkf_txtkey_obj, info.version);
                     xkf_txtkey_obj.SetKeys(txtkey_obj.GetKeys());
-
                 }
-                else if (kf_type == KF_CIV4)
+                else if (kf_type == NifGame.KF_CIV4)
                 {
                     // Construct the Nif file without transform controllers ...
                     xnif_root = CloneNifTree(root_object, info.version, info.userVersion);
 
-                    list<NiObjectRef> mgrs = GetAllObjectsByType(xnif_root, NiControllerManager::TYPE);
-                    for (list<NiObjectRef>::iterator it = mgrs.begin(); it != mgrs.end(); ++it)
+                    var mgrs = GetAllObjectsByType(xnif_root, NiControllerManager.TYPE);
+                    foreach (var it in mgrs)
                     {
-                        NiControllerManagerRef mgr = DynamicCast<NiControllerManager>(*it);
+                        var mgr = it as NiControllerManager;
                         if (mgr == null)
-                        {
                             continue;
-                        }
-                        NiObjectNETRef target = mgr.GetTarget();
-                        target.RemoveController(StaticCast<NiTimeController>(mgr));
-                        vector<NiControllerSequenceRef> seqs = mgr.GetControllerSequences();
-                        for (vector<NiControllerSequenceRef>::iterator itr = seqs.begin(); itr != seqs.end(); ++itr)
-                        {
-                            xkf_roots.push_back(StaticCast<NiObject>(*itr));
-                        }
+                        var target = mgr.GetTarget();
+                        target.RemoveController((NiTimeController)mgr);
+                        var seqs = mgr.GetControllerSequences();
+                        foreach (var itr in seqs)
+                            xkf_roots.Add((NiObject)itr);
                         mgr.ClearSequences();
                     }
                 }
-                else if (kf_type == KF_FFVT3R)
+                else if (kf_type == NifGame.KF_FFVT3R)
                 {
-
                     // Construct the Nif file without transform controllers ...
                     xnif_root = CloneNifTree(root_object, info.version, info.userVersion);
 
                     // Delete all NiMultiTargetTransformController
-                    list<NiObjectRef> nodes = GetAllObjectsByType(xnif_root, NiMultiTargetTransformController::TYPE);
-                    for (list<NiObjectRef>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-                    {
-                        if (NiMultiTargetTransformControllerRef ctrl = DynamicCast<NiMultiTargetTransformController>(*it) ) {
-                        if (NiNodeRef target = DynamicCast<NiNode>(ctrl.GetTarget())) {
+                    var nodes = GetAllObjectsByType(xnif_root, NiMultiTargetTransformController.TYPE);
+                    NiMultiTargetTransformController ctrl; NiNode target;
+                    foreach (var it in nodes)
+                        if ((ctrl = it as NiMultiTargetTransformController) != null && (target = ctrl.GetTarget() as NiNode) != null)
                             target.RemoveController(ctrl);
-                        }
+
+                    var mgrs = GetAllObjectsByType(xnif_root, NiControllerManager.TYPE);
+                    foreach (var it in mgrs)
+                    {
+                        var mgr = it as NiControllerManager;
+                        if (mgr == null)
+                            continue;
+                        var target = mgr.GetTarget();
+                        target.RemoveController((NiTimeController)mgr);
+                        var seqs = mgr.GetControllerSequences();
+                        foreach (var itr in seqs)
+                            xkf_roots.Add((NiObject)itr);
+                        mgr.ClearSequences();
                     }
                 }
+                else throw new Exception("KF splitting for the requested game is not yet implemented.");
+            }
+            // no animation groups: nothing to do
+            else xnif_root = root_object;
+        }
 
-                list<NiObjectRef> mgrs = GetAllObjectsByType(xnif_root, NiControllerManager::TYPE);
-                for (list<NiObjectRef>::iterator it = mgrs.begin(); it != mgrs.end(); ++it)
+        //TODO:  This was written by Amorilia.  Figure out how to fix it.
+        static void WriteFileGroup(string file_name, NiObject root_object, NifInfo info, ExportOptions export_files, NifGame kf_type)
+        {
+            // Get base filename.
+            var file_name_slash = (uint)file_name.rfind("\\") + 1;
+            var file_name_path = file_name.Substring(0, file_name_slash);
+            var file_name_base = file_name.Substring(file_name_slash);
+            var file_name_dot = (uint)file_name_base.rfind(".");
+            file_name_base = file_name_base.Substring(0, file_name_dot);
+
+            // Deal with the simple case first
+            if (export_files == ExportOptions.EXPORT_NIF)
+                WriteNifTree(file_name_path + file_name_base + ".nif", root_object, info); // simply export the NIF file!
+            // Now consider all other cases
+            else if (kf_type == NifGame.KF_MW)
+            {
+                if (export_files == ExportOptions.EXPORT_NIF_KF)
                 {
-                    NiControllerManagerRef mgr = DynamicCast<NiControllerManager>(*it);
-                    if (mgr == null)
+                    // for Morrowind we must also write the full NIF file
+                    WriteNifTree(file_name_path + file_name_base + ".nif", root_object, info); // simply export the NIF file!
+                    SplitNifTree(root_object, out var xnif_root, out var xkf_roots, out kfm, kf_type, info);
+                    if (xnif_root != null && !xkf_roots.empty())
                     {
-                        continue;
+                        WriteNifTree(file_name_path + "x" + file_name_base + ".nif", xnif_root, info);
+                        WriteNifTree(file_name_path + "x" + file_name_base + ".kf", xkf_roots.front(), info);
                     }
-                    NiObjectNETRef target = mgr.GetTarget();
-                    target.RemoveController(StaticCast<NiTimeController>(mgr));
-                    vector<NiControllerSequenceRef> seqs = mgr.GetControllerSequences();
-                    for (vector<NiControllerSequenceRef>::iterator itr = seqs.begin(); itr != seqs.end(); ++itr)
-                    {
-                        xkf_roots.push_back(StaticCast<NiObject>(*itr));
-                    }
-                    mgr.ClearSequences();
                 }
-
+                else throw new Exception("Invalid export option.");
             }
-            else
+            else if (kf_type == NifGame.KF_CIV4)
             {
-                throw runtime_error("KF splitting for the requested game is not yet implemented.");
+                SplitNifTree(root_object, out var xnif_root, out var xkf_roots, out kfm, kf_type, info);
+                if (export_files == ExportOptions.EXPORT_NIF || export_files == ExportOptions.EXPORT_NIF_KF || export_files == ExportOptions.EXPORT_NIF_KF_MULTI)
+                    WriteNifTree(file_name_path + file_name_base + ".nif", xnif_root, info);
+                if (export_files == ExportOptions.EXPORT_NIF_KF || export_files == ExportOptions.EXPORT_KF)
+                    WriteNifTree(file_name_path + file_name_base + ".kf", xkf_roots, info);
+                else if (export_files == ExportOptions.EXPORT_NIF_KF_MULTI || export_files == ExportOptions.EXPORT_KF_MULTI)
+                    foreach (var it in xkf_roots)
+                    {
+                        var seq = it as NiControllerSequence;
+                        if (seq == null)
+                            continue;
+                        var path = file_name_path + file_name_base + "_" + CreateFileName(seq.GetTargetName()) + "_" + CreateFileName(seq.GetName()) + ".kf";
+                        WriteNifTree(path, (NiObject)seq, info);
+                    }
             }
-        } else {
-		// no animation groups: nothing to do
-		xnif_root = root_object;
-	};
-}
-
-//TODO:  This was written by Amorilia.  Figure out how to fix it.
-static void WriteFileGroup(string const file_name, NiObject root_object, NifInfo info, ExportOptions export_files, NifGame kf_type)
-{
-    // Get base filename.
-    uint file_name_slash = (unsigned int)(file_name.rfind("\\") + 1);
-    string file_name_path = file_name.substr(0, file_name_slash);
-    string file_name_base = file_name.substr(file_name_slash, file_name.length());
-    unsigned int file_name_dot = (unsigned int)(file_name_base.rfind("."));
-    file_name_base = file_name_base.substr(0, file_name_dot);
-
-    // Deal with the simple case first
-    if (export_files == EXPORT_NIF)
-        WriteNifTree(file_name_path + file_name_base + ".nif", root_object, info); // simply export the NIF file!
-                                                                                   // Now consider all other cases
-    else if (kf_type == Niflib.NifGame.KF_MW)
-    {
-        if (export_files == EXPORT_NIF_KF)
-        {
-            // for Morrowind we must also write the full NIF file
-            WriteNifTree(file_name_path + file_name_base + ".nif", root_object, info); // simply export the NIF file!
-            NiObjectRef xnif_root;
-            list<NiObjectRef> xkf_roots;
-            Kfm kfm; // dummy
-            SplitNifTree(root_object, xnif_root, xkf_roots, kfm, kf_type, info);
-            if (xnif_root != null && !xkf_roots.empty())
+            else if (kf_type == NifGame.KF_FFVT3R)
             {
-                WriteNifTree(file_name_path + "x" + file_name_base + ".nif", xnif_root, info);
-                WriteNifTree(file_name_path + "x" + file_name_base + ".kf", xkf_roots.front(), info);
-            };
-        }
-        else
-            throw runtime_error("Invalid export option.");
-    }
-    else if (kf_type == KF_CIV4)
-    {
-
-        NiObjectRef xnif_root;
-        list<NiObjectRef> xkf_roots;
-        Kfm kfm; // dummy
-        SplitNifTree(root_object, xnif_root, xkf_roots, kfm, kf_type, info);
-        if (export_files == EXPORT_NIF || export_files == EXPORT_NIF_KF || export_files == EXPORT_NIF_KF_MULTI)
-        {
-            WriteNifTree(file_name_path + file_name_base + ".nif", xnif_root, info);
-        }
-        if (export_files == EXPORT_NIF_KF || export_files == EXPORT_KF)
-        {
-            WriteNifTree(file_name_path + file_name_base + ".kf", xkf_roots, info);
-        }
-        else if (export_files == EXPORT_NIF_KF_MULTI || export_files == EXPORT_KF_MULTI)
-        {
-            for (list<NiObjectRef>::iterator it = xkf_roots.begin(); it != xkf_roots.end(); ++it)
-            {
-                NiControllerSequenceRef seq = DynamicCast<NiControllerSequence>(*it);
-                if (seq == null)
-                    continue;
-                string path = file_name_path + file_name_base + "_" + CreateFileName(seq.GetTargetName()) + "_" + CreateFileName(seq.GetName()) + ".kf";
-                WriteNifTree(path, StaticCast<NiObject>(seq), info);
+                SplitNifTree(root_object, out var xnif_root, out var xkf_roots, out var kfm, kf_type, info);
+                if (export_files == ExportOptions.EXPORT_NIF || export_files == ExportOptions.EXPORT_NIF_KF || export_files == ExportOptions.EXPORT_NIF_KF_MULTI)
+                    WriteNifTree(file_name_path + file_name_base + ".nif", xnif_root, info);
+                if (export_files == ExportOptions.EXPORT_NIF_KF || export_files == ExportOptions.EXPORT_KF)
+                    WriteNifTree(file_name_path + file_name_base + ".kf", xkf_roots, info);
+                else if (export_files == ExportOptions.EXPORT_NIF_KF_MULTI || export_files == ExportOptions.EXPORT_KF_MULTI)
+                    foreach (var it in xkf_roots)
+                    {
+                        var seq = it as NiControllerSequence;
+                        if (seq == null)
+                            continue;
+                        var path = file_name_path + file_name_base + "_" + CreateFileName(seq.GetTargetName()) + "_" + CreateFileName(seq.GetName()) + ".kf";
+                        WriteNifTree(path, (NiObject)seq, info);
+                    }
             }
+            else throw new Exception("Not yet implemented.");
         }
-    }
-    else if (kf_type == KF_FFVT3R)
-    {
 
-        NiObjectRef xnif_root;
-        list<NiObjectRef> xkf_roots;
-        Kfm kfm; // dummy
-        SplitNifTree(root_object, xnif_root, xkf_roots, kfm, kf_type, info);
-        if (export_files == EXPORT_NIF || export_files == EXPORT_NIF_KF || export_files == EXPORT_NIF_KF_MULTI)
+        static void MapNodeNames(Dictionary<string, NiNodeRef> name_map, NiNode par)
         {
-            WriteNifTree(file_name_path + file_name_base + ".nif", xnif_root, info);
-        }
-        if (export_files == EXPORT_NIF_KF || export_files == EXPORT_KF)
-        {
-            WriteNifTree(file_name_path + file_name_base + ".kf", xkf_roots, info);
-        }
-        else if (export_files == EXPORT_NIF_KF_MULTI || export_files == EXPORT_KF_MULTI)
-        {
-            for (list<NiObjectRef>::iterator it = xkf_roots.begin(); it != xkf_roots.end(); ++it)
+            //Add the par node to the map, and then call this function for each of its children
+            name_map[par.GetName()] = par;
+
+            List<NiAVObjectRef> links = par.GetChildren();
+            for (vector<NiAVObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
             {
-                NiControllerSequenceRef seq = DynamicCast<NiControllerSequence>(*it);
-                if (seq == null)
-                    continue;
-                string path = file_name_path + file_name_base + "_" + CreateFileName(seq.GetTargetName()) + "_" + CreateFileName(seq.GetName()) + ".kf";
-                WriteNifTree(path, StaticCast<NiObject>(seq), info);
-            }
-        }
-    }
-    else
-        throw runtime_error("Not yet implemented.");
-}
-
-static void MapNodeNames(Dictionary<string, NiNodeRef> name_map, NiNode par)
-{
-    //Add the par node to the map, and then call this function for each of its children
-    name_map[par.GetName()] = par;
-
-    List<NiAVObjectRef> links = par.GetChildren();
-    for (vector<NiAVObjectRef>::iterator it = links.begin(); it != links.end(); ++it)
-    {
-        NiNodeRef child_node = DynamicCast<NiNode>(*it);
-        if (child_node != null)
-        {
-            MapNodeNames(name_map, child_node);
-        };
-    };
-}
-
-//This function will merge two scene graphs by attatching new objects to the correct position
-//on the existing scene graph.  In other words, it deals only with adding new nodes, not altering
-//existing nodes by changing their data or attatched properties
-void MergeSceneGraph(map<string, NiNodeRef> & name_map, NiNode* root, NiAVObject* par)
-{
-    //Check if this object's name exists in the object map
-    string name = par.GetName();
-
-    if (name_map.find(name) != name_map.end())
-    {
-        //This object already exists in the original file, so continue on to its children, if it is a NiNode
-
-        NiNodeRef par_node = DynamicCast<NiNode>(par);
-        if (par_node != null)
-        {
-            vector<NiAVObjectRef> children = par_node.GetChildren();
-            for (vector<NiAVObjectRef>::iterator it = children.begin(); it != children.end(); ++it)
-            {
-                if ((*it) != null)
+                NiNodeRef child_node = DynamicCast<NiNode>(*it);
+                if (child_node != null)
                 {
-                    MergeSceneGraph(name_map, root, *it);
+                    MapNodeNames(name_map, child_node);
                 };
             };
         }
-        return;
-    }
 
-    //This object has a new name and either it has no parent or its parent has a name that is
-    // in the list.  Attatch it to the object with the same name as its parent
-    //all child objects will follow along.
-    NiNodeRef par_par = par.GetParent();
-
-    if (par_par == null)
-    {
-        //This object has a new name and no parents.  That means it is the root object.
-        //of a disimilar Nif file.
-
-        //Check whether we have a NiNode ( a node that might have children) or not.
-        NiNodeRef par_node = DynamicCast<NiNode>(par);
-        if (par_node == null)
+        //This function will merge two scene graphs by attatching new objects to the correct position
+        //on the existing scene graph.  In other words, it deals only with adding new nodes, not altering
+        //existing nodes by changing their data or attatched properties
+        void MergeSceneGraph(map<string, NiNodeRef> & name_map, NiNode* root, NiAVObject* par)
         {
-            //This is not a NiNode class, so simply add it as a new child of the
-            //target root node
-            root.AddChild(par);
-        }
-        else
-        {
-            //This is a NiNode class, so merge its child list with that of the root
-            vector<NiAVObjectRef> children = par_node.GetChildren();
-            for (unsigned int i = 0; i < children.size(); ++i)
+            //Check if this object's name exists in the object map
+            string name = par.GetName();
+
+            if (name_map.find(name) != name_map.end())
             {
-                root.AddChild(children[i]);
-            }
-        }
-    }
-    else
-    {
-        //This object has a new name and has a parent with a name that already exists.
-        //Attatch it to the object in the target tree that matches the name of its
-        //parent
+                //This object already exists in the original file, so continue on to its children, if it is a NiNode
 
-        //TODO:  Implement children
-        ////Remove this object from its old parent
-        //par_par.GetAttr("Children").RemoveLinks( par );
-
-        //Get the object to attatch to
-        NiObjectRef attatch = DynamicCast<NiObject>(name_map[par_par.GetName()]);
-
-        //TODO:  Implement children
-        ////Add this object as new child
-        //attatch.GetAttr("Children").AddLink( par );
-    }
-}
-
-void MergeNifTrees(NiNode* target, NiAVObject* right, unsigned version, unsigned user_version)
-{
-    //For now assume that both are normal Nif trees just to verify that it works
-
-    //Make a clone of the tree to add
-    stringstream tmp;
-    //WriteNifTree( tmp, right, version );
-    tmp.seekg(0, ios_base::beg);
-    NiAVObjectRef new_tree = right;// ReadNifTree( tmp ); TODO: Figure out why this doesn't work
-
-    //Create a list of names in the target
-    map<string, NiNodeRef> name_map;
-    MapNodeNames(name_map, target);
-
-    ////Reassign any cross references in the new tree to point to objects in the
-    ////target tree with the same names
-    //ReassignTreeCrossRefs( name_map, new_tree );
-
-    //Use the name map to merge the Scene Graphs
-    MergeSceneGraph(name_map, target, new_tree);
-}
-
-//Version for merging KF Trees rooted by a NiControllerSequence
-void MergeNifTrees(NiNode* target, NiControllerSequence* right, unsigned version, unsigned user_version)
-{
-    //Map the node names
-    map<string, NiNodeRef> name_map;
-    MapNodeNames(name_map, target);
-
-    //TODO:  Allow this to merge a KF sequence into a file that already has
-    //sequences in it by appending all the keyframe data to the end of
-    //existing controllers
-
-    //Get the NiTextKeyExtraData, clone it, and attach it to the target node
-    NiTextKeyExtraDataRef txt_key = right.GetTextKeyExtraData();
-    if (txt_key != null)
-    {
-        NiObjectRef tx_clone = txt_key.Clone(version, user_version);
-        NiExtraDataRef ext_dat = DynamicCast<NiExtraData>(tx_clone);
-        if (ext_dat != null)
-        {
-            target.AddExtraData(ext_dat, version);
-        }
-    }
-
-    //Atach it to
-
-    //Get the controller data
-    vector<ControllerLink> data = right.GetControllerData();
-
-    //Connect a clone of all the interpolators/controllers to the named node
-    for (unsigned int i = 0; i < data.size(); ++i)
-    {
-        //Get strings
-        //TODO: Find out if other strings are needed
-        string node_name, ctlr_type;
-        NiStringPaletteRef str_pal = data[i].stringPalette;
-        if (str_pal == null)
-        {
-            node_name = data[i].nodeName;
-            ctlr_type = data[i].controllerType;
-        }
-        else
-        {
-            node_name = str_pal.GetSubStr(data[i].nodeNameOffset);
-            ctlr_type = str_pal.GetSubStr(data[i].controllerTypeOffset);
-        }
-        //Make sure there is a node with this name in the target tree
-        if (name_map.find(node_name) != name_map.end())
-        {
-            //See if we're dealing with an interpolator or a controller
-            if (data[i].controller != null)
-            {
-                //Clone the controller and attached data and
-                //add it to the named node
-                NiObjectRef clone = CloneNifTree(StaticCast<NiObject>(data[i].controller), version, user_version);
-                NiTimeControllerRef ctlr = DynamicCast<NiTimeController>(clone);
-                if (ctlr != null)
+                NiNodeRef par_node = DynamicCast<NiNode>(par);
+                if (par_node != null)
                 {
-                    name_map[node_name].AddController(ctlr);
-                }
-            }
-            else if (data[i].interpolator != null)
-            {
-                //Clone the interpolator and attached data and
-                //attach it to the specific type of controller that's
-                //connected to the named node
-                NiNodeRef node = name_map[node_name];
-                list<NiTimeControllerRef> ctlrs = node.GetControllers();
-                NiSingleInterpControllerRef ctlr;
-                for (list<NiTimeControllerRef>::iterator it = ctlrs.begin(); it != ctlrs.end(); ++it)
-                {
-                    if (*it != null && (*it).GetType().GetTypeName() == ctlr_type)
+                    vector<NiAVObjectRef> children = par_node.GetChildren();
+                    for (vector<NiAVObjectRef>::iterator it = children.begin(); it != children.end(); ++it)
                     {
-                        ctlr = DynamicCast<NiSingleInterpController>(*it);
-                        if (ctlr != null)
+                        if ((*it) != null)
                         {
-                            break;
-                        }
-                    }
+                            MergeSceneGraph(name_map, root, *it);
+                        };
+                    };
                 }
-
-                //If the controller wasn't found, create one of the right type and attach it
-                if (ctlr == null)
-                {
-                    NiObjectRef new_ctlr = ObjectRegistry::CreateObject(ctlr_type);
-                    ctlr = DynamicCast<NiSingleInterpController>(new_ctlr);
-                    if (ctlr == null)
-                    {
-                        throw runtime_error("Non-NiSingleInterpController controller found in KF file.");
-                    }
-                    node.AddController(StaticCast<NiTimeController>(ctlr));
-                }
-
-                //Clone the interpolator and attached data and
-                //add it to controller of matching type that was
-                //found
-                NiObjectRef clone = CloneNifTree(StaticCast<NiObject>(data[i].interpolator), version, user_version);
-                NiInterpolatorRef interp = DynamicCast<NiInterpolator>(clone);
-                if (interp != null)
-                {
-                    ctlr.SetInterpolator(interp);
-
-                    //Set the start/stop time and frequency of this controller
-                    ctlr.SetStartTime(right.GetStartTime());
-                    ctlr.SetStopTime(right.GetStopTime());
-                    ctlr.SetFrequency(right.GetFrequency());
-                    ctlr.SetPhase(0.0f); //TODO:  Is phase somewhere in NiControllerSequence?
-
-                    //Set cycle type as well
-                    switch (right.GetCycleType())
-                    {
-                        case CYCLE_LOOP:
-                            ctlr.SetFlags(8); //Active
-                            break;
-                        case CYCLE_CLAMP:
-                            ctlr.SetFlags(12); //Active+Clamp
-                            break;
-                        case CYCLE_REVERSE:
-                            ctlr.SetFlags(10); //Active+Reverse
-                            break;
-                    }
-                }
+                return;
             }
-        }
-    }
-}
 
-//Version for merging KF Trees rooted by a NiSequenceStreamHelper
-void MergeNifTrees(NiNode* target, NiSequenceStreamHelper* right, unsigned version, unsigned user_version)
-{
-    //Map the node names
-    map<string, NiNodeRef> name_map;
-    MapNodeNames(name_map, target);
+            //This object has a new name and either it has no parent or its parent has a name that is
+            // in the list.  Attatch it to the object with the same name as its parent
+            //all child objects will follow along.
+            NiNodeRef par_par = par.GetParent();
 
-    //TODO: Implement this
-
-}
-
-
-bool IsSupportedVersion(unsigned int version)
-{
-    switch (version)
-    {
-        case VER_2_3:
-        case VER_3_0:
-        case VER_3_03:
-        case VER_3_1:
-        case VER_3_3_0_13:
-        case VER_4_0_0_0:
-        case VER_4_0_0_2:
-        case VER_4_1_0_12:
-        case VER_4_2_0_2:
-        case VER_4_2_1_0:
-        case VER_4_2_2_0:
-        case VER_10_0_1_0:
-        case VER_10_0_1_2:
-        case VER_10_0_1_3:
-        case VER_10_1_0_0:
-        case VER_10_1_0_101:
-        case VER_10_1_0_106:
-        case VER_10_2_0_0:
-        case VER_10_4_0_1:
-        case VER_20_0_0_4:
-        case VER_20_0_0_5:
-        case VER_20_1_0_3:
-        case VER_20_2_0_7:
-        case VER_20_2_0_8:
-        case VER_20_3_0_1:
-        case VER_20_3_0_2:
-        case VER_20_3_0_3:
-        case VER_20_3_0_6:
-        case VER_20_3_0_9:
-            return true;
-    }
-    return false;
-}
-
-unsigned int ParseVersionString(string version)
-{
-
-    unsigned int outver = 0;
-
-    string::size_type start = 0, len, end;
-    for (int offset = 3; offset >= 0 && start < version.length(); --offset)
-    {
-        end = version.find_first_of(".", start);
-
-        if (end == string::npos)
-        {
-            if (offset > 0)
+            if (par_par == null)
             {
-                //This version has only one period in it.  Take the rest of the numbers one character at a time.
-                len = 1;
+                //This object has a new name and no parents.  That means it is the root object.
+                //of a disimilar Nif file.
+
+                //Check whether we have a NiNode ( a node that might have children) or not.
+                NiNodeRef par_node = DynamicCast<NiNode>(par);
+                if (par_node == null)
+                {
+                    //This is not a NiNode class, so simply add it as a new child of the
+                    //target root node
+                    root.AddChild(par);
+                }
+                else
+                {
+                    //This is a NiNode class, so merge its child list with that of the root
+                    vector<NiAVObjectRef> children = par_node.GetChildren();
+                    for (unsigned int i = 0; i < children.size(); ++i)
+                    {
+                        root.AddChild(children[i]);
+                    }
+                }
             }
             else
             {
-                //We've already taken two characters one at a time, so take the rest all at once.
-                len = end;
+                //This object has a new name and has a parent with a name that already exists.
+                //Attatch it to the object in the target tree that matches the name of its
+                //parent
+
+                //TODO:  Implement children
+                ////Remove this object from its old parent
+                //par_par.GetAttr("Children").RemoveLinks( par );
+
+                //Get the object to attatch to
+                NiObjectRef attatch = DynamicCast<NiObject>(name_map[par_par.GetName()]);
+
+                //TODO:  Implement children
+                ////Add this object as new child
+                //attatch.GetAttr("Children").AddLink( par );
             }
         }
-        else
+
+        void MergeNifTrees(NiNode* target, NiAVObject* right, unsigned version, unsigned user_version)
         {
-            len = end - start;
+            //For now assume that both are normal Nif trees just to verify that it works
+
+            //Make a clone of the tree to add
+            stringstream tmp;
+            //WriteNifTree( tmp, right, version );
+            tmp.seekg(0, ios_base::beg);
+            NiAVObjectRef new_tree = right;// ReadNifTree( tmp ); TODO: Figure out why this doesn't work
+
+            //Create a list of names in the target
+            map<string, NiNodeRef> name_map;
+            MapNodeNames(name_map, target);
+
+            ////Reassign any cross references in the new tree to point to objects in the
+            ////target tree with the same names
+            //ReassignTreeCrossRefs( name_map, new_tree );
+
+            //Use the name map to merge the Scene Graphs
+            MergeSceneGraph(name_map, target, new_tree);
+        }
+
+        //Version for merging KF Trees rooted by a NiControllerSequence
+        void MergeNifTrees(NiNode* target, NiControllerSequence* right, unsigned version, unsigned user_version)
+        {
+            //Map the node names
+            map<string, NiNodeRef> name_map;
+            MapNodeNames(name_map, target);
+
+            //TODO:  Allow this to merge a KF sequence into a file that already has
+            //sequences in it by appending all the keyframe data to the end of
+            //existing controllers
+
+            //Get the NiTextKeyExtraData, clone it, and attach it to the target node
+            NiTextKeyExtraDataRef txt_key = right.GetTextKeyExtraData();
+            if (txt_key != null)
+            {
+                NiObjectRef tx_clone = txt_key.Clone(version, user_version);
+                NiExtraDataRef ext_dat = DynamicCast<NiExtraData>(tx_clone);
+                if (ext_dat != null)
+                {
+                    target.AddExtraData(ext_dat, version);
+                }
+            }
+
+            //Atach it to
+
+            //Get the controller data
+            vector<ControllerLink> data = right.GetControllerData();
+
+            //Connect a clone of all the interpolators/controllers to the named node
+            for (unsigned int i = 0; i < data.size(); ++i)
+            {
+                //Get strings
+                //TODO: Find out if other strings are needed
+                string node_name, ctlr_type;
+                NiStringPaletteRef str_pal = data[i].stringPalette;
+                if (str_pal == null)
+                {
+                    node_name = data[i].nodeName;
+                    ctlr_type = data[i].controllerType;
+                }
+                else
+                {
+                    node_name = str_pal.GetSubStr(data[i].nodeNameOffset);
+                    ctlr_type = str_pal.GetSubStr(data[i].controllerTypeOffset);
+                }
+                //Make sure there is a node with this name in the target tree
+                if (name_map.find(node_name) != name_map.end())
+                {
+                    //See if we're dealing with an interpolator or a controller
+                    if (data[i].controller != null)
+                    {
+                        //Clone the controller and attached data and
+                        //add it to the named node
+                        NiObjectRef clone = CloneNifTree(StaticCast<NiObject>(data[i].controller), version, user_version);
+                        NiTimeControllerRef ctlr = DynamicCast<NiTimeController>(clone);
+                        if (ctlr != null)
+                        {
+                            name_map[node_name].AddController(ctlr);
+                        }
+                    }
+                    else if (data[i].interpolator != null)
+                    {
+                        //Clone the interpolator and attached data and
+                        //attach it to the specific type of controller that's
+                        //connected to the named node
+                        NiNodeRef node = name_map[node_name];
+                        list<NiTimeControllerRef> ctlrs = node.GetControllers();
+                        NiSingleInterpControllerRef ctlr;
+                        for (list<NiTimeControllerRef>::iterator it = ctlrs.begin(); it != ctlrs.end(); ++it)
+                        {
+                            if (*it != null && (*it).GetType().GetTypeName() == ctlr_type)
+                            {
+                                ctlr = DynamicCast<NiSingleInterpController>(*it);
+                                if (ctlr != null)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        //If the controller wasn't found, create one of the right type and attach it
+                        if (ctlr == null)
+                        {
+                            NiObjectRef new_ctlr = ObjectRegistry::CreateObject(ctlr_type);
+                            ctlr = DynamicCast<NiSingleInterpController>(new_ctlr);
+                            if (ctlr == null)
+                            {
+                                throw runtime_error("Non-NiSingleInterpController controller found in KF file.");
+                            }
+                            node.AddController(StaticCast<NiTimeController>(ctlr));
+                        }
+
+                        //Clone the interpolator and attached data and
+                        //add it to controller of matching type that was
+                        //found
+                        NiObjectRef clone = CloneNifTree(StaticCast<NiObject>(data[i].interpolator), version, user_version);
+                        NiInterpolatorRef interp = DynamicCast<NiInterpolator>(clone);
+                        if (interp != null)
+                        {
+                            ctlr.SetInterpolator(interp);
+
+                            //Set the start/stop time and frequency of this controller
+                            ctlr.SetStartTime(right.GetStartTime());
+                            ctlr.SetStopTime(right.GetStopTime());
+                            ctlr.SetFrequency(right.GetFrequency());
+                            ctlr.SetPhase(0.0f); //TODO:  Is phase somewhere in NiControllerSequence?
+
+                            //Set cycle type as well
+                            switch (right.GetCycleType())
+                            {
+                                case CYCLE_LOOP:
+                                    ctlr.SetFlags(8); //Active
+                                    break;
+                                case CYCLE_CLAMP:
+                                    ctlr.SetFlags(12); //Active+Clamp
+                                    break;
+                                case CYCLE_REVERSE:
+                                    ctlr.SetFlags(10); //Active+Reverse
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Version for merging KF Trees rooted by a NiSequenceStreamHelper
+        void MergeNifTrees(NiNode* target, NiSequenceStreamHelper* right, unsigned version, unsigned user_version)
+        {
+            //Map the node names
+            map<string, NiNodeRef> name_map;
+            MapNodeNames(name_map, target);
+
+            //TODO: Implement this
 
         }
 
-        int num = 0;
-        stringstream sstr(version.substr(start, len) );
-        sstr >> num;
-        if (num > 0xFF)
+
+        bool IsSupportedVersion(unsigned int version)
         {
-            return VER_INVALID;
+            switch (version)
+            {
+                case VER_2_3:
+                case VER_3_0:
+                case VER_3_03:
+                case VER_3_1:
+                case VER_3_3_0_13:
+                case VER_4_0_0_0:
+                case VER_4_0_0_2:
+                case VER_4_1_0_12:
+                case VER_4_2_0_2:
+                case VER_4_2_1_0:
+                case VER_4_2_2_0:
+                case VER_10_0_1_0:
+                case VER_10_0_1_2:
+                case VER_10_0_1_3:
+                case VER_10_1_0_0:
+                case VER_10_1_0_101:
+                case VER_10_1_0_106:
+                case VER_10_2_0_0:
+                case VER_10_4_0_1:
+                case VER_20_0_0_4:
+                case VER_20_0_0_5:
+                case VER_20_1_0_3:
+                case VER_20_2_0_7:
+                case VER_20_2_0_8:
+                case VER_20_3_0_1:
+                case VER_20_3_0_2:
+                case VER_20_3_0_3:
+                case VER_20_3_0_6:
+                case VER_20_3_0_9:
+                    return true;
+            }
+            return false;
         }
-        outver |= (num << (offset * 8));
-        if (len == string::npos)
+
+        unsigned int ParseVersionString(string version)
         {
-            break;
+
+            unsigned int outver = 0;
+
+            string::size_type start = 0, len, end;
+            for (int offset = 3; offset >= 0 && start < version.length(); --offset)
+            {
+                end = version.find_first_of(".", start);
+
+                if (end == string::npos)
+                {
+                    if (offset > 0)
+                    {
+                        //This version has only one period in it.  Take the rest of the numbers one character at a time.
+                        len = 1;
+                    }
+                    else
+                    {
+                        //We've already taken two characters one at a time, so take the rest all at once.
+                        len = end;
+                    }
+                }
+                else
+                {
+                    len = end - start;
+
+                }
+
+                int num = 0;
+                stringstream sstr(version.substr(start, len) );
+                sstr >> num;
+                if (num > 0xFF)
+                {
+                    return VER_INVALID;
+                }
+                outver |= (num << (offset * 8));
+                if (len == string::npos)
+                {
+                    break;
+                }
+
+                if (end != string::npos)
+                {
+                    //account for length of the period
+                    start += 1;
+                }
+                start += len;
+            }
+
+            if (outver == 0)
+            {
+                return VER_INVALID;
+            }
+            else
+            {
+                return outver;
+            }
         }
 
-        if (end != string::npos)
+        string FormatVersionString(unsigned version)
         {
-            //account for length of the period
-            start += 1;
-        }
-        start += len;
-    }
+            //Cast the version to an array of 4 bytes
+            char* byte_ver = (char*)&version;
 
-    if (outver == 0)
-    {
-        return VER_INVALID;
-    }
-    else
-    {
-        return outver;
-    }
-}
+            //Put the version parts into an integer array, reversing their order
+            int int_ver[4] = { byte_ver[3], byte_ver[2], byte_ver[1], byte_ver[0] };
 
-string FormatVersionString(unsigned version)
-{
-    //Cast the version to an array of 4 bytes
-    char* byte_ver = (char*)&version;
+            //Format the version string and return it
+            stringstream out;
 
-    //Put the version parts into an integer array, reversing their order
-    int int_ver[4] = { byte_ver[3], byte_ver[2], byte_ver[1], byte_ver[0] };
-
-    //Format the version string and return it
-    stringstream out;
-
-    if (version >= VER_3_3_0_13)
-    {
+            if (version >= VER_3_3_0_13)
+            {
 		//Version 3.3.0.13+ is in x.x.x.x format.
 		out << int_ver[0] << "." << int_ver[1] << "." << int_ver[2] << "." << int_ver[3];
-    }
-    else
-    {
+            }
+            else
+            {
 		//Versions before 3.3.0.13 are in x.x format.
 		out << int_ver[0] << "." << int_ver[1];
-        if (int_ver[2])
-        {
+                if (int_ver[2])
+                {
 			out << int_ver[2];
-            if (int_ver[3])
-            {
+                    if (int_ver[3])
+                    {
 				out << int_ver[3];
+                    }
+                }
+            }
+
+            return out.str();
+        }
+
+
+        Ref<NiObject> CloneNifTree(NiObject* root, unsigned version, unsigned user_version, NiObject* target_root)
+        {
+            //Create a string stream to temporarily hold the state-save of this tree
+            stringstream tmp;
+            list<NiObject*> missing_link_stack;
+            list<NiObjectRef> resolved_link_stack;
+
+            //Write the existing tree into the stringstream
+            WriteNifTree(tmp, root, missing_link_stack, NifInfo(version, user_version));
+            //Resolve missing links into target root.
+            if (target_root != null)
+                resolved_link_stack = ResolveMissingLinkStack(target_root, missing_link_stack);
+
+            //Read the data back out of the stringstream, returning the new tree
+            return ReadNifTree(tmp, resolved_link_stack);
+        }
+
+        void SendNifTreeToBindPos(NiNode* root)
+        {
+            //If this node is a skeleton root, send its children to the bind
+            //position
+
+            if (root == null)
+            {
+                throw runtime_error("Attempted to call SendNifTreeToBindPos on a null reference.");
+            }
+
+            if (root.IsSkeletonRoot())
+            {
+                root.GoToSkeletonBindPosition();
+            }
+
+            //Call this function on any NiNode children
+            vector<NiAVObjectRef> children = root.GetChildren();
+            for (unsigned int i = 0; i < children.size(); ++i)
+            {
+                NiNodeRef child = DynamicCast<NiNode>(children[i]);
+                if (child != null)
+                {
+                    SendNifTreeToBindPos(child);
+                }
             }
         }
-    }
 
-    return out.str();
-}
-
-
-Ref<NiObject> CloneNifTree(NiObject* root, unsigned version, unsigned user_version, NiObject* target_root)
-{
-    //Create a string stream to temporarily hold the state-save of this tree
-    stringstream tmp;
-    list<NiObject*> missing_link_stack;
-    list<NiObjectRef> resolved_link_stack;
-
-    //Write the existing tree into the stringstream
-    WriteNifTree(tmp, root, missing_link_stack, NifInfo(version, user_version));
-    //Resolve missing links into target root.
-    if (target_root != null)
-        resolved_link_stack = ResolveMissingLinkStack(target_root, missing_link_stack);
-
-    //Read the data back out of the stringstream, returning the new tree
-    return ReadNifTree(tmp, resolved_link_stack);
-}
-
-void SendNifTreeToBindPos(NiNode* root)
-{
-    //If this node is a skeleton root, send its children to the bind
-    //position
-
-    if (root == null)
-    {
-        throw runtime_error("Attempted to call SendNifTreeToBindPos on a null reference.");
-    }
-
-    if (root.IsSkeletonRoot())
-    {
-        root.GoToSkeletonBindPosition();
-    }
-
-    //Call this function on any NiNode children
-    vector<NiAVObjectRef> children = root.GetChildren();
-    for (unsigned int i = 0; i < children.size(); ++i)
-    {
-        NiNodeRef child = DynamicCast<NiNode>(children[i]);
-        if (child != null)
+        list<Ref<NiNode>> ListAncestors(NiAVObject* leaf)
         {
-            SendNifTreeToBindPos(child);
+            if (leaf == null)
+            {
+                throw runtime_error("ListAncestors called with a null leaf NiNode Ref");
+            }
+
+            list<NiNodeRef> ancestors;
+
+            NiNodeRef current = leaf.GetParent();
+
+            while (current != null)
+            {
+                ancestors.push_front(current);
+
+                current = current.GetParent();
+            }
+
+            return ancestors;
         }
-    }
-}
 
-list<Ref<NiNode>> ListAncestors(NiAVObject* leaf)
-{
-    if (leaf == null)
-    {
-        throw runtime_error("ListAncestors called with a null leaf NiNode Ref");
-    }
-
-    list<NiNodeRef> ancestors;
-
-    NiNodeRef current = leaf.GetParent();
-
-    while (current != null)
-    {
-        ancestors.push_front(current);
-
-        current = current.GetParent();
-    }
-
-    return ancestors;
-}
-
-Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
+        Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
 {
 
     //create lists of nodes that have an influence and this TriBasedGeom
     //as decendents
     size_t obj_count = objects.size();
-    vector<list<NiNodeRef>> ancestors(obj_count );
+        vector<list<NiNodeRef>> ancestors(obj_count );
 
     //Add Ancestors of each object to its corresponding list
-    for (size_t i = 0; i < obj_count; ++i)
+    for (size_t i = 0; i<obj_count; ++i)
     {
         ancestors[i] = ListAncestors(objects[i]);
     }
@@ -1743,9 +1634,9 @@ Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
         return null;
     }
 
-    NiNodeRef root = ancestors[0].front();
+NiNodeRef root = ancestors[0].front();
     //Make sure bone and shapes are part of the same tree
-    for (size_t i = 1; i < obj_count; ++i)
+    for (size_t i = 1; i<obj_count; ++i)
     {
         if (ancestors[i].size() == 0)
         {
@@ -1760,7 +1651,7 @@ Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
     }
 
     //Since the first items have been shown to match, pop all the stacks
-    for (size_t i = 0; i < obj_count; ++i)
+    for (size_t i = 0; i<obj_count; ++i)
     {
         ancestors[i].pop_front();
     }
@@ -1776,7 +1667,7 @@ Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
             break;
         }
         NiNodeRef first_ancestor = ancestors[0].front();
-        for (size_t i = 1; i < obj_count; ++i)
+        for (size_t i = 1; i<obj_count; ++i)
         {
             if (ancestors[i].size() == 0)
             {
@@ -1797,7 +1688,7 @@ Ref<NiNode> FindCommonAncestor( const vector<Ref<NiAVObject>> & objects )
             //and look again
 
             root = ancestors[0].front();
-            for (size_t i = 0; i < obj_count; ++i)
+            for (size_t i = 0; i<obj_count; ++i)
             {
                 ancestors[i].pop_front();
             }

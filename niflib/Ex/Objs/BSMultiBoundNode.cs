@@ -19,9 +19,9 @@ public class BSMultiBoundNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBoundNode", NiNode.TYPE);
 	/*!  */
-	public BSMultiBound multiBound;
+	BSMultiBound multiBound;
 	/*!  */
-	public BSCPCullingType cullingMode;
+	BSCPCullingType cullingMode;
 
 	public BSMultiBoundNode() {
 	multiBound = null;
@@ -69,10 +69,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Multi Bound:  {multiBound}");
 	s.AppendLine($"  Culling Mode:  {cullingMode}");
 	return s.ToString();

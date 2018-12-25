@@ -23,20 +23,20 @@ public class NiFlipController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFlipController", NiFloatInterpController.TYPE);
 	/*! Target texture slot (0=base, 4=glow). */
-	public TexType textureSlot;
+	TexType textureSlot;
 	/*!  */
-	public float startTime;
+	float startTime;
 	/*!
 	 * Time between two flips.
 	 *             delta = (start_time - stop_time) / sources.num_indices
 	 */
-	public float delta;
+	float delta;
 	/*!  */
-	public uint numSources;
+	uint numSources;
 	/*! The texture sources. */
-	public NiSourceTexture[] sources;
+	NiSourceTexture[] sources;
 	/*! The image sources */
-	public NiImage[] images;
+	NiImage[] images;
 
 	public NiFlipController() {
 	textureSlot = (TexType)0;
@@ -118,11 +118,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numSources = (uint)sources.Length;
 	s.AppendLine($"  Texture Slot:  {textureSlot}");
 	s.AppendLine($"  Start Time:  {startTime}");

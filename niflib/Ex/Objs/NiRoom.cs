@@ -19,21 +19,21 @@ public class NiRoom : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRoom", NiNode.TYPE);
 	/*!  */
-	public int numWalls;
+	int numWalls;
 	/*!  */
-	public NiPlane[] wallPlanes;
+	NiPlane[] wallPlanes;
 	/*!  */
-	public uint numInPortals;
+	uint numInPortals;
 	/*! The portals which see into the room. */
-	public NiPortal[] inPortals;
+	NiPortal[] inPortals;
 	/*!  */
-	public uint numOutPortals;
+	uint numOutPortals;
 	/*! The portals which see out of the room. */
-	public NiPortal[] outPortals;
+	NiPortal[] outPortals;
 	/*!  */
-	public uint numFixtures;
+	uint numFixtures;
 	/*! All geometry associated with the room. */
-	public NiAVObject[] fixtures;
+	NiAVObject[] fixtures;
 
 	public NiRoom() {
 	numWalls = (int)0;
@@ -119,11 +119,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numFixtures = (uint)fixtures.Length;
 	numOutPortals = (uint)outPortals.Length;
 	numInPortals = (uint)inPortals.Length;

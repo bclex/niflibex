@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A set of NiBoneLODController::SkinInfo. */
 public class SkinInfoSet {
 	/*!  */
-	public uint numSkinInfo;
+	uint numSkinInfo;
 	/*!  */
-	public SkinInfo[] skinInfo;
+	SkinInfo[] skinInfo;
 	//Constructor
 	public SkinInfoSet() { unchecked {
 	numSkinInfo = (uint)0;

@@ -19,103 +19,103 @@ public class NiParticleSystemController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleSystemController", NiTimeController.TYPE);
 	/*! Particle speed in old files */
-	public uint oldSpeed;
+	uint oldSpeed;
 	/*! Particle speed */
-	public float speed;
+	float speed;
 	/*! Particle random speed modifier */
-	public float speedRandom;
+	float speedRandom;
 	/*!
 	 * vertical emit direction [radians]
 	 *             0.0 : up
 	 *             1.6 : horizontal
 	 *             3.1416 : down
 	 */
-	public float verticalDirection;
+	float verticalDirection;
 	/*! emitter's vertical opening angle [radians] */
-	public float verticalAngle;
+	float verticalAngle;
 	/*! horizontal emit direction */
-	public float horizontalDirection;
+	float horizontalDirection;
 	/*! emitter's horizontal opening angle */
-	public float horizontalAngle;
+	float horizontalAngle;
 	/*! Unknown. */
-	public Vector3 unknownNormal_;
+	Vector3 unknownNormal_;
 	/*! Unknown. */
-	public Color4 unknownColor_;
+	Color4 unknownColor_;
 	/*! Particle size */
-	public float size;
+	float size;
 	/*! Particle emit start time */
-	public float emitStartTime;
+	float emitStartTime;
 	/*! Particle emit stop time */
-	public float emitStopTime;
+	float emitStopTime;
 	/*! Unknown byte, (=0) */
-	public byte unknownByte;
+	byte unknownByte;
 	/*! Particle emission rate in old files */
-	public uint oldEmitRate;
+	uint oldEmitRate;
 	/*! Particle emission rate (particles per second) */
-	public float emitRate;
+	float emitRate;
 	/*! Particle lifetime */
-	public float lifetime;
+	float lifetime;
 	/*! Particle lifetime random modifier */
-	public float lifetimeRandom;
+	float lifetimeRandom;
 	/*! Bit 0: Emit Rate toggle bit (0 = auto adjust, 1 = use Emit Rate value) */
-	public ushort emitFlags;
+	ushort emitFlags;
 	/*! Particle random start translation vector */
-	public Vector3 startRandom;
+	Vector3 startRandom;
 	/*!
 	 * This index targets the particle emitter object (TODO: find out what type of
 	 * object this refers to).
 	 */
-	public NiObject emitter;
+	NiObject emitter;
 	/*! ? short=0 ? */
-	public ushort unknownShort2_;
+	ushort unknownShort2_;
 	/*! ? float=1.0 ? */
-	public float unknownFloat13_;
+	float unknownFloat13_;
 	/*! ? int=1 ? */
-	public uint unknownInt1_;
+	uint unknownInt1_;
 	/*! ? int=0 ? */
-	public uint unknownInt2_;
+	uint unknownInt2_;
 	/*! ? short=0 ? */
-	public ushort unknownShort3_;
+	ushort unknownShort3_;
 	/*! Particle velocity */
-	public Vector3 particleVelocity;
+	Vector3 particleVelocity;
 	/*! Unknown */
-	public Vector3 particleUnknownVector;
+	Vector3 particleUnknownVector;
 	/*! The particle's age. */
-	public float particleLifetime;
+	float particleLifetime;
 	/*!  */
-	public NiObject particleLink;
+	NiObject particleLink;
 	/*! Timestamp of the last update. */
-	public uint particleTimestamp;
+	uint particleTimestamp;
 	/*! Unknown short */
-	public ushort particleUnknownShort;
+	ushort particleUnknownShort;
 	/*! Particle/vertex index matches array index */
-	public ushort particleVertexId;
+	ushort particleVertexId;
 	/*! Size of the following array. (Maximum number of simultaneous active particles) */
-	public ushort numParticles;
+	ushort numParticles;
 	/*!
 	 * Number of valid entries in the following array. (Number of active particles at
 	 * the time the system was saved)
 	 */
-	public ushort numValid;
+	ushort numValid;
 	/*! Individual particle modifiers? */
-	public Particle[] particles;
+	Particle[] particles;
 	/*! unknown int (=0xffffffff) */
-	public NiObject unknownLink;
+	NiObject unknownLink;
 	/*!
 	 * Link to some optional particle modifiers (NiGravity, NiParticleGrowFade,
 	 * NiParticleBomb, ...)
 	 */
-	public NiParticleModifier particleExtra;
+	NiParticleModifier particleExtra;
 	/*! Unknown int (=0xffffffff) */
-	public NiObject unknownLink2;
+	NiObject unknownLink2;
 	/*! Trailing null byte */
-	public byte trailer;
+	byte trailer;
 	/*!  */
-	public NiColorData colorData;
+	NiColorData colorData;
 	/*! Unknown. */
-	public float unknownFloat1;
+	float unknownFloat1;
 	/*! Unknown. */
-	public float[] unknownFloats2;
+	float[] unknownFloats2;
 
 	public NiParticleSystemController() {
 	oldSpeed = (uint)0;
@@ -345,11 +345,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numParticles = (ushort)particles.Length;
 	particleUnknownShort = (ushort)unknownFloats2.Length;
 	s.AppendLine($"  Old Speed:  {oldSpeed}");

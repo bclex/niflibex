@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class ElementReference {
 	/*! The element semantic. */
-	public SemanticData semantic;
+	SemanticData semantic;
 	/*! Whether or not to normalize the data. */
-	public uint normalizeFlag;
+	uint normalizeFlag;
 	//Constructor
 	public ElementReference() { unchecked {
 	normalizeFlag = (uint)0;

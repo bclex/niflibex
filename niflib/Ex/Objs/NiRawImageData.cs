@@ -22,15 +22,15 @@ public class NiRawImageData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRawImageData", NiObject.TYPE);
 	/*! Image width */
-	public uint width;
+	uint width;
 	/*! Image height */
-	public uint height;
+	uint height;
 	/*! The format of the raw image data. */
-	public ImageType imageType;
+	ImageType imageType;
 	/*! Image pixel data. */
-	public ByteColor3[][] rgbImageData;
+	ByteColor3[][] rgbImageData;
 	/*! Image pixel data. */
-	public ByteColor4[][] rgbaImageData;
+	ByteColor4[][] rgbaImageData;
 
 	public NiRawImageData() {
 	width = (uint)0;
@@ -119,11 +119,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	height = (uint)((rgbImageData.Length > 0) ? rgbImageData[0].Length : 0);
 	width = (uint)rgbImageData.Length;
 	s.AppendLine($"  Width:  {width}");

@@ -13,9 +13,9 @@ namespace Niflib {
 /*! NiSkinData::BoneVertData. A vertex and its weight. */
 public class BoneVertData {
 	/*! The vertex index, in the mesh. */
-	public ushort index;
+	ushort index;
 	/*! The vertex weight - between 0.0 and 1.0 */
-	public float weight;
+	float weight;
 	//Constructor
 	public BoneVertData() { unchecked {
 	index = (ushort)0;

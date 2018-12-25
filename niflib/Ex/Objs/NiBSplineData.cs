@@ -22,13 +22,13 @@ public class NiBSplineData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineData", NiObject.TYPE);
 	/*!  */
-	public uint numFloatControlPoints;
+	uint numFloatControlPoints;
 	/*! Float values representing the control data. */
-	public float[] floatControlPoints;
+	float[] floatControlPoints;
 	/*!  */
-	public uint numCompactControlPoints;
+	uint numCompactControlPoints;
 	/*! Signed shorts representing the data from 0 to 1 (scaled by SHRT_MAX). */
-	public short[] compactControlPoints;
+	short[] compactControlPoints;
 
 	public NiBSplineData() {
 	numFloatControlPoints = (uint)0;
@@ -86,11 +86,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numCompactControlPoints = (uint)compactControlPoints.Length;
 	numFloatControlPoints = (uint)floatControlPoints.Length;
 	s.AppendLine($"  Num Float Control Points:  {numFloatControlPoints}");

@@ -36,7 +36,7 @@ namespace Niflib
          * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed out.
          * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
          */
-        public abstract string asString(bool verbose = false);
+        public abstract string AsString(bool verbose = false);
 
         /*!
          * Used to determine whether this object is exactly the same type as the given type constant.

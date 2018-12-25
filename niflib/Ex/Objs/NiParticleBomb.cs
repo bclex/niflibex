@@ -19,21 +19,21 @@ public class NiParticleBomb : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleBomb", NiParticleModifier.TYPE);
 	/*!  */
-	public float decay;
+	float decay;
 	/*!  */
-	public float duration;
+	float duration;
 	/*!  */
-	public float deltav;
+	float deltav;
 	/*!  */
-	public float start;
+	float start;
 	/*!  */
-	public DecayType decayType;
+	DecayType decayType;
 	/*!  */
-	public SymmetryType symmetryType;
+	SymmetryType symmetryType;
 	/*! The position of the mass point relative to the particle system? */
-	public Vector3 position;
+	Vector3 position;
 	/*! The direction of the applied acceleration? */
-	public Vector3 direction;
+	Vector3 direction;
 
 	public NiParticleBomb() {
 	decay = 0.0f;
@@ -95,10 +95,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Decay:  {decay}");
 	s.AppendLine($"  Duration:  {duration}");
 	s.AppendLine($"  DeltaV:  {deltav}");

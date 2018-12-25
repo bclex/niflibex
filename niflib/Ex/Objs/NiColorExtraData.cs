@@ -19,7 +19,7 @@ public class NiColorExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiColorExtraData", NiExtraData.TYPE);
 	/*! RGBA Color? */
-	public Color4 data;
+	Color4 data;
 
 	public NiColorExtraData() {
 	}
@@ -57,10 +57,10 @@ public class NiColorExtraData : NiExtraData {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Data:  {data}");
 		return s.ToString();
 

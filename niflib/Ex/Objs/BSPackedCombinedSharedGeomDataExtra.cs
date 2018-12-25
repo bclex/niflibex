@@ -24,21 +24,21 @@ public class BSPackedCombinedSharedGeomDataExtra : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPackedCombinedSharedGeomDataExtra", NiExtraData.TYPE);
 	/*!  */
-	public BSVertexDesc vertexDesc;
+	BSVertexDesc vertexDesc;
 	/*!  */
-	public uint numVertices;
+	uint numVertices;
 	/*!  */
-	public uint numTriangles;
+	uint numTriangles;
 	/*! Unknown. */
-	public uint unknownFlags1;
+	uint unknownFlags1;
 	/*! Unknown. */
-	public uint unknownFlags2;
+	uint unknownFlags2;
 	/*!  */
-	public uint numData;
+	uint numData;
 	/*!  */
-	public BSPackedGeomObject[] object;
+	BSPackedGeomObject[] object;
 	/*!  */
-	public BSPackedSharedGeomData[] objectData;
+	BSPackedSharedGeomData[] objectData;
 
 	public BSPackedCombinedSharedGeomDataExtra() {
 	numVertices = (uint)0;
@@ -168,11 +168,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	numData = (uint)object.Length;
 	s.AppendLine($"  VF1:  {vertexDesc.vf1}");
 	s.AppendLine($"  VF2:  {vertexDesc.vf2}");

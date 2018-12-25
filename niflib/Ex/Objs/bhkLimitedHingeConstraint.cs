@@ -19,7 +19,7 @@ public class bhkLimitedHingeConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkLimitedHingeConstraint", bhkConstraint.TYPE);
 	/*! Describes a limited hinge constraint */
-	public LimitedHingeDescriptor limitedHinge;
+	LimitedHingeDescriptor limitedHinge;
 
 	public bhkLimitedHingeConstraint() {
 	}
@@ -153,10 +153,10 @@ public class bhkLimitedHingeConstraint : bhkConstraint {
 	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
 	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
 	 */
-	public override string asString(bool verbose = false) {
+	public override string AsString(bool verbose = false) {
 
 		var s = new System.Text.StringBuilder();
-		s.Append(base.asString());
+		s.Append(base.AsString());
 		s.AppendLine($"    Pivot A:  {limitedHinge.pivotA}");
 		s.AppendLine($"    Axis A:  {limitedHinge.axisA}");
 		s.AppendLine($"    Perp Axis In A1:  {limitedHinge.perpAxisInA1}");

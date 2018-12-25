@@ -212,7 +212,7 @@ for n in compound_names:
             cs.stream(x, ACTION_WRITE)
             cs.code('}')
             cs.code()
-            cs.code('public string AsString(bool verbose) {')
+            cs.code('public string AsString(bool verbose = false) {')
             cs.stream(x, ACTION_OUT)
             cs.code('}')
 

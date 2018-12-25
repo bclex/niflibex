@@ -22,26 +22,26 @@ public class NiPSysSpawnModifier : NiPSysModifier {
 	 * Number of allowed generations for spawning. Particles whose generations are >=
 	 * will not be spawned.
 	 */
-	public ushort numSpawnGenerations;
+	ushort numSpawnGenerations;
 	/*!
 	 * The likelihood of a particular particle being spawned. Must be between 0.0 and
 	 * 1.0.
 	 */
-	public float percentageSpawned;
+	float percentageSpawned;
 	/*! The minimum particles to spawn for any given original particle. */
-	public ushort minNumToSpawn;
+	ushort minNumToSpawn;
 	/*! The maximum particles to spawn for any given original particle. */
-	public ushort maxNumToSpawn;
+	ushort maxNumToSpawn;
 	/*! WorldShift */
-	public int unknownInt;
+	int unknownInt;
 	/*! How much the spawned particle speed can vary. */
-	public float spawnSpeedVariation;
+	float spawnSpeedVariation;
 	/*! How much the spawned particle direction can vary. */
-	public float spawnDirVariation;
+	float spawnDirVariation;
 	/*! Lifespan assigned to spawned particles. */
-	public float lifeSpan;
+	float lifeSpan;
 	/*! The amount the lifespan can vary. */
-	public float lifeSpanVariation;
+	float lifeSpanVariation;
 
 	public NiPSysSpawnModifier() {
 	numSpawnGenerations = (ushort)0;
@@ -108,10 +108,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
  * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
  * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
  */
-public override string asString(bool verbose = false) {
+public override string AsString(bool verbose = false) {
 
 	var s = new System.Text.StringBuilder();
-	s.Append(base.asString());
+	s.Append(base.AsString());
 	s.AppendLine($"  Num Spawn Generations:  {numSpawnGenerations}");
 	s.AppendLine($"  Percentage Spawned:  {percentageSpawned}");
 	s.AppendLine($"  Min Num to Spawn:  {minNumToSpawn}");

@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Texture coordinates (u,v). */
 public class HalfTexCoord {
 	/*! First coordinate. */
-	public hfloat u;
+	hfloat u;
 	/*! Second coordinate. */
-	public hfloat v;
+	hfloat v;
 	//Constructor
 	public HalfTexCoord() { unchecked {
 	u = (hfloat)0;
