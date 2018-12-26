@@ -41,7 +41,6 @@ namespace Niflib
         }
 
         //   public bool operator<(Type compare_to ) => this < compare_to;
-
         public NiObject Create => ObjectRegistry.CreateObject(name);
     }
 }

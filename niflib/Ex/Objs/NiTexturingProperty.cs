@@ -735,8 +735,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 
 }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        internal void SetTexture(int tex_num, object td)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
 	numShaderTextures = (uint)shaderTextures.Length;

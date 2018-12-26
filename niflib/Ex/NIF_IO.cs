@@ -46,7 +46,7 @@ namespace Niflib
 
     public class OStream : BStream
     {
-        //public OStream() : base(new MemoryStream()) { }
+        public OStream() : base(new MemoryStream()) { }
         public OStream(Stream stream) : base(stream) { }
         public static OStream operator +(OStream s, string val) { var buf = Encoding.ASCII.GetBytes(val); s.B.Write(buf, 0, buf.Length); return s; }
         public static OStream operator +(OStream s, HeaderString val) => s + val.header;

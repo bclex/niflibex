@@ -96,7 +96,7 @@ namespace Niflib
     public class ComplexFace
     {
         /*! A list of points which make up this polygon */
-        public List<ComplexPoint> points;
+        public ComplexPoint[] points;
         /*!
          * Index into the ComplexShape::propGroups array which specifies which
          * set of NiProperty classes to apply to this face.
@@ -169,7 +169,7 @@ namespace Niflib
 
             //There will be one NiTriShape per property group
             //with a minimum of 1
-            var num_shapes = PropGroups.Count;
+            var num_shapes = PropGroups.Length;
             if (num_shapes == 0)
                 num_shapes = 1;
 
@@ -348,7 +348,7 @@ namespace Niflib
 
                 //Attatch properties if any
                 //Check if the properties are skyrim specific in which case attach them in the 2 special slots called bs_properties
-                if (PropGroups.Count > 0)
+                if (PropGroups.Length > 0)
                 {
                     BSLightingShaderProperty shader_property = null;
                     foreach (var prop in PropGroups[shape_num])
@@ -362,10 +362,8 @@ namespace Niflib
                     }
 
                     if (shader_property == null)
-                    {
                         foreach (var prop in PropGroups)
                             shapes[shape_num].AddProperty(prop);
-                    }
                     else
                     {
                         NiAlphaProperty alpha_property = null;
@@ -382,17 +380,17 @@ namespace Niflib
                 //--Set Shape Data--//
 
                 //lists to hold data
-                List<Vector3> shapeVerts(compVerts.Count);
-                List<Vector3> shapeNorms(compVerts.Count );
-                List<Color4> shapeColors(compVerts.Count );
-                List<List<TexCoord>> shapeTCs;
-                List<int> shapeTexCoordSets;
-                Dictionary<NiNodeRef, List<SkinWeight>> shapeWeights;
+                var shapeVerts = new Vector3[compVerts.Count];
+                var shapeNorms = new Vector3[compVerts.Count];
+                var shapeColors = new Color4[compVerts.Count];
+                var shapeTCs = new TexCoord[][] { };
+                var shapeTexCoordSets = new List<int>();
+                Dictionary<NiNode, List<SkinWeight>> shapeWeights;
 
                 //Search for a NiTexturingProperty to build list of
                 //texture coordinates sets to create
-                NiProperty niProp = shapes[shape_num].GetPropertyByType(NiTexturingProperty.TYPE);
-                NiTexturingProperty niTexProp;
+                var niProp = shapes[shape_num].GetPropertyByType(NiTexturingProperty.TYPE);
+                NiTexturingProperty niTexProp = null;
                 if (niProp != null)
                     niTexProp = (NiTexturingProperty)niProp;
                 if (niTexProp != null)
@@ -401,20 +399,16 @@ namespace Niflib
                         if (niTexProp.HasTexture(tex_num))
                         {
                             shapeTexCoordSets.Add(tex_num);
-                            TexDesc td = niTexProp.GetTexture(tex_num);
+                            var td = niTexProp.GetTexture(tex_num);
                             td.uvSet = (int)shapeTexCoordSets.Count - 1;
                             niTexProp.SetTexture(tex_num, td);
                         }
                 }
-                else
-                {
-                    //Always include the base map if it's there, whether there's a
-                    //texture or not
-                    shapeTexCoordSets.Add(BASE_MAP);
-                }
-                shapeTCs.resize(shapeTexCoordSets.Count);
-                foreach (var set in shapeTCs)
-                    set.resize(compVerts.Count);
+                //Always include the base map if it's there, whether there's a texture or not
+                else shapeTexCoordSets.Add(BASE_MAP);
+                Array.Resize(ref shapeTCs, shapeTexCoordSets.Count);
+                for (var set = 0; set < shapeTCs.Length; set++)
+                    Array.Resize(ref shapeTCs[set], compVerts.Count);
 
                 //Loop through all compound vertices, adding the data
                 //to the correct arrays.
@@ -460,28 +454,28 @@ namespace Niflib
                     niData.SetVertexColors(shapeColors);
                 if (TexCoordSets.Count > 0)
                 {
-                    niData.SetUVSetCount((int)shapeTCs.Count);
-                    for (uint tex_index = 0; tex_index < shapeTCs.Count; ++tex_index)
+                    niData.SetUVSetCount((int)shapeTCs.Length);
+                    for (var tex_index = 0; tex_index < shapeTCs.Length; ++tex_index)
                         niData.SetUVSet(tex_index, shapeTCs[tex_index]);
                 }
 
                 //If there are any skin influences, bind the skin
                 if (shapeWeights.Count > 0)
                 {
-                    List<NiNodeRef> shapeInfluences;
+                    var shapeInfluences = new List<NiNode>();
                     foreach (var inf in shapeWeights)
-                        shapeInfluences.Add(inf.first);
+                        shapeInfluences.Add(inf.Key);
 
                     if (!use_dismember_partitions)
                         shapes[shape_num].BindSkin(shapeInfluences);
                     else
                     {
                         shapes[shape_num].BindSkinWith(shapeInfluences, BSDismemberSkinInstance.Create);
-                        BSDismemberSkinInstanceRef dismember_skin = (BSDismemberSkinInstance)shapes[shape_num].GetSkinInstance();
+                        var dismember_skin = (BSDismemberSkinInstance)shapes[shape_num].GetSkinInstance();
                         dismember_skin.SetPartitions(current_dismember_partitions);
                     }
 
-                    for (uint inf = 0; inf < shapeInfluences.Count; ++inf)
+                    for (var inf = 0; inf < shapeInfluences.Count; ++inf)
                         shapes[shape_num].SetBoneWeights(inf, shapeWeights[shapeInfluences[inf]]);
 
                     shapes[shape_num].NormalizeSkinWeights();
@@ -499,14 +493,12 @@ namespace Niflib
                     else if (max_bones_per_partition > 0)
                         shapes[shape_num].GenHardwareSkinInfo(max_bones_per_partition, 4, stripify);
 
-                    //NiSkinInstanceRef skinInst = shapes[shape_num].GetSkinInstance();
-                    //if ( skinInst != null) {
-                    //	NiSkinDataRef skinData = skinInst.GetSkinData();
-                    //	if ( skinData != NULL ) {
-                    //		for ( uint inf = 0; inf < shapeInfluences.Count; ++inf ) {
-                    //			skinData.SetBoneWeights( inf, shapeWeights[ shapeInfluences[inf] ] );
-                    //		}
-                    //	}
+                    //var skinInst = shapes[shape_num].GetSkinInstance();
+                    //if (skinInst != null) {
+                    //	var skinData = skinInst.GetSkinData();
+                    //	if (skinData != null)
+                    //		for (var inf = 0; inf < shapeInfluences.Count; ++inf)
+                    //			skinData.SetBoneWeights(inf, shapeWeights[shapeInfluences[inf]]);
                     //}
                 }
 
@@ -543,39 +535,36 @@ namespace Niflib
             var shapes = new List<NiTriBasedGeom>();
             //Determine root type
             if (root.IsDerivedType(NiTriBasedGeom.TYPE))
-                //The function was called on a single shape.
-                //Add it to the list
+                //The function was called on a single shape. Add it to the list
                 shapes.Add((NiTriBasedGeom)root);
             else if (root.IsDerivedType(NiNode.TYPE))
             {
-                //The function was called on a NiNode.  Search for
-                //shape children
-                NiNodeRef nodeRoot = (NiNode)root;
-                List<NiAVObjectRef> children = nodeRoot.GetChildren();
-                for (uint child = 0; child < children.Count; ++child)
+                //The function was called on a NiNode.  Search for shape children
+                var nodeRoot = (NiNode)root;
+                var children = nodeRoot.GetChildren();
+                for (var child = 0; child < children.Count; ++child)
                     if (children[child]->IsDerivedType(NiTriBasedGeom.TYPE))
                         shapes.Add((NiTriBasedGeom)children[child]);
                 if (shapes.Count == 0)
                     throw new InvalidOperationException("The NiNode passed to ComplexShape::Merge has no shape children.");
             }
-            else
-                throw new InvalidOperationException(" The ComplexShape::Merge function requies either a NiNode or a NiTriBasedGeom AVObject.");
+            else throw new InvalidOperationException("The ComplexShape::Merge function requies either a NiNode or a NiTriBasedGeom AVObject.");
 
             //The vector of VertNorm struts allows us to to refuse
             //to merge vertices that have different normals.
-            List<VertNorm> vns = new List<VertNorm>();
+            var vns = new List<VertNorm>();
 
             //Clear all existing data
             Clear();
 
             //Merge in data from each shape
-            bool has_any_verts = false;
-            bool has_any_norms = false;
-            propGroups.resize(shapes.Count);
+            var has_any_verts = false;
+            var has_any_norms = false;
+            Array.Resize(ref PropGroups, shapes.Count);
             uint prop_group_index = 0;
             foreach (var geom in shapes)
             {
-                List<NiPropertyRef> current_property_group = geom.GetProperties();
+                var current_property_group = geom.GetProperties();
 
                 //Special code to handle the Bethesda Skyrim properties
                 var bs_properties = geom.GetBSProperties();
@@ -586,8 +575,7 @@ namespace Niflib
                 //Get properties of this shape
                 propGroups[prop_group_index] = current_property_group;
 
-
-                NiTriBasedGeomDataRef geomData = (NiTriBasedGeomData)geom.GetData();
+                var geomData = (NiTriBasedGeomData)geom.GetData();
                 if (geomData == null)
                     throw new InvalidOperationException("One of the NiTriBasedGeom found by ComplexShape::Merge with a NiTriBasedGeom has no NiTriBasedGeomData attached.");
 
@@ -600,48 +588,48 @@ namespace Niflib
                     geom.GetSkinDeformation(shapeVerts, shapeNorms);
                     if (geom.GetSkinInstance().GetType().IsSameType(BSDismemberSkinInstance.TYPE))
                     {
-                        BSDismemberSkinInstanceRef dismember_skin = (BSDismemberSkinInstance)geom->GetSkinInstance();
+                        var dismember_skin = (BSDismemberSkinInstance)geom.GetSkinInstance();
                         NiSkinPartitionRef skin_partition = dismember_skin.GetSkinPartition();
                     }
                 }
                 else
                 {
-                    shapeVerts = geomData->GetVertices();
-                    shapeNorms = geomData->GetNormals();
+                    shapeVerts = geomData.GetVertices();
+                    shapeNorms = geomData.GetNormals();
                 }
 
-                List<Color4> shapeColors = geomData.GetColors();
-                List<List<TexCoord>> shapeUVs(geomData.GetUVSetCount() );
-                for (uint i = 0; i < shapeUVs.Count; ++i)
+                var shapeColors = geomData.GetColors();
+                var shapeUVs = new List<List<TexCoord>>(geomData.GetUVSetCount());
+                for (var i = 0; i < shapeUVs.Count; ++i)
                     shapeUVs[i] = geomData.GetUVSet(i);
-                List<Triangle> shapeTris = geomData.GetTriangles();
+                var shapeTris = geomData.GetTriangles();
 
                 //Lookup table
-                List<MergeLookUp> lookUp = new List<MergeLookUp>(geomData.GetVertexCount());
+                var lookUp = new List<MergeLookUp>(geomData.GetVertexCount());
 
                 //Vertices and normals
                 if (shapeVerts.Count != 0)
                     has_any_verts = true;
 
-                bool shape_has_norms = (shapeNorms.Count == shapeVerts.Count);
+                var shape_has_norms = (shapeNorms.Count == shapeVerts.Count);
                 if (shape_has_norms)
                     has_any_norms = true;
-                for (uint v = 0; v < shapeVerts.Count; ++v)
+                for (var v = 0; v < shapeVerts.Count; ++v)
                 {
-                    VertNorm newVert;
+                    var newVert = new VertNorm();
                     newVert.position = shapeVerts[v];
                     if (shape_has_norms)
                         newVert.normal = shapeNorms[v];
 
                     //Search for matching vert/norm
-                    bool match_found = false;
-                    for (uint vn_index = 0; vn_index < vns.Count; ++vn_index)
+                    var match_found = false;
+                    for (var vn_index = 0; vn_index < vns.Count; ++vn_index)
                         if (vns[vn_index] == newVert)
                         {
                             //Match found, use existing index
-                            lookUp[v].vertIndex = vn_index;
+                            lookUp[v].vertIndex = (uint)vn_index;
                             if (shapeNorms.Count != 0)
-                                lookUp[v].normIndex = vn_index;
+                                lookUp[v].normIndex = (uint)vn_index;
                             match_found = true;
                             //Stop searching
                             break;
@@ -658,26 +646,21 @@ namespace Niflib
                 }
 
                 //Colors
-                for (uint c = 0; c < shapeColors.Count; ++c)
+                for (var c = 0; c < shapeColors.Count; ++c)
                 {
                     Color4 newColor;
-
                     newColor = shapeColors[c];
-
                     //Search for matching color
-                    bool match_found = false;
-                    for (uint c_index = 0; c_index < Colors.Count; ++c_index)
-                    {
+                    var match_found = false;
+                    for (var c_index = 0; c_index < Colors.Count; ++c_index)
                         if (Colors[c_index].r == newColor.r && Colors[c_index].g == newColor.g && Colors[c_index].b == newColor.b && Colors[c_index].a == newColor.a)
                         {
                             //Match found, use existing index
-                            lookUp[c].colorIndex = c_index;
+                            lookUp[c].colorIndex = (uint)c_index;
                             match_found = true;
                             //Stop searching
                             break;
                         }
-                    }
-
                     if (!match_found)
                     {
                         //No match found, add this color to the list
@@ -692,31 +675,31 @@ namespace Niflib
                 //Create UV set list
                 List<TexType> uvSetList = new List<TexType>(shapeUVs.Count);
                 //Initialize to base
-                for (uint tex = 0; tex < uvSetList.Count; ++tex)
+                for (var tex = 0; tex < uvSetList.Count; ++tex)
                     uvSetList[tex] = BASE_MAP;
-                NiPropertyRef niProp = geom.GetPropertyByType(NiTexturingProperty.TYPE);
-                NiTexturingPropertyRef niTexingProp;
+                var niProp = geom.GetPropertyByType(NiTexturingProperty.TYPE);
+                NiTexturingProperty niTexingProp = null;
                 if (niProp != null)
                     niTexingProp = (NiTexturingProperty)niProp;
                 niProp = geom.GetPropertyByType(NiTextureProperty.TYPE);
-                NiTexturePropertyRef niTexProp;
+                NiTextureProperty niTexProp = null;
                 if (niProp != null)
                     niTexProp = (NiTextureProperty)niProp;
-                BSShaderTextureSetRef bsTexProp = null;
+                BSShaderTextureSet bsTexProp = null;
                 niProp = geom.GetPropertyByType(BSShaderTextureSet.TYPE);
                 if (niProp != null)
                     bsTexProp = (BSShaderTextureSet)niProp;
                 niProp = geom.GetBSProperties()[0];
                 if (niProp != null && niProp.GetType().IsSameType(BSLightingShaderProperty.TYPE))
                 {
-                    BSLightingShaderPropertyRef bs_shader = (BSLightingShaderProperty)niProp;
-                    if (bs_shader->GetTextureSet() != null)
+                    var bs_shader = (BSLightingShaderProperty)niProp;
+                    if (bs_shader.GetTextureSet() != null)
                         bsTexProp = bs_shader.GetTextureSet();
                 }
                 niProp = geom.GetBSProperties()[1];
                 if (niProp != null && niProp.GetType().IsSameType(BSLightingShaderProperty.TYPE))
                 {
-                    BSLightingShaderPropertyRef bs_shader = (BSLightingShaderProperty)niProp;
+                    var bs_shader = (BSLightingShaderProperty)niProp;
                     if (bs_shader.GetTextureSet() != null)
                         bsTexProp = bs_shader.GetTextureSet();
                 }
@@ -724,7 +707,7 @@ namespace Niflib
                 //Create a list of UV sets to check
                 //pair.first = Texture Type
                 //pair.second = UV Set ID
-                List<Tuple<TexType, uint>> uvSets = new List<Tuple<TexType, uint>>();
+                var uvSets = new List<Tuple<TexType, uint>>();
                 if (shapeUVs.Count != 0 && (niTexingProp != null || niTexProp != null || bsTexProp != null))
                 {
                     if (niTexingProp != null)
@@ -733,9 +716,8 @@ namespace Niflib
                         for (int tex = 0; tex < 8; ++tex)
                             if (niTexingProp.HasTexture(tex))
                             {
-                                TexDesc td;
-                                td = niTexingProp->GetTexture(tex);
-                                uvSets.Add(new Tuple<TexType, uint>(TexType(tex), td.uvSet));
+                                var td = niTexingProp.GetTexture(tex);
+                                uvSets.Add(new Tuple<TexType, uint>((TexType)tex, td.uvSet));
                             }
                     }
                     else if (niTexProp != null || bsTexProp != null)
@@ -743,20 +725,18 @@ namespace Niflib
                         uvSets.Add(new Tuple<TexType, uint>(BASE_MAP, 0));
 
                     //Add the UV set to the list for every type of texture slot that uses it
-                    for (int i = 0; i < uvSets.Count; ++i)
+                    for (var i = 0; i < uvSets.Count; ++i)
                     {
-
-                        TexType newType = uvSets[i].Item1;
-                        uint set = uvSets[i].Item2;
-
+                        var newType = uvSets[i].Item1;
+                        var set = uvSets[i].Item2;
                         //Search for matching UV set
-                        bool match_found = false;
+                        var match_found = false;
                         uint uvSetIndex;
-                        for (uint set_index = 0; set_index < texCoordSets.Count; ++set_index)
-                            if (texCoordSets[set_index].texType == newType)
+                        for (var set_index = 0; set_index < TexCoordSets.Count; ++set_index)
+                            if (TexCoordSets[set_index].texType == newType)
                             {
                                 //Match found, use existing index
-                                uvSetIndex = set_index;
+                                uvSetIndex = (uint)set_index;
                                 match_found = true;
                                 //Stop searching
                                 break;
@@ -765,26 +745,23 @@ namespace Niflib
                         if (!match_found)
                         {
                             //No match found, add this UV set to the list
-                            TexCoordSet newTCS;
+                            var newTCS = new TexCoordSet();
                             newTCS.texType = newType;
-                            texCoordSets.Add(newTCS);
+                            TexCoordSets.Add(newTCS);
                             //Record new index
-                            uvSetIndex = (uint)texCoordSets.Count - 1;
+                            uvSetIndex = (uint)TexCoordSets.Count - 1;
                         }
 
                         //Loop through texture coordinates in this set
                         if (set >= shapeUVs.Count || set < 0)
                             throw new InvalidOperationException("One of the UV sets specified in the NiTexturingProperty did not exist in the NiTriBasedGeomData.");
-                        for (uint v = 0; v < shapeUVs[set].Count; ++v)
+                        for (var v = 0; v < shapeUVs[(int)set].Count; ++v)
                         {
-                            TexCoord newCoord;
-                            newCoord = shapeUVs[set][v];
-
+                            var newCoord = shapeUVs[set][v];
                             //Search for matching texture coordinate
-                            bool match_found = false;
-                            for (uint tc_index = 0; tc_index < texCoordSets[uvSetIndex].texCoords.Count; ++tc_index)
-                            {
-                                if (texCoordSets[uvSetIndex].texCoords[tc_index] == newCoord)
+                            var match_found = false;
+                            for (var tc_index = 0; tc_index < TexCoordSets[(int)uvSetIndex].texCoords.Count; ++tc_index)
+                                if (TexCoordSets[(int)uvSetIndex].texCoords[tc_index] == newCoord)
                                 {
                                     //Match found, use existing index
                                     lookUp[v].uvIndices[uvSetIndex] = tc_index;
@@ -792,27 +769,26 @@ namespace Niflib
                                     //Stop searching
                                     break;
                                 }
-                            }
 
                             //Done with loop, check if match was found
                             if (!match_found)
                             {
                                 //No match found, add this texture coordinate to the list
-                                texCoordSets[uvSetIndex].texCoords.Add(newCoord);
+                                TexCoordSets[uvSetIndex].texCoords.Add(newCoord);
                                 //Record new index
-                                lookUp[v].uvIndices[uvSetIndex] = (uint)texCoordSets[uvSetIndex].texCoords.Count - 1;
+                                lookUp[v].uvIndices[uvSetIndex] = (uint)TexCoordSets[uvSetIndex].texCoords.Count - 1;
                             }
                         }
                     }
                 }
 
                 //Use look up table to build list of faces
-                for (uint t = 0; t < shapeTris.Count; ++t)
+                for (var t = 0; t < shapeTris.Count; ++t)
                 {
-                    ComplexFace newFace;
+                    var newFace = new ComplexFace();
                     newFace.propGroupIndex = prop_group_index;
-                    newFace.points.resize(3);
-                    Triangle tri = shapeTris[t];
+                    Array.Resize<ref newFace.points, 3);
+                    var tri = shapeTris[t];
                     for (uint p = 0; p < 3; ++p)
                     {
                         if (shapeVerts.Count != 0)
@@ -964,8 +940,8 @@ namespace Niflib
             }
 
             //Finished with all shapes.  Build up a list of influences
-            Dictionary<NiNodeRef, uint> boneLookUp;
-            for (uint v = 0; v < vns.Count; ++v)
+            var boneLookUp = new Dictionary<NiNode, uint>();
+            for (var v = 0; v < vns.Count; ++v)
                 foreach (var w in vns[v].weights)
                     boneLookUp[w.Key] = 0; //will change later
 
@@ -983,7 +959,7 @@ namespace Niflib
                 Vertices.resize(vns.Count);
             if (has_any_norms)
                 Normals.resize(vns.Count);
-            for (uint v = 0; v < vns.Count; ++v)
+            for (var v = 0; v < vns.Count; ++v)
             {
                 if (has_any_verts)
                 {
@@ -1054,7 +1030,7 @@ namespace Niflib
         /*
          * Gets or Sets the property groups used by the Complex Shape.  Each group of NiProperty values can be assigned by vector index to a face in the ComplexShape by index, allowing for material and other properties to be specified on a per-face basis.  If the ComplexShape is split, each property group that is used by faces in the mesh will result in a separate NiTriBasedGeom with the specified propreties attached.
          */
-        public List<List<NiProperty>> PropGroups { get; set; }
+        public List<NiProperty>[] PropGroups { get; set; }
 
         /*
          * Gets or Sets the skin influences used by the Complex Shape.  These are the NiNode objects which cause deformations in skin meshes.  They are referenced in the vertex data by vector index.

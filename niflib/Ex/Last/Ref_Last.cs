@@ -3,7 +3,7 @@ All rights reserved.  Please see niflib.h for license. */
 
 using System;
 
-namespace Niflib
+namespace Niflib.Last
 {
     public class Ref<T> : IDisposable
         where T : RefObject

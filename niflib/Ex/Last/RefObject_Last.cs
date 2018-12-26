@@ -1,17 +1,29 @@
 /* Copyright (c) 2006, NIF File Format Library and Tools
 All rights reserved.  Please see niflib.h for license. */
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Niflib
+namespace Niflib.Last
 {
-    public abstract class RefObject
+    public abstract class RefObject : IDisposable
     {
+        uint _ref_count = 0;
+        static uint objectsInMemory = 0;
+
         /*!
          * A constant value which uniquly identifies objects of this type.
          */
         public static readonly Type_ TYPE = new Type_("RefObject", null);
+
+        /*! Constructor */
+        public RefObject() { objectsInMemory++; }
+
+        /*! Copy Constructor */
+        public RefObject(RefObject src) { objectsInMemory++; }
+
+        public void Dispose() { objectsInMemory--; }
 
         /*!
          * Used to determine the type of a particular instance of this object.
@@ -58,6 +70,27 @@ namespace Niflib
         public virtual string GetIDString() => $"({GetType().GetTypeName()})";
 
         /*!
+         * Returns the total number of reference-counted objects of any kind that have been allocated by Niflib for any reason.  This is for debugging or informational purpouses.  Mostly usful for tracking down memory leaks.
+         * \return The total number of reference-counted objects that have been allocated.
+         */
+        static uint NumObjectsInMemory() => objectsInMemory;
+
+        /*!
+         * Increments the reference count on this object.  This should be taken care of automatically as long as you use Ref<T> smart pointers.  However, if you use bare pointers you may call this function yourself, though it is not recomended.
+         */
+        public void AddRef() => ++_ref_count;
+
+        /*!
+         * Decriments the reference count on this object.  This should be taken care of automatically as long as you use Ref<T> smart pointers.  However, if you use bare pointers you may call this function yourself, though it is not recomended.
+         */
+        public void SubtractRef()
+        {
+            _ref_count--;
+            if (_ref_count < 1)
+                Dispose();
+        }
+
+        /*!
          * Returns the number of references that currently exist for this object.
          * \return The number of references to this object that are in use.
          */
@@ -66,10 +99,10 @@ namespace Niflib
         /*! NIFLIB_HIDDEN function.  For internal use only. */
         protected abstract void Read(StreamReader s, List<uint> link_stack, NifInfo info);
         /*! NIFLIB_HIDDEN function.  For internal use only. */
-        protected abstract void Write(StreamWriter s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info);
+        protected abstract void Write(StreamWriter s, Dictionary<Ref<NiObject>, uint> link_map, List<NiObject> missing_link_stack, NifInfo info);
         /*! NIFLIB_HIDDEN function.  For internal use only. */
-        protected abstract void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info);
+        protected abstract void FixLinks(Dictionary<uint, Ref<NiObject>> objects, List<uint> link_stack, List<Ref<NiObject>> missing_link_stack, NifInfo info);
         /*! NIFLIB_HIDDEN function.  For internal use only. */
-        protected abstract List<NiObject> GetRefs();
+        protected abstract List<Ref<NiObject>> GetRefs();
     }
 }
