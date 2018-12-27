@@ -13,11 +13,11 @@ namespace Niflib {
 /*! An array of bytes. */
 public class ByteMatrix {
 	/*! The number of bytes in this array */
-	uint dataSize1;
+	internal uint dataSize1;
 	/*! The number of bytes in this array */
-	uint dataSize2;
+	internal uint dataSize2;
 	/*! The bytes which make up the array */
-	byte[][] data;
+	internal byte[][] data;
 	//Constructor
 	public ByteMatrix() { unchecked {
 	dataSize1 = (uint)0;

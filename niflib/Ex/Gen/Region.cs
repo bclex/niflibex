@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A range of indices, which make up a region (such as a submesh). */
 public class Region {
 	/*!  */
-	uint startIndex;
+	internal uint startIndex;
 	/*!  */
-	uint numIndices;
+	internal uint numIndices;
 	//Constructor
 	public Region() { unchecked {
 	startIndex = (uint)0;

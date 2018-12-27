@@ -19,7 +19,7 @@ public class NiPhysXTransformDest : NiPhysXRigidBodyDest {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXTransformDest", NiPhysXRigidBodyDest.TYPE);
 	/*!  */
-	NiAVObject target;
+	internal NiAVObject target;
 
 	public NiPhysXTransformDest() {
 	target = null;

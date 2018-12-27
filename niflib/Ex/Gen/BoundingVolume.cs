@@ -13,15 +13,15 @@ namespace Niflib {
 /*!  */
 public class BoundingVolume {
 	/*! Type of collision data. */
-	BoundVolumeType collisionType;
+	internal BoundVolumeType collisionType;
 	/*!  */
-	NiBound sphere;
+	internal NiBound sphere;
 	/*!  */
-	BoxBV box;
+	internal BoxBV box;
 	/*!  */
-	CapsuleBV capsule;
+	internal CapsuleBV capsule;
 	/*!  */
-	HalfSpaceBV halfSpace;
+	internal HalfSpaceBV halfSpace;
 	//Constructor
 	public BoundingVolume() { unchecked {
 	collisionType = (BoundVolumeType)0;

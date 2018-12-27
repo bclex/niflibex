@@ -13,34 +13,34 @@ namespace Niflib {
 /*!  */
 public class MaterialData {
 	/*! Shader. */
-	bool hasShader;
+	internal bool hasShader;
 	/*! The shader name. */
-	IndexString shaderName;
+	internal IndexString shaderName;
 	/*!
 	 * Extra data associated with the shader. A value of -1 means the shader is the
 	 * default implementation.
 	 */
-	int shaderExtraData;
+	internal int shaderExtraData;
 	/*!  */
-	uint numMaterials;
+	internal uint numMaterials;
 	/*! The name of the material. */
-	IndexString[] materialName;
+	internal IndexString[] materialName;
 	/*!
 	 * Extra data associated with the material. A value of -1 means the material is the
 	 * default implementation.
 	 */
-	int[] materialExtraData;
+	internal int[] materialExtraData;
 	/*! The index of the currently active material. */
-	int activeMaterial;
+	internal int activeMaterial;
 	/*! Cyanide extension (only in version 10.2.0.0?). */
-	byte unknownByte;
+	internal byte unknownByte;
 	/*! Unknown. */
-	int unknownInteger2;
+	internal int unknownInteger2;
 	/*!
 	 * Whether the materials for this object always needs to be updated before
 	 * rendering with them.
 	 */
-	bool materialNeedsUpdate;
+	internal bool materialNeedsUpdate;
 	//Constructor
 	public MaterialData() { unchecked {
 	hasShader = false;

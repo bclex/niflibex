@@ -19,11 +19,11 @@ public class bhkAabbPhantom : bhkShapePhantom {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkAabbPhantom", bhkShapePhantom.TYPE);
 	/*!  */
-	Array8<byte> unused;
+	internal Array8<byte> unused;
 	/*!  */
-	Vector4 aabbMin;
+	internal Vector4 aabbMin;
 	/*!  */
-	Vector4 aabbMax;
+	internal Vector4 aabbMax;
 
 	public bhkAabbPhantom() {
 	}

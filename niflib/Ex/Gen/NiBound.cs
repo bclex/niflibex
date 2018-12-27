@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A sphere. */
 public class NiBound {
 	/*! The sphere's center. */
-	Vector3 center;
+	internal Vector3 center;
 	/*! The sphere's radius. */
-	float radius;
+	internal float radius;
 	//Constructor
 	public NiBound() { unchecked {
 	radius = 0.0f;

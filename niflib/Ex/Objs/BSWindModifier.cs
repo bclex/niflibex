@@ -22,7 +22,7 @@ public class BSWindModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSWindModifier", NiPSysModifier.TYPE);
 	/*! The amount of force wind will have on particles. */
-	float strength;
+	internal float strength;
 
 	public BSWindModifier() {
 	strength = 0.0f;

@@ -19,15 +19,15 @@ public class NiTriShapeData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriShapeData", NiTriBasedGeomData.TYPE);
 	/*! Num Triangles times 3. */
-	uint numTrianglePoints;
+	internal uint numTrianglePoints;
 	/*! Do we have triangle data? */
-	bool hasTriangles;
+	internal bool hasTriangles;
 	/*! Triangle data. */
-	Triangle[] triangles;
+	internal Triangle[] triangles;
 	/*! Number of shared normals groups. */
-	ushort numMatchGroups;
+	internal ushort numMatchGroups;
 	/*! The shared normals. */
-	MatchGroup[] matchGroups;
+	internal MatchGroup[] matchGroups;
 
 	public NiTriShapeData() {
 	numTrianglePoints = (uint)0;

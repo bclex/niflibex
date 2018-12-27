@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A set of transformation data: translation and rotation */
 public class bhkCMSDTransform {
 	/*! A vector that moves the chunk by the specified amount. W is not used. */
-	Vector4 translation;
+	internal Vector4 translation;
 	/*! Rotation. Reference point for rotation is bhkRigidBody translation. */
-	hkQuaternion rotation;
+	internal hkQuaternion rotation;
 	//Constructor
 }
 

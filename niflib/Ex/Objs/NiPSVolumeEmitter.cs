@@ -19,7 +19,7 @@ public class NiPSVolumeEmitter : NiPSEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSVolumeEmitter", NiPSEmitter.TYPE);
 	/*!  */
-	NiAVObject emitterObject;
+	internal NiAVObject emitterObject;
 
 	public NiPSVolumeEmitter() {
 	emitterObject = null;

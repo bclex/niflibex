@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Group of vertex indices of vertices that match. */
 public class MatchGroup {
 	/*! Number of vertices in this group. */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! The vertex indices. */
-	ushort[] vertexIndices;
+	internal ushort[] vertexIndices;
 	//Constructor
 	public MatchGroup() { unchecked {
 	numVertices = (ushort)0;

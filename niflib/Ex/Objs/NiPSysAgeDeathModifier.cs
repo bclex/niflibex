@@ -19,9 +19,9 @@ public class NiPSysAgeDeathModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysAgeDeathModifier", NiPSysModifier.TYPE);
 	/*! Should the particles spawn on death? */
-	bool spawnOnDeath;
+	internal bool spawnOnDeath;
 	/*! The spawner to use on death. */
-	NiPSysSpawnModifier spawnModifier;
+	internal NiPSysSpawnModifier spawnModifier;
 
 	public NiPSysAgeDeathModifier() {
 	spawnOnDeath = false;

@@ -19,7 +19,7 @@ public class NiParticleMeshesData : NiRotatingParticlesData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleMeshesData", NiRotatingParticlesData.TYPE);
 	/*! Refers to the mesh that makes up a particle? */
-	NiAVObject unknownLink2;
+	internal NiAVObject unknownLink2;
 
 	public NiParticleMeshesData() {
 	unknownLink2 = null;

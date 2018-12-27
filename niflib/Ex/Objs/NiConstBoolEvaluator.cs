@@ -19,7 +19,7 @@ public class NiConstBoolEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiConstBoolEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	float value;
+	internal float value;
 
 	public NiConstBoolEvaluator() {
 	value = -3.402823466e+38f;

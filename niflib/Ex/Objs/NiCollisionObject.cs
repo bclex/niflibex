@@ -27,7 +27,7 @@ public class NiCollisionObject : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiCollisionObject", NiObject.TYPE);
 	/*! Index of the AV object referring to this collision object. */
-	NiAVObject target;
+	internal NiAVObject target;
 
 	public NiCollisionObject() {
 	target = null;

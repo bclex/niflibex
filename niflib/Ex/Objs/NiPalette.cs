@@ -22,11 +22,11 @@ public class NiPalette : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPalette", NiObject.TYPE);
 	/*!  */
-	byte hasAlpha;
+	internal byte hasAlpha;
 	/*! The number of palette entries. Always 256 but can also be 16. */
-	uint numEntries;
+	internal uint numEntries;
 	/*! The color palette. */
-	Array16<ByteColor4> palette;
+	internal Array16<ByteColor4> palette;
 
 	public NiPalette() {
 	hasAlpha = (byte)0;

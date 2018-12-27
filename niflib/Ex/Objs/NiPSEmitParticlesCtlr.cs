@@ -19,7 +19,7 @@ public class NiPSEmitParticlesCtlr : NiPSEmitterCtlr {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSEmitParticlesCtlr", NiPSEmitterCtlr.TYPE);
 	/*!  */
-	NiInterpolator emitterActiveInterpolator;
+	internal NiInterpolator emitterActiveInterpolator;
 
 	public NiPSEmitParticlesCtlr() {
 	emitterActiveInterpolator = null;

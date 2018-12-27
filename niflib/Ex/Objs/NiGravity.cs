@@ -22,15 +22,15 @@ public class NiGravity : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGravity", NiParticleModifier.TYPE);
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! The strength/force of this gravity. */
-	float force;
+	internal float force;
 	/*! The force field type. */
-	FieldType type;
+	internal FieldType type;
 	/*! The position of the mass point relative to the particle system. */
-	Vector3 position;
+	internal Vector3 position;
 	/*! The direction of the applied acceleration. */
-	Vector3 direction;
+	internal Vector3 direction;
 
 	public NiGravity() {
 	unknownFloat1 = 0.0f;

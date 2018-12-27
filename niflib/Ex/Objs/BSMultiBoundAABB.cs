@@ -19,9 +19,9 @@ public class BSMultiBoundAABB : BSMultiBoundData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBoundAABB", BSMultiBoundData.TYPE);
 	/*! Position of the AABB's center */
-	Vector3 position;
+	internal Vector3 position;
 	/*! Extent of the AABB in all directions */
-	Vector3 extent;
+	internal Vector3 extent;
 
 	public BSMultiBoundAABB() {
 	}

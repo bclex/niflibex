@@ -22,7 +22,7 @@ public class NiShadeProperty : NiProperty {
 	 * Bit 0: Enable smooth phong shading on this shape. Otherwise, hard-edged flat
 	 * shading will be used on this shape.
 	 */
-	ushort flags;
+	internal ushort flags;
 
 	public NiShadeProperty() {
 	flags = (ushort)1;

@@ -19,9 +19,9 @@ public class NiPSSimulatorCollidersStep : NiPSSimulatorStep {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulatorCollidersStep", NiPSSimulatorStep.TYPE);
 	/*!  */
-	uint numColliders;
+	internal uint numColliders;
 	/*! The colliders affecting the particle system. */
-	NiPSCollider[] colliders;
+	internal NiPSCollider[] colliders;
 
 	public NiPSSimulatorCollidersStep() {
 	numColliders = (uint)0;

@@ -19,14 +19,14 @@ public class NiTextKeyExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextKeyExtraData", NiExtraData.TYPE);
 	/*! Unknown.  Always equals zero in all official files. */
-	uint unknownInt1;
+	internal uint unknownInt1;
 	/*! The number of text keys that follow. */
-	uint numTextKeys;
+	internal uint numTextKeys;
 	/*!
 	 * List of textual notes and at which time they take effect. Used for designating
 	 * the start and stop of animations and the triggering of sounds.
 	 */
-	Key<IndexString>[] textKeys;
+	internal Key<IndexString>[] textKeys;
 
 	public NiTextKeyExtraData() {
 	unknownInt1 = (uint)0;

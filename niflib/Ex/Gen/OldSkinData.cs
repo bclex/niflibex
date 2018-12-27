@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Used to store skin weights in NiTriShapeSkinController. */
 public class OldSkinData {
 	/*! The amount that this bone affects the vertex. */
-	float vertexWeight;
+	internal float vertexWeight;
 	/*! The index of the vertex that this weight applies to. */
-	ushort vertexIndex;
+	internal ushort vertexIndex;
 	/*! Unknown.  Perhaps some sort of offset? */
-	Vector3 unknownVector;
+	internal Vector3 unknownVector;
 	//Constructor
 	public OldSkinData() { unchecked {
 	vertexWeight = 0.0f;

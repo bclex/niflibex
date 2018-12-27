@@ -40,7 +40,7 @@ public class NiBillboardNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBillboardNode", NiNode.TYPE);
 	/*! The way the billboard will react to the camera. */
-	BillboardMode billboardMode;
+	internal BillboardMode billboardMode;
 
 	public NiBillboardNode() {
 	billboardMode = (BillboardMode)0;

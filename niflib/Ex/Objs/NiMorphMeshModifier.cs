@@ -27,13 +27,13 @@ public class NiMorphMeshModifier : NiMeshModifier {
 	 *             FLAG_SKINNED         = 0x20
 	 *             FLAG_SWSKINNED       = 0x40
 	 */
-	byte flags;
+	internal byte flags;
 	/*! The number of morph targets. */
-	ushort numTargets;
+	internal ushort numTargets;
 	/*! The number of morphing data stream elements. */
-	uint numElements;
+	internal uint numElements;
 	/*! Semantics and normalization of the morphing data stream elements. */
-	ElementReference[] elements;
+	internal ElementReference[] elements;
 
 	public NiMorphMeshModifier() {
 	flags = (byte)0;

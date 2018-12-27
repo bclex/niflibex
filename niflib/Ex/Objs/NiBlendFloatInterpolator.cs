@@ -19,7 +19,7 @@ public class NiBlendFloatInterpolator : NiBlendInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendFloatInterpolator", NiBlendInterpolator.TYPE);
 	/*! The pose value. Invalid if using data. */
-	float value;
+	internal float value;
 
 	public NiBlendFloatInterpolator() {
 	value = -3.402823466e+38f;

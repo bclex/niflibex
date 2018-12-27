@@ -19,7 +19,7 @@ public class NiPSysVortexFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysVortexFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! Direction of the vortex field in Field Object's space. */
-	Vector3 direction;
+	internal Vector3 direction;
 
 	public NiPSysVortexFieldModifier() {
 	}

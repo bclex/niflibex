@@ -19,21 +19,21 @@ public class bhkRagdollTemplateData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkRagdollTemplateData", NiObject.TYPE);
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	float mass;
+	internal float mass;
 	/*!  */
-	float restitution;
+	internal float restitution;
 	/*!  */
-	float friction;
+	internal float friction;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*!  */
-	HavokMaterial material;
+	internal HavokMaterial material;
 	/*!  */
-	uint numConstraints;
+	internal uint numConstraints;
 	/*!  */
-	ConstraintData[] constraint;
+	internal ConstraintData[] constraint;
 
 	public bhkRagdollTemplateData() {
 	mass = 9.0f;

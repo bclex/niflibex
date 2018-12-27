@@ -19,7 +19,7 @@ public class NiPSysSphericalCollider : NiPSysCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysSphericalCollider", NiPSysCollider.TYPE);
 	/*!  */
-	float radius;
+	internal float radius;
 
 	public NiPSysSphericalCollider() {
 	radius = 0.0f;

@@ -19,13 +19,13 @@ public class bhkConvexSweepShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConvexSweepShape", bhkShape.TYPE);
 	/*!  */
-	bhkShape shape;
+	internal bhkShape shape;
 	/*!  */
-	HavokMaterial material;
+	internal HavokMaterial material;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*! Unknown. */
-	Vector3 unknown;
+	internal Vector3 unknown;
 
 	public bhkConvexSweepShape() {
 	shape = null;

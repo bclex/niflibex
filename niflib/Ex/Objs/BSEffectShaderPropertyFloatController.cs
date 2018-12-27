@@ -19,7 +19,7 @@ public class BSEffectShaderPropertyFloatController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSEffectShaderPropertyFloatController", NiFloatInterpController.TYPE);
 	/*! Which float variable in BSEffectShaderProperty to animate: */
-	EffectShaderControlledVariable typeOfControlledVariable;
+	internal EffectShaderControlledVariable typeOfControlledVariable;
 
 	public BSEffectShaderPropertyFloatController() {
 	typeOfControlledVariable = (EffectShaderControlledVariable)0;

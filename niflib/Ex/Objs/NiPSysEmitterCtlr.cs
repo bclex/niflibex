@@ -24,9 +24,9 @@ public class NiPSysEmitterCtlr : NiPSysModifierCtlr {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysEmitterCtlr", NiPSysModifierCtlr.TYPE);
 	/*!  */
-	NiInterpolator visibilityInterpolator;
+	internal NiInterpolator visibilityInterpolator;
 	/*!  */
-	NiPSysEmitterCtlrData data;
+	internal NiPSysEmitterCtlrData data;
 
 	public NiPSysEmitterCtlr() {
 	visibilityInterpolator = null;

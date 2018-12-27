@@ -22,21 +22,21 @@ public class NiGeomMorpherController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGeomMorpherController", NiInterpController.TYPE);
 	/*! 1 = UPDATE NORMALS */
-	ushort extraFlags;
+	internal ushort extraFlags;
 	/*! Geometry morphing data index. */
-	NiMorphData data;
+	internal NiMorphData data;
 	/*!  */
-	byte alwaysUpdate;
+	internal byte alwaysUpdate;
 	/*!  */
-	uint numInterpolators;
+	internal uint numInterpolators;
 	/*!  */
-	NiInterpolator[] interpolators;
+	internal NiInterpolator[] interpolators;
 	/*!  */
-	MorphWeight[] interpolatorWeights;
+	internal MorphWeight[] interpolatorWeights;
 	/*!  */
-	uint numUnknownInts;
+	internal uint numUnknownInts;
 	/*! Unknown. */
-	uint[] unknownInts;
+	internal uint[] unknownInts;
 
 	public NiGeomMorpherController() {
 	extraFlags = (ushort)0;

@@ -19,17 +19,17 @@ public class NiLookAtEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLookAtEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	LookAtFlags flags;
+	internal LookAtFlags flags;
 	/*!  */
-	IndexString lookAtName;
+	internal IndexString lookAtName;
 	/*!  */
-	IndexString drivenName;
+	internal IndexString drivenName;
 	/*!  */
-	NiPoint3Interpolator interpolator_Translation;
+	internal NiPoint3Interpolator interpolator_Translation;
 	/*!  */
-	NiFloatInterpolator interpolator_Roll;
+	internal NiFloatInterpolator interpolator_Roll;
 	/*!  */
-	NiFloatInterpolator interpolator_Scale;
+	internal NiFloatInterpolator interpolator_Scale;
 
 	public NiLookAtEvaluator() {
 	flags = (LookAtFlags)0;

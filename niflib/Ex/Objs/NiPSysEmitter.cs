@@ -19,27 +19,27 @@ public class NiPSysEmitter : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysEmitter", NiPSysModifier.TYPE);
 	/*! Speed / Inertia of particle movement. */
-	float speed;
+	internal float speed;
 	/*! Adds an amount of randomness to Speed. */
-	float speedVariation;
+	internal float speedVariation;
 	/*! Declination / First axis. */
-	float declination;
+	internal float declination;
 	/*! Declination randomness / First axis. */
-	float declinationVariation;
+	internal float declinationVariation;
 	/*! Planar Angle / Second axis. */
-	float planarAngle;
+	internal float planarAngle;
 	/*! Planar Angle randomness / Second axis . */
-	float planarAngleVariation;
+	internal float planarAngleVariation;
 	/*! Defines color of a birthed particle. */
-	Color4 initialColor;
+	internal Color4 initialColor;
 	/*! Size of a birthed particle. */
-	float initialRadius;
+	internal float initialRadius;
 	/*! Particle Radius randomness. */
-	float radiusVariation;
+	internal float radiusVariation;
 	/*! Duration until a particle dies. */
-	float lifeSpan;
+	internal float lifeSpan;
 	/*! Adds randomness to Life Span. */
-	float lifeSpanVariation;
+	internal float lifeSpanVariation;
 
 	public NiPSysEmitter() {
 	speed = 0.0f;

@@ -19,15 +19,15 @@ public class NiPSysData : NiParticlesData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysData", NiParticlesData.TYPE);
 	/*!  */
-	ParticleDesc[] particleDescriptions;
+	internal ParticleDesc[] particleDescriptions;
 	/*!  */
-	bool hasRotationSpeeds;
+	internal bool hasRotationSpeeds;
 	/*!  */
-	float[] rotationSpeeds;
+	internal float[] rotationSpeeds;
 	/*!  */
-	ushort numAddedParticles;
+	internal ushort numAddedParticles;
 	/*!  */
-	ushort addedParticlesBase;
+	internal ushort addedParticlesBase;
 
 	public NiPSysData() {
 	hasRotationSpeeds = false;

@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class hkWorldObjCinfoProperty {
 	/*!  */
-	uint data;
+	internal uint data;
 	/*!  */
-	uint size;
+	internal uint size;
 	/*!  */
-	uint capacityAndFlags;
+	internal uint capacityAndFlags;
 	//Constructor
 	public hkWorldObjCinfoProperty() { unchecked {
 	data = (uint)0;

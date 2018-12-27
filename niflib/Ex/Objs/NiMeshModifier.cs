@@ -19,13 +19,13 @@ public class NiMeshModifier : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMeshModifier", NiObject.TYPE);
 	/*!  */
-	uint numSubmitPoints;
+	internal uint numSubmitPoints;
 	/*! The sync points supported by this mesh modifier for SubmitTasks. */
-	SyncPoint[] submitPoints;
+	internal SyncPoint[] submitPoints;
 	/*!  */
-	uint numCompletePoints;
+	internal uint numCompletePoints;
 	/*! The sync points supported by this mesh modifier for CompleteTasks. */
-	SyncPoint[] completePoints;
+	internal SyncPoint[] completePoints;
 
 	public NiMeshModifier() {
 	numSubmitPoints = (uint)0;

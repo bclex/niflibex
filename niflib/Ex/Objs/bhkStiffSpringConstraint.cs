@@ -19,7 +19,7 @@ public class bhkStiffSpringConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkStiffSpringConstraint", bhkConstraint.TYPE);
 	/*! Stiff Spring constraint. */
-	StiffSpringDescriptor stiffSpring;
+	internal StiffSpringDescriptor stiffSpring;
 
 	public bhkStiffSpringConstraint() {
 	}

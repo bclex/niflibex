@@ -22,37 +22,37 @@ public class NiBlendInterpolator : NiInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendInterpolator", NiInterpolator.TYPE);
 	/*!  */
-	InterpBlendFlags flags;
+	internal InterpBlendFlags flags;
 	/*!  */
-	ushort arraySize;
+	internal ushort arraySize;
 	/*!  */
-	ushort arrayGrowBy;
+	internal ushort arrayGrowBy;
 	/*!  */
-	float weightThreshold;
+	internal float weightThreshold;
 	/*!  */
-	byte interpCount;
+	internal byte interpCount;
 	/*!  */
-	byte singleIndex;
+	internal byte singleIndex;
 	/*!  */
-	byte highPriority;
+	internal byte highPriority;
 	/*!  */
-	byte nextHighPriority;
+	internal byte nextHighPriority;
 	/*!  */
-	float singleTime;
+	internal float singleTime;
 	/*!  */
-	float highWeightsSum;
+	internal float highWeightsSum;
 	/*!  */
-	float nextHighWeightsSum;
+	internal float nextHighWeightsSum;
 	/*!  */
-	float highEaseSpinner;
+	internal float highEaseSpinner;
 	/*!  */
-	InterpBlendItem[] interpArrayItems;
+	internal InterpBlendItem[] interpArrayItems;
 	/*!  */
-	bool managedControlled;
+	internal bool managedControlled;
 	/*!  */
-	bool onlyUseHighestWeight;
+	internal bool onlyUseHighestWeight;
 	/*!  */
-	NiInterpolator singleInterpolator;
+	internal NiInterpolator singleInterpolator;
 
 	public NiBlendInterpolator() {
 	flags = (InterpBlendFlags)0;

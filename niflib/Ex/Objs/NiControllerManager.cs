@@ -23,13 +23,13 @@ public class NiControllerManager : NiTimeController {
 	 * the manager will treat all sequence data on the accumulation root as absolute
 	 * data instead of relative delta values.
 	 */
-	bool cumulative;
+	internal bool cumulative;
 	/*!  */
-	uint numControllerSequences;
+	internal uint numControllerSequences;
 	/*!  */
-	NiControllerSequence[] controllerSequences;
+	internal NiControllerSequence[] controllerSequences;
 	/*!  */
-	NiDefaultAVObjectPalette objectPalette;
+	internal NiDefaultAVObjectPalette objectPalette;
 
 	public NiControllerManager() {
 	cumulative = false;

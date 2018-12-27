@@ -22,13 +22,13 @@ public class NiFloatExtraDataController : NiExtraDataController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatExtraDataController", NiExtraDataController.TYPE);
 	/*! Number of extra bytes. */
-	byte numExtraBytes;
+	internal byte numExtraBytes;
 	/*! Unknown. */
-	Array7<byte> unknownBytes;
+	internal Array7<byte> unknownBytes;
 	/*! Unknown. */
-	byte[] unknownExtraBytes;
+	internal byte[] unknownExtraBytes;
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiFloatExtraDataController() {
 	numExtraBytes = (byte)0;

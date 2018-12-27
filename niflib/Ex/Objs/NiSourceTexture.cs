@@ -19,32 +19,32 @@ public class NiSourceTexture : NiTexture {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSourceTexture", NiTexture.TYPE);
 	/*! Is the texture external? */
-	byte useExternal;
+	internal byte useExternal;
 	/*! The external texture file name. */
-	IndexString fileName;
+	internal IndexString fileName;
 	/*! Unknown. */
-	NiObject unknownLink;
+	internal NiObject unknownLink;
 	/*! Unknown. Seems to be set if Pixel Data is present? */
-	byte unknownByte;
+	internal byte unknownByte;
 	/*! NiPixelData or NiPersistentSrcTextureRendererData */
-	NiPixelFormat pixelData;
+	internal NiPixelFormat pixelData;
 	/*!
 	 * A set of preferences for the texture format. They are a request only and the
 	 * renderer may ignore them.
 	 */
-	FormatPrefs formatPrefs;
+	internal FormatPrefs formatPrefs;
 	/*!
 	 * If set, then the application cannot assume that any dynamic changes to the pixel
 	 * data will show in the rendered image.
 	 */
-	byte isStatic;
+	internal byte isStatic;
 	/*!
 	 * A hint to the renderer that the texture can be loaded directly from a texture
 	 * file into a renderer-specific resource, bypassing the NiPixelData object.
 	 */
-	bool directRender;
+	internal bool directRender;
 	/*! Pixel Data is NiPersistentSrcTextureRendererData instead of NiPixelData. */
-	bool persistRenderData;
+	internal bool persistRenderData;
 
 	public NiSourceTexture() {
 	useExternal = (byte)1;

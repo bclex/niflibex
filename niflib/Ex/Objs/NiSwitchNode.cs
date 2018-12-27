@@ -22,9 +22,9 @@ public class NiSwitchNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSwitchNode", NiNode.TYPE);
 	/*!  */
-	NiSwitchFlags switchNodeFlags;
+	internal NiSwitchFlags switchNodeFlags;
 	/*!  */
-	uint index;
+	internal uint index;
 
 	public NiSwitchNode() {
 	switchNodeFlags = (NiSwitchFlags)0;

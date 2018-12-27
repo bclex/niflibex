@@ -19,7 +19,7 @@ public class NiBSplinePoint3Evaluator : NiBSplineEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplinePoint3Evaluator", NiBSplineEvaluator.TYPE);
 	/*! Handle into the data. (USHRT_MAX for invalid handle.) */
-	uint handle;
+	internal uint handle;
 
 	public NiBSplinePoint3Evaluator() {
 	handle = (uint)0xFFFF;

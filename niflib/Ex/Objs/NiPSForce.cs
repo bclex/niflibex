@@ -19,11 +19,11 @@ public class NiPSForce : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSForce", NiObject.TYPE);
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	PSForceType type;
+	internal PSForceType type;
 	/*!  */
-	bool active;
+	internal bool active;
 
 	public NiPSForce() {
 	type = (PSForceType)0;

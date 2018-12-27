@@ -19,9 +19,9 @@ public class BSFurnitureMarker : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSFurnitureMarker", NiExtraData.TYPE);
 	/*! Number of positions. */
-	uint numPositions;
+	internal uint numPositions;
 	/*! Unknown. Probably has something to do with the furniture positions? */
-	FurniturePosition[] positions;
+	internal FurniturePosition[] positions;
 
 	public BSFurnitureMarker() {
 	numPositions = (uint)0;

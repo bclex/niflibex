@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class PhysXMaterialRef {
 	/*!  */
-	ushort key;
+	internal ushort key;
 	/*!  */
-	NiPhysXMaterialDesc materialDesc;
+	internal NiPhysXMaterialDesc materialDesc;
 	//Constructor
 	public PhysXMaterialRef() { unchecked {
 	key = (ushort)0;

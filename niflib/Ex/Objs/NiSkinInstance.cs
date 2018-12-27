@@ -19,18 +19,18 @@ public class NiSkinInstance : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinInstance", NiObject.TYPE);
 	/*! Skinning data reference. */
-	NiSkinData data;
+	internal NiSkinData data;
 	/*!
 	 * Refers to a NiSkinPartition objects, which partitions the mesh such that every
 	 * vertex is only influenced by a limited number of bones.
 	 */
-	NiSkinPartition skinPartition;
+	internal NiSkinPartition skinPartition;
 	/*! Armature root node. */
-	NiNode skeletonRoot;
+	internal NiNode skeletonRoot;
 	/*! The number of node bones referenced as influences. */
-	uint numBones;
+	internal uint numBones;
 	/*! List of all armature bones. */
-	NiNode[] bones;
+	internal NiNode[] bones;
 
 	public NiSkinInstance() {
 	data = null;

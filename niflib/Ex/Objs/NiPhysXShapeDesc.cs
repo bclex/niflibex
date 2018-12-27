@@ -19,37 +19,37 @@ public class NiPhysXShapeDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXShapeDesc", NiObject.TYPE);
 	/*!  */
-	NxShapeType shapeType;
+	internal NxShapeType shapeType;
 	/*!  */
-	Matrix34 localPose;
+	internal Matrix34 localPose;
 	/*!  */
-	uint shapeFlags;
+	internal uint shapeFlags;
 	/*!  */
-	ushort collisionGroup;
+	internal ushort collisionGroup;
 	/*!  */
-	ushort materialIndex;
+	internal ushort materialIndex;
 	/*!  */
-	float density;
+	internal float density;
 	/*!  */
-	float mass;
+	internal float mass;
 	/*!  */
-	float skinWidth;
+	internal float skinWidth;
 	/*!  */
-	IndexString shapeName;
+	internal IndexString shapeName;
 	/*!  */
-	uint non_interactingCompartmentTypes;
+	internal uint non_interactingCompartmentTypes;
 	/*!  */
-	Array4<uint> collisionBits;
+	internal Array4<uint> collisionBits;
 	/*!  */
-	NxPlane plane;
+	internal NxPlane plane;
 	/*!  */
-	float sphereRadius;
+	internal float sphereRadius;
 	/*!  */
-	Vector3 boxHalfExtents;
+	internal Vector3 boxHalfExtents;
 	/*!  */
-	NxCapsule capsule;
+	internal NxCapsule capsule;
 	/*!  */
-	NiPhysXMeshDesc mesh;
+	internal NiPhysXMeshDesc mesh;
 
 	public NiPhysXShapeDesc() {
 	shapeType = (NxShapeType)0;

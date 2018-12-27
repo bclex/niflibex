@@ -19,17 +19,17 @@ public class NiPixelFormat : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPixelFormat", NiObject.TYPE);
 	/*! The format of the pixels in this internally stored image. */
-	PixelFormat pixelFormat;
+	internal PixelFormat pixelFormat;
 	/*! 0x000000ff (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	uint redMask;
+	internal uint redMask;
 	/*! 0x0000ff00 (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	uint greenMask;
+	internal uint greenMask;
 	/*! 0x00ff0000 (for 24bpp and 32bpp) or 0x00000000 (for 8bpp) */
-	uint blueMask;
+	internal uint blueMask;
 	/*! 0xff000000 (for 32bpp) or 0x00000000 (for 24bpp and 8bpp) */
-	uint alphaMask;
+	internal uint alphaMask;
 	/*! Bits per pixel, 0 (Compressed), 8, 24 or 32. */
-	uint bitsPerPixel;
+	internal uint bitsPerPixel;
 	/*!
 	 * [96,8,130,0,0,65,0,0] if 24 bits per pixel
 	 *             [129,8,130,32,0,65,12,0] if 32 bits per pixel
@@ -37,19 +37,19 @@ public class NiPixelFormat : NiObject {
 	 *             [X,0,0,0,0,0,0,0] if 0 (Compressed) bits per pixel where X =
 	 * PixelFormat
 	 */
-	Array8<byte> oldFastCompare;
+	internal Array8<byte> oldFastCompare;
 	/*! Seems to always be zero. */
-	PixelTiling tiling;
+	internal PixelTiling tiling;
 	/*!  */
-	uint rendererHint;
+	internal uint rendererHint;
 	/*!  */
-	uint extraData;
+	internal uint extraData;
 	/*!  */
-	byte flags;
+	internal byte flags;
 	/*!  */
-	bool srgbSpace;
+	internal bool srgbSpace;
 	/*! Channel Data */
-	Array4<PixelFormatComponent> channels;
+	internal Array4<PixelFormatComponent> channels;
 
 	public NiPixelFormat() {
 	pixelFormat = (PixelFormat)0;

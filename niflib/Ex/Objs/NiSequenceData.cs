@@ -25,32 +25,32 @@ public class NiSequenceData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSequenceData", NiObject.TYPE);
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	uint numControlledBlocks;
+	internal uint numControlledBlocks;
 	/*!  */
-	uint arrayGrowBy;
+	internal uint arrayGrowBy;
 	/*!  */
-	ControlledBlock[] controlledBlocks;
+	internal ControlledBlock[] controlledBlocks;
 	/*!  */
-	uint numEvaluators;
+	internal uint numEvaluators;
 	/*!  */
-	NiEvaluator[] evaluators;
+	internal NiEvaluator[] evaluators;
 	/*!  */
-	NiTextKeyExtraData textKeys;
+	internal NiTextKeyExtraData textKeys;
 	/*!  */
-	float duration;
+	internal float duration;
 	/*!  */
-	CycleType cycleType;
+	internal CycleType cycleType;
 	/*!  */
-	float frequency;
+	internal float frequency;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	IndexString accumRootName;
+	internal IndexString accumRootName;
 	/*!  */
-	AccumFlags accumFlags;
+	internal AccumFlags accumFlags;
 
 	public NiSequenceData() {
 	numControlledBlocks = (uint)0;

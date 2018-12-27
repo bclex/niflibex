@@ -19,7 +19,7 @@ public class NiColorEvaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiColorEvaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiColorData data;
+	internal NiColorData data;
 
 	public NiColorEvaluator() {
 	data = null;

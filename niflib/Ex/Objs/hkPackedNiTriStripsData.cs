@@ -19,19 +19,19 @@ public class hkPackedNiTriStripsData : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("hkPackedNiTriStripsData", bhkShapeCollection.TYPE);
 	/*!  */
-	uint numTriangles;
+	internal uint numTriangles;
 	/*!  */
-	TriangleData[] triangles;
+	internal TriangleData[] triangles;
 	/*!  */
-	uint numVertices;
+	internal uint numVertices;
 	/*! Unknown. */
-	byte unknownByte1;
+	internal byte unknownByte1;
 	/*!  */
-	Vector3[] vertices;
+	internal Vector3[] vertices;
 	/*! Number of subparts. */
-	ushort numSubShapes;
+	internal ushort numSubShapes;
 	/*! The subparts. */
-	OblivionSubShape[] subShapes;
+	internal OblivionSubShape[] subShapes;
 
 	public hkPackedNiTriStripsData() {
 	numTriangles = (uint)0;

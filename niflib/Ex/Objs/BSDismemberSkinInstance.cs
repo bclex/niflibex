@@ -19,9 +19,9 @@ public class BSDismemberSkinInstance : NiSkinInstance {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSDismemberSkinInstance", NiSkinInstance.TYPE);
 	/*!  */
-	int numPartitions;
+	internal int numPartitions;
 	/*!  */
-	BodyPartList[] partitions;
+	internal BodyPartList[] partitions;
 
 	public BSDismemberSkinInstance() {
 	numPartitions = (int)0;

@@ -19,9 +19,9 @@ public class BSWArray : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSWArray", NiExtraData.TYPE);
 	/*!  */
-	int numItems;
+	internal int numItems;
 	/*!  */
-	int[] items;
+	internal int[] items;
 
 	public BSWArray() {
 	numItems = (int)0;

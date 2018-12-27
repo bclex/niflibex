@@ -17,50 +17,50 @@ public class Header {
 	 * x.x.x.x' (versions >= 10.1.0.0), with x.x.x.x the version written out. Ends with
 	 * a newline character (0x0A).
 	 */
-	HeaderString headerString;
+	internal HeaderString headerString;
 	/*!  */
-	Array3<LineString> copyright;
+	internal Array3<LineString> copyright;
 	/*!
 	 * The NIF version, in hexadecimal notation: 0x04000002, 0x0401000C, 0x04020002,
 	 * 0x04020100, 0x04020200, 0x0A000100, 0x0A010000, 0x0A020000, 0x14000004, ...
 	 */
-	uint version;
+	internal uint version;
 	/*! Determines the endianness of the data in the file. */
-	EndianType endianType;
+	internal EndianType endianType;
 	/*! An extra version number, for companies that decide to modify the file format. */
-	uint userVersion;
+	internal uint userVersion;
 	/*! Number of file objects. */
-	uint numBlocks;
+	internal uint numBlocks;
 	/*!  */
-	uint userVersion2;
+	internal uint userVersion2;
 	/*!  */
-	ExportInfo exportInfo;
+	internal ExportInfo exportInfo;
 	/*!  */
-	ShortString maxFilepath;
+	internal ShortString maxFilepath;
 	/*!  */
-	ByteArray metadata;
+	internal ByteArray metadata;
 	/*! Number of object types in this NIF file. */
-	ushort numBlockTypes;
+	internal ushort numBlockTypes;
 	/*! List of all object types used in this NIF file. */
-	string[] blockTypes;
+	internal string[] blockTypes;
 	/*!
 	 * Maps file objects on their corresponding type: first file object is of type
 	 * object_types[object_type_index[0]], the second of
 	 * object_types[object_type_index[1]], etc.
 	 */
-	ushort[] blockTypeIndex;
+	internal ushort[] blockTypeIndex;
 	/*! Array of block sizes? */
-	uint[] blockSize;
+	internal uint[] blockSize;
 	/*! Number of strings. */
-	uint numStrings;
+	internal uint numStrings;
 	/*! Maximum string length. */
-	uint maxStringLength;
+	internal uint maxStringLength;
 	/*! Strings. */
-	string[] strings;
+	internal string[] strings;
 	/*!  */
-	uint numGroups;
+	internal uint numGroups;
 	/*!  */
-	uint[] groups;
+	internal uint[] groups;
 	//Constructor
 	public Header() { unchecked {
 	version = (uint)0x04000002;

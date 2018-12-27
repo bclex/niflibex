@@ -19,7 +19,7 @@ public class NiSingleInterpController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSingleInterpController", NiInterpController.TYPE);
 	/*!  */
-	NiInterpolator interpolator;
+	internal NiInterpolator interpolator;
 
 	public NiSingleInterpController() {
 	interpolator = null;

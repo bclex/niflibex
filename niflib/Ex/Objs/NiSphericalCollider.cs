@@ -19,19 +19,19 @@ public class NiSphericalCollider : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSphericalCollider", NiParticleModifier.TYPE);
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown. */
-	ushort unknownShort1;
+	internal ushort unknownShort1;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! Unknown. */
-	ushort unknownShort2;
+	internal ushort unknownShort2;
 	/*! Unknown. */
-	float unknownFloat3;
+	internal float unknownFloat3;
 	/*! Unknown. */
-	float unknownFloat4;
+	internal float unknownFloat4;
 	/*! Unknown. */
-	float unknownFloat5;
+	internal float unknownFloat5;
 
 	public NiSphericalCollider() {
 	unknownFloat1 = 0.0f;

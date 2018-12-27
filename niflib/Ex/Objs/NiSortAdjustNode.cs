@@ -22,9 +22,9 @@ public class NiSortAdjustNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSortAdjustNode", NiNode.TYPE);
 	/*! Sorting */
-	SortingMode sortingMode;
+	internal SortingMode sortingMode;
 	/*!  */
-	NiAccumulator accumulator;
+	internal NiAccumulator accumulator;
 
 	public NiSortAdjustNode() {
 	sortingMode = SortingMode.SORTING_INHERIT;

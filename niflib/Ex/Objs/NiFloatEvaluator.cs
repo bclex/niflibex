@@ -19,7 +19,7 @@ public class NiFloatEvaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatEvaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiFloatEvaluator() {
 	data = null;

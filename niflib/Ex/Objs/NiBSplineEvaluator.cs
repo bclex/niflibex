@@ -19,13 +19,13 @@ public class NiBSplineEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	float startTime;
+	internal float startTime;
 	/*!  */
-	float endTime;
+	internal float endTime;
 	/*!  */
-	NiBSplineData data;
+	internal NiBSplineData data;
 	/*!  */
-	NiBSplineBasisData basisData;
+	internal NiBSplineBasisData basisData;
 
 	public NiBSplineEvaluator() {
 	startTime = 3.402823466e+38f;

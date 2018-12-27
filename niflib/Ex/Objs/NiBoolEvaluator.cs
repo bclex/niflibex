@@ -19,7 +19,7 @@ public class NiBoolEvaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBoolEvaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiBoolData data;
+	internal NiBoolData data;
 
 	public NiBoolEvaluator() {
 	data = null;

@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class PixelFormatComponent {
 	/*! Component Type */
-	PixelComponent type;
+	internal PixelComponent type;
 	/*! Data Storage Convention */
-	PixelRepresentation convention;
+	internal PixelRepresentation convention;
 	/*! Bits per component */
-	byte bitsPerChannel;
+	internal byte bitsPerChannel;
 	/*!  */
-	bool isSigned;
+	internal bool isSigned;
 	//Constructor
 	public PixelFormatComponent() { unchecked {
 	type = (PixelComponent)0;

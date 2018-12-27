@@ -19,7 +19,7 @@ public class NiConstColorEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiConstColorEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	Color4 value;
+	internal Color4 value;
 
 	public NiConstColorEvaluator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

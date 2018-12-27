@@ -19,18 +19,18 @@ public class NiPSysFieldModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysFieldModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the field. */
-	NiAVObject fieldObject;
+	internal NiAVObject fieldObject;
 	/*! Magnitude of the force. */
-	float magnitude;
+	internal float magnitude;
 	/*! How the magnitude diminishes with distance from the Field Object. */
-	float attenuation;
+	internal float attenuation;
 	/*!
 	 * Whether or not to use a distance from the Field Object after which there is no
 	 * effect.
 	 */
-	bool useMaxDistance;
+	internal bool useMaxDistance;
 	/*! Maximum distance after which there is no effect. */
-	float maxDistance;
+	internal float maxDistance;
 
 	public NiPSysFieldModifier() {
 	fieldObject = null;

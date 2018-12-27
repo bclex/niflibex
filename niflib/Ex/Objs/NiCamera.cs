@@ -19,39 +19,39 @@ public class NiCamera : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiCamera", NiAVObject.TYPE);
 	/*! Obsolete flags. */
-	ushort cameraFlags;
+	internal ushort cameraFlags;
 	/*! Frustrum left. */
-	float frustumLeft;
+	internal float frustumLeft;
 	/*! Frustrum right. */
-	float frustumRight;
+	internal float frustumRight;
 	/*! Frustrum top. */
-	float frustumTop;
+	internal float frustumTop;
 	/*! Frustrum bottom. */
-	float frustumBottom;
+	internal float frustumBottom;
 	/*! Frustrum near. */
-	float frustumNear;
+	internal float frustumNear;
 	/*! Frustrum far. */
-	float frustumFar;
+	internal float frustumFar;
 	/*! Determines whether perspective is used.  Orthographic means no perspective. */
-	bool useOrthographicProjection;
+	internal bool useOrthographicProjection;
 	/*! Viewport left. */
-	float viewportLeft;
+	internal float viewportLeft;
 	/*! Viewport right. */
-	float viewportRight;
+	internal float viewportRight;
 	/*! Viewport top. */
-	float viewportTop;
+	internal float viewportTop;
 	/*! Viewport bottom. */
-	float viewportBottom;
+	internal float viewportBottom;
 	/*! Level of detail adjust. */
-	float lodAdjust;
+	internal float lodAdjust;
 	/*!  */
-	NiAVObject scene;
+	internal NiAVObject scene;
 	/*! Deprecated. Array is always zero length on disk write. */
-	uint numScreenPolygons;
+	internal uint numScreenPolygons;
 	/*! Deprecated. Array is always zero length on disk write. */
-	uint numScreenTextures;
+	internal uint numScreenTextures;
 	/*! Unknown. */
-	uint unknownInt3;
+	internal uint unknownInt3;
 
 	public NiCamera() {
 	cameraFlags = (ushort)0;

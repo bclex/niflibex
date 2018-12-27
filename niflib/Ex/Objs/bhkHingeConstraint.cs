@@ -19,7 +19,7 @@ public class bhkHingeConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkHingeConstraint", bhkConstraint.TYPE);
 	/*! Hinge constraing. */
-	HingeDescriptor hinge;
+	internal HingeDescriptor hinge;
 
 	public bhkHingeConstraint() {
 	}

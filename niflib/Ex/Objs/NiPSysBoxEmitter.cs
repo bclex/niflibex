@@ -19,11 +19,11 @@ public class NiPSysBoxEmitter : NiPSysVolumeEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysBoxEmitter", NiPSysVolumeEmitter.TYPE);
 	/*!  */
-	float width;
+	internal float width;
 	/*!  */
-	float height;
+	internal float height;
 	/*!  */
-	float depth;
+	internal float depth;
 
 	public NiPSysBoxEmitter() {
 	width = 0.0f;

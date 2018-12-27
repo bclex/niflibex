@@ -19,27 +19,27 @@ public class NiPSysTrailEmitter : NiPSysEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysTrailEmitter", NiPSysEmitter.TYPE);
 	/*! Unknown */
-	int unknownInt1;
+	internal int unknownInt1;
 	/*! Unknown */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! Unknown */
-	float unknownFloat3;
+	internal float unknownFloat3;
 	/*! Unknown */
-	int unknownInt2;
+	internal int unknownInt2;
 	/*! Unknown */
-	float unknownFloat4;
+	internal float unknownFloat4;
 	/*! Unknown */
-	int unknownInt3;
+	internal int unknownInt3;
 	/*! Unknown */
-	float unknownFloat5;
+	internal float unknownFloat5;
 	/*! Unknown */
-	int unknownInt4;
+	internal int unknownInt4;
 	/*! Unknown */
-	float unknownFloat6;
+	internal float unknownFloat6;
 	/*! Unknown */
-	float unknownFloat7;
+	internal float unknownFloat7;
 
 	public NiPSysTrailEmitter() {
 	unknownInt1 = (int)0;

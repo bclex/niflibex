@@ -13,13 +13,13 @@ namespace Niflib {
 /*! Capsule Bounding Volume */
 public class CapsuleBV {
 	/*!  */
-	Vector3 center;
+	internal Vector3 center;
 	/*!  */
-	Vector3 origin;
+	internal Vector3 origin;
 	/*!  */
-	float extent;
+	internal float extent;
 	/*!  */
-	float radius;
+	internal float radius;
 	//Constructor
 	public CapsuleBV() { unchecked {
 	extent = 0.0f;

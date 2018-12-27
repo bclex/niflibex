@@ -81,18 +81,15 @@ public class bhkSphereShape : bhkConvexShape {
 	}
 
 	//--BEGIN:FILE FOOT--//
-
         /*!
-         * Retrieves the radius of the sphere.
-         * \return The radius of the sphere.
-         */
-        NIFLIB_API float GetRadius() const;
-
-        /*!
-         * Sets a new value for the radius of the sphere.
+         * Gets or sets a new value for the radius of the sphere.
          * \param[in] value The new radius of the sphere.
          */
-        NIFLIB_API void SetRadius(float value);
+        public float Radius
+        {
+            get => radius;
+            set => radius = value;
+        }
 
         /*! Helper routine for calculating mass properties.
          *  \param[in]  density Uniform density of object
@@ -102,7 +99,13 @@ public class bhkSphereShape : bhkConvexShape {
          *  \param[out] inertia Mass Inertia Tensor
          *  \return Return mass, center, and inertia tensor.
          */
-        NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
+        public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
+        {
+            center = new Vector3(0, 0, 0);
+            mass = 0.0f;  volume = 0.0f;
+            inertia = InertiaMatrix.IDENTITY;
+            Inertia.CalcMassPropertiesSphere(radius, density, solid, out mass, out volume, out center, out inertia);
+        }
 
 	//--END:CUSTOM--//
 

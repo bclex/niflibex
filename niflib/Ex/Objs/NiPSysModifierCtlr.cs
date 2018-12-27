@@ -24,7 +24,7 @@ public class NiPSysModifierCtlr : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysModifierCtlr", NiSingleInterpController.TYPE);
 	/*! Used to find the modifier pointer. */
-	IndexString modifierName;
+	internal IndexString modifierName;
 
 	public NiPSysModifierCtlr() {
 	}

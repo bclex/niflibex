@@ -19,7 +19,7 @@ public class TallGrassShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("TallGrassShaderProperty", BSShaderProperty.TYPE);
 	/*! Texture file name */
-	string fileName;
+	internal string fileName;
 
 	public TallGrassShaderProperty() {
 	}

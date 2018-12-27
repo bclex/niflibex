@@ -22,9 +22,9 @@ public class NiParticleGrowFade : NiParticleModifier {
 	 * The time from the beginning of the particle lifetime during which the particle
 	 * grows.
 	 */
-	float grow;
+	internal float grow;
 	/*! The time from the end of the particle lifetime during which the particle fades. */
-	float fade;
+	internal float fade;
 
 	public NiParticleGrowFade() {
 	grow = 0.0f;

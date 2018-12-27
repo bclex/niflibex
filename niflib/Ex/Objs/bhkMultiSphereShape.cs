@@ -19,13 +19,13 @@ public class bhkMultiSphereShape : bhkSphereRepShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMultiSphereShape", bhkSphereRepShape.TYPE);
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! The number of spheres in this multi sphere shape. */
-	uint numSpheres;
+	internal uint numSpheres;
 	/*! This array holds the spheres which make up the multi sphere shape. */
-	NiBound[] spheres;
+	internal NiBound[] spheres;
 
 	public bhkMultiSphereShape() {
 	unknownFloat1 = 0.0f;

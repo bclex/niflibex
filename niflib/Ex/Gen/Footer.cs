@@ -13,13 +13,13 @@ namespace Niflib {
 /*! The NIF file footer. */
 public class Footer {
 	/*! The number of root references. */
-	uint numRoots;
+	internal uint numRoots;
 	/*!
 	 * List of root NIF objects. If there is a camera, for 1st person view, then this
 	 * NIF object is referred to as well in this list, even if it is not a root object
 	 * (usually we want the camera to be attached to the Bip Head node).
 	 */
-	NiObject[] roots;
+	internal NiObject[] roots;
 	//Constructor
 	public Footer() { unchecked {
 	numRoots = (uint)0;

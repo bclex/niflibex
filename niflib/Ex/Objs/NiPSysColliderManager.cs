@@ -22,7 +22,7 @@ public class NiPSysColliderManager : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysColliderManager", NiPSysModifier.TYPE);
 	/*!  */
-	NiPSysCollider collider;
+	internal NiPSysCollider collider;
 
 	public NiPSysColliderManager() {
 	collider = null;

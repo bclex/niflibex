@@ -22,19 +22,19 @@ public class NiPSysAirFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysAirFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! Direction of the particle velocity */
-	Vector3 direction;
+	internal Vector3 direction;
 	/*! How quickly particles will accelerate to the magnitude of the air field. */
-	float airFriction;
+	internal float airFriction;
 	/*! How much of the air field velocity will be added to the particle velocity. */
-	float inheritVelocity;
+	internal float inheritVelocity;
 	/*!  */
-	bool inheritRotation;
+	internal bool inheritRotation;
 	/*!  */
-	bool componentOnly;
+	internal bool componentOnly;
 	/*!  */
-	bool enableSpread;
+	internal bool enableSpread;
 	/*! The angle of the air field cone if Enable Spread is true. */
-	float spread;
+	internal float spread;
 
 	public NiPSysAirFieldModifier() {
 	direction = -1.0, 0.0, 0.0;

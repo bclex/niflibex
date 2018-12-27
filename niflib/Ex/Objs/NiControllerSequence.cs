@@ -22,38 +22,38 @@ public class NiControllerSequence : NiSequence {
 	 * The weight of a sequence describes how it blends with other sequences at the
 	 * same priority.
 	 */
-	float weight;
+	internal float weight;
 	/*!  */
-	NiTextKeyExtraData textKeys;
+	internal NiTextKeyExtraData textKeys;
 	/*!  */
-	CycleType cycleType;
+	internal CycleType cycleType;
 	/*!  */
-	float frequency;
+	internal float frequency;
 	/*!  */
-	float phase;
+	internal float phase;
 	/*!  */
-	float startTime;
+	internal float startTime;
 	/*!  */
-	float stopTime;
+	internal float stopTime;
 	/*!  */
-	bool playBackwards;
+	internal bool playBackwards;
 	/*! The owner of this sequence. */
-	NiControllerManager manager;
+	internal NiControllerManager manager;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	IndexString accumRootName;
+	internal IndexString accumRootName;
 	/*!  */
-	AccumFlags accumFlags;
+	internal AccumFlags accumFlags;
 	/*!  */
-	NiStringPalette stringPalette;
+	internal NiStringPalette stringPalette;
 	/*!  */
-	BSAnimNotes animNotes;
+	internal BSAnimNotes animNotes;
 	/*!  */
-	ushort numAnimNoteArrays;
+	internal ushort numAnimNoteArrays;
 	/*!  */
-	BSAnimNotes[] animNoteArrays;
+	internal BSAnimNotes[] animNoteArrays;
 
 	public NiControllerSequence() {
 	weight = 1.0f;

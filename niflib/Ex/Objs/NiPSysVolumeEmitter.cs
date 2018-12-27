@@ -19,7 +19,7 @@ public class NiPSysVolumeEmitter : NiPSysEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysVolumeEmitter", NiPSysEmitter.TYPE);
 	/*! Node parent of this modifier? */
-	NiNode emitterObject;
+	internal NiNode emitterObject;
 
 	public NiPSysVolumeEmitter() {
 	emitterObject = null;

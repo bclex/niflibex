@@ -18,13 +18,13 @@ public class SemanticData {
 	 * DISPLAYLIST,
 	 *             MORPH_POSITION, BINORMAL_BP, TANGENT_BP).
 	 */
-	IndexString name;
+	internal IndexString name;
 	/*!
 	 * An extra index of the data. For example, if there are 3 uv maps,
 	 *             then the corresponding TEXCOORD data components would have indices
 	 *             0, 1, and 2, respectively.
 	 */
-	uint index;
+	internal uint index;
 	//Constructor
 	public SemanticData() { unchecked {
 	index = (uint)0;

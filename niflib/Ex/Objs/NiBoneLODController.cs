@@ -23,25 +23,25 @@ public class NiBoneLODController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBoneLODController", NiTimeController.TYPE);
 	/*! Unknown. */
-	uint lod;
+	internal uint lod;
 	/*! Number of LODs. */
-	uint numLods;
+	internal uint numLods;
 	/*! Number of node arrays. */
-	uint numNodeGroups;
+	internal uint numNodeGroups;
 	/*! A list of node sets (each set a sequence of bones). */
-	NodeSet[] nodeGroups;
+	internal NodeSet[] nodeGroups;
 	/*! Number of shape groups. */
-	uint numShapeGroups;
+	internal uint numShapeGroups;
 	/*! List of shape groups. */
-	SkinInfoSet[] shapeGroups1;
+	internal SkinInfoSet[] shapeGroups1;
 	/*! The size of the second list of shape groups. */
-	uint numShapeGroups2;
+	internal uint numShapeGroups2;
 	/*! Group of NiTriShape indices. */
-	NiTriBasedGeom[] shapeGroups2;
+	internal NiTriBasedGeom[] shapeGroups2;
 	/*! Unknown. */
-	int unknownInt2;
+	internal int unknownInt2;
 	/*! Unknown. */
-	int unknownInt3;
+	internal int unknownInt3;
 
 	public NiBoneLODController() {
 	lod = (uint)0;

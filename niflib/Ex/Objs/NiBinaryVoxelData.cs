@@ -19,25 +19,25 @@ public class NiBinaryVoxelData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBinaryVoxelData", NiObject.TYPE);
 	/*! Unknown. */
-	ushort unknownShort1;
+	internal ushort unknownShort1;
 	/*! Unknown. */
-	ushort unknownShort2;
+	internal ushort unknownShort2;
 	/*! Unknown. Is this^3 the Unknown Bytes 1 size? */
-	ushort unknownShort3;
+	internal ushort unknownShort3;
 	/*! Unknown. */
-	Array7<float> unknown7Floats;
+	internal Array7<float> unknown7Floats;
 	/*! Unknown. Always a multiple of 7. */
-	Array7<Array12<byte>> unknownBytes1;
+	internal Array7<Array12<byte>> unknownBytes1;
 	/*! Unknown. */
-	uint numUnknownVectors;
+	internal uint numUnknownVectors;
 	/*! Vectors on the unit sphere. */
-	Vector4[] unknownVectors;
+	internal Vector4[] unknownVectors;
 	/*! Unknown. */
-	uint numUnknownBytes2;
+	internal uint numUnknownBytes2;
 	/*! Unknown. */
-	byte[] unknownBytes2;
+	internal byte[] unknownBytes2;
 	/*! Unknown. */
-	Array5<uint> unknown5Ints;
+	internal Array5<uint> unknown5Ints;
 
 	public NiBinaryVoxelData() {
 	unknownShort1 = (ushort)0;

@@ -26,13 +26,13 @@ public class bhkPoseArray : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkPoseArray", NiObject.TYPE);
 	/*!  */
-	int numBones;
+	internal int numBones;
 	/*!  */
-	IndexString[] bones;
+	internal IndexString[] bones;
 	/*!  */
-	int numPoses;
+	internal int numPoses;
 	/*!  */
-	BonePose[] poses;
+	internal BonePose[] poses;
 
 	public bhkPoseArray() {
 	numBones = (int)0;

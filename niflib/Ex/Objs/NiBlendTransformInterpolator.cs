@@ -19,7 +19,7 @@ public class NiBlendTransformInterpolator : NiBlendInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendTransformInterpolator", NiBlendInterpolator.TYPE);
 	/*!  */
-	NiQuatTransform value;
+	internal NiQuatTransform value;
 
 	public NiBlendTransformInterpolator() {
 	}

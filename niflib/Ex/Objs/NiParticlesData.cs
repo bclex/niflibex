@@ -19,50 +19,50 @@ public class NiParticlesData : NiGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticlesData", NiGeometryData.TYPE);
 	/*! The maximum number of particles (matches the number of vertices). */
-	ushort numParticles;
+	internal ushort numParticles;
 	/*! The particles' size. */
-	float particleRadius;
+	internal float particleRadius;
 	/*! Is the particle size array present? */
-	bool hasRadii;
+	internal bool hasRadii;
 	/*! The individual particle sizes. */
-	float[] radii;
+	internal float[] radii;
 	/*!
 	 * The number of active particles at the time the system was saved. This is also
 	 * the number of valid entries in the following arrays.
 	 */
-	ushort numActive;
+	internal ushort numActive;
 	/*! Is the particle size array present? */
-	bool hasSizes;
+	internal bool hasSizes;
 	/*! The individual particle sizes. */
-	float[] sizes;
+	internal float[] sizes;
 	/*! Is the particle rotation array present? */
-	bool hasRotations;
+	internal bool hasRotations;
 	/*! The individual particle rotations. */
-	Quaternion[] rotations;
+	internal Quaternion[] rotations;
 	/*! Are the angles of rotation present? */
-	bool hasRotationAngles;
+	internal bool hasRotationAngles;
 	/*! Angles of rotation */
-	float[] rotationAngles;
+	internal float[] rotationAngles;
 	/*! Are axes of rotation present? */
-	bool hasRotationAxes;
+	internal bool hasRotationAxes;
 	/*! Axes of rotation. */
-	Vector3[] rotationAxes;
+	internal Vector3[] rotationAxes;
 	/*!  */
-	bool hasTextureIndices;
+	internal bool hasTextureIndices;
 	/*! How many quads to use in BSPSysSubTexModifier for texture atlasing */
-	uint numSubtextureOffsets;
+	internal uint numSubtextureOffsets;
 	/*! Defines UV offsets */
-	Vector4[] subtextureOffsets;
+	internal Vector4[] subtextureOffsets;
 	/*! Sets aspect ratio for Subtexture Offset UV quads */
-	float aspectRatio;
+	internal float aspectRatio;
 	/*!  */
-	ushort aspectFlags;
+	internal ushort aspectFlags;
 	/*!  */
-	float speedToAspectAspect2;
+	internal float speedToAspectAspect2;
 	/*!  */
-	float speedToAspectSpeed1;
+	internal float speedToAspectSpeed1;
 	/*!  */
-	float speedToAspectSpeed2;
+	internal float speedToAspectSpeed2;
 
 	public NiParticlesData() {
 	numParticles = (ushort)0;

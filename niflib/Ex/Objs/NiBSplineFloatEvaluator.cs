@@ -19,7 +19,7 @@ public class NiBSplineFloatEvaluator : NiBSplineEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineFloatEvaluator", NiBSplineEvaluator.TYPE);
 	/*! Handle into the data. (USHRT_MAX for invalid handle.) */
-	uint handle;
+	internal uint handle;
 
 	public NiBSplineFloatEvaluator() {
 	handle = (uint)0xFFFF;

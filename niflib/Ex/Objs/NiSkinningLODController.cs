@@ -22,19 +22,19 @@ public class NiSkinningLODController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinningLODController", NiTimeController.TYPE);
 	/*!  */
-	uint currentLod;
+	internal uint currentLod;
 	/*!  */
-	uint numBones;
+	internal uint numBones;
 	/*!  */
-	NiNode[] bones;
+	internal NiNode[] bones;
 	/*!  */
-	uint numSkins;
+	internal uint numSkins;
 	/*!  */
-	NiMesh[] skins;
+	internal NiMesh[] skins;
 	/*!  */
-	uint numLodLevels;
+	internal uint numLodLevels;
 	/*!  */
-	LODInfo[] lods;
+	internal LODInfo[] lods;
 
 	public NiSkinningLODController() {
 	currentLod = (uint)0;

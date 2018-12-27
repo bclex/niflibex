@@ -22,26 +22,26 @@ public class NiPSysSpawnModifier : NiPSysModifier {
 	 * Number of allowed generations for spawning. Particles whose generations are >=
 	 * will not be spawned.
 	 */
-	ushort numSpawnGenerations;
+	internal ushort numSpawnGenerations;
 	/*!
 	 * The likelihood of a particular particle being spawned. Must be between 0.0 and
 	 * 1.0.
 	 */
-	float percentageSpawned;
+	internal float percentageSpawned;
 	/*! The minimum particles to spawn for any given original particle. */
-	ushort minNumToSpawn;
+	internal ushort minNumToSpawn;
 	/*! The maximum particles to spawn for any given original particle. */
-	ushort maxNumToSpawn;
+	internal ushort maxNumToSpawn;
 	/*! WorldShift */
-	int unknownInt;
+	internal int unknownInt;
 	/*! How much the spawned particle speed can vary. */
-	float spawnSpeedVariation;
+	internal float spawnSpeedVariation;
 	/*! How much the spawned particle direction can vary. */
-	float spawnDirVariation;
+	internal float spawnDirVariation;
 	/*! Lifespan assigned to spawned particles. */
-	float lifeSpan;
+	internal float lifeSpan;
 	/*! The amount the lifespan can vary. */
-	float lifeSpanVariation;
+	internal float lifeSpanVariation;
 
 	public NiPSysSpawnModifier() {
 	numSpawnGenerations = (ushort)0;

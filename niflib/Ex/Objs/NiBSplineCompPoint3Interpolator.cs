@@ -22,9 +22,9 @@ public class NiBSplineCompPoint3Interpolator : NiBSplinePoint3Interpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompPoint3Interpolator", NiBSplinePoint3Interpolator.TYPE);
 	/*!  */
-	float positionOffset;
+	internal float positionOffset;
 	/*!  */
-	float positionHalfRange;
+	internal float positionHalfRange;
 
 	public NiBSplineCompPoint3Interpolator() {
 	positionOffset = 3.402823466e+38f;

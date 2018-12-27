@@ -19,9 +19,9 @@ public class NiPSysMeshUpdateModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysMeshUpdateModifier", NiPSysModifier.TYPE);
 	/*!  */
-	uint numMeshes;
+	internal uint numMeshes;
 	/*!  */
-	NiAVObject[] meshes;
+	internal NiAVObject[] meshes;
 
 	public NiPSysMeshUpdateModifier() {
 	numMeshes = (uint)0;

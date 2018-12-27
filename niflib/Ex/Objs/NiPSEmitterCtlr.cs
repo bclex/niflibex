@@ -19,7 +19,7 @@ public class NiPSEmitterCtlr : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSEmitterCtlr", NiSingleInterpController.TYPE);
 	/*!  */
-	IndexString emitterName;
+	internal IndexString emitterName;
 
 	public NiPSEmitterCtlr() {
 	}

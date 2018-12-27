@@ -19,7 +19,7 @@ public class bhkRagdollSystem : bhkSystem {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkRagdollSystem", bhkSystem.TYPE);
 	/*!  */
-	ByteArray binaryData;
+	internal ByteArray binaryData;
 
 	public bhkRagdollSystem() {
 	}

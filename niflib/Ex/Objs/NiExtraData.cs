@@ -19,9 +19,9 @@ public class NiExtraData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiExtraData", NiObject.TYPE);
 	/*! Name of this object. */
-	IndexString name;
+	internal IndexString name;
 	/*! Block number of the next extra data object. */
-	NiExtraData nextExtraData;
+	internal NiExtraData nextExtraData;
 
 	public NiExtraData() {
 	nextExtraData = null;

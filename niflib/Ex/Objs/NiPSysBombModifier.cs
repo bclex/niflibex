@@ -19,17 +19,17 @@ public class NiPSysBombModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysBombModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the force. */
-	NiNode bombObject;
+	internal NiNode bombObject;
 	/*! The local direction of the force. */
-	Vector3 bombAxis;
+	internal Vector3 bombAxis;
 	/*! How the bomb force will decrease with distance. */
-	float decay;
+	internal float decay;
 	/*! The acceleration the bomb will apply to particles. */
-	float deltaV;
+	internal float deltaV;
 	/*!  */
-	DecayType decayType;
+	internal DecayType decayType;
 	/*!  */
-	SymmetryType symmetryType;
+	internal SymmetryType symmetryType;
 
 	public NiPSysBombModifier() {
 	bombObject = null;

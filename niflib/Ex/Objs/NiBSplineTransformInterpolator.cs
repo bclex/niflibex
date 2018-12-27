@@ -24,13 +24,13 @@ public class NiBSplineTransformInterpolator : NiBSplineInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineTransformInterpolator", NiBSplineInterpolator.TYPE);
 	/*!  */
-	NiQuatTransform transform;
+	internal NiQuatTransform transform;
 	/*! Handle into the translation data. (USHRT_MAX for invalid handle.) */
-	uint translationHandle;
+	internal uint translationHandle;
 	/*! Handle into the rotation data. (USHRT_MAX for invalid handle.) */
-	uint rotationHandle;
+	internal uint rotationHandle;
 	/*! Handle into the scale data. (USHRT_MAX for invalid handle.) */
-	uint scaleHandle;
+	internal uint scaleHandle;
 
 	public NiBSplineTransformInterpolator() {
 	translationHandle = (uint)0xFFFF;

@@ -22,9 +22,9 @@ public class NiLookAtController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLookAtController", NiTimeController.TYPE);
 	/*!  */
-	LookAtFlags flags;
+	internal LookAtFlags flags;
 	/*!  */
-	NiNode lookAt;
+	internal NiNode lookAt;
 
 	public NiLookAtController() {
 	flags = (LookAtFlags)0;

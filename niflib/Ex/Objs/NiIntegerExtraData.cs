@@ -19,7 +19,7 @@ public class NiIntegerExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiIntegerExtraData", NiExtraData.TYPE);
 	/*! The value of the extra data. */
-	uint integerData;
+	internal uint integerData;
 
 	public NiIntegerExtraData() {
 	integerData = (uint)0;

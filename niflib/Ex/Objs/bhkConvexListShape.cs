@@ -28,23 +28,23 @@ public class bhkConvexListShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConvexListShape", bhkShape.TYPE);
 	/*!  */
-	uint numSubShapes;
+	internal uint numSubShapes;
 	/*! List of shapes. */
-	bhkConvexShape[] subShapes;
+	internal bhkConvexShape[] subShapes;
 	/*! The material of the shape. */
-	HavokMaterial material;
+	internal HavokMaterial material;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*! Unknown. */
-	uint unknownInt1;
+	internal uint unknownInt1;
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*!  */
-	hkWorldObjCinfoProperty childShapeProperty;
+	internal hkWorldObjCinfoProperty childShapeProperty;
 	/*! Unknown. */
-	byte unknownByte1;
+	internal byte unknownByte1;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 
 	public bhkConvexListShape() {
 	numSubShapes = (uint)0;

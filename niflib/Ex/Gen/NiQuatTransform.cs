@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class NiQuatTransform {
 	/*!  */
-	Vector3 translation;
+	internal Vector3 translation;
 	/*!  */
-	Quaternion rotation;
+	internal Quaternion rotation;
 	/*!  */
-	float scale;
+	internal float scale;
 	/*! Whether each transform component is valid. */
-	Array3<bool> trsValid;
+	internal Array3<bool> trsValid;
 	//Constructor
 	public NiQuatTransform() { unchecked {
 	scale = 1.0f;

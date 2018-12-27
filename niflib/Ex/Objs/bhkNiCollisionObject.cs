@@ -22,9 +22,9 @@ public class bhkNiCollisionObject : NiCollisionObject {
 	 * Set to 1 for most objects, and to 41 for animated objects (ANIM_STATIC). Bits:
 	 * 0=Active 2=Notify 3=Set Local 6=Reset.
 	 */
-	bhkCOFlags flags;
+	internal bhkCOFlags flags;
 	/*!  */
-	bhkWorldObject body;
+	internal bhkWorldObject body;
 
 	public bhkNiCollisionObject() {
 	flags = (bhkCOFlags)1;

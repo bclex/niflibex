@@ -22,27 +22,27 @@ public class NiBezierMesh : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBezierMesh", NiAVObject.TYPE);
 	/*! references. */
-	uint numBezierTriangles;
+	internal uint numBezierTriangles;
 	/*! unknown */
-	NiBezierTriangle4[] bezierTriangle;
+	internal NiBezierTriangle4[] bezierTriangle;
 	/*! Unknown. */
-	uint unknown3;
+	internal uint unknown3;
 	/*! Data count. */
-	ushort count1;
+	internal ushort count1;
 	/*! Unknown. */
-	ushort unknown4;
+	internal ushort unknown4;
 	/*! data. */
-	Vector3[] points1;
+	internal Vector3[] points1;
 	/*! Unknown (illegal link?). */
-	uint unknown5;
+	internal uint unknown5;
 	/*! data. */
-	Array2<float>[] points2;
+	internal Array2<float>[] points2;
 	/*! unknown */
-	uint unknown6;
+	internal uint unknown6;
 	/*! data count 2. */
-	ushort count2;
+	internal ushort count2;
 	/*! data count. */
-	Array4<ushort>[] data2;
+	internal Array4<ushort>[] data2;
 
 	public NiBezierMesh() {
 	numBezierTriangles = (uint)0;

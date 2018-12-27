@@ -22,9 +22,9 @@ public class NiVisData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiVisData", NiObject.TYPE);
 	/*!  */
-	uint numKeys;
+	internal uint numKeys;
 	/*!  */
-	Key<byte>[] keys;
+	internal Key<byte>[] keys;
 
 	public NiVisData() {
 	numKeys = (uint)0;

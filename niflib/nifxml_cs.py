@@ -1346,7 +1346,7 @@ class Member:
                 pass
             elif self.default.find(',') != -1:
                 pass 
-            elif self.default != "0" and self.type in enum_names:
+            elif not self.default.isdigit() and self.type in enum_names:
                 self.default = "%s.%s" % (class_name(self.type), self.default)
             else:
                 self.default = "(%s)%s" % (class_name(self.type), self.default)
@@ -1411,7 +1411,7 @@ class Member:
         result = self.ctype
         suffix1 = ""
         suffix2 = ""
-        keyword = "" #"public "
+        keyword = "internal "
         #if not self.is_duplicate: # is dimension for one or more arrays
         #  if self.arr1_ref:
         #    if not self.arr1 or not self.arr1.lhs: # Simple Scalar

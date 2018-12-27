@@ -19,7 +19,7 @@ public class bhkPhysicsSystem : bhkSystem {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkPhysicsSystem", bhkSystem.TYPE);
 	/*!  */
-	ByteArray binaryData;
+	internal ByteArray binaryData;
 
 	public bhkPhysicsSystem() {
 	}

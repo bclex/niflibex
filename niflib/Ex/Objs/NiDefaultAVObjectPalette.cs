@@ -19,11 +19,11 @@ public class NiDefaultAVObjectPalette : NiAVObjectPalette {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDefaultAVObjectPalette", NiAVObjectPalette.TYPE);
 	/*! Scene root of the object palette. */
-	NiAVObject scene;
+	internal NiAVObject scene;
 	/*! Number of objects. */
-	uint numObjs;
+	internal uint numObjs;
 	/*! The objects. */
-	AVObject[] objs;
+	internal AVObject[] objs;
 
 	public NiDefaultAVObjectPalette() {
 	scene = null;

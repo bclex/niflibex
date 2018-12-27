@@ -22,7 +22,7 @@ public class NiBSplineBasisData : NiObject {
 	 * The number of control points of the B-spline (number of frames of animation plus
 	 * degree of B-spline minus one).
 	 */
-	uint numControlPoints;
+	internal uint numControlPoints;
 
 	public NiBSplineBasisData() {
 	numControlPoints = (uint)0;

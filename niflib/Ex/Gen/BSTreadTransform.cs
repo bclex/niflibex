@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Bethesda-specific compound. */
 public class BSTreadTransform {
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	NiQuatTransform transform1;
+	internal NiQuatTransform transform1;
 	/*!  */
-	NiQuatTransform transform2;
+	internal NiQuatTransform transform2;
 	//Constructor
 }
 

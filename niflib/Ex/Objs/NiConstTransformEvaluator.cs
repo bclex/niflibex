@@ -19,7 +19,7 @@ public class NiConstTransformEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiConstTransformEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	NiQuatTransform value;
+	internal NiQuatTransform value;
 
 	public NiConstTransformEvaluator() {
 	}

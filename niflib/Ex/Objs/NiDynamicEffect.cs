@@ -22,20 +22,20 @@ public class NiDynamicEffect : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDynamicEffect", NiAVObject.TYPE);
 	/*! If true, then the dynamic effect is applied to affected nodes during rendering. */
-	bool switchState;
+	internal bool switchState;
 	/*!  */
-	uint numAffectedNodes;
+	internal uint numAffectedNodes;
 	/*!
 	 * If a node appears in this list, then its entire subtree will be affected by the
 	 * effect.
 	 */
-	NiNode[] affectedNodes;
+	internal NiNode[] affectedNodes;
 	/*!
 	 * As of 4.0 the pointer hash is no longer stored alongside each NiObject on disk,
 	 * yet this node list still refers to the pointer hashes. Cannot leave the type as
 	 * Ptr because the link will be invalid.
 	 */
-	uint[] affectedNodePointers;
+	internal uint[] affectedNodePointers;
 
 	public NiDynamicEffect() {
 	switchState = 1;

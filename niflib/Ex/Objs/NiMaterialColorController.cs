@@ -26,9 +26,9 @@ public class NiMaterialColorController : NiPoint3InterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMaterialColorController", NiPoint3InterpController.TYPE);
 	/*! Selects which color to control. */
-	MaterialColor targetColor;
+	internal MaterialColor targetColor;
 	/*!  */
-	NiPosData data;
+	internal NiPosData data;
 
 	public NiMaterialColorController() {
 	targetColor = (MaterialColor)0;

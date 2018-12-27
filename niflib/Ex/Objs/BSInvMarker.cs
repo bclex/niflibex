@@ -28,13 +28,13 @@ public class BSInvMarker : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSInvMarker", NiExtraData.TYPE);
 	/*!  */
-	ushort rotationX;
+	internal ushort rotationX;
 	/*!  */
-	ushort rotationY;
+	internal ushort rotationY;
 	/*!  */
-	ushort rotationZ;
+	internal ushort rotationZ;
 	/*! Zoom factor. */
-	float zoom;
+	internal float zoom;
 
 	public BSInvMarker() {
 	rotationX = (ushort)4712;

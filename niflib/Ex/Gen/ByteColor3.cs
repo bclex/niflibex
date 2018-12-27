@@ -13,11 +13,11 @@ namespace Niflib {
 /*! A color without alpha (red, green, blue). */
 public class ByteColor3 {
 	/*! Red color component. */
-	byte r;
+	internal byte r;
 	/*! Green color component. */
-	byte g;
+	internal byte g;
 	/*! Blue color component. */
-	byte b;
+	internal byte b;
 	//Constructor
 	public ByteColor3() { unchecked {
 	r = (byte)0;

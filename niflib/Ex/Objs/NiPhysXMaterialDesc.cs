@@ -19,11 +19,11 @@ public class NiPhysXMaterialDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXMaterialDesc", NiObject.TYPE);
 	/*!  */
-	ushort index;
+	internal ushort index;
 	/*!  */
-	uint numStates;
+	internal uint numStates;
 	/*!  */
-	NxMaterialDesc[] materialDescs;
+	internal NxMaterialDesc[] materialDescs;
 
 	public NiPhysXMaterialDesc() {
 	index = (ushort)0;

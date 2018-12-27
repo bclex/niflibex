@@ -19,9 +19,9 @@ public class BSMultiBoundSphere : BSMultiBoundData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBoundSphere", BSMultiBoundData.TYPE);
 	/*!  */
-	Vector3 center;
+	internal Vector3 center;
 	/*!  */
-	float radius;
+	internal float radius;
 
 	public BSMultiBoundSphere() {
 	radius = 0.0f;

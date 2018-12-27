@@ -19,11 +19,11 @@ public class BSMasterParticleSystem : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMasterParticleSystem", NiNode.TYPE);
 	/*!  */
-	ushort maxEmitterObjects;
+	internal ushort maxEmitterObjects;
 	/*!  */
-	int numParticleSystems;
+	internal int numParticleSystems;
 	/*!  */
-	NiAVObject[] particleSystems;
+	internal NiAVObject[] particleSystems;
 
 	public BSMasterParticleSystem() {
 	maxEmitterObjects = (ushort)0;

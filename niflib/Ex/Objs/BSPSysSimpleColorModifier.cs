@@ -19,19 +19,19 @@ public class BSPSysSimpleColorModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysSimpleColorModifier", NiPSysModifier.TYPE);
 	/*!  */
-	float fadeInPercent;
+	internal float fadeInPercent;
 	/*!  */
-	float fadeOutPercent;
+	internal float fadeOutPercent;
 	/*!  */
-	float color1EndPercent;
+	internal float color1EndPercent;
 	/*!  */
-	float color1StartPercent;
+	internal float color1StartPercent;
 	/*!  */
-	float color2EndPercent;
+	internal float color2EndPercent;
 	/*!  */
-	float color2StartPercent;
+	internal float color2StartPercent;
 	/*!  */
-	Array3<Color4> colors;
+	internal Array3<Color4> colors;
 
 	public BSPSysSimpleColorModifier() {
 	fadeInPercent = 0.0f;

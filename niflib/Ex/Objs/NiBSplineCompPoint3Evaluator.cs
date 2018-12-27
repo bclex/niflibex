@@ -19,9 +19,9 @@ public class NiBSplineCompPoint3Evaluator : NiBSplinePoint3Evaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompPoint3Evaluator", NiBSplinePoint3Evaluator.TYPE);
 	/*!  */
-	float offset;
+	internal float offset;
 	/*!  */
-	float halfRange;
+	internal float halfRange;
 
 	public NiBSplineCompPoint3Evaluator() {
 	offset = 3.402823466e+38f;

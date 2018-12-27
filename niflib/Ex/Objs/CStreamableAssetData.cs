@@ -19,9 +19,9 @@ public class CStreamableAssetData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("CStreamableAssetData", NiObject.TYPE);
 	/*!  */
-	NiNode root;
+	internal NiNode root;
 	/*! Unknown. */
-	Array5<byte> unknownBytes;
+	internal Array5<byte> unknownBytes;
 
 	public CStreamableAssetData() {
 	root = null;

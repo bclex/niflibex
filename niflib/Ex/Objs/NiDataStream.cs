@@ -19,28 +19,28 @@ public class NiDataStream : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDataStream", NiObject.TYPE);
 	/*!  */
-	DataStreamUsage usage;
+	internal DataStreamUsage usage;
 	/*!  */
-	DataStreamAccess access;
+	internal DataStreamAccess access;
 	/*! The size in bytes of this data stream. */
-	uint numBytes;
+	internal uint numBytes;
 	/*!  */
-	CloningBehavior cloningBehavior;
+	internal CloningBehavior cloningBehavior;
 	/*! Number of regions (such as submeshes). */
-	uint numRegions;
+	internal uint numRegions;
 	/*!
 	 * The regions in the mesh. Regions can be used to mark off submeshes which are
 	 * independent draw calls.
 	 */
-	Region[] regions;
+	internal Region[] regions;
 	/*! Number of components of the data (matches corresponding field in MeshData). */
-	uint numComponents;
+	internal uint numComponents;
 	/*! The format of each component in this data stream. */
-	ComponentFormat[] componentFormats;
+	internal ComponentFormat[] componentFormats;
 	/*!  */
-	byte[] data;
+	internal byte[] data;
 	/*!  */
-	bool streamable;
+	internal bool streamable;
 
 	public NiDataStream() {
 	usage = (DataStreamUsage)0;

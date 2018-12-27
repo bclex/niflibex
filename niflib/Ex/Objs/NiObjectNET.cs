@@ -22,27 +22,27 @@ public class NiObjectNET : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiObjectNET", NiObject.TYPE);
 	/*! Configures the main shader path */
-	BSLightingShaderPropertyShaderType skyrimShaderType;
+	internal BSLightingShaderPropertyShaderType skyrimShaderType;
 	/*! Name of this controllable object, used to refer to the object in .kf files. */
-	IndexString name;
+	internal IndexString name;
 	/*! Extra data for pre-3.0 versions. */
-	bool hasOldExtraData;
+	internal bool hasOldExtraData;
 	/*! (=NiStringExtraData) */
-	IndexString oldExtraPropName;
+	internal IndexString oldExtraPropName;
 	/*! ref */
-	uint oldExtraInternalId;
+	internal uint oldExtraInternalId;
 	/*! Extra string data. */
-	IndexString oldExtraString;
+	internal IndexString oldExtraString;
 	/*! Always 0. */
-	byte unknownByte;
+	internal byte unknownByte;
 	/*! Extra data object index. (The first in a chain) */
-	NiExtraData extraData;
+	internal NiExtraData extraData;
 	/*! The number of Extra Data objects referenced through the list. */
-	uint numExtraDataList;
+	internal uint numExtraDataList;
 	/*! List of extra data indices. */
-	NiExtraData[] extraDataList;
+	internal NiExtraData[] extraDataList;
 	/*! Controller object index. (The first in a chain) */
-	NiTimeController controller;
+	internal NiTimeController controller;
 
 	public NiObjectNET() {
 	skyrimShaderType = (BSLightingShaderPropertyShaderType)0;

@@ -19,13 +19,13 @@ public class BSPSysInheritVelocityModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysInheritVelocityModifier", NiPSysModifier.TYPE);
 	/*!  */
-	NiNode target;
+	internal NiNode target;
 	/*!  */
-	float chanceToInherit;
+	internal float chanceToInherit;
 	/*!  */
-	float velocityMultiplier;
+	internal float velocityMultiplier;
 	/*!  */
-	float velocityVariation;
+	internal float velocityVariation;
 
 	public BSPSysInheritVelocityModifier() {
 	target = null;

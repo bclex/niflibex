@@ -19,15 +19,15 @@ public class NiMorphWeightsController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMorphWeightsController", NiInterpController.TYPE);
 	/*!  */
-	uint count;
+	internal uint count;
 	/*!  */
-	uint numInterpolators;
+	internal uint numInterpolators;
 	/*!  */
-	NiInterpolator[] interpolators;
+	internal NiInterpolator[] interpolators;
 	/*!  */
-	uint numTargets;
+	internal uint numTargets;
 	/*!  */
-	IndexString[] targetNames;
+	internal IndexString[] targetNames;
 
 	public NiMorphWeightsController() {
 	count = (uint)0;

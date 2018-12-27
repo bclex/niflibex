@@ -27,11 +27,11 @@ public class NiVertexColorProperty : NiProperty {
 	 *             Bit 3: Lighting Mode
 	 *             Bits 4-5: Vertex Mode
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*! In Flags from 20.1.0.3 on. */
-	VertMode vertexMode;
+	internal VertMode vertexMode;
 	/*! In Flags from 20.1.0.3 on. */
-	LightMode lightingMode;
+	internal LightMode lightingMode;
 
 	public NiVertexColorProperty() {
 	flags = (ushort)0;

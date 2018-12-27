@@ -25,7 +25,7 @@ public class NiUVData : NiObject {
 	 * Four UV data groups. Appear to be U translation, V translation, U
 	 * scaling/tiling, V scaling/tiling.
 	 */
-	Array4<KeyGroup<float>> uvGroups;
+	internal Array4<KeyGroup<float>> uvGroups;
 
 	public NiUVData() {
 	}

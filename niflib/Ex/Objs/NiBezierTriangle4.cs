@@ -22,23 +22,23 @@ public class NiBezierTriangle4 : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBezierTriangle4", NiObject.TYPE);
 	/*! unknown */
-	Array6<uint> unknown1;
+	internal Array6<uint> unknown1;
 	/*! unknown */
-	ushort unknown2;
+	internal ushort unknown2;
 	/*! unknown */
-	Matrix33 matrix;
+	internal Matrix33 matrix;
 	/*! unknown */
-	Vector3 vector1;
+	internal Vector3 vector1;
 	/*! unknown */
-	Vector3 vector2;
+	internal Vector3 vector2;
 	/*! unknown */
-	Array4<short> unknown3;
+	internal Array4<short> unknown3;
 	/*! unknown */
-	byte unknown4;
+	internal byte unknown4;
 	/*! unknown */
-	uint unknown5;
+	internal uint unknown5;
 	/*! unknown */
-	Array24<short> unknown6;
+	internal Array24<short> unknown6;
 
 	public NiBezierTriangle4() {
 	unknown2 = (ushort)0;

@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Tension, bias, continuity. */
 public class TBC {
 	/*! Tension. */
-	float t;
+	internal float t;
 	/*! Bias. */
-	float b;
+	internal float b;
 	/*! Continuity. */
-	float c;
+	internal float c;
 	//Constructor
 	public TBC() { unchecked {
 	t = 0.0f;

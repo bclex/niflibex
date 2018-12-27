@@ -19,37 +19,37 @@ public class NiPhysXActorDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXActorDesc", NiObject.TYPE);
 	/*!  */
-	IndexString actorName;
+	internal IndexString actorName;
 	/*!  */
-	uint numPoses;
+	internal uint numPoses;
 	/*!  */
-	Matrix34[] poses;
+	internal Matrix34[] poses;
 	/*!  */
-	NiPhysXBodyDesc bodyDesc;
+	internal NiPhysXBodyDesc bodyDesc;
 	/*!  */
-	float density;
+	internal float density;
 	/*!  */
-	uint actorFlags;
+	internal uint actorFlags;
 	/*!  */
-	ushort actorGroup;
+	internal ushort actorGroup;
 	/*!  */
-	ushort dominanceGroup;
+	internal ushort dominanceGroup;
 	/*!  */
-	uint contactReportFlags;
+	internal uint contactReportFlags;
 	/*!  */
-	ushort forceFieldMaterial;
+	internal ushort forceFieldMaterial;
 	/*!  */
-	uint dummy;
+	internal uint dummy;
 	/*!  */
-	uint numShapeDescs;
+	internal uint numShapeDescs;
 	/*!  */
-	NiPhysXShapeDesc[] shapeDescriptions;
+	internal NiPhysXShapeDesc[] shapeDescriptions;
 	/*!  */
-	NiPhysXActorDesc actorParent;
+	internal NiPhysXActorDesc actorParent;
 	/*!  */
-	NiPhysXRigidBodySrc source;
+	internal NiPhysXRigidBodySrc source;
 	/*!  */
-	NiPhysXRigidBodyDest dest;
+	internal NiPhysXRigidBodyDest dest;
 
 	public NiPhysXActorDesc() {
 	numPoses = (uint)0;

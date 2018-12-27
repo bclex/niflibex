@@ -19,103 +19,103 @@ public class NiParticleSystemController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleSystemController", NiTimeController.TYPE);
 	/*! Particle speed in old files */
-	uint oldSpeed;
+	internal uint oldSpeed;
 	/*! Particle speed */
-	float speed;
+	internal float speed;
 	/*! Particle random speed modifier */
-	float speedRandom;
+	internal float speedRandom;
 	/*!
 	 * vertical emit direction [radians]
 	 *             0.0 : up
 	 *             1.6 : horizontal
 	 *             3.1416 : down
 	 */
-	float verticalDirection;
+	internal float verticalDirection;
 	/*! emitter's vertical opening angle [radians] */
-	float verticalAngle;
+	internal float verticalAngle;
 	/*! horizontal emit direction */
-	float horizontalDirection;
+	internal float horizontalDirection;
 	/*! emitter's horizontal opening angle */
-	float horizontalAngle;
+	internal float horizontalAngle;
 	/*! Unknown. */
-	Vector3 unknownNormal_;
+	internal Vector3 unknownNormal_;
 	/*! Unknown. */
-	Color4 unknownColor_;
+	internal Color4 unknownColor_;
 	/*! Particle size */
-	float size;
+	internal float size;
 	/*! Particle emit start time */
-	float emitStartTime;
+	internal float emitStartTime;
 	/*! Particle emit stop time */
-	float emitStopTime;
+	internal float emitStopTime;
 	/*! Unknown byte, (=0) */
-	byte unknownByte;
+	internal byte unknownByte;
 	/*! Particle emission rate in old files */
-	uint oldEmitRate;
+	internal uint oldEmitRate;
 	/*! Particle emission rate (particles per second) */
-	float emitRate;
+	internal float emitRate;
 	/*! Particle lifetime */
-	float lifetime;
+	internal float lifetime;
 	/*! Particle lifetime random modifier */
-	float lifetimeRandom;
+	internal float lifetimeRandom;
 	/*! Bit 0: Emit Rate toggle bit (0 = auto adjust, 1 = use Emit Rate value) */
-	ushort emitFlags;
+	internal ushort emitFlags;
 	/*! Particle random start translation vector */
-	Vector3 startRandom;
+	internal Vector3 startRandom;
 	/*!
 	 * This index targets the particle emitter object (TODO: find out what type of
 	 * object this refers to).
 	 */
-	NiObject emitter;
+	internal NiObject emitter;
 	/*! ? short=0 ? */
-	ushort unknownShort2_;
+	internal ushort unknownShort2_;
 	/*! ? float=1.0 ? */
-	float unknownFloat13_;
+	internal float unknownFloat13_;
 	/*! ? int=1 ? */
-	uint unknownInt1_;
+	internal uint unknownInt1_;
 	/*! ? int=0 ? */
-	uint unknownInt2_;
+	internal uint unknownInt2_;
 	/*! ? short=0 ? */
-	ushort unknownShort3_;
+	internal ushort unknownShort3_;
 	/*! Particle velocity */
-	Vector3 particleVelocity;
+	internal Vector3 particleVelocity;
 	/*! Unknown */
-	Vector3 particleUnknownVector;
+	internal Vector3 particleUnknownVector;
 	/*! The particle's age. */
-	float particleLifetime;
+	internal float particleLifetime;
 	/*!  */
-	NiObject particleLink;
+	internal NiObject particleLink;
 	/*! Timestamp of the last update. */
-	uint particleTimestamp;
+	internal uint particleTimestamp;
 	/*! Unknown short */
-	ushort particleUnknownShort;
+	internal ushort particleUnknownShort;
 	/*! Particle/vertex index matches array index */
-	ushort particleVertexId;
+	internal ushort particleVertexId;
 	/*! Size of the following array. (Maximum number of simultaneous active particles) */
-	ushort numParticles;
+	internal ushort numParticles;
 	/*!
 	 * Number of valid entries in the following array. (Number of active particles at
 	 * the time the system was saved)
 	 */
-	ushort numValid;
+	internal ushort numValid;
 	/*! Individual particle modifiers? */
-	Particle[] particles;
+	internal Particle[] particles;
 	/*! unknown int (=0xffffffff) */
-	NiObject unknownLink;
+	internal NiObject unknownLink;
 	/*!
 	 * Link to some optional particle modifiers (NiGravity, NiParticleGrowFade,
 	 * NiParticleBomb, ...)
 	 */
-	NiParticleModifier particleExtra;
+	internal NiParticleModifier particleExtra;
 	/*! Unknown int (=0xffffffff) */
-	NiObject unknownLink2;
+	internal NiObject unknownLink2;
 	/*! Trailing null byte */
-	byte trailer;
+	internal byte trailer;
 	/*!  */
-	NiColorData colorData;
+	internal NiColorData colorData;
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown. */
-	float[] unknownFloats2;
+	internal float[] unknownFloats2;
 
 	public NiParticleSystemController() {
 	oldSpeed = (uint)0;

@@ -19,9 +19,9 @@ public class FxWidget : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("FxWidget", NiNode.TYPE);
 	/*! Unknown. */
-	byte unknown3;
+	internal byte unknown3;
 	/*! Looks like 9 links and some string data. */
-	Array292<byte> unknown292Bytes;
+	internal Array292<byte> unknown292Bytes;
 
 	public FxWidget() {
 	unknown3 = (byte)0;

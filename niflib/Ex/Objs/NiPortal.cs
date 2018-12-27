@@ -23,15 +23,15 @@ public class NiPortal : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPortal", NiAVObject.TYPE);
 	/*!  */
-	ushort portalFlags;
+	internal ushort portalFlags;
 	/*! Unused in 20.x, possibly also 10.x. */
-	ushort planeCount;
+	internal ushort planeCount;
 	/*!  */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*!  */
-	Vector3[] vertices;
+	internal Vector3[] vertices;
 	/*! Root of the scenegraph which is to be seen through this portal. */
-	NiNode adjoiner;
+	internal NiNode adjoiner;
 
 	public NiPortal() {
 	portalFlags = (ushort)0;

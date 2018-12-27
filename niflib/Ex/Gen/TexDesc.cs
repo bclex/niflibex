@@ -13,44 +13,44 @@ namespace Niflib {
 /*! NiTexturingProperty::Map. Texture description. */
 public class TexDesc {
 	/*! Link to the texture image. */
-	NiImage image;
+	internal NiImage image;
 	/*! NiSourceTexture object index. */
-	NiSourceTexture source;
+	internal NiSourceTexture source;
 	/*! 0=clamp S clamp T, 1=clamp S wrap T, 2=wrap S clamp T, 3=wrap S wrap T */
-	TexClampMode clampMode;
+	internal TexClampMode clampMode;
 	/*! 0=nearest, 1=bilinear, 2=trilinear, 3=..., 4=..., 5=... */
-	TexFilterMode filterMode;
+	internal TexFilterMode filterMode;
 	/*!
 	 * Texture mode flags; clamp and filter mode stored in upper byte with 0xYZ00 =
 	 * clamp mode Y, filter mode Z.
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*!  */
-	ushort maxAnisotropy;
+	internal ushort maxAnisotropy;
 	/*! The texture coordinate set in NiGeometryData that this texture slot will use. */
-	uint uvSet;
+	internal uint uvSet;
 	/*! L can range from 0 to 3 and are used to specify how fast a texture gets blurry. */
-	short ps2L;
+	internal short ps2L;
 	/*!
 	 * K is used as an offset into the mipmap levels and can range from -2047 to 2047.
 	 * Positive values push the mipmap towards being blurry and negative values make
 	 * the mipmap sharper.
 	 */
-	short ps2K;
+	internal short ps2K;
 	/*! Unknown, 0 or 0x0101? */
-	ushort unknown1;
+	internal ushort unknown1;
 	/*! Whether or not the texture coordinates are transformed. */
-	bool hasTextureTransform;
+	internal bool hasTextureTransform;
 	/*! The UV translation. */
-	TexCoord translation;
+	internal TexCoord translation;
 	/*! The UV scale. */
-	TexCoord scale;
+	internal TexCoord scale;
 	/*! The W axis rotation in texture space. */
-	float rotation;
+	internal float rotation;
 	/*! Depending on the source, scaling can occur before or after rotation. */
-	TransformMethod transformMethod;
+	internal TransformMethod transformMethod;
 	/*! The origin around which the texture rotates. */
-	TexCoord center;
+	internal TexCoord center;
 	//Constructor
 	public TexDesc() { unchecked {
 	image = null;

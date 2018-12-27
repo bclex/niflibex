@@ -19,13 +19,13 @@ public class BSShaderProperty : NiShadeProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderProperty", NiShadeProperty.TYPE);
 	/*!  */
-	BSShaderType shaderType;
+	internal BSShaderType shaderType;
 	/*!  */
-	BSShaderFlags shaderFlags;
+	internal BSShaderFlags shaderFlags;
 	/*!  */
-	BSShaderFlags2 shaderFlags2;
+	internal BSShaderFlags2 shaderFlags2;
 	/*! Scales the intensity of the environment/cube map. */
-	float environmentMapScale;
+	internal float environmentMapScale;
 
 	public BSShaderProperty() {
 	shaderType = BSShaderType.SHADER_DEFAULT;

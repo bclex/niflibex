@@ -19,41 +19,41 @@ public class NiPlanarCollider : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPlanarCollider", NiParticleModifier.TYPE);
 	/*! Usually 0? */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! Unknown. */
-	ushort unknownShort2;
+	internal ushort unknownShort2;
 	/*! Unknown. */
-	float unknownFloat3;
+	internal float unknownFloat3;
 	/*! Unknown. */
-	float unknownFloat4;
+	internal float unknownFloat4;
 	/*! Unknown. */
-	float unknownFloat5;
+	internal float unknownFloat5;
 	/*! Unknown. */
-	float unknownFloat6;
+	internal float unknownFloat6;
 	/*! Unknown. */
-	float unknownFloat7;
+	internal float unknownFloat7;
 	/*! Unknown. */
-	float unknownFloat8;
+	internal float unknownFloat8;
 	/*! Unknown. */
-	float unknownFloat9;
+	internal float unknownFloat9;
 	/*! Unknown. */
-	float unknownFloat10;
+	internal float unknownFloat10;
 	/*! Unknown. */
-	float unknownFloat11;
+	internal float unknownFloat11;
 	/*! Unknown. */
-	float unknownFloat12;
+	internal float unknownFloat12;
 	/*! Unknown. */
-	float unknownFloat13;
+	internal float unknownFloat13;
 	/*! Unknown. */
-	float unknownFloat14;
+	internal float unknownFloat14;
 	/*! Unknown. */
-	float unknownFloat15;
+	internal float unknownFloat15;
 	/*! Unknown. */
-	float unknownFloat16;
+	internal float unknownFloat16;
 
 	public NiPlanarCollider() {
 	unknownShort = (ushort)0;

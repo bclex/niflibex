@@ -19,29 +19,29 @@ public class bhkMoppBvTreeShape : bhkBvTreeShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMoppBvTreeShape", bhkBvTreeShape.TYPE);
 	/*! The shape. */
-	bhkShape shape;
+	internal bhkShape shape;
 	/*! Garbage data from memory. Referred to as User Data, Shape Collection, and Code. */
-	Array3<uint> unused;
+	internal Array3<uint> unused;
 	/*! Scale. */
-	float shapeScale;
+	internal float shapeScale;
 	/*! Number of bytes for MOPP data. */
-	uint moppDataSize;
+	internal uint moppDataSize;
 	/*!
 	 * Origin of the object in mopp coordinates. This is the minimum of all vertices in
 	 * the packed shape along each axis, minus 0.1.
 	 */
-	Vector3 origin;
+	internal Vector3 origin;
 	/*!
 	 * The scaling factor to quantize the MOPP: the quantization factor is equal to
 	 * 256*256 divided by this number. In Oblivion files, scale is taken equal to
 	 * 256*256*254 / (size + 0.2) where size is the largest dimension of the bounding
 	 * box of the packed shape.
 	 */
-	float scale;
+	internal float scale;
 	/*! Tells if MOPP Data was organized into smaller chunks (PS3) or not (PC) */
-	MoppDataBuildType buildType;
+	internal MoppDataBuildType buildType;
 	/*! The tree of bounding volume data. */
-	byte[] moppData;
+	internal byte[] moppData;
 
 	public bhkMoppBvTreeShape() {
 	shape = null;

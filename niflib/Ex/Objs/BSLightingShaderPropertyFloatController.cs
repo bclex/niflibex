@@ -19,7 +19,7 @@ public class BSLightingShaderPropertyFloatController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLightingShaderPropertyFloatController", NiFloatInterpController.TYPE);
 	/*! Which float variable in BSLightingShaderProperty to animate: */
-	LightingShaderControlledVariable typeOfControlledVariable;
+	internal LightingShaderControlledVariable typeOfControlledVariable;
 
 	public BSLightingShaderPropertyFloatController() {
 	typeOfControlledVariable = (LightingShaderControlledVariable)0;

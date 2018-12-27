@@ -22,33 +22,33 @@ public class NiTextureEffect : NiDynamicEffect {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureEffect", NiDynamicEffect.TYPE);
 	/*! Model projection matrix.  Always identity? */
-	Matrix33 modelProjectionMatrix;
+	internal Matrix33 modelProjectionMatrix;
 	/*! Model projection transform.  Always (0,0,0)? */
-	Vector3 modelProjectionTransform;
+	internal Vector3 modelProjectionTransform;
 	/*! Texture Filtering mode. */
-	TexFilterMode textureFiltering;
+	internal TexFilterMode textureFiltering;
 	/*!  */
-	ushort maxAnisotropy;
+	internal ushort maxAnisotropy;
 	/*! Texture Clamp mode. */
-	TexClampMode textureClamping;
+	internal TexClampMode textureClamping;
 	/*! The type of effect that the texture is used for. */
-	TextureType textureType;
+	internal TextureType textureType;
 	/*! The method that will be used to generate UV coordinates for the texture effect. */
-	CoordGenType coordinateGenerationType;
+	internal CoordGenType coordinateGenerationType;
 	/*! Image index. */
-	NiImage image;
+	internal NiImage image;
 	/*! Source texture index. */
-	NiSourceTexture sourceTexture;
+	internal NiSourceTexture sourceTexture;
 	/*! Determines whether a clipping plane is used. */
-	byte enablePlane;
+	internal byte enablePlane;
 	/*!  */
-	NiPlane plane;
+	internal NiPlane plane;
 	/*!  */
-	short ps2L;
+	internal short ps2L;
 	/*!  */
-	short ps2K;
+	internal short ps2K;
 	/*! Unknown: 0. */
-	ushort unknownShort;
+	internal ushort unknownShort;
 
 	public NiTextureEffect() {
 	textureFiltering = TexFilterMode.FILTER_TRILERP;

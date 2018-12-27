@@ -19,7 +19,7 @@ public class BSPSysStripUpdateModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysStripUpdateModifier", NiPSysModifier.TYPE);
 	/*!  */
-	float updateDeltaTime;
+	internal float updateDeltaTime;
 
 	public BSPSysStripUpdateModifier() {
 	updateDeltaTime = 0.0f;

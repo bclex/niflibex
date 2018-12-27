@@ -19,39 +19,39 @@ public class NiPhysXBodyDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXBodyDesc", NiObject.TYPE);
 	/*!  */
-	Matrix34 localPose;
+	internal Matrix34 localPose;
 	/*!  */
-	Vector3 spaceInertia;
+	internal Vector3 spaceInertia;
 	/*!  */
-	float mass;
+	internal float mass;
 	/*!  */
-	uint numVels;
+	internal uint numVels;
 	/*!  */
-	PhysXBodyStoredVels[] vels;
+	internal PhysXBodyStoredVels[] vels;
 	/*!  */
-	float wakeUpCounter;
+	internal float wakeUpCounter;
 	/*!  */
-	float linearDamping;
+	internal float linearDamping;
 	/*!  */
-	float angularDamping;
+	internal float angularDamping;
 	/*!  */
-	float maxAngularVelocity;
+	internal float maxAngularVelocity;
 	/*!  */
-	float ccdMotionThreshold;
+	internal float ccdMotionThreshold;
 	/*!  */
-	uint flags;
+	internal uint flags;
 	/*!  */
-	float sleepLinearVelocity;
+	internal float sleepLinearVelocity;
 	/*!  */
-	float sleepAngularVelocity;
+	internal float sleepAngularVelocity;
 	/*!  */
-	uint solverIterationCount;
+	internal uint solverIterationCount;
 	/*!  */
-	float sleepEnergyThreshold;
+	internal float sleepEnergyThreshold;
 	/*!  */
-	float sleepDamping;
+	internal float sleepDamping;
 	/*!  */
-	float contactReportThreshold;
+	internal float contactReportThreshold;
 
 	public NiPhysXBodyDesc() {
 	mass = 0.0f;

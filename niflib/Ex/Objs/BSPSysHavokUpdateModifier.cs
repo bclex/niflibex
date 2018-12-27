@@ -19,11 +19,11 @@ public class BSPSysHavokUpdateModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysHavokUpdateModifier", NiPSysModifier.TYPE);
 	/*!  */
-	uint numNodes;
+	internal uint numNodes;
 	/*!  */
-	NiNode[] nodes;
+	internal NiNode[] nodes;
 	/*!  */
-	NiPSysModifier modifier;
+	internal NiPSysModifier modifier;
 
 	public BSPSysHavokUpdateModifier() {
 	numNodes = (uint)0;

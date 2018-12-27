@@ -19,7 +19,7 @@ public class NiBinaryExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBinaryExtraData", NiExtraData.TYPE);
 	/*! The binary data. */
-	ByteArray binaryData;
+	internal ByteArray binaryData;
 
 	public NiBinaryExtraData() {
 	}

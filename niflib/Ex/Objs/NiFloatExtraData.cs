@@ -19,7 +19,7 @@ public class NiFloatExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatExtraData", NiExtraData.TYPE);
 	/*! The float data. */
-	float floatData;
+	internal float floatData;
 
 	public NiFloatExtraData() {
 	floatData = 0.0f;

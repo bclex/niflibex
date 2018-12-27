@@ -19,7 +19,7 @@ public class NiBoolData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBoolData", NiObject.TYPE);
 	/*! The boolean keys. */
-	KeyGroup<byte> data;
+	internal KeyGroup<byte> data;
 
 	public NiBoolData() {
 	}

@@ -19,9 +19,9 @@ public class NiBinaryVoxelExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBinaryVoxelExtraData", NiExtraData.TYPE);
 	/*! Unknown.  0? */
-	uint unknownInt;
+	internal uint unknownInt;
 	/*! Link to binary voxel data. */
-	NiBinaryVoxelData data;
+	internal NiBinaryVoxelData data;
 
 	public NiBinaryVoxelExtraData() {
 	unknownInt = (uint)0;

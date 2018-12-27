@@ -16,11 +16,11 @@ namespace Niflib {
  */
 public class FormatPrefs {
 	/*! Requests the way the image will be stored. */
-	PixelLayout pixelLayout;
+	internal PixelLayout pixelLayout;
 	/*! Requests if mipmaps are used or not. */
-	MipMapFormat useMipmaps;
+	internal MipMapFormat useMipmaps;
 	/*! Requests no alpha, 1-bit alpha, or */
-	AlphaFormat alphaFormat;
+	internal AlphaFormat alphaFormat;
 	//Constructor
 	public FormatPrefs() { unchecked {
 	pixelLayout = (PixelLayout)0;

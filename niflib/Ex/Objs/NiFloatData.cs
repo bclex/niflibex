@@ -19,7 +19,7 @@ public class NiFloatData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatData", NiObject.TYPE);
 	/*! The keys. */
-	KeyGroup<float> data;
+	internal KeyGroup<float> data;
 
 	public NiFloatData() {
 	}

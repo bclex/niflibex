@@ -22,7 +22,7 @@ public class NiPSBoundUpdater : NiObject {
 	 * Number of particle bounds to skip updating every frame. Higher = more updates
 	 * each frame.
 	 */
-	ushort updateSkip;
+	internal ushort updateSkip;
 
 	public NiPSBoundUpdater() {
 	updateSkip = (ushort)0;

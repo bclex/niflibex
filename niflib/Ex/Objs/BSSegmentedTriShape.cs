@@ -19,9 +19,9 @@ public class BSSegmentedTriShape : NiTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSegmentedTriShape", NiTriShape.TYPE);
 	/*! Number of segments in the square grid */
-	int numSegments;
+	internal int numSegments;
 	/*! Configuration of each segment */
-	BSGeometrySegmentData[] segment;
+	internal BSGeometrySegmentData[] segment;
 
 	public BSSegmentedTriShape() {
 	numSegments = (int)0;

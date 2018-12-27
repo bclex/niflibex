@@ -19,26 +19,26 @@ public class bhkNiTriStripsShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkNiTriStripsShape", bhkShapeCollection.TYPE);
 	/*! The material of the shape. */
-	HavokMaterial material;
+	internal HavokMaterial material;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*!
 	 * Garbage data from memory though the last 3 are referred to as maxSize, size, and
 	 * eSize.
 	 */
-	Array5<uint> unused;
+	internal Array5<uint> unused;
 	/*!  */
-	uint growBy;
+	internal uint growBy;
 	/*! Scale. Usually (1.0, 1.0, 1.0, 0.0). */
-	Vector4 scale;
+	internal Vector4 scale;
 	/*! The number of strips data objects referenced. */
-	uint numStripsData;
+	internal uint numStripsData;
 	/*! Refers to a bunch of NiTriStripsData objects that make up this shape. */
-	NiTriStripsData[] stripsData;
+	internal NiTriStripsData[] stripsData;
 	/*! Number of Havok Layers, equal to Number of strips data objects. */
-	uint numDataLayers;
+	internal uint numDataLayers;
 	/*! Havok Layers for each strip data. */
-	HavokFilter[] dataLayers;
+	internal HavokFilter[] dataLayers;
 
 	public bhkNiTriStripsShape() {
 	radius = 0.1f;

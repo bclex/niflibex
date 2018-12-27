@@ -19,19 +19,19 @@ public class NiInstancingMeshModifier : NiMeshModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiInstancingMeshModifier", NiMeshModifier.TYPE);
 	/*!  */
-	bool hasInstanceNodes;
+	internal bool hasInstanceNodes;
 	/*!  */
-	bool perInstanceCulling;
+	internal bool perInstanceCulling;
 	/*!  */
-	bool hasStaticBounds;
+	internal bool hasStaticBounds;
 	/*!  */
-	NiMesh affectedMesh;
+	internal NiMesh affectedMesh;
 	/*!  */
-	NiBound bound;
+	internal NiBound bound;
 	/*!  */
-	uint numInstanceNodes;
+	internal uint numInstanceNodes;
 	/*!  */
-	NiMeshHWInstance[] instanceNodes;
+	internal NiMeshHWInstance[] instanceNodes;
 
 	public NiInstancingMeshModifier() {
 	hasInstanceNodes = false;

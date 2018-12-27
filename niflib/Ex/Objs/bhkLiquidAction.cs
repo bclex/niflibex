@@ -19,19 +19,19 @@ public class bhkLiquidAction : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkLiquidAction", bhkSerializable.TYPE);
 	/*!  */
-	uint userData;
+	internal uint userData;
 	/*! Unknown */
-	int unknownInt2;
+	internal int unknownInt2;
 	/*! Unknown */
-	int unknownInt3;
+	internal int unknownInt3;
 	/*!  */
-	float initialStickForce;
+	internal float initialStickForce;
 	/*!  */
-	float stickStrength;
+	internal float stickStrength;
 	/*!  */
-	float neighborDistance;
+	internal float neighborDistance;
 	/*!  */
-	float neighborStrength;
+	internal float neighborStrength;
 
 	public bhkLiquidAction() {
 	userData = (uint)0;

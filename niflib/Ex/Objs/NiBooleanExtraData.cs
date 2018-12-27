@@ -19,7 +19,7 @@ public class NiBooleanExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBooleanExtraData", NiExtraData.TYPE);
 	/*! The boolean extra data value. */
-	byte booleanData;
+	internal byte booleanData;
 
 	public NiBooleanExtraData() {
 	booleanData = (byte)0;

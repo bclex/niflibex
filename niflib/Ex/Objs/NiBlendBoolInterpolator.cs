@@ -19,7 +19,7 @@ public class NiBlendBoolInterpolator : NiBlendInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendBoolInterpolator", NiBlendInterpolator.TYPE);
 	/*! The pose value. Invalid if using data. */
-	byte value;
+	internal byte value;
 
 	public NiBlendBoolInterpolator() {
 	value = (byte)2;

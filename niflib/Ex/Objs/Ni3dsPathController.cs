@@ -19,7 +19,7 @@ public class Ni3dsPathController : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsPathController", NiObject.TYPE);
 	/*! Unknown. */
-	Array20<byte> unknown1;
+	internal Array20<byte> unknown1;
 
 	public Ni3dsPathController() {
 	}

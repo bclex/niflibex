@@ -19,7 +19,7 @@ public class NiRenderObject : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRenderObject", NiAVObject.TYPE);
 	/*! Per-material data. */
-	MaterialData materialData;
+	internal MaterialData materialData;
 
 	public NiRenderObject() {
 	}

@@ -22,7 +22,7 @@ public class NiKeyframeController : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiKeyframeController", NiSingleInterpController.TYPE);
 	/*!  */
-	NiKeyframeData data;
+	internal NiKeyframeData data;
 
 	public NiKeyframeController() {
 	data = null;

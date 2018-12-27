@@ -13,15 +13,15 @@ namespace Niflib {
 /*! Interpolator item for array in NiBlendInterpolator. */
 public class InterpBlendItem {
 	/*! Reference to an interpolator. */
-	NiInterpolator interpolator;
+	internal NiInterpolator interpolator;
 	/*!  */
-	float weight;
+	internal float weight;
 	/*!  */
-	float normalizedWeight;
+	internal float normalizedWeight;
 	/*!  */
-	int priority;
+	internal int priority;
 	/*!  */
-	float easeSpinner;
+	internal float easeSpinner;
 	//Constructor
 	public InterpBlendItem() { unchecked {
 	interpolator = null;

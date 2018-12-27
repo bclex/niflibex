@@ -19,15 +19,15 @@ public class NiSkinData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinData", NiObject.TYPE);
 	/*! Offset of the skin from this bone in bind position. */
-	NiTransform skinTransform;
+	internal NiTransform skinTransform;
 	/*! Number of bones. */
-	uint numBones;
+	internal uint numBones;
 	/*! This optionally links a NiSkinPartition for hardware-acceleration information. */
-	NiSkinPartition skinPartition;
+	internal NiSkinPartition skinPartition;
 	/*! Enables Vertex Weights for this NiSkinData. */
-	byte hasVertexWeights;
+	internal byte hasVertexWeights;
 	/*! Contains offset data for each node that this skin is influenced by. */
-	BoneData[] boneList;
+	internal BoneData[] boneList;
 
 	public NiSkinData() {
 	numBones = (uint)0;

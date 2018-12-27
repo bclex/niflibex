@@ -19,9 +19,9 @@ public class NiMeshHWInstance : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMeshHWInstance", NiAVObject.TYPE);
 	/*! The instanced mesh this object represents. */
-	NiMesh masterMesh;
+	internal NiMesh masterMesh;
 	/*!  */
-	NiInstancingMeshModifier meshModifier;
+	internal NiInstancingMeshModifier meshModifier;
 
 	public NiMeshHWInstance() {
 	masterMesh = null;

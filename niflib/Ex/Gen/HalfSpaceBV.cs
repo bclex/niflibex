@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class HalfSpaceBV {
 	/*!  */
-	NiPlane plane;
+	internal NiPlane plane;
 	/*!  */
-	Vector3 center;
+	internal Vector3 center;
 	//Constructor
 }
 

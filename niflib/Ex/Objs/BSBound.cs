@@ -19,9 +19,9 @@ public class BSBound : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSBound", NiExtraData.TYPE);
 	/*! Center of the bounding box. */
-	Vector3 center;
+	internal Vector3 center;
 	/*! Dimensions of the bounding box from center. */
-	Vector3 dimensions;
+	internal Vector3 dimensions;
 
 	public BSBound() {
 	}

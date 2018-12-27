@@ -13,19 +13,19 @@ namespace Niflib {
 /*!  */
 public class BSVertexDesc {
 	/*!  */
-	byte vf1;
+	internal byte vf1;
 	/*!  */
-	byte vf2;
+	internal byte vf2;
 	/*!  */
-	byte vf3;
+	internal byte vf3;
 	/*!  */
-	byte vf4;
+	internal byte vf4;
 	/*!  */
-	byte vf5;
+	internal byte vf5;
 	/*!  */
-	VertexFlags vertexAttributes;
+	internal VertexFlags vertexAttributes;
 	/*!  */
-	byte vf8;
+	internal byte vf8;
 	//Constructor
 	public BSVertexDesc() { unchecked {
 	vf1 = (byte)0;

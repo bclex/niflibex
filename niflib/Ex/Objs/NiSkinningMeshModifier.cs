@@ -22,22 +22,22 @@ public class NiSkinningMeshModifier : NiMeshModifier {
 	 * USE_SOFTWARE_SKINNING = 0x0001
 	 *             RECOMPUTE_BOUNDS = 0x0002
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*! The root bone of the skeleton. */
-	NiAVObject skeletonRoot;
+	internal NiAVObject skeletonRoot;
 	/*!
 	 * The transform that takes the root bone parent coordinate system into the skin
 	 * coordinate system.
 	 */
-	NiTransform skeletonTransform;
+	internal NiTransform skeletonTransform;
 	/*! The number of bones referenced by this mesh modifier. */
-	uint numBones;
+	internal uint numBones;
 	/*! Pointers to the bone nodes that affect this skin. */
-	NiAVObject[] bones;
+	internal NiAVObject[] bones;
 	/*! The transforms that go from bind-pose space to bone space. */
-	NiTransform[] boneTransforms;
+	internal NiTransform[] boneTransforms;
 	/*! The bounds of the bones.  Only stored if the RECOMPUTE_BOUNDS bit is set. */
-	NiBound[] boneBounds;
+	internal NiBound[] boneBounds;
 
 	public NiSkinningMeshModifier() {
 	flags = (ushort)0;

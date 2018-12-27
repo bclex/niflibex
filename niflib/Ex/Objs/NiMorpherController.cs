@@ -19,7 +19,7 @@ public class NiMorpherController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMorpherController", NiInterpController.TYPE);
 	/*! This controller's data. */
-	NiMorphData data;
+	internal NiMorphData data;
 
 	public NiMorpherController() {
 	data = null;

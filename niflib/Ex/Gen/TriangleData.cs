@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Bethesda Havok. A triangle with extra data used for physics. */
 public class TriangleData {
 	/*! The triangle. */
-	Triangle triangle;
+	internal Triangle triangle;
 	/*! Additional havok information on how triangles are welded. */
-	ushort weldingInfo;
+	internal ushort weldingInfo;
 	/*! This is the triangle's normal. */
-	Vector3 normal;
+	internal Vector3 normal;
 	//Constructor
 	public TriangleData() { unchecked {
 	weldingInfo = (ushort)0;

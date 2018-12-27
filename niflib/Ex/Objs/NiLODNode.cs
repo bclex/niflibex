@@ -22,13 +22,13 @@ public class NiLODNode : NiSwitchNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLODNode", NiSwitchNode.TYPE);
 	/*!  */
-	Vector3 lodCenter;
+	internal Vector3 lodCenter;
 	/*!  */
-	uint numLodLevels;
+	internal uint numLodLevels;
 	/*!  */
-	LODRange[] lodLevels;
+	internal LODRange[] lodLevels;
 	/*!  */
-	NiLODData lodLevelData;
+	internal NiLODData lodLevelData;
 
 	public NiLODNode() {
 	numLodLevels = (uint)0;

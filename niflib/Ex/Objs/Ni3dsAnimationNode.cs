@@ -19,21 +19,21 @@ public class Ni3dsAnimationNode : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsAnimationNode", NiObject.TYPE);
 	/*! Name of this object. */
-	IndexString name;
+	internal IndexString name;
 	/*! Unknown. */
-	bool hasData;
+	internal bool hasData;
 	/*! Unknown. Matrix? */
-	Array21<float> unknownFloats1;
+	internal Array21<float> unknownFloats1;
 	/*! Unknown. */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*! Child? */
-	NiObject child;
+	internal NiObject child;
 	/*! Unknown. */
-	Array12<float> unknownFloats2;
+	internal Array12<float> unknownFloats2;
 	/*! A count. */
-	uint count;
+	internal uint count;
 	/*! Unknown. */
-	Array5<byte>[] unknownArray;
+	internal Array5<byte>[] unknownArray;
 
 	public Ni3dsAnimationNode() {
 	hasData = false;

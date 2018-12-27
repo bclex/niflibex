@@ -23,47 +23,47 @@ public class BSProceduralLightningController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSProceduralLightningController", NiTimeController.TYPE);
 	/*! References generation interpolator. */
-	NiInterpolator interpolator1_Generation;
+	internal NiInterpolator interpolator1_Generation;
 	/*! References interpolator for Mutation of strips */
-	NiInterpolator interpolator2_Mutation;
+	internal NiInterpolator interpolator2_Mutation;
 	/*! References subdivision interpolator. */
-	NiInterpolator interpolator3_Subdivision;
+	internal NiInterpolator interpolator3_Subdivision;
 	/*! References branches interpolator. */
-	NiInterpolator interpolator4_NumBranches;
+	internal NiInterpolator interpolator4_NumBranches;
 	/*! References branches variation interpolator. */
-	NiInterpolator interpolator5_NumBranchesVar;
+	internal NiInterpolator interpolator5_NumBranchesVar;
 	/*! References length interpolator. */
-	NiInterpolator interpolator6_Length;
+	internal NiInterpolator interpolator6_Length;
 	/*! References length variation interpolator. */
-	NiInterpolator interpolator7_LengthVar;
+	internal NiInterpolator interpolator7_LengthVar;
 	/*! References width interpolator. */
-	NiInterpolator interpolator8_Width;
+	internal NiInterpolator interpolator8_Width;
 	/*! References interpolator for amplitude control. 0=straight, 50=wide */
-	NiInterpolator interpolator9_ArcOffset;
+	internal NiInterpolator interpolator9_ArcOffset;
 	/*!  */
-	ushort subdivisions;
+	internal ushort subdivisions;
 	/*!  */
-	ushort numBranches;
+	internal ushort numBranches;
 	/*!  */
-	ushort numBranchesVariation;
+	internal ushort numBranchesVariation;
 	/*! How far lightning will stretch to. */
-	float length;
+	internal float length;
 	/*! How far lightning variation will stretch to. */
-	float lengthVariation;
+	internal float lengthVariation;
 	/*! How wide the bolt will be. */
-	float width;
+	internal float width;
 	/*! Influences forking behavior with a multiplier. */
-	float childWidthMult;
+	internal float childWidthMult;
 	/*!  */
-	float arcOffset;
+	internal float arcOffset;
 	/*!  */
-	bool fadeMainBolt;
+	internal bool fadeMainBolt;
 	/*!  */
-	bool fadeChildBolts;
+	internal bool fadeChildBolts;
 	/*!  */
-	bool animateArcOffset;
+	internal bool animateArcOffset;
 	/*! Reference to a shader property. */
-	BSShaderProperty shaderProperty;
+	internal BSShaderProperty shaderProperty;
 
 	public BSProceduralLightningController() {
 	interpolator1_Generation = null;

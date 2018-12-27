@@ -19,7 +19,7 @@ public class NiSpecularProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSpecularProperty", NiProperty.TYPE);
 	/*! Bit 0 = Enable specular lighting on this shape. */
-	ushort flags;
+	internal ushort flags;
 
 	public NiSpecularProperty() {
 	flags = (ushort)0;

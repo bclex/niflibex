@@ -22,29 +22,29 @@ public class NiShadowGenerator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiShadowGenerator", NiObject.TYPE);
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	ushort flags;
+	internal ushort flags;
 	/*!  */
-	uint numShadowCasters;
+	internal uint numShadowCasters;
 	/*!  */
-	NiNode[] shadowCasters;
+	internal NiNode[] shadowCasters;
 	/*!  */
-	uint numShadowReceivers;
+	internal uint numShadowReceivers;
 	/*!  */
-	NiNode[] shadowReceivers;
+	internal NiNode[] shadowReceivers;
 	/*!  */
-	NiDynamicEffect target;
+	internal NiDynamicEffect target;
 	/*!  */
-	float depthBias;
+	internal float depthBias;
 	/*!  */
-	ushort sizeHint;
+	internal ushort sizeHint;
 	/*!  */
-	float nearClippingDistance;
+	internal float nearClippingDistance;
 	/*!  */
-	float farClippingDistance;
+	internal float farClippingDistance;
 	/*!  */
-	float directionalLightFrustumWidth;
+	internal float directionalLightFrustumWidth;
 
 	public NiShadowGenerator() {
 	flags = (ushort)0;

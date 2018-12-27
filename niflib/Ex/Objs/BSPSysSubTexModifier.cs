@@ -22,19 +22,19 @@ public class BSPSysSubTexModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysSubTexModifier", NiPSysModifier.TYPE);
 	/*! Starting frame/position on atlas */
-	uint startFrame;
+	internal uint startFrame;
 	/*! Random chance to start on a different frame? */
-	float startFrameFudge;
+	internal float startFrameFudge;
 	/*! Ending frame/position on atlas */
-	float endFrame;
+	internal float endFrame;
 	/*! Frame to start looping */
-	float loopStartFrame;
+	internal float loopStartFrame;
 	/*!  */
-	float loopStartFrameFudge;
+	internal float loopStartFrameFudge;
 	/*!  */
-	float frameCount;
+	internal float frameCount;
 	/*!  */
-	float frameCountFudge;
+	internal float frameCountFudge;
 
 	public BSPSysSubTexModifier() {
 	startFrame = (uint)0;

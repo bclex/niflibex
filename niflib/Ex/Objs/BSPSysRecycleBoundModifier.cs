@@ -19,11 +19,11 @@ public class BSPSysRecycleBoundModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysRecycleBoundModifier", NiPSysModifier.TYPE);
 	/*!  */
-	Vector3 boundOffset;
+	internal Vector3 boundOffset;
 	/*!  */
-	Vector3 boundExtent;
+	internal Vector3 boundExtent;
 	/*!  */
-	NiNode target;
+	internal NiNode target;
 
 	public BSPSysRecycleBoundModifier() {
 	target = null;

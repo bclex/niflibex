@@ -19,25 +19,25 @@ public class NiPSysRotationModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysRotationModifier", NiPSysModifier.TYPE);
 	/*! Initial Rotation Speed in radians per second. */
-	float rotationSpeed;
+	internal float rotationSpeed;
 	/*!
 	 * Distributes rotation speed over the range [Speed - Variation, Speed +
 	 * Variation].
 	 */
-	float rotationSpeedVariation;
+	internal float rotationSpeedVariation;
 	/*! Initial Rotation Angle in radians. */
-	float rotationAngle;
+	internal float rotationAngle;
 	/*!
 	 * Distributes rotation angle over the range [Angle - Variation, Angle +
 	 * Variation].
 	 */
-	float rotationAngleVariation;
+	internal float rotationAngleVariation;
 	/*! Randomly negate the initial rotation speed? */
-	bool randomRotSpeedSign;
+	internal bool randomRotSpeedSign;
 	/*! Assign a random axis to new particles? */
-	bool randomAxis;
+	internal bool randomAxis;
 	/*! Initial rotation axis. */
-	Vector3 axis;
+	internal Vector3 axis;
 
 	public NiPSysRotationModifier() {
 	rotationSpeed = 0.0f;

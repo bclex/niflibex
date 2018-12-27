@@ -16,33 +16,33 @@ namespace Niflib {
  */
 public class LimitedHingeDescriptor {
 	/*! Pivot point around which the object will rotate. */
-	Vector4 pivotA;
+	internal Vector4 pivotA;
 	/*! Axis of rotation. */
-	Vector4 axisA;
+	internal Vector4 axisA;
 	/*! Vector in the rotation plane which defines the zero angle. */
-	Vector4 perpAxisInA1;
+	internal Vector4 perpAxisInA1;
 	/*!
 	 * Vector in the rotation plane, orthogonal on the previous one, which defines the
 	 * positive direction of rotation. This is always the vector product of Axis A and
 	 * Perp Axis In A1.
 	 */
-	Vector4 perpAxisInA2;
+	internal Vector4 perpAxisInA2;
 	/*! Pivot A in second entity coordinate system. */
-	Vector4 pivotB;
+	internal Vector4 pivotB;
 	/*! Axis A in second entity coordinate system. */
-	Vector4 axisB;
+	internal Vector4 axisB;
 	/*! Perp Axis In A2 in second entity coordinate system. */
-	Vector4 perpAxisInB2;
+	internal Vector4 perpAxisInB2;
 	/*! Perp Axis In A1 in second entity coordinate system. */
-	Vector4 perpAxisInB1;
+	internal Vector4 perpAxisInB1;
 	/*! Minimum rotation angle. */
-	float minAngle;
+	internal float minAngle;
 	/*! Maximum rotation angle. */
-	float maxAngle;
+	internal float maxAngle;
 	/*! Maximum friction, typically either 0 or 10. In Fallout 3, typically 100. */
-	float maxFriction;
+	internal float maxFriction;
 	/*!  */
-	MotorDescriptor motor;
+	internal MotorDescriptor motor;
 	//Constructor
 	public LimitedHingeDescriptor() { unchecked {
 	minAngle = 0.0f;

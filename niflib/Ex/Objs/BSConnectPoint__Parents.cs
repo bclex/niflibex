@@ -19,9 +19,9 @@ public class BSConnectPoint__Parents : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSConnectPoint::Parents", NiExtraData.TYPE);
 	/*!  */
-	uint numConnectPoints;
+	internal uint numConnectPoints;
 	/*!  */
-	BSConnectPoint[] connectPoints;
+	internal BSConnectPoint[] connectPoints;
 
 	public BSConnectPoint__Parents() {
 	numConnectPoints = (uint)0;

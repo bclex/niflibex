@@ -13,33 +13,33 @@ namespace Niflib {
 /*!  */
 public class MalleableDescriptor {
 	/*! Type of constraint. */
-	hkConstraintType type;
+	internal hkConstraintType type;
 	/*! Always 2 (Hardcoded). Number of bodies affected by this constraint. */
-	uint numEntities;
+	internal uint numEntities;
 	/*! Usually NONE. The entity affected by this constraint. */
-	bhkEntity entityA;
+	internal bhkEntity entityA;
 	/*! Usually NONE. The entity affected by this constraint. */
-	bhkEntity entityB;
+	internal bhkEntity entityB;
 	/*! Usually 1. Higher values indicate higher priority of this constraint? */
-	uint priority;
+	internal uint priority;
 	/*!  */
-	BallAndSocketDescriptor ballAndSocket;
+	internal BallAndSocketDescriptor ballAndSocket;
 	/*!  */
-	HingeDescriptor hinge;
+	internal HingeDescriptor hinge;
 	/*!  */
-	LimitedHingeDescriptor limitedHinge;
+	internal LimitedHingeDescriptor limitedHinge;
 	/*!  */
-	PrismaticDescriptor prismatic;
+	internal PrismaticDescriptor prismatic;
 	/*!  */
-	RagdollDescriptor ragdoll;
+	internal RagdollDescriptor ragdoll;
 	/*!  */
-	StiffSpringDescriptor stiffSpring;
+	internal StiffSpringDescriptor stiffSpring;
 	/*!  */
-	float tau;
+	internal float tau;
 	/*!  */
-	float damping;
+	internal float damping;
 	/*!  */
-	float strength;
+	internal float strength;
 	//Constructor
 	public MalleableDescriptor() { unchecked {
 	type = (hkConstraintType)0;

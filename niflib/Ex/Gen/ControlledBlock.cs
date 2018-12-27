@@ -23,60 +23,60 @@ namespace Niflib {
  */
 public class ControlledBlock {
 	/*! Name of a controllable object in another NIF file. */
-	IndexString targetName;
+	internal IndexString targetName;
 	/*!  */
-	NiInterpolator interpolator;
+	internal NiInterpolator interpolator;
 	/*!  */
-	NiTimeController controller;
+	internal NiTimeController controller;
 	/*!  */
-	NiBlendInterpolator blendInterpolator;
+	internal NiBlendInterpolator blendInterpolator;
 	/*!  */
-	ushort blendIndex;
+	internal ushort blendIndex;
 	/*!
 	 * Idle animations tend to have low values for this, and high values tend to
 	 * correspond with the important parts of the animations.
 	 */
-	byte priority;
+	internal byte priority;
 	/*! The name of the animated NiAVObject. */
-	IndexString nodeName;
+	internal IndexString nodeName;
 	/*! The RTTI type of the NiProperty the controller is attached to, if applicable. */
-	IndexString propertyType;
+	internal IndexString propertyType;
 	/*! The RTTI type of the NiTimeController. */
-	IndexString controllerType;
+	internal IndexString controllerType;
 	/*!
 	 * An ID that can uniquely identify the controller among others of the same type on
 	 * the same NiObjectNET.
 	 */
-	IndexString controllerId;
+	internal IndexString controllerId;
 	/*!
 	 * An ID that can uniquely identify the interpolator among others of the same type
 	 * on the same NiObjectNET.
 	 */
-	IndexString interpolatorId;
+	internal IndexString interpolatorId;
 	/*!
 	 * Refers to the NiStringPalette which contains the name of the controlled NIF
 	 * object.
 	 */
-	NiStringPalette stringPalette;
+	internal NiStringPalette stringPalette;
 	/*! Offset in NiStringPalette to the name of the animated NiAVObject. */
-	uint nodeNameOffset;
+	internal uint nodeNameOffset;
 	/*!
 	 * Offset in NiStringPalette to the RTTI type of the NiProperty the controller is
 	 * attached to, if applicable.
 	 */
-	uint propertyTypeOffset;
+	internal uint propertyTypeOffset;
 	/*! Offset in NiStringPalette to the RTTI type of the NiTimeController. */
-	uint controllerTypeOffset;
+	internal uint controllerTypeOffset;
 	/*!
 	 * Offset in NiStringPalette to an ID that can uniquely identify the controller
 	 * among others of the same type on the same NiObjectNET.
 	 */
-	uint controllerIdOffset;
+	internal uint controllerIdOffset;
 	/*!
 	 * Offset in NiStringPalette to an ID that can uniquely identify the interpolator
 	 * among others of the same type on the same NiObjectNET.
 	 */
-	uint interpolatorIdOffset;
+	internal uint interpolatorIdOffset;
 	//Constructor
 	public ControlledBlock() { unchecked {
 	interpolator = null;

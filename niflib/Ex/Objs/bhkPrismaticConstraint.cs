@@ -19,7 +19,7 @@ public class bhkPrismaticConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkPrismaticConstraint", bhkConstraint.TYPE);
 	/*! Describes a prismatic constraint */
-	PrismaticDescriptor prismatic;
+	internal PrismaticDescriptor prismatic;
 
 	public bhkPrismaticConstraint() {
 	}

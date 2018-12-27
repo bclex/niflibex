@@ -22,7 +22,7 @@ public class NiStringPalette : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiStringPalette", NiObject.TYPE);
 	/*! A bunch of 0x00 seperated strings. */
-	StringPalette palette;
+	internal StringPalette palette;
 
 	public NiStringPalette() {
 	}

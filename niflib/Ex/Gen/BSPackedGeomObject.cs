@@ -13,9 +13,9 @@ namespace Niflib {
 /*! This appears to be a 64-bit hash but nif.xml does not have a 64-bit type. */
 public class BSPackedGeomObject {
 	/*!  */
-	uint shapeId1;
+	internal uint shapeId1;
 	/*!  */
-	uint shapeId2;
+	internal uint shapeId2;
 	//Constructor
 	public BSPackedGeomObject() { unchecked {
 	shapeId1 = (uint)0;

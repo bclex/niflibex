@@ -19,9 +19,9 @@ public class NiPoint3Interpolator : NiKeyBasedInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPoint3Interpolator", NiKeyBasedInterpolator.TYPE);
 	/*! Pose value if lacking NiPosData. */
-	Vector3 value;
+	internal Vector3 value;
 	/*!  */
-	NiPosData data;
+	internal NiPosData data;
 
 	public NiPoint3Interpolator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

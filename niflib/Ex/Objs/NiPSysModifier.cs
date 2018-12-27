@@ -19,13 +19,13 @@ public class NiPSysModifier : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysModifier", NiObject.TYPE);
 	/*! Used to locate the modifier. */
-	IndexString name;
+	internal IndexString name;
 	/*! Modifier ID in the particle modifier chain (always a multiple of 1000)? */
-	uint order;
+	internal uint order;
 	/*! NiParticleSystem parent of this modifier. */
-	NiParticleSystem target;
+	internal NiParticleSystem target;
 	/*! Whether or not the modifier is active. */
-	bool active;
+	internal bool active;
 
 	public NiPSysModifier() {
 	order = (uint)0;

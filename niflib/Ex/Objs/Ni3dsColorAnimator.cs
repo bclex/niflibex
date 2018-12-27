@@ -19,7 +19,7 @@ public class Ni3dsColorAnimator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsColorAnimator", NiObject.TYPE);
 	/*! Unknown. */
-	Array184<byte> unknown1;
+	internal Array184<byte> unknown1;
 
 	public Ni3dsColorAnimator() {
 	}

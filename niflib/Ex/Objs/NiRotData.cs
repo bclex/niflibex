@@ -19,13 +19,13 @@ public class NiRotData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRotData", NiObject.TYPE);
 	/*!  */
-	uint numRotationKeys;
+	internal uint numRotationKeys;
 	/*!  */
-	KeyType rotationType;
+	internal KeyType rotationType;
 	/*!  */
-	Key<Quaternion>[] quaternionKeys;
+	internal Key<Quaternion>[] quaternionKeys;
 	/*!  */
-	Array3<KeyGroup<float>> xyzRotations;
+	internal Array3<KeyGroup<float>> xyzRotations;
 
 	public NiRotData() {
 	numRotationKeys = (uint)0;

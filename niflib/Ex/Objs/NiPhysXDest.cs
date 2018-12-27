@@ -22,9 +22,9 @@ public class NiPhysXDest : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXDest", NiObject.TYPE);
 	/*!  */
-	bool active;
+	internal bool active;
 	/*!  */
-	bool interpolate;
+	internal bool interpolate;
 
 	public NiPhysXDest() {
 	active = false;

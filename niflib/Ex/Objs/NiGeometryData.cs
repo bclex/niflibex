@@ -19,48 +19,48 @@ public class NiGeometryData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGeometryData", NiObject.TYPE);
 	/*! Always zero. */
-	int groupId;
+	internal int groupId;
 	/*! Number of vertices. */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! Bethesda uses this for max number of particles in NiPSysData. */
-	ushort bsMaxVertices;
+	internal ushort bsMaxVertices;
 	/*! Used with NiCollision objects when OBB or TRI is set. */
-	byte keepFlags;
+	internal byte keepFlags;
 	/*! Unknown. */
-	byte compressFlags;
+	internal byte compressFlags;
 	/*! Is the vertex array present? (Always non-zero.) */
-	bool hasVertices;
+	internal bool hasVertices;
 	/*! The mesh vertices. */
-	Vector3[] vertices;
+	internal Vector3[] vertices;
 	/*!  */
-	VectorFlags vectorFlags;
+	internal VectorFlags vectorFlags;
 	/*!  */
-	BSVectorFlags bsVectorFlags;
+	internal BSVectorFlags bsVectorFlags;
 	/*!  */
-	uint materialCrc;
+	internal uint materialCrc;
 	/*!
 	 * Do we have lighting normals? These are essential for proper lighting: if not
 	 * present, the model will only be influenced by ambient light.
 	 */
-	bool hasNormals;
+	internal bool hasNormals;
 	/*! The lighting normals. */
-	Vector3[] normals;
+	internal Vector3[] normals;
 	/*! Tangent vectors. */
-	Vector3[] tangents;
+	internal Vector3[] tangents;
 	/*! Bitangent vectors. */
-	Vector3[] bitangents;
+	internal Vector3[] bitangents;
 	/*!
 	 * Center of the bounding box (smallest box that contains all vertices) of the
 	 * mesh.
 	 */
-	Vector3 center;
+	internal Vector3 center;
 	/*!
 	 * Radius of the mesh: maximal Euclidean distance between the center and all
 	 * vertices.
 	 */
-	float radius;
+	internal float radius;
 	/*! Unknown, always 0? */
-	Array13<short> unknown13Shorts;
+	internal Array13<short> unknown13Shorts;
 	/*!
 	 * Do we have vertex colors? These are usually used to fine-tune the lighting of
 	 * the model.
@@ -71,31 +71,31 @@ public class NiGeometryData : NiObject {
 	 * 
 	 *             Note 2: set to either 0 or 0xFFFFFFFF for NifTexture compatibility.
 	 */
-	bool hasVertexColors;
+	internal bool hasVertexColors;
 	/*! The vertex colors. */
-	Color4[] vertexColors;
+	internal Color4[] vertexColors;
 	/*!
 	 * The lower 6 (or less?) bits of this field represent the number of UV texture
 	 * sets. The other bits are probably flag bits. For versions 10.1.0.0 and up, if
 	 * bit 12 is set then extra vectors are present after the normals.
 	 */
-	ushort numUvSets;
+	internal ushort numUvSets;
 	/*!
 	 * Do we have UV coordinates?
 	 * 
 	 *             Note: for compatibility with NifTexture, set this value to either
 	 * 0x00000000 or 0xFFFFFFFF.
 	 */
-	bool hasUv;
+	internal bool hasUv;
 	/*!
 	 * The UV texture coordinates. They follow the OpenGL standard: some programs may
 	 * require you to flip the second coordinate.
 	 */
-	TexCoord[][] uvSets;
+	internal TexCoord[][] uvSets;
 	/*! Consistency Flags */
-	ConsistencyType consistencyFlags;
+	internal ConsistencyType consistencyFlags;
 	/*! Unknown. */
-	AbstractAdditionalGeometryData additionalData;
+	internal AbstractAdditionalGeometryData additionalData;
 
 	public NiGeometryData() {
 	groupId = (int)0;

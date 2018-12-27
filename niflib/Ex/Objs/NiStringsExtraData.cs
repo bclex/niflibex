@@ -19,9 +19,9 @@ public class NiStringsExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiStringsExtraData", NiExtraData.TYPE);
 	/*! Number of strings. */
-	uint numStrings;
+	internal uint numStrings;
 	/*! The strings. */
-	string[] data;
+	internal string[] data;
 
 	public NiStringsExtraData() {
 	numStrings = (uint)0;

@@ -19,11 +19,11 @@ public class NiPointLight : NiLight {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPointLight", NiLight.TYPE);
 	/*!  */
-	float constantAttenuation;
+	internal float constantAttenuation;
 	/*!  */
-	float linearAttenuation;
+	internal float linearAttenuation;
 	/*!  */
-	float quadraticAttenuation;
+	internal float quadraticAttenuation;
 
 	public NiPointLight() {
 	constantAttenuation = 0.0f;

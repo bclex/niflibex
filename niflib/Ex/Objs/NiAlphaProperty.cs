@@ -49,13 +49,13 @@ public class NiAlphaProperty : NiProperty {
 	 *             110 GL_GEQUAL
 	 *             111 GL_NEVER
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*! Threshold for alpha testing (see: glAlphaFunc) */
-	byte threshold;
+	internal byte threshold;
 	/*! Unknown */
-	ushort unknownShort1;
+	internal ushort unknownShort1;
 	/*! Unknown */
-	uint unknownInt2;
+	internal uint unknownInt2;
 
 	public NiAlphaProperty() {
 	flags = (ushort)4844;

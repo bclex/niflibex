@@ -19,11 +19,11 @@ public class NiPSBoxEmitter : NiPSVolumeEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSBoxEmitter", NiPSVolumeEmitter.TYPE);
 	/*!  */
-	float emitterWidth;
+	internal float emitterWidth;
 	/*!  */
-	float emitterHeight;
+	internal float emitterHeight;
 	/*!  */
-	float emitterDepth;
+	internal float emitterDepth;
 
 	public NiPSBoxEmitter() {
 	emitterWidth = 0.0f;

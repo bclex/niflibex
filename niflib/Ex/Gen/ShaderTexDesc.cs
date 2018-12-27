@@ -13,11 +13,11 @@ namespace Niflib {
 /*! NiTexturingProperty::ShaderMap. Shader texture description. */
 public class ShaderTexDesc {
 	/*!  */
-	bool hasMap;
+	internal bool hasMap;
 	/*!  */
-	TexDesc map;
+	internal TexDesc map;
 	/*! Unique identifier for the Gamebryo shader system. */
-	uint mapId;
+	internal uint mapId;
 	//Constructor
 	public ShaderTexDesc() { unchecked {
 	hasMap = false;

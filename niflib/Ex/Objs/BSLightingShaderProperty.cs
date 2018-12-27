@@ -19,104 +19,104 @@ public class BSLightingShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLightingShaderProperty", BSShaderProperty.TYPE);
 	/*! Skyrim Shader Flags for setting render/shader options. */
-	SkyrimShaderPropertyFlags1 shaderFlags1_sk;
+	internal SkyrimShaderPropertyFlags1 shaderFlags1_sk;
 	/*! Skyrim Shader Flags for setting render/shader options. */
-	SkyrimShaderPropertyFlags2 shaderFlags2_sk;
+	internal SkyrimShaderPropertyFlags2 shaderFlags2_sk;
 	/*!
 	 * Fallout 4 Shader Flags. Mostly overridden if "Name" is a path to a BGSM/BGEM
 	 * file.
 	 */
-	Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
+	internal Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
 	/*!
 	 * Fallout 4 Shader Flags. Mostly overridden if "Name" is a path to a BGSM/BGEM
 	 * file.
 	 */
-	Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
+	internal Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
 	/*! Offset UVs */
-	TexCoord uvOffset;
+	internal TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures, see above. */
-	TexCoord uvScale;
+	internal TexCoord uvScale;
 	/*! Texture Set, can have override in an esm/esp */
-	BSShaderTextureSet textureSet;
+	internal BSShaderTextureSet textureSet;
 	/*! Glow color and alpha */
-	Color3 emissiveColor;
+	internal Color3 emissiveColor;
 	/*! Multiplied emissive colors */
-	float emissiveMultiple;
+	internal float emissiveMultiple;
 	/*!  */
-	IndexString wetMaterial;
+	internal IndexString wetMaterial;
 	/*! How to handle texture borders. */
-	TexClampMode textureClampMode;
+	internal TexClampMode textureClampMode;
 	/*! The material opacity (1=non-transparent). */
-	float alpha;
+	internal float alpha;
 	/*!
 	 * The amount of distortion. **Not based on physically accurate refractive index**
 	 * (0=none) (0-1)
 	 */
-	float refractionStrength;
+	internal float refractionStrength;
 	/*! The material specular power, or glossiness (0-999). */
-	float glossiness;
+	internal float glossiness;
 	/*! The base roughness (0.0-1.0), multiplied by the smoothness map. */
-	float smoothness;
+	internal float smoothness;
 	/*! Adds a colored highlight. */
-	Color3 specularColor;
+	internal Color3 specularColor;
 	/*! Brightness of specular highlight. (0=not visible) (0-999) */
-	float specularStrength;
+	internal float specularStrength;
 	/*! Controls strength for envmap/backlight/rim/softlight lighting effect? */
-	float lightingEffect1;
+	internal float lightingEffect1;
 	/*! Controls strength for envmap/backlight/rim/softlight lighting effect? */
-	float lightingEffect2;
+	internal float lightingEffect2;
 	/*!  */
-	float subsurfaceRolloff;
+	internal float subsurfaceRolloff;
 	/*!  */
-	float rimlightPower;
+	internal float rimlightPower;
 	/*!  */
-	float backlightPower;
+	internal float backlightPower;
 	/*!  */
-	float grayscaleToPaletteScale;
+	internal float grayscaleToPaletteScale;
 	/*!  */
-	float fresnelPower;
+	internal float fresnelPower;
 	/*!  */
-	float wetnessSpecScale;
+	internal float wetnessSpecScale;
 	/*!  */
-	float wetnessSpecPower;
+	internal float wetnessSpecPower;
 	/*!  */
-	float wetnessMinVar;
+	internal float wetnessMinVar;
 	/*!  */
-	float wetnessEnvMapScale;
+	internal float wetnessEnvMapScale;
 	/*!  */
-	float wetnessFresnelPower;
+	internal float wetnessFresnelPower;
 	/*!  */
-	float wetnessMetalness;
+	internal float wetnessMetalness;
 	/*! Scales the intensity of the environment/cube map. (0-1) */
-	float environmentMapScale;
+	internal float environmentMapScale;
 	/*! Unknown. */
-	ushort unknownEnvMapShort;
+	internal ushort unknownEnvMapShort;
 	/*! Tints the base texture. Overridden by game settings. */
-	Color3 skinTintColor;
+	internal Color3 skinTintColor;
 	/*! Unknown. */
-	uint unknownSkinTintInt;
+	internal uint unknownSkinTintInt;
 	/*! Tints the base texture. Overridden by game settings. */
-	Color3 hairTintColor;
+	internal Color3 hairTintColor;
 	/*! Max Passes */
-	float maxPasses;
+	internal float maxPasses;
 	/*! Scale */
-	float scale;
+	internal float scale;
 	/*! How far from the surface the inner layer appears to be. */
-	float parallaxInnerLayerThickness;
+	internal float parallaxInnerLayerThickness;
 	/*! Depth of inner parallax layer effect. */
-	float parallaxRefractionScale;
+	internal float parallaxRefractionScale;
 	/*! Scales the inner parallax layer texture. */
-	TexCoord parallaxInnerLayerTextureScale;
+	internal TexCoord parallaxInnerLayerTextureScale;
 	/*! How strong the environment/cube map is. (0-??) */
-	float parallaxEnvmapStrength;
+	internal float parallaxEnvmapStrength;
 	/*! CK lists "snow material" when used. */
-	Vector4 sparkleParameters;
+	internal Vector4 sparkleParameters;
 	/*! Eye cubemap scale */
-	float eyeCubemapScale;
+	internal float eyeCubemapScale;
 	/*! Offset to set center for left eye cubemap */
-	Vector3 leftEyeReflectionCenter;
+	internal Vector3 leftEyeReflectionCenter;
 	/*! Offset to set center for right eye cubemap */
-	Vector3 rightEyeReflectionCenter;
+	internal Vector3 rightEyeReflectionCenter;
 
 	public BSLightingShaderProperty() {
 	shaderFlags1_sk = (SkyrimShaderPropertyFlags1)2185233153;
@@ -127,7 +127,7 @@ public class BSLightingShaderProperty : BSShaderProperty {
 	textureSet = null;
 	emissiveColor = 0.0, 0.0, 0.0;
 	emissiveMultiple = 0.0f;
-	textureClampMode = TexClampMode.3;
+	textureClampMode = (TexClampMode)3;
 	alpha = 1.0f;
 	refractionStrength = 0.0f;
 	glossiness = 80f;

@@ -19,7 +19,7 @@ public class BSShaderTextureSet : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderTextureSet", NiObject.TYPE);
 	/*!  */
-	int numTextures;
+	internal int numTextures;
 	/*!
 	 * Textures.
 	 *             0: Diffuse
@@ -31,7 +31,7 @@ public class BSShaderTextureSet : NiObject {
 	 *             6: Subsurface for Multilayer Parallax
 	 *             7: Back Lighting Map (SLSF2_Back_Lighting)
 	 */
-	string[] textures;
+	internal string[] textures;
 
 	public BSShaderTextureSet() {
 	numTextures = (int)6;

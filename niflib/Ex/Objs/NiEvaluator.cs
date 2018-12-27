@@ -19,21 +19,21 @@ public class NiEvaluator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiEvaluator", NiObject.TYPE);
 	/*! The name of the animated NiAVObject. */
-	IndexString nodeName;
+	internal IndexString nodeName;
 	/*! The RTTI type of the NiProperty the controller is attached to, if applicable. */
-	IndexString propertyType;
+	internal IndexString propertyType;
 	/*! The RTTI type of the NiTimeController. */
-	IndexString controllerType;
+	internal IndexString controllerType;
 	/*!
 	 * An ID that can uniquely identify the controller among others of the same type on
 	 * the same NiObjectNET.
 	 */
-	IndexString controllerId;
+	internal IndexString controllerId;
 	/*!
 	 * An ID that can uniquely identify the interpolator among others of the same type
 	 * on the same NiObjectNET.
 	 */
-	IndexString interpolatorId;
+	internal IndexString interpolatorId;
 	/*!
 	 * Channel Indices are BASE/POS = 0, ROT = 1, SCALE = 2, FLAG = 3
 	 *             Channel Types are:
@@ -43,7 +43,7 @@ public class NiEvaluator : NiObject {
 	 *              REFERENCED = 0x1, TRANSFORM = 0x2, ALWAYSUPDATE = 0x4, SHUTDOWN =
 	 * 0x8
 	 */
-	Array4<byte> channelTypes;
+	internal Array4<byte> channelTypes;
 
 	public NiEvaluator() {
 	}

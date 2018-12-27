@@ -13,15 +13,15 @@ namespace Niflib {
 /*!  */
 public class BSConnectPoint {
 	/*!  */
-	string parent;
+	internal string parent;
 	/*!  */
-	string name;
+	internal string name;
 	/*!  */
-	Quaternion rotation;
+	internal Quaternion rotation;
 	/*!  */
-	Vector3 translation;
+	internal Vector3 translation;
 	/*!  */
-	float scale;
+	internal float scale;
 	//Constructor
 	public BSConnectPoint() { unchecked {
 	parent = (string)WorkshopConnectPoints;

@@ -23,11 +23,11 @@ public class NiVertWeightsExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiVertWeightsExtraData", NiExtraData.TYPE);
 	/*! Number of bytes in this data object. */
-	uint numBytes;
+	internal uint numBytes;
 	/*! Number of vertices. */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! The vertex weights. */
-	float[] weight;
+	internal float[] weight;
 
 	public NiVertWeightsExtraData() {
 	numBytes = (uint)0;

@@ -13,13 +13,13 @@ namespace Niflib {
 /*!  */
 public class MotorDescriptor {
 	/*!  */
-	MotorType type;
+	internal MotorType type;
 	/*!  */
-	bhkPositionConstraintMotor positionMotor;
+	internal bhkPositionConstraintMotor positionMotor;
 	/*!  */
-	bhkVelocityConstraintMotor velocityMotor;
+	internal bhkVelocityConstraintMotor velocityMotor;
 	/*!  */
-	bhkSpringDamperConstraintMotor springDamperMotor;
+	internal bhkSpringDamperConstraintMotor springDamperMotor;
 	//Constructor
 	public MotorDescriptor() { unchecked {
 	type = MotorType.MOTOR_NONE;

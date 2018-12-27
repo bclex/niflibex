@@ -22,13 +22,13 @@ public class NiBSplineData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineData", NiObject.TYPE);
 	/*!  */
-	uint numFloatControlPoints;
+	internal uint numFloatControlPoints;
 	/*! Float values representing the control data. */
-	float[] floatControlPoints;
+	internal float[] floatControlPoints;
 	/*!  */
-	uint numCompactControlPoints;
+	internal uint numCompactControlPoints;
 	/*! Signed shorts representing the data from 0 to 1 (scaled by SHRT_MAX). */
-	short[] compactControlPoints;
+	internal short[] compactControlPoints;
 
 	public NiBSplineData() {
 	numFloatControlPoints = (uint)0;

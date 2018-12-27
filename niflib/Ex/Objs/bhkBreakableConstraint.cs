@@ -19,14 +19,14 @@ public class bhkBreakableConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBreakableConstraint", bhkConstraint.TYPE);
 	/*! Constraint within constraint. */
-	ConstraintData constraintData;
+	internal ConstraintData constraintData;
 	/*! Amount of force to break the rigid bodies apart? */
-	float threshold;
+	internal float threshold;
 	/*!
 	 * No: Constraint stays active. Yes: Constraint gets removed when breaking
 	 * threshold is exceeded.
 	 */
-	bool removeWhenBroken;
+	internal bool removeWhenBroken;
 
 	public bhkBreakableConstraint() {
 	threshold = 0.0f;

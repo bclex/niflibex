@@ -19,7 +19,7 @@ public class BSLightingShaderPropertyColorController : NiPoint3InterpController 
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLightingShaderPropertyColorController", NiPoint3InterpController.TYPE);
 	/*! Which color in BSLightingShaderProperty to animate: */
-	LightingShaderControlledColor typeOfControlledColor;
+	internal LightingShaderControlledColor typeOfControlledColor;
 
 	public BSLightingShaderPropertyColorController() {
 	typeOfControlledColor = (LightingShaderControlledColor)0;

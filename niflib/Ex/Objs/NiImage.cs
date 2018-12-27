@@ -19,15 +19,15 @@ public class NiImage : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiImage", NiObject.TYPE);
 	/*! 0 if the texture is internal to the NIF file. */
-	byte useExternal;
+	internal byte useExternal;
 	/*! The filepath to the texture. */
-	IndexString fileName;
+	internal IndexString fileName;
 	/*! Link to the internally stored image data. */
-	NiRawImageData imageData;
+	internal NiRawImageData imageData;
 	/*! Unknown.  Often seems to be 7. Perhaps m_uiMipLevels? */
-	uint unknownInt;
+	internal uint unknownInt;
 	/*! Unknown.  Perhaps fImageScale? */
-	float unknownFloat;
+	internal float unknownFloat;
 
 	public NiImage() {
 	useExternal = (byte)0;

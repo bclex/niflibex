@@ -19,13 +19,13 @@ public class bhkBlendCollisionObject : bhkCollisionObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBlendCollisionObject", bhkCollisionObject.TYPE);
 	/*!  */
-	float heirGain;
+	internal float heirGain;
 	/*!  */
-	float velGain;
+	internal float velGain;
 	/*! Unknown. */
-	float unkFloat1;
+	internal float unkFloat1;
 	/*! Unknown. */
-	float unkFloat2;
+	internal float unkFloat2;
 
 	public bhkBlendCollisionObject() {
 	heirGain = 0.0f;

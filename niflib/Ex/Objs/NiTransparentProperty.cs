@@ -19,7 +19,7 @@ public class NiTransparentProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTransparentProperty", NiProperty.TYPE);
 	/*! Unknown. */
-	Array6<byte> unknown;
+	internal Array6<byte> unknown;
 
 	public NiTransparentProperty() {
 	}

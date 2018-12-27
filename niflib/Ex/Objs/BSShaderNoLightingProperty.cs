@@ -19,15 +19,15 @@ public class BSShaderNoLightingProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderNoLightingProperty", BSShaderLightingProperty.TYPE);
 	/*! The texture glow map. */
-	string fileName;
+	internal string fileName;
 	/*! At this cosine of angle falloff will be equal to Falloff Start Opacity */
-	float falloffStartAngle;
+	internal float falloffStartAngle;
 	/*! At this cosine of angle falloff will be equal to Falloff Stop Opacity */
-	float falloffStopAngle;
+	internal float falloffStopAngle;
 	/*! Alpha falloff multiplier at start angle */
-	float falloffStartOpacity;
+	internal float falloffStartOpacity;
 	/*! Alpha falloff multiplier at end angle */
-	float falloffStopOpacity;
+	internal float falloffStopOpacity;
 
 	public BSShaderNoLightingProperty() {
 	falloffStartAngle = 1.0f;

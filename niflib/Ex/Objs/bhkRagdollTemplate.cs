@@ -19,9 +19,9 @@ public class bhkRagdollTemplate : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkRagdollTemplate", NiExtraData.TYPE);
 	/*!  */
-	int numBones;
+	internal int numBones;
 	/*!  */
-	NiObject[] bones;
+	internal NiObject[] bones;
 
 	public bhkRagdollTemplate() {
 	numBones = (int)0;

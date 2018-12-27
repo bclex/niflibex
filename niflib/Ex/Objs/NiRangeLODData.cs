@@ -22,11 +22,11 @@ public class NiRangeLODData : NiLODData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRangeLODData", NiLODData.TYPE);
 	/*!  */
-	Vector3 lodCenter;
+	internal Vector3 lodCenter;
 	/*!  */
-	uint numLodLevels;
+	internal uint numLodLevels;
 	/*!  */
-	LODRange[] lodLevels;
+	internal LODRange[] lodLevels;
 
 	public NiRangeLODData() {
 	numLodLevels = (uint)0;

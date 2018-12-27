@@ -22,13 +22,13 @@ public class NiPSMeshParticleSystem : NiPSParticleSystem {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSMeshParticleSystem", NiPSParticleSystem.TYPE);
 	/*!  */
-	uint numGenerations;
+	internal uint numGenerations;
 	/*!  */
-	NiAVObject[] masterParticles;
+	internal NiAVObject[] masterParticles;
 	/*!  */
-	uint poolSize;
+	internal uint poolSize;
 	/*!  */
-	bool auto_fillPools;
+	internal bool auto_fillPools;
 
 	public NiPSMeshParticleSystem() {
 	numGenerations = (uint)0;

@@ -19,7 +19,7 @@ public class NiBSplineColorEvaluator : NiBSplineEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineColorEvaluator", NiBSplineEvaluator.TYPE);
 	/*! Handle into the data. (USHRT_MAX for invalid handle.) */
-	uint handle;
+	internal uint handle;
 
 	public NiBSplineColorEvaluator() {
 	handle = (uint)0xFFFF;

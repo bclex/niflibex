@@ -19,20 +19,20 @@ public class BSSkyShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSkyShaderProperty", BSShaderProperty.TYPE);
 	/*!  */
-	SkyrimShaderPropertyFlags1 shaderFlags1;
+	internal SkyrimShaderPropertyFlags1 shaderFlags1;
 	/*!  */
-	SkyrimShaderPropertyFlags2 shaderFlags2;
+	internal SkyrimShaderPropertyFlags2 shaderFlags2;
 	/*!
 	 * Offset UVs. Seems to be unused, but it fits with the other Skyrim shader
 	 * properties.
 	 */
-	TexCoord uvOffset;
+	internal TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures, see above. */
-	TexCoord uvScale;
+	internal TexCoord uvScale;
 	/*! points to an external texture. */
-	string sourceTexture;
+	internal string sourceTexture;
 	/*!  */
-	SkyObjectType skyObjectType;
+	internal SkyObjectType skyObjectType;
 
 	public BSSkyShaderProperty() {
 	shaderFlags1 = (SkyrimShaderPropertyFlags1)0;

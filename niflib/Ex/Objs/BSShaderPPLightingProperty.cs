@@ -19,20 +19,20 @@ public class BSShaderPPLightingProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderPPLightingProperty", BSShaderLightingProperty.TYPE);
 	/*! Texture Set */
-	BSShaderTextureSet textureSet;
+	internal BSShaderTextureSet textureSet;
 	/*!
 	 * The amount of distortion. **Not based on physically accurate refractive index**
 	 * (0=none) (0-1)
 	 */
-	float refractionStrength;
+	internal float refractionStrength;
 	/*! Rate of texture movement for refraction shader. */
-	int refractionFirePeriod;
+	internal int refractionFirePeriod;
 	/*! The number of passes the parallax shader can apply. */
-	float parallaxMaxPasses;
+	internal float parallaxMaxPasses;
 	/*! The strength of the parallax. */
-	float parallaxScale;
+	internal float parallaxScale;
 	/*! Glow color and alpha */
-	Color4 emissiveColor;
+	internal Color4 emissiveColor;
 
 	public BSShaderPPLightingProperty() {
 	textureSet = null;

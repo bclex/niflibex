@@ -19,9 +19,9 @@ public class NiMultiTargetTransformController : NiInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMultiTargetTransformController", NiInterpController.TYPE);
 	/*! The number of target pointers that follow. */
-	ushort numExtraTargets;
+	internal ushort numExtraTargets;
 	/*! NiNode Targets to be controlled. */
-	NiAVObject[] extraTargets;
+	internal NiAVObject[] extraTargets;
 
 	public NiMultiTargetTransformController() {
 	numExtraTargets = (ushort)0;

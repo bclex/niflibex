@@ -19,13 +19,13 @@ public class BSTreeNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSTreeNode", NiNode.TYPE);
 	/*!  */
-	uint numBones1;
+	internal uint numBones1;
 	/*! Unknown */
-	NiNode[] bones1;
+	internal NiNode[] bones1;
 	/*!  */
-	uint numBones2;
+	internal uint numBones2;
 	/*! Unknown */
-	NiNode[] bones;
+	internal NiNode[] bones;
 
 	public BSTreeNode() {
 	numBones1 = (uint)0;

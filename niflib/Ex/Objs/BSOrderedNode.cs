@@ -19,9 +19,9 @@ public class BSOrderedNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSOrderedNode", NiNode.TYPE);
 	/*!  */
-	Vector4 alphaSortBound;
+	internal Vector4 alphaSortBound;
 	/*!  */
-	bool staticBound;
+	internal bool staticBound;
 
 	public BSOrderedNode() {
 	staticBound = false;

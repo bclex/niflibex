@@ -19,36 +19,36 @@ public class bhkBallSocketConstraintChain : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBallSocketConstraintChain", bhkSerializable.TYPE);
 	/*! Number of pivot points. Divide by 2 to get the number of constraints. */
-	uint numPivots;
+	internal uint numPivots;
 	/*! Two pivot points A and B for each constraint. */
-	ConstraintInfo[] pivots;
+	internal ConstraintInfo[] pivots;
 	/*! High values are harder and more reactive, lower values are smoother. */
-	float tau;
+	internal float tau;
 	/*! Defines damping strength for the current velocity. */
-	float damping;
+	internal float damping;
 	/*!
 	 * Restitution (amount of elasticity) of constraints. Added to the diagonal of the
 	 * constraint matrix. A value of 0.0 can result in a division by zero with some
 	 * chain configurations.
 	 */
-	float constraintForceMixing;
+	internal float constraintForceMixing;
 	/*!
 	 * Maximum distance error in constraints allowed before stabilization algorithm
 	 * kicks in. A smaller distance causes more resistance.
 	 */
-	float maxErrorDistance;
+	internal float maxErrorDistance;
 	/*! Number of links in the chain */
-	uint numEntitiesA;
+	internal uint numEntitiesA;
 	/*!  */
-	bhkRigidBody[] entitiesA;
+	internal bhkRigidBody[] entitiesA;
 	/*! Hardcoded to 2. Don't change. */
-	uint numEntities;
+	internal uint numEntities;
 	/*!  */
-	bhkRigidBody entityA;
+	internal bhkRigidBody entityA;
 	/*!  */
-	bhkRigidBody entityB;
+	internal bhkRigidBody entityB;
 	/*!  */
-	uint priority;
+	internal uint priority;
 
 	public bhkBallSocketConstraintChain() {
 	numPivots = (uint)0;

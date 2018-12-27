@@ -19,9 +19,9 @@ public class NiPSysCylinderEmitter : NiPSysVolumeEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysCylinderEmitter", NiPSysVolumeEmitter.TYPE);
 	/*!  */
-	float radius;
+	internal float radius;
 	/*!  */
-	float height;
+	internal float height;
 
 	public NiPSysCylinderEmitter() {
 	radius = 0.0f;

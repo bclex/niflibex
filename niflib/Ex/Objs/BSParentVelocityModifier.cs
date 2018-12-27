@@ -22,7 +22,7 @@ public class BSParentVelocityModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSParentVelocityModifier", NiPSysModifier.TYPE);
 	/*! Amount of blending? */
-	float damping;
+	internal float damping;
 
 	public BSParentVelocityModifier() {
 	damping = 0.0f;

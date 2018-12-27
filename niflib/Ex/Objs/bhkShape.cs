@@ -12,76 +12,84 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*! A Havok Shape? */
-public class bhkShape : bhkSerializable {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("bhkShape", bhkSerializable.TYPE);
+    /*! A Havok Shape? */
+    public class bhkShape : bhkSerializable
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("bhkShape", bhkSerializable.TYPE);
 
-	public bhkShape() {
-	}
+        public bhkShape()
+        {
+        }
 
-	/*!
-	 * Used to determine the type of a particular instance of this object.
-	 * \return The type constant for the actual type of the object.
-	 */
-	public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-	/*!
-	 * A factory function used during file reading to create an instance of this type of object.
-	 * \return A pointer to a newly allocated instance of this type of object.
-	 */
-	public static NiObject Create() => new bhkShape();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new bhkShape();
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
-		base.Read(s, link_stack, info);
+            base.Read(s, link_stack, info);
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.Write(s, link_map, missing_link_stack, info);
+            base.Write(s, link_map, missing_link_stack, info);
 
-	}
+        }
 
-	/*!
-	 * Summarizes the information contained in this object in English.
-	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
-	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
-	 */
-	public override string AsString(bool verbose = false) {
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-		var s = new System.Text.StringBuilder();
-		s.Append(base.AsString());
-		return s.ToString();
+            var s = new System.Text.StringBuilder();
+            s.Append(base.AsString());
+            return s.ToString();
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.FixLinks(objects, link_stack, missing_link_stack, info);
+            base.FixLinks(objects, link_stack, missing_link_stack, info);
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetRefs() {
-		var refs = base.GetRefs();
-		return refs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            var refs = base.GetRefs();
+            return refs;
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetPtrs() {
-		var ptrs = base.GetPtrs();
-		return ptrs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            var ptrs = base.GetPtrs();
+            return ptrs;
+        }
 
-	//--BEGIN:FILE FOOT--//
-
+        //--BEGIN:FILE FOOT--//
         /*! Helper routine for calculating mass properties.
          *  \param[in]  density Uniform density of object
          *  \param[in]  solid Determines whether the object is assumed to be solid or not
@@ -90,10 +98,14 @@ public class bhkShape : bhkSerializable {
          *  \param[out] inertia Mass Inertia Tensor
          *  \return Return mass, center, and inertia tensor.
          */
-        NIFLIB_API virtual void CalcMassProperties(float density, bool solid, float &mass, float &volume, Vector3 &center, InertiaMatrix& inertia);
+        public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
+        {
+            center = new Vector3(0, 0, 0);
+            mass = 0.0f; volume = 0.0f;
+            inertia = InertiaMatrix.IDENTITY;
+        }
+        //--END:CUSTOM--//
 
-	//--END:CUSTOM--//
-
-}
+    }
 
 }

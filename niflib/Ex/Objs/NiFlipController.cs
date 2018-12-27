@@ -23,20 +23,20 @@ public class NiFlipController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFlipController", NiFloatInterpController.TYPE);
 	/*! Target texture slot (0=base, 4=glow). */
-	TexType textureSlot;
+	internal TexType textureSlot;
 	/*!  */
-	float startTime;
+	internal float startTime;
 	/*!
 	 * Time between two flips.
 	 *             delta = (start_time - stop_time) / sources.num_indices
 	 */
-	float delta;
+	internal float delta;
 	/*!  */
-	uint numSources;
+	internal uint numSources;
 	/*! The texture sources. */
-	NiSourceTexture[] sources;
+	internal NiSourceTexture[] sources;
 	/*! The image sources */
-	NiImage[] images;
+	internal NiImage[] images;
 
 	public NiFlipController() {
 	textureSlot = (TexType)0;

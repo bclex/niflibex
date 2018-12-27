@@ -22,7 +22,7 @@ public class NiPSysColorModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysColorModifier", NiPSysModifier.TYPE);
 	/*!  */
-	NiColorData data;
+	internal NiColorData data;
 
 	public NiPSysColorModifier() {
 	data = null;

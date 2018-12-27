@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class PhysXStateName {
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	uint index;
+	internal uint index;
 	//Constructor
 	public PhysXStateName() { unchecked {
 	index = (uint)0;

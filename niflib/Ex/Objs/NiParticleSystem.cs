@@ -19,24 +19,24 @@ public class NiParticleSystem : NiParticles {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleSystem", NiParticles.TYPE);
 	/*!  */
-	ushort farBegin;
+	internal ushort farBegin;
 	/*!  */
-	ushort farEnd;
+	internal ushort farEnd;
 	/*!  */
-	ushort nearBegin;
+	internal ushort nearBegin;
 	/*!  */
-	ushort nearEnd;
+	internal ushort nearEnd;
 	/*!  */
-	NiPSysData data;
+	internal NiPSysData data;
 	/*!
 	 * If true, Particles are birthed into world space.  If false, Particles are
 	 * birthed into object space.
 	 */
-	bool worldSpace;
+	internal bool worldSpace;
 	/*! The number of modifier references. */
-	uint numModifiers;
+	internal uint numModifiers;
 	/*! The list of particle modifiers. */
-	NiPSysModifier[] modifiers;
+	internal NiPSysModifier[] modifiers;
 
 	public NiParticleSystem() {
 	farBegin = (ushort)0;

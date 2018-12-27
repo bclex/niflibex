@@ -19,13 +19,13 @@ public class NiBSplineInterpolator : NiInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineInterpolator", NiInterpolator.TYPE);
 	/*! Animation start time. */
-	float startTime;
+	internal float startTime;
 	/*! Animation stop time. */
-	float stopTime;
+	internal float stopTime;
 	/*!  */
-	NiBSplineData splineData;
+	internal NiBSplineData splineData;
 	/*!  */
-	NiBSplineBasisData basisData;
+	internal NiBSplineBasisData basisData;
 
 	public NiBSplineInterpolator() {
 	startTime = 3.402823466e+38f;

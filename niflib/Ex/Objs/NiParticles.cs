@@ -19,7 +19,7 @@ public class NiParticles : NiGeometry {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticles", NiGeometry.TYPE);
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 
 	public NiParticles() {
 	}

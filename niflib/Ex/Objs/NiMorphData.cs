@@ -22,13 +22,13 @@ public class NiMorphData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMorphData", NiObject.TYPE);
 	/*! Number of morphing object. */
-	uint numMorphs;
+	internal uint numMorphs;
 	/*! Number of vertices. */
-	uint numVertices;
+	internal uint numVertices;
 	/*! This byte is always 1 in all official files. */
-	byte relativeTargets;
+	internal byte relativeTargets;
 	/*! The geometry morphing objects. */
-	Morph[] morphs;
+	internal Morph[] morphs;
 
 	public NiMorphData() {
 	numMorphs = (uint)0;

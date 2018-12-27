@@ -19,25 +19,25 @@ public class bhkPackedNiTriStripsShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkPackedNiTriStripsShape", bhkShapeCollection.TYPE);
 	/*!  */
-	ushort numSubShapes;
+	internal ushort numSubShapes;
 	/*!  */
-	OblivionSubShape[] subShapes;
+	internal OblivionSubShape[] subShapes;
 	/*!  */
-	uint userData;
+	internal uint userData;
 	/*! Looks like a memory pointer and may be garbage. */
-	uint unused1;
+	internal uint unused1;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*! Looks like a memory pointer and may be garbage. */
-	uint unused2;
+	internal uint unused2;
 	/*!  */
-	Vector4 scale;
+	internal Vector4 scale;
 	/*! Same as radius */
-	float radiusCopy;
+	internal float radiusCopy;
 	/*! Same as scale. */
-	Vector4 scaleCopy;
+	internal Vector4 scaleCopy;
 	/*!  */
-	hkPackedNiTriStripsData data;
+	internal hkPackedNiTriStripsData data;
 
 	public bhkPackedNiTriStripsShape() {
 	numSubShapes = (ushort)0;

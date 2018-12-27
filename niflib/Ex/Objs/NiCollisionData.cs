@@ -19,13 +19,13 @@ public class NiCollisionData : NiCollisionObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiCollisionData", NiCollisionObject.TYPE);
 	/*!  */
-	PropagationMode propagationMode;
+	internal PropagationMode propagationMode;
 	/*!  */
-	CollisionMode collisionMode;
+	internal CollisionMode collisionMode;
 	/*! Use Alternate Bounding Volume. */
-	byte useAbv;
+	internal byte useAbv;
 	/*!  */
-	BoundingVolume boundingVolume;
+	internal BoundingVolume boundingVolume;
 
 	public NiCollisionData() {
 	propagationMode = (PropagationMode)0;

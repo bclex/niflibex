@@ -25,7 +25,7 @@ public class NiFloatsExtraDataPoint3Controller : NiExtraDataController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatsExtraDataPoint3Controller", NiExtraDataController.TYPE);
 	/*!  */
-	int floatsExtraDataIndex;
+	internal int floatsExtraDataIndex;
 
 	public NiFloatsExtraDataPoint3Controller() {
 	floatsExtraDataIndex = (int)0;

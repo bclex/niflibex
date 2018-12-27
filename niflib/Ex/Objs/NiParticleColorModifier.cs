@@ -19,7 +19,7 @@ public class NiParticleColorModifier : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleColorModifier", NiParticleModifier.TYPE);
 	/*!  */
-	NiColorData colorData;
+	internal NiColorData colorData;
 
 	public NiParticleColorModifier() {
 	colorData = null;

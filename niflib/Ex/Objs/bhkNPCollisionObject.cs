@@ -23,11 +23,11 @@ public class bhkNPCollisionObject : NiCollisionObject {
 	 * a guess.
 	 *             Bits: 0=Reset, 2=Notify, 3=SetLocal, 7=SyncOnUpdate, 10=AnimTargeted
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*!  */
-	bhkSystem data;
+	internal bhkSystem data;
 	/*!  */
-	uint bodyId;
+	internal uint bodyId;
 
 	public bhkNPCollisionObject() {
 	flags = (ushort)0;

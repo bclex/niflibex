@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class BallAndSocketDescriptor {
 	/*! Pivot point in the local space of entity A. */
-	Vector4 pivotA;
+	internal Vector4 pivotA;
 	/*! Pivot point in the local space of entity B. */
-	Vector4 pivotB;
+	internal Vector4 pivotB;
 	//Constructor
 }
 

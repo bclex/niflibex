@@ -19,11 +19,11 @@ public class BSMultiBoundOBB : BSMultiBoundData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBoundOBB", BSMultiBoundData.TYPE);
 	/*! Center of the box. */
-	Vector3 center;
+	internal Vector3 center;
 	/*! Size of the box along each axis. */
-	Vector3 size;
+	internal Vector3 size;
 	/*! Rotation of the bounding box. */
-	Matrix33 rotation;
+	internal Matrix33 rotation;
 
 	public BSMultiBoundOBB() {
 	}

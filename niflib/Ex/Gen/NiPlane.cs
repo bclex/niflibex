@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A plane. */
 public class NiPlane {
 	/*! The plane normal. */
-	Vector3 normal;
+	internal Vector3 normal;
 	/*! The plane constant. */
-	float constant;
+	internal float constant;
 	//Constructor
 	public NiPlane() { unchecked {
 	constant = 0.0f;

@@ -19,11 +19,11 @@ public class NiPSysEmitterCtlrData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysEmitterCtlrData", NiObject.TYPE);
 	/*!  */
-	KeyGroup<float> birthRateKeys;
+	internal KeyGroup<float> birthRateKeys;
 	/*!  */
-	uint numActiveKeys;
+	internal uint numActiveKeys;
 	/*!  */
-	Key<byte>[] activeKeys;
+	internal Key<byte>[] activeKeys;
 
 	public NiPSysEmitterCtlrData() {
 	numActiveKeys = (uint)0;

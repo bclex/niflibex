@@ -22,25 +22,25 @@ public class BSWaterShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSWaterShaderProperty", BSShaderProperty.TYPE);
 	/*!  */
-	SkyrimShaderPropertyFlags1 shaderFlags1;
+	internal SkyrimShaderPropertyFlags1 shaderFlags1;
 	/*!  */
-	SkyrimShaderPropertyFlags2 shaderFlags2;
+	internal SkyrimShaderPropertyFlags2 shaderFlags2;
 	/*!
 	 * Offset UVs. Seems to be unused, but it fits with the other Skyrim shader
 	 * properties.
 	 */
-	TexCoord uvOffset;
+	internal TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures, see above. */
-	TexCoord uvScale;
+	internal TexCoord uvScale;
 	/*! Defines attributes for the water shader (will use SkyrimWaterShaderFlags) */
-	SkyrimWaterShaderFlags waterShaderFlags;
+	internal SkyrimWaterShaderFlags waterShaderFlags;
 	/*!
 	 * A bitflag, only the first/second bit controls water flow positive or negative
 	 * along UVs.
 	 */
-	byte waterDirection;
+	internal byte waterDirection;
 	/*! Unknown, flag? */
-	ushort unknownShort3;
+	internal ushort unknownShort3;
 
 	public BSWaterShaderProperty() {
 	shaderFlags1 = (SkyrimShaderPropertyFlags1)0;

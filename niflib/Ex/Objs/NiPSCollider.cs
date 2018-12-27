@@ -19,17 +19,17 @@ public class NiPSCollider : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSCollider", NiObject.TYPE);
 	/*!  */
-	NiPSSpawner spawner;
+	internal NiPSSpawner spawner;
 	/*!  */
-	ColliderType type;
+	internal ColliderType type;
 	/*!  */
-	bool active;
+	internal bool active;
 	/*!  */
-	float bounce;
+	internal float bounce;
 	/*!  */
-	bool spawnOnCollide;
+	internal bool spawnOnCollide;
 	/*!  */
-	bool dieOnCollide;
+	internal bool dieOnCollide;
 
 	public NiPSCollider() {
 	spawner = null;

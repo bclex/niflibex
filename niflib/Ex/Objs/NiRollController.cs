@@ -22,7 +22,7 @@ public class NiRollController : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRollController", NiSingleInterpController.TYPE);
 	/*! The data for the controller. */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiRollController() {
 	data = null;

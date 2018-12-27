@@ -19,47 +19,47 @@ public class NiPSParticleSystem : NiMesh {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSParticleSystem", NiMesh.TYPE);
 	/*!  */
-	NiPSSimulator simulator;
+	internal NiPSSimulator simulator;
 	/*!  */
-	NiPSBoundUpdater generator;
+	internal NiPSBoundUpdater generator;
 	/*!  */
-	uint numEmitters;
+	internal uint numEmitters;
 	/*!  */
-	NiPSEmitter[] emitters;
+	internal NiPSEmitter[] emitters;
 	/*!  */
-	uint numSpawners;
+	internal uint numSpawners;
 	/*!  */
-	NiPSSpawner[] spawners;
+	internal NiPSSpawner[] spawners;
 	/*!  */
-	NiPSSpawner deathSpawner;
+	internal NiPSSpawner deathSpawner;
 	/*!  */
-	uint maxNumParticles;
+	internal uint maxNumParticles;
 	/*!  */
-	bool hasColors;
+	internal bool hasColors;
 	/*!  */
-	bool hasRotations;
+	internal bool hasRotations;
 	/*!  */
-	bool hasRotationAxes;
+	internal bool hasRotationAxes;
 	/*!  */
-	bool hasAnimatedTextures;
+	internal bool hasAnimatedTextures;
 	/*!  */
-	bool worldSpace;
+	internal bool worldSpace;
 	/*!  */
-	AlignMethod normalMethod;
+	internal AlignMethod normalMethod;
 	/*!  */
-	Vector3 normalDirection;
+	internal Vector3 normalDirection;
 	/*!  */
-	AlignMethod upMethod;
+	internal AlignMethod upMethod;
 	/*!  */
-	Vector3 upDirection;
+	internal Vector3 upDirection;
 	/*!  */
-	NiPSSpawner livingSpawner;
+	internal NiPSSpawner livingSpawner;
 	/*!  */
-	byte numSpawnRateKeys;
+	internal byte numSpawnRateKeys;
 	/*!  */
-	PSSpawnRateKey[] spawnRateKeys;
+	internal PSSpawnRateKey[] spawnRateKeys;
 	/*!  */
-	bool pre_rpi;
+	internal bool pre_rpi;
 
 	public NiPSParticleSystem() {
 	simulator = null;

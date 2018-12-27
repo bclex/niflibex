@@ -19,9 +19,9 @@ public class NiPSysDragFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysDragFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! Whether or not the drag force applies only in the direction specified. */
-	bool useDirection;
+	internal bool useDirection;
 	/*! Direction in which the force applies if Use Direction is true. */
-	Vector3 direction;
+	internal Vector3 direction;
 
 	public NiPSysDragFieldModifier() {
 	useDirection = false;

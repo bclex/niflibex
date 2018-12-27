@@ -19,7 +19,7 @@ public class NiQuaternionEvaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiQuaternionEvaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiRotData data;
+	internal NiRotData data;
 
 	public NiQuaternionEvaluator() {
 	data = null;

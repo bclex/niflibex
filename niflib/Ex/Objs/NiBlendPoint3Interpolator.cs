@@ -19,7 +19,7 @@ public class NiBlendPoint3Interpolator : NiBlendInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBlendPoint3Interpolator", NiBlendInterpolator.TYPE);
 	/*! The pose value. Invalid if using data. */
-	Vector3 value;
+	internal Vector3 value;
 
 	public NiBlendPoint3Interpolator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

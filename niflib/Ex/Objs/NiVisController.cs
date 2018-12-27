@@ -19,7 +19,7 @@ public class NiVisController : NiBoolInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiVisController", NiBoolInterpController.TYPE);
 	/*!  */
-	NiVisData data;
+	internal NiVisData data;
 
 	public NiVisController() {
 	data = null;

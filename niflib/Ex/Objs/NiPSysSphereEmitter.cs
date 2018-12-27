@@ -19,7 +19,7 @@ public class NiPSysSphereEmitter : NiPSysVolumeEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysSphereEmitter", NiPSysVolumeEmitter.TYPE);
 	/*!  */
-	float radius;
+	internal float radius;
 
 	public NiPSysSphereEmitter() {
 	radius = 0.0f;

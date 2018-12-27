@@ -19,23 +19,23 @@ public class NiStencilProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiStencilProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	ushort flags;
+	internal ushort flags;
 	/*! Enables or disables the stencil test. */
-	byte stencilEnabled;
+	internal byte stencilEnabled;
 	/*! Selects the compare mode function (see: glStencilFunc). */
-	StencilCompareMode stencilFunction;
+	internal StencilCompareMode stencilFunction;
 	/*!  */
-	uint stencilRef;
+	internal uint stencilRef;
 	/*! A bit mask. The default is 0xffffffff. */
-	uint stencilMask;
+	internal uint stencilMask;
 	/*!  */
-	StencilAction failAction;
+	internal StencilAction failAction;
 	/*!  */
-	StencilAction zFailAction;
+	internal StencilAction zFailAction;
 	/*!  */
-	StencilAction passAction;
+	internal StencilAction passAction;
 	/*! Used to enabled double sided faces. Default is 3 (DRAW_BOTH). */
-	StencilDrawMode drawMode;
+	internal StencilDrawMode drawMode;
 
 	public NiStencilProperty() {
 	flags = (ushort)0;

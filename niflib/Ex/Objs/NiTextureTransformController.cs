@@ -26,13 +26,13 @@ public class NiTextureTransformController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureTransformController", NiFloatInterpController.TYPE);
 	/*! Is the target map a shader map? */
-	bool shaderMap;
+	internal bool shaderMap;
 	/*! The target texture slot. */
-	TexType textureSlot;
+	internal TexType textureSlot;
 	/*! Controls which aspect of the texture transform to modify. */
-	TransformMember operation;
+	internal TransformMember operation;
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiTextureTransformController() {
 	shaderMap = false;

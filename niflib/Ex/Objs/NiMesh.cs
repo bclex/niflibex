@@ -19,63 +19,63 @@ public class NiMesh : NiRenderObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMesh", NiRenderObject.TYPE);
 	/*! The primitive type of the mesh, such as triangles or lines. */
-	MeshPrimitiveType primitiveType;
+	internal MeshPrimitiveType primitiveType;
 	/*! Unknown. */
-	int unknown51;
+	internal int unknown51;
 	/*! Unknown. */
-	int unknown52;
+	internal int unknown52;
 	/*! Unknown. */
-	int unknown53;
+	internal int unknown53;
 	/*! Unknown. */
-	int unknown54;
+	internal int unknown54;
 	/*! Unknown. */
-	float unknown55;
+	internal float unknown55;
 	/*! Unknown. */
-	int unknown56;
+	internal int unknown56;
 	/*! The number of submeshes contained in this mesh. */
-	ushort numSubmeshes;
+	internal ushort numSubmeshes;
 	/*! Sets whether hardware instancing is being used. */
-	bool instancingEnabled;
+	internal bool instancingEnabled;
 	/*! The combined bounding volume of all submeshes. */
-	NiBound bound;
+	internal NiBound bound;
 	/*!  */
-	uint numDatastreams;
+	internal uint numDatastreams;
 	/*!  */
-	DataStreamRef[] datastreams;
+	internal DataStreamRef[] datastreams;
 	/*!  */
-	uint numModifiers;
+	internal uint numModifiers;
 	/*!  */
-	NiMeshModifier[] modifiers;
+	internal NiMeshModifier[] modifiers;
 	/*! Unknown. */
-	byte unknown100;
+	internal byte unknown100;
 	/*! Unknown. */
-	int unknown101;
+	internal int unknown101;
 	/*! Size of additional data. */
-	uint unknown102;
+	internal uint unknown102;
 	/*! Unknown. */
-	float[] unknown103;
+	internal float[] unknown103;
 	/*! Unknown. */
-	int unknown200;
+	internal int unknown200;
 	/*! Unknown. */
-	ExtraMeshDataEpicMickey[] unknown201;
+	internal ExtraMeshDataEpicMickey[] unknown201;
 	/*! Unknown. */
-	int unknown250;
+	internal int unknown250;
 	/*! Unknown. */
-	int[] unknown251;
+	internal int[] unknown251;
 	/*! Unknown. */
-	int unknown300;
+	internal int unknown300;
 	/*! Unknown. */
-	short unknown301;
+	internal short unknown301;
 	/*! Unknown. */
-	int unknown302;
+	internal int unknown302;
 	/*! Unknown. */
-	byte[] unknown303;
+	internal byte[] unknown303;
 	/*! Unknown. */
-	int unknown350;
+	internal int unknown350;
 	/*! Unknown. */
-	ExtraMeshDataEpicMickey2[] unknown351;
+	internal ExtraMeshDataEpicMickey2[] unknown351;
 	/*! Unknown. */
-	int unknown400;
+	internal int unknown400;
 
 	public NiMesh() {
 	primitiveType = (MeshPrimitiveType)0;

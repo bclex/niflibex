@@ -17,13 +17,13 @@ public class BSGeometryPerSegmentSharedData {
 	 * Otherwise this is the "Biped Object", which is like the body part types in
 	 * Skyrim and earlier.
 	 */
-	uint userIndex;
+	internal uint userIndex;
 	/*! A hash of the bone name string. */
-	uint boneId;
+	internal uint boneId;
 	/*! Maximum of 8. */
-	uint numCutOffsets;
+	internal uint numCutOffsets;
 	/*!  */
-	float[] cutOffsets;
+	internal float[] cutOffsets;
 	//Constructor
 	public BSGeometryPerSegmentSharedData() { unchecked {
 	userIndex = (uint)0;

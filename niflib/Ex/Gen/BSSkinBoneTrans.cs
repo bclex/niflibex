@@ -13,13 +13,13 @@ namespace Niflib {
 /*! Fallout 4 Bone Transform */
 public class BSSkinBoneTrans {
 	/*!  */
-	NiBound boundingSphere;
+	internal NiBound boundingSphere;
 	/*!  */
-	Matrix33 rotation;
+	internal Matrix33 rotation;
 	/*!  */
-	Vector3 translation;
+	internal Vector3 translation;
 	/*!  */
-	float scale;
+	internal float scale;
 	//Constructor
 	public BSSkinBoneTrans() { unchecked {
 	scale = 0.0f;

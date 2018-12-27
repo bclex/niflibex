@@ -19,9 +19,9 @@ public class NiPSSimulator : NiMeshModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulator", NiMeshModifier.TYPE);
 	/*!  */
-	uint numSimulationSteps;
+	internal uint numSimulationSteps;
 	/*!  */
-	NiPSSimulatorStep[] simulationSteps;
+	internal NiPSSimulatorStep[] simulationSteps;
 
 	public NiPSSimulator() {
 	numSimulationSteps = (uint)0;

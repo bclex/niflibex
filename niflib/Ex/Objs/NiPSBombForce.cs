@@ -19,17 +19,17 @@ public class NiPSBombForce : NiPSForce {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSBombForce", NiPSForce.TYPE);
 	/*!  */
-	Vector3 bombAxis;
+	internal Vector3 bombAxis;
 	/*!  */
-	float decay;
+	internal float decay;
 	/*!  */
-	float deltaV;
+	internal float deltaV;
 	/*!  */
-	DecayType decayType;
+	internal DecayType decayType;
 	/*!  */
-	SymmetryType symmetryType;
+	internal SymmetryType symmetryType;
 	/*!  */
-	NiAVObject bombObject;
+	internal NiAVObject bombObject;
 
 	public NiPSBombForce() {
 	decay = 0.0f;

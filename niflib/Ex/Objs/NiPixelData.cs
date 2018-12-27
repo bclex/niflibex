@@ -19,19 +19,19 @@ public class NiPixelData : NiPixelFormat {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPixelData", NiPixelFormat.TYPE);
 	/*!  */
-	NiPalette palette;
+	internal NiPalette palette;
 	/*!  */
-	uint numMipmaps;
+	internal uint numMipmaps;
 	/*!  */
-	uint bytesPerPixel;
+	internal uint bytesPerPixel;
 	/*!  */
-	MipMap[] mipmaps;
+	internal MipMap[] mipmaps;
 	/*!  */
-	uint numPixels;
+	internal uint numPixels;
 	/*!  */
-	uint numFaces;
+	internal uint numFaces;
 	/*!  */
-	byte[] pixelData;
+	internal byte[] pixelData;
 
 	public NiPixelData() {
 	palette = null;

@@ -19,11 +19,11 @@ public class BSMeshLODTriShape : BSTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMeshLODTriShape", BSTriShape.TYPE);
 	/*!  */
-	uint lod0Size;
+	internal uint lod0Size;
 	/*!  */
-	uint lod1Size;
+	internal uint lod1Size;
 	/*!  */
-	uint lod2Size;
+	internal uint lod2Size;
 
 	public BSMeshLODTriShape() {
 	lod0Size = (uint)0;

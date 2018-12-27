@@ -19,9 +19,9 @@ public class BSBoneLODExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSBoneLODExtraData", NiExtraData.TYPE);
 	/*! Number of bone entries */
-	uint bonelodCount;
+	internal uint bonelodCount;
 	/*! Bone Entry */
-	BoneLOD[] bonelodInfo;
+	internal BoneLOD[] bonelodInfo;
 
 	public BSBoneLODExtraData() {
 	bonelodCount = (uint)0;

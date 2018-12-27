@@ -19,9 +19,9 @@ public class BSSkin__BoneData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSkin::BoneData", NiObject.TYPE);
 	/*!  */
-	uint numBones;
+	internal uint numBones;
 	/*!  */
-	BSSkinBoneTrans[] boneList;
+	internal BSSkinBoneTrans[] boneList;
 
 	public BSSkin__BoneData() {
 	numBones = (uint)0;

@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Transformation data for the bone at this index in bhkPoseArray. */
 public class BoneTransform {
 	/*!  */
-	Vector3 translation;
+	internal Vector3 translation;
 	/*!  */
-	hkQuaternion rotation;
+	internal hkQuaternion rotation;
 	/*!  */
-	Vector3 scale;
+	internal Vector3 scale;
 	//Constructor
 }
 

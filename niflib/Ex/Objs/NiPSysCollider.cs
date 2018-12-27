@@ -19,19 +19,19 @@ public class NiPSysCollider : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysCollider", NiObject.TYPE);
 	/*! Amount of bounce for the collider. */
-	float bounce;
+	internal float bounce;
 	/*! Spawn particles on impact? */
-	bool spawnOnCollide;
+	internal bool spawnOnCollide;
 	/*! Kill particles on impact? */
-	bool dieOnCollide;
+	internal bool dieOnCollide;
 	/*! Spawner to use for the collider. */
-	NiPSysSpawnModifier spawnModifier;
+	internal NiPSysSpawnModifier spawnModifier;
 	/*! Link to parent. */
-	NiPSysColliderManager parent;
+	internal NiPSysColliderManager parent;
 	/*! The next collider. */
-	NiPSysCollider nextCollider;
+	internal NiPSysCollider nextCollider;
 	/*! The object whose position and orientation are the basis of the collider. */
-	NiAVObject colliderObject;
+	internal NiAVObject colliderObject;
 
 	public NiPSysCollider() {
 	bounce = 1.0f;

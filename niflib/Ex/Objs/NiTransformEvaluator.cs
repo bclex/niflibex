@@ -19,9 +19,9 @@ public class NiTransformEvaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTransformEvaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiQuatTransform value;
+	internal NiQuatTransform value;
 	/*!  */
-	NiTransformData data;
+	internal NiTransformData data;
 
 	public NiTransformEvaluator() {
 	data = null;

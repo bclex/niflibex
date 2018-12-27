@@ -19,23 +19,23 @@ public class bhkOrientHingedBodyAction : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkOrientHingedBodyAction", bhkSerializable.TYPE);
 	/*!  */
-	bhkRigidBody body;
+	internal bhkRigidBody body;
 	/*! Unknown. */
-	uint unknownInt1;
+	internal uint unknownInt1;
 	/*! Unknown. */
-	uint unknownInt2;
+	internal uint unknownInt2;
 	/*!  */
-	Array8<byte> unused1;
+	internal Array8<byte> unused1;
 	/*!  */
-	Vector4 hingeAxisLs;
+	internal Vector4 hingeAxisLs;
 	/*!  */
-	Vector4 forwardLs;
+	internal Vector4 forwardLs;
 	/*!  */
-	float strength;
+	internal float strength;
 	/*!  */
-	float damping;
+	internal float damping;
 	/*!  */
-	Array8<byte> unused2;
+	internal Array8<byte> unused2;
 
 	public bhkOrientHingedBodyAction() {
 	body = null;

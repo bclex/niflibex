@@ -19,9 +19,9 @@ public class BSAnimNotes : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSAnimNotes", NiObject.TYPE);
 	/*! Number of BSAnimNote objects. */
-	ushort numAnimNotes;
+	internal ushort numAnimNotes;
 	/*! BSAnimNote objects. */
-	BSAnimNote[] animNotes;
+	internal BSAnimNote[] animNotes;
 
 	public BSAnimNotes() {
 	numAnimNotes = (ushort)0;

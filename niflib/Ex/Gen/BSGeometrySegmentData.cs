@@ -16,21 +16,21 @@ namespace Niflib {
  */
 public class BSGeometrySegmentData {
 	/*!  */
-	byte flags;
+	internal byte flags;
 	/*! Index = previous Index + previous Num Tris in Segment * 3 */
-	uint index;
+	internal uint index;
 	/*! The number of triangles belonging to this segment */
-	uint numTrisInSegment;
+	internal uint numTrisInSegment;
 	/*!  */
-	uint startIndex;
+	internal uint startIndex;
 	/*!  */
-	uint numPrimitives;
+	internal uint numPrimitives;
 	/*!  */
-	uint parentArrayIndex;
+	internal uint parentArrayIndex;
 	/*!  */
-	uint numSubSegments;
+	internal uint numSubSegments;
 	/*!  */
-	BSGeometrySubSegment[] subSegment;
+	internal BSGeometrySubSegment[] subSegment;
 	//Constructor
 	public BSGeometrySegmentData() { unchecked {
 	flags = (byte)0;

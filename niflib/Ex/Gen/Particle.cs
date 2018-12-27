@@ -13,19 +13,19 @@ namespace Niflib {
 /*! particle array entry */
 public class Particle {
 	/*! Particle velocity */
-	Vector3 velocity;
+	internal Vector3 velocity;
 	/*! Unknown */
-	Vector3 unknownVector;
+	internal Vector3 unknownVector;
 	/*! The particle age. */
-	float lifetime;
+	internal float lifetime;
 	/*! Maximum age of the particle. */
-	float lifespan;
+	internal float lifespan;
 	/*! Timestamp of the last update. */
-	float timestamp;
+	internal float timestamp;
 	/*! Unknown short */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*! Particle/vertex index matches array index */
-	ushort vertexId;
+	internal ushort vertexId;
 	//Constructor
 	public Particle() { unchecked {
 	lifetime = 0.0f;

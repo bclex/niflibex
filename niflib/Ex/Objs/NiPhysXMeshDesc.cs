@@ -19,21 +19,21 @@ public class NiPhysXMeshDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXMeshDesc", NiObject.TYPE);
 	/*!  */
-	bool isConvex;
+	internal bool isConvex;
 	/*!  */
-	IndexString meshName;
+	internal IndexString meshName;
 	/*!  */
-	ByteArray meshData;
+	internal ByteArray meshData;
 	/*!  */
-	ushort meshSize;
+	internal ushort meshSize;
 	/*!  */
-	uint meshFlags;
+	internal uint meshFlags;
 	/*!  */
-	uint meshPagingMode;
+	internal uint meshPagingMode;
 	/*!  */
-	bool isHardware;
+	internal bool isHardware;
 	/*!  */
-	byte flags;
+	internal byte flags;
 
 	public NiPhysXMeshDesc() {
 	isConvex = false;

@@ -23,19 +23,19 @@ public class BSPackedCombinedGeomDataExtra : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPackedCombinedGeomDataExtra", NiExtraData.TYPE);
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 	/*!  */
-	uint numVertices;
+	internal uint numVertices;
 	/*!  */
-	uint numTriangles;
+	internal uint numTriangles;
 	/*! Unknown. */
-	uint unknownFlags1;
+	internal uint unknownFlags1;
 	/*! Unknown. */
-	uint unknownFlags2;
+	internal uint unknownFlags2;
 	/*!  */
-	uint numData;
+	internal uint numData;
 	/*!  */
-	BSPackedGeomData[] objectData;
+	internal BSPackedGeomData[] objectData;
 
 	public BSPackedCombinedGeomDataExtra() {
 	numVertices = (uint)0;

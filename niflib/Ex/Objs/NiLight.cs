@@ -23,13 +23,13 @@ public class NiLight : NiDynamicEffect {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLight", NiDynamicEffect.TYPE);
 	/*! Scales the overall brightness of all light components. */
-	float dimmer;
+	internal float dimmer;
 	/*!  */
-	Color3 ambientColor;
+	internal Color3 ambientColor;
 	/*!  */
-	Color3 diffuseColor;
+	internal Color3 diffuseColor;
 	/*!  */
-	Color3 specularColor;
+	internal Color3 specularColor;
 
 	public NiLight() {
 	dimmer = 1.0f;

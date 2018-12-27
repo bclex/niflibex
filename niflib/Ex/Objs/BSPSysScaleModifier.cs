@@ -19,9 +19,9 @@ public class BSPSysScaleModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysScaleModifier", NiPSysModifier.TYPE);
 	/*!  */
-	uint numScales;
+	internal uint numScales;
 	/*!  */
-	float[] scales;
+	internal float[] scales;
 
 	public BSPSysScaleModifier() {
 	numScales = (uint)0;

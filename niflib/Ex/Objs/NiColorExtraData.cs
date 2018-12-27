@@ -19,7 +19,7 @@ public class NiColorExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiColorExtraData", NiExtraData.TYPE);
 	/*! RGBA Color? */
-	Color4 data;
+	internal Color4 data;
 
 	public NiColorExtraData() {
 	}

@@ -19,9 +19,9 @@ public class BSDynamicTriShape : BSTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSDynamicTriShape", BSTriShape.TYPE);
 	/*!  */
-	uint vertexDataSize;
+	internal uint vertexDataSize;
 	/*!  */
-	Vector4[] vertices;
+	internal Vector4[] vertices;
 
 	public BSDynamicTriShape() {
 	vertexDataSize = (uint)0;

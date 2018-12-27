@@ -19,9 +19,9 @@ public class NiPSSimulatorForcesStep : NiPSSimulatorStep {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulatorForcesStep", NiPSSimulatorStep.TYPE);
 	/*!  */
-	uint numForces;
+	internal uint numForces;
 	/*! The forces affecting the particle system. */
-	NiPSForce[] forces;
+	internal NiPSForce[] forces;
 
 	public NiPSSimulatorForcesStep() {
 	numForces = (uint)0;

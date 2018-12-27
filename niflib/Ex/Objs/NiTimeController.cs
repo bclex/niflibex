@@ -22,7 +22,7 @@ public class NiTimeController : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTimeController", NiObject.TYPE);
 	/*! Index of the next controller. */
-	NiTimeController nextController;
+	internal NiTimeController nextController;
 	/*!
 	 * Controller flags.
 	 *             Bit 0 : Anim type, 0=APP_TIME 1=APP_INIT
@@ -33,22 +33,22 @@ public class NiTimeController : NiObject {
 	 *             Bit 6 : Compute scaled time (take frequency and phase into account)
 	 *             Bit 7 : Force update
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*! Frequency (is usually 1.0). */
-	float frequency;
+	internal float frequency;
 	/*! Phase (usually 0.0). */
-	float phase;
+	internal float phase;
 	/*! Controller start time. */
-	float startTime;
+	internal float startTime;
 	/*! Controller stop time. */
-	float stopTime;
+	internal float stopTime;
 	/*!
 	 * Controller target (object index of the first controllable ancestor of this
 	 * object).
 	 */
-	NiObjectNET target;
+	internal NiObjectNET target;
 	/*! Unknown integer. */
-	uint unknownInteger;
+	internal uint unknownInteger;
 
 	public NiTimeController() {
 	nextController = null;

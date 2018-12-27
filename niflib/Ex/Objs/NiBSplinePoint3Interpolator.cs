@@ -19,9 +19,9 @@ public class NiBSplinePoint3Interpolator : NiBSplineInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplinePoint3Interpolator", NiBSplineInterpolator.TYPE);
 	/*! Base value when curve not defined. */
-	Vector3 value;
+	internal Vector3 value;
 	/*! Handle into the data. (USHRT_MAX for invalid handle.) */
-	uint handle;
+	internal uint handle;
 
 	public NiBSplinePoint3Interpolator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

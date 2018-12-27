@@ -19,11 +19,11 @@ public class BSTreadTransfInterpolator : NiInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSTreadTransfInterpolator", NiInterpolator.TYPE);
 	/*!  */
-	int numTreadTransforms;
+	internal int numTreadTransforms;
 	/*!  */
-	BSTreadTransform[] treadTransforms;
+	internal BSTreadTransform[] treadTransforms;
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public BSTreadTransfInterpolator() {
 	numTreadTransforms = (int)0;

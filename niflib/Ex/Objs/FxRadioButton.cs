@@ -19,18 +19,18 @@ public class FxRadioButton : FxWidget {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("FxRadioButton", FxWidget.TYPE);
 	/*! Unknown. */
-	uint unknownInt1;
+	internal uint unknownInt1;
 	/*! Unknown. */
-	uint unknownInt2;
+	internal uint unknownInt2;
 	/*! Unknown. */
-	uint unknownInt3;
+	internal uint unknownInt3;
 	/*! Number of unknown links. */
-	uint numButtons;
+	internal uint numButtons;
 	/*!
 	 * Unknown pointers to other buttons.  Maybe other buttons in a group so they can
 	 * be switch off if this one is switched on?
 	 */
-	FxRadioButton[] buttons;
+	internal FxRadioButton[] buttons;
 
 	public FxRadioButton() {
 	unknownInt1 = (uint)0;

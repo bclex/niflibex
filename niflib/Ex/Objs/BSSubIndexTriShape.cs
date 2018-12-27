@@ -19,15 +19,15 @@ public class BSSubIndexTriShape : BSTriShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSubIndexTriShape", BSTriShape.TYPE);
 	/*!  */
-	uint numPrimitives;
+	internal uint numPrimitives;
 	/*!  */
-	uint numSegments;
+	internal uint numSegments;
 	/*!  */
-	uint totalSegments;
+	internal uint totalSegments;
 	/*!  */
-	BSGeometrySegmentData[] segment;
+	internal BSGeometrySegmentData[] segment;
 	/*!  */
-	BSGeometrySegmentSharedData segmentData;
+	internal BSGeometrySegmentSharedData segmentData;
 
 	public BSSubIndexTriShape() {
 	numPrimitives = (uint)0;

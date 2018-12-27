@@ -22,7 +22,7 @@ public class NiPSysBoundUpdateModifier : NiPSysModifier {
 	 * Optimize by only computing the bound of (1 / Update Skip) of the total particles
 	 * each frame.
 	 */
-	ushort updateSkip;
+	internal ushort updateSkip;
 
 	public NiPSysBoundUpdateModifier() {
 	updateSkip = (ushort)0;

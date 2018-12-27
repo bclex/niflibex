@@ -19,7 +19,7 @@ public class BSClothExtraData : BSExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSClothExtraData", BSExtraData.TYPE);
 	/*!  */
-	ByteArray binaryData;
+	internal ByteArray binaryData;
 
 	public BSClothExtraData() {
 	}

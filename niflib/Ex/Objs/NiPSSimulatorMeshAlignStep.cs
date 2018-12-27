@@ -22,11 +22,11 @@ public class NiPSSimulatorMeshAlignStep : NiPSSimulatorStep {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulatorMeshAlignStep", NiPSSimulatorStep.TYPE);
 	/*!  */
-	byte numRotationKeys;
+	internal byte numRotationKeys;
 	/*! The particle rotation keys. */
-	Key<Quaternion>[] rotationKeys;
+	internal Key<Quaternion>[] rotationKeys;
 	/*! The loop behavior for the rotation keys. */
-	PSLoopBehavior rotationLoopBehavior;
+	internal PSLoopBehavior rotationLoopBehavior;
 
 	public NiPSSimulatorMeshAlignStep() {
 	numRotationKeys = (byte)0;

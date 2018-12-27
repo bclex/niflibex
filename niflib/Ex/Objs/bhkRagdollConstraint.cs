@@ -19,7 +19,7 @@ public class bhkRagdollConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkRagdollConstraint", bhkConstraint.TYPE);
 	/*! Ragdoll constraint. */
-	RagdollDescriptor ragdoll;
+	internal RagdollDescriptor ragdoll;
 
 	public bhkRagdollConstraint() {
 	}

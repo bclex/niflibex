@@ -19,17 +19,17 @@ public class bhkBoxShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBoxShape", bhkConvexShape.TYPE);
 	/*! Not used. The following wants to be aligned at 16 bytes. */
-	Array8<byte> unused;
+	internal Array8<byte> unused;
 	/*!
 	 * A cube stored in Half Extents. A unit cube (1.0, 1.0, 1.0) would be stored as
 	 * 0.5, 0.5, 0.5.
 	 */
-	Vector3 dimensions;
+	internal Vector3 dimensions;
 	/*!
 	 * Unused as Havok stores the Half Extents as hkVector4 with the W component
 	 * unused.
 	 */
-	float unusedFloat;
+	internal float unusedFloat;
 
 	public bhkBoxShape() {
 	unusedFloat = 0.0f;

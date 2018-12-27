@@ -22,17 +22,17 @@ public class NiPSMeshEmitter : NiPSEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSMeshEmitter", NiPSEmitter.TYPE);
 	/*!  */
-	uint numMeshEmitters;
+	internal uint numMeshEmitters;
 	/*!  */
-	NiMesh[] meshEmitters;
+	internal NiMesh[] meshEmitters;
 	/*!  */
-	Vector3 emitAxis;
+	internal Vector3 emitAxis;
 	/*!  */
-	NiAVObject emitterObject;
+	internal NiAVObject emitterObject;
 	/*!  */
-	EmitFrom meshEmissionType;
+	internal EmitFrom meshEmissionType;
 	/*!  */
-	VelocityType initialVelocityType;
+	internal VelocityType initialVelocityType;
 
 	public NiPSMeshEmitter() {
 	numMeshEmitters = (uint)0;

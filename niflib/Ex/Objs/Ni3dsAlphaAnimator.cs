@@ -19,15 +19,15 @@ public class Ni3dsAlphaAnimator : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("Ni3dsAlphaAnimator", NiObject.TYPE);
 	/*! Unknown. */
-	Array40<byte> unknown1;
+	internal Array40<byte> unknown1;
 	/*! The parent? */
-	NiObject parent;
+	internal NiObject parent;
 	/*! Unknown. */
-	uint num1;
+	internal uint num1;
 	/*! Unknown. */
-	uint num2;
+	internal uint num2;
 	/*! Unknown. */
-	uint[][] unknown2;
+	internal uint[][] unknown2;
 
 	public Ni3dsAlphaAnimator() {
 	parent = null;

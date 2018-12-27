@@ -27,9 +27,9 @@ public class NiStringExtraData : NiExtraData {
 	 * The number of bytes left in the record.  Equals the length of the following
 	 * string + 4.
 	 */
-	uint bytesRemaining;
+	internal uint bytesRemaining;
 	/*! The string. */
-	IndexString stringData;
+	internal IndexString stringData;
 
 	public NiStringExtraData() {
 	bytesRemaining = (uint)0;

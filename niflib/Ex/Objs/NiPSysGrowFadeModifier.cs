@@ -19,21 +19,21 @@ public class NiPSysGrowFadeModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysGrowFadeModifier", NiPSysModifier.TYPE);
 	/*! The time taken to grow from 0 to their specified size. */
-	float growTime;
+	internal float growTime;
 	/*!
 	 * Specifies the particle generation to which the grow effect should be applied.
 	 * This is usually generation 0, so that newly created particles will grow.
 	 */
-	ushort growGeneration;
+	internal ushort growGeneration;
 	/*! The time taken to shrink from their specified size to 0. */
-	float fadeTime;
+	internal float fadeTime;
 	/*!
 	 * Specifies the particle generation to which the shrink effect should be applied.
 	 * This is usually the highest supported generation for the particle system.
 	 */
-	ushort fadeGeneration;
+	internal ushort fadeGeneration;
 	/*! A multiplier on the base particle scale. */
-	float baseScale;
+	internal float baseScale;
 
 	public NiPSysGrowFadeModifier() {
 	growTime = 0.0f;

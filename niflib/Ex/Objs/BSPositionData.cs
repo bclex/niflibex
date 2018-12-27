@@ -19,9 +19,9 @@ public class BSPositionData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPositionData", NiExtraData.TYPE);
 	/*!  */
-	uint numData;
+	internal uint numData;
 	/*!  */
-	hfloat[] data;
+	internal hfloat[] data;
 
 	public BSPositionData() {
 	numData = (uint)0;

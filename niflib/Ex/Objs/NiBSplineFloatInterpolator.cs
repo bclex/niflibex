@@ -19,9 +19,9 @@ public class NiBSplineFloatInterpolator : NiBSplineInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineFloatInterpolator", NiBSplineInterpolator.TYPE);
 	/*! Base value when curve not defined. */
-	float value;
+	internal float value;
 	/*! Handle into the data. (USHRT_MAX for invalid handle.) */
-	uint handle;
+	internal uint handle;
 
 	public NiBSplineFloatInterpolator() {
 	value = -3.402823466e+38f;

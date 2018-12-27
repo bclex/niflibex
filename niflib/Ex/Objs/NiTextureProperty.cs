@@ -19,13 +19,13 @@ public class NiTextureProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	Array2<uint> unknownInts1;
+	internal Array2<uint> unknownInts1;
 	/*! Property flags. */
-	ushort flags;
+	internal ushort flags;
 	/*! Link to the texture image. */
-	NiImage image;
+	internal NiImage image;
 	/*! Unknown.  0? */
-	Array2<uint> unknownInts2;
+	internal Array2<uint> unknownInts2;
 
 	public NiTextureProperty() {
 	flags = (ushort)0;

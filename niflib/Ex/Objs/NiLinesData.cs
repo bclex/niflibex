@@ -19,7 +19,7 @@ public class NiLinesData : NiGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLinesData", NiGeometryData.TYPE);
 	/*! Is vertex connected to other (next?) vertex? */
-	bool[] lines;
+	internal bool[] lines;
 
 	public NiLinesData() {
 	}

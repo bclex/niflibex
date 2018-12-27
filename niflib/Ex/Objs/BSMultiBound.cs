@@ -19,7 +19,7 @@ public class BSMultiBound : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBound", NiObject.TYPE);
 	/*!  */
-	BSMultiBoundData data;
+	internal BSMultiBoundData data;
 
 	public BSMultiBound() {
 	data = null;

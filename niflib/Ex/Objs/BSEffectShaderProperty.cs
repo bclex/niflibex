@@ -19,54 +19,54 @@ public class BSEffectShaderProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSEffectShaderProperty", BSShaderProperty.TYPE);
 	/*!  */
-	SkyrimShaderPropertyFlags1 shaderFlags1_sk;
+	internal SkyrimShaderPropertyFlags1 shaderFlags1_sk;
 	/*!  */
-	SkyrimShaderPropertyFlags2 shaderFlags2_sk;
+	internal SkyrimShaderPropertyFlags2 shaderFlags2_sk;
 	/*!  */
-	Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
+	internal Fallout4ShaderPropertyFlags1 shaderFlags1_fo4;
 	/*!  */
-	Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
+	internal Fallout4ShaderPropertyFlags2 shaderFlags2_fo4;
 	/*! Offset UVs */
-	TexCoord uvOffset;
+	internal TexCoord uvOffset;
 	/*! Offset UV Scale to repeat tiling textures */
-	TexCoord uvScale;
+	internal TexCoord uvScale;
 	/*! points to an external texture. */
-	string sourceTexture;
+	internal string sourceTexture;
 	/*! How to handle texture borders. */
-	byte textureClampMode;
+	internal byte textureClampMode;
 	/*!  */
-	byte lightingInfluence;
+	internal byte lightingInfluence;
 	/*!  */
-	byte envMapMinLod;
+	internal byte envMapMinLod;
 	/*! Unknown. */
-	byte unknownByte;
+	internal byte unknownByte;
 	/*! At this cosine of angle falloff will be equal to Falloff Start Opacity */
-	float falloffStartAngle;
+	internal float falloffStartAngle;
 	/*! At this cosine of angle falloff will be equal to Falloff Stop Opacity */
-	float falloffStopAngle;
+	internal float falloffStopAngle;
 	/*! Alpha falloff multiplier at start angle */
-	float falloffStartOpacity;
+	internal float falloffStartOpacity;
 	/*! Alpha falloff multiplier at end angle */
-	float falloffStopOpacity;
+	internal float falloffStopOpacity;
 	/*! Emissive color */
-	Color4 emissiveColor;
+	internal Color4 emissiveColor;
 	/*! Multiplier for Emissive Color (RGB part) */
-	float emissiveMultiple;
+	internal float emissiveMultiple;
 	/*!  */
-	float softFalloffDepth;
+	internal float softFalloffDepth;
 	/*!
 	 * Points to an external texture, used as palette for
 	 * SLSF1_Greyscale_To_PaletteColor/SLSF1_Greyscale_To_PaletteAlpha.
 	 */
-	string greyscaleTexture;
+	internal string greyscaleTexture;
 	/*!  */
-	string envMapTexture;
+	internal string envMapTexture;
 	/*!  */
-	string normalTexture;
+	internal string normalTexture;
 	/*!  */
-	string envMaskTexture;
+	internal string envMaskTexture;
 	/*!  */
-	float environmentMapScale;
+	internal float environmentMapScale;
 
 	public BSEffectShaderProperty() {
 	shaderFlags1_sk = (SkyrimShaderPropertyFlags1)2147483648;

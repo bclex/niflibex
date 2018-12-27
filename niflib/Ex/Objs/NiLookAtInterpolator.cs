@@ -19,19 +19,19 @@ public class NiLookAtInterpolator : NiInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLookAtInterpolator", NiInterpolator.TYPE);
 	/*!  */
-	LookAtFlags flags;
+	internal LookAtFlags flags;
 	/*!  */
-	NiNode lookAt;
+	internal NiNode lookAt;
 	/*!  */
-	IndexString lookAtName;
+	internal IndexString lookAtName;
 	/*!  */
-	NiQuatTransform transform;
+	internal NiQuatTransform transform;
 	/*!  */
-	NiPoint3Interpolator interpolator_Translation;
+	internal NiPoint3Interpolator interpolator_Translation;
 	/*!  */
-	NiFloatInterpolator interpolator_Roll;
+	internal NiFloatInterpolator interpolator_Roll;
 	/*!  */
-	NiFloatInterpolator interpolator_Scale;
+	internal NiFloatInterpolator interpolator_Scale;
 
 	public NiLookAtInterpolator() {
 	flags = (LookAtFlags)0;

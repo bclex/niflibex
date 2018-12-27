@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Box Bounding Volume */
 public class BoxBV {
 	/*!  */
-	Vector3 center;
+	internal Vector3 center;
 	/*!  */
-	Array3<Vector3> axis;
+	internal Array3<Vector3> axis;
 	/*!  */
-	Vector3 extent;
+	internal Vector3 extent;
 	//Constructor
 }
 

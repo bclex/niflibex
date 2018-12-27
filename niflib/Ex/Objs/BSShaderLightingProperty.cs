@@ -19,10 +19,10 @@ public class BSShaderLightingProperty : BSShaderProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSShaderLightingProperty", BSShaderProperty.TYPE);
 	/*! How to handle texture borders. */
-	TexClampMode textureClampMode;
+	internal TexClampMode textureClampMode;
 
 	public BSShaderLightingProperty() {
-	textureClampMode = TexClampMode.3;
+	textureClampMode = (TexClampMode)3;
 }
 
 /*!

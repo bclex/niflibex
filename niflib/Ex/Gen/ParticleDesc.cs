@@ -13,17 +13,17 @@ namespace Niflib {
 /*! Particle Description. */
 public class ParticleDesc {
 	/*! Unknown. */
-	Vector3 translation;
+	internal Vector3 translation;
 	/*! Unknown. */
-	Array3<float> unknownFloats1;
+	internal Array3<float> unknownFloats1;
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! Unknown. */
-	float unknownFloat3;
+	internal float unknownFloat3;
 	/*! Unknown. */
-	int unknownInt1;
+	internal int unknownInt1;
 	//Constructor
 	public ParticleDesc() { unchecked {
 	unknownFloat1 = 0.9f;

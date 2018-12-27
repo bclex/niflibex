@@ -19,7 +19,7 @@ public class NiConstPoint3Evaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiConstPoint3Evaluator", NiEvaluator.TYPE);
 	/*!  */
-	Vector3 value;
+	internal Vector3 value;
 
 	public NiConstPoint3Evaluator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

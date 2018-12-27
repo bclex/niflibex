@@ -19,11 +19,11 @@ public class NiRoomGroup : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRoomGroup", NiNode.TYPE);
 	/*! Object that represents the room group as seen from the outside. */
-	NiNode shell;
+	internal NiNode shell;
 	/*!  */
-	int numRooms;
+	internal int numRooms;
 	/*!  */
-	NiRoom[] rooms;
+	internal NiRoom[] rooms;
 
 	public NiRoomGroup() {
 	shell = null;

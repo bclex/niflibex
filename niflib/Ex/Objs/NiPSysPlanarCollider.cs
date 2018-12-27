@@ -19,13 +19,13 @@ public class NiPSysPlanarCollider : NiPSysCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysPlanarCollider", NiPSysCollider.TYPE);
 	/*! Width of the plane along the X Axis. */
-	float width;
+	internal float width;
 	/*! Height of the plane along the Y Axis. */
-	float height;
+	internal float height;
 	/*! Axis defining a plane, relative to Collider Object. */
-	Vector3 xAxis;
+	internal Vector3 xAxis;
 	/*! Axis defining a plane, relative to Collider Object. */
-	Vector3 yAxis;
+	internal Vector3 yAxis;
 
 	public NiPSysPlanarCollider() {
 	width = 0.0f;

@@ -24,7 +24,7 @@ public class NiExtraDataController : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiExtraDataController", NiSingleInterpController.TYPE);
 	/*!  */
-	IndexString extraDataName;
+	internal IndexString extraDataName;
 
 	public NiExtraDataController() {
 	}

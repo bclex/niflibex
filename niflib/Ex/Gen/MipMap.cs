@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Description of a mipmap within an NiPixelData object. */
 public class MipMap {
 	/*! Width of the mipmap image. */
-	uint width;
+	internal uint width;
 	/*! Height of the mipmap image. */
-	uint height;
+	internal uint height;
 	/*! Offset into the pixel data array where this mipmap starts. */
-	uint offset;
+	internal uint offset;
 	//Constructor
 	public MipMap() { unchecked {
 	width = (uint)0;

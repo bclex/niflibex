@@ -22,44 +22,44 @@ public class NiPSSimulatorGeneralStep : NiPSSimulatorStep {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSimulatorGeneralStep", NiPSSimulatorStep.TYPE);
 	/*!  */
-	byte numSizeKeys;
+	internal byte numSizeKeys;
 	/*! The particle size keys. */
-	Key<float>[] sizeKeys;
+	internal Key<float>[] sizeKeys;
 	/*! The loop behavior for the size keys. */
-	PSLoopBehavior sizeLoopBehavior;
+	internal PSLoopBehavior sizeLoopBehavior;
 	/*!  */
-	byte numColorKeys;
+	internal byte numColorKeys;
 	/*! The particle color keys. */
-	Key<ByteColor4>[] colorKeys;
+	internal Key<ByteColor4>[] colorKeys;
 	/*! The loop behavior for the color keys. */
-	PSLoopBehavior colorLoopBehavior;
+	internal PSLoopBehavior colorLoopBehavior;
 	/*!  */
-	byte numRotationKeys;
+	internal byte numRotationKeys;
 	/*! The particle rotation keys. */
-	Key<Quaternion>[] rotationKeys;
+	internal Key<Quaternion>[] rotationKeys;
 	/*! The loop behavior for the rotation keys. */
-	PSLoopBehavior rotationLoopBehavior;
+	internal PSLoopBehavior rotationLoopBehavior;
 	/*!
 	 * The the amount of time over which a particle's size is ramped from 0.0 to 1.0 in
 	 * seconds
 	 */
-	float growTime;
+	internal float growTime;
 	/*!
 	 * The the amount of time over which a particle's size is ramped from 1.0 to 0.0 in
 	 * seconds
 	 */
-	float shrinkTime;
+	internal float shrinkTime;
 	/*!
 	 * Specifies the particle generation to which the grow effect should be applied.
 	 * This is usually generation 0, so that newly created particles will grow.
 	 */
-	ushort growGeneration;
+	internal ushort growGeneration;
 	/*!
 	 * Specifies the particle generation to which the shrink effect should be applied.
 	 * This is usually the highest supported generation for the particle system, so
 	 * that particles will shrink immediately before getting killed.
 	 */
-	ushort shrinkGeneration;
+	internal ushort shrinkGeneration;
 
 	public NiPSSimulatorGeneralStep() {
 	numSizeKeys = (byte)0;

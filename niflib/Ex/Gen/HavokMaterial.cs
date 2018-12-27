@@ -13,13 +13,13 @@ namespace Niflib {
 /*! Bethesda Havok. Material wrapper for varying material enums by game. */
 public class HavokMaterial {
 	/*! Unknown. */
-	uint unknownInt;
+	internal uint unknownInt;
 	/*! The material of the shape. */
-	OblivionHavokMaterial material_ob;
+	internal OblivionHavokMaterial material_ob;
 	/*! The material of the shape. */
-	Fallout3HavokMaterial material_fo;
+	internal Fallout3HavokMaterial material_fo;
 	/*! The material of the shape. */
-	SkyrimHavokMaterial material_sk;
+	internal SkyrimHavokMaterial material_sk;
 	//Constructor
 	public HavokMaterial() { unchecked {
 	unknownInt = (uint)0;

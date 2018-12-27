@@ -19,9 +19,9 @@ public class NiParticleModifier : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleModifier", NiObject.TYPE);
 	/*! Next particle modifier. */
-	NiParticleModifier nextModifier;
+	internal NiParticleModifier nextModifier;
 	/*! Points to the particle system controller parent. */
-	NiParticleSystemController controller;
+	internal NiParticleSystemController controller;
 
 	public NiParticleModifier() {
 	nextModifier = null;

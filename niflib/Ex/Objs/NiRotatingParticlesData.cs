@@ -19,9 +19,9 @@ public class NiRotatingParticlesData : NiParticlesData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRotatingParticlesData", NiParticlesData.TYPE);
 	/*! Is the particle rotation array present? */
-	bool hasRotations2;
+	internal bool hasRotations2;
 	/*! The individual particle rotations. */
-	Quaternion[] rotations2;
+	internal Quaternion[] rotations2;
 
 	public NiRotatingParticlesData() {
 	hasRotations2 = false;

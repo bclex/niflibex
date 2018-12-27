@@ -19,13 +19,13 @@ public class NiTriShapeSkinController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriShapeSkinController", NiTimeController.TYPE);
 	/*! The number of node bones referenced as influences. */
-	uint numBones;
+	internal uint numBones;
 	/*! The number of vertex weights stored for each bone. */
-	uint[] vertexCounts;
+	internal uint[] vertexCounts;
 	/*! List of all armature bones. */
-	NiBone[] bones;
+	internal NiBone[] bones;
 	/*! Contains skin weight data for each node that this skin is influenced by. */
-	OldSkinData[][] boneData;
+	internal OldSkinData[][] boneData;
 
 	public NiTriShapeSkinController() {
 	numBones = (uint)0;

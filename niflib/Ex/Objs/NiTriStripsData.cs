@@ -19,16 +19,16 @@ public class NiTriStripsData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriStripsData", NiTriBasedGeomData.TYPE);
 	/*! Number of OpenGL triangle strips that are present. */
-	ushort numStrips;
+	internal ushort numStrips;
 	/*! The number of points in each triangle strip. */
-	ushort[] stripLengths;
+	internal ushort[] stripLengths;
 	/*! Do we have strip point data? */
-	bool hasPoints;
+	internal bool hasPoints;
 	/*!
 	 * The points in the Triangle strips.  Size is the sum of all entries in Strip
 	 * Lengths.
 	 */
-	ushort[][] points;
+	internal ushort[][] points;
 
 	public NiTriStripsData() {
 	numStrips = (ushort)0;

@@ -26,7 +26,7 @@ public class NiWireframeProperty : NiProperty {
 	 *             0 - Wireframe Mode Disabled
 	 *             1 - Wireframe Mode Enabled
 	 */
-	ushort flags;
+	internal ushort flags;
 
 	public NiWireframeProperty() {
 	flags = (ushort)0;

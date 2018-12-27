@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class UnionBV {
 	/*!  */
-	uint numBv;
+	internal uint numBv;
 	/*!  */
-	BoundingVolume[] boundingVolumes;
+	internal BoundingVolume[] boundingVolumes;
 	//Constructor
 	public UnionBV() { unchecked {
 	numBv = (uint)0;

@@ -19,11 +19,11 @@ public class NiParticleRotation : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleRotation", NiParticleModifier.TYPE);
 	/*!  */
-	byte randomInitialAxis;
+	internal byte randomInitialAxis;
 	/*!  */
-	Vector3 initialAxis;
+	internal Vector3 initialAxis;
 	/*!  */
-	float rotationSpeed;
+	internal float rotationSpeed;
 
 	public NiParticleRotation() {
 	randomInitialAxis = (byte)0;

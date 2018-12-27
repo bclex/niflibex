@@ -19,11 +19,11 @@ public class bhkConstraint : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConstraint", bhkSerializable.TYPE);
 	/*! Number of bodies affected by this constraint. */
-	uint numEntities;
+	internal uint numEntities;
 	/*! The entities affected by this constraint. */
-	bhkEntity[] entities;
+	internal bhkEntity[] entities;
 	/*! Usually 1. Higher values indicate higher priority of this constraint? */
-	uint priority;
+	internal uint priority;
 
 	public bhkConstraint() {
 	numEntities = (uint)0;

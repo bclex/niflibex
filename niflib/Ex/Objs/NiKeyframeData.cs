@@ -26,22 +26,22 @@ public class NiKeyframeData : NiObject {
 	 * then this *must* be set to 1, and in this case the actual number of keys is
 	 * stored in the XYZ Rotations field.
 	 */
-	uint numRotationKeys;
+	internal uint numRotationKeys;
 	/*!
 	 * The type of interpolation to use for rotation.  Can also be 4 to indicate that
 	 * separate X, Y, and Z values are used for the rotation instead of Quaternions.
 	 */
-	KeyType rotationType;
+	internal KeyType rotationType;
 	/*! The rotation keys if Quaternion rotation is used. */
-	Key<Quaternion>[] quaternionKeys;
+	internal Key<Quaternion>[] quaternionKeys;
 	/*!  */
-	float order;
+	internal float order;
 	/*! Individual arrays of keys for rotating X, Y, and Z individually. */
-	Array3<KeyGroup<float>> xyzRotations;
+	internal Array3<KeyGroup<float>> xyzRotations;
 	/*! Translation keys. */
-	KeyGroup<Vector3> translations;
+	internal KeyGroup<Vector3> translations;
 	/*! Scale keys. */
-	KeyGroup<float> scales;
+	internal KeyGroup<float> scales;
 
 	public NiKeyframeData() {
 	numRotationKeys = (uint)0;

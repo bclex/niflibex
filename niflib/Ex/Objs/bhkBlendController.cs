@@ -19,7 +19,7 @@ public class bhkBlendController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBlendController", NiTimeController.TYPE);
 	/*! Seems to be always zero. */
-	uint keys;
+	internal uint keys;
 
 	public bhkBlendController() {
 	keys = (uint)0;

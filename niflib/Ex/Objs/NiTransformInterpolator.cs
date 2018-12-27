@@ -19,9 +19,9 @@ public class NiTransformInterpolator : NiKeyBasedInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTransformInterpolator", NiKeyBasedInterpolator.TYPE);
 	/*!  */
-	NiQuatTransform transform;
+	internal NiQuatTransform transform;
 	/*!  */
-	NiTransformData data;
+	internal NiTransformData data;
 
 	public NiTransformInterpolator() {
 	data = null;

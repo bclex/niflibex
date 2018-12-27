@@ -27,19 +27,19 @@ public class bhkListShape : bhkShapeCollection {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkListShape", bhkShapeCollection.TYPE);
 	/*! The number of sub shapes referenced. */
-	uint numSubShapes;
+	internal uint numSubShapes;
 	/*! List of shapes. */
-	bhkShape[] subShapes;
+	internal bhkShape[] subShapes;
 	/*! The material of the shape. */
-	HavokMaterial material;
+	internal HavokMaterial material;
 	/*!  */
-	hkWorldObjCinfoProperty childShapeProperty;
+	internal hkWorldObjCinfoProperty childShapeProperty;
 	/*!  */
-	hkWorldObjCinfoProperty childFilterProperty;
+	internal hkWorldObjCinfoProperty childFilterProperty;
 	/*! Count. */
-	uint numUnknownInts;
+	internal uint numUnknownInts;
 	/*! Unknown. */
-	uint[] unknownInts;
+	internal uint[] unknownInts;
 
 	public bhkListShape() {
 	numSubShapes = (uint)0;

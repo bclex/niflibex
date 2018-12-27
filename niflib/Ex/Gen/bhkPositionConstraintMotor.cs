@@ -13,19 +13,19 @@ namespace Niflib {
 /*!  */
 public class bhkPositionConstraintMotor {
 	/*! Minimum motor force */
-	float minForce;
+	internal float minForce;
 	/*! Maximum motor force */
-	float maxForce;
+	internal float maxForce;
 	/*! Relative stiffness */
-	float tau;
+	internal float tau;
 	/*! Motor damping value */
-	float damping;
+	internal float damping;
 	/*! A factor of the current error to calculate the recovery velocity */
-	float proportionalRecoveryVelocity;
+	internal float proportionalRecoveryVelocity;
 	/*! A constant velocity which is used to recover from errors */
-	float constantRecoveryVelocity;
+	internal float constantRecoveryVelocity;
 	/*! Is Motor enabled */
-	bool motorEnabled;
+	internal bool motorEnabled;
 	//Constructor
 	public bhkPositionConstraintMotor() { unchecked {
 	minForce = -1000000.0f;

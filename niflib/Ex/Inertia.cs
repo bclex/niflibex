@@ -57,7 +57,7 @@ namespace Niflib
         /*! Return mass and inertia matrix for a sphere of given radius and
         *	density.
         */
-        static void CalcMassPropertiesSphere(float radius,
+        public static void CalcMassPropertiesSphere(float radius,
             float density, bool solid,
             out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
         {

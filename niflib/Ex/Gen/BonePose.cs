@@ -13,9 +13,9 @@ namespace Niflib {
 /*! A list of transforms for each bone in bhkPoseArray. */
 public class BonePose {
 	/*!  */
-	uint numTransforms;
+	internal uint numTransforms;
 	/*!  */
-	BoneTransform[] transforms;
+	internal BoneTransform[] transforms;
 	//Constructor
 	public BonePose() { unchecked {
 	numTransforms = (uint)0;

@@ -19,7 +19,7 @@ public class NiConstQuaternionEvaluator : NiEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiConstQuaternionEvaluator", NiEvaluator.TYPE);
 	/*!  */
-	Quaternion value;
+	internal Quaternion value;
 
 	public NiConstQuaternionEvaluator() {
 	value = -3.402823466e+38, -3.402823466e+38, -3.402823466e+38, -3.402823466e+38;

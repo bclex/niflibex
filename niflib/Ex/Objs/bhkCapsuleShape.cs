@@ -19,15 +19,15 @@ public class bhkCapsuleShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkCapsuleShape", bhkConvexShape.TYPE);
 	/*! Not used. The following wants to be aligned at 16 bytes. */
-	Array8<byte> unused;
+	internal Array8<byte> unused;
 	/*! First point on the capsule's axis. */
-	Vector3 firstPoint;
+	internal Vector3 firstPoint;
 	/*! Matches first capsule radius. */
-	float radius1;
+	internal float radius1;
 	/*! Second point on the capsule's axis. */
-	Vector3 secondPoint;
+	internal Vector3 secondPoint;
 	/*! Matches second capsule radius. */
-	float radius2;
+	internal float radius2;
 
 	public bhkCapsuleShape() {
 	radius1 = 0.0f;

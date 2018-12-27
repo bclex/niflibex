@@ -26,9 +26,9 @@ public class NiZBufferProperty : NiProperty {
 	 *             Bit 1 controls wether the Z buffer is read only (0) or read/write
 	 * (1)
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*! Z-Test function (see: glDepthFunc). In Flags from 20.1.0.3 on. */
-	ZCompareMode function;
+	internal ZCompareMode function;
 
 	public NiZBufferProperty() {
 	flags = (ushort)3;

@@ -19,15 +19,15 @@ public class NiPSysMeshEmitter : NiPSysEmitter {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysMeshEmitter", NiPSysEmitter.TYPE);
 	/*!  */
-	uint numEmitterMeshes;
+	internal uint numEmitterMeshes;
 	/*! The meshes which are emitted from. */
-	NiAVObject[] emitterMeshes;
+	internal NiAVObject[] emitterMeshes;
 	/*! The method by which the initial particle velocity will be computed. */
-	VelocityType initialVelocityType;
+	internal VelocityType initialVelocityType;
 	/*! The manner in which particles are emitted from the Emitter Meshes. */
-	EmitFrom emissionType;
+	internal EmitFrom emissionType;
 	/*! The emission axis if VELOCITY_USE_DIRECTION. */
-	Vector3 emissionAxis;
+	internal Vector3 emissionAxis;
 
 	public NiPSysMeshEmitter() {
 	numEmitterMeshes = (uint)0;

@@ -19,7 +19,7 @@ public class NiPSysTurbulenceFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysTurbulenceFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! How many turbulence updates per second. */
-	float frequency;
+	internal float frequency;
 
 	public NiPSysTurbulenceFieldModifier() {
 	frequency = 0.0f;

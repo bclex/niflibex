@@ -19,25 +19,25 @@ public class NiPhysXProp : NiObjectNET {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXProp", NiObjectNET.TYPE);
 	/*!  */
-	float physxToWorldScale;
+	internal float physxToWorldScale;
 	/*!  */
-	uint numSources;
+	internal uint numSources;
 	/*!  */
-	NiObject[] sources;
+	internal NiObject[] sources;
 	/*!  */
-	int numDests;
+	internal int numDests;
 	/*!  */
-	NiPhysXDest[] dests;
+	internal NiPhysXDest[] dests;
 	/*!  */
-	uint numModifiedMeshes;
+	internal uint numModifiedMeshes;
 	/*!  */
-	NiMesh[] modifiedMeshes;
+	internal NiMesh[] modifiedMeshes;
 	/*!  */
-	IndexString tempName;
+	internal IndexString tempName;
 	/*!  */
-	bool keepMeshes;
+	internal bool keepMeshes;
 	/*!  */
-	NiPhysXPropDesc propDescription;
+	internal NiPhysXPropDesc propDescription;
 
 	public NiPhysXProp() {
 	physxToWorldScale = 0.0f;

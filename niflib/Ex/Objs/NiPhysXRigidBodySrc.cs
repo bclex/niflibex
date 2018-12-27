@@ -19,7 +19,7 @@ public class NiPhysXRigidBodySrc : NiPhysXSrc {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXRigidBodySrc", NiPhysXSrc.TYPE);
 	/*!  */
-	NiAVObject source;
+	internal NiAVObject source;
 
 	public NiPhysXRigidBodySrc() {
 	source = null;

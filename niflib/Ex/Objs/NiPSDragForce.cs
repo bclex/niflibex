@@ -19,15 +19,15 @@ public class NiPSDragForce : NiPSForce {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSDragForce", NiPSForce.TYPE);
 	/*!  */
-	Vector3 dragAxis;
+	internal Vector3 dragAxis;
 	/*!  */
-	float percentage;
+	internal float percentage;
 	/*!  */
-	float range;
+	internal float range;
 	/*!  */
-	float rangeFalloff;
+	internal float rangeFalloff;
 	/*!  */
-	NiAVObject dragObject;
+	internal NiAVObject dragObject;
 
 	public NiPSDragForce() {
 	percentage = 0.0f;

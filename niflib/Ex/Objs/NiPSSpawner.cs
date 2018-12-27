@@ -22,25 +22,25 @@ public class NiPSSpawner : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSpawner", NiObject.TYPE);
 	/*!  */
-	NiPSParticleSystem masterParticleSystem;
+	internal NiPSParticleSystem masterParticleSystem;
 	/*!  */
-	float percentageSpawned;
+	internal float percentageSpawned;
 	/*!  */
-	float spawnSpeedFactor;
+	internal float spawnSpeedFactor;
 	/*!  */
-	float spawnSpeedFactorVar;
+	internal float spawnSpeedFactorVar;
 	/*!  */
-	float spawnDirChaos;
+	internal float spawnDirChaos;
 	/*!  */
-	float lifeSpan;
+	internal float lifeSpan;
 	/*!  */
-	float lifeSpanVar;
+	internal float lifeSpanVar;
 	/*!  */
-	ushort numSpawnGenerations;
+	internal ushort numSpawnGenerations;
 	/*!  */
-	uint minToSpawn;
+	internal uint minToSpawn;
 	/*!  */
-	uint maxToSpawn;
+	internal uint maxToSpawn;
 
 	public NiPSSpawner() {
 	masterParticleSystem = null;

@@ -19,15 +19,15 @@ public class NiPSPlanarCollider : NiPSCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSPlanarCollider", NiPSCollider.TYPE);
 	/*!  */
-	float width;
+	internal float width;
 	/*!  */
-	float height;
+	internal float height;
 	/*!  */
-	Vector3 xAxis;
+	internal Vector3 xAxis;
 	/*!  */
-	Vector3 yAxis;
+	internal Vector3 yAxis;
 	/*!  */
-	NiAVObject colliderObject;
+	internal NiAVObject colliderObject;
 
 	public NiPSPlanarCollider() {
 	width = 0.0f;

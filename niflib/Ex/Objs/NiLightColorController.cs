@@ -23,9 +23,9 @@ public class NiLightColorController : NiPoint3InterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLightColorController", NiPoint3InterpController.TYPE);
 	/*!  */
-	LightColor targetColor;
+	internal LightColor targetColor;
 	/*!  */
-	NiPosData data;
+	internal NiPosData data;
 
 	public NiLightColorController() {
 	targetColor = (LightColor)0;

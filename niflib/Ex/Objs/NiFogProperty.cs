@@ -29,14 +29,14 @@ public class NiFogProperty : NiProperty {
 	 *             If Bit 1 and Bit 2 are not set, but fog is enabled, Fog function is
 	 * FOG_Z_LINEAR.
 	 */
-	ushort flags;
+	internal ushort flags;
 	/*!
 	 * Depth of the fog in normalized units. 1.0 = begins at near plane. 0.5 = begins
 	 * halfway between the near and far planes.
 	 */
-	float fogDepth;
+	internal float fogDepth;
 	/*! The color of the fog. */
-	Color3 fogColor;
+	internal Color3 fogColor;
 
 	public NiFogProperty() {
 	flags = (ushort)0;

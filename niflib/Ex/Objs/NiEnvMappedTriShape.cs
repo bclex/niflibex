@@ -19,17 +19,17 @@ public class NiEnvMappedTriShape : NiObjectNET {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiEnvMappedTriShape", NiObjectNET.TYPE);
 	/*! unknown (=4 - 5) */
-	ushort unknown1;
+	internal ushort unknown1;
 	/*! unknown */
-	Matrix44 unknownMatrix;
+	internal Matrix44 unknownMatrix;
 	/*! The number of child objects. */
-	uint numChildren;
+	internal uint numChildren;
 	/*! List of child node object indices. */
-	NiAVObject[] children;
+	internal NiAVObject[] children;
 	/*! unknown */
-	NiObject child2;
+	internal NiObject child2;
 	/*! unknown */
-	NiObject child3;
+	internal NiObject child3;
 
 	public NiEnvMappedTriShape() {
 	unknown1 = (ushort)0;

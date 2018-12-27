@@ -19,13 +19,13 @@ public class NiTextureModeProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTextureModeProperty", NiProperty.TYPE);
 	/*! Unknown. */
-	Array3<uint> unknownInts;
+	internal Array3<uint> unknownInts;
 	/*! Unknown. Either 210 or 194. */
-	short unknownShort;
+	internal short unknownShort;
 	/*! 0? */
-	short ps2L;
+	internal short ps2L;
 	/*! -75? */
-	short ps2K;
+	internal short ps2K;
 
 	public NiTextureModeProperty() {
 	unknownShort = (short)0;

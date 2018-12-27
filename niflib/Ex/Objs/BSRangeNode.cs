@@ -19,11 +19,11 @@ public class BSRangeNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSRangeNode", NiNode.TYPE);
 	/*!  */
-	byte min;
+	internal byte min;
 	/*!  */
-	byte max;
+	internal byte max;
 	/*!  */
-	byte current;
+	internal byte current;
 
 	public BSRangeNode() {
 	min = (byte)0;

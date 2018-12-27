@@ -19,15 +19,15 @@ public class BSPackedAdditionalGeometryData : AbstractAdditionalGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPackedAdditionalGeometryData", AbstractAdditionalGeometryData.TYPE);
 	/*!  */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! Information about additional data blocks */
-	uint numBlockInfos;
+	internal uint numBlockInfos;
 	/*! Number of additional data blocks */
-	AdditionalDataInfo[] blockInfos;
+	internal AdditionalDataInfo[] blockInfos;
 	/*! Number of additional data blocks. Usually there is exactly one block. */
-	int numBlocks;
+	internal int numBlocks;
 	/*! Number of additional data blocks */
-	BSPackedAdditionalDataBlock[] blocks;
+	internal BSPackedAdditionalDataBlock[] blocks;
 
 	public BSPackedAdditionalGeometryData() {
 	numVertices = (ushort)0;

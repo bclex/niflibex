@@ -19,7 +19,7 @@ public class bhkMalleableConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMalleableConstraint", bhkConstraint.TYPE);
 	/*! Constraint within constraint. */
-	MalleableDescriptor malleable;
+	internal MalleableDescriptor malleable;
 
 	public bhkMalleableConstraint() {
 	}

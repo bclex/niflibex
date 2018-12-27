@@ -19,11 +19,11 @@ public class NiSpotLight : NiPointLight {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSpotLight", NiPointLight.TYPE);
 	/*!  */
-	float outerSpotAngle;
+	internal float outerSpotAngle;
 	/*!  */
-	float innerSpotAngle;
+	internal float innerSpotAngle;
 	/*! Describes the distribution of light. (see: glLight) */
-	float exponent;
+	internal float exponent;
 
 	public NiSpotLight() {
 	outerSpotAngle = 0.0f;

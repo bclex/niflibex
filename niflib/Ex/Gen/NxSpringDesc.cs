@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class NxSpringDesc {
 	/*!  */
-	float spring;
+	internal float spring;
 	/*!  */
-	float damper;
+	internal float damper;
 	/*!  */
-	float targetValue;
+	internal float targetValue;
 	//Constructor
 	public NxSpringDesc() { unchecked {
 	spring = 0.0f;

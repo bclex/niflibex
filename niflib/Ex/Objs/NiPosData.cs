@@ -19,7 +19,7 @@ public class NiPosData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPosData", NiObject.TYPE);
 	/*!  */
-	KeyGroup<Vector3> data;
+	internal KeyGroup<Vector3> data;
 
 	public NiPosData() {
 	}

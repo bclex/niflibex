@@ -19,9 +19,9 @@ public class BSBehaviorGraphExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSBehaviorGraphExtraData", NiExtraData.TYPE);
 	/*! Name of the hkx file. */
-	IndexString behaviourGraphFile;
+	internal IndexString behaviourGraphFile;
 	/*! Unknown, has to do with blending appended bones onto an actor. */
-	bool controlsBaseSkeleton;
+	internal bool controlsBaseSkeleton;
 
 	public BSBehaviorGraphExtraData() {
 	controlsBaseSkeleton = false;

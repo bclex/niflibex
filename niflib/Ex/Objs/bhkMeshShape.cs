@@ -19,23 +19,23 @@ public class bhkMeshShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkMeshShape", bhkShape.TYPE);
 	/*! Unknown. */
-	Array2<uint> unknowns;
+	internal Array2<uint> unknowns;
 	/*!  */
-	float radius;
+	internal float radius;
 	/*!  */
-	Array8<byte> unused2;
+	internal Array8<byte> unused2;
 	/*!  */
-	Vector4 scale;
+	internal Vector4 scale;
 	/*!  */
-	uint numShapeProperties;
+	internal uint numShapeProperties;
 	/*!  */
-	hkWorldObjCinfoProperty[] shapeProperties;
+	internal hkWorldObjCinfoProperty[] shapeProperties;
 	/*! Unknown. */
-	Array3<int> unknown2;
+	internal Array3<int> unknown2;
 	/*! The number of strips data objects referenced. */
-	uint numStripsData;
+	internal uint numStripsData;
 	/*! Refers to a bunch of NiTriStripsData objects that make up this shape. */
-	NiTriStripsData[] stripsData;
+	internal NiTriStripsData[] stripsData;
 
 	public bhkMeshShape() {
 	radius = 0.0f;

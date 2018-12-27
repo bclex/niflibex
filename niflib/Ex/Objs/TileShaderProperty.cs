@@ -19,7 +19,7 @@ public class TileShaderProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("TileShaderProperty", BSShaderLightingProperty.TYPE);
 	/*! Texture file name */
-	string fileName;
+	internal string fileName;
 
 	public TileShaderProperty() {
 	}

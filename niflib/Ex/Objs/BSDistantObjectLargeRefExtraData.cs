@@ -19,7 +19,7 @@ public class BSDistantObjectLargeRefExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSDistantObjectLargeRefExtraData", NiExtraData.TYPE);
 	/*!  */
-	bool largeRef;
+	internal bool largeRef;
 
 	public BSDistantObjectLargeRefExtraData() {
 	largeRef = false;

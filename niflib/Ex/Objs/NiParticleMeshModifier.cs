@@ -19,9 +19,9 @@ public class NiParticleMeshModifier : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleMeshModifier", NiParticleModifier.TYPE);
 	/*!  */
-	uint numParticleMeshes;
+	internal uint numParticleMeshes;
 	/*!  */
-	NiAVObject[] particleMeshes;
+	internal NiAVObject[] particleMeshes;
 
 	public NiParticleMeshModifier() {
 	numParticleMeshes = (uint)0;

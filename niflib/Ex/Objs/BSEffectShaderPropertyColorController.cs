@@ -19,7 +19,7 @@ public class BSEffectShaderPropertyColorController : NiPoint3InterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSEffectShaderPropertyColorController", NiPoint3InterpController.TYPE);
 	/*! Which color in BSEffectShaderProperty to animate: */
-	EffectShaderControlledColor typeOfControlledColor;
+	internal EffectShaderControlledColor typeOfControlledColor;
 
 	public BSEffectShaderPropertyColorController() {
 	typeOfControlledColor = (EffectShaderControlledColor)0;

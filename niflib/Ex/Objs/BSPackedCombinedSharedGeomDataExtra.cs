@@ -24,21 +24,21 @@ public class BSPackedCombinedSharedGeomDataExtra : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPackedCombinedSharedGeomDataExtra", NiExtraData.TYPE);
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 	/*!  */
-	uint numVertices;
+	internal uint numVertices;
 	/*!  */
-	uint numTriangles;
+	internal uint numTriangles;
 	/*! Unknown. */
-	uint unknownFlags1;
+	internal uint unknownFlags1;
 	/*! Unknown. */
-	uint unknownFlags2;
+	internal uint unknownFlags2;
 	/*!  */
-	uint numData;
+	internal uint numData;
 	/*!  */
-	BSPackedGeomObject[] object;
+	internal BSPackedGeomObject[] object;
 	/*!  */
-	BSPackedSharedGeomData[] objectData;
+	internal BSPackedSharedGeomData[] objectData;
 
 	public BSPackedCombinedSharedGeomDataExtra() {
 	numVertices = (uint)0;

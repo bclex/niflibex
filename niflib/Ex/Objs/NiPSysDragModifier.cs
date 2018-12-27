@@ -19,15 +19,15 @@ public class NiPSysDragModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysDragModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the force. */
-	NiAVObject dragObject;
+	internal NiAVObject dragObject;
 	/*! The local direction of the force. */
-	Vector3 dragAxis;
+	internal Vector3 dragAxis;
 	/*! The amount of drag to apply to particles. */
-	float percentage;
+	internal float percentage;
 	/*! The distance up to which particles are fully affected. */
-	float range;
+	internal float range;
 	/*! The distance at which particles cease to be affected. */
-	float rangeFalloff;
+	internal float rangeFalloff;
 
 	public NiPSysDragModifier() {
 	dragObject = null;

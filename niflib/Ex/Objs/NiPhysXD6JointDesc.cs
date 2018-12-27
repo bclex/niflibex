@@ -19,57 +19,57 @@ public class NiPhysXD6JointDesc : NiPhysXJointDesc {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXD6JointDesc", NiPhysXJointDesc.TYPE);
 	/*!  */
-	NxD6JointMotion xMotion;
+	internal NxD6JointMotion xMotion;
 	/*!  */
-	NxD6JointMotion yMotion;
+	internal NxD6JointMotion yMotion;
 	/*!  */
-	NxD6JointMotion zMotion;
+	internal NxD6JointMotion zMotion;
 	/*!  */
-	NxD6JointMotion swing1Motion;
+	internal NxD6JointMotion swing1Motion;
 	/*!  */
-	NxD6JointMotion swing2Motion;
+	internal NxD6JointMotion swing2Motion;
 	/*!  */
-	NxD6JointMotion twistMotion;
+	internal NxD6JointMotion twistMotion;
 	/*!  */
-	NxJointLimitSoftDesc linearLimit;
+	internal NxJointLimitSoftDesc linearLimit;
 	/*!  */
-	NxJointLimitSoftDesc swing1Limit;
+	internal NxJointLimitSoftDesc swing1Limit;
 	/*!  */
-	NxJointLimitSoftDesc swing2Limit;
+	internal NxJointLimitSoftDesc swing2Limit;
 	/*!  */
-	NxJointLimitSoftDesc twistLowLimit;
+	internal NxJointLimitSoftDesc twistLowLimit;
 	/*!  */
-	NxJointLimitSoftDesc twistHighLimit;
+	internal NxJointLimitSoftDesc twistHighLimit;
 	/*!  */
-	NxJointDriveDesc xDrive;
+	internal NxJointDriveDesc xDrive;
 	/*!  */
-	NxJointDriveDesc yDrive;
+	internal NxJointDriveDesc yDrive;
 	/*!  */
-	NxJointDriveDesc zDrive;
+	internal NxJointDriveDesc zDrive;
 	/*!  */
-	NxJointDriveDesc swingDrive;
+	internal NxJointDriveDesc swingDrive;
 	/*!  */
-	NxJointDriveDesc twistDrive;
+	internal NxJointDriveDesc twistDrive;
 	/*!  */
-	NxJointDriveDesc slerpDrive;
+	internal NxJointDriveDesc slerpDrive;
 	/*!  */
-	Vector3 drivePosition;
+	internal Vector3 drivePosition;
 	/*!  */
-	Quaternion driveOrientation;
+	internal Quaternion driveOrientation;
 	/*!  */
-	Vector3 driveLinearVelocity;
+	internal Vector3 driveLinearVelocity;
 	/*!  */
-	Vector3 driveAngularVelocity;
+	internal Vector3 driveAngularVelocity;
 	/*!  */
-	NxJointProjectionMode projectionMode;
+	internal NxJointProjectionMode projectionMode;
 	/*!  */
-	float projectionDistance;
+	internal float projectionDistance;
 	/*!  */
-	float projectionAngle;
+	internal float projectionAngle;
 	/*!  */
-	float gearRatio;
+	internal float gearRatio;
 	/*!  */
-	uint flags;
+	internal uint flags;
 
 	public NiPhysXD6JointDesc() {
 	xMotion = (NxD6JointMotion)0;

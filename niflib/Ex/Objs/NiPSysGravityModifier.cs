@@ -19,21 +19,21 @@ public class NiPSysGravityModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysGravityModifier", NiPSysModifier.TYPE);
 	/*! The object whose position and orientation are the basis of the force. */
-	NiAVObject gravityObject;
+	internal NiAVObject gravityObject;
 	/*! The local direction of the force. */
-	Vector3 gravityAxis;
+	internal Vector3 gravityAxis;
 	/*! How the force diminishes by distance. */
-	float decay;
+	internal float decay;
 	/*! The acceleration of the force. */
-	float strength;
+	internal float strength;
 	/*! The type of gravitational force. */
-	ForceType forceType;
+	internal ForceType forceType;
 	/*! Adds a degree of randomness. */
-	float turbulence;
+	internal float turbulence;
 	/*! Scale for turbulence. */
-	float turbulenceScale;
+	internal float turbulenceScale;
 	/*!  */
-	bool worldAligned;
+	internal bool worldAligned;
 
 	public NiPSysGravityModifier() {
 	gravityObject = null;

@@ -19,7 +19,7 @@ public class NiPSForceCtlr : NiSingleInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSForceCtlr", NiSingleInterpController.TYPE);
 	/*!  */
-	IndexString forceName;
+	internal IndexString forceName;
 
 	public NiPSForceCtlr() {
 	}

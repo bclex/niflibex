@@ -19,9 +19,9 @@ public class NiFloatInterpolator : NiKeyBasedInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatInterpolator", NiKeyBasedInterpolator.TYPE);
 	/*! Pose value if lacking NiFloatData. */
-	float value;
+	internal float value;
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiFloatInterpolator() {
 	value = -3.402823466e+38f;

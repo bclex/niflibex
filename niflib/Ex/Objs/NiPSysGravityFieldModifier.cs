@@ -19,7 +19,7 @@ public class NiPSysGravityFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysGravityFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! Direction of the gravity field in Field Object's space. */
-	Vector3 direction;
+	internal Vector3 direction;
 
 	public NiPSysGravityFieldModifier() {
 	direction = 0.0, -1.0, 0.0;

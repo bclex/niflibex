@@ -19,9 +19,9 @@ public class NiFloatsExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFloatsExtraData", NiExtraData.TYPE);
 	/*! Number of floats in the next field. */
-	uint numFloats;
+	internal uint numFloats;
 	/*! Float data. */
-	float[] data;
+	internal float[] data;
 
 	public NiFloatsExtraData() {
 	numFloats = (uint)0;

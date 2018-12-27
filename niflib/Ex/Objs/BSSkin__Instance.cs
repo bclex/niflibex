@@ -19,17 +19,17 @@ public class BSSkin__Instance : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSSkin::Instance", NiObject.TYPE);
 	/*!  */
-	NiAVObject skeletonRoot;
+	internal NiAVObject skeletonRoot;
 	/*!  */
-	BSSkin__BoneData data;
+	internal BSSkin__BoneData data;
 	/*!  */
-	uint numBones;
+	internal uint numBones;
 	/*!  */
-	NiNode[] bones;
+	internal NiNode[] bones;
 	/*!  */
-	uint numUnknown;
+	internal uint numUnknown;
 	/*! Unknown. */
-	Vector3[] unknown;
+	internal Vector3[] unknown;
 
 	public BSSkin__Instance() {
 	skeletonRoot = null;

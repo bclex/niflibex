@@ -19,19 +19,19 @@ public class NiPSGravityForce : NiPSForce {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSGravityForce", NiPSForce.TYPE);
 	/*!  */
-	Vector3 gravityAxis;
+	internal Vector3 gravityAxis;
 	/*!  */
-	float decay;
+	internal float decay;
 	/*!  */
-	float strength;
+	internal float strength;
 	/*!  */
-	ForceType forceType;
+	internal ForceType forceType;
 	/*!  */
-	float turbulence;
+	internal float turbulence;
 	/*!  */
-	float turbulenceScale;
+	internal float turbulenceScale;
 	/*!  */
-	NiAVObject gravityObject;
+	internal NiAVObject gravityObject;
 
 	public NiPSGravityForce() {
 	decay = 0.0f;

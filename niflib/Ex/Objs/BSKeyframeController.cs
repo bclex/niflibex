@@ -19,7 +19,7 @@ public class BSKeyframeController : NiKeyframeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSKeyframeController", NiKeyframeController.TYPE);
 	/*! A link to more keyframe data. */
-	NiKeyframeData data2;
+	internal NiKeyframeData data2;
 
 	public BSKeyframeController() {
 	data2 = null;

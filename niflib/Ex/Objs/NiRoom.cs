@@ -19,21 +19,21 @@ public class NiRoom : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRoom", NiNode.TYPE);
 	/*!  */
-	int numWalls;
+	internal int numWalls;
 	/*!  */
-	NiPlane[] wallPlanes;
+	internal NiPlane[] wallPlanes;
 	/*!  */
-	uint numInPortals;
+	internal uint numInPortals;
 	/*! The portals which see into the room. */
-	NiPortal[] inPortals;
+	internal NiPortal[] inPortals;
 	/*!  */
-	uint numOutPortals;
+	internal uint numOutPortals;
 	/*! The portals which see out of the room. */
-	NiPortal[] outPortals;
+	internal NiPortal[] outPortals;
 	/*!  */
-	uint numFixtures;
+	internal uint numFixtures;
 	/*! All geometry associated with the room. */
-	NiAVObject[] fixtures;
+	internal NiAVObject[] fixtures;
 
 	public NiRoom() {
 	numWalls = (int)0;

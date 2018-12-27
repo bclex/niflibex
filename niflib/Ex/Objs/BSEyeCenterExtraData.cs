@@ -19,9 +19,9 @@ public class BSEyeCenterExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSEyeCenterExtraData", NiExtraData.TYPE);
 	/*!  */
-	int numData;
+	internal int numData;
 	/*!  */
-	float[] data;
+	internal float[] data;
 
 	public BSEyeCenterExtraData() {
 	numData = (int)0;

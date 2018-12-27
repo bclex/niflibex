@@ -22,9 +22,9 @@ public class NiUVController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiUVController", NiTimeController.TYPE);
 	/*! Always 0? */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*! Texture coordinate controller data index. */
-	NiUVData data;
+	internal NiUVData data;
 
 	public NiUVController() {
 	unknownShort = (ushort)0;

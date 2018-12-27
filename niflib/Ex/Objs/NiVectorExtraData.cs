@@ -22,7 +22,7 @@ public class NiVectorExtraData : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiVectorExtraData", NiExtraData.TYPE);
 	/*! The vector data. */
-	Vector4 vectorData;
+	internal Vector4 vectorData;
 
 	public NiVectorExtraData() {
 	}

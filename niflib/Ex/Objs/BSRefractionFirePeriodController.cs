@@ -19,7 +19,7 @@ public class BSRefractionFirePeriodController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSRefractionFirePeriodController", NiTimeController.TYPE);
 	/*!  */
-	NiInterpolator interpolator;
+	internal NiInterpolator interpolator;
 
 	public BSRefractionFirePeriodController() {
 	interpolator = null;

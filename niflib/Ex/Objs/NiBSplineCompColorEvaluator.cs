@@ -19,9 +19,9 @@ public class NiBSplineCompColorEvaluator : NiBSplineColorEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompColorEvaluator", NiBSplineColorEvaluator.TYPE);
 	/*!  */
-	float offset;
+	internal float offset;
 	/*!  */
-	float halfRange;
+	internal float halfRange;
 
 	public NiBSplineCompColorEvaluator() {
 	offset = 3.402823466e+38f;

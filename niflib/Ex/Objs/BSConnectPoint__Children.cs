@@ -19,11 +19,11 @@ public class BSConnectPoint__Children : NiExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSConnectPoint::Children", NiExtraData.TYPE);
 	/*!  */
-	bool skinned;
+	internal bool skinned;
 	/*!  */
-	int numPoints;
+	internal int numPoints;
 	/*!  */
-	string[] name;
+	internal string[] name;
 
 	public BSConnectPoint__Children() {
 	skinned = false;

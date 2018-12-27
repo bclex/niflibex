@@ -22,15 +22,15 @@ public class NiRawImageData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiRawImageData", NiObject.TYPE);
 	/*! Image width */
-	uint width;
+	internal uint width;
 	/*! Image height */
-	uint height;
+	internal uint height;
 	/*! The format of the raw image data. */
-	ImageType imageType;
+	internal ImageType imageType;
 	/*! Image pixel data. */
-	ByteColor3[][] rgbImageData;
+	internal ByteColor3[][] rgbImageData;
 	/*! Image pixel data. */
-	ByteColor4[][] rgbaImageData;
+	internal ByteColor4[][] rgbaImageData;
 
 	public NiRawImageData() {
 	width = (uint)0;

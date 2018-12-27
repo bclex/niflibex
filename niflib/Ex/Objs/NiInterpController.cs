@@ -22,7 +22,7 @@ public class NiInterpController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiInterpController", NiTimeController.TYPE);
 	/*!  */
-	bool managerControlled;
+	internal bool managerControlled;
 
 	public NiInterpController() {
 	managerControlled = false;

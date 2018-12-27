@@ -25,23 +25,23 @@ public class NiClodData : NiTriBasedGeomData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiClodData", NiTriBasedGeomData.TYPE);
 	/*! Unknown. */
-	ushort unknownShorts;
+	internal ushort unknownShorts;
 	/*! Unknown. */
-	ushort unknownCount1;
+	internal ushort unknownCount1;
 	/*! Unknown. */
-	ushort unknownCount2;
+	internal ushort unknownCount2;
 	/*! Unknown. */
-	ushort unknownCount3;
+	internal ushort unknownCount3;
 	/*! Unknown. */
-	float unknownFloat;
+	internal float unknownFloat;
 	/*! Unknown. */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*! Unknown. */
-	Array6<ushort>[] unknownClodShorts1;
+	internal Array6<ushort>[] unknownClodShorts1;
 	/*! Unknown. */
-	ushort[] unknownClodShorts2;
+	internal ushort[] unknownClodShorts2;
 	/*! Unknown. */
-	Array6<ushort>[] unknownClodShorts3;
+	internal Array6<ushort>[] unknownClodShorts3;
 
 	public NiClodData() {
 	unknownShorts = (ushort)0;

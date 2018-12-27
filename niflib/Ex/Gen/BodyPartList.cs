@@ -13,9 +13,9 @@ namespace Niflib {
 /*! Body part list for DismemberSkinInstance */
 public class BodyPartList {
 	/*! Flags related to the Body Partition */
-	BSPartFlag partFlag;
+	internal BSPartFlag partFlag;
 	/*! Body Part Index */
-	BSDismemberBodyPartType bodyPart;
+	internal BSDismemberBodyPartType bodyPart;
 	//Constructor
 	public BodyPartList() { unchecked {
 	partFlag = (BSPartFlag)257;

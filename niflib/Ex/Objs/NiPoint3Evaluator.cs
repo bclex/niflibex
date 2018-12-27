@@ -19,7 +19,7 @@ public class NiPoint3Evaluator : NiKeyBasedEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPoint3Evaluator", NiKeyBasedEvaluator.TYPE);
 	/*!  */
-	NiPosData data;
+	internal NiPosData data;
 
 	public NiPoint3Evaluator() {
 	data = null;

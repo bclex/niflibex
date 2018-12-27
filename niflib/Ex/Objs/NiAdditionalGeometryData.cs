@@ -19,15 +19,15 @@ public class NiAdditionalGeometryData : AbstractAdditionalGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiAdditionalGeometryData", AbstractAdditionalGeometryData.TYPE);
 	/*! Number of vertices */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! Information about additional data blocks */
-	uint numBlockInfos;
+	internal uint numBlockInfos;
 	/*! Number of additional data blocks */
-	AdditionalDataInfo[] blockInfos;
+	internal AdditionalDataInfo[] blockInfos;
 	/*! Number of additional data blocks */
-	int numBlocks;
+	internal int numBlocks;
 	/*! Number of additional data blocks */
-	AdditionalDataBlock[] blocks;
+	internal AdditionalDataBlock[] blocks;
 
 	public NiAdditionalGeometryData() {
 	numVertices = (ushort)0;

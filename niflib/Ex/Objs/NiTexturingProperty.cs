@@ -22,74 +22,74 @@ public class NiTexturingProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTexturingProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	ushort flags;
+	internal ushort flags;
 	/*!
 	 * Determines how the texture will be applied.  Seems to have special functions in
 	 * Oblivion.
 	 */
-	ApplyMode applyMode;
+	internal ApplyMode applyMode;
 	/*! Number of textures. */
-	uint textureCount;
+	internal uint textureCount;
 	/*! Do we have a base texture? */
-	bool hasBaseTexture;
+	internal bool hasBaseTexture;
 	/*! The base texture. */
-	TexDesc baseTexture;
+	internal TexDesc baseTexture;
 	/*! Do we have a dark texture? */
-	bool hasDarkTexture;
+	internal bool hasDarkTexture;
 	/*! The dark texture. */
-	TexDesc darkTexture;
+	internal TexDesc darkTexture;
 	/*! Do we have a detail texture? */
-	bool hasDetailTexture;
+	internal bool hasDetailTexture;
 	/*! The detail texture. */
-	TexDesc detailTexture;
+	internal TexDesc detailTexture;
 	/*! Do we have a gloss texture? */
-	bool hasGlossTexture;
+	internal bool hasGlossTexture;
 	/*! The gloss texture. */
-	TexDesc glossTexture;
+	internal TexDesc glossTexture;
 	/*! Do we have a glow texture? */
-	bool hasGlowTexture;
+	internal bool hasGlowTexture;
 	/*! The glowing texture. */
-	TexDesc glowTexture;
+	internal TexDesc glowTexture;
 	/*! Do we have a bump map texture? */
-	bool hasBumpMapTexture;
+	internal bool hasBumpMapTexture;
 	/*! The bump map texture. */
-	TexDesc bumpMapTexture;
+	internal TexDesc bumpMapTexture;
 	/*!  */
-	float bumpMapLumaScale;
+	internal float bumpMapLumaScale;
 	/*!  */
-	float bumpMapLumaOffset;
+	internal float bumpMapLumaOffset;
 	/*!  */
-	Matrix22 bumpMapMatrix;
+	internal Matrix22 bumpMapMatrix;
 	/*! Do we have a normal texture? */
-	bool hasNormalTexture;
+	internal bool hasNormalTexture;
 	/*! Normal texture. */
-	TexDesc normalTexture;
+	internal TexDesc normalTexture;
 	/*!  */
-	bool hasParallaxTexture;
+	internal bool hasParallaxTexture;
 	/*!  */
-	TexDesc parallaxTexture;
+	internal TexDesc parallaxTexture;
 	/*!  */
-	float parallaxOffset;
+	internal float parallaxOffset;
 	/*! Do we have a decal 0 texture? */
-	bool hasDecal0Texture;
+	internal bool hasDecal0Texture;
 	/*! The decal texture. */
-	TexDesc decal0Texture;
+	internal TexDesc decal0Texture;
 	/*! Do we have a decal 1 texture? */
-	bool hasDecal1Texture;
+	internal bool hasDecal1Texture;
 	/*! Another decal texture. */
-	TexDesc decal1Texture;
+	internal TexDesc decal1Texture;
 	/*! Do we have a decal 2 texture? */
-	bool hasDecal2Texture;
+	internal bool hasDecal2Texture;
 	/*! Another decal texture. */
-	TexDesc decal2Texture;
+	internal TexDesc decal2Texture;
 	/*! Do we have a decal 3 texture? */
-	bool hasDecal3Texture;
+	internal bool hasDecal3Texture;
 	/*! Another decal texture. Who knows the limit. */
-	TexDesc decal3Texture;
+	internal TexDesc decal3Texture;
 	/*! Number of Shader textures that follow. */
-	uint numShaderTextures;
+	internal uint numShaderTextures;
 	/*! Shader textures. */
-	ShaderTexDesc[] shaderTextures;
+	internal ShaderTexDesc[] shaderTextures;
 
 	public NiTexturingProperty() {
 	flags = (ushort)0;
@@ -735,13 +735,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 
 }
 
-        internal void SetTexture(int tex_num, object td)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*! NIFLIB_HIDDEN function.  For internal use only. */
-        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+/*! NIFLIB_HIDDEN function.  For internal use only. */
+internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
 	numShaderTextures = (uint)shaderTextures.Length;

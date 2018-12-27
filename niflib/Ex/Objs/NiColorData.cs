@@ -19,7 +19,7 @@ public class NiColorData : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiColorData", NiObject.TYPE);
 	/*! The color keys. */
-	KeyGroup<Color4> data;
+	internal KeyGroup<Color4> data;
 
 	public NiColorData() {
 	}

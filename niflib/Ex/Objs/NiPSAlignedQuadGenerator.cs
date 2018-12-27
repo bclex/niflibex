@@ -22,41 +22,41 @@ public class NiPSAlignedQuadGenerator : NiMeshModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSAlignedQuadGenerator", NiMeshModifier.TYPE);
 	/*!  */
-	float scaleAmountU;
+	internal float scaleAmountU;
 	/*!  */
-	float scaleLimitU;
+	internal float scaleLimitU;
 	/*!  */
-	float scaleRestU;
+	internal float scaleRestU;
 	/*!  */
-	float scaleAmountV;
+	internal float scaleAmountV;
 	/*!  */
-	float scaleLimitV;
+	internal float scaleLimitV;
 	/*!  */
-	float scaleRestV;
+	internal float scaleRestV;
 	/*!  */
-	float centerU;
+	internal float centerU;
 	/*!  */
-	float centerV;
+	internal float centerV;
 	/*!  */
-	bool uvScrolling;
+	internal bool uvScrolling;
 	/*!  */
-	ushort numFramesAcross;
+	internal ushort numFramesAcross;
 	/*!  */
-	ushort numFramesDown;
+	internal ushort numFramesDown;
 	/*!  */
-	bool pingPong;
+	internal bool pingPong;
 	/*!  */
-	ushort initialFrame;
+	internal ushort initialFrame;
 	/*!  */
-	float initialFrameVariation;
+	internal float initialFrameVariation;
 	/*!  */
-	ushort numFrames;
+	internal ushort numFrames;
 	/*!  */
-	float numFramesVariation;
+	internal float numFramesVariation;
 	/*!  */
-	float initialTime;
+	internal float initialTime;
 	/*!  */
-	float finalTime;
+	internal float finalTime;
 
 	public NiPSAlignedQuadGenerator() {
 	scaleAmountU = 0.0f;

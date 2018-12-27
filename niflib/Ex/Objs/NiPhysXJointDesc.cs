@@ -19,27 +19,27 @@ public class NiPhysXJointDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXJointDesc", NiObject.TYPE);
 	/*!  */
-	NxJointType jointType;
+	internal NxJointType jointType;
 	/*!  */
-	IndexString jointName;
+	internal IndexString jointName;
 	/*!  */
-	Array2<NiPhysXJointActor> actors;
+	internal Array2<NiPhysXJointActor> actors;
 	/*!  */
-	float maxForce;
+	internal float maxForce;
 	/*!  */
-	float maxTorque;
+	internal float maxTorque;
 	/*!  */
-	float solverExtrapolationFactor;
+	internal float solverExtrapolationFactor;
 	/*!  */
-	uint useAccelerationSpring;
+	internal uint useAccelerationSpring;
 	/*!  */
-	uint jointFlags;
+	internal uint jointFlags;
 	/*!  */
-	Vector3 limitPoint;
+	internal Vector3 limitPoint;
 	/*!  */
-	uint numLimits;
+	internal uint numLimits;
 	/*!  */
-	NiPhysXJointLimit[] limits;
+	internal NiPhysXJointLimit[] limits;
 
 	public NiPhysXJointDesc() {
 	jointType = (NxJointType)0;

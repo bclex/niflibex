@@ -19,31 +19,31 @@ public class BSTriShape : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSTriShape", NiAVObject.TYPE);
 	/*!  */
-	NiBound boundingSphere;
+	internal NiBound boundingSphere;
 	/*!  */
-	NiObject skin;
+	internal NiObject skin;
 	/*!  */
-	BSShaderProperty shaderProperty;
+	internal BSShaderProperty shaderProperty;
 	/*!  */
-	NiAlphaProperty alphaProperty;
+	internal NiAlphaProperty alphaProperty;
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 	/*!  */
-	uint numTriangles;
+	internal uint numTriangles;
 	/*!  */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*!  */
-	uint dataSize;
+	internal uint dataSize;
 	/*!  */
-	BSVertexData[] vertexData;
+	internal BSVertexData[] vertexData;
 	/*!  */
-	Triangle[] triangles;
+	internal Triangle[] triangles;
 	/*!  */
-	uint particleDataSize;
+	internal uint particleDataSize;
 	/*!  */
-	Vector3[] vertices;
+	internal Vector3[] vertices;
 	/*!  */
-	Triangle[] trianglesCopy;
+	internal Triangle[] trianglesCopy;
 
 	public BSTriShape() {
 	skin = null;

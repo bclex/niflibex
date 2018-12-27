@@ -19,21 +19,21 @@ public class bhkCompressedMeshShape : bhkShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkCompressedMeshShape", bhkShape.TYPE);
 	/*! Points to root node? */
-	NiAVObject target;
+	internal NiAVObject target;
 	/*! Unknown. */
-	uint userData;
+	internal uint userData;
 	/*! A shell that is added around the shape. */
-	float radius;
+	internal float radius;
 	/*! Unknown. */
-	float unknownFloat1;
+	internal float unknownFloat1;
 	/*! Scale */
-	Vector4 scale;
+	internal Vector4 scale;
 	/*! A shell that is added around the shape. */
-	float radiusCopy;
+	internal float radiusCopy;
 	/*! Scale */
-	Vector4 scaleCopy;
+	internal Vector4 scaleCopy;
 	/*! The collision mesh data. */
-	bhkCompressedMeshShapeData data;
+	internal bhkCompressedMeshShapeData data;
 
 	public bhkCompressedMeshShape() {
 	target = null;

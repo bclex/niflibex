@@ -19,9 +19,9 @@ public class NiBoolInterpolator : NiKeyBasedInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBoolInterpolator", NiKeyBasedInterpolator.TYPE);
 	/*! Pose value if lacking NiBoolData. */
-	bool value;
+	internal bool value;
 	/*!  */
-	NiBoolData data;
+	internal NiBoolData data;
 
 	public NiBoolInterpolator() {
 	value = 2;

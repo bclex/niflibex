@@ -22,24 +22,24 @@ public class NiMaterialProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMaterialProperty", NiProperty.TYPE);
 	/*! Property flags. */
-	ushort flags;
+	internal ushort flags;
 	/*! How much the material reflects ambient light. */
-	Color3 ambientColor;
+	internal Color3 ambientColor;
 	/*! How much the material reflects diffuse light. */
-	Color3 diffuseColor;
+	internal Color3 diffuseColor;
 	/*! How much light the material reflects in a specular manner. */
-	Color3 specularColor;
+	internal Color3 specularColor;
 	/*! How much light the material emits. */
-	Color3 emissiveColor;
+	internal Color3 emissiveColor;
 	/*! The material glossiness. */
-	float glossiness;
+	internal float glossiness;
 	/*!
 	 * The material transparency (1=non-transparant). Refer to a NiAlphaProperty object
 	 * in this material's parent NiTriShape object, when alpha is not 1.
 	 */
-	float alpha;
+	internal float alpha;
 	/*!  */
-	float emissiveMult;
+	internal float emissiveMult;
 
 	public NiMaterialProperty() {
 	flags = (ushort)0;

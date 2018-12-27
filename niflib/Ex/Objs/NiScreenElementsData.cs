@@ -22,23 +22,23 @@ public class NiScreenElementsData : NiTriShapeData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiScreenElementsData", NiTriShapeData.TYPE);
 	/*!  */
-	ushort maxPolygons;
+	internal ushort maxPolygons;
 	/*!  */
-	Polygon[] polygons;
+	internal Polygon[] polygons;
 	/*!  */
-	ushort[] polygonIndices;
+	internal ushort[] polygonIndices;
 	/*!  */
-	ushort polygonGrowBy;
+	internal ushort polygonGrowBy;
 	/*!  */
-	ushort numPolygons;
+	internal ushort numPolygons;
 	/*!  */
-	ushort maxVertices;
+	internal ushort maxVertices;
 	/*!  */
-	ushort verticesGrowBy;
+	internal ushort verticesGrowBy;
 	/*!  */
-	ushort maxIndices;
+	internal ushort maxIndices;
 	/*!  */
-	ushort indicesGrowBy;
+	internal ushort indicesGrowBy;
 
 	public NiScreenElementsData() {
 	maxPolygons = (ushort)0;

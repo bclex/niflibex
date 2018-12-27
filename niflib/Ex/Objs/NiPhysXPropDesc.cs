@@ -19,29 +19,29 @@ public class NiPhysXPropDesc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXPropDesc", NiObject.TYPE);
 	/*!  */
-	int numActors;
+	internal int numActors;
 	/*!  */
-	NiPhysXActorDesc[] actors;
+	internal NiPhysXActorDesc[] actors;
 	/*!  */
-	uint numJoints;
+	internal uint numJoints;
 	/*!  */
-	NiPhysXJointDesc[] joints;
+	internal NiPhysXJointDesc[] joints;
 	/*!  */
-	uint numClothes;
+	internal uint numClothes;
 	/*!  */
-	NiObject[] clothes;
+	internal NiObject[] clothes;
 	/*!  */
-	uint numMaterials;
+	internal uint numMaterials;
 	/*!  */
-	PhysXMaterialRef[] materials;
+	internal PhysXMaterialRef[] materials;
 	/*!  */
-	uint numStates;
+	internal uint numStates;
 	/*!  */
-	uint numStateNames;
+	internal uint numStateNames;
 	/*!  */
-	PhysXStateName[] stateNames;
+	internal PhysXStateName[] stateNames;
 	/*!  */
-	byte flags;
+	internal byte flags;
 
 	public NiPhysXPropDesc() {
 	numActors = (int)0;

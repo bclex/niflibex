@@ -19,9 +19,9 @@ public class NiPSSphericalCollider : NiPSCollider {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSSphericalCollider", NiPSCollider.TYPE);
 	/*!  */
-	float radius;
+	internal float radius;
 	/*!  */
-	NiAVObject colliderObject;
+	internal NiAVObject colliderObject;
 
 	public NiPSSphericalCollider() {
 	radius = 0.0f;

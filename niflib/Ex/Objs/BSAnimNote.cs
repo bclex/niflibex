@@ -19,15 +19,15 @@ public class BSAnimNote : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSAnimNote", NiObject.TYPE);
 	/*! Type of this note. */
-	AnimNoteType type;
+	internal AnimNoteType type;
 	/*! Location in time. */
-	float time;
+	internal float time;
 	/*! Unknown. */
-	uint arm;
+	internal uint arm;
 	/*! Unknown. */
-	float gain;
+	internal float gain;
 	/*! Unknown. */
-	uint state;
+	internal uint state;
 
 	public BSAnimNote() {
 	type = (AnimNoteType)0;

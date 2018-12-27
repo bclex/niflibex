@@ -22,9 +22,9 @@ public class NiBSplineCompFloatInterpolator : NiBSplineFloatInterpolator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompFloatInterpolator", NiBSplineFloatInterpolator.TYPE);
 	/*!  */
-	float floatOffset;
+	internal float floatOffset;
 	/*!  */
-	float floatHalfRange;
+	internal float floatHalfRange;
 
 	public NiBSplineCompFloatInterpolator() {
 	floatOffset = 3.402823466e+38f;

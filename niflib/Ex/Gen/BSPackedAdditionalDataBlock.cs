@@ -13,32 +13,32 @@ namespace Niflib {
 /*!  */
 public class BSPackedAdditionalDataBlock {
 	/*! Has data */
-	bool hasData;
+	internal bool hasData;
 	/*!
 	 * Total number of bytes (over all channels and all elements, equals num total
 	 * bytes per element times num vertices).
 	 */
-	int numTotalBytes;
+	internal int numTotalBytes;
 	/*! Number of blocks? Usually equal to one. */
-	int numBlocks;
+	internal int numBlocks;
 	/*! Block offsets in the data? Usually equal to zero. */
-	int[] blockOffsets;
+	internal int[] blockOffsets;
 	/*! Number of atoms? */
-	int numAtoms;
+	internal int numAtoms;
 	/*!
 	 * The sum of all of these equal num total bytes per element, so this probably
 	 * describes how each data element breaks down into smaller chunks (i.e. atoms).
 	 */
-	int[] atomSizes;
+	internal int[] atomSizes;
 	/*!  */
-	byte[] data;
+	internal byte[] data;
 	/*! Unknown. */
-	int unknownInt1;
+	internal int unknownInt1;
 	/*!
 	 * Unsure, but this seems to correspond again to the number of total bytes per
 	 * element.
 	 */
-	int numTotalBytesPerElement;
+	internal int numTotalBytesPerElement;
 	//Constructor
 	public BSPackedAdditionalDataBlock() { unchecked {
 	hasData = false;

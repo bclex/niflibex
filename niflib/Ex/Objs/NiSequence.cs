@@ -19,24 +19,24 @@ public class NiSequence : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSequence", NiObject.TYPE);
 	/*! The sequence name by which the animation system finds and manages this sequence. */
-	IndexString name;
+	internal IndexString name;
 	/*!
 	 * The name of the NiAVObject serving as the accumulation root. This is where all
 	 * accumulated translations, scales, and rotations are applied.
 	 */
-	IndexString accumRootName;
+	internal IndexString accumRootName;
 	/*!  */
-	NiTextKeyExtraData textKeys;
+	internal NiTextKeyExtraData textKeys;
 	/*! Divinity 2 */
-	int unknownInt4;
+	internal int unknownInt4;
 	/*! Divinity 2 */
-	int unknownInt5;
+	internal int unknownInt5;
 	/*!  */
-	uint numControlledBlocks;
+	internal uint numControlledBlocks;
 	/*!  */
-	uint arrayGrowBy;
+	internal uint arrayGrowBy;
 	/*!  */
-	ControlledBlock[] controlledBlocks;
+	internal ControlledBlock[] controlledBlocks;
 
 	public NiSequence() {
 	textKeys = null;

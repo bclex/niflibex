@@ -13,9 +13,9 @@ namespace Niflib {
 /*!  */
 public class PSSpawnRateKey {
 	/*!  */
-	float value;
+	internal float value;
 	/*!  */
-	float time;
+	internal float time;
 	//Constructor
 	public PSSpawnRateKey() { unchecked {
 	value = 0.0f;

@@ -19,9 +19,9 @@ public class BSValueNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSValueNode", NiNode.TYPE);
 	/*!  */
-	uint value;
+	internal uint value;
 	/*!  */
-	BSValueNodeFlags valueNodeFlags;
+	internal BSValueNodeFlags valueNodeFlags;
 
 	public BSValueNode() {
 	value = (uint)0;

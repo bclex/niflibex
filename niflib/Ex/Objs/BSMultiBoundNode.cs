@@ -19,9 +19,9 @@ public class BSMultiBoundNode : NiNode {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSMultiBoundNode", NiNode.TYPE);
 	/*!  */
-	BSMultiBound multiBound;
+	internal BSMultiBound multiBound;
 	/*!  */
-	BSCPCullingType cullingMode;
+	internal BSCPCullingType cullingMode;
 
 	public BSMultiBoundNode() {
 	multiBound = null;

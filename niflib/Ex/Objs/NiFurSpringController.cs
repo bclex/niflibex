@@ -19,17 +19,17 @@ public class NiFurSpringController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiFurSpringController", NiTimeController.TYPE);
 	/*! Unknown. */
-	float unknownFloat;
+	internal float unknownFloat;
 	/*! Unknown. */
-	float unknownFloat2;
+	internal float unknownFloat2;
 	/*! The number of node bones referenced as influences. */
-	uint numBones;
+	internal uint numBones;
 	/*! List of all armature bones. */
-	NiNode[] bones;
+	internal NiNode[] bones;
 	/*! The number of node bones referenced as influences. */
-	uint numBones2;
+	internal uint numBones2;
 	/*! List of all armature bones. */
-	NiNode[] bones2;
+	internal NiNode[] bones2;
 
 	public NiFurSpringController() {
 	unknownFloat = 0.0f;

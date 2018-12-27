@@ -13,11 +13,11 @@ namespace Niflib {
 /*! The distance range where a specific level of detail applies. */
 public class LODRange {
 	/*! Begining of range. */
-	float nearExtent;
+	internal float nearExtent;
 	/*! End of Range. */
-	float farExtent;
+	internal float farExtent;
 	/*! Unknown (0,0,0). */
-	Array3<uint> unknownInts;
+	internal Array3<uint> unknownInts;
 	//Constructor
 	public LODRange() { unchecked {
 	nearExtent = 0.0f;

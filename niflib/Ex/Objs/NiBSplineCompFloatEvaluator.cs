@@ -19,9 +19,9 @@ public class NiBSplineCompFloatEvaluator : NiBSplineFloatEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompFloatEvaluator", NiBSplineFloatEvaluator.TYPE);
 	/*!  */
-	float offset;
+	internal float offset;
 	/*!  */
-	float halfRange;
+	internal float halfRange;
 
 	public NiBSplineCompFloatEvaluator() {
 	offset = 3.402823466e+38f;

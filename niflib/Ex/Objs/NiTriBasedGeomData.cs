@@ -19,7 +19,7 @@ public class NiTriBasedGeomData : NiGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiTriBasedGeomData", NiGeometryData.TYPE);
 	/*! Number of triangles. */
-	ushort numTriangles;
+	internal ushort numTriangles;
 
 	public NiTriBasedGeomData() {
 	numTriangles = (ushort)0;

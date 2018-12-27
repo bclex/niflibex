@@ -23,15 +23,15 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkConvexVerticesShape", bhkConvexShape.TYPE);
 	/*!  */
-	hkWorldObjCinfoProperty verticesProperty;
+	internal hkWorldObjCinfoProperty verticesProperty;
 	/*!  */
-	hkWorldObjCinfoProperty normalsProperty;
+	internal hkWorldObjCinfoProperty normalsProperty;
 	/*! Number of vertices. */
-	uint numVertices;
+	internal uint numVertices;
 	/*! Vertices. Fourth component is 0. Lexicographically sorted. */
-	Vector4[] vertices;
+	internal Vector4[] vertices;
 	/*! The number of half spaces. */
-	uint numNormals;
+	internal uint numNormals;
 	/*!
 	 * Half spaces as determined by the set of vertices above. First three components
 	 * define the normal pointing to the exterior, fourth component is the signed
@@ -39,7 +39,7 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	 * and n, where v is any vertex on the separating plane, and n is the normal.
 	 * Lexicographically sorted.
 	 */
-	Vector4[] normals;
+	internal Vector4[] normals;
 
 	public bhkConvexVerticesShape() {
 	numVertices = (uint)0;

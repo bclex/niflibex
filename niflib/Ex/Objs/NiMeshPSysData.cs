@@ -19,15 +19,15 @@ public class NiMeshPSysData : NiPSysData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiMeshPSysData", NiPSysData.TYPE);
 	/*!  */
-	uint defaultPoolSize;
+	internal uint defaultPoolSize;
 	/*!  */
-	bool fillPoolsOnLoad;
+	internal bool fillPoolsOnLoad;
 	/*!  */
-	uint numGenerations;
+	internal uint numGenerations;
 	/*!  */
-	uint[] generations;
+	internal uint[] generations;
 	/*!  */
-	NiNode particleMeshes;
+	internal NiNode particleMeshes;
 
 	public NiMeshPSysData() {
 	defaultPoolSize = (uint)0;

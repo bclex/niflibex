@@ -19,9 +19,9 @@ public class BSPSysMultiTargetEmitterCtlr : NiPSysEmitterCtlr {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysMultiTargetEmitterCtlr", NiPSysEmitterCtlr.TYPE);
 	/*!  */
-	ushort maxEmitters;
+	internal ushort maxEmitters;
 	/*!  */
-	BSMasterParticleSystem masterParticleSystem;
+	internal BSMasterParticleSystem masterParticleSystem;
 
 	public BSPSysMultiTargetEmitterCtlr() {
 	maxEmitters = (ushort)0;

@@ -19,21 +19,21 @@ public class NiParticleBomb : NiParticleModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiParticleBomb", NiParticleModifier.TYPE);
 	/*!  */
-	float decay;
+	internal float decay;
 	/*!  */
-	float duration;
+	internal float duration;
 	/*!  */
-	float deltav;
+	internal float deltav;
 	/*!  */
-	float start;
+	internal float start;
 	/*!  */
-	DecayType decayType;
+	internal DecayType decayType;
 	/*!  */
-	SymmetryType symmetryType;
+	internal SymmetryType symmetryType;
 	/*! The position of the mass point relative to the particle system? */
-	Vector3 position;
+	internal Vector3 position;
 	/*! The direction of the applied acceleration? */
-	Vector3 direction;
+	internal Vector3 direction;
 
 	public NiParticleBomb() {
 	decay = 0.0f;

@@ -19,17 +19,17 @@ public class NiBSplineCompTransformEvaluator : NiBSplineTransformEvaluator {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiBSplineCompTransformEvaluator", NiBSplineTransformEvaluator.TYPE);
 	/*!  */
-	float translationOffset;
+	internal float translationOffset;
 	/*!  */
-	float translationHalfRange;
+	internal float translationHalfRange;
 	/*!  */
-	float rotationOffset;
+	internal float rotationOffset;
 	/*!  */
-	float rotationHalfRange;
+	internal float rotationHalfRange;
 	/*!  */
-	float scaleOffset;
+	internal float scaleOffset;
 	/*!  */
-	float scaleHalfRange;
+	internal float scaleHalfRange;
 
 	public NiBSplineCompTransformEvaluator() {
 	translationOffset = 3.402823466e+38f;

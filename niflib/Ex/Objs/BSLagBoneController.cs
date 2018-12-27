@@ -19,11 +19,11 @@ public class BSLagBoneController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSLagBoneController", NiTimeController.TYPE);
 	/*! How long it takes to rotate about an actor back to rest position. */
-	float linearVelocity;
+	internal float linearVelocity;
 	/*! How the bone lags rotation */
-	float linearRotation;
+	internal float linearRotation;
 	/*! How far bone will tail an actor. */
-	float maximumDistance;
+	internal float maximumDistance;
 
 	public BSLagBoneController() {
 	linearVelocity = 0.0f;

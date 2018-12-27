@@ -22,13 +22,13 @@ public class NiScreenLODData : NiLODData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiScreenLODData", NiLODData.TYPE);
 	/*!  */
-	NiBound bound;
+	internal NiBound bound;
 	/*!  */
-	NiBound worldBound;
+	internal NiBound worldBound;
 	/*!  */
-	uint numProportions;
+	internal uint numProportions;
 	/*!  */
-	float[] proportionLevels;
+	internal float[] proportionLevels;
 
 	public NiScreenLODData() {
 	numProportions = (uint)0;

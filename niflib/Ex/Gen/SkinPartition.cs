@@ -16,50 +16,50 @@ namespace Niflib {
  */
 public class SkinPartition {
 	/*! Number of vertices in this submesh. */
-	ushort numVertices;
+	internal ushort numVertices;
 	/*! Number of triangles in this submesh. */
-	ushort numTriangles;
+	internal ushort numTriangles;
 	/*! Number of bones influencing this submesh. */
-	ushort numBones;
+	internal ushort numBones;
 	/*! Number of strips in this submesh (zero if not stripped). */
-	ushort numStrips;
+	internal ushort numStrips;
 	/*!
 	 * Number of weight coefficients per vertex. The Gamebryo engine seems to work well
 	 * only if this number is equal to 4, even if there are less than 4 influences per
 	 * vertex.
 	 */
-	ushort numWeightsPerVertex;
+	internal ushort numWeightsPerVertex;
 	/*! List of bones. */
-	ushort[] bones;
+	internal ushort[] bones;
 	/*! Do we have a vertex map? */
-	bool hasVertexMap;
+	internal bool hasVertexMap;
 	/*!
 	 * Maps the weight/influence lists in this submesh to the vertices in the shape
 	 * being skinned.
 	 */
-	ushort[] vertexMap;
+	internal ushort[] vertexMap;
 	/*! Do we have vertex weights? */
-	bool hasVertexWeights;
+	internal bool hasVertexWeights;
 	/*! The vertex weights. */
-	float[][] vertexWeights;
+	internal float[][] vertexWeights;
 	/*! The strip lengths. */
-	ushort[] stripLengths;
+	internal ushort[] stripLengths;
 	/*! Do we have triangle or strip data? */
-	bool hasFaces;
+	internal bool hasFaces;
 	/*! The strips. */
-	ushort[][] strips;
+	internal ushort[][] strips;
 	/*! The triangles. */
-	Triangle[] triangles;
+	internal Triangle[] triangles;
 	/*! Do we have bone indices? */
-	bool hasBoneIndices;
+	internal bool hasBoneIndices;
 	/*! Bone indices, they index into 'Bones'. */
-	byte[][] boneIndices;
+	internal byte[][] boneIndices;
 	/*! Unknown */
-	ushort unknownShort;
+	internal ushort unknownShort;
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 	/*!  */
-	Triangle[] trianglesCopy;
+	internal Triangle[] trianglesCopy;
 	//Constructor
 	public SkinPartition() { unchecked {
 	numVertices = (ushort)0;

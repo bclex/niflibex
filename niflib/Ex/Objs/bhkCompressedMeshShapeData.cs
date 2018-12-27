@@ -19,71 +19,71 @@ public class bhkCompressedMeshShapeData : bhkRefObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkCompressedMeshShapeData", bhkRefObject.TYPE);
 	/*! Number of bits in the shape-key reserved for a triangle index */
-	uint bitsPerIndex;
+	internal uint bitsPerIndex;
 	/*! Number of bits in the shape-key reserved for a triangle index and its winding */
-	uint bitsPerWIndex;
+	internal uint bitsPerWIndex;
 	/*!
 	 * Mask used to get the triangle index and winding from a shape-key (common: 262143
 	 * = 0x3ffff)
 	 */
-	uint maskWIndex;
+	internal uint maskWIndex;
 	/*! Mask used to get the triangle index from a shape-key (common: 131071 = 0x1ffff) */
-	uint maskIndex;
+	internal uint maskIndex;
 	/*! The radius of the storage mesh shape? Quantization error? */
-	float error;
+	internal float error;
 	/*!
 	 * The minimum boundary of the AABB (the coordinates of the corner with the lowest
 	 * numerical values)
 	 */
-	Vector4 boundsMin;
+	internal Vector4 boundsMin;
 	/*!
 	 * The maximum boundary of the AABB (the coordinates of the corner with the highest
 	 * numerical values)
 	 */
-	Vector4 boundsMax;
+	internal Vector4 boundsMax;
 	/*!  */
-	byte weldingType;
+	internal byte weldingType;
 	/*!  */
-	byte materialType;
+	internal byte materialType;
 	/*!  */
-	uint numMaterials32;
+	internal uint numMaterials32;
 	/*! Does not appear to be used. */
-	uint[] materials32;
+	internal uint[] materials32;
 	/*!  */
-	uint numMaterials16;
+	internal uint numMaterials16;
 	/*! Does not appear to be used. */
-	uint[] materials16;
+	internal uint[] materials16;
 	/*!  */
-	uint numMaterials8;
+	internal uint numMaterials8;
 	/*! Does not appear to be used. */
-	uint[] materials8;
+	internal uint[] materials8;
 	/*! Number of chunk materials */
-	uint numMaterials;
+	internal uint numMaterials;
 	/*! Table (array) with sets of materials. Chunks refers to this table by index. */
-	bhkCMSDMaterial[] chunkMaterials;
+	internal bhkCMSDMaterial[] chunkMaterials;
 	/*!  */
-	uint numNamedMaterials;
+	internal uint numNamedMaterials;
 	/*! Number of chunk transformations */
-	uint numTransforms;
+	internal uint numTransforms;
 	/*!
 	 * Table (array) with sets of transformations. Chunks refers to this table by
 	 * index.
 	 */
-	bhkCMSDTransform[] chunkTransforms;
+	internal bhkCMSDTransform[] chunkTransforms;
 	/*!  */
-	uint numBigVerts;
+	internal uint numBigVerts;
 	/*! Compressed Vertices? */
-	Vector4[] bigVerts;
+	internal Vector4[] bigVerts;
 	/*!  */
-	uint numBigTris;
+	internal uint numBigTris;
 	/*!  */
-	bhkCMSDBigTris[] bigTris;
+	internal bhkCMSDBigTris[] bigTris;
 	/*!  */
-	uint numChunks;
+	internal uint numChunks;
 	/*!  */
-	bhkCMSDChunk[] chunks;
+	internal bhkCMSDChunk[] chunks;
 	/*! Does not appear to be used. Needs array. */
-	uint numConvexPieceA;
+	internal uint numConvexPieceA;
 
 	public bhkCompressedMeshShapeData() {
 	bitsPerIndex = (uint)0;

@@ -19,9 +19,9 @@ public class SkyShaderProperty : BSShaderLightingProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("SkyShaderProperty", BSShaderLightingProperty.TYPE);
 	/*! The texture. */
-	string fileName;
+	internal string fileName;
 	/*! Sky Object Type */
-	SkyObjectType skyObjectType;
+	internal SkyObjectType skyObjectType;
 
 	public SkyShaderProperty() {
 	skyObjectType = (SkyObjectType)0;

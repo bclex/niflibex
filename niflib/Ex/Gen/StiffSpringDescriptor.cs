@@ -13,11 +13,11 @@ namespace Niflib {
 /*!  */
 public class StiffSpringDescriptor {
 	/*!  */
-	Vector4 pivotA;
+	internal Vector4 pivotA;
 	/*!  */
-	Vector4 pivotB;
+	internal Vector4 pivotB;
 	/*!  */
-	float length;
+	internal float length;
 	//Constructor
 	public StiffSpringDescriptor() { unchecked {
 	length = 0.0f;

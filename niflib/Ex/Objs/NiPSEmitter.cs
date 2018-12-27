@@ -19,47 +19,47 @@ public class NiPSEmitter : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSEmitter", NiObject.TYPE);
 	/*!  */
-	IndexString name;
+	internal IndexString name;
 	/*!  */
-	float speed;
+	internal float speed;
 	/*!  */
-	float speedVar;
+	internal float speedVar;
 	/*!  */
-	float speedFlipRatio;
+	internal float speedFlipRatio;
 	/*!  */
-	float declination;
+	internal float declination;
 	/*!  */
-	float declinationVar;
+	internal float declinationVar;
 	/*!  */
-	float planarAngle;
+	internal float planarAngle;
 	/*!  */
-	float planarAngleVar;
+	internal float planarAngleVar;
 	/*!  */
-	ByteColor4 color;
+	internal ByteColor4 color;
 	/*!  */
-	float size;
+	internal float size;
 	/*!  */
-	float sizeVar;
+	internal float sizeVar;
 	/*!  */
-	float lifespan;
+	internal float lifespan;
 	/*!  */
-	float lifespanVar;
+	internal float lifespanVar;
 	/*!  */
-	float rotationAngle;
+	internal float rotationAngle;
 	/*!  */
-	float rotationAngleVar;
+	internal float rotationAngleVar;
 	/*!  */
-	float rotationSpeed;
+	internal float rotationSpeed;
 	/*!  */
-	float rotationSpeedVar;
+	internal float rotationSpeedVar;
 	/*!  */
-	Vector3 rotationAxis;
+	internal Vector3 rotationAxis;
 	/*!  */
-	bool randomRotSpeedSign;
+	internal bool randomRotSpeedSign;
 	/*!  */
-	bool randomRotAxis;
+	internal bool randomRotAxis;
 	/*! Unknown. */
-	bool unknown;
+	internal bool unknown;
 
 	public NiPSEmitter() {
 	speed = 0.0f;

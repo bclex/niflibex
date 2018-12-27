@@ -19,13 +19,13 @@ public class BSPSysLODModifier : NiPSysModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSPSysLODModifier", NiPSysModifier.TYPE);
 	/*!  */
-	float lodBeginDistance;
+	internal float lodBeginDistance;
 	/*!  */
-	float lodEndDistance;
+	internal float lodEndDistance;
 	/*!  */
-	float endEmitScale;
+	internal float endEmitScale;
 	/*!  */
-	float endSize;
+	internal float endSize;
 
 	public BSPSysLODModifier() {
 	lodBeginDistance = 0.1f;

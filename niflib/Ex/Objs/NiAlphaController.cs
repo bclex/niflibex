@@ -19,7 +19,7 @@ public class NiAlphaController : NiFloatInterpController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiAlphaController", NiFloatInterpController.TYPE);
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiAlphaController() {
 	data = null;

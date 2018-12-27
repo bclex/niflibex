@@ -22,19 +22,19 @@ public class NiGeometry : NiAVObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiGeometry", NiAVObject.TYPE);
 	/*!  */
-	NiBound bound;
+	internal NiBound bound;
 	/*!  */
-	NiObject skin;
+	internal NiObject skin;
 	/*! Data index (NiTriShapeData/NiTriStripData). */
-	NiGeometryData data;
+	internal NiGeometryData data;
 	/*!  */
-	NiSkinInstance skinInstance;
+	internal NiSkinInstance skinInstance;
 	/*!  */
-	MaterialData materialData;
+	internal MaterialData materialData;
 	/*!  */
-	BSShaderProperty shaderProperty;
+	internal BSShaderProperty shaderProperty;
 	/*!  */
-	NiAlphaProperty alphaProperty;
+	internal NiAlphaProperty alphaProperty;
 
 	public NiGeometry() {
 	skin = null;

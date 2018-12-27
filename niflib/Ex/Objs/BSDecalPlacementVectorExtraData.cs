@@ -22,9 +22,9 @@ public class BSDecalPlacementVectorExtraData : NiFloatExtraData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSDecalPlacementVectorExtraData", NiFloatExtraData.TYPE);
 	/*!  */
-	short numVectorBlocks;
+	internal short numVectorBlocks;
 	/*!  */
-	DecalVectorArray[] vectorBlocks;
+	internal DecalVectorArray[] vectorBlocks;
 
 	public BSDecalPlacementVectorExtraData() {
 	numVectorBlocks = (short)0;

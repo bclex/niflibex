@@ -19,9 +19,9 @@ public class NiPhysXSrc : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPhysXSrc", NiObject.TYPE);
 	/*!  */
-	bool active;
+	internal bool active;
 	/*!  */
-	bool interpolate;
+	internal bool interpolate;
 
 	public NiPhysXSrc() {
 	active = false;

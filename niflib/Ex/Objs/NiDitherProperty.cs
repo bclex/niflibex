@@ -22,7 +22,7 @@ public class NiDitherProperty : NiProperty {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiDitherProperty", NiProperty.TYPE);
 	/*! 1 = Enable dithering */
-	ushort flags;
+	internal ushort flags;
 
 	public NiDitherProperty() {
 	flags = (ushort)0;

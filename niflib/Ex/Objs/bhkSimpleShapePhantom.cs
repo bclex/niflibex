@@ -19,9 +19,9 @@ public class bhkSimpleShapePhantom : bhkShapePhantom {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkSimpleShapePhantom", bhkShapePhantom.TYPE);
 	/*! Garbage data from memory. */
-	Array8<byte> unused2;
+	internal Array8<byte> unused2;
 	/*!  */
-	Matrix44 transform;
+	internal Matrix44 transform;
 
 	public bhkSimpleShapePhantom() {
 	}

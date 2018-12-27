@@ -23,19 +23,19 @@ public class NiPathController : NiTimeController {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPathController", NiTimeController.TYPE);
 	/*!  */
-	PathFlags pathFlags;
+	internal PathFlags pathFlags;
 	/*! -1 = Negative, 1 = Positive */
-	int bankDir;
+	internal int bankDir;
 	/*! Max angle in radians. */
-	float maxBankAngle;
+	internal float maxBankAngle;
 	/*!  */
-	float smoothing;
+	internal float smoothing;
 	/*! 0, 1, or 2 representing X, Y, or Z. */
-	short followAxis;
+	internal short followAxis;
 	/*!  */
-	NiPosData pathData;
+	internal NiPosData pathData;
 	/*!  */
-	NiFloatData percentData;
+	internal NiFloatData percentData;
 
 	public NiPathController() {
 	pathFlags = (PathFlags)0;

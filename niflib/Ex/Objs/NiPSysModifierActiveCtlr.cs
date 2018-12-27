@@ -22,7 +22,7 @@ public class NiPSysModifierActiveCtlr : NiPSysModifierBoolCtlr {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysModifierActiveCtlr", NiPSysModifierBoolCtlr.TYPE);
 	/*!  */
-	NiVisData data;
+	internal NiVisData data;
 
 	public NiPSysModifierActiveCtlr() {
 	data = null;

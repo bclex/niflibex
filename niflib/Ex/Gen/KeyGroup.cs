@@ -13,11 +13,11 @@ namespace Niflib {
 /*! Array of vector keys (anything that can be interpolated, except rotations). */
 public class KeyGroup<T> {
 	/*! Number of keys in the array. */
-	uint numKeys;
+	internal uint numKeys;
 	/*! The key type. */
-	KeyType interpolation;
+	internal KeyType interpolation;
 	/*! The keys. */
-	Key<T>[] keys;
+	internal Key<T>[] keys;
 }
 
 }

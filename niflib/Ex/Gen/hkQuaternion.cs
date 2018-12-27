@@ -13,13 +13,13 @@ namespace Niflib {
 /*! A quaternion as it appears in the havok objects. */
 public class hkQuaternion {
 	/*! The x-coordinate. */
-	float x;
+	internal float x;
 	/*! The y-coordinate. */
-	float y;
+	internal float y;
 	/*! The z-coordinate. */
-	float z;
+	internal float z;
 	/*! The w-coordinate. */
-	float w;
+	internal float w;
 	//Constructor
 	public hkQuaternion() { unchecked {
 	x = 0.0f;

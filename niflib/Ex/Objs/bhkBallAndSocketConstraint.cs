@@ -19,7 +19,7 @@ public class bhkBallAndSocketConstraint : bhkConstraint {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkBallAndSocketConstraint", bhkConstraint.TYPE);
 	/*! Describes a ball and socket constraint */
-	BallAndSocketDescriptor ballAndSocket;
+	internal BallAndSocketDescriptor ballAndSocket;
 
 	public bhkBallAndSocketConstraint() {
 	}

@@ -19,13 +19,13 @@ public class BSStripPSysData : NiPSysData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("BSStripPSysData", NiPSysData.TYPE);
 	/*!  */
-	ushort maxPointCount;
+	internal ushort maxPointCount;
 	/*!  */
-	float startCapSize;
+	internal float startCapSize;
 	/*!  */
-	float endCapSize;
+	internal float endCapSize;
 	/*!  */
-	bool doZPrepass;
+	internal bool doZPrepass;
 
 	public BSStripPSysData() {
 	maxPointCount = (ushort)0;

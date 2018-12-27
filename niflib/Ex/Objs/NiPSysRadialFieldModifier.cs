@@ -22,7 +22,7 @@ public class NiPSysRadialFieldModifier : NiPSysFieldModifier {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysRadialFieldModifier", NiPSysFieldModifier.TYPE);
 	/*! If zero, no attenuation. */
-	float radialType;
+	internal float radialType;
 
 	public NiPSysRadialFieldModifier() {
 	radialType = 0.0f;

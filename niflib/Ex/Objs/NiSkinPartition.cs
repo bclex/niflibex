@@ -23,19 +23,19 @@ public class NiSkinPartition : NiObject {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiSkinPartition", NiObject.TYPE);
 	/*!  */
-	uint numSkinPartitionBlocks;
+	internal uint numSkinPartitionBlocks;
 	/*! Skin partition objects. */
-	SkinPartition[] skinPartitionBlocks;
+	internal SkinPartition[] skinPartitionBlocks;
 	/*!  */
-	uint dataSize;
+	internal uint dataSize;
 	/*!  */
-	uint vertexSize;
+	internal uint vertexSize;
 	/*!  */
-	BSVertexDesc vertexDesc;
+	internal BSVertexDesc vertexDesc;
 	/*!  */
-	BSVertexData[] vertexData;
+	internal BSVertexData[] vertexData;
 	/*!  */
-	SkinPartition[] partition;
+	internal SkinPartition[] partition;
 
 	public NiSkinPartition() {
 	numSkinPartitionBlocks = (uint)0;

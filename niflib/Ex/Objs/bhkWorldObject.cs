@@ -19,24 +19,24 @@ public class bhkWorldObject : bhkSerializable {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("bhkWorldObject", bhkSerializable.TYPE);
 	/*! Link to the body for this collision object. */
-	bhkShape shape;
+	internal bhkShape shape;
 	/*! Unknown. */
-	uint unknownInt;
+	internal uint unknownInt;
 	/*!  */
-	HavokFilter havokFilter;
+	internal HavokFilter havokFilter;
 	/*! Garbage data from memory. */
-	Array4<byte> unused;
+	internal Array4<byte> unused;
 	/*!  */
-	BroadPhaseType broadPhaseType;
+	internal BroadPhaseType broadPhaseType;
 	/*!  */
-	Array3<byte> unusedBytes;
+	internal Array3<byte> unusedBytes;
 	/*!  */
-	hkWorldObjCinfoProperty cinfoProperty;
+	internal hkWorldObjCinfoProperty cinfoProperty;
 
 	public bhkWorldObject() {
 	shape = null;
 	unknownInt = (uint)0;
-	broadPhaseType = BroadPhaseType.1;
+	broadPhaseType = (BroadPhaseType)1;
 }
 
 /*!
@@ -189,34 +189,26 @@ internal override List<NiObject> GetPtrs() {
 }
 
 //--BEGIN:FILE FOOT--//
+/*!
+* Get or sets the shape object that this body will use.
+* \param[in] value The new shape object for this body to use.
+*/
+public bhkShape Shape
+{
+    get => shape;
+    set => shape = value;
+}
 
-        /*!
-         * Retrieves the shape object that this body is using.
-         * \return The shape object being used by this body.
-         */
-        NIFLIB_API Ref<bhkShape> GetShape() const;
 
-        /*!
-         * Sets the shape object that this body will use.
-         * \param[in] value The new shape object for this body to use.
-         */
-        NIFLIB_API void SetShape(bhkShape* value);
-
-        /*!
-         * Gets the current Oblivion layer, which seems to determine the mesh color displayed by the Oblivion Construction Set.
-         * \return The current Oblivion Layer.
-         */
-        NIFLIB_API OblivionLayer GetLayer() const;
-
-        /*!
-         * Sets the Oblivion layer, which seems to determine the mesh color displayed by the Oblivion Construction Set.
-         * \param[in] value The new Oblivoin layer to use.
-         */
-        NIFLIB_API void SetLayer(OblivionLayer value);
-
-        NIFLIB_API SkyrimLayer GetSkyrimLayer() const;
-        NIFLIB_API void SetSkyrimLayer(SkyrimLayer value);
-
+/*!
+* Gets or sets the Oblivion layer, which seems to determine the mesh color displayed by the Oblivion Construction Set.
+* \param[in] value The new Oblivoin layer to use.
+*/
+public HavokFilter HavokFilter
+{
+    get => havokFilter;
+    set => havokFilter = value;
+}
 //--END:CUSTOM--//
 
 }

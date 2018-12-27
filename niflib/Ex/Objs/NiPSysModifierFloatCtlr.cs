@@ -22,7 +22,7 @@ public class NiPSysModifierFloatCtlr : NiPSysModifierCtlr {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysModifierFloatCtlr", NiPSysModifierCtlr.TYPE);
 	/*!  */
-	NiFloatData data;
+	internal NiFloatData data;
 
 	public NiPSysModifierFloatCtlr() {
 	data = null;
