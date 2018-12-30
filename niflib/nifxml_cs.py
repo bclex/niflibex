@@ -169,6 +169,10 @@ ACTION_FIXLINKS = 3
 ACTION_GETREFS = 4
 ACTION_GETPTRS = 5
 
+
+LISTARRAYS = [
+    'bhkConstraint::entities',
+]
         
 #
 # C# code formatting functions
@@ -1412,14 +1416,6 @@ class Member:
         suffix1 = ""
         suffix2 = ""
         keyword = "internal "
-        #if not self.is_duplicate: # is dimension for one or more arrays
-        #  if self.arr1_ref:
-        #    if not self.arr1 or not self.arr1.lhs: # Simple Scalar
-        #      keyword = "mutable "
-        #  elif self.arr2_ref: # 1-dimensional dynamic array
-        #      keyword = "mutable "
-        #  elif self.is_calculated:
-        #      keyword = "mutable "
         if self.ctemplate:
             if result != "*" and result != "Ref":
                 result += "<%s>" % self.ctemplate

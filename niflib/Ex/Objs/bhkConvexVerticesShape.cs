@@ -176,7 +176,7 @@ internal override List<NiObject> GetPtrs() {
         * Returns the number of vertices that make up this mesh.  This is also the number of normals, colors, and UV coordinates if these are used.
         * \return The number of vertices that make up this mesh.
         */
-        public int VertexCount { get => vertices.Length; }
+        public int VertexCount => vertices.Length;
 
         /*! 
         * Used to retrieve the vertices used by this mesh.  The size of the vector will be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
@@ -304,7 +304,7 @@ internal override List<NiObject> GetPtrs() {
             inertia = InertiaMatrix.IDENTITY;
             var verts = GetVertices();
             var tris = new List<Triangle>(); // no tris mean convex
-            Inertia.CalcMassPropertiesPolyhedron(verts, tris, density, solid, mass, volume, center, inertia);
+            Inertia.CalcMassPropertiesPolyhedron(verts, tris, density, solid, out mass, out volume, out center, out inertia);
         }
 //--END:CUSTOM--//
 

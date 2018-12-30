@@ -206,21 +206,21 @@ namespace Niflib
         // The function is an implementation of the Blow and Binstock algorithm,
         // extended for the case where the polygon is a surface (set parameter
         // solid = False).
-        static void CalcMassPropertiesPolyhedron(Vector3[] vertices,
-            Triangle[] triangles,
+        static void CalcMassPropertiesPolyhedron(List<Vector3> vertices,
+            List<Triangle> triangles,
             float density, bool solid,
             out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
         {
             if (extCalcMassPropertiesPolyhedronRoutine != null)
             {
-                extCalcMassPropertiesPolyhedronRoutine((int)vertices.Length, vertices[0],
-                    (int)triangles.Length, triangles.Length == 0 ? null : triangles[0],
+                extCalcMassPropertiesPolyhedronRoutine((int)vertices.Count, vertices[0],
+                    (int)triangles.Count, triangles.Count == 0 ? null : triangles[0],
                     density, solid,
                     out mass, out volume, out center, out inertia);
                 return;
             }
 
-            var tri = triangles.Length == 0 ? NifQHull.compute_convex_hull(vertices) : triangles;
+            var tri = triangles.Count == 0 ? NifQHull.compute_convex_hull(vertices) : triangles;
 
             // 120 times the covariance matrix of the canonical tetrahedron
             // (0,0,0),(1,0,0),(0,1,0),(0,0,1)
