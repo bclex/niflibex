@@ -21,7 +21,7 @@ public class BSBoneLODExtraData : NiExtraData {
 	/*! Number of bone entries */
 	internal uint bonelodCount;
 	/*! Bone Entry */
-	internal BoneLOD[] bonelodInfo;
+	internal IList<BoneLOD> bonelodInfo;
 
 	public BSBoneLODExtraData() {
 	bonelodCount = (uint)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out bonelodCount, s, info);
 	bonelodInfo = new BoneLOD[bonelodCount];
-	for (var i1 = 0; i1 < bonelodInfo.Length; i1++) {
+	for (var i1 = 0; i1 < bonelodInfo.Count; i1++) {
 		Nif.NifStream(out bonelodInfo[i1].distance, s, info);
 		Nif.NifStream(out bonelodInfo[i1].boneName, s, info);
 	}
@@ -56,9 +56,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	bonelodCount = (uint)bonelodInfo.Length;
+	bonelodCount = (uint)bonelodInfo.Count;
 	Nif.NifStream(bonelodCount, s, info);
-	for (var i1 = 0; i1 < bonelodInfo.Length; i1++) {
+	for (var i1 = 0; i1 < bonelodInfo.Count; i1++) {
 		Nif.NifStream(bonelodInfo[i1].distance, s, info);
 		Nif.NifStream(bonelodInfo[i1].boneName, s, info);
 	}
@@ -75,10 +75,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	bonelodCount = (uint)bonelodInfo.Length;
+	bonelodCount = (uint)bonelodInfo.Count;
 	s.AppendLine($"  BoneLOD Count:  {bonelodCount}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bonelodInfo.Length; i1++) {
+	for (var i1 = 0; i1 < bonelodInfo.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -182,7 +182,7 @@ internal override List<NiObject> GetPtrs() {
         *  \param[out] inertia Mass Inertia Tensor
         *  \return Return mass, center, and inertia tensor.
         */
-        public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia) => Inertia.CalcMassPropertiesCapsule(firstPoint, secondPoint, radius, density, solid, mass, volume, center, inertia);
+        public virtual void CalcMassProperties(float density, bool solid, out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia) => Inertia.CalcMassPropertiesCapsule(firstPoint, secondPoint, radius, density, solid, out mass, out volume, out center, out inertia);
 //--END:CUSTOM--//
 
 }

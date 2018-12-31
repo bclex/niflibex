@@ -23,11 +23,11 @@ public class NiAdditionalGeometryData : AbstractAdditionalGeometryData {
 	/*! Information about additional data blocks */
 	internal uint numBlockInfos;
 	/*! Number of additional data blocks */
-	internal AdditionalDataInfo[] blockInfos;
+	internal IList<AdditionalDataInfo> blockInfos;
 	/*! Number of additional data blocks */
 	internal int numBlocks;
 	/*! Number of additional data blocks */
-	internal AdditionalDataBlock[] blocks;
+	internal IList<AdditionalDataBlock> blocks;
 
 	public NiAdditionalGeometryData() {
 	numVertices = (ushort)0;
@@ -54,7 +54,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numVertices, s, info);
 	Nif.NifStream(out numBlockInfos, s, info);
 	blockInfos = new AdditionalDataInfo[numBlockInfos];
-	for (var i1 = 0; i1 < blockInfos.Length; i1++) {
+	for (var i1 = 0; i1 < blockInfos.Count; i1++) {
 		Nif.NifStream(out blockInfos[i1].dataType, s, info);
 		Nif.NifStream(out blockInfos[i1].numChannelBytesPerElement, s, info);
 		Nif.NifStream(out blockInfos[i1].numChannelBytes, s, info);
@@ -65,24 +65,24 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numBlocks, s, info);
 	blocks = new AdditionalDataBlock[numBlocks];
-	for (var i1 = 0; i1 < blocks.Length; i1++) {
+	for (var i1 = 0; i1 < blocks.Count; i1++) {
 		Nif.NifStream(out blocks[i1].hasData, s, info);
 		if (blocks[i1].hasData) {
 			Nif.NifStream(out blocks[i1].blockSize, s, info);
 			Nif.NifStream(out blocks[i1].numBlocks, s, info);
 			blocks[i1].blockOffsets = new int[blocks[i1].numBlocks];
-			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Count; i3++) {
 				Nif.NifStream(out blocks[i1].blockOffsets[i3], s, info);
 			}
 			Nif.NifStream(out blocks[i1].numData, s, info);
 			blocks[i1].dataSizes = new int[blocks[i1].numData];
-			for (var i3 = 0; i3 < blocks[i1].dataSizes.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].dataSizes.Count; i3++) {
 				Nif.NifStream(out blocks[i1].dataSizes[i3], s, info);
 			}
 			blocks[i1].data = new byte[blocks[i1].numData];
-			for (var i3 = 0; i3 < blocks[i1].data.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].data.Count; i3++) {
 				blocks[i1].data[i3].Resize(blocks[i1].blockSize);
-				for (var i4 = 0; i4 < blocks[i1].data[i3].Length; i4++) {
+				for (var i4 = 0; i4 < blocks[i1].data[i3].Count; i4++) {
 					Nif.NifStream(out blocks[i1].data[i3][i4], s, info);
 				}
 			}
@@ -95,11 +95,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numBlocks = (int)blocks.Length;
-	numBlockInfos = (uint)blockInfos.Length;
+	numBlocks = (int)blocks.Count;
+	numBlockInfos = (uint)blockInfos.Count;
 	Nif.NifStream(numVertices, s, info);
 	Nif.NifStream(numBlockInfos, s, info);
-	for (var i1 = 0; i1 < blockInfos.Length; i1++) {
+	for (var i1 = 0; i1 < blockInfos.Count; i1++) {
 		Nif.NifStream(blockInfos[i1].dataType, s, info);
 		Nif.NifStream(blockInfos[i1].numChannelBytesPerElement, s, info);
 		Nif.NifStream(blockInfos[i1].numChannelBytes, s, info);
@@ -109,23 +109,23 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(blockInfos[i1].unknownByte1, s, info);
 	}
 	Nif.NifStream(numBlocks, s, info);
-	for (var i1 = 0; i1 < blocks.Length; i1++) {
-		blocks[i1].numData = (int)blocks[i1].dataSizes.Length;
-		blocks[i1].numBlocks = (int)blocks[i1].blockOffsets.Length;
-		blocks[i1].blockSize = (int)((blocks[i1].data.Length > 0) ? blocks[i1].data[0].Length : 0);
+	for (var i1 = 0; i1 < blocks.Count; i1++) {
+		blocks[i1].numData = (int)blocks[i1].dataSizes.Count;
+		blocks[i1].numBlocks = (int)blocks[i1].blockOffsets.Count;
+		blocks[i1].blockSize = (int)((blocks[i1].data.Count > 0) ? blocks[i1].data[0].Count : 0);
 		Nif.NifStream(blocks[i1].hasData, s, info);
 		if (blocks[i1].hasData) {
 			Nif.NifStream(blocks[i1].blockSize, s, info);
 			Nif.NifStream(blocks[i1].numBlocks, s, info);
-			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Count; i3++) {
 				Nif.NifStream(blocks[i1].blockOffsets[i3], s, info);
 			}
 			Nif.NifStream(blocks[i1].numData, s, info);
-			for (var i3 = 0; i3 < blocks[i1].dataSizes.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].dataSizes.Count; i3++) {
 				Nif.NifStream(blocks[i1].dataSizes[i3], s, info);
 			}
-			for (var i3 = 0; i3 < blocks[i1].data.Length; i3++) {
-				for (var i4 = 0; i4 < blocks[i1].data[i3].Length; i4++) {
+			for (var i3 = 0; i3 < blocks[i1].data.Count; i3++) {
+				for (var i4 = 0; i4 < blocks[i1].data[i3].Count; i4++) {
 					Nif.NifStream(blocks[i1].data[i3][i4], s, info);
 				}
 			}
@@ -144,12 +144,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numBlocks = (int)blocks.Length;
-	numBlockInfos = (uint)blockInfos.Length;
+	numBlocks = (int)blocks.Count;
+	numBlockInfos = (uint)blockInfos.Count;
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	s.AppendLine($"  Num Block Infos:  {numBlockInfos}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < blockInfos.Length; i1++) {
+	for (var i1 = 0; i1 < blockInfos.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -164,20 +164,20 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Blocks:  {numBlocks}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < blocks.Length; i1++) {
+	for (var i1 = 0; i1 < blocks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		blocks[i1].numData = (int)blocks[i1].dataSizes.Length;
-		blocks[i1].numBlocks = (int)blocks[i1].blockOffsets.Length;
-		blocks[i1].blockSize = (int)((blocks[i1].data.Length > 0) ? blocks[i1].data[0].Length : 0);
+		blocks[i1].numData = (int)blocks[i1].dataSizes.Count;
+		blocks[i1].numBlocks = (int)blocks[i1].blockOffsets.Count;
+		blocks[i1].blockSize = (int)((blocks[i1].data.Count > 0) ? blocks[i1].data[0].Count : 0);
 		s.AppendLine($"    Has Data:  {blocks[i1].hasData}");
 		if (blocks[i1].hasData) {
 			s.AppendLine($"      Block Size:  {blocks[i1].blockSize}");
 			s.AppendLine($"      Num Blocks:  {blocks[i1].numBlocks}");
 			array_output_count = 0;
-			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].blockOffsets.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -190,7 +190,7 @@ public override string AsString(bool verbose = false) {
 			}
 			s.AppendLine($"      Num Data:  {blocks[i1].numData}");
 			array_output_count = 0;
-			for (var i3 = 0; i3 < blocks[i1].dataSizes.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].dataSizes.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -202,12 +202,12 @@ public override string AsString(bool verbose = false) {
 				array_output_count++;
 			}
 			array_output_count = 0;
-			for (var i3 = 0; i3 < blocks[i1].data.Length; i3++) {
+			for (var i3 = 0; i3 < blocks[i1].data.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
 				}
-				for (var i4 = 0; i4 < blocks[i1].data[i3].Length; i4++) {
+				for (var i4 = 0; i4 < blocks[i1].data[i3].Count; i4++) {
 					if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 						break;
 					}

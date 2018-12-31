@@ -24,11 +24,11 @@ public class NiBSplineData : NiObject {
 	/*!  */
 	internal uint numFloatControlPoints;
 	/*! Float values representing the control data. */
-	internal float[] floatControlPoints;
+	internal IList<float> floatControlPoints;
 	/*!  */
 	internal uint numCompactControlPoints;
 	/*! Signed shorts representing the data from 0 to 1 (scaled by SHRT_MAX). */
-	internal short[] compactControlPoints;
+	internal IList<short> compactControlPoints;
 
 	public NiBSplineData() {
 	numFloatControlPoints = (uint)0;
@@ -53,12 +53,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numFloatControlPoints, s, info);
 	floatControlPoints = new float[numFloatControlPoints];
-	for (var i1 = 0; i1 < floatControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < floatControlPoints.Count; i1++) {
 		Nif.NifStream(out floatControlPoints[i1], s, info);
 	}
 	Nif.NifStream(out numCompactControlPoints, s, info);
 	compactControlPoints = new short[numCompactControlPoints];
-	for (var i1 = 0; i1 < compactControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < compactControlPoints.Count; i1++) {
 		Nif.NifStream(out compactControlPoints[i1], s, info);
 	}
 
@@ -68,14 +68,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numCompactControlPoints = (uint)compactControlPoints.Length;
-	numFloatControlPoints = (uint)floatControlPoints.Length;
+	numCompactControlPoints = (uint)compactControlPoints.Count;
+	numFloatControlPoints = (uint)floatControlPoints.Count;
 	Nif.NifStream(numFloatControlPoints, s, info);
-	for (var i1 = 0; i1 < floatControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < floatControlPoints.Count; i1++) {
 		Nif.NifStream(floatControlPoints[i1], s, info);
 	}
 	Nif.NifStream(numCompactControlPoints, s, info);
-	for (var i1 = 0; i1 < compactControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < compactControlPoints.Count; i1++) {
 		Nif.NifStream(compactControlPoints[i1], s, info);
 	}
 
@@ -91,11 +91,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numCompactControlPoints = (uint)compactControlPoints.Length;
-	numFloatControlPoints = (uint)floatControlPoints.Length;
+	numCompactControlPoints = (uint)compactControlPoints.Count;
+	numFloatControlPoints = (uint)floatControlPoints.Count;
 	s.AppendLine($"  Num Float Control Points:  {numFloatControlPoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < floatControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < floatControlPoints.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -108,7 +108,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Compact Control Points:  {numCompactControlPoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < compactControlPoints.Length; i1++) {
+	for (var i1 = 0; i1 < compactControlPoints.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

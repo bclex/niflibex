@@ -27,7 +27,7 @@ public class Ni3dsAlphaAnimator : NiObject {
 	/*! Unknown. */
 	internal uint num2;
 	/*! Unknown. */
-	internal uint[][] unknown2;
+	internal IList<uint[]> unknown2;
 
 	public Ni3dsAlphaAnimator() {
 	parent = null;
@@ -60,9 +60,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out num1, s, info);
 	Nif.NifStream(out num2, s, info);
 	unknown2 = new uint[num1];
-	for (var i1 = 0; i1 < unknown2.Length; i1++) {
+	for (var i1 = 0; i1 < unknown2.Count; i1++) {
 		unknown2[i1].Resize(num2);
-		for (var i2 = 0; i2 < unknown2[i1].Length; i2++) {
+		for (var i2 = 0; i2 < unknown2[i1].Count; i2++) {
 			Nif.NifStream(out unknown2[i1][i2], s, info);
 		}
 	}
@@ -73,16 +73,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	num2 = (uint)((unknown2.Length > 0) ? unknown2[0].Length : 0);
-	num1 = (uint)unknown2.Length;
+	num2 = (uint)((unknown2.Count > 0) ? unknown2[0].Count : 0);
+	num1 = (uint)unknown2.Count;
 	for (var i1 = 0; i1 < 40; i1++) {
 		Nif.NifStream(unknown1[i1], s, info);
 	}
 	WriteRef((NiObject)parent, s, info, link_map, missing_link_stack);
 	Nif.NifStream(num1, s, info);
 	Nif.NifStream(num2, s, info);
-	for (var i1 = 0; i1 < unknown2.Length; i1++) {
-		for (var i2 = 0; i2 < unknown2[i1].Length; i2++) {
+	for (var i1 = 0; i1 < unknown2.Count; i1++) {
+		for (var i2 = 0; i2 < unknown2[i1].Count; i2++) {
 			Nif.NifStream(unknown2[i1][i2], s, info);
 		}
 	}
@@ -99,8 +99,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	num2 = (uint)((unknown2.Length > 0) ? unknown2[0].Length : 0);
-	num1 = (uint)unknown2.Length;
+	num2 = (uint)((unknown2.Count > 0) ? unknown2[0].Count : 0);
+	num1 = (uint)unknown2.Count;
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 40; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
@@ -117,12 +117,12 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num 1:  {num1}");
 	s.AppendLine($"  Num 2:  {num2}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown2.Length; i1++) {
+	for (var i1 = 0; i1 < unknown2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		for (var i2 = 0; i2 < unknown2[i1].Length; i2++) {
+		for (var i2 = 0; i2 < unknown2[i1].Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				break;
 			}

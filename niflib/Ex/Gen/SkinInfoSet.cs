@@ -15,7 +15,7 @@ public class SkinInfoSet {
 	/*!  */
 	internal uint numSkinInfo;
 	/*!  */
-	internal SkinInfo[] skinInfo;
+	internal IList<SkinInfo> skinInfo;
 	//Constructor
 	public SkinInfoSet() { unchecked {
 	numSkinInfo = (uint)0;

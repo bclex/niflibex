@@ -31,7 +31,7 @@ public class BSShaderTextureSet : NiObject {
 	 *             6: Subsurface for Multilayer Parallax
 	 *             7: Back Lighting Map (SLSF2_Back_Lighting)
 	 */
-	internal string[] textures;
+	internal IList<string> textures;
 
 	public BSShaderTextureSet() {
 	numTextures = (int)6;
@@ -55,7 +55,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numTextures, s, info);
 	textures = new string[numTextures];
-	for (var i1 = 0; i1 < textures.Length; i1++) {
+	for (var i1 = 0; i1 < textures.Count; i1++) {
 		Nif.NifStream(out textures[i1], s, info);
 	}
 
@@ -65,9 +65,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numTextures = (int)textures.Length;
+	numTextures = (int)textures.Count;
 	Nif.NifStream(numTextures, s, info);
-	for (var i1 = 0; i1 < textures.Length; i1++) {
+	for (var i1 = 0; i1 < textures.Count; i1++) {
 		Nif.NifStream(textures[i1], s, info);
 	}
 
@@ -83,10 +83,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numTextures = (int)textures.Length;
+	numTextures = (int)textures.Count;
 	s.AppendLine($"  Num Textures:  {numTextures}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < textures.Length; i1++) {
+	for (var i1 = 0; i1 < textures.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

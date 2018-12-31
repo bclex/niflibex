@@ -27,7 +27,7 @@ public class NiPhysXBodyDesc : NiObject {
 	/*!  */
 	internal uint numVels;
 	/*!  */
-	internal PhysXBodyStoredVels[] vels;
+	internal IList<PhysXBodyStoredVels> vels;
 	/*!  */
 	internal float wakeUpCounter;
 	/*!  */
@@ -91,7 +91,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out mass, s, info);
 	Nif.NifStream(out numVels, s, info);
 	vels = new PhysXBodyStoredVels[numVels];
-	for (var i1 = 0; i1 < vels.Length; i1++) {
+	for (var i1 = 0; i1 < vels.Count; i1++) {
 		Nif.NifStream(out vels[i1].linearVelocity, s, info);
 		Nif.NifStream(out vels[i1].angularVelocity, s, info);
 		if (info.version >= 0x1E020003) {
@@ -121,12 +121,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVels = (uint)vels.Length;
+	numVels = (uint)vels.Count;
 	Nif.NifStream(localPose, s, info);
 	Nif.NifStream(spaceInertia, s, info);
 	Nif.NifStream(mass, s, info);
 	Nif.NifStream(numVels, s, info);
-	for (var i1 = 0; i1 < vels.Length; i1++) {
+	for (var i1 = 0; i1 < vels.Count; i1++) {
 		Nif.NifStream(vels[i1].linearVelocity, s, info);
 		Nif.NifStream(vels[i1].angularVelocity, s, info);
 		if (info.version >= 0x1E020003) {
@@ -162,13 +162,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVels = (uint)vels.Length;
+	numVels = (uint)vels.Count;
 	s.AppendLine($"  Local Pose:  {localPose}");
 	s.AppendLine($"  Space Inertia:  {spaceInertia}");
 	s.AppendLine($"  Mass:  {mass}");
 	s.AppendLine($"  Num Vels:  {numVels}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vels.Length; i1++) {
+	for (var i1 = 0; i1 < vels.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

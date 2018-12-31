@@ -22,16 +22,16 @@ public class BSPackedAdditionalDataBlock {
 	/*! Number of blocks? Usually equal to one. */
 	internal int numBlocks;
 	/*! Block offsets in the data? Usually equal to zero. */
-	internal int[] blockOffsets;
+	internal IList<int> blockOffsets;
 	/*! Number of atoms? */
 	internal int numAtoms;
 	/*!
 	 * The sum of all of these equal num total bytes per element, so this probably
 	 * describes how each data element breaks down into smaller chunks (i.e. atoms).
 	 */
-	internal int[] atomSizes;
+	internal IList<int> atomSizes;
 	/*!  */
-	internal byte[] data;
+	internal IList<byte> data;
 	/*! Unknown. */
 	internal int unknownInt1;
 	/*!

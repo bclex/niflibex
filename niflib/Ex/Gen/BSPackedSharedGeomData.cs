@@ -31,7 +31,7 @@ public class BSPackedSharedGeomData {
 	/*!  */
 	internal uint numCombined;
 	/*!  */
-	internal BSPackedGeomDataCombined[] combined;
+	internal IList<BSPackedGeomDataCombined> combined;
 	/*!  */
 	internal BSVertexDesc vertexDesc;
 	//Constructor

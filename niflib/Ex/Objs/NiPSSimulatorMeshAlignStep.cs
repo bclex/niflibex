@@ -24,7 +24,7 @@ public class NiPSSimulatorMeshAlignStep : NiPSSimulatorStep {
 	/*!  */
 	internal byte numRotationKeys;
 	/*! The particle rotation keys. */
-	internal Key<Quaternion>[] rotationKeys;
+	internal IList<Key<Quaternion>> rotationKeys;
 	/*! The loop behavior for the rotation keys. */
 	internal PSLoopBehavior rotationLoopBehavior;
 
@@ -51,7 +51,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numRotationKeys, s, info);
 	rotationKeys = new Key[numRotationKeys];
-	for (var i1 = 0; i1 < rotationKeys.Length; i1++) {
+	for (var i1 = 0; i1 < rotationKeys.Count; i1++) {
 		Nif.NifStream(out rotationKeys[i1], s, info, 1);
 	}
 	Nif.NifStream(out rotationLoopBehavior, s, info);
@@ -62,9 +62,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numRotationKeys = (byte)rotationKeys.Length;
+	numRotationKeys = (byte)rotationKeys.Count;
 	Nif.NifStream(numRotationKeys, s, info);
-	for (var i1 = 0; i1 < rotationKeys.Length; i1++) {
+	for (var i1 = 0; i1 < rotationKeys.Count; i1++) {
 		Nif.NifStream(rotationKeys[i1], s, info, 1);
 	}
 	Nif.NifStream(rotationLoopBehavior, s, info);
@@ -81,10 +81,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numRotationKeys = (byte)rotationKeys.Length;
+	numRotationKeys = (byte)rotationKeys.Count;
 	s.AppendLine($"  Num Rotation Keys:  {numRotationKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < rotationKeys.Length; i1++) {
+	for (var i1 = 0; i1 < rotationKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -28,7 +28,7 @@ public class NiMorphData : NiObject {
 	/*! This byte is always 1 in all official files. */
 	internal byte relativeTargets;
 	/*! The geometry morphing objects. */
-	internal Morph[] morphs;
+	internal IList<Morph> morphs;
 
 	public NiMorphData() {
 	numMorphs = (uint)0;
@@ -56,7 +56,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numVertices, s, info);
 	Nif.NifStream(out relativeTargets, s, info);
 	morphs = new Morph[numMorphs];
-	for (var i1 = 0; i1 < morphs.Length; i1++) {
+	for (var i1 = 0; i1 < morphs.Count; i1++) {
 		if (info.version >= 0x0A01006A) {
 			Nif.NifStream(out morphs[i1].frameName, s, info);
 		}
@@ -64,7 +64,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out morphs[i1].numKeys, s, info);
 			Nif.NifStream(out morphs[i1].interpolation, s, info);
 			morphs[i1].keys = new Key[morphs[i1].numKeys];
-			for (var i3 = 0; i3 < morphs[i1].keys.Length; i3++) {
+			for (var i3 = 0; i3 < morphs[i1].keys.Count; i3++) {
 				Nif.NifStream(out morphs[i1].keys[i3], s, info, morphs[i1].interpolation);
 			}
 		}
@@ -72,7 +72,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out morphs[i1].legacyWeight, s, info);
 		}
 		morphs[i1].vectors = new Vector3[numVertices];
-		for (var i2 = 0; i2 < morphs[i1].vectors.Length; i2++) {
+		for (var i2 = 0; i2 < morphs[i1].vectors.Count; i2++) {
 			Nif.NifStream(out morphs[i1].vectors[i2], s, info);
 		}
 	}
@@ -83,26 +83,26 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numMorphs = (uint)morphs.Length;
+	numMorphs = (uint)morphs.Count;
 	Nif.NifStream(numMorphs, s, info);
 	Nif.NifStream(numVertices, s, info);
 	Nif.NifStream(relativeTargets, s, info);
-	for (var i1 = 0; i1 < morphs.Length; i1++) {
-		morphs[i1].numKeys = (uint)morphs[i1].keys.Length;
+	for (var i1 = 0; i1 < morphs.Count; i1++) {
+		morphs[i1].numKeys = (uint)morphs[i1].keys.Count;
 		if (info.version >= 0x0A01006A) {
 			Nif.NifStream(morphs[i1].frameName, s, info);
 		}
 		if (info.version <= 0x0A010000) {
 			Nif.NifStream(morphs[i1].numKeys, s, info);
 			Nif.NifStream(morphs[i1].interpolation, s, info);
-			for (var i3 = 0; i3 < morphs[i1].keys.Length; i3++) {
+			for (var i3 = 0; i3 < morphs[i1].keys.Count; i3++) {
 				Nif.NifStream(morphs[i1].keys[i3], s, info, morphs[i1].interpolation);
 			}
 		}
 		if ((info.version >= 0x0A010068) && (info.version <= 0x14010002) && ((info.userVersion2 < 10))) {
 			Nif.NifStream(morphs[i1].legacyWeight, s, info);
 		}
-		for (var i2 = 0; i2 < morphs[i1].vectors.Length; i2++) {
+		for (var i2 = 0; i2 < morphs[i1].vectors.Count; i2++) {
 			Nif.NifStream(morphs[i1].vectors[i2], s, info);
 		}
 	}
@@ -119,22 +119,22 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numMorphs = (uint)morphs.Length;
+	numMorphs = (uint)morphs.Count;
 	s.AppendLine($"  Num Morphs:  {numMorphs}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	s.AppendLine($"  Relative Targets:  {relativeTargets}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < morphs.Length; i1++) {
+	for (var i1 = 0; i1 < morphs.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		morphs[i1].numKeys = (uint)morphs[i1].keys.Length;
+		morphs[i1].numKeys = (uint)morphs[i1].keys.Count;
 		s.AppendLine($"    Frame Name:  {morphs[i1].frameName}");
 		s.AppendLine($"    Num Keys:  {morphs[i1].numKeys}");
 		s.AppendLine($"    Interpolation:  {morphs[i1].interpolation}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < morphs[i1].keys.Length; i2++) {
+		for (var i2 = 0; i2 < morphs[i1].keys.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -147,7 +147,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Legacy Weight:  {morphs[i1].legacyWeight}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < morphs[i1].vectors.Length; i2++) {
+		for (var i2 = 0; i2 < morphs[i1].vectors.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

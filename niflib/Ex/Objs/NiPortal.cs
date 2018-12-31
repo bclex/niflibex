@@ -29,7 +29,7 @@ public class NiPortal : NiAVObject {
 	/*!  */
 	internal ushort numVertices;
 	/*!  */
-	internal Vector3[] vertices;
+	internal IList<Vector3> vertices;
 	/*! Root of the scenegraph which is to be seen through this portal. */
 	internal NiNode adjoiner;
 
@@ -61,7 +61,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out planeCount, s, info);
 	Nif.NifStream(out numVertices, s, info);
 	vertices = new Vector3[numVertices];
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(out vertices[i1], s, info);
 	}
 	Nif.NifStream(out block_num, s, info);
@@ -73,11 +73,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVertices = (ushort)vertices.Length;
+	numVertices = (ushort)vertices.Count;
 	Nif.NifStream(portalFlags, s, info);
 	Nif.NifStream(planeCount, s, info);
 	Nif.NifStream(numVertices, s, info);
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(vertices[i1], s, info);
 	}
 	WriteRef((NiObject)adjoiner, s, info, link_map, missing_link_stack);
@@ -94,12 +94,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVertices = (ushort)vertices.Length;
+	numVertices = (ushort)vertices.Count;
 	s.AppendLine($"  Portal Flags:  {portalFlags}");
 	s.AppendLine($"  Plane Count:  {planeCount}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

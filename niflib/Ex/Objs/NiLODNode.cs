@@ -26,7 +26,7 @@ public class NiLODNode : NiSwitchNode {
 	/*!  */
 	internal uint numLodLevels;
 	/*!  */
-	internal LODRange[] lodLevels;
+	internal IList<LODRange> lodLevels;
 	/*!  */
 	internal NiLODData lodLevelData;
 
@@ -58,7 +58,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version <= 0x0A000100) {
 		Nif.NifStream(out numLodLevels, s, info);
 		lodLevels = new LODRange[numLodLevels];
-		for (var i2 = 0; i2 < lodLevels.Length; i2++) {
+		for (var i2 = 0; i2 < lodLevels.Count; i2++) {
 			Nif.NifStream(out lodLevels[i2].nearExtent, s, info);
 			Nif.NifStream(out lodLevels[i2].farExtent, s, info);
 			if (info.version <= 0x03010000) {
@@ -79,13 +79,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numLodLevels = (uint)lodLevels.Length;
+	numLodLevels = (uint)lodLevels.Count;
 	if ((info.version >= 0x04000002) && (info.version <= 0x0A000100)) {
 		Nif.NifStream(lodCenter, s, info);
 	}
 	if (info.version <= 0x0A000100) {
 		Nif.NifStream(numLodLevels, s, info);
-		for (var i2 = 0; i2 < lodLevels.Length; i2++) {
+		for (var i2 = 0; i2 < lodLevels.Count; i2++) {
 			Nif.NifStream(lodLevels[i2].nearExtent, s, info);
 			Nif.NifStream(lodLevels[i2].farExtent, s, info);
 			if (info.version <= 0x03010000) {
@@ -111,11 +111,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numLodLevels = (uint)lodLevels.Length;
+	numLodLevels = (uint)lodLevels.Count;
 	s.AppendLine($"  LOD Center:  {lodCenter}");
 	s.AppendLine($"  Num LOD Levels:  {numLodLevels}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < lodLevels.Length; i1++) {
+	for (var i1 = 0; i1 < lodLevels.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

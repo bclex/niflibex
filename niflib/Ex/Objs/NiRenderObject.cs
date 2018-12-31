@@ -50,11 +50,11 @@ public class NiRenderObject : NiAVObject {
 		if (info.version >= 0x14020005) {
 			Nif.NifStream(out materialData.numMaterials, s, info);
 			materialData.materialName = new IndexString[materialData.numMaterials];
-			for (var i3 = 0; i3 < materialData.materialName.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialName.Count; i3++) {
 				Nif.NifStream(out materialData.materialName[i3], s, info);
 			}
 			materialData.materialExtraData = new int[materialData.numMaterials];
-			for (var i3 = 0; i3 < materialData.materialExtraData.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialExtraData.Count; i3++) {
 				Nif.NifStream(out materialData.materialExtraData[i3], s, info);
 			}
 			Nif.NifStream(out materialData.activeMaterial, s, info);
@@ -75,7 +75,7 @@ public class NiRenderObject : NiAVObject {
 	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 		base.Write(s, link_map, missing_link_stack, info);
-		materialData.numMaterials = (uint)materialData.materialName.Length;
+		materialData.numMaterials = (uint)materialData.materialName.Count;
 		if ((info.version >= 0x0A000100) && (info.version <= 0x14010003)) {
 			Nif.NifStream(materialData.hasShader, s, info);
 			if (materialData.hasShader) {
@@ -85,10 +85,10 @@ public class NiRenderObject : NiAVObject {
 		}
 		if (info.version >= 0x14020005) {
 			Nif.NifStream(materialData.numMaterials, s, info);
-			for (var i3 = 0; i3 < materialData.materialName.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialName.Count; i3++) {
 				Nif.NifStream(materialData.materialName[i3], s, info);
 			}
-			for (var i3 = 0; i3 < materialData.materialExtraData.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialExtraData.Count; i3++) {
 				Nif.NifStream(materialData.materialExtraData[i3], s, info);
 			}
 			Nif.NifStream(materialData.activeMaterial, s, info);
@@ -115,7 +115,7 @@ public class NiRenderObject : NiAVObject {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		s.Append(base.AsString());
-		materialData.numMaterials = (uint)materialData.materialName.Length;
+		materialData.numMaterials = (uint)materialData.materialName.Count;
 		s.AppendLine($"    Has Shader:  {materialData.hasShader}");
 		if (materialData.hasShader) {
 			s.AppendLine($"      Shader Name:  {materialData.shaderName}");
@@ -123,7 +123,7 @@ public class NiRenderObject : NiAVObject {
 		}
 		s.AppendLine($"    Num Materials:  {materialData.numMaterials}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < materialData.materialName.Length; i2++) {
+		for (var i2 = 0; i2 < materialData.materialName.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -135,7 +135,7 @@ public class NiRenderObject : NiAVObject {
 			array_output_count++;
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < materialData.materialExtraData.Length; i2++) {
+		for (var i2 = 0; i2 < materialData.materialExtraData.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

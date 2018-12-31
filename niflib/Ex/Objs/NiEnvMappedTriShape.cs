@@ -25,7 +25,7 @@ public class NiEnvMappedTriShape : NiObjectNET {
 	/*! The number of child objects. */
 	internal uint numChildren;
 	/*! List of child node object indices. */
-	internal NiAVObject[] children;
+	internal IList<NiAVObject> children;
 	/*! unknown */
 	internal NiObject child2;
 	/*! unknown */
@@ -59,7 +59,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownMatrix, s, info);
 	Nif.NifStream(out numChildren, s, info);
 	children = new Ref[numChildren];
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -74,11 +74,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numChildren = (uint)children.Length;
+	numChildren = (uint)children.Count;
 	Nif.NifStream(unknown1, s, info);
 	Nif.NifStream(unknownMatrix, s, info);
 	Nif.NifStream(numChildren, s, info);
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 		WriteRef((NiObject)children[i1], s, info, link_map, missing_link_stack);
 	}
 	WriteRef((NiObject)child2, s, info, link_map, missing_link_stack);
@@ -96,12 +96,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numChildren = (uint)children.Length;
+	numChildren = (uint)children.Count;
 	s.AppendLine($"  Unknown 1:  {unknown1}");
 	s.AppendLine($"  Unknown Matrix:  {unknownMatrix}");
 	s.AppendLine($"  Num Children:  {numChildren}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -122,7 +122,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 		children[i1] = FixLink<NiAVObject>(objects, link_stack, missing_link_stack, info);
 	}
 	child2 = FixLink<NiObject>(objects, link_stack, missing_link_stack, info);
@@ -133,7 +133,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 		if (children[i1] != null)
 			refs.Add((NiObject)children[i1]);
 	}
@@ -147,7 +147,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < children.Length; i1++) {
+	for (var i1 = 0; i1 < children.Count; i1++) {
 	}
 	return ptrs;
 }

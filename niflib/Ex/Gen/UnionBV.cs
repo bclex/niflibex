@@ -15,7 +15,7 @@ public class UnionBV {
 	/*!  */
 	internal uint numBv;
 	/*!  */
-	internal BoundingVolume[] boundingVolumes;
+	internal IList<BoundingVolume> boundingVolumes;
 	//Constructor
 	public UnionBV() { unchecked {
 	numBv = (uint)0;

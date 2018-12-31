@@ -22,11 +22,11 @@ public class Morph {
 	 */
 	internal KeyType interpolation;
 	/*! The morph key frames. */
-	internal Key<float>[] keys;
+	internal IList<Key<float>> keys;
 	/*!  */
 	internal float legacyWeight;
 	/*! Morph vectors. */
-	internal Vector3[] vectors;
+	internal IList<Vector3> vectors;
 	//Constructor
 	public Morph() { unchecked {
 	numKeys = (uint)0;

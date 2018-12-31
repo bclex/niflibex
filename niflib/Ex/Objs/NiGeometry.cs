@@ -100,11 +100,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		if (info.version >= 0x14020005) {
 			Nif.NifStream(out materialData.numMaterials, s, info);
 			materialData.materialName = new IndexString[materialData.numMaterials];
-			for (var i3 = 0; i3 < materialData.materialName.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialName.Count; i3++) {
 				Nif.NifStream(out materialData.materialName[i3], s, info);
 			}
 			materialData.materialExtraData = new int[materialData.numMaterials];
-			for (var i3 = 0; i3 < materialData.materialExtraData.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialExtraData.Count; i3++) {
 				Nif.NifStream(out materialData.materialExtraData[i3], s, info);
 			}
 			Nif.NifStream(out materialData.activeMaterial, s, info);
@@ -131,11 +131,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x14020005) {
 				Nif.NifStream(out materialData.numMaterials, s, info);
 				materialData.materialName = new IndexString[materialData.numMaterials];
-				for (var i4 = 0; i4 < materialData.materialName.Length; i4++) {
+				for (var i4 = 0; i4 < materialData.materialName.Count; i4++) {
 					Nif.NifStream(out materialData.materialName[i4], s, info);
 				}
 				materialData.materialExtraData = new int[materialData.numMaterials];
-				for (var i4 = 0; i4 < materialData.materialExtraData.Length; i4++) {
+				for (var i4 = 0; i4 < materialData.materialExtraData.Count; i4++) {
 					Nif.NifStream(out materialData.materialExtraData[i4], s, info);
 				}
 				Nif.NifStream(out materialData.activeMaterial, s, info);
@@ -188,7 +188,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 	}
 	if ((info.version >= 0x0A000100) && ((info.userVersion2 < 100))) {
-		materialData.numMaterials = (uint)materialData.materialName.Length;
+		materialData.numMaterials = (uint)materialData.materialName.Count;
 		if ((info.version >= 0x0A000100) && (info.version <= 0x14010003)) {
 			Nif.NifStream(materialData.hasShader, s, info);
 			if (materialData.hasShader) {
@@ -198,10 +198,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 		if (info.version >= 0x14020005) {
 			Nif.NifStream(materialData.numMaterials, s, info);
-			for (var i3 = 0; i3 < materialData.materialName.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialName.Count; i3++) {
 				Nif.NifStream(materialData.materialName[i3], s, info);
 			}
-			for (var i3 = 0; i3 < materialData.materialExtraData.Length; i3++) {
+			for (var i3 = 0; i3 < materialData.materialExtraData.Count; i3++) {
 				Nif.NifStream(materialData.materialExtraData[i3], s, info);
 			}
 			Nif.NifStream(materialData.activeMaterial, s, info);
@@ -218,7 +218,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x0A000100) && ((info.userVersion2 >= 100))) {
 		if ((!IsDerivedType(NiParticleSystem.TYPE))) {
-			materialData.numMaterials = (uint)materialData.materialName.Length;
+			materialData.numMaterials = (uint)materialData.materialName.Count;
 			if ((info.version >= 0x0A000100) && (info.version <= 0x14010003)) {
 				Nif.NifStream(materialData.hasShader, s, info);
 				if (materialData.hasShader) {
@@ -228,10 +228,10 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version >= 0x14020005) {
 				Nif.NifStream(materialData.numMaterials, s, info);
-				for (var i4 = 0; i4 < materialData.materialName.Length; i4++) {
+				for (var i4 = 0; i4 < materialData.materialName.Count; i4++) {
 					Nif.NifStream(materialData.materialName[i4], s, info);
 				}
-				for (var i4 = 0; i4 < materialData.materialExtraData.Length; i4++) {
+				for (var i4 = 0; i4 < materialData.materialExtraData.Count; i4++) {
 					Nif.NifStream(materialData.materialExtraData[i4], s, info);
 				}
 				Nif.NifStream(materialData.activeMaterial, s, info);
@@ -271,7 +271,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Data:  {data}");
 	s.AppendLine($"  Skin Instance:  {skinInstance}");
-	materialData.numMaterials = (uint)materialData.materialName.Length;
+	materialData.numMaterials = (uint)materialData.materialName.Count;
 	s.AppendLine($"  Has Shader:  {materialData.hasShader}");
 	if (materialData.hasShader) {
 		s.AppendLine($"    Shader Name:  {materialData.shaderName}");
@@ -279,7 +279,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Materials:  {materialData.numMaterials}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materialData.materialName.Length; i1++) {
+	for (var i1 = 0; i1 < materialData.materialName.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -291,7 +291,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materialData.materialExtraData.Length; i1++) {
+	for (var i1 = 0; i1 < materialData.materialExtraData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

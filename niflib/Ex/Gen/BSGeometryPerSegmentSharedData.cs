@@ -23,7 +23,7 @@ public class BSGeometryPerSegmentSharedData {
 	/*! Maximum of 8. */
 	internal uint numCutOffsets;
 	/*!  */
-	internal float[] cutOffsets;
+	internal IList<float> cutOffsets;
 	//Constructor
 	public BSGeometryPerSegmentSharedData() { unchecked {
 	userIndex = (uint)0;

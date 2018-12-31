@@ -29,7 +29,7 @@ public class bhkListShape : bhkShapeCollection {
 	/*! The number of sub shapes referenced. */
 	internal uint numSubShapes;
 	/*! List of shapes. */
-	internal bhkShape[] subShapes;
+	internal IList<bhkShape> subShapes;
 	/*! The material of the shape. */
 	internal HavokMaterial material;
 	/*!  */
@@ -39,7 +39,7 @@ public class bhkListShape : bhkShapeCollection {
 	/*! Count. */
 	internal uint numUnknownInts;
 	/*! Unknown. */
-	internal uint[] unknownInts;
+	internal IList<uint> unknownInts;
 
 	public bhkListShape() {
 	numSubShapes = (uint)0;
@@ -65,7 +65,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numSubShapes, s, info);
 	subShapes = new Ref[numSubShapes];
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -89,7 +89,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out childFilterProperty.capacityAndFlags, s, info);
 	Nif.NifStream(out numUnknownInts, s, info);
 	unknownInts = new uint[numUnknownInts];
-	for (var i1 = 0; i1 < unknownInts.Length; i1++) {
+	for (var i1 = 0; i1 < unknownInts.Count; i1++) {
 		Nif.NifStream(out unknownInts[i1], s, info);
 	}
 
@@ -99,10 +99,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numUnknownInts = (uint)unknownInts.Length;
-	numSubShapes = (uint)subShapes.Length;
+	numUnknownInts = (uint)unknownInts.Count;
+	numSubShapes = (uint)subShapes.Count;
 	Nif.NifStream(numSubShapes, s, info);
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		WriteRef((NiObject)subShapes[i1], s, info, link_map, missing_link_stack);
 	}
 	if (info.version <= 0x0A000102) {
@@ -124,7 +124,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(childFilterProperty.size, s, info);
 	Nif.NifStream(childFilterProperty.capacityAndFlags, s, info);
 	Nif.NifStream(numUnknownInts, s, info);
-	for (var i1 = 0; i1 < unknownInts.Length; i1++) {
+	for (var i1 = 0; i1 < unknownInts.Count; i1++) {
 		Nif.NifStream(unknownInts[i1], s, info);
 	}
 
@@ -140,11 +140,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numUnknownInts = (uint)unknownInts.Length;
-	numSubShapes = (uint)subShapes.Length;
+	numUnknownInts = (uint)unknownInts.Count;
+	numSubShapes = (uint)subShapes.Count;
 	s.AppendLine($"  Num Sub Shapes:  {numSubShapes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -167,7 +167,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Capacity and Flags:  {childFilterProperty.capacityAndFlags}");
 	s.AppendLine($"  Num Unknown Ints:  {numUnknownInts}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownInts.Length; i1++) {
+	for (var i1 = 0; i1 < unknownInts.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -186,7 +186,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		subShapes[i1] = FixLink<bhkShape>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -195,7 +195,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		if (subShapes[i1] != null)
 			refs.Add((NiObject)subShapes[i1]);
 	}
@@ -205,7 +205,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 	}
 	return ptrs;
 }

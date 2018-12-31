@@ -21,7 +21,7 @@ public class BSTreadTransfInterpolator : NiInterpolator {
 	/*!  */
 	internal int numTreadTransforms;
 	/*!  */
-	internal BSTreadTransform[] treadTransforms;
+	internal IList<BSTreadTransform> treadTransforms;
 	/*!  */
 	internal NiFloatData data;
 
@@ -49,7 +49,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numTreadTransforms, s, info);
 	treadTransforms = new BSTreadTransform[numTreadTransforms];
-	for (var i1 = 0; i1 < treadTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < treadTransforms.Count; i1++) {
 		Nif.NifStream(out treadTransforms[i1].name, s, info);
 		Nif.NifStream(out treadTransforms[i1].transform1.translation, s, info);
 		Nif.NifStream(out treadTransforms[i1].transform1.rotation, s, info);
@@ -85,9 +85,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numTreadTransforms = (int)treadTransforms.Length;
+	numTreadTransforms = (int)treadTransforms.Count;
 	Nif.NifStream(numTreadTransforms, s, info);
-	for (var i1 = 0; i1 < treadTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < treadTransforms.Count; i1++) {
 		Nif.NifStream(treadTransforms[i1].name, s, info);
 		Nif.NifStream(treadTransforms[i1].transform1.translation, s, info);
 		Nif.NifStream(treadTransforms[i1].transform1.rotation, s, info);
@@ -126,10 +126,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numTreadTransforms = (int)treadTransforms.Length;
+	numTreadTransforms = (int)treadTransforms.Count;
 	s.AppendLine($"  Num Tread Transforms:  {numTreadTransforms}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < treadTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < treadTransforms.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

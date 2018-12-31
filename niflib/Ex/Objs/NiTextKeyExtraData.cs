@@ -26,7 +26,7 @@ public class NiTextKeyExtraData : NiExtraData {
 	 * List of textual notes and at which time they take effect. Used for designating
 	 * the start and stop of animations and the triggering of sounds.
 	 */
-	internal Key<IndexString>[] textKeys;
+	internal IList<Key<IndexString>> textKeys;
 
 	public NiTextKeyExtraData() {
 	unknownInt1 = (uint)0;
@@ -54,7 +54,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numTextKeys, s, info);
 	textKeys = new Key[numTextKeys];
-	for (var i1 = 0; i1 < textKeys.Length; i1++) {
+	for (var i1 = 0; i1 < textKeys.Count; i1++) {
 		Nif.NifStream(out textKeys[i1], s, info, 1);
 	}
 
@@ -64,12 +64,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numTextKeys = (uint)textKeys.Length;
+	numTextKeys = (uint)textKeys.Count;
 	if (info.version <= 0x04020200) {
 		Nif.NifStream(unknownInt1, s, info);
 	}
 	Nif.NifStream(numTextKeys, s, info);
-	for (var i1 = 0; i1 < textKeys.Length; i1++) {
+	for (var i1 = 0; i1 < textKeys.Count; i1++) {
 		Nif.NifStream(textKeys[i1], s, info, 1);
 	}
 
@@ -85,11 +85,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numTextKeys = (uint)textKeys.Length;
+	numTextKeys = (uint)textKeys.Count;
 	s.AppendLine($"  Unknown Int 1:  {unknownInt1}");
 	s.AppendLine($"  Num Text Keys:  {numTextKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < textKeys.Length; i1++) {
+	for (var i1 = 0; i1 < textKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -15,7 +15,7 @@ public class NodeSet {
 	/*! Number of node references that follow. */
 	internal uint numNodes;
 	/*! The list of NiNode references. */
-	internal NiNode[] nodes;
+	internal IList<NiNode> nodes;
 	//Constructor
 	public NodeSet() { unchecked {
 	numNodes = (uint)0;

@@ -27,7 +27,7 @@ public class NiSkinData : NiObject {
 	/*! Enables Vertex Weights for this NiSkinData. */
 	internal byte hasVertexWeights;
 	/*! Contains offset data for each node that this skin is influenced by. */
-	internal BoneData[] boneList;
+	internal IList<BoneData> boneList;
 
 	public NiSkinData() {
 	numBones = (uint)0;
@@ -64,7 +64,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out hasVertexWeights, s, info);
 	}
 	boneList = new BoneData[numBones];
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
 		Nif.NifStream(out boneList[i1].skinTransform.rotation, s, info);
 		Nif.NifStream(out boneList[i1].skinTransform.translation, s, info);
 		Nif.NifStream(out boneList[i1].skinTransform.scale, s, info);
@@ -78,7 +78,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out boneList[i1].numVertices, s, info);
 		if (info.version <= 0x04020100) {
 			boneList[i1].vertexWeights = new BoneVertData[boneList[i1].numVertices];
-			for (var i3 = 0; i3 < boneList[i1].vertexWeights.Length; i3++) {
+			for (var i3 = 0; i3 < boneList[i1].vertexWeights.Count; i3++) {
 				Nif.NifStream(out boneList[i1].vertexWeights[i3].index, s, info);
 				Nif.NifStream(out boneList[i1].vertexWeights[i3].weight, s, info);
 			}
@@ -86,7 +86,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		if (info.version >= 0x04020200) {
 			if ((hasVertexWeights != 0)) {
 				boneList[i1].vertexWeights = new BoneVertData[boneList[i1].numVertices];
-				for (var i4 = 0; i4 < boneList[i1].vertexWeights.Length; i4++) {
+				for (var i4 = 0; i4 < boneList[i1].vertexWeights.Count; i4++) {
 					Nif.NifStream(out boneList[i1].vertexWeights[i4].index, s, info);
 					Nif.NifStream(out boneList[i1].vertexWeights[i4].weight, s, info);
 				}
@@ -100,7 +100,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numBones = (uint)boneList.Length;
+	numBones = (uint)boneList.Count;
 	Nif.NifStream(skinTransform.rotation, s, info);
 	Nif.NifStream(skinTransform.translation, s, info);
 	Nif.NifStream(skinTransform.scale, s, info);
@@ -111,8 +111,8 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x04020100) {
 		Nif.NifStream(hasVertexWeights, s, info);
 	}
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
-		boneList[i1].numVertices = (ushort)boneList[i1].vertexWeights.Length;
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
+		boneList[i1].numVertices = (ushort)boneList[i1].vertexWeights.Count;
 		Nif.NifStream(boneList[i1].skinTransform.rotation, s, info);
 		Nif.NifStream(boneList[i1].skinTransform.translation, s, info);
 		Nif.NifStream(boneList[i1].skinTransform.scale, s, info);
@@ -125,14 +125,14 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 		Nif.NifStream(boneList[i1].numVertices, s, info);
 		if (info.version <= 0x04020100) {
-			for (var i3 = 0; i3 < boneList[i1].vertexWeights.Length; i3++) {
+			for (var i3 = 0; i3 < boneList[i1].vertexWeights.Count; i3++) {
 				Nif.NifStream(boneList[i1].vertexWeights[i3].index, s, info);
 				Nif.NifStream(boneList[i1].vertexWeights[i3].weight, s, info);
 			}
 		}
 		if (info.version >= 0x04020200) {
 			if ((hasVertexWeights != 0)) {
-				for (var i4 = 0; i4 < boneList[i1].vertexWeights.Length; i4++) {
+				for (var i4 = 0; i4 < boneList[i1].vertexWeights.Count; i4++) {
 					Nif.NifStream(boneList[i1].vertexWeights[i4].index, s, info);
 					Nif.NifStream(boneList[i1].vertexWeights[i4].weight, s, info);
 				}
@@ -152,7 +152,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numBones = (uint)boneList.Length;
+	numBones = (uint)boneList.Count;
 	s.AppendLine($"  Rotation:  {skinTransform.rotation}");
 	s.AppendLine($"  Translation:  {skinTransform.translation}");
 	s.AppendLine($"  Scale:  {skinTransform.scale}");
@@ -160,12 +160,12 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Skin Partition:  {skinPartition}");
 	s.AppendLine($"  Has Vertex Weights:  {hasVertexWeights}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		boneList[i1].numVertices = (ushort)boneList[i1].vertexWeights.Length;
+		boneList[i1].numVertices = (ushort)boneList[i1].vertexWeights.Count;
 		s.AppendLine($"    Rotation:  {boneList[i1].skinTransform.rotation}");
 		s.AppendLine($"    Translation:  {boneList[i1].skinTransform.translation}");
 		s.AppendLine($"    Scale:  {boneList[i1].skinTransform.scale}");
@@ -185,7 +185,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Num Vertices:  {boneList[i1].numVertices}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < boneList[i1].vertexWeights.Length; i2++) {
+		for (var i2 = 0; i2 < boneList[i1].vertexWeights.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

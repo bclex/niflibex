@@ -45,7 +45,7 @@ public class NiColorData : NiObject {
 			Nif.NifStream(out data.interpolation, s, info);
 		}
 		data.keys = new Key[data.numKeys];
-		for (var i2 = 0; i2 < data.keys.Length; i2++) {
+		for (var i2 = 0; i2 < data.keys.Count; i2++) {
 			Nif.NifStream(out data.keys[i2], s, info, data.interpolation);
 		}
 
@@ -55,12 +55,12 @@ public class NiColorData : NiObject {
 	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 		base.Write(s, link_map, missing_link_stack, info);
-		data.numKeys = (uint)data.keys.Length;
+		data.numKeys = (uint)data.keys.Count;
 		Nif.NifStream(data.numKeys, s, info);
 		if ((data.numKeys != 0)) {
 			Nif.NifStream(data.interpolation, s, info);
 		}
-		for (var i2 = 0; i2 < data.keys.Length; i2++) {
+		for (var i2 = 0; i2 < data.keys.Count; i2++) {
 			Nif.NifStream(data.keys[i2], s, info, data.interpolation);
 		}
 
@@ -76,13 +76,13 @@ public class NiColorData : NiObject {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		s.Append(base.AsString());
-		data.numKeys = (uint)data.keys.Length;
+		data.numKeys = (uint)data.keys.Count;
 		s.AppendLine($"    Num Keys:  {data.numKeys}");
 		if ((data.numKeys != 0)) {
 			s.AppendLine($"      Interpolation:  {data.interpolation}");
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < data.keys.Length; i2++) {
+		for (var i2 = 0; i2 < data.keys.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

@@ -33,7 +33,7 @@ public class bhkRagdollTemplateData : NiObject {
 	/*!  */
 	internal uint numConstraints;
 	/*!  */
-	internal ConstraintData[] constraint;
+	internal IList<ConstraintData> constraint;
 
 	public bhkRagdollTemplateData() {
 	mass = 9.0f;
@@ -79,7 +79,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numConstraints, s, info);
 	constraint = new ConstraintData[numConstraints];
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 		Nif.NifStream(out constraint[i1].type, s, info);
 		Nif.NifStream(out constraint[i1].numEntities2, s, info);
 		Nif.NifStream(out block_num, s, info);
@@ -479,7 +479,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numConstraints = (uint)constraint.Length;
+	numConstraints = (uint)constraint.Count;
 	Nif.NifStream(name, s, info);
 	Nif.NifStream(mass, s, info);
 	Nif.NifStream(restitution, s, info);
@@ -498,7 +498,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(material.material_sk, s, info);
 	}
 	Nif.NifStream(numConstraints, s, info);
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 		Nif.NifStream(constraint[i1].type, s, info);
 		Nif.NifStream(constraint[i1].numEntities2, s, info);
 		WriteRef((NiObject)constraint[i1].entityA, s, info, link_map, missing_link_stack);
@@ -900,7 +900,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numConstraints = (uint)constraint.Length;
+	numConstraints = (uint)constraint.Count;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Mass:  {mass}");
 	s.AppendLine($"  Restitution:  {restitution}");
@@ -912,7 +912,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Material:  {material.material_sk}");
 	s.AppendLine($"  Num Constraints:  {numConstraints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -1213,7 +1213,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 		constraint[i1].entityA = FixLink<bhkEntity>(objects, link_stack, missing_link_stack, info);
 		constraint[i1].entityB = FixLink<bhkEntity>(objects, link_stack, missing_link_stack, info);
 		if ((constraint[i1].type == 13)) {
@@ -1227,7 +1227,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 	}
 	return refs;
 }
@@ -1235,7 +1235,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < constraint.Length; i1++) {
+	for (var i1 = 0; i1 < constraint.Count; i1++) {
 		if (constraint[i1].entityA != null)
 			ptrs.Add((NiObject)constraint[i1].entityA);
 		if (constraint[i1].entityB != null)

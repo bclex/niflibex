@@ -19,7 +19,7 @@ public class NiLinesData : NiGeometryData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiLinesData", NiGeometryData.TYPE);
 	/*! Is vertex connected to other (next?) vertex? */
-	internal bool[] lines;
+	internal IList<bool> lines;
 
 	public NiLinesData() {
 	}
@@ -41,7 +41,7 @@ public class NiLinesData : NiGeometryData {
 
 		base.Read(s, link_stack, info);
 		lines = new bool[numVertices];
-		for (var i2 = 0; i2 < lines.Length; i2++) {
+		for (var i2 = 0; i2 < lines.Count; i2++) {
 			{
 				bool tmp;
 				Nif.NifStream(out tmp, s, info);
@@ -55,7 +55,7 @@ public class NiLinesData : NiGeometryData {
 	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 		base.Write(s, link_map, missing_link_stack, info);
-		for (var i2 = 0; i2 < lines.Length; i2++) {
+		for (var i2 = 0; i2 < lines.Count; i2++) {
 			{
 				bool tmp = lines[i2];
 				Nif.NifStream(tmp, s, info);
@@ -75,7 +75,7 @@ public class NiLinesData : NiGeometryData {
 		uint array_output_count = 0;
 		s.Append(base.AsString());
 		array_output_count = 0;
-		for (var i2 = 0; i2 < lines.Length; i2++) {
+		for (var i2 = 0; i2 < lines.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

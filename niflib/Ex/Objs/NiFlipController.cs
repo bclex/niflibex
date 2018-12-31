@@ -34,9 +34,9 @@ public class NiFlipController : NiFloatInterpController {
 	/*!  */
 	internal uint numSources;
 	/*! The texture sources. */
-	internal NiSourceTexture[] sources;
+	internal IList<NiSourceTexture> sources;
 	/*! The image sources */
-	internal NiImage[] images;
+	internal IList<NiImage> images;
 
 	public NiFlipController() {
 	textureSlot = (TexType)0;
@@ -72,14 +72,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numSources, s, info);
 	if (info.version >= 0x04000000) {
 		sources = new Ref[numSources];
-		for (var i2 = 0; i2 < sources.Length; i2++) {
+		for (var i2 = 0; i2 < sources.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
 	}
 	if (info.version <= 0x03010000) {
 		images = new Ref[numSources];
-		for (var i2 = 0; i2 < images.Length; i2++) {
+		for (var i2 = 0; i2 < images.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -91,7 +91,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSources = (uint)sources.Length;
+	numSources = (uint)sources.Count;
 	Nif.NifStream(textureSlot, s, info);
 	if ((info.version >= 0x0303000D) && (info.version <= 0x0A010067)) {
 		Nif.NifStream(startTime, s, info);
@@ -101,12 +101,12 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	Nif.NifStream(numSources, s, info);
 	if (info.version >= 0x04000000) {
-		for (var i2 = 0; i2 < sources.Length; i2++) {
+		for (var i2 = 0; i2 < sources.Count; i2++) {
 			WriteRef((NiObject)sources[i2], s, info, link_map, missing_link_stack);
 		}
 	}
 	if (info.version <= 0x03010000) {
-		for (var i2 = 0; i2 < images.Length; i2++) {
+		for (var i2 = 0; i2 < images.Count; i2++) {
 			WriteRef((NiObject)images[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -123,13 +123,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSources = (uint)sources.Length;
+	numSources = (uint)sources.Count;
 	s.AppendLine($"  Texture Slot:  {textureSlot}");
 	s.AppendLine($"  Start Time:  {startTime}");
 	s.AppendLine($"  Delta:  {delta}");
 	s.AppendLine($"  Num Sources:  {numSources}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -141,7 +141,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < images.Length; i1++) {
+	for (var i1 = 0; i1 < images.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -161,12 +161,12 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	if (info.version >= 0x04000000) {
-		for (var i2 = 0; i2 < sources.Length; i2++) {
+		for (var i2 = 0; i2 < sources.Count; i2++) {
 			sources[i2] = FixLink<NiSourceTexture>(objects, link_stack, missing_link_stack, info);
 		}
 	}
 	if (info.version <= 0x03010000) {
-		for (var i2 = 0; i2 < images.Length; i2++) {
+		for (var i2 = 0; i2 < images.Count; i2++) {
 			images[i2] = FixLink<NiImage>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -176,11 +176,11 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		if (sources[i1] != null)
 			refs.Add((NiObject)sources[i1]);
 	}
-	for (var i1 = 0; i1 < images.Length; i1++) {
+	for (var i1 = 0; i1 < images.Count; i1++) {
 		if (images[i1] != null)
 			refs.Add((NiObject)images[i1]);
 	}
@@ -190,9 +190,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < images.Length; i1++) {
+	for (var i1 = 0; i1 < images.Count; i1++) {
 	}
 	return ptrs;
 }

@@ -23,11 +23,11 @@ public class NiTriShapeData : NiTriBasedGeomData {
 	/*! Do we have triangle data? */
 	internal bool hasTriangles;
 	/*! Triangle data. */
-	internal Triangle[] triangles;
+	internal IList<Triangle> triangles;
 	/*! Number of shared normals groups. */
 	internal ushort numMatchGroups;
 	/*! The shared normals. */
-	internal MatchGroup[] matchGroups;
+	internal IList<MatchGroup> matchGroups;
 
 	public NiTriShapeData() {
 	numTrianglePoints = (uint)0;
@@ -57,14 +57,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if (info.version <= 0x0A000102) {
 		triangles = new Triangle[numTriangles];
-		for (var i2 = 0; i2 < triangles.Length; i2++) {
+		for (var i2 = 0; i2 < triangles.Count; i2++) {
 			Nif.NifStream(out triangles[i2], s, info);
 		}
 	}
 	if (info.version >= 0x0A000103) {
 		if (hasTriangles) {
 			triangles = new Triangle[numTriangles];
-			for (var i3 = 0; i3 < triangles.Length; i3++) {
+			for (var i3 = 0; i3 < triangles.Count; i3++) {
 				Nif.NifStream(out (Triangle)triangles[i3], s, info);
 			}
 		}
@@ -72,10 +72,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x03010000) {
 		Nif.NifStream(out numMatchGroups, s, info);
 		matchGroups = new MatchGroup[numMatchGroups];
-		for (var i2 = 0; i2 < matchGroups.Length; i2++) {
+		for (var i2 = 0; i2 < matchGroups.Count; i2++) {
 			Nif.NifStream(out matchGroups[i2].numVertices, s, info);
 			matchGroups[i2].vertexIndices = new ushort[matchGroups[i2].numVertices];
-			for (var i3 = 0; i3 < matchGroups[i2].vertexIndices.Length; i3++) {
+			for (var i3 = 0; i3 < matchGroups[i2].vertexIndices.Count; i3++) {
 				Nif.NifStream(out matchGroups[i2].vertexIndices[i3], s, info);
 			}
 		}
@@ -87,30 +87,30 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numMatchGroups = (ushort)matchGroups.Length;
+	numMatchGroups = (ushort)matchGroups.Count;
 	hasTriangles = hasTrianglesCalc(info);
 	Nif.NifStream(numTrianglePoints, s, info);
 	if (info.version >= 0x0A010000) {
 		Nif.NifStream(hasTriangles, s, info);
 	}
 	if (info.version <= 0x0A000102) {
-		for (var i2 = 0; i2 < triangles.Length; i2++) {
+		for (var i2 = 0; i2 < triangles.Count; i2++) {
 			Nif.NifStream(triangles[i2], s, info);
 		}
 	}
 	if (info.version >= 0x0A000103) {
 		if (hasTriangles) {
-			for (var i3 = 0; i3 < triangles.Length; i3++) {
+			for (var i3 = 0; i3 < triangles.Count; i3++) {
 				Nif.NifStream((Triangle)triangles[i3], s, info);
 			}
 		}
 	}
 	if (info.version >= 0x03010000) {
 		Nif.NifStream(numMatchGroups, s, info);
-		for (var i2 = 0; i2 < matchGroups.Length; i2++) {
-			matchGroups[i2].numVertices = (ushort)matchGroups[i2].vertexIndices.Length;
+		for (var i2 = 0; i2 < matchGroups.Count; i2++) {
+			matchGroups[i2].numVertices = (ushort)matchGroups[i2].vertexIndices.Count;
 			Nif.NifStream(matchGroups[i2].numVertices, s, info);
-			for (var i3 = 0; i3 < matchGroups[i2].vertexIndices.Length; i3++) {
+			for (var i3 = 0; i3 < matchGroups[i2].vertexIndices.Count; i3++) {
 				Nif.NifStream(matchGroups[i2].vertexIndices[i3], s, info);
 			}
 		}
@@ -128,11 +128,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numMatchGroups = (ushort)matchGroups.Length;
+	numMatchGroups = (ushort)matchGroups.Count;
 	s.AppendLine($"  Num Triangle Points:  {numTrianglePoints}");
 	s.AppendLine($"  Has Triangles:  {hasTriangles}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < triangles.Length; i1++) {
+	for (var i1 = 0; i1 < triangles.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -145,15 +145,15 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Match Groups:  {numMatchGroups}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < matchGroups.Length; i1++) {
+	for (var i1 = 0; i1 < matchGroups.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		matchGroups[i1].numVertices = (ushort)matchGroups[i1].vertexIndices.Length;
+		matchGroups[i1].numVertices = (ushort)matchGroups[i1].vertexIndices.Count;
 		s.AppendLine($"    Num Vertices:  {matchGroups[i1].numVertices}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < matchGroups[i1].vertexIndices.Length; i2++) {
+		for (var i2 = 0; i2 < matchGroups[i1].vertexIndices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

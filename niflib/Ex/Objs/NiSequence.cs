@@ -36,7 +36,7 @@ public class NiSequence : NiObject {
 	/*!  */
 	internal uint arrayGrowBy;
 	/*!  */
-	internal ControlledBlock[] controlledBlocks;
+	internal IList<ControlledBlock> controlledBlocks;
 
 	public NiSequence() {
 	textKeys = null;
@@ -78,7 +78,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out arrayGrowBy, s, info);
 	}
 	controlledBlocks = new ControlledBlock[numControlledBlocks];
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (info.version <= 0x0A010067) {
 			Nif.NifStream(out controlledBlocks[i1].targetName, s, info);
 		}
@@ -129,7 +129,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numControlledBlocks = (uint)controlledBlocks.Length;
+	numControlledBlocks = (uint)controlledBlocks.Count;
 	Nif.NifStream(name, s, info);
 	if (info.version <= 0x0A010067) {
 		Nif.NifStream(accumRootName, s, info);
@@ -143,7 +143,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x0A01006A) {
 		Nif.NifStream(arrayGrowBy, s, info);
 	}
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (info.version <= 0x0A010067) {
 			Nif.NifStream(controlledBlocks[i1].targetName, s, info);
 		}
@@ -196,7 +196,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numControlledBlocks = (uint)controlledBlocks.Length;
+	numControlledBlocks = (uint)controlledBlocks.Count;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Accum Root Name:  {accumRootName}");
 	s.AppendLine($"  Text Keys:  {textKeys}");
@@ -205,7 +205,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num Controlled Blocks:  {numControlledBlocks}");
 	s.AppendLine($"  Array Grow By:  {arrayGrowBy}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -239,7 +239,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 	if (info.version <= 0x0A010067) {
 		textKeys = FixLink<NiTextKeyExtraData>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (info.version >= 0x0A01006A) {
 			controlledBlocks[i1].interpolator = FixLink<NiInterpolator>(objects, link_stack, missing_link_stack, info);
 		}
@@ -261,7 +261,7 @@ internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
 	if (textKeys != null)
 		refs.Add((NiObject)textKeys);
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (controlledBlocks[i1].interpolator != null)
 			refs.Add((NiObject)controlledBlocks[i1].interpolator);
 		if (controlledBlocks[i1].controller != null)
@@ -277,7 +277,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 	}
 	return ptrs;
 }

@@ -30,36 +30,36 @@ public class SkinPartition {
 	 */
 	internal ushort numWeightsPerVertex;
 	/*! List of bones. */
-	internal ushort[] bones;
+	internal IList<ushort> bones;
 	/*! Do we have a vertex map? */
 	internal bool hasVertexMap;
 	/*!
 	 * Maps the weight/influence lists in this submesh to the vertices in the shape
 	 * being skinned.
 	 */
-	internal ushort[] vertexMap;
+	internal IList<ushort> vertexMap;
 	/*! Do we have vertex weights? */
 	internal bool hasVertexWeights;
 	/*! The vertex weights. */
-	internal float[][] vertexWeights;
+	internal IList<float[]> vertexWeights;
 	/*! The strip lengths. */
-	internal ushort[] stripLengths;
+	internal IList<ushort> stripLengths;
 	/*! Do we have triangle or strip data? */
 	internal bool hasFaces;
 	/*! The strips. */
-	internal ushort[][] strips;
+	internal IList<ushort[]> strips;
 	/*! The triangles. */
-	internal Triangle[] triangles;
+	internal IList<Triangle> triangles;
 	/*! Do we have bone indices? */
 	internal bool hasBoneIndices;
 	/*! Bone indices, they index into 'Bones'. */
-	internal byte[][] boneIndices;
+	internal IList<byte[]> boneIndices;
 	/*! Unknown */
 	internal ushort unknownShort;
 	/*!  */
 	internal BSVertexDesc vertexDesc;
 	/*!  */
-	internal Triangle[] trianglesCopy;
+	internal IList<Triangle> trianglesCopy;
 	//Constructor
 	public SkinPartition() { unchecked {
 	numVertices = (ushort)0;

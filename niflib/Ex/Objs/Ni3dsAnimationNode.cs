@@ -33,7 +33,7 @@ public class Ni3dsAnimationNode : NiObject {
 	/*! A count. */
 	internal uint count;
 	/*! Unknown. */
-	internal Array5<byte>[] unknownArray;
+	internal IList<Array5<byte>> unknownArray;
 
 	public Ni3dsAnimationNode() {
 	hasData = false;
@@ -73,7 +73,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		}
 		Nif.NifStream(out count, s, info);
 		unknownArray = new byte[count];
-		for (var i2 = 0; i2 < unknownArray.Length; i2++) {
+		for (var i2 = 0; i2 < unknownArray.Count; i2++) {
 			for (var i3 = 0; i3 < 5; i3++) {
 				Nif.NifStream(out unknownArray[i2][i3], s, info);
 			}
@@ -86,7 +86,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	count = (uint)unknownArray.Length;
+	count = (uint)unknownArray.Count;
 	Nif.NifStream(name, s, info);
 	Nif.NifStream(hasData, s, info);
 	if (hasData) {
@@ -99,7 +99,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			Nif.NifStream(unknownFloats2[i2], s, info);
 		}
 		Nif.NifStream(count, s, info);
-		for (var i2 = 0; i2 < unknownArray.Length; i2++) {
+		for (var i2 = 0; i2 < unknownArray.Count; i2++) {
 			for (var i3 = 0; i3 < 5; i3++) {
 				Nif.NifStream(unknownArray[i2][i3], s, info);
 			}
@@ -118,7 +118,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	count = (uint)unknownArray.Length;
+	count = (uint)unknownArray.Count;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Has Data:  {hasData}");
 	if (hasData) {
@@ -150,7 +150,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Count:  {count}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < unknownArray.Length; i2++) {
+		for (var i2 = 0; i2 < unknownArray.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

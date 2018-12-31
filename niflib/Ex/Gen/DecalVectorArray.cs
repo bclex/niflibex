@@ -15,9 +15,9 @@ public class DecalVectorArray {
 	/*!  */
 	internal short numVectors;
 	/*! Vector XYZ coords */
-	internal Vector3[] points;
+	internal IList<Vector3> points;
 	/*! Vector Normals */
-	internal Vector3[] normals;
+	internal IList<Vector3> normals;
 	//Constructor
 	public DecalVectorArray() { unchecked {
 	numVectors = (short)0;

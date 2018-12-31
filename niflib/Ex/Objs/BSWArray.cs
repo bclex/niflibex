@@ -21,7 +21,7 @@ public class BSWArray : NiExtraData {
 	/*!  */
 	internal int numItems;
 	/*!  */
-	internal int[] items;
+	internal IList<int> items;
 
 	public BSWArray() {
 	numItems = (int)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numItems, s, info);
 	items = new int[numItems];
-	for (var i1 = 0; i1 < items.Length; i1++) {
+	for (var i1 = 0; i1 < items.Count; i1++) {
 		Nif.NifStream(out items[i1], s, info);
 	}
 
@@ -55,9 +55,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numItems = (int)items.Length;
+	numItems = (int)items.Count;
 	Nif.NifStream(numItems, s, info);
-	for (var i1 = 0; i1 < items.Length; i1++) {
+	for (var i1 = 0; i1 < items.Count; i1++) {
 		Nif.NifStream(items[i1], s, info);
 	}
 
@@ -73,10 +73,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numItems = (int)items.Length;
+	numItems = (int)items.Count;
 	s.AppendLine($"  Num Items:  {numItems}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < items.Length; i1++) {
+	for (var i1 = 0; i1 < items.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

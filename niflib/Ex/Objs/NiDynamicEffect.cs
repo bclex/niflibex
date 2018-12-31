@@ -29,13 +29,13 @@ public class NiDynamicEffect : NiAVObject {
 	 * If a node appears in this list, then its entire subtree will be affected by the
 	 * effect.
 	 */
-	internal NiNode[] affectedNodes;
+	internal IList<NiNode> affectedNodes;
 	/*!
 	 * As of 4.0 the pointer hash is no longer stored alongside each NiObject on disk,
 	 * yet this node list still refers to the pointer hashes. Cannot leave the type as
 	 * Ptr because the link will be invalid.
 	 */
-	internal uint[] affectedNodePointers;
+	internal IList<uint> affectedNodePointers;
 
 	public NiDynamicEffect() {
 	switchState = 1;
@@ -67,21 +67,21 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if (info.version <= 0x0303000D) {
 		affectedNodes = new *[numAffectedNodes];
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
 	}
 	if ((info.version >= 0x04000000) && (info.version <= 0x04000002)) {
 		affectedNodePointers = new uint[numAffectedNodes];
-		for (var i2 = 0; i2 < affectedNodePointers.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodePointers.Count; i2++) {
 			Nif.NifStream(out affectedNodePointers[i2], s, info);
 		}
 	}
 	if ((info.version >= 0x0A010000) && ((info.userVersion2 < 130))) {
 		Nif.NifStream(out (uint)numAffectedNodes, s, info);
 		affectedNodes = new *[numAffectedNodes];
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -93,7 +93,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numAffectedNodes = (uint)affectedNodes.Length;
+	numAffectedNodes = (uint)affectedNodes.Count;
 	if ((info.version >= 0x0A01006A) && ((info.userVersion2 < 130))) {
 		Nif.NifStream(switchState, s, info);
 	}
@@ -101,18 +101,18 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(numAffectedNodes, s, info);
 	}
 	if (info.version <= 0x0303000D) {
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			WriteRef((NiObject)affectedNodes[i2], s, info, link_map, missing_link_stack);
 		}
 	}
 	if ((info.version >= 0x04000000) && (info.version <= 0x04000002)) {
-		for (var i2 = 0; i2 < affectedNodePointers.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodePointers.Count; i2++) {
 			Nif.NifStream(affectedNodePointers[i2], s, info);
 		}
 	}
 	if ((info.version >= 0x0A010000) && ((info.userVersion2 < 130))) {
 		Nif.NifStream((uint)numAffectedNodes, s, info);
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			WriteRef((NiObject)affectedNodes[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -129,11 +129,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numAffectedNodes = (uint)affectedNodes.Length;
+	numAffectedNodes = (uint)affectedNodes.Count;
 	s.AppendLine($"  Switch State:  {switchState}");
 	s.AppendLine($"  Num Affected Nodes:  {numAffectedNodes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < affectedNodes.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -145,7 +145,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < affectedNodePointers.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodePointers.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -165,12 +165,12 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	if (info.version <= 0x0303000D) {
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			affectedNodes[i2] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 		}
 	}
 	if ((info.version >= 0x0A010000) && ((info.userVersion2 < 130))) {
-		for (var i2 = 0; i2 < affectedNodes.Length; i2++) {
+		for (var i2 = 0; i2 < affectedNodes.Count; i2++) {
 			affectedNodes[i2] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -180,9 +180,9 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < affectedNodes.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodes.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < affectedNodes.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodes.Count; i1++) {
 	}
 	return refs;
 }
@@ -190,11 +190,11 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < affectedNodes.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodes.Count; i1++) {
 		if (affectedNodes[i1] != null)
 			ptrs.Add((NiObject)affectedNodes[i1]);
 	}
-	for (var i1 = 0; i1 < affectedNodes.Length; i1++) {
+	for (var i1 = 0; i1 < affectedNodes.Count; i1++) {
 	}
 	return ptrs;
 }

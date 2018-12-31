@@ -21,7 +21,7 @@ public class bhkBallSocketConstraintChain : bhkSerializable {
 	/*! Number of pivot points. Divide by 2 to get the number of constraints. */
 	internal uint numPivots;
 	/*! Two pivot points A and B for each constraint. */
-	internal ConstraintInfo[] pivots;
+	internal IList<ConstraintInfo> pivots;
 	/*! High values are harder and more reactive, lower values are smoother. */
 	internal float tau;
 	/*! Defines damping strength for the current velocity. */
@@ -40,7 +40,7 @@ public class bhkBallSocketConstraintChain : bhkSerializable {
 	/*! Number of links in the chain */
 	internal uint numEntitiesA;
 	/*!  */
-	internal bhkRigidBody[] entitiesA;
+	internal IList<bhkRigidBody> entitiesA;
 	/*! Hardcoded to 2. Don't change. */
 	internal uint numEntities;
 	/*!  */
@@ -82,7 +82,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numPivots, s, info);
 	pivots = new ConstraintInfo[(numPivots / 2)];
-	for (var i1 = 0; i1 < pivots.Length; i1++) {
+	for (var i1 = 0; i1 < pivots.Count; i1++) {
 		Nif.NifStream(out pivots[i1].pivotInA, s, info);
 		Nif.NifStream(out pivots[i1].pivotInB, s, info);
 	}
@@ -92,7 +92,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out maxErrorDistance, s, info);
 	Nif.NifStream(out numEntitiesA, s, info);
 	entitiesA = new *[numEntitiesA];
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -109,10 +109,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numEntitiesA = (uint)entitiesA.Length;
-	numPivots = (uint)pivots.Length;
+	numEntitiesA = (uint)entitiesA.Count;
+	numPivots = (uint)pivots.Count;
 	Nif.NifStream(numPivots, s, info);
-	for (var i1 = 0; i1 < pivots.Length; i1++) {
+	for (var i1 = 0; i1 < pivots.Count; i1++) {
 		Nif.NifStream(pivots[i1].pivotInA, s, info);
 		Nif.NifStream(pivots[i1].pivotInB, s, info);
 	}
@@ -121,7 +121,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(constraintForceMixing, s, info);
 	Nif.NifStream(maxErrorDistance, s, info);
 	Nif.NifStream(numEntitiesA, s, info);
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 		WriteRef((NiObject)entitiesA[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numEntities, s, info);
@@ -141,11 +141,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numEntitiesA = (uint)entitiesA.Length;
-	numPivots = (uint)pivots.Length;
+	numEntitiesA = (uint)entitiesA.Count;
+	numPivots = (uint)pivots.Count;
 	s.AppendLine($"  Num Pivots:  {numPivots}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < pivots.Length; i1++) {
+	for (var i1 = 0; i1 < pivots.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -159,7 +159,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Max Error Distance:  {maxErrorDistance}");
 	s.AppendLine($"  Num Entities A:  {numEntitiesA}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -182,7 +182,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 		entitiesA[i1] = FixLink<bhkRigidBody>(objects, link_stack, missing_link_stack, info);
 	}
 	entityA = FixLink<bhkRigidBody>(objects, link_stack, missing_link_stack, info);
@@ -193,7 +193,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 	}
 	return refs;
 }
@@ -201,7 +201,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < entitiesA.Length; i1++) {
+	for (var i1 = 0; i1 < entitiesA.Count; i1++) {
 		if (entitiesA[i1] != null)
 			ptrs.Add((NiObject)entitiesA[i1]);
 	}

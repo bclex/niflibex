@@ -41,11 +41,11 @@ public class NiMesh : NiRenderObject {
 	/*!  */
 	internal uint numDatastreams;
 	/*!  */
-	internal DataStreamRef[] datastreams;
+	internal IList<DataStreamRef> datastreams;
 	/*!  */
 	internal uint numModifiers;
 	/*!  */
-	internal NiMeshModifier[] modifiers;
+	internal IList<NiMeshModifier> modifiers;
 	/*! Unknown. */
 	internal byte unknown100;
 	/*! Unknown. */
@@ -53,15 +53,15 @@ public class NiMesh : NiRenderObject {
 	/*! Size of additional data. */
 	internal uint unknown102;
 	/*! Unknown. */
-	internal float[] unknown103;
+	internal IList<float> unknown103;
 	/*! Unknown. */
 	internal int unknown200;
 	/*! Unknown. */
-	internal ExtraMeshDataEpicMickey[] unknown201;
+	internal IList<ExtraMeshDataEpicMickey> unknown201;
 	/*! Unknown. */
 	internal int unknown250;
 	/*! Unknown. */
-	internal int[] unknown251;
+	internal IList<int> unknown251;
 	/*! Unknown. */
 	internal int unknown300;
 	/*! Unknown. */
@@ -69,11 +69,11 @@ public class NiMesh : NiRenderObject {
 	/*! Unknown. */
 	internal int unknown302;
 	/*! Unknown. */
-	internal byte[] unknown303;
+	internal IList<byte> unknown303;
 	/*! Unknown. */
 	internal int unknown350;
 	/*! Unknown. */
-	internal ExtraMeshDataEpicMickey2[] unknown351;
+	internal IList<ExtraMeshDataEpicMickey2> unknown351;
 	/*! Unknown. */
 	internal int unknown400;
 
@@ -133,25 +133,25 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out bound.radius, s, info);
 	Nif.NifStream(out numDatastreams, s, info);
 	datastreams = new DataStreamRef[numDatastreams];
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 		Nif.NifStream(out datastreams[i1].isPerInstance, s, info);
 		Nif.NifStream(out datastreams[i1].numSubmeshes, s, info);
 		datastreams[i1].submeshToRegionMap = new ushort[datastreams[i1].numSubmeshes];
-		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Count; i2++) {
 			Nif.NifStream(out datastreams[i1].submeshToRegionMap[i2], s, info);
 		}
 		Nif.NifStream(out datastreams[i1].numComponents, s, info);
 		datastreams[i1].componentSemantics = new SemanticData[datastreams[i1].numComponents];
-		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Count; i2++) {
 			Nif.NifStream(out datastreams[i1].componentSemantics[i2].name, s, info);
 			Nif.NifStream(out datastreams[i1].componentSemantics[i2].index, s, info);
 		}
 	}
 	Nif.NifStream(out numModifiers, s, info);
 	modifiers = new Ref[numModifiers];
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -160,12 +160,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out unknown101, s, info);
 		Nif.NifStream(out unknown102, s, info);
 		unknown103 = new float[unknown102];
-		for (var i2 = 0; i2 < unknown103.Length; i2++) {
+		for (var i2 = 0; i2 < unknown103.Count; i2++) {
 			Nif.NifStream(out unknown103[i2], s, info);
 		}
 		Nif.NifStream(out unknown200, s, info);
 		unknown201 = new ExtraMeshDataEpicMickey[unknown200];
-		for (var i2 = 0; i2 < unknown201.Length; i2++) {
+		for (var i2 = 0; i2 < unknown201.Count; i2++) {
 			Nif.NifStream(out unknown201[i2].unknownInt1, s, info);
 			Nif.NifStream(out unknown201[i2].unknownInt2, s, info);
 			Nif.NifStream(out unknown201[i2].unknownInt3, s, info);
@@ -175,19 +175,19 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		}
 		Nif.NifStream(out unknown250, s, info);
 		unknown251 = new int[unknown250];
-		for (var i2 = 0; i2 < unknown251.Length; i2++) {
+		for (var i2 = 0; i2 < unknown251.Count; i2++) {
 			Nif.NifStream(out unknown251[i2], s, info);
 		}
 		Nif.NifStream(out unknown300, s, info);
 		Nif.NifStream(out unknown301, s, info);
 		Nif.NifStream(out unknown302, s, info);
 		unknown303 = new byte[unknown302];
-		for (var i2 = 0; i2 < unknown303.Length; i2++) {
+		for (var i2 = 0; i2 < unknown303.Count; i2++) {
 			Nif.NifStream(out unknown303[i2], s, info);
 		}
 		Nif.NifStream(out unknown350, s, info);
 		unknown351 = new ExtraMeshDataEpicMickey2[unknown350];
-		for (var i2 = 0; i2 < unknown351.Length; i2++) {
+		for (var i2 = 0; i2 < unknown351.Count; i2++) {
 			Nif.NifStream(out unknown351[i2].start, s, info);
 			Nif.NifStream(out unknown351[i2].end, s, info);
 			for (var i3 = 0; i3 < 10; i3++) {
@@ -203,13 +203,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	unknown350 = (int)unknown351.Length;
-	unknown302 = (int)unknown303.Length;
-	unknown250 = (int)unknown251.Length;
-	unknown200 = (int)unknown201.Length;
-	unknown102 = (uint)unknown103.Length;
-	numModifiers = (uint)modifiers.Length;
-	numDatastreams = (uint)datastreams.Length;
+	unknown350 = (int)unknown351.Count;
+	unknown302 = (int)unknown303.Count;
+	unknown250 = (int)unknown251.Count;
+	unknown200 = (int)unknown201.Count;
+	unknown102 = (uint)unknown103.Count;
+	numModifiers = (uint)modifiers.Count;
+	numDatastreams = (uint)datastreams.Count;
 	Nif.NifStream(primitiveType, s, info);
 	if (info.userVersion == 15) {
 		Nif.NifStream(unknown51, s, info);
@@ -224,34 +224,34 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(bound.center, s, info);
 	Nif.NifStream(bound.radius, s, info);
 	Nif.NifStream(numDatastreams, s, info);
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
-		datastreams[i1].numComponents = (uint)datastreams[i1].componentSemantics.Length;
-		datastreams[i1].numSubmeshes = (ushort)datastreams[i1].submeshToRegionMap.Length;
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
+		datastreams[i1].numComponents = (uint)datastreams[i1].componentSemantics.Count;
+		datastreams[i1].numSubmeshes = (ushort)datastreams[i1].submeshToRegionMap.Count;
 		WriteRef((NiObject)datastreams[i1].stream, s, info, link_map, missing_link_stack);
 		Nif.NifStream(datastreams[i1].isPerInstance, s, info);
 		Nif.NifStream(datastreams[i1].numSubmeshes, s, info);
-		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Count; i2++) {
 			Nif.NifStream(datastreams[i1].submeshToRegionMap[i2], s, info);
 		}
 		Nif.NifStream(datastreams[i1].numComponents, s, info);
-		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Count; i2++) {
 			Nif.NifStream(datastreams[i1].componentSemantics[i2].name, s, info);
 			Nif.NifStream(datastreams[i1].componentSemantics[i2].index, s, info);
 		}
 	}
 	Nif.NifStream(numModifiers, s, info);
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		WriteRef((NiObject)modifiers[i1], s, info, link_map, missing_link_stack);
 	}
 	if (info.userVersion == 15) {
 		Nif.NifStream(unknown100, s, info);
 		Nif.NifStream(unknown101, s, info);
 		Nif.NifStream(unknown102, s, info);
-		for (var i2 = 0; i2 < unknown103.Length; i2++) {
+		for (var i2 = 0; i2 < unknown103.Count; i2++) {
 			Nif.NifStream(unknown103[i2], s, info);
 		}
 		Nif.NifStream(unknown200, s, info);
-		for (var i2 = 0; i2 < unknown201.Length; i2++) {
+		for (var i2 = 0; i2 < unknown201.Count; i2++) {
 			Nif.NifStream(unknown201[i2].unknownInt1, s, info);
 			Nif.NifStream(unknown201[i2].unknownInt2, s, info);
 			Nif.NifStream(unknown201[i2].unknownInt3, s, info);
@@ -260,17 +260,17 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			Nif.NifStream(unknown201[i2].unknownInt6, s, info);
 		}
 		Nif.NifStream(unknown250, s, info);
-		for (var i2 = 0; i2 < unknown251.Length; i2++) {
+		for (var i2 = 0; i2 < unknown251.Count; i2++) {
 			Nif.NifStream(unknown251[i2], s, info);
 		}
 		Nif.NifStream(unknown300, s, info);
 		Nif.NifStream(unknown301, s, info);
 		Nif.NifStream(unknown302, s, info);
-		for (var i2 = 0; i2 < unknown303.Length; i2++) {
+		for (var i2 = 0; i2 < unknown303.Count; i2++) {
 			Nif.NifStream(unknown303[i2], s, info);
 		}
 		Nif.NifStream(unknown350, s, info);
-		for (var i2 = 0; i2 < unknown351.Length; i2++) {
+		for (var i2 = 0; i2 < unknown351.Count; i2++) {
 			Nif.NifStream(unknown351[i2].start, s, info);
 			Nif.NifStream(unknown351[i2].end, s, info);
 			for (var i3 = 0; i3 < 10; i3++) {
@@ -292,13 +292,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	unknown350 = (int)unknown351.Length;
-	unknown302 = (int)unknown303.Length;
-	unknown250 = (int)unknown251.Length;
-	unknown200 = (int)unknown201.Length;
-	unknown102 = (uint)unknown103.Length;
-	numModifiers = (uint)modifiers.Length;
-	numDatastreams = (uint)datastreams.Length;
+	unknown350 = (int)unknown351.Count;
+	unknown302 = (int)unknown303.Count;
+	unknown250 = (int)unknown251.Count;
+	unknown200 = (int)unknown201.Count;
+	unknown102 = (uint)unknown103.Count;
+	numModifiers = (uint)modifiers.Count;
+	numDatastreams = (uint)datastreams.Count;
 	s.AppendLine($"  Primitive Type:  {primitiveType}");
 	s.AppendLine($"  Unknown 51:  {unknown51}");
 	s.AppendLine($"  Unknown 52:  {unknown52}");
@@ -312,18 +312,18 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Radius:  {bound.radius}");
 	s.AppendLine($"  Num Datastreams:  {numDatastreams}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		datastreams[i1].numComponents = (uint)datastreams[i1].componentSemantics.Length;
-		datastreams[i1].numSubmeshes = (ushort)datastreams[i1].submeshToRegionMap.Length;
+		datastreams[i1].numComponents = (uint)datastreams[i1].componentSemantics.Count;
+		datastreams[i1].numSubmeshes = (ushort)datastreams[i1].submeshToRegionMap.Count;
 		s.AppendLine($"    Stream:  {datastreams[i1].stream}");
 		s.AppendLine($"    Is Per Instance:  {datastreams[i1].isPerInstance}");
 		s.AppendLine($"    Num Submeshes:  {datastreams[i1].numSubmeshes}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].submeshToRegionMap.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -336,7 +336,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Num Components:  {datastreams[i1].numComponents}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Length; i2++) {
+		for (var i2 = 0; i2 < datastreams[i1].componentSemantics.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -347,7 +347,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Modifiers:  {numModifiers}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -362,7 +362,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Unknown 101:  {unknown101}");
 	s.AppendLine($"  Unknown 102:  {unknown102}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown103.Length; i1++) {
+	for (var i1 = 0; i1 < unknown103.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -375,7 +375,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Unknown 200:  {unknown200}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown201.Length; i1++) {
+	for (var i1 = 0; i1 < unknown201.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -389,7 +389,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Unknown 250:  {unknown250}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown251.Length; i1++) {
+	for (var i1 = 0; i1 < unknown251.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -404,7 +404,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Unknown 301:  {unknown301}");
 	s.AppendLine($"  Unknown 302:  {unknown302}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown303.Length; i1++) {
+	for (var i1 = 0; i1 < unknown303.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -417,7 +417,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Unknown 350:  {unknown350}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknown351.Length; i1++) {
+	for (var i1 = 0; i1 < unknown351.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -446,10 +446,10 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
 		datastreams[i1].stream = FixLink<NiDataStream>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		modifiers[i1] = FixLink<NiMeshModifier>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -458,11 +458,11 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
 		if (datastreams[i1].stream != null)
 			refs.Add((NiObject)datastreams[i1].stream);
 	}
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		if (modifiers[i1] != null)
 			refs.Add((NiObject)modifiers[i1]);
 	}
@@ -472,9 +472,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < datastreams.Length; i1++) {
+	for (var i1 = 0; i1 < datastreams.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 	}
 	return ptrs;
 }

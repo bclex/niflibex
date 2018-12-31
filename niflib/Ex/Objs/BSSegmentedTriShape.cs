@@ -21,7 +21,7 @@ public class BSSegmentedTriShape : NiTriShape {
 	/*! Number of segments in the square grid */
 	internal int numSegments;
 	/*! Configuration of each segment */
-	internal BSGeometrySegmentData[] segment;
+	internal IList<BSGeometrySegmentData> segment;
 
 	public BSSegmentedTriShape() {
 	numSegments = (int)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numSegments, s, info);
 	segment = new BSGeometrySegmentData[numSegments];
-	for (var i1 = 0; i1 < segment.Length; i1++) {
+	for (var i1 = 0; i1 < segment.Count; i1++) {
 		if ((info.userVersion2 < 130)) {
 			Nif.NifStream(out segment[i1].flags, s, info);
 			Nif.NifStream(out segment[i1].index, s, info);
@@ -57,7 +57,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out segment[i1].parentArrayIndex, s, info);
 			Nif.NifStream(out segment[i1].numSubSegments, s, info);
 			segment[i1].subSegment = new BSGeometrySubSegment[segment[i1].numSubSegments];
-			for (var i3 = 0; i3 < segment[i1].subSegment.Length; i3++) {
+			for (var i3 = 0; i3 < segment[i1].subSegment.Count; i3++) {
 				Nif.NifStream(out segment[i1].subSegment[i3].startIndex, s, info);
 				Nif.NifStream(out segment[i1].subSegment[i3].numPrimitives, s, info);
 				Nif.NifStream(out segment[i1].subSegment[i3].parentArrayIndex, s, info);
@@ -72,10 +72,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSegments = (int)segment.Length;
+	numSegments = (int)segment.Count;
 	Nif.NifStream(numSegments, s, info);
-	for (var i1 = 0; i1 < segment.Length; i1++) {
-		segment[i1].numSubSegments = (uint)segment[i1].subSegment.Length;
+	for (var i1 = 0; i1 < segment.Count; i1++) {
+		segment[i1].numSubSegments = (uint)segment[i1].subSegment.Count;
 		if ((info.userVersion2 < 130)) {
 			Nif.NifStream(segment[i1].flags, s, info);
 			Nif.NifStream(segment[i1].index, s, info);
@@ -86,7 +86,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			Nif.NifStream(segment[i1].numPrimitives, s, info);
 			Nif.NifStream(segment[i1].parentArrayIndex, s, info);
 			Nif.NifStream(segment[i1].numSubSegments, s, info);
-			for (var i3 = 0; i3 < segment[i1].subSegment.Length; i3++) {
+			for (var i3 = 0; i3 < segment[i1].subSegment.Count; i3++) {
 				Nif.NifStream(segment[i1].subSegment[i3].startIndex, s, info);
 				Nif.NifStream(segment[i1].subSegment[i3].numPrimitives, s, info);
 				Nif.NifStream(segment[i1].subSegment[i3].parentArrayIndex, s, info);
@@ -107,15 +107,15 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSegments = (int)segment.Length;
+	numSegments = (int)segment.Count;
 	s.AppendLine($"  Num Segments:  {numSegments}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < segment.Length; i1++) {
+	for (var i1 = 0; i1 < segment.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		segment[i1].numSubSegments = (uint)segment[i1].subSegment.Length;
+		segment[i1].numSubSegments = (uint)segment[i1].subSegment.Count;
 		s.AppendLine($"    Flags:  {segment[i1].flags}");
 		s.AppendLine($"    Index:  {segment[i1].index}");
 		s.AppendLine($"    Num Tris in Segment:  {segment[i1].numTrisInSegment}");
@@ -124,7 +124,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Parent Array Index:  {segment[i1].parentArrayIndex}");
 		s.AppendLine($"    Num Sub Segments:  {segment[i1].numSubSegments}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < segment[i1].subSegment.Length; i2++) {
+		for (var i2 = 0; i2 < segment[i1].subSegment.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

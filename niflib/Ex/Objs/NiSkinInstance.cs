@@ -30,7 +30,7 @@ public class NiSkinInstance : NiObject {
 	/*! The number of node bones referenced as influences. */
 	internal uint numBones;
 	/*! List of all armature bones. */
-	internal NiNode[] bones;
+	internal IList<NiNode> bones;
 
 	public NiSkinInstance() {
 	data = null;
@@ -66,7 +66,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	link_stack.Add(block_num);
 	Nif.NifStream(out numBones, s, info);
 	bones = new *[numBones];
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -77,14 +77,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numBones = (uint)bones.Length;
+	numBones = (uint)bones.Count;
 	WriteRef((NiObject)data, s, info, link_map, missing_link_stack);
 	if (info.version >= 0x0A010065) {
 		WriteRef((NiObject)skinPartition, s, info, link_map, missing_link_stack);
 	}
 	WriteRef((NiObject)skeletonRoot, s, info, link_map, missing_link_stack);
 	Nif.NifStream(numBones, s, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		WriteRef((NiObject)bones[i1], s, info, link_map, missing_link_stack);
 	}
 
@@ -100,13 +100,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numBones = (uint)bones.Length;
+	numBones = (uint)bones.Count;
 	s.AppendLine($"  Data:  {data}");
 	s.AppendLine($"  Skin Partition:  {skinPartition}");
 	s.AppendLine($"  Skeleton Root:  {skeletonRoot}");
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -130,7 +130,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		skinPartition = FixLink<NiSkinPartition>(objects, link_stack, missing_link_stack, info);
 	}
 	skeletonRoot = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		bones[i1] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -143,7 +143,7 @@ internal override List<NiObject> GetRefs() {
 		refs.Add((NiObject)data);
 	if (skinPartition != null)
 		refs.Add((NiObject)skinPartition);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 	}
 	return refs;
 }
@@ -153,7 +153,7 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	if (skeletonRoot != null)
 		ptrs.Add((NiObject)skeletonRoot);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (bones[i1] != null)
 			ptrs.Add((NiObject)bones[i1]);
 	}

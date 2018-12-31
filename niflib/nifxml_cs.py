@@ -380,7 +380,7 @@ class CSFile(io.TextIOWrapper):
                         # self.code('assert(%s%s ==
                         # (%s)(%s%s.size()));'%(prefix, y.cname, y.ctype,
                         # prefix, cref.cname))
-                      self.code('%s%s = (%s)%s%s.Length;' % (prefix, y.cname, y.ctype, prefix, cref.cname))
+                      self.code('%s%s = (%s)%s%s.Count;' % (prefix, y.cname, y.ctype, prefix, cref.cname))
                   elif y.arr2_ref: # 1-dimensional dynamic array
                     cref = block.find_member(y.arr2_ref[0], True) 
                     if not y.arr1 or not y.arr1.lhs: # Second dimension
@@ -389,11 +389,11 @@ class CSFile(io.TextIOWrapper):
                        # self.code('assert(%s%s == (%s)((%s%s.size() > 0) ?
                                                                            # %s%s[0].size() : 0));'%(prefix, y.cname, y.ctype,
                                                                            # prefix, cref.cname, prefix, cref.cname))
-                      self.code('%s%s = (%s)((%s%s.Length > 0) ? %s%s[0].Length : 0);' % (prefix, y.cname, y.ctype, prefix, cref.cname, prefix, cref.cname))
+                      self.code('%s%s = (%s)((%s%s.Count > 0) ? %s%s[0].Count : 0);' % (prefix, y.cname, y.ctype, prefix, cref.cname, prefix, cref.cname))
                     else:
                         # index of dynamically sized array
-                        self.code('for (var i%i = 0; i%i < %s%s.Length; i%i++)' % (self.indent, self.indent, prefix, cref.cname, self.indent))
-                        self.code('\t%s%s[i%i] = (%s)%s%s[i%i].Length;' % (prefix, y.cname, self.indent, y.ctype, prefix, cref.cname, self.indent))
+                        self.code('for (var i%i = 0; i%i < %s%s.Count; i%i++)' % (self.indent, self.indent, prefix, cref.cname, self.indent))
+                        self.code('\t%s%s[i%i] = (%s)%s%s[i%i].Count;' % (prefix, y.cname, self.indent, y.ctype, prefix, cref.cname, self.indent))
                   # else: #has duplicates needs to be selective based on
                   # version
                     # self.code('assert(!"%s");'%(y.name))
@@ -540,7 +540,7 @@ class CSFile(io.TextIOWrapper):
                       self.code(memcode)
                       
                     self.code(\
-                        "for (var i%i = 0; i%i < %s%s.Length; i%i++) {" % (self.indent, self.indent, y_prefix, y.cname, self.indent))
+                        "for (var i%i = 0; i%i < %s%s.Count; i%i++) {" % (self.indent, self.indent, y_prefix, y.cname, self.indent))
                 else:
                     self.code(\
                         "for (var i%i = 0; i%i < %s; i%i++) {" % (self.indent, self.indent, y.arr1.code(y_arr1_prefix), self.indent))
@@ -558,7 +558,7 @@ class CSFile(io.TextIOWrapper):
                             if action == ACTION_READ:
                                 self.code("%s%s[i%i].Resize(%s);" % (y_prefix, y.cname, self.indent - 1, y.arr2.code(y_arr2_prefix)))
                             self.code(\
-                                "for (var i%i = 0; i%i < %s%s[i%i].Length; i%i++) {" % (self.indent, self.indent, y_prefix, y.cname, self.indent - 1, self.indent))
+                                "for (var i%i = 0; i%i < %s%s[i%i].Count; i%i++) {" % (self.indent, self.indent, y_prefix, y.cname, self.indent - 1, self.indent))
                         else:
                             self.code(\
                                 "for (var i%i = 0; i%i < %s; i%i++) {" % (self.indent, self.indent, y.arr2.code(y_arr2_prefix), self.indent))
@@ -1429,12 +1429,12 @@ class Member:
                       result = "Array%s<%s>" % (self.arr1.lhs, result) 
             else:
                 if self.arr2.lhs and self.arr2.lhs.isdigit():
-                    result = "Array%s<%s>[]" % (self.arr2.lhs, result)
+                    result = "IList<Array%s<%s>>" % (self.arr2.lhs, result)
                 else:
                     if self.arr2.lhs:
-                        result = "%s[][]" % result
+                        result = "IList<%s[]>" % result
                     else:
-                        result = "%s[]" % result
+                        result = "IList<%s>" % result
         result = keyword + result + " " + prefix + self.cname + suffix1 + suffix2 + ";"
         return result
 

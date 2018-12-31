@@ -29,15 +29,15 @@ public class NiBoneLODController : NiTimeController {
 	/*! Number of node arrays. */
 	internal uint numNodeGroups;
 	/*! A list of node sets (each set a sequence of bones). */
-	internal NodeSet[] nodeGroups;
+	internal IList<NodeSet> nodeGroups;
 	/*! Number of shape groups. */
 	internal uint numShapeGroups;
 	/*! List of shape groups. */
-	internal SkinInfoSet[] shapeGroups1;
+	internal IList<SkinInfoSet> shapeGroups1;
 	/*! The size of the second list of shape groups. */
 	internal uint numShapeGroups2;
 	/*! Group of NiTriShape indices. */
-	internal NiTriBasedGeom[] shapeGroups2;
+	internal IList<NiTriBasedGeom> shapeGroups2;
 	/*! Unknown. */
 	internal int unknownInt2;
 	/*! Unknown. */
@@ -74,10 +74,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numLods, s, info);
 	Nif.NifStream(out numNodeGroups, s, info);
 	nodeGroups = new NodeSet[numLods];
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
 		Nif.NifStream(out nodeGroups[i1].numNodes, s, info);
 		nodeGroups[i1].nodes = new *[nodeGroups[i1].numNodes];
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -90,10 +90,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
 		shapeGroups1 = new SkinInfoSet[numShapeGroups];
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
 			Nif.NifStream(out shapeGroups1[i2].numSkinInfo, s, info);
 			shapeGroups1[i2].skinInfo = new SkinInfo[shapeGroups1[i2].numSkinInfo];
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				Nif.NifStream(out block_num, s, info);
 				link_stack.Add(block_num);
 				Nif.NifStream(out block_num, s, info);
@@ -103,10 +103,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
 		shapeGroups1 = new SkinInfoSet[numShapeGroups];
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
 			Nif.NifStream(out shapeGroups1[i2].numSkinInfo, s, info);
 			shapeGroups1[i2].skinInfo = new SkinInfo[shapeGroups1[i2].numSkinInfo];
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				Nif.NifStream(out block_num, s, info);
 				link_stack.Add(block_num);
 				Nif.NifStream(out block_num, s, info);
@@ -122,14 +122,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
 		shapeGroups2 = new Ref[numShapeGroups2];
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
 		shapeGroups2 = new Ref[numShapeGroups2];
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -145,16 +145,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numShapeGroups2 = (uint)shapeGroups2.Length;
-	numShapeGroups = (uint)shapeGroups1.Length;
-	numLods = (uint)nodeGroups.Length;
+	numShapeGroups2 = (uint)shapeGroups2.Count;
+	numShapeGroups = (uint)shapeGroups1.Count;
+	numLods = (uint)nodeGroups.Count;
 	Nif.NifStream(lod, s, info);
 	Nif.NifStream(numLods, s, info);
 	Nif.NifStream(numNodeGroups, s, info);
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
-		nodeGroups[i1].numNodes = (uint)nodeGroups[i1].nodes.Length;
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
+		nodeGroups[i1].numNodes = (uint)nodeGroups[i1].nodes.Count;
 		Nif.NifStream(nodeGroups[i1].numNodes, s, info);
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 			WriteRef((NiObject)nodeGroups[i1].nodes[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -165,20 +165,20 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream((uint)numShapeGroups, s, info);
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
-			shapeGroups1[i2].numSkinInfo = (uint)shapeGroups1[i2].skinInfo.Length;
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
+			shapeGroups1[i2].numSkinInfo = (uint)shapeGroups1[i2].skinInfo.Count;
 			Nif.NifStream(shapeGroups1[i2].numSkinInfo, s, info);
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				WriteRef((NiObject)shapeGroups1[i2].skinInfo[i3].shape, s, info, link_map, missing_link_stack);
 				WriteRef((NiObject)shapeGroups1[i2].skinInfo[i3].skinInstance, s, info, link_map, missing_link_stack);
 			}
 		}
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
-			shapeGroups1[i2].numSkinInfo = (uint)shapeGroups1[i2].skinInfo.Length;
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
+			shapeGroups1[i2].numSkinInfo = (uint)shapeGroups1[i2].skinInfo.Count;
 			Nif.NifStream(shapeGroups1[i2].numSkinInfo, s, info);
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				WriteRef((NiObject)shapeGroups1[i2].skinInfo[i3].shape, s, info, link_map, missing_link_stack);
 				WriteRef((NiObject)shapeGroups1[i2].skinInfo[i3].skinInstance, s, info, link_map, missing_link_stack);
 			}
@@ -191,12 +191,12 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream((uint)numShapeGroups2, s, info);
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			WriteRef((NiObject)shapeGroups2[i2], s, info, link_map, missing_link_stack);
 		}
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			WriteRef((NiObject)shapeGroups2[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -217,22 +217,22 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numShapeGroups2 = (uint)shapeGroups2.Length;
-	numShapeGroups = (uint)shapeGroups1.Length;
-	numLods = (uint)nodeGroups.Length;
+	numShapeGroups2 = (uint)shapeGroups2.Count;
+	numShapeGroups = (uint)shapeGroups1.Count;
+	numLods = (uint)nodeGroups.Count;
 	s.AppendLine($"  LOD:  {lod}");
 	s.AppendLine($"  Num LODs:  {numLods}");
 	s.AppendLine($"  Num Node Groups:  {numNodeGroups}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		nodeGroups[i1].numNodes = (uint)nodeGroups[i1].nodes.Length;
+		nodeGroups[i1].numNodes = (uint)nodeGroups[i1].nodes.Count;
 		s.AppendLine($"    Num Nodes:  {nodeGroups[i1].numNodes}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -246,15 +246,15 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Shape Groups:  {numShapeGroups}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shapeGroups1.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups1.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		shapeGroups1[i1].numSkinInfo = (uint)shapeGroups1[i1].skinInfo.Length;
+		shapeGroups1[i1].numSkinInfo = (uint)shapeGroups1[i1].skinInfo.Count;
 		s.AppendLine($"    Num Skin Info:  {shapeGroups1[i1].numSkinInfo}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -265,7 +265,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Shape Groups 2:  {numShapeGroups2}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shapeGroups2.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -286,34 +286,34 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 			nodeGroups[i1].nodes[i2] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 		}
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				shapeGroups1[i2].skinInfo[i3].shape = FixLink<NiTriBasedGeom>(objects, link_stack, missing_link_stack, info);
 				shapeGroups1[i2].skinInfo[i3].skinInstance = FixLink<NiSkinInstance>(objects, link_stack, missing_link_stack, info);
 			}
 		}
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
-		for (var i2 = 0; i2 < shapeGroups1.Length; i2++) {
-			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Length; i3++) {
+		for (var i2 = 0; i2 < shapeGroups1.Count; i2++) {
+			for (var i3 = 0; i3 < shapeGroups1[i2].skinInfo.Count; i3++) {
 				shapeGroups1[i2].skinInfo[i3].shape = FixLink<NiTriBasedGeom>(objects, link_stack, missing_link_stack, info);
 				shapeGroups1[i2].skinInfo[i3].skinInstance = FixLink<NiSkinInstance>(objects, link_stack, missing_link_stack, info);
 			}
 		}
 	}
 	if ((info.version >= 0x04020200) && (info.userVersion == 0)) {
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			shapeGroups2[i2] = FixLink<NiTriBasedGeom>(objects, link_stack, missing_link_stack, info);
 		}
 	}
 	if ((info.version >= 0x0A020000) && (info.version <= 0x0A020000) && (info.userVersion == 1)) {
-		for (var i2 = 0; i2 < shapeGroups2.Length; i2++) {
+		for (var i2 = 0; i2 < shapeGroups2.Count; i2++) {
 			shapeGroups2[i2] = FixLink<NiTriBasedGeom>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -323,27 +323,27 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups1.Length; i1++) {
-		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Length; i2++) {
+	for (var i1 = 0; i1 < shapeGroups1.Count; i1++) {
+		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Count; i2++) {
 			if (shapeGroups1[i1].skinInfo[i2].skinInstance != null)
 				refs.Add((NiObject)shapeGroups1[i1].skinInfo[i2].skinInstance);
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups1.Length; i1++) {
-		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Length; i2++) {
+	for (var i1 = 0; i1 < shapeGroups1.Count; i1++) {
+		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Count; i2++) {
 			if (shapeGroups1[i1].skinInfo[i2].skinInstance != null)
 				refs.Add((NiObject)shapeGroups1[i1].skinInfo[i2].skinInstance);
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups2.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups2.Count; i1++) {
 		if (shapeGroups2[i1] != null)
 			refs.Add((NiObject)shapeGroups2[i1]);
 	}
-	for (var i1 = 0; i1 < shapeGroups2.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups2.Count; i1++) {
 	}
 	return refs;
 }
@@ -351,27 +351,27 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < nodeGroups.Length; i1++) {
-		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Length; i2++) {
+	for (var i1 = 0; i1 < nodeGroups.Count; i1++) {
+		for (var i2 = 0; i2 < nodeGroups[i1].nodes.Count; i2++) {
 			if (nodeGroups[i1].nodes[i2] != null)
 				ptrs.Add((NiObject)nodeGroups[i1].nodes[i2]);
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups1.Length; i1++) {
-		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Length; i2++) {
+	for (var i1 = 0; i1 < shapeGroups1.Count; i1++) {
+		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Count; i2++) {
 			if (shapeGroups1[i1].skinInfo[i2].shape != null)
 				ptrs.Add((NiObject)shapeGroups1[i1].skinInfo[i2].shape);
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups1.Length; i1++) {
-		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Length; i2++) {
+	for (var i1 = 0; i1 < shapeGroups1.Count; i1++) {
+		for (var i2 = 0; i2 < shapeGroups1[i1].skinInfo.Count; i2++) {
 			if (shapeGroups1[i1].skinInfo[i2].shape != null)
 				ptrs.Add((NiObject)shapeGroups1[i1].skinInfo[i2].shape);
 		}
 	}
-	for (var i1 = 0; i1 < shapeGroups2.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups2.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < shapeGroups2.Length; i1++) {
+	for (var i1 = 0; i1 < shapeGroups2.Count; i1++) {
 	}
 	return ptrs;
 }

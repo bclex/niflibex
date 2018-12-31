@@ -26,7 +26,7 @@ public class BoneData {
 	/*! Number of weighted vertices. */
 	internal ushort numVertices;
 	/*! The vertex weights. */
-	internal BoneVertData[] vertexWeights;
+	internal IList<BoneVertData> vertexWeights;
 	//Constructor
 	public BoneData() { unchecked {
 	boundingSphereRadius = 0.0f;

@@ -23,7 +23,7 @@ public class NiDefaultAVObjectPalette : NiAVObjectPalette {
 	/*! Number of objects. */
 	internal uint numObjs;
 	/*! The objects. */
-	internal AVObject[] objs;
+	internal IList<AVObject> objs;
 
 	public NiDefaultAVObjectPalette() {
 	scene = null;
@@ -51,7 +51,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	link_stack.Add(block_num);
 	Nif.NifStream(out numObjs, s, info);
 	objs = new AVObject[numObjs];
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 		Nif.NifStream(out objs[i1].name, s, info);
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
@@ -63,10 +63,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numObjs = (uint)objs.Length;
+	numObjs = (uint)objs.Count;
 	WriteRef((NiObject)scene, s, info, link_map, missing_link_stack);
 	Nif.NifStream(numObjs, s, info);
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 		Nif.NifStream(objs[i1].name, s, info);
 		WriteRef((NiObject)objs[i1].avObject, s, info, link_map, missing_link_stack);
 	}
@@ -83,11 +83,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numObjs = (uint)objs.Length;
+	numObjs = (uint)objs.Count;
 	s.AppendLine($"  Scene:  {scene}");
 	s.AppendLine($"  Num Objs:  {numObjs}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -104,7 +104,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	scene = FixLink<NiAVObject>(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 		objs[i1].avObject = FixLink<NiAVObject>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -113,7 +113,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 	}
 	return refs;
 }
@@ -123,7 +123,7 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	if (scene != null)
 		ptrs.Add((NiObject)scene);
-	for (var i1 = 0; i1 < objs.Length; i1++) {
+	for (var i1 = 0; i1 < objs.Count; i1++) {
 		if (objs[i1].avObject != null)
 			ptrs.Add((NiObject)objs[i1].avObject);
 	}

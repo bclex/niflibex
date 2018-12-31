@@ -24,7 +24,7 @@ public class BSDecalPlacementVectorExtraData : NiFloatExtraData {
 	/*!  */
 	internal short numVectorBlocks;
 	/*!  */
-	internal DecalVectorArray[] vectorBlocks;
+	internal IList<DecalVectorArray> vectorBlocks;
 
 	public BSDecalPlacementVectorExtraData() {
 	numVectorBlocks = (short)0;
@@ -48,14 +48,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numVectorBlocks, s, info);
 	vectorBlocks = new DecalVectorArray[numVectorBlocks];
-	for (var i1 = 0; i1 < vectorBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < vectorBlocks.Count; i1++) {
 		Nif.NifStream(out vectorBlocks[i1].numVectors, s, info);
 		vectorBlocks[i1].points = new Vector3[vectorBlocks[i1].numVectors];
-		for (var i2 = 0; i2 < vectorBlocks[i1].points.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].points.Count; i2++) {
 			Nif.NifStream(out vectorBlocks[i1].points[i2], s, info);
 		}
 		vectorBlocks[i1].normals = new Vector3[vectorBlocks[i1].numVectors];
-		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Count; i2++) {
 			Nif.NifStream(out vectorBlocks[i1].normals[i2], s, info);
 		}
 	}
@@ -66,15 +66,15 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVectorBlocks = (short)vectorBlocks.Length;
+	numVectorBlocks = (short)vectorBlocks.Count;
 	Nif.NifStream(numVectorBlocks, s, info);
-	for (var i1 = 0; i1 < vectorBlocks.Length; i1++) {
-		vectorBlocks[i1].numVectors = (short)vectorBlocks[i1].points.Length;
+	for (var i1 = 0; i1 < vectorBlocks.Count; i1++) {
+		vectorBlocks[i1].numVectors = (short)vectorBlocks[i1].points.Count;
 		Nif.NifStream(vectorBlocks[i1].numVectors, s, info);
-		for (var i2 = 0; i2 < vectorBlocks[i1].points.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].points.Count; i2++) {
 			Nif.NifStream(vectorBlocks[i1].points[i2], s, info);
 		}
-		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Count; i2++) {
 			Nif.NifStream(vectorBlocks[i1].normals[i2], s, info);
 		}
 	}
@@ -91,18 +91,18 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVectorBlocks = (short)vectorBlocks.Length;
+	numVectorBlocks = (short)vectorBlocks.Count;
 	s.AppendLine($"  Num Vector Blocks:  {numVectorBlocks}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vectorBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < vectorBlocks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		vectorBlocks[i1].numVectors = (short)vectorBlocks[i1].points.Length;
+		vectorBlocks[i1].numVectors = (short)vectorBlocks[i1].points.Count;
 		s.AppendLine($"    Num Vectors:  {vectorBlocks[i1].numVectors}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vectorBlocks[i1].points.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].points.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -114,7 +114,7 @@ public override string AsString(bool verbose = false) {
 			array_output_count++;
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Length; i2++) {
+		for (var i2 = 0; i2 < vectorBlocks[i1].normals.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

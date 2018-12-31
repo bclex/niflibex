@@ -19,13 +19,13 @@ public class AdditionalDataBlock {
 	/*!  */
 	internal int numBlocks;
 	/*!  */
-	internal int[] blockOffsets;
+	internal IList<int> blockOffsets;
 	/*!  */
 	internal int numData;
 	/*!  */
-	internal int[] dataSizes;
+	internal IList<int> dataSizes;
 	/*!  */
-	internal byte[][] data;
+	internal IList<byte[]> data;
 	//Constructor
 	public AdditionalDataBlock() { unchecked {
 	hasData = false;

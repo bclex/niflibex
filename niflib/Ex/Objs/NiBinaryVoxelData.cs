@@ -31,11 +31,11 @@ public class NiBinaryVoxelData : NiObject {
 	/*! Unknown. */
 	internal uint numUnknownVectors;
 	/*! Vectors on the unit sphere. */
-	internal Vector4[] unknownVectors;
+	internal IList<Vector4> unknownVectors;
 	/*! Unknown. */
 	internal uint numUnknownBytes2;
 	/*! Unknown. */
-	internal byte[] unknownBytes2;
+	internal IList<byte> unknownBytes2;
 	/*! Unknown. */
 	internal Array5<uint> unknown5Ints;
 
@@ -76,12 +76,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numUnknownVectors, s, info);
 	unknownVectors = new Vector4[numUnknownVectors];
-	for (var i1 = 0; i1 < unknownVectors.Length; i1++) {
+	for (var i1 = 0; i1 < unknownVectors.Count; i1++) {
 		Nif.NifStream(out unknownVectors[i1], s, info);
 	}
 	Nif.NifStream(out numUnknownBytes2, s, info);
 	unknownBytes2 = new byte[numUnknownBytes2];
-	for (var i1 = 0; i1 < unknownBytes2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownBytes2.Count; i1++) {
 		Nif.NifStream(out unknownBytes2[i1], s, info);
 	}
 	for (var i1 = 0; i1 < 5; i1++) {
@@ -94,8 +94,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numUnknownBytes2 = (uint)unknownBytes2.Length;
-	numUnknownVectors = (uint)unknownVectors.Length;
+	numUnknownBytes2 = (uint)unknownBytes2.Count;
+	numUnknownVectors = (uint)unknownVectors.Count;
 	Nif.NifStream(unknownShort1, s, info);
 	Nif.NifStream(unknownShort2, s, info);
 	Nif.NifStream(unknownShort3, s, info);
@@ -108,11 +108,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 	}
 	Nif.NifStream(numUnknownVectors, s, info);
-	for (var i1 = 0; i1 < unknownVectors.Length; i1++) {
+	for (var i1 = 0; i1 < unknownVectors.Count; i1++) {
 		Nif.NifStream(unknownVectors[i1], s, info);
 	}
 	Nif.NifStream(numUnknownBytes2, s, info);
-	for (var i1 = 0; i1 < unknownBytes2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownBytes2.Count; i1++) {
 		Nif.NifStream(unknownBytes2[i1], s, info);
 	}
 	for (var i1 = 0; i1 < 5; i1++) {
@@ -131,8 +131,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numUnknownBytes2 = (uint)unknownBytes2.Length;
-	numUnknownVectors = (uint)unknownVectors.Length;
+	numUnknownBytes2 = (uint)unknownBytes2.Count;
+	numUnknownVectors = (uint)unknownVectors.Count;
 	s.AppendLine($"  Unknown Short 1:  {unknownShort1}");
 	s.AppendLine($"  Unknown Short 2:  {unknownShort2}");
 	s.AppendLine($"  Unknown Short 3:  {unknownShort3}");
@@ -164,7 +164,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Unknown Vectors:  {numUnknownVectors}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownVectors.Length; i1++) {
+	for (var i1 = 0; i1 < unknownVectors.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -177,7 +177,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Unknown Bytes 2:  {numUnknownBytes2}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownBytes2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownBytes2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

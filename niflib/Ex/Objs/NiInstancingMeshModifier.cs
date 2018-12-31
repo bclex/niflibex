@@ -31,7 +31,7 @@ public class NiInstancingMeshModifier : NiMeshModifier {
 	/*!  */
 	internal uint numInstanceNodes;
 	/*!  */
-	internal NiMeshHWInstance[] instanceNodes;
+	internal IList<NiMeshHWInstance> instanceNodes;
 
 	public NiInstancingMeshModifier() {
 	hasInstanceNodes = false;
@@ -70,7 +70,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (hasInstanceNodes) {
 		Nif.NifStream(out numInstanceNodes, s, info);
 		instanceNodes = new Ref[numInstanceNodes];
-		for (var i2 = 0; i2 < instanceNodes.Length; i2++) {
+		for (var i2 = 0; i2 < instanceNodes.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -82,7 +82,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numInstanceNodes = (uint)instanceNodes.Length;
+	numInstanceNodes = (uint)instanceNodes.Count;
 	Nif.NifStream(hasInstanceNodes, s, info);
 	Nif.NifStream(perInstanceCulling, s, info);
 	Nif.NifStream(hasStaticBounds, s, info);
@@ -93,7 +93,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if (hasInstanceNodes) {
 		Nif.NifStream(numInstanceNodes, s, info);
-		for (var i2 = 0; i2 < instanceNodes.Length; i2++) {
+		for (var i2 = 0; i2 < instanceNodes.Count; i2++) {
 			WriteRef((NiObject)instanceNodes[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -110,7 +110,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numInstanceNodes = (uint)instanceNodes.Length;
+	numInstanceNodes = (uint)instanceNodes.Count;
 	s.AppendLine($"  Has Instance Nodes:  {hasInstanceNodes}");
 	s.AppendLine($"  Per Instance Culling:  {perInstanceCulling}");
 	s.AppendLine($"  Has Static Bounds:  {hasStaticBounds}");
@@ -122,7 +122,7 @@ public override string AsString(bool verbose = false) {
 	if (hasInstanceNodes) {
 		s.AppendLine($"    Num Instance Nodes:  {numInstanceNodes}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < instanceNodes.Length; i2++) {
+		for (var i2 = 0; i2 < instanceNodes.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -144,7 +144,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	affectedMesh = FixLink<NiMesh>(objects, link_stack, missing_link_stack, info);
 	if (hasInstanceNodes) {
-		for (var i2 = 0; i2 < instanceNodes.Length; i2++) {
+		for (var i2 = 0; i2 < instanceNodes.Count; i2++) {
 			instanceNodes[i2] = FixLink<NiMeshHWInstance>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -156,7 +156,7 @@ internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
 	if (affectedMesh != null)
 		refs.Add((NiObject)affectedMesh);
-	for (var i1 = 0; i1 < instanceNodes.Length; i1++) {
+	for (var i1 = 0; i1 < instanceNodes.Count; i1++) {
 		if (instanceNodes[i1] != null)
 			refs.Add((NiObject)instanceNodes[i1]);
 	}
@@ -166,7 +166,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < instanceNodes.Length; i1++) {
+	for (var i1 = 0; i1 < instanceNodes.Count; i1++) {
 	}
 	return ptrs;
 }

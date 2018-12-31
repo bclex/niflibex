@@ -19,7 +19,7 @@ public class Footer {
 	 * NIF object is referred to as well in this list, even if it is not a root object
 	 * (usually we want the camera to be attached to the Bip Head node).
 	 */
-	internal NiObject[] roots;
+	internal IList<NiObject> roots;
 	//Constructor
 	public Footer() { unchecked {
 	numRoots = (uint)0;
@@ -32,7 +32,7 @@ public class Footer {
 		if (info.version >= 0x0303000D) {
 			Nif.NifStream(out numRoots, s, info);
 			roots = new Ref[numRoots];
-			for (var i3 = 0; i3 < roots.Length; i3++) {
+			for (var i3 = 0; i3 < roots.Count; i3++) {
 				Nif.NifStream(out block_num, s, info);
 				link_stack.Add(block_num);
 			}
@@ -40,10 +40,10 @@ public class Footer {
 	}
 
 	public void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
-		numRoots = (uint)roots.Length;
+		numRoots = (uint)roots.Count;
 		if (info.version >= 0x0303000D) {
 			Nif.NifStream(numRoots, s, info);
-			for (var i3 = 0; i3 < roots.Length; i3++) {
+			for (var i3 = 0; i3 < roots.Count; i3++) {
 				WriteRef((NiObject)roots[i3], s, info, link_map, missing_link_stack);
 			}
 		}
@@ -52,10 +52,10 @@ public class Footer {
 	public string AsString(bool verbose = false) {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
-		numRoots = (uint)roots.Length;
+		numRoots = (uint)roots.Count;
 		s.AppendLine($"    Num Roots:  {numRoots}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < roots.Length; i2++) {
+		for (var i2 = 0; i2 < roots.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

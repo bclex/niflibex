@@ -29,7 +29,7 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	/*! Number of vertices. */
 	internal uint numVertices;
 	/*! Vertices. Fourth component is 0. Lexicographically sorted. */
-	internal Vector4[] vertices;
+	internal IList<Vector4> vertices;
 	/*! The number of half spaces. */
 	internal uint numNormals;
 	/*!
@@ -39,7 +39,7 @@ public class bhkConvexVerticesShape : bhkConvexShape {
 	 * and n, where v is any vertex on the separating plane, and n is the normal.
 	 * Lexicographically sorted.
 	 */
-	internal Vector4[] normals;
+	internal IList<Vector4> normals;
 
 	public bhkConvexVerticesShape() {
 	numVertices = (uint)0;
@@ -70,12 +70,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out normalsProperty.capacityAndFlags, s, info);
 	Nif.NifStream(out numVertices, s, info);
 	vertices = new Vector4[numVertices];
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(out vertices[i1], s, info);
 	}
 	Nif.NifStream(out numNormals, s, info);
 	normals = new Vector4[numNormals];
-	for (var i1 = 0; i1 < normals.Length; i1++) {
+	for (var i1 = 0; i1 < normals.Count; i1++) {
 		Nif.NifStream(out normals[i1], s, info);
 	}
 
@@ -85,8 +85,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numNormals = (uint)normals.Length;
-	numVertices = (uint)vertices.Length;
+	numNormals = (uint)normals.Count;
+	numVertices = (uint)vertices.Count;
 	Nif.NifStream(verticesProperty.data, s, info);
 	Nif.NifStream(verticesProperty.size, s, info);
 	Nif.NifStream(verticesProperty.capacityAndFlags, s, info);
@@ -94,11 +94,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(normalsProperty.size, s, info);
 	Nif.NifStream(normalsProperty.capacityAndFlags, s, info);
 	Nif.NifStream(numVertices, s, info);
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(vertices[i1], s, info);
 	}
 	Nif.NifStream(numNormals, s, info);
-	for (var i1 = 0; i1 < normals.Length; i1++) {
+	for (var i1 = 0; i1 < normals.Count; i1++) {
 		Nif.NifStream(normals[i1], s, info);
 	}
 
@@ -114,8 +114,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numNormals = (uint)normals.Length;
-	numVertices = (uint)vertices.Length;
+	numNormals = (uint)normals.Count;
+	numVertices = (uint)vertices.Count;
 	s.AppendLine($"  Data:  {verticesProperty.data}");
 	s.AppendLine($"  Size:  {verticesProperty.size}");
 	s.AppendLine($"  Capacity and Flags:  {verticesProperty.capacityAndFlags}");
@@ -124,7 +124,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Capacity and Flags:  {normalsProperty.capacityAndFlags}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -137,7 +137,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Normals:  {numNormals}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < normals.Length; i1++) {
+	for (var i1 = 0; i1 < normals.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

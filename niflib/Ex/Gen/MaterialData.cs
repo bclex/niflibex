@@ -24,12 +24,12 @@ public class MaterialData {
 	/*!  */
 	internal uint numMaterials;
 	/*! The name of the material. */
-	internal IndexString[] materialName;
+	internal IList<IndexString> materialName;
 	/*!
 	 * Extra data associated with the material. A value of -1 means the material is the
 	 * default implementation.
 	 */
-	internal int[] materialExtraData;
+	internal IList<int> materialExtraData;
 	/*! The index of the currently active material. */
 	internal int activeMaterial;
 	/*! Cyanide extension (only in version 10.2.0.0?). */

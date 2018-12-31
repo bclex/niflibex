@@ -33,7 +33,7 @@ public class NiMorphMeshModifier : NiMeshModifier {
 	/*! The number of morphing data stream elements. */
 	internal uint numElements;
 	/*! Semantics and normalization of the morphing data stream elements. */
-	internal ElementReference[] elements;
+	internal IList<ElementReference> elements;
 
 	public NiMorphMeshModifier() {
 	flags = (byte)0;
@@ -61,7 +61,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numTargets, s, info);
 	Nif.NifStream(out numElements, s, info);
 	elements = new ElementReference[numElements];
-	for (var i1 = 0; i1 < elements.Length; i1++) {
+	for (var i1 = 0; i1 < elements.Count; i1++) {
 		Nif.NifStream(out elements[i1].semantic.name, s, info);
 		Nif.NifStream(out elements[i1].semantic.index, s, info);
 		Nif.NifStream(out elements[i1].normalizeFlag, s, info);
@@ -73,11 +73,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numElements = (uint)elements.Length;
+	numElements = (uint)elements.Count;
 	Nif.NifStream(flags, s, info);
 	Nif.NifStream(numTargets, s, info);
 	Nif.NifStream(numElements, s, info);
-	for (var i1 = 0; i1 < elements.Length; i1++) {
+	for (var i1 = 0; i1 < elements.Count; i1++) {
 		Nif.NifStream(elements[i1].semantic.name, s, info);
 		Nif.NifStream(elements[i1].semantic.index, s, info);
 		Nif.NifStream(elements[i1].normalizeFlag, s, info);
@@ -95,12 +95,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numElements = (uint)elements.Length;
+	numElements = (uint)elements.Count;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Num Targets:  {numTargets}");
 	s.AppendLine($"  Num Elements:  {numElements}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < elements.Length; i1++) {
+	for (var i1 = 0; i1 < elements.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

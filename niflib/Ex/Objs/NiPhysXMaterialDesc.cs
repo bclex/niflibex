@@ -23,7 +23,7 @@ public class NiPhysXMaterialDesc : NiObject {
 	/*!  */
 	internal uint numStates;
 	/*!  */
-	internal NxMaterialDesc[] materialDescs;
+	internal IList<NxMaterialDesc> materialDescs;
 
 	public NiPhysXMaterialDesc() {
 	index = (ushort)0;
@@ -49,7 +49,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out index, s, info);
 	Nif.NifStream(out numStates, s, info);
 	materialDescs = new NxMaterialDesc[numStates];
-	for (var i1 = 0; i1 < materialDescs.Length; i1++) {
+	for (var i1 = 0; i1 < materialDescs.Count; i1++) {
 		Nif.NifStream(out materialDescs[i1].dynamicFriction, s, info);
 		Nif.NifStream(out materialDescs[i1].staticFriction, s, info);
 		Nif.NifStream(out materialDescs[i1].restitution, s, info);
@@ -75,10 +75,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numStates = (uint)materialDescs.Length;
+	numStates = (uint)materialDescs.Count;
 	Nif.NifStream(index, s, info);
 	Nif.NifStream(numStates, s, info);
-	for (var i1 = 0; i1 < materialDescs.Length; i1++) {
+	for (var i1 = 0; i1 < materialDescs.Count; i1++) {
 		Nif.NifStream(materialDescs[i1].dynamicFriction, s, info);
 		Nif.NifStream(materialDescs[i1].staticFriction, s, info);
 		Nif.NifStream(materialDescs[i1].restitution, s, info);
@@ -110,11 +110,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numStates = (uint)materialDescs.Length;
+	numStates = (uint)materialDescs.Count;
 	s.AppendLine($"  Index:  {index}");
 	s.AppendLine($"  Num States:  {numStates}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materialDescs.Length; i1++) {
+	for (var i1 = 0; i1 < materialDescs.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -40,7 +40,7 @@ public class NiObjectNET : NiObject {
 	/*! The number of Extra Data objects referenced through the list. */
 	internal uint numExtraDataList;
 	/*! List of extra data indices. */
-	internal NiExtraData[] extraDataList;
+	internal IList<NiExtraData> extraDataList;
 	/*! Controller object index. (The first in a chain) */
 	internal NiTimeController controller;
 
@@ -93,7 +93,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x0A000100) {
 		Nif.NifStream(out numExtraDataList, s, info);
 		extraDataList = new Ref[numExtraDataList];
-		for (var i2 = 0; i2 < extraDataList.Length; i2++) {
+		for (var i2 = 0; i2 < extraDataList.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -109,7 +109,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numExtraDataList = (uint)extraDataList.Length;
+	numExtraDataList = (uint)extraDataList.Count;
 	if ((info.userVersion2 >= 83)) {
 		if (IsDerivedType(BSLightingShaderProperty.TYPE)) {
 			Nif.NifStream(skyrimShaderType, s, info);
@@ -130,7 +130,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if (info.version >= 0x0A000100) {
 		Nif.NifStream(numExtraDataList, s, info);
-		for (var i2 = 0; i2 < extraDataList.Length; i2++) {
+		for (var i2 = 0; i2 < extraDataList.Count; i2++) {
 			WriteRef((NiObject)extraDataList[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -150,7 +150,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numExtraDataList = (uint)extraDataList.Length;
+	numExtraDataList = (uint)extraDataList.Count;
 	if (IsDerivedType(BSLightingShaderProperty.TYPE)) {
 		s.AppendLine($"    Skyrim Shader Type:  {skyrimShaderType}");
 	}
@@ -165,7 +165,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Extra Data:  {extraData}");
 	s.AppendLine($"  Num Extra Data List:  {numExtraDataList}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < extraDataList.Length; i1++) {
+	for (var i1 = 0; i1 < extraDataList.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -189,7 +189,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		extraData = FixLink<NiExtraData>(objects, link_stack, missing_link_stack, info);
 	}
 	if (info.version >= 0x0A000100) {
-		for (var i2 = 0; i2 < extraDataList.Length; i2++) {
+		for (var i2 = 0; i2 < extraDataList.Count; i2++) {
 			extraDataList[i2] = FixLink<NiExtraData>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -204,7 +204,7 @@ internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
 	if (extraData != null)
 		refs.Add((NiObject)extraData);
-	for (var i1 = 0; i1 < extraDataList.Length; i1++) {
+	for (var i1 = 0; i1 < extraDataList.Count; i1++) {
 		if (extraDataList[i1] != null)
 			refs.Add((NiObject)extraDataList[i1]);
 	}
@@ -216,7 +216,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < extraDataList.Length; i1++) {
+	for (var i1 = 0; i1 < extraDataList.Count; i1++) {
 	}
 	return ptrs;
 }

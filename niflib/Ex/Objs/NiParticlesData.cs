@@ -25,7 +25,7 @@ public class NiParticlesData : NiGeometryData {
 	/*! Is the particle size array present? */
 	internal bool hasRadii;
 	/*! The individual particle sizes. */
-	internal float[] radii;
+	internal IList<float> radii;
 	/*!
 	 * The number of active particles at the time the system was saved. This is also
 	 * the number of valid entries in the following arrays.
@@ -34,25 +34,25 @@ public class NiParticlesData : NiGeometryData {
 	/*! Is the particle size array present? */
 	internal bool hasSizes;
 	/*! The individual particle sizes. */
-	internal float[] sizes;
+	internal IList<float> sizes;
 	/*! Is the particle rotation array present? */
 	internal bool hasRotations;
 	/*! The individual particle rotations. */
-	internal Quaternion[] rotations;
+	internal IList<Quaternion> rotations;
 	/*! Are the angles of rotation present? */
 	internal bool hasRotationAngles;
 	/*! Angles of rotation */
-	internal float[] rotationAngles;
+	internal IList<float> rotationAngles;
 	/*! Are axes of rotation present? */
 	internal bool hasRotationAxes;
 	/*! Axes of rotation. */
-	internal Vector3[] rotationAxes;
+	internal IList<Vector3> rotationAxes;
 	/*!  */
 	internal bool hasTextureIndices;
 	/*! How many quads to use in BSPSysSubTexModifier for texture atlasing */
 	internal uint numSubtextureOffsets;
 	/*! Defines UV offsets */
-	internal Vector4[] subtextureOffsets;
+	internal IList<Vector4> subtextureOffsets;
 	/*! Sets aspect ratio for Subtexture Offset UV quads */
 	internal float aspectRatio;
 	/*!  */
@@ -110,7 +110,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((info.version >= 0x0A010000) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRadii) {
 			radii = new float[numVertices];
-			for (var i3 = 0; i3 < radii.Length; i3++) {
+			for (var i3 = 0; i3 < radii.Count; i3++) {
 				Nif.NifStream(out radii[i3], s, info);
 			}
 		}
@@ -120,7 +120,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
 		if (hasSizes) {
 			sizes = new float[numVertices];
-			for (var i3 = 0; i3 < sizes.Length; i3++) {
+			for (var i3 = 0; i3 < sizes.Count; i3++) {
 				Nif.NifStream(out sizes[i3], s, info);
 			}
 		}
@@ -131,7 +131,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((info.version >= 0x0A000100) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotations) {
 			rotations = new Quaternion[numVertices];
-			for (var i3 = 0; i3 < rotations.Length; i3++) {
+			for (var i3 = 0; i3 < rotations.Count; i3++) {
 				Nif.NifStream(out rotations[i3], s, info);
 			}
 		}
@@ -142,7 +142,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
 		if (hasRotationAngles) {
 			rotationAngles = new float[numVertices];
-			for (var i3 = 0; i3 < rotationAngles.Length; i3++) {
+			for (var i3 = 0; i3 < rotationAngles.Count; i3++) {
 				Nif.NifStream(out rotationAngles[i3], s, info);
 			}
 		}
@@ -153,7 +153,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((info.version >= 0x14000004) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotationAxes) {
 			rotationAxes = new Vector3[numVertices];
-			for (var i3 = 0; i3 < rotationAxes.Length; i3++) {
+			for (var i3 = 0; i3 < rotationAxes.Count; i3++) {
 				Nif.NifStream(out rotationAxes[i3], s, info);
 			}
 		}
@@ -169,7 +169,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if (((info.version == 0x14020007) && (info.userVersion2 > 0))) {
 		subtextureOffsets = new Vector4[numSubtextureOffsets];
-		for (var i2 = 0; i2 < subtextureOffsets.Length; i2++) {
+		for (var i2 = 0; i2 < subtextureOffsets.Count; i2++) {
 			Nif.NifStream(out subtextureOffsets[i2], s, info);
 		}
 	}
@@ -187,7 +187,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSubtextureOffsets = (uint)subtextureOffsets.Length;
+	numSubtextureOffsets = (uint)subtextureOffsets.Count;
 	if (info.version <= 0x04000002) {
 		Nif.NifStream(numParticles, s, info);
 	}
@@ -199,7 +199,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x0A010000) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRadii) {
-			for (var i3 = 0; i3 < radii.Length; i3++) {
+			for (var i3 = 0; i3 < radii.Count; i3++) {
 				Nif.NifStream(radii[i3], s, info);
 			}
 		}
@@ -208,7 +208,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(hasSizes, s, info);
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
 		if (hasSizes) {
-			for (var i3 = 0; i3 < sizes.Length; i3++) {
+			for (var i3 = 0; i3 < sizes.Count; i3++) {
 				Nif.NifStream(sizes[i3], s, info);
 			}
 		}
@@ -218,7 +218,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x0A000100) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotations) {
-			for (var i3 = 0; i3 < rotations.Length; i3++) {
+			for (var i3 = 0; i3 < rotations.Count; i3++) {
 				Nif.NifStream(rotations[i3], s, info);
 			}
 		}
@@ -228,7 +228,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
 		if (hasRotationAngles) {
-			for (var i3 = 0; i3 < rotationAngles.Length; i3++) {
+			for (var i3 = 0; i3 < rotationAngles.Count; i3++) {
 				Nif.NifStream(rotationAngles[i3], s, info);
 			}
 		}
@@ -238,7 +238,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x14000004) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotationAxes) {
-			for (var i3 = 0; i3 < rotationAxes.Length; i3++) {
+			for (var i3 = 0; i3 < rotationAxes.Count; i3++) {
 				Nif.NifStream(rotationAxes[i3], s, info);
 			}
 		}
@@ -253,7 +253,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream((byte)numSubtextureOffsets, s, info);
 	}
 	if (((info.version == 0x14020007) && (info.userVersion2 > 0))) {
-		for (var i2 = 0; i2 < subtextureOffsets.Length; i2++) {
+		for (var i2 = 0; i2 < subtextureOffsets.Count; i2++) {
 			Nif.NifStream(subtextureOffsets[i2], s, info);
 		}
 	}
@@ -277,13 +277,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSubtextureOffsets = (uint)subtextureOffsets.Length;
+	numSubtextureOffsets = (uint)subtextureOffsets.Count;
 	s.AppendLine($"  Num Particles:  {numParticles}");
 	s.AppendLine($"  Particle Radius:  {particleRadius}");
 	s.AppendLine($"  Has Radii:  {hasRadii}");
 	if (hasRadii) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < radii.Length; i2++) {
+		for (var i2 = 0; i2 < radii.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -299,7 +299,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Sizes:  {hasSizes}");
 	if (hasSizes) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < sizes.Length; i2++) {
+		for (var i2 = 0; i2 < sizes.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -314,7 +314,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Rotations:  {hasRotations}");
 	if (hasRotations) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rotations.Length; i2++) {
+		for (var i2 = 0; i2 < rotations.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -329,7 +329,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Rotation Angles:  {hasRotationAngles}");
 	if (hasRotationAngles) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rotationAngles.Length; i2++) {
+		for (var i2 = 0; i2 < rotationAngles.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -344,7 +344,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Rotation Axes:  {hasRotationAxes}");
 	if (hasRotationAxes) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rotationAxes.Length; i2++) {
+		for (var i2 = 0; i2 < rotationAxes.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -359,7 +359,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Texture Indices:  {hasTextureIndices}");
 	s.AppendLine($"  Num Subtexture Offsets:  {numSubtextureOffsets}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < subtextureOffsets.Length; i1++) {
+	for (var i1 = 0; i1 < subtextureOffsets.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

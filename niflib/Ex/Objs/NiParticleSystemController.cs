@@ -98,7 +98,7 @@ public class NiParticleSystemController : NiTimeController {
 	 */
 	internal ushort numValid;
 	/*! Individual particle modifiers? */
-	internal Particle[] particles;
+	internal IList<Particle> particles;
 	/*! unknown int (=0xffffffff) */
 	internal NiObject unknownLink;
 	/*!
@@ -115,7 +115,7 @@ public class NiParticleSystemController : NiTimeController {
 	/*! Unknown. */
 	internal float unknownFloat1;
 	/*! Unknown. */
-	internal float[] unknownFloats2;
+	internal IList<float> unknownFloats2;
 
 	public NiParticleSystemController() {
 	oldSpeed = (uint)0;
@@ -226,7 +226,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out numParticles, s, info);
 		Nif.NifStream(out numValid, s, info);
 		particles = new Particle[numParticles];
-		for (var i2 = 0; i2 < particles.Length; i2++) {
+		for (var i2 = 0; i2 < particles.Count; i2++) {
 			Nif.NifStream(out particles[i2].velocity, s, info);
 			Nif.NifStream(out particles[i2].unknownVector, s, info);
 			Nif.NifStream(out particles[i2].lifetime, s, info);
@@ -250,7 +250,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		link_stack.Add(block_num);
 		Nif.NifStream(out unknownFloat1, s, info);
 		unknownFloats2 = new float[particleUnknownShort];
-		for (var i2 = 0; i2 < unknownFloats2.Length; i2++) {
+		for (var i2 = 0; i2 < unknownFloats2.Count; i2++) {
 			Nif.NifStream(out unknownFloats2[i2], s, info);
 		}
 	}
@@ -261,8 +261,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numParticles = (ushort)particles.Length;
-	particleUnknownShort = (ushort)unknownFloats2.Length;
+	numParticles = (ushort)particles.Count;
+	particleUnknownShort = (ushort)unknownFloats2.Count;
 	if (info.version <= 0x03010000) {
 		Nif.NifStream(oldSpeed, s, info);
 	}
@@ -314,7 +314,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x04000002) {
 		Nif.NifStream(numParticles, s, info);
 		Nif.NifStream(numValid, s, info);
-		for (var i2 = 0; i2 < particles.Length; i2++) {
+		for (var i2 = 0; i2 < particles.Count; i2++) {
 			Nif.NifStream(particles[i2].velocity, s, info);
 			Nif.NifStream(particles[i2].unknownVector, s, info);
 			Nif.NifStream(particles[i2].lifetime, s, info);
@@ -333,7 +333,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version <= 0x03010000) {
 		WriteRef((NiObject)colorData, s, info, link_map, missing_link_stack);
 		Nif.NifStream(unknownFloat1, s, info);
-		for (var i2 = 0; i2 < unknownFloats2.Length; i2++) {
+		for (var i2 = 0; i2 < unknownFloats2.Count; i2++) {
 			Nif.NifStream(unknownFloats2[i2], s, info);
 		}
 	}
@@ -350,8 +350,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numParticles = (ushort)particles.Length;
-	particleUnknownShort = (ushort)unknownFloats2.Length;
+	numParticles = (ushort)particles.Count;
+	particleUnknownShort = (ushort)unknownFloats2.Count;
 	s.AppendLine($"  Old Speed:  {oldSpeed}");
 	s.AppendLine($"  Speed:  {speed}");
 	s.AppendLine($"  Speed Random:  {speedRandom}");
@@ -387,7 +387,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num Particles:  {numParticles}");
 	s.AppendLine($"  Num Valid:  {numValid}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < particles.Length; i1++) {
+	for (var i1 = 0; i1 < particles.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -407,7 +407,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Color Data:  {colorData}");
 	s.AppendLine($"  Unknown Float 1:  {unknownFloat1}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownFloats2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownFloats2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

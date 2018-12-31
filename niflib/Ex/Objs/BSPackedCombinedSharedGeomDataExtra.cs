@@ -36,9 +36,9 @@ public class BSPackedCombinedSharedGeomDataExtra : NiExtraData {
 	/*!  */
 	internal uint numData;
 	/*!  */
-	internal BSPackedGeomObject[] object;
+	internal IList<BSPackedGeomObject> object;
 	/*!  */
-	internal BSPackedSharedGeomData[] objectData;
+	internal IList<BSPackedSharedGeomData> objectData;
 
 	public BSPackedCombinedSharedGeomDataExtra() {
 	numVertices = (uint)0;
@@ -77,12 +77,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownFlags2, s, info);
 	Nif.NifStream(out numData, s, info);
 	object = new BSPackedGeomObject[numData];
-	for (var i1 = 0; i1 < object.Length; i1++) {
+	for (var i1 = 0; i1 < object.Count; i1++) {
 		Nif.NifStream(out object[i1].shapeId1, s, info);
 		Nif.NifStream(out object[i1].shapeId2, s, info);
 	}
 	objectData = new BSPackedSharedGeomData[numData];
-	for (var i1 = 0; i1 < objectData.Length; i1++) {
+	for (var i1 = 0; i1 < objectData.Count; i1++) {
 		Nif.NifStream(out objectData[i1].numVerts, s, info);
 		Nif.NifStream(out objectData[i1].lodLevels, s, info);
 		Nif.NifStream(out objectData[i1].triCountLod0, s, info);
@@ -93,7 +93,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out objectData[i1].triOffsetLod2, s, info);
 		Nif.NifStream(out objectData[i1].numCombined, s, info);
 		objectData[i1].combined = new BSPackedGeomDataCombined[objectData[i1].numCombined];
-		for (var i2 = 0; i2 < objectData[i1].combined.Length; i2++) {
+		for (var i2 = 0; i2 < objectData[i1].combined.Count; i2++) {
 			Nif.NifStream(out objectData[i1].combined[i2].grayscaleToPaletteScale, s, info);
 			Nif.NifStream(out objectData[i1].combined[i2].transform.rotation, s, info);
 			Nif.NifStream(out objectData[i1].combined[i2].transform.translation, s, info);
@@ -116,7 +116,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numData = (uint)object.Length;
+	numData = (uint)object.Count;
 	Nif.NifStream(vertexDesc.vf1, s, info);
 	Nif.NifStream(vertexDesc.vf2, s, info);
 	Nif.NifStream(vertexDesc.vf3, s, info);
@@ -129,12 +129,12 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(unknownFlags1, s, info);
 	Nif.NifStream(unknownFlags2, s, info);
 	Nif.NifStream(numData, s, info);
-	for (var i1 = 0; i1 < object.Length; i1++) {
+	for (var i1 = 0; i1 < object.Count; i1++) {
 		Nif.NifStream(object[i1].shapeId1, s, info);
 		Nif.NifStream(object[i1].shapeId2, s, info);
 	}
-	for (var i1 = 0; i1 < objectData.Length; i1++) {
-		objectData[i1].numCombined = (uint)objectData[i1].combined.Length;
+	for (var i1 = 0; i1 < objectData.Count; i1++) {
+		objectData[i1].numCombined = (uint)objectData[i1].combined.Count;
 		Nif.NifStream(objectData[i1].numVerts, s, info);
 		Nif.NifStream(objectData[i1].lodLevels, s, info);
 		Nif.NifStream(objectData[i1].triCountLod0, s, info);
@@ -144,7 +144,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(objectData[i1].triCountLod2, s, info);
 		Nif.NifStream(objectData[i1].triOffsetLod2, s, info);
 		Nif.NifStream(objectData[i1].numCombined, s, info);
-		for (var i2 = 0; i2 < objectData[i1].combined.Length; i2++) {
+		for (var i2 = 0; i2 < objectData[i1].combined.Count; i2++) {
 			Nif.NifStream(objectData[i1].combined[i2].grayscaleToPaletteScale, s, info);
 			Nif.NifStream(objectData[i1].combined[i2].transform.rotation, s, info);
 			Nif.NifStream(objectData[i1].combined[i2].transform.translation, s, info);
@@ -173,7 +173,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numData = (uint)object.Length;
+	numData = (uint)object.Count;
 	s.AppendLine($"  VF1:  {vertexDesc.vf1}");
 	s.AppendLine($"  VF2:  {vertexDesc.vf2}");
 	s.AppendLine($"  VF3:  {vertexDesc.vf3}");
@@ -187,7 +187,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Unknown Flags 2:  {unknownFlags2}");
 	s.AppendLine($"  Num Data:  {numData}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < object.Length; i1++) {
+	for (var i1 = 0; i1 < object.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -196,12 +196,12 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Shape ID 2:  {object[i1].shapeId2}");
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < objectData.Length; i1++) {
+	for (var i1 = 0; i1 < objectData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		objectData[i1].numCombined = (uint)objectData[i1].combined.Length;
+		objectData[i1].numCombined = (uint)objectData[i1].combined.Count;
 		s.AppendLine($"    Num Verts:  {objectData[i1].numVerts}");
 		s.AppendLine($"    LOD Levels:  {objectData[i1].lodLevels}");
 		s.AppendLine($"    Tri Count LOD0:  {objectData[i1].triCountLod0}");
@@ -212,7 +212,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Tri Offset LOD2:  {objectData[i1].triOffsetLod2}");
 		s.AppendLine($"    Num Combined:  {objectData[i1].numCombined}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < objectData[i1].combined.Length; i2++) {
+		for (var i2 = 0; i2 < objectData[i1].combined.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

@@ -34,11 +34,11 @@ public class bhkNiTriStripsShape : bhkShapeCollection {
 	/*! The number of strips data objects referenced. */
 	internal uint numStripsData;
 	/*! Refers to a bunch of NiTriStripsData objects that make up this shape. */
-	internal NiTriStripsData[] stripsData;
+	internal IList<NiTriStripsData> stripsData;
 	/*! Number of Havok Layers, equal to Number of strips data objects. */
 	internal uint numDataLayers;
 	/*! Havok Layers for each strip data. */
-	internal HavokFilter[] dataLayers;
+	internal IList<HavokFilter> dataLayers;
 
 	public bhkNiTriStripsShape() {
 	radius = 0.1f;
@@ -87,13 +87,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numStripsData, s, info);
 	stripsData = new Ref[numStripsData];
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numDataLayers, s, info);
 	dataLayers = new HavokFilter[numDataLayers];
-	for (var i1 = 0; i1 < dataLayers.Length; i1++) {
+	for (var i1 = 0; i1 < dataLayers.Count; i1++) {
 		if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 			Nif.NifStream(out dataLayers[i1].layer_ob, s, info);
 		}
@@ -113,8 +113,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numDataLayers = (uint)dataLayers.Length;
-	numStripsData = (uint)stripsData.Length;
+	numDataLayers = (uint)dataLayers.Count;
+	numStripsData = (uint)stripsData.Count;
 	if (info.version <= 0x0A000102) {
 		Nif.NifStream(material.unknownInt, s, info);
 	}
@@ -136,11 +136,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(scale, s, info);
 	}
 	Nif.NifStream(numStripsData, s, info);
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 		WriteRef((NiObject)stripsData[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numDataLayers, s, info);
-	for (var i1 = 0; i1 < dataLayers.Length; i1++) {
+	for (var i1 = 0; i1 < dataLayers.Count; i1++) {
 		if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 			Nif.NifStream(dataLayers[i1].layer_ob, s, info);
 		}
@@ -166,8 +166,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numDataLayers = (uint)dataLayers.Length;
-	numStripsData = (uint)stripsData.Length;
+	numDataLayers = (uint)dataLayers.Count;
+	numStripsData = (uint)stripsData.Count;
 	s.AppendLine($"  Unknown Int:  {material.unknownInt}");
 	s.AppendLine($"  Material:  {material.material_ob}");
 	s.AppendLine($"  Material:  {material.material_fo}");
@@ -189,7 +189,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Scale:  {scale}");
 	s.AppendLine($"  Num Strips Data:  {numStripsData}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -202,7 +202,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Data Layers:  {numDataLayers}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < dataLayers.Length; i1++) {
+	for (var i1 = 0; i1 < dataLayers.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -221,7 +221,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 		stripsData[i1] = FixLink<NiTriStripsData>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -230,7 +230,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 		if (stripsData[i1] != null)
 			refs.Add((NiObject)stripsData[i1]);
 	}
@@ -240,7 +240,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < stripsData.Length; i1++) {
+	for (var i1 = 0; i1 < stripsData.Count; i1++) {
 	}
 	return ptrs;
 }

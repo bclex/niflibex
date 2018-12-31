@@ -21,7 +21,7 @@ public class BSSkin__BoneData : NiObject {
 	/*!  */
 	internal uint numBones;
 	/*!  */
-	internal BSSkinBoneTrans[] boneList;
+	internal IList<BSSkinBoneTrans> boneList;
 
 	public BSSkin__BoneData() {
 	numBones = (uint)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numBones, s, info);
 	boneList = new BSSkinBoneTrans[numBones];
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
 		Nif.NifStream(out boneList[i1].boundingSphere.center, s, info);
 		Nif.NifStream(out boneList[i1].boundingSphere.radius, s, info);
 		Nif.NifStream(out boneList[i1].rotation, s, info);
@@ -59,9 +59,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numBones = (uint)boneList.Length;
+	numBones = (uint)boneList.Count;
 	Nif.NifStream(numBones, s, info);
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
 		Nif.NifStream(boneList[i1].boundingSphere.center, s, info);
 		Nif.NifStream(boneList[i1].boundingSphere.radius, s, info);
 		Nif.NifStream(boneList[i1].rotation, s, info);
@@ -81,10 +81,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numBones = (uint)boneList.Length;
+	numBones = (uint)boneList.Count;
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < boneList.Length; i1++) {
+	for (var i1 = 0; i1 < boneList.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

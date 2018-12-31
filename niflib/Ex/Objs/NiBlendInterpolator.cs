@@ -46,7 +46,7 @@ public class NiBlendInterpolator : NiInterpolator {
 	/*!  */
 	internal float highEaseSpinner;
 	/*!  */
-	internal InterpBlendItem[] interpArrayItems;
+	internal IList<InterpBlendItem> interpArrayItems;
 	/*!  */
 	internal bool managedControlled;
 	/*!  */
@@ -111,7 +111,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out nextHighWeightsSum, s, info);
 			Nif.NifStream(out highEaseSpinner, s, info);
 			interpArrayItems = new InterpBlendItem[arraySize];
-			for (var i3 = 0; i3 < interpArrayItems.Length; i3++) {
+			for (var i3 = 0; i3 < interpArrayItems.Count; i3++) {
 				Nif.NifStream(out block_num, s, info);
 				link_stack.Add(block_num);
 				Nif.NifStream(out interpArrayItems[i3].weight, s, info);
@@ -128,7 +128,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if (info.version <= 0x0A01006F) {
 		interpArrayItems = new InterpBlendItem[arraySize];
-		for (var i2 = 0; i2 < interpArrayItems.Length; i2++) {
+		for (var i2 = 0; i2 < interpArrayItems.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 			Nif.NifStream(out interpArrayItems[i2].weight, s, info);
@@ -173,7 +173,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	arraySize = (ushort)interpArrayItems.Length;
+	arraySize = (ushort)interpArrayItems.Count;
 	if (info.version >= 0x0A010070) {
 		Nif.NifStream(flags, s, info);
 	}
@@ -195,7 +195,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			Nif.NifStream(highWeightsSum, s, info);
 			Nif.NifStream(nextHighWeightsSum, s, info);
 			Nif.NifStream(highEaseSpinner, s, info);
-			for (var i3 = 0; i3 < interpArrayItems.Length; i3++) {
+			for (var i3 = 0; i3 < interpArrayItems.Count; i3++) {
 				WriteRef((NiObject)interpArrayItems[i3].interpolator, s, info, link_map, missing_link_stack);
 				Nif.NifStream(interpArrayItems[i3].weight, s, info);
 				Nif.NifStream(interpArrayItems[i3].normalizedWeight, s, info);
@@ -210,7 +210,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 	}
 	if (info.version <= 0x0A01006F) {
-		for (var i2 = 0; i2 < interpArrayItems.Length; i2++) {
+		for (var i2 = 0; i2 < interpArrayItems.Count; i2++) {
 			WriteRef((NiObject)interpArrayItems[i2].interpolator, s, info, link_map, missing_link_stack);
 			Nif.NifStream(interpArrayItems[i2].weight, s, info);
 			Nif.NifStream(interpArrayItems[i2].normalizedWeight, s, info);
@@ -259,7 +259,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	arraySize = (ushort)interpArrayItems.Length;
+	arraySize = (ushort)interpArrayItems.Count;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Array Size:  {arraySize}");
 	s.AppendLine($"  Array Grow By:  {arrayGrowBy}");
@@ -274,7 +274,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Next High Weights Sum:  {nextHighWeightsSum}");
 		s.AppendLine($"    High Ease Spinner:  {highEaseSpinner}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < interpArrayItems.Length; i2++) {
+		for (var i2 = 0; i2 < interpArrayItems.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -299,13 +299,13 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	if (info.version >= 0x0A010070) {
 		if (((flags & 1) == 0)) {
-			for (var i3 = 0; i3 < interpArrayItems.Length; i3++) {
+			for (var i3 = 0; i3 < interpArrayItems.Count; i3++) {
 				interpArrayItems[i3].interpolator = FixLink<NiInterpolator>(objects, link_stack, missing_link_stack, info);
 			}
 		}
 	}
 	if (info.version <= 0x0A01006F) {
-		for (var i2 = 0; i2 < interpArrayItems.Length; i2++) {
+		for (var i2 = 0; i2 < interpArrayItems.Count; i2++) {
 			interpArrayItems[i2].interpolator = FixLink<NiInterpolator>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -318,11 +318,11 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < interpArrayItems.Length; i1++) {
+	for (var i1 = 0; i1 < interpArrayItems.Count; i1++) {
 		if (interpArrayItems[i1].interpolator != null)
 			refs.Add((NiObject)interpArrayItems[i1].interpolator);
 	}
-	for (var i1 = 0; i1 < interpArrayItems.Length; i1++) {
+	for (var i1 = 0; i1 < interpArrayItems.Count; i1++) {
 		if (interpArrayItems[i1].interpolator != null)
 			refs.Add((NiObject)interpArrayItems[i1].interpolator);
 	}
@@ -334,9 +334,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < interpArrayItems.Length; i1++) {
+	for (var i1 = 0; i1 < interpArrayItems.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < interpArrayItems.Length; i1++) {
+	for (var i1 = 0; i1 < interpArrayItems.Count; i1++) {
 	}
 	return ptrs;
 }

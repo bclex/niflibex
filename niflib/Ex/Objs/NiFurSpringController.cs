@@ -25,11 +25,11 @@ public class NiFurSpringController : NiTimeController {
 	/*! The number of node bones referenced as influences. */
 	internal uint numBones;
 	/*! List of all armature bones. */
-	internal NiNode[] bones;
+	internal IList<NiNode> bones;
 	/*! The number of node bones referenced as influences. */
 	internal uint numBones2;
 	/*! List of all armature bones. */
-	internal NiNode[] bones2;
+	internal IList<NiNode> bones2;
 
 	public NiFurSpringController() {
 	unknownFloat = 0.0f;
@@ -59,13 +59,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownFloat2, s, info);
 	Nif.NifStream(out numBones, s, info);
 	bones = new *[numBones];
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numBones2, s, info);
 	bones2 = new *[numBones2];
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -76,16 +76,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numBones2 = (uint)bones2.Length;
-	numBones = (uint)bones.Length;
+	numBones2 = (uint)bones2.Count;
+	numBones = (uint)bones.Count;
 	Nif.NifStream(unknownFloat, s, info);
 	Nif.NifStream(unknownFloat2, s, info);
 	Nif.NifStream(numBones, s, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		WriteRef((NiObject)bones[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numBones2, s, info);
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 		WriteRef((NiObject)bones2[i1], s, info, link_map, missing_link_stack);
 	}
 
@@ -101,13 +101,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numBones2 = (uint)bones2.Length;
-	numBones = (uint)bones.Length;
+	numBones2 = (uint)bones2.Count;
+	numBones = (uint)bones.Count;
 	s.AppendLine($"  Unknown Float:  {unknownFloat}");
 	s.AppendLine($"  Unknown Float 2:  {unknownFloat2}");
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -120,7 +120,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Bones 2:  {numBones2}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -139,10 +139,10 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		bones[i1] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 		bones2[i1] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -151,9 +151,9 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 	}
 	return refs;
 }
@@ -161,11 +161,11 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (bones[i1] != null)
 			ptrs.Add((NiObject)bones[i1]);
 	}
-	for (var i1 = 0; i1 < bones2.Length; i1++) {
+	for (var i1 = 0; i1 < bones2.Count; i1++) {
 		if (bones2[i1] != null)
 			ptrs.Add((NiObject)bones2[i1]);
 	}

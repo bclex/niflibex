@@ -42,7 +42,7 @@ public class BSClothExtraData : BSExtraData {
 		base.Read(s, link_stack, info);
 		Nif.NifStream(out binaryData.dataSize, s, info);
 		binaryData.data = new byte[binaryData.dataSize];
-		for (var i2 = 0; i2 < binaryData.data.Length; i2++) {
+		for (var i2 = 0; i2 < binaryData.data.Count; i2++) {
 			Nif.NifStream(out binaryData.data[i2], s, info);
 		}
 
@@ -52,9 +52,9 @@ public class BSClothExtraData : BSExtraData {
 	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 		base.Write(s, link_map, missing_link_stack, info);
-		binaryData.dataSize = (uint)binaryData.data.Length;
+		binaryData.dataSize = (uint)binaryData.data.Count;
 		Nif.NifStream(binaryData.dataSize, s, info);
-		for (var i2 = 0; i2 < binaryData.data.Length; i2++) {
+		for (var i2 = 0; i2 < binaryData.data.Count; i2++) {
 			Nif.NifStream(binaryData.data[i2], s, info);
 		}
 
@@ -70,10 +70,10 @@ public class BSClothExtraData : BSExtraData {
 		var s = new System.Text.StringBuilder();
 		uint array_output_count = 0;
 		s.Append(base.AsString());
-		binaryData.dataSize = (uint)binaryData.data.Length;
+		binaryData.dataSize = (uint)binaryData.data.Count;
 		s.AppendLine($"    Data Size:  {binaryData.dataSize}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < binaryData.data.Length; i2++) {
+		for (var i2 = 0; i2 < binaryData.data.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

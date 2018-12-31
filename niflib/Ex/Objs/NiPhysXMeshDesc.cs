@@ -66,13 +66,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out meshName, s, info);
 	Nif.NifStream(out meshData.dataSize, s, info);
 	meshData.data = new byte[meshData.dataSize];
-	for (var i1 = 0; i1 < meshData.data.Length; i1++) {
+	for (var i1 = 0; i1 < meshData.data.Count; i1++) {
 		Nif.NifStream(out meshData.data[i1], s, info);
 	}
 	if ((info.version >= 0x14030005) && (info.version <= 0x1E020002)) {
 		Nif.NifStream(out meshSize, s, info);
 		meshData = new ushort[meshSize];
-		for (var i2 = 0; i2 < meshData.Length; i2++) {
+		for (var i2 = 0; i2 < meshData.Count; i2++) {
 			Nif.NifStream(out (ushort)meshData[i2], s, info);
 		}
 	}
@@ -93,19 +93,19 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	meshSize = (ushort)meshData.Length;
+	meshSize = (ushort)meshData.Count;
 	if (info.version <= 0x14030004) {
 		Nif.NifStream(isConvex, s, info);
 	}
 	Nif.NifStream(meshName, s, info);
-	meshData.dataSize = (uint)meshData.data.Length;
+	meshData.dataSize = (uint)meshData.data.Count;
 	Nif.NifStream(meshData.dataSize, s, info);
-	for (var i1 = 0; i1 < meshData.data.Length; i1++) {
+	for (var i1 = 0; i1 < meshData.data.Count; i1++) {
 		Nif.NifStream(meshData.data[i1], s, info);
 	}
 	if ((info.version >= 0x14030005) && (info.version <= 0x1E020002)) {
 		Nif.NifStream(meshSize, s, info);
-		for (var i2 = 0; i2 < meshData.Length; i2++) {
+		for (var i2 = 0; i2 < meshData.Count; i2++) {
 			Nif.NifStream((ushort)meshData[i2], s, info);
 		}
 	}
@@ -132,13 +132,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	meshSize = (ushort)meshData.Length;
+	meshSize = (ushort)meshData.Count;
 	s.AppendLine($"  Is Convex:  {isConvex}");
 	s.AppendLine($"  Mesh Name:  {meshName}");
-	meshData.dataSize = (uint)meshData.data.Length;
+	meshData.dataSize = (uint)meshData.data.Count;
 	s.AppendLine($"  Data Size:  {meshData.dataSize}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < meshData.data.Length; i1++) {
+	for (var i1 = 0; i1 < meshData.data.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

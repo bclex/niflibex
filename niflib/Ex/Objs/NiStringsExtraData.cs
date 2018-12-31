@@ -21,7 +21,7 @@ public class NiStringsExtraData : NiExtraData {
 	/*! Number of strings. */
 	internal uint numStrings;
 	/*! The strings. */
-	internal string[] data;
+	internal IList<string> data;
 
 	public NiStringsExtraData() {
 	numStrings = (uint)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numStrings, s, info);
 	data = new string[numStrings];
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		Nif.NifStream(out data[i1], s, info);
 	}
 
@@ -55,9 +55,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numStrings = (uint)data.Length;
+	numStrings = (uint)data.Count;
 	Nif.NifStream(numStrings, s, info);
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		Nif.NifStream(data[i1], s, info);
 	}
 
@@ -73,10 +73,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numStrings = (uint)data.Length;
+	numStrings = (uint)data.Count;
 	s.AppendLine($"  Num Strings:  {numStrings}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

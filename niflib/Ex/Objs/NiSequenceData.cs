@@ -31,11 +31,11 @@ public class NiSequenceData : NiObject {
 	/*!  */
 	internal uint arrayGrowBy;
 	/*!  */
-	internal ControlledBlock[] controlledBlocks;
+	internal IList<ControlledBlock> controlledBlocks;
 	/*!  */
 	internal uint numEvaluators;
 	/*!  */
-	internal NiEvaluator[] evaluators;
+	internal IList<NiEvaluator> evaluators;
 	/*!  */
 	internal NiTextKeyExtraData textKeys;
 	/*!  */
@@ -85,7 +85,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out numControlledBlocks, s, info);
 		Nif.NifStream(out arrayGrowBy, s, info);
 		controlledBlocks = new ControlledBlock[numControlledBlocks];
-		for (var i2 = 0; i2 < controlledBlocks.Length; i2++) {
+		for (var i2 = 0; i2 < controlledBlocks.Count; i2++) {
 			if (info.version <= 0x0A010067) {
 				Nif.NifStream(out controlledBlocks[i2].targetName, s, info);
 			}
@@ -133,7 +133,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x14050002) {
 		Nif.NifStream(out numEvaluators, s, info);
 		evaluators = new Ref[numEvaluators];
-		for (var i2 = 0; i2 < evaluators.Length; i2++) {
+		for (var i2 = 0; i2 < evaluators.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -152,13 +152,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numEvaluators = (uint)evaluators.Length;
-	numControlledBlocks = (uint)controlledBlocks.Length;
+	numEvaluators = (uint)evaluators.Count;
+	numControlledBlocks = (uint)controlledBlocks.Count;
 	Nif.NifStream(name, s, info);
 	if (info.version <= 0x14050001) {
 		Nif.NifStream(numControlledBlocks, s, info);
 		Nif.NifStream(arrayGrowBy, s, info);
-		for (var i2 = 0; i2 < controlledBlocks.Length; i2++) {
+		for (var i2 = 0; i2 < controlledBlocks.Count; i2++) {
 			if (info.version <= 0x0A010067) {
 				Nif.NifStream(controlledBlocks[i2].targetName, s, info);
 			}
@@ -201,7 +201,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if (info.version >= 0x14050002) {
 		Nif.NifStream(numEvaluators, s, info);
-		for (var i2 = 0; i2 < evaluators.Length; i2++) {
+		for (var i2 = 0; i2 < evaluators.Count; i2++) {
 			WriteRef((NiObject)evaluators[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -224,13 +224,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numEvaluators = (uint)evaluators.Length;
-	numControlledBlocks = (uint)controlledBlocks.Length;
+	numEvaluators = (uint)evaluators.Count;
+	numControlledBlocks = (uint)controlledBlocks.Count;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Num Controlled Blocks:  {numControlledBlocks}");
 	s.AppendLine($"  Array Grow By:  {arrayGrowBy}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -255,7 +255,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Evaluators:  {numEvaluators}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < evaluators.Length; i1++) {
+	for (var i1 = 0; i1 < evaluators.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -281,7 +281,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	if (info.version <= 0x14050001) {
-		for (var i2 = 0; i2 < controlledBlocks.Length; i2++) {
+		for (var i2 = 0; i2 < controlledBlocks.Count; i2++) {
 			if (info.version >= 0x0A01006A) {
 				controlledBlocks[i2].interpolator = FixLink<NiInterpolator>(objects, link_stack, missing_link_stack, info);
 			}
@@ -297,7 +297,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		}
 	}
 	if (info.version >= 0x14050002) {
-		for (var i2 = 0; i2 < evaluators.Length; i2++) {
+		for (var i2 = 0; i2 < evaluators.Count; i2++) {
 			evaluators[i2] = FixLink<NiEvaluator>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -308,7 +308,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 		if (controlledBlocks[i1].interpolator != null)
 			refs.Add((NiObject)controlledBlocks[i1].interpolator);
 		if (controlledBlocks[i1].controller != null)
@@ -318,7 +318,7 @@ internal override List<NiObject> GetRefs() {
 		if (controlledBlocks[i1].stringPalette != null)
 			refs.Add((NiObject)controlledBlocks[i1].stringPalette);
 	}
-	for (var i1 = 0; i1 < evaluators.Length; i1++) {
+	for (var i1 = 0; i1 < evaluators.Count; i1++) {
 		if (evaluators[i1] != null)
 			refs.Add((NiObject)evaluators[i1]);
 	}
@@ -330,9 +330,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < controlledBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < controlledBlocks.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < evaluators.Length; i1++) {
+	for (var i1 = 0; i1 < evaluators.Count; i1++) {
 	}
 	return ptrs;
 }

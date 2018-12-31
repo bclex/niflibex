@@ -15,7 +15,7 @@ public class BonePose {
 	/*!  */
 	internal uint numTransforms;
 	/*!  */
-	internal BoneTransform[] transforms;
+	internal IList<BoneTransform> transforms;
 	//Constructor
 	public BonePose() { unchecked {
 	numTransforms = (uint)0;

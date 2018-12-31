@@ -17,7 +17,7 @@ public class KeyGroup<T> {
 	/*! The key type. */
 	internal KeyType interpolation;
 	/*! The keys. */
-	internal Key<T>[] keys;
+	internal IList<Key<T>> keys;
 }
 
 }

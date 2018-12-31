@@ -25,7 +25,7 @@ public class NiMeshPSysData : NiPSysData {
 	/*!  */
 	internal uint numGenerations;
 	/*!  */
-	internal uint[] generations;
+	internal IList<uint> generations;
 	/*!  */
 	internal NiNode particleMeshes;
 
@@ -58,7 +58,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out fillPoolsOnLoad, s, info);
 		Nif.NifStream(out numGenerations, s, info);
 		generations = new uint[numGenerations];
-		for (var i2 = 0; i2 < generations.Length; i2++) {
+		for (var i2 = 0; i2 < generations.Count; i2++) {
 			Nif.NifStream(out generations[i2], s, info);
 		}
 	}
@@ -71,12 +71,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numGenerations = (uint)generations.Length;
+	numGenerations = (uint)generations.Count;
 	if (info.version >= 0x0A020000) {
 		Nif.NifStream(defaultPoolSize, s, info);
 		Nif.NifStream(fillPoolsOnLoad, s, info);
 		Nif.NifStream(numGenerations, s, info);
-		for (var i2 = 0; i2 < generations.Length; i2++) {
+		for (var i2 = 0; i2 < generations.Count; i2++) {
 			Nif.NifStream(generations[i2], s, info);
 		}
 	}
@@ -94,12 +94,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numGenerations = (uint)generations.Length;
+	numGenerations = (uint)generations.Count;
 	s.AppendLine($"  Default Pool Size:  {defaultPoolSize}");
 	s.AppendLine($"  Fill Pools On Load:  {fillPoolsOnLoad}");
 	s.AppendLine($"  Num Generations:  {numGenerations}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < generations.Length; i1++) {
+	for (var i1 = 0; i1 < generations.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

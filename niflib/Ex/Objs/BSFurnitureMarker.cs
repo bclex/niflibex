@@ -21,7 +21,7 @@ public class BSFurnitureMarker : NiExtraData {
 	/*! Number of positions. */
 	internal uint numPositions;
 	/*! Unknown. Probably has something to do with the furniture positions? */
-	internal FurniturePosition[] positions;
+	internal IList<FurniturePosition> positions;
 
 	public BSFurnitureMarker() {
 	numPositions = (uint)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numPositions, s, info);
 	positions = new FurniturePosition[numPositions];
-	for (var i1 = 0; i1 < positions.Length; i1++) {
+	for (var i1 = 0; i1 < positions.Count; i1++) {
 		Nif.NifStream(out positions[i1].offset, s, info);
 		if ((info.userVersion2 <= 34)) {
 			Nif.NifStream(out positions[i1].orientation, s, info);
@@ -65,9 +65,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numPositions = (uint)positions.Length;
+	numPositions = (uint)positions.Count;
 	Nif.NifStream(numPositions, s, info);
-	for (var i1 = 0; i1 < positions.Length; i1++) {
+	for (var i1 = 0; i1 < positions.Count; i1++) {
 		Nif.NifStream(positions[i1].offset, s, info);
 		if ((info.userVersion2 <= 34)) {
 			Nif.NifStream(positions[i1].orientation, s, info);
@@ -93,10 +93,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numPositions = (uint)positions.Length;
+	numPositions = (uint)positions.Count;
 	s.AppendLine($"  Num Positions:  {numPositions}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < positions.Length; i1++) {
+	for (var i1 = 0; i1 < positions.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

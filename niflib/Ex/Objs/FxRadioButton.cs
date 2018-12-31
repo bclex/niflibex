@@ -30,7 +30,7 @@ public class FxRadioButton : FxWidget {
 	 * Unknown pointers to other buttons.  Maybe other buttons in a group so they can
 	 * be switch off if this one is switched on?
 	 */
-	internal FxRadioButton[] buttons;
+	internal IList<FxRadioButton> buttons;
 
 	public FxRadioButton() {
 	unknownInt1 = (uint)0;
@@ -61,7 +61,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownInt3, s, info);
 	Nif.NifStream(out numButtons, s, info);
 	buttons = new *[numButtons];
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -72,12 +72,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numButtons = (uint)buttons.Length;
+	numButtons = (uint)buttons.Count;
 	Nif.NifStream(unknownInt1, s, info);
 	Nif.NifStream(unknownInt2, s, info);
 	Nif.NifStream(unknownInt3, s, info);
 	Nif.NifStream(numButtons, s, info);
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 		WriteRef((NiObject)buttons[i1], s, info, link_map, missing_link_stack);
 	}
 
@@ -93,13 +93,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numButtons = (uint)buttons.Length;
+	numButtons = (uint)buttons.Count;
 	s.AppendLine($"  Unknown Int 1:  {unknownInt1}");
 	s.AppendLine($"  Unknown Int  2:  {unknownInt2}");
 	s.AppendLine($"  Unknown Int 3:  {unknownInt3}");
 	s.AppendLine($"  Num Buttons:  {numButtons}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -118,7 +118,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 		buttons[i1] = FixLink<FxRadioButton>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -127,7 +127,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 	}
 	return refs;
 }
@@ -135,7 +135,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < buttons.Length; i1++) {
+	for (var i1 = 0; i1 < buttons.Count; i1++) {
 		if (buttons[i1] != null)
 			ptrs.Add((NiObject)buttons[i1]);
 	}

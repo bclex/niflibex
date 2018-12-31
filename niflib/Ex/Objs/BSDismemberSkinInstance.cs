@@ -21,7 +21,7 @@ public class BSDismemberSkinInstance : NiSkinInstance {
 	/*!  */
 	internal int numPartitions;
 	/*!  */
-	internal BodyPartList[] partitions;
+	internal IList<BodyPartList> partitions;
 
 	public BSDismemberSkinInstance() {
 	numPartitions = (int)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numPartitions, s, info);
 	partitions = new BodyPartList[numPartitions];
-	for (var i1 = 0; i1 < partitions.Length; i1++) {
+	for (var i1 = 0; i1 < partitions.Count; i1++) {
 		Nif.NifStream(out partitions[i1].partFlag, s, info);
 		Nif.NifStream(out partitions[i1].bodyPart, s, info);
 	}
@@ -56,9 +56,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numPartitions = (int)partitions.Length;
+	numPartitions = (int)partitions.Count;
 	Nif.NifStream(numPartitions, s, info);
-	for (var i1 = 0; i1 < partitions.Length; i1++) {
+	for (var i1 = 0; i1 < partitions.Count; i1++) {
 		Nif.NifStream(partitions[i1].partFlag, s, info);
 		Nif.NifStream(partitions[i1].bodyPart, s, info);
 	}
@@ -75,10 +75,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numPartitions = (int)partitions.Length;
+	numPartitions = (int)partitions.Count;
 	s.AppendLine($"  Num Partitions:  {numPartitions}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < partitions.Length; i1++) {
+	for (var i1 = 0; i1 < partitions.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -89,7 +89,7 @@ public class NiTexturingProperty : NiProperty {
 	/*! Number of Shader textures that follow. */
 	internal uint numShaderTextures;
 	/*! Shader textures. */
-	internal ShaderTexDesc[] shaderTextures;
+	internal IList<ShaderTexDesc> shaderTextures;
 
 	public NiTexturingProperty() {
 	flags = (ushort)0;
@@ -687,7 +687,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x0A000100) {
 		Nif.NifStream(out numShaderTextures, s, info);
 		shaderTextures = new ShaderTexDesc[numShaderTextures];
-		for (var i2 = 0; i2 < shaderTextures.Length; i2++) {
+		for (var i2 = 0; i2 < shaderTextures.Count; i2++) {
 			Nif.NifStream(out shaderTextures[i2].hasMap, s, info);
 			if (shaderTextures[i2].hasMap) {
 				if (info.version <= 0x03010000) {
@@ -739,7 +739,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numShaderTextures = (uint)shaderTextures.Length;
+	numShaderTextures = (uint)shaderTextures.Count;
 	if (info.version <= 0x0A000102) {
 		Nif.NifStream(flags, s, info);
 	}
@@ -1272,7 +1272,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if (info.version >= 0x0A000100) {
 		Nif.NifStream(numShaderTextures, s, info);
-		for (var i2 = 0; i2 < shaderTextures.Length; i2++) {
+		for (var i2 = 0; i2 < shaderTextures.Count; i2++) {
 			Nif.NifStream(shaderTextures[i2].hasMap, s, info);
 			if (shaderTextures[i2].hasMap) {
 				if (info.version <= 0x03010000) {
@@ -1328,7 +1328,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numShaderTextures = (uint)shaderTextures.Length;
+	numShaderTextures = (uint)shaderTextures.Count;
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Apply Mode:  {applyMode}");
 	s.AppendLine($"  Texture Count:  {textureCount}");
@@ -1604,7 +1604,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Shader Textures:  {numShaderTextures}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shaderTextures.Length; i1++) {
+	for (var i1 = 0; i1 < shaderTextures.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -1737,7 +1737,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		}
 	}
 	if (info.version >= 0x0A000100) {
-		for (var i2 = 0; i2 < shaderTextures.Length; i2++) {
+		for (var i2 = 0; i2 < shaderTextures.Count; i2++) {
 			if (shaderTextures[i2].hasMap) {
 				if (info.version <= 0x03010000) {
 					shaderTextures[i2].map.image = FixLink<NiImage>(objects, link_stack, missing_link_stack, info);
@@ -1802,7 +1802,7 @@ internal override List<NiObject> GetRefs() {
 		refs.Add((NiObject)decal3Texture.image);
 	if (decal3Texture.source != null)
 		refs.Add((NiObject)decal3Texture.source);
-	for (var i1 = 0; i1 < shaderTextures.Length; i1++) {
+	for (var i1 = 0; i1 < shaderTextures.Count; i1++) {
 		if (shaderTextures[i1].map.image != null)
 			refs.Add((NiObject)shaderTextures[i1].map.image);
 		if (shaderTextures[i1].map.source != null)
@@ -1814,7 +1814,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < shaderTextures.Length; i1++) {
+	for (var i1 = 0; i1 < shaderTextures.Count; i1++) {
 	}
 	return ptrs;
 }

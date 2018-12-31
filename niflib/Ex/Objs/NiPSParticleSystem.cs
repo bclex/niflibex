@@ -25,11 +25,11 @@ public class NiPSParticleSystem : NiMesh {
 	/*!  */
 	internal uint numEmitters;
 	/*!  */
-	internal NiPSEmitter[] emitters;
+	internal IList<NiPSEmitter> emitters;
 	/*!  */
 	internal uint numSpawners;
 	/*!  */
-	internal NiPSSpawner[] spawners;
+	internal IList<NiPSSpawner> spawners;
 	/*!  */
 	internal NiPSSpawner deathSpawner;
 	/*!  */
@@ -57,7 +57,7 @@ public class NiPSParticleSystem : NiMesh {
 	/*!  */
 	internal byte numSpawnRateKeys;
 	/*!  */
-	internal PSSpawnRateKey[] spawnRateKeys;
+	internal IList<PSSpawnRateKey> spawnRateKeys;
 	/*!  */
 	internal bool pre_rpi;
 
@@ -103,13 +103,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	link_stack.Add(block_num);
 	Nif.NifStream(out numEmitters, s, info);
 	emitters = new Ref[numEmitters];
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numSpawners, s, info);
 	spawners = new Ref[numSpawners];
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -132,7 +132,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		link_stack.Add(block_num);
 		Nif.NifStream(out numSpawnRateKeys, s, info);
 		spawnRateKeys = new PSSpawnRateKey[numSpawnRateKeys];
-		for (var i2 = 0; i2 < spawnRateKeys.Length; i2++) {
+		for (var i2 = 0; i2 < spawnRateKeys.Count; i2++) {
 			Nif.NifStream(out spawnRateKeys[i2].value, s, info);
 			Nif.NifStream(out spawnRateKeys[i2].time, s, info);
 		}
@@ -145,17 +145,17 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSpawnRateKeys = (byte)spawnRateKeys.Length;
-	numSpawners = (uint)spawners.Length;
-	numEmitters = (uint)emitters.Length;
+	numSpawnRateKeys = (byte)spawnRateKeys.Count;
+	numSpawners = (uint)spawners.Count;
+	numEmitters = (uint)emitters.Count;
 	WriteRef((NiObject)simulator, s, info, link_map, missing_link_stack);
 	WriteRef((NiObject)generator, s, info, link_map, missing_link_stack);
 	Nif.NifStream(numEmitters, s, info);
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 		WriteRef((NiObject)emitters[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numSpawners, s, info);
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 		WriteRef((NiObject)spawners[i1], s, info, link_map, missing_link_stack);
 	}
 	WriteRef((NiObject)deathSpawner, s, info, link_map, missing_link_stack);
@@ -174,7 +174,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(upDirection, s, info);
 		WriteRef((NiObject)livingSpawner, s, info, link_map, missing_link_stack);
 		Nif.NifStream(numSpawnRateKeys, s, info);
-		for (var i2 = 0; i2 < spawnRateKeys.Length; i2++) {
+		for (var i2 = 0; i2 < spawnRateKeys.Count; i2++) {
 			Nif.NifStream(spawnRateKeys[i2].value, s, info);
 			Nif.NifStream(spawnRateKeys[i2].time, s, info);
 		}
@@ -193,14 +193,14 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSpawnRateKeys = (byte)spawnRateKeys.Length;
-	numSpawners = (uint)spawners.Length;
-	numEmitters = (uint)emitters.Length;
+	numSpawnRateKeys = (byte)spawnRateKeys.Count;
+	numSpawners = (uint)spawners.Count;
+	numEmitters = (uint)emitters.Count;
 	s.AppendLine($"  Simulator:  {simulator}");
 	s.AppendLine($"  Generator:  {generator}");
 	s.AppendLine($"  Num Emitters:  {numEmitters}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -213,7 +213,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Spawners:  {numSpawners}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -238,7 +238,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Living Spawner:  {livingSpawner}");
 	s.AppendLine($"  Num Spawn Rate Keys:  {numSpawnRateKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < spawnRateKeys.Length; i1++) {
+	for (var i1 = 0; i1 < spawnRateKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -257,10 +257,10 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	simulator = FixLink<NiPSSimulator>(objects, link_stack, missing_link_stack, info);
 	generator = FixLink<NiPSBoundUpdater>(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 		emitters[i1] = FixLink<NiPSEmitter>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 		spawners[i1] = FixLink<NiPSSpawner>(objects, link_stack, missing_link_stack, info);
 	}
 	deathSpawner = FixLink<NiPSSpawner>(objects, link_stack, missing_link_stack, info);
@@ -277,11 +277,11 @@ internal override List<NiObject> GetRefs() {
 		refs.Add((NiObject)simulator);
 	if (generator != null)
 		refs.Add((NiObject)generator);
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 		if (emitters[i1] != null)
 			refs.Add((NiObject)emitters[i1]);
 	}
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 		if (spawners[i1] != null)
 			refs.Add((NiObject)spawners[i1]);
 	}
@@ -295,9 +295,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < emitters.Length; i1++) {
+	for (var i1 = 0; i1 < emitters.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < spawners.Length; i1++) {
+	for (var i1 = 0; i1 < spawners.Count; i1++) {
 	}
 	return ptrs;
 }

@@ -17,7 +17,7 @@ public class LODInfo {
 	/*!  */
 	internal uint numActiveSkins;
 	/*!  */
-	internal uint[] skinIndices;
+	internal IList<uint> skinIndices;
 	//Constructor
 	public LODInfo() { unchecked {
 	numBones = (uint)0;

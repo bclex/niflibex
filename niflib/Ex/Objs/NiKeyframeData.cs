@@ -33,7 +33,7 @@ public class NiKeyframeData : NiObject {
 	 */
 	internal KeyType rotationType;
 	/*! The rotation keys if Quaternion rotation is used. */
-	internal Key<Quaternion>[] quaternionKeys;
+	internal IList<Key<Quaternion>> quaternionKeys;
 	/*!  */
 	internal float order;
 	/*! Individual arrays of keys for rotating X, Y, and Z individually. */
@@ -71,7 +71,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((rotationType != 4)) {
 		quaternionKeys = new Key[numRotationKeys];
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			Nif.NifStream(out quaternionKeys[i2], s, info, rotationType);
 		}
 	}
@@ -87,7 +87,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 				Nif.NifStream(out xyzRotations[i2].interpolation, s, info);
 			}
 			xyzRotations[i2].keys = new Key[xyzRotations[i2].numKeys];
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				Nif.NifStream(out xyzRotations[i2].keys[i3], s, info, xyzRotations[i2].interpolation);
 			}
 		}
@@ -97,7 +97,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out translations.interpolation, s, info);
 	}
 	translations.keys = new Key[translations.numKeys];
-	for (var i1 = 0; i1 < translations.keys.Length; i1++) {
+	for (var i1 = 0; i1 < translations.keys.Count; i1++) {
 		Nif.NifStream(out translations.keys[i1], s, info, translations.interpolation);
 	}
 	Nif.NifStream(out scales.numKeys, s, info);
@@ -105,7 +105,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out scales.interpolation, s, info);
 	}
 	scales.keys = new Key[scales.numKeys];
-	for (var i1 = 0; i1 < scales.keys.Length; i1++) {
+	for (var i1 = 0; i1 < scales.keys.Count; i1++) {
 		Nif.NifStream(out scales.keys[i1], s, info, scales.interpolation);
 	}
 
@@ -120,7 +120,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(rotationType, s, info);
 	}
 	if ((rotationType != 4)) {
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			Nif.NifStream(quaternionKeys[i2], s, info, rotationType);
 		}
 	}
@@ -131,30 +131,30 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((rotationType == 4)) {
 		for (var i2 = 0; i2 < 3; i2++) {
-			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Length;
+			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Count;
 			Nif.NifStream(xyzRotations[i2].numKeys, s, info);
 			if ((xyzRotations[i2].numKeys != 0)) {
 				Nif.NifStream(xyzRotations[i2].interpolation, s, info);
 			}
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				Nif.NifStream(xyzRotations[i2].keys[i3], s, info, xyzRotations[i2].interpolation);
 			}
 		}
 	}
-	translations.numKeys = (uint)translations.keys.Length;
+	translations.numKeys = (uint)translations.keys.Count;
 	Nif.NifStream(translations.numKeys, s, info);
 	if ((translations.numKeys != 0)) {
 		Nif.NifStream(translations.interpolation, s, info);
 	}
-	for (var i1 = 0; i1 < translations.keys.Length; i1++) {
+	for (var i1 = 0; i1 < translations.keys.Count; i1++) {
 		Nif.NifStream(translations.keys[i1], s, info, translations.interpolation);
 	}
-	scales.numKeys = (uint)scales.keys.Length;
+	scales.numKeys = (uint)scales.keys.Count;
 	Nif.NifStream(scales.numKeys, s, info);
 	if ((scales.numKeys != 0)) {
 		Nif.NifStream(scales.interpolation, s, info);
 	}
-	for (var i1 = 0; i1 < scales.keys.Length; i1++) {
+	for (var i1 = 0; i1 < scales.keys.Count; i1++) {
 		Nif.NifStream(scales.keys[i1], s, info, scales.interpolation);
 	}
 
@@ -176,7 +176,7 @@ public override string AsString(bool verbose = false) {
 	}
 	if ((rotationType != 4)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -196,13 +196,13 @@ public override string AsString(bool verbose = false) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Length;
+			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Count;
 			s.AppendLine($"      Num Keys:  {xyzRotations[i2].numKeys}");
 			if ((xyzRotations[i2].numKeys != 0)) {
 				s.AppendLine($"        Interpolation:  {xyzRotations[i2].interpolation}");
 			}
 			array_output_count = 0;
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -215,13 +215,13 @@ public override string AsString(bool verbose = false) {
 			}
 		}
 	}
-	translations.numKeys = (uint)translations.keys.Length;
+	translations.numKeys = (uint)translations.keys.Count;
 	s.AppendLine($"  Num Keys:  {translations.numKeys}");
 	if ((translations.numKeys != 0)) {
 		s.AppendLine($"    Interpolation:  {translations.interpolation}");
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < translations.keys.Length; i1++) {
+	for (var i1 = 0; i1 < translations.keys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -232,13 +232,13 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Keys[{i1}]:  {translations.keys[i1]}");
 		array_output_count++;
 	}
-	scales.numKeys = (uint)scales.keys.Length;
+	scales.numKeys = (uint)scales.keys.Count;
 	s.AppendLine($"  Num Keys:  {scales.numKeys}");
 	if ((scales.numKeys != 0)) {
 		s.AppendLine($"    Interpolation:  {scales.interpolation}");
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < scales.keys.Length; i1++) {
+	for (var i1 = 0; i1 < scales.keys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

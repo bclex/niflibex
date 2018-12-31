@@ -52,7 +52,7 @@ public class NiUVData : NiObject {
 				Nif.NifStream(out uvGroups[i2].interpolation, s, info);
 			}
 			uvGroups[i2].keys = new Key[uvGroups[i2].numKeys];
-			for (var i3 = 0; i3 < uvGroups[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < uvGroups[i2].keys.Count; i3++) {
 				Nif.NifStream(out uvGroups[i2].keys[i3], s, info, uvGroups[i2].interpolation);
 			}
 		}
@@ -64,12 +64,12 @@ public class NiUVData : NiObject {
 
 		base.Write(s, link_map, missing_link_stack, info);
 		for (var i2 = 0; i2 < 4; i2++) {
-			uvGroups[i2].numKeys = (uint)uvGroups[i2].keys.Length;
+			uvGroups[i2].numKeys = (uint)uvGroups[i2].keys.Count;
 			Nif.NifStream(uvGroups[i2].numKeys, s, info);
 			if ((uvGroups[i2].numKeys != 0)) {
 				Nif.NifStream(uvGroups[i2].interpolation, s, info);
 			}
-			for (var i3 = 0; i3 < uvGroups[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < uvGroups[i2].keys.Count; i3++) {
 				Nif.NifStream(uvGroups[i2].keys[i3], s, info, uvGroups[i2].interpolation);
 			}
 		}
@@ -92,13 +92,13 @@ public class NiUVData : NiObject {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			uvGroups[i2].numKeys = (uint)uvGroups[i2].keys.Length;
+			uvGroups[i2].numKeys = (uint)uvGroups[i2].keys.Count;
 			s.AppendLine($"      Num Keys:  {uvGroups[i2].numKeys}");
 			if ((uvGroups[i2].numKeys != 0)) {
 				s.AppendLine($"        Interpolation:  {uvGroups[i2].interpolation}");
 			}
 			array_output_count = 0;
-			for (var i3 = 0; i3 < uvGroups[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < uvGroups[i2].keys.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;

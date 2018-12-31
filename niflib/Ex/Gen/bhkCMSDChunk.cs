@@ -23,19 +23,19 @@ public class bhkCMSDChunk {
 	/*!  */
 	internal uint numVertices;
 	/*!  */
-	internal ushort[] vertices;
+	internal IList<ushort> vertices;
 	/*!  */
 	internal uint numIndices;
 	/*!  */
-	internal ushort[] indices;
+	internal IList<ushort> indices;
 	/*!  */
 	internal uint numStrips;
 	/*!  */
-	internal ushort[] strips;
+	internal IList<ushort> strips;
 	/*!  */
 	internal uint numWeldingInfo;
 	/*!  */
-	internal ushort[] weldingInfo;
+	internal IList<ushort> weldingInfo;
 	//Constructor
 	public bhkCMSDChunk() { unchecked {
 	materialIndex = (uint)0;

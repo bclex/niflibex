@@ -24,7 +24,7 @@ public class NiVisData : NiObject {
 	/*!  */
 	internal uint numKeys;
 	/*!  */
-	internal Key<byte>[] keys;
+	internal IList<Key<byte>> keys;
 
 	public NiVisData() {
 	numKeys = (uint)0;
@@ -48,7 +48,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numKeys, s, info);
 	keys = new Key[numKeys];
-	for (var i1 = 0; i1 < keys.Length; i1++) {
+	for (var i1 = 0; i1 < keys.Count; i1++) {
 		Nif.NifStream(out keys[i1], s, info, 1);
 	}
 
@@ -58,9 +58,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numKeys = (uint)keys.Length;
+	numKeys = (uint)keys.Count;
 	Nif.NifStream(numKeys, s, info);
-	for (var i1 = 0; i1 < keys.Length; i1++) {
+	for (var i1 = 0; i1 < keys.Count; i1++) {
 		Nif.NifStream(keys[i1], s, info, 1);
 	}
 
@@ -76,10 +76,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numKeys = (uint)keys.Length;
+	numKeys = (uint)keys.Count;
 	s.AppendLine($"  Num Keys:  {numKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < keys.Length; i1++) {
+	for (var i1 = 0; i1 < keys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

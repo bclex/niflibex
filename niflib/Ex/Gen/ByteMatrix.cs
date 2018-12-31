@@ -17,7 +17,7 @@ public class ByteMatrix {
 	/*! The number of bytes in this array */
 	internal uint dataSize2;
 	/*! The bytes which make up the array */
-	internal byte[][] data;
+	internal IList<byte[]> data;
 	//Constructor
 	public ByteMatrix() { unchecked {
 	dataSize1 = (uint)0;

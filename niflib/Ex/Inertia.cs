@@ -158,7 +158,7 @@ namespace Niflib
         /*! Return mass and inertia matrix for a capsule of given radius, 
          *	height and density.
          */
-        static void CalcMassPropertiesCapsule(Vector3 startAxis, Vector3 endAxis, float radius,
+        public static void CalcMassPropertiesCapsule(Vector3 startAxis, Vector3 endAxis, float radius,
             float density, bool solid,
             out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
         {

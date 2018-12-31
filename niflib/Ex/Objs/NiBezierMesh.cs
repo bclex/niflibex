@@ -24,7 +24,7 @@ public class NiBezierMesh : NiAVObject {
 	/*! references. */
 	internal uint numBezierTriangles;
 	/*! unknown */
-	internal NiBezierTriangle4[] bezierTriangle;
+	internal IList<NiBezierTriangle4> bezierTriangle;
 	/*! Unknown. */
 	internal uint unknown3;
 	/*! Data count. */
@@ -32,17 +32,17 @@ public class NiBezierMesh : NiAVObject {
 	/*! Unknown. */
 	internal ushort unknown4;
 	/*! data. */
-	internal Vector3[] points1;
+	internal IList<Vector3> points1;
 	/*! Unknown (illegal link?). */
 	internal uint unknown5;
 	/*! data. */
-	internal Array2<float>[] points2;
+	internal IList<Array2<float>> points2;
 	/*! unknown */
 	internal uint unknown6;
 	/*! data count 2. */
 	internal ushort count2;
 	/*! data count. */
-	internal Array4<ushort>[] data2;
+	internal IList<Array4<ushort>> data2;
 
 	public NiBezierMesh() {
 	numBezierTriangles = (uint)0;
@@ -73,7 +73,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numBezierTriangles, s, info);
 	bezierTriangle = new Ref[numBezierTriangles];
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -81,12 +81,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out count1, s, info);
 	Nif.NifStream(out unknown4, s, info);
 	points1 = new Vector3[count1];
-	for (var i1 = 0; i1 < points1.Length; i1++) {
+	for (var i1 = 0; i1 < points1.Count; i1++) {
 		Nif.NifStream(out points1[i1], s, info);
 	}
 	Nif.NifStream(out unknown5, s, info);
 	points2 = new float[count1];
-	for (var i1 = 0; i1 < points2.Length; i1++) {
+	for (var i1 = 0; i1 < points2.Count; i1++) {
 		for (var i2 = 0; i2 < 2; i2++) {
 			Nif.NifStream(out points2[i1][i2], s, info);
 		}
@@ -94,7 +94,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknown6, s, info);
 	Nif.NifStream(out count2, s, info);
 	data2 = new ushort[count2];
-	for (var i1 = 0; i1 < data2.Length; i1++) {
+	for (var i1 = 0; i1 < data2.Count; i1++) {
 		for (var i2 = 0; i2 < 4; i2++) {
 			Nif.NifStream(out data2[i1][i2], s, info);
 		}
@@ -106,28 +106,28 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	count2 = (ushort)data2.Length;
-	count1 = (ushort)points1.Length;
-	numBezierTriangles = (uint)bezierTriangle.Length;
+	count2 = (ushort)data2.Count;
+	count1 = (ushort)points1.Count;
+	numBezierTriangles = (uint)bezierTriangle.Count;
 	Nif.NifStream(numBezierTriangles, s, info);
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 		WriteRef((NiObject)bezierTriangle[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(unknown3, s, info);
 	Nif.NifStream(count1, s, info);
 	Nif.NifStream(unknown4, s, info);
-	for (var i1 = 0; i1 < points1.Length; i1++) {
+	for (var i1 = 0; i1 < points1.Count; i1++) {
 		Nif.NifStream(points1[i1], s, info);
 	}
 	Nif.NifStream(unknown5, s, info);
-	for (var i1 = 0; i1 < points2.Length; i1++) {
+	for (var i1 = 0; i1 < points2.Count; i1++) {
 		for (var i2 = 0; i2 < 2; i2++) {
 			Nif.NifStream(points2[i1][i2], s, info);
 		}
 	}
 	Nif.NifStream(unknown6, s, info);
 	Nif.NifStream(count2, s, info);
-	for (var i1 = 0; i1 < data2.Length; i1++) {
+	for (var i1 = 0; i1 < data2.Count; i1++) {
 		for (var i2 = 0; i2 < 4; i2++) {
 			Nif.NifStream(data2[i1][i2], s, info);
 		}
@@ -145,12 +145,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	count2 = (ushort)data2.Length;
-	count1 = (ushort)points1.Length;
-	numBezierTriangles = (uint)bezierTriangle.Length;
+	count2 = (ushort)data2.Count;
+	count1 = (ushort)points1.Count;
+	numBezierTriangles = (uint)bezierTriangle.Count;
 	s.AppendLine($"  Num Bezier Triangles:  {numBezierTriangles}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -165,7 +165,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Count 1:  {count1}");
 	s.AppendLine($"  Unknown 4:  {unknown4}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < points1.Length; i1++) {
+	for (var i1 = 0; i1 < points1.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -178,7 +178,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Unknown 5:  {unknown5}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < points2.Length; i1++) {
+	for (var i1 = 0; i1 < points2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -194,7 +194,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Unknown 6:  {unknown6}");
 	s.AppendLine($"  Count 2:  {count2}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < data2.Length; i1++) {
+	for (var i1 = 0; i1 < data2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -215,7 +215,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 		bezierTriangle[i1] = FixLink<NiBezierTriangle4>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -224,7 +224,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 		if (bezierTriangle[i1] != null)
 			refs.Add((NiObject)bezierTriangle[i1]);
 	}
@@ -234,7 +234,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < bezierTriangle.Length; i1++) {
+	for (var i1 = 0; i1 < bezierTriangle.Count; i1++) {
 	}
 	return ptrs;
 }

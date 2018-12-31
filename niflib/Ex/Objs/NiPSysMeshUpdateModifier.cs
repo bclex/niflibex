@@ -21,7 +21,7 @@ public class NiPSysMeshUpdateModifier : NiPSysModifier {
 	/*!  */
 	internal uint numMeshes;
 	/*!  */
-	internal NiAVObject[] meshes;
+	internal IList<NiAVObject> meshes;
 
 	public NiPSysMeshUpdateModifier() {
 	numMeshes = (uint)0;
@@ -46,7 +46,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numMeshes, s, info);
 	meshes = new Ref[numMeshes];
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -57,9 +57,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numMeshes = (uint)meshes.Length;
+	numMeshes = (uint)meshes.Count;
 	Nif.NifStream(numMeshes, s, info);
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 		WriteRef((NiObject)meshes[i1], s, info, link_map, missing_link_stack);
 	}
 
@@ -75,10 +75,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numMeshes = (uint)meshes.Length;
+	numMeshes = (uint)meshes.Count;
 	s.AppendLine($"  Num Meshes:  {numMeshes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -97,7 +97,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 		meshes[i1] = FixLink<NiAVObject>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -106,7 +106,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 		if (meshes[i1] != null)
 			refs.Add((NiObject)meshes[i1]);
 	}
@@ -116,7 +116,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < meshes.Length; i1++) {
+	for (var i1 = 0; i1 < meshes.Count; i1++) {
 	}
 	return ptrs;
 }

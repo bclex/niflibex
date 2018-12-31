@@ -48,19 +48,19 @@ public class bhkCompressedMeshShapeData : bhkRefObject {
 	/*!  */
 	internal uint numMaterials32;
 	/*! Does not appear to be used. */
-	internal uint[] materials32;
+	internal IList<uint> materials32;
 	/*!  */
 	internal uint numMaterials16;
 	/*! Does not appear to be used. */
-	internal uint[] materials16;
+	internal IList<uint> materials16;
 	/*!  */
 	internal uint numMaterials8;
 	/*! Does not appear to be used. */
-	internal uint[] materials8;
+	internal IList<uint> materials8;
 	/*! Number of chunk materials */
 	internal uint numMaterials;
 	/*! Table (array) with sets of materials. Chunks refers to this table by index. */
-	internal bhkCMSDMaterial[] chunkMaterials;
+	internal IList<bhkCMSDMaterial> chunkMaterials;
 	/*!  */
 	internal uint numNamedMaterials;
 	/*! Number of chunk transformations */
@@ -69,19 +69,19 @@ public class bhkCompressedMeshShapeData : bhkRefObject {
 	 * Table (array) with sets of transformations. Chunks refers to this table by
 	 * index.
 	 */
-	internal bhkCMSDTransform[] chunkTransforms;
+	internal IList<bhkCMSDTransform> chunkTransforms;
 	/*!  */
 	internal uint numBigVerts;
 	/*! Compressed Vertices? */
-	internal Vector4[] bigVerts;
+	internal IList<Vector4> bigVerts;
 	/*!  */
 	internal uint numBigTris;
 	/*!  */
-	internal bhkCMSDBigTris[] bigTris;
+	internal IList<bhkCMSDBigTris> bigTris;
 	/*!  */
 	internal uint numChunks;
 	/*!  */
-	internal bhkCMSDChunk[] chunks;
+	internal IList<bhkCMSDChunk> chunks;
 	/*! Does not appear to be used. Needs array. */
 	internal uint numConvexPieceA;
 
@@ -132,22 +132,22 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out materialType, s, info);
 	Nif.NifStream(out numMaterials32, s, info);
 	materials32 = new uint[numMaterials32];
-	for (var i1 = 0; i1 < materials32.Length; i1++) {
+	for (var i1 = 0; i1 < materials32.Count; i1++) {
 		Nif.NifStream(out materials32[i1], s, info);
 	}
 	Nif.NifStream(out numMaterials16, s, info);
 	materials16 = new uint[numMaterials16];
-	for (var i1 = 0; i1 < materials16.Length; i1++) {
+	for (var i1 = 0; i1 < materials16.Count; i1++) {
 		Nif.NifStream(out materials16[i1], s, info);
 	}
 	Nif.NifStream(out numMaterials8, s, info);
 	materials8 = new uint[numMaterials8];
-	for (var i1 = 0; i1 < materials8.Length; i1++) {
+	for (var i1 = 0; i1 < materials8.Count; i1++) {
 		Nif.NifStream(out materials8[i1], s, info);
 	}
 	Nif.NifStream(out numMaterials, s, info);
 	chunkMaterials = new bhkCMSDMaterial[numMaterials];
-	for (var i1 = 0; i1 < chunkMaterials.Length; i1++) {
+	for (var i1 = 0; i1 < chunkMaterials.Count; i1++) {
 		Nif.NifStream(out chunkMaterials[i1].material, s, info);
 		if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 			Nif.NifStream(out chunkMaterials[i1].filter.layer_ob, s, info);
@@ -164,7 +164,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numNamedMaterials, s, info);
 	Nif.NifStream(out numTransforms, s, info);
 	chunkTransforms = new bhkCMSDTransform[numTransforms];
-	for (var i1 = 0; i1 < chunkTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < chunkTransforms.Count; i1++) {
 		Nif.NifStream(out chunkTransforms[i1].translation, s, info);
 		Nif.NifStream(out chunkTransforms[i1].rotation.x, s, info);
 		Nif.NifStream(out chunkTransforms[i1].rotation.y, s, info);
@@ -173,12 +173,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numBigVerts, s, info);
 	bigVerts = new Vector4[numBigVerts];
-	for (var i1 = 0; i1 < bigVerts.Length; i1++) {
+	for (var i1 = 0; i1 < bigVerts.Count; i1++) {
 		Nif.NifStream(out bigVerts[i1], s, info);
 	}
 	Nif.NifStream(out numBigTris, s, info);
 	bigTris = new bhkCMSDBigTris[numBigTris];
-	for (var i1 = 0; i1 < bigTris.Length; i1++) {
+	for (var i1 = 0; i1 < bigTris.Count; i1++) {
 		Nif.NifStream(out bigTris[i1].triangle1, s, info);
 		Nif.NifStream(out bigTris[i1].triangle2, s, info);
 		Nif.NifStream(out bigTris[i1].triangle3, s, info);
@@ -187,29 +187,29 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numChunks, s, info);
 	chunks = new bhkCMSDChunk[numChunks];
-	for (var i1 = 0; i1 < chunks.Length; i1++) {
+	for (var i1 = 0; i1 < chunks.Count; i1++) {
 		Nif.NifStream(out chunks[i1].translation, s, info);
 		Nif.NifStream(out chunks[i1].materialIndex, s, info);
 		Nif.NifStream(out chunks[i1].reference, s, info);
 		Nif.NifStream(out chunks[i1].transformIndex, s, info);
 		Nif.NifStream(out chunks[i1].numVertices, s, info);
 		chunks[i1].vertices = new ushort[chunks[i1].numVertices];
-		for (var i2 = 0; i2 < chunks[i1].vertices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].vertices.Count; i2++) {
 			Nif.NifStream(out chunks[i1].vertices[i2], s, info);
 		}
 		Nif.NifStream(out chunks[i1].numIndices, s, info);
 		chunks[i1].indices = new ushort[chunks[i1].numIndices];
-		for (var i2 = 0; i2 < chunks[i1].indices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].indices.Count; i2++) {
 			Nif.NifStream(out chunks[i1].indices[i2], s, info);
 		}
 		Nif.NifStream(out chunks[i1].numStrips, s, info);
 		chunks[i1].strips = new ushort[chunks[i1].numStrips];
-		for (var i2 = 0; i2 < chunks[i1].strips.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].strips.Count; i2++) {
 			Nif.NifStream(out chunks[i1].strips[i2], s, info);
 		}
 		Nif.NifStream(out chunks[i1].numWeldingInfo, s, info);
 		chunks[i1].weldingInfo = new ushort[chunks[i1].numWeldingInfo];
-		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Count; i2++) {
 			Nif.NifStream(out chunks[i1].weldingInfo[i2], s, info);
 		}
 	}
@@ -221,14 +221,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numChunks = (uint)chunks.Length;
-	numBigTris = (uint)bigTris.Length;
-	numBigVerts = (uint)bigVerts.Length;
-	numTransforms = (uint)chunkTransforms.Length;
-	numMaterials = (uint)chunkMaterials.Length;
-	numMaterials8 = (uint)materials8.Length;
-	numMaterials16 = (uint)materials16.Length;
-	numMaterials32 = (uint)materials32.Length;
+	numChunks = (uint)chunks.Count;
+	numBigTris = (uint)bigTris.Count;
+	numBigVerts = (uint)bigVerts.Count;
+	numTransforms = (uint)chunkTransforms.Count;
+	numMaterials = (uint)chunkMaterials.Count;
+	numMaterials8 = (uint)materials8.Count;
+	numMaterials16 = (uint)materials16.Count;
+	numMaterials32 = (uint)materials32.Count;
 	Nif.NifStream(bitsPerIndex, s, info);
 	Nif.NifStream(bitsPerWIndex, s, info);
 	Nif.NifStream(maskWIndex, s, info);
@@ -239,19 +239,19 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(weldingType, s, info);
 	Nif.NifStream(materialType, s, info);
 	Nif.NifStream(numMaterials32, s, info);
-	for (var i1 = 0; i1 < materials32.Length; i1++) {
+	for (var i1 = 0; i1 < materials32.Count; i1++) {
 		Nif.NifStream(materials32[i1], s, info);
 	}
 	Nif.NifStream(numMaterials16, s, info);
-	for (var i1 = 0; i1 < materials16.Length; i1++) {
+	for (var i1 = 0; i1 < materials16.Count; i1++) {
 		Nif.NifStream(materials16[i1], s, info);
 	}
 	Nif.NifStream(numMaterials8, s, info);
-	for (var i1 = 0; i1 < materials8.Length; i1++) {
+	for (var i1 = 0; i1 < materials8.Count; i1++) {
 		Nif.NifStream(materials8[i1], s, info);
 	}
 	Nif.NifStream(numMaterials, s, info);
-	for (var i1 = 0; i1 < chunkMaterials.Length; i1++) {
+	for (var i1 = 0; i1 < chunkMaterials.Count; i1++) {
 		Nif.NifStream(chunkMaterials[i1].material, s, info);
 		if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 			Nif.NifStream(chunkMaterials[i1].filter.layer_ob, s, info);
@@ -267,7 +267,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	Nif.NifStream(numNamedMaterials, s, info);
 	Nif.NifStream(numTransforms, s, info);
-	for (var i1 = 0; i1 < chunkTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < chunkTransforms.Count; i1++) {
 		Nif.NifStream(chunkTransforms[i1].translation, s, info);
 		Nif.NifStream(chunkTransforms[i1].rotation.x, s, info);
 		Nif.NifStream(chunkTransforms[i1].rotation.y, s, info);
@@ -275,11 +275,11 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(chunkTransforms[i1].rotation.w, s, info);
 	}
 	Nif.NifStream(numBigVerts, s, info);
-	for (var i1 = 0; i1 < bigVerts.Length; i1++) {
+	for (var i1 = 0; i1 < bigVerts.Count; i1++) {
 		Nif.NifStream(bigVerts[i1], s, info);
 	}
 	Nif.NifStream(numBigTris, s, info);
-	for (var i1 = 0; i1 < bigTris.Length; i1++) {
+	for (var i1 = 0; i1 < bigTris.Count; i1++) {
 		Nif.NifStream(bigTris[i1].triangle1, s, info);
 		Nif.NifStream(bigTris[i1].triangle2, s, info);
 		Nif.NifStream(bigTris[i1].triangle3, s, info);
@@ -287,29 +287,29 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(bigTris[i1].weldingInfo, s, info);
 	}
 	Nif.NifStream(numChunks, s, info);
-	for (var i1 = 0; i1 < chunks.Length; i1++) {
-		chunks[i1].numWeldingInfo = (uint)chunks[i1].weldingInfo.Length;
-		chunks[i1].numStrips = (uint)chunks[i1].strips.Length;
-		chunks[i1].numIndices = (uint)chunks[i1].indices.Length;
-		chunks[i1].numVertices = (uint)chunks[i1].vertices.Length;
+	for (var i1 = 0; i1 < chunks.Count; i1++) {
+		chunks[i1].numWeldingInfo = (uint)chunks[i1].weldingInfo.Count;
+		chunks[i1].numStrips = (uint)chunks[i1].strips.Count;
+		chunks[i1].numIndices = (uint)chunks[i1].indices.Count;
+		chunks[i1].numVertices = (uint)chunks[i1].vertices.Count;
 		Nif.NifStream(chunks[i1].translation, s, info);
 		Nif.NifStream(chunks[i1].materialIndex, s, info);
 		Nif.NifStream(chunks[i1].reference, s, info);
 		Nif.NifStream(chunks[i1].transformIndex, s, info);
 		Nif.NifStream(chunks[i1].numVertices, s, info);
-		for (var i2 = 0; i2 < chunks[i1].vertices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].vertices.Count; i2++) {
 			Nif.NifStream(chunks[i1].vertices[i2], s, info);
 		}
 		Nif.NifStream(chunks[i1].numIndices, s, info);
-		for (var i2 = 0; i2 < chunks[i1].indices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].indices.Count; i2++) {
 			Nif.NifStream(chunks[i1].indices[i2], s, info);
 		}
 		Nif.NifStream(chunks[i1].numStrips, s, info);
-		for (var i2 = 0; i2 < chunks[i1].strips.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].strips.Count; i2++) {
 			Nif.NifStream(chunks[i1].strips[i2], s, info);
 		}
 		Nif.NifStream(chunks[i1].numWeldingInfo, s, info);
-		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Count; i2++) {
 			Nif.NifStream(chunks[i1].weldingInfo[i2], s, info);
 		}
 	}
@@ -327,14 +327,14 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numChunks = (uint)chunks.Length;
-	numBigTris = (uint)bigTris.Length;
-	numBigVerts = (uint)bigVerts.Length;
-	numTransforms = (uint)chunkTransforms.Length;
-	numMaterials = (uint)chunkMaterials.Length;
-	numMaterials8 = (uint)materials8.Length;
-	numMaterials16 = (uint)materials16.Length;
-	numMaterials32 = (uint)materials32.Length;
+	numChunks = (uint)chunks.Count;
+	numBigTris = (uint)bigTris.Count;
+	numBigVerts = (uint)bigVerts.Count;
+	numTransforms = (uint)chunkTransforms.Count;
+	numMaterials = (uint)chunkMaterials.Count;
+	numMaterials8 = (uint)materials8.Count;
+	numMaterials16 = (uint)materials16.Count;
+	numMaterials32 = (uint)materials32.Count;
 	s.AppendLine($"  Bits Per Index:  {bitsPerIndex}");
 	s.AppendLine($"  Bits Per W Index:  {bitsPerWIndex}");
 	s.AppendLine($"  Mask W Index:  {maskWIndex}");
@@ -346,7 +346,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Material Type:  {materialType}");
 	s.AppendLine($"  Num Materials 32:  {numMaterials32}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materials32.Length; i1++) {
+	for (var i1 = 0; i1 < materials32.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -359,7 +359,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Materials 16:  {numMaterials16}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materials16.Length; i1++) {
+	for (var i1 = 0; i1 < materials16.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -372,7 +372,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Materials 8:  {numMaterials8}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < materials8.Length; i1++) {
+	for (var i1 = 0; i1 < materials8.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -385,7 +385,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Materials:  {numMaterials}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < chunkMaterials.Length; i1++) {
+	for (var i1 = 0; i1 < chunkMaterials.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -400,7 +400,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num Named Materials:  {numNamedMaterials}");
 	s.AppendLine($"  Num Transforms:  {numTransforms}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < chunkTransforms.Length; i1++) {
+	for (var i1 = 0; i1 < chunkTransforms.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -413,7 +413,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Big Verts:  {numBigVerts}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bigVerts.Length; i1++) {
+	for (var i1 = 0; i1 < bigVerts.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -426,7 +426,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Big Tris:  {numBigTris}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bigTris.Length; i1++) {
+	for (var i1 = 0; i1 < bigTris.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -439,22 +439,22 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Chunks:  {numChunks}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < chunks.Length; i1++) {
+	for (var i1 = 0; i1 < chunks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		chunks[i1].numWeldingInfo = (uint)chunks[i1].weldingInfo.Length;
-		chunks[i1].numStrips = (uint)chunks[i1].strips.Length;
-		chunks[i1].numIndices = (uint)chunks[i1].indices.Length;
-		chunks[i1].numVertices = (uint)chunks[i1].vertices.Length;
+		chunks[i1].numWeldingInfo = (uint)chunks[i1].weldingInfo.Count;
+		chunks[i1].numStrips = (uint)chunks[i1].strips.Count;
+		chunks[i1].numIndices = (uint)chunks[i1].indices.Count;
+		chunks[i1].numVertices = (uint)chunks[i1].vertices.Count;
 		s.AppendLine($"    Translation:  {chunks[i1].translation}");
 		s.AppendLine($"    Material Index:  {chunks[i1].materialIndex}");
 		s.AppendLine($"    Reference:  {chunks[i1].reference}");
 		s.AppendLine($"    Transform Index:  {chunks[i1].transformIndex}");
 		s.AppendLine($"    Num Vertices:  {chunks[i1].numVertices}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < chunks[i1].vertices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].vertices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -467,7 +467,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Num Indices:  {chunks[i1].numIndices}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < chunks[i1].indices.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].indices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -480,7 +480,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Num Strips:  {chunks[i1].numStrips}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < chunks[i1].strips.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].strips.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -493,7 +493,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Num Welding Info:  {chunks[i1].numWeldingInfo}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Length; i2++) {
+		for (var i2 = 0; i2 < chunks[i1].weldingInfo.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -614,12 +614,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or sets list of chunkMaterials 
          * \param[in] List of the chunkMaterials
          */
-        public virtual bhkCMSDMaterial[] ChunkMaterials
+        public virtual IList<bhkCMSDMaterial> ChunkMaterials
         {
             get => chunkMaterials;
             set
             {
-                numMaterials = (uint)value.Length;
+                numMaterials = (uint)value.Count;
                 chunkMaterials = value;
             }
         }
@@ -638,12 +638,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or set list of chunkTransforms 
          * \param[in] List of the chunkTransforms
          */
-        public virtual bhkCMSDTransform[] ChunkTransforms
+        public virtual IList<bhkCMSDTransform> ChunkTransforms
         {
             get => chunkTransforms;
             set
             {
-                numTransforms = (uint)value.Length;
+                numTransforms = (uint)value.Count;
                 chunkTransforms = value;
             }
         }
@@ -662,12 +662,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or sets list of bigVerts 
          * \param[in] List of the bigVerts
          */
-        public virtual Vector4[] BigVerts
+        public virtual IList<Vector4> BigVerts
         {
             get => bigVerts;
             set
             {
-                numBigVerts = (uint)value.Length;
+                numBigVerts = (uint)value.Count;
                 bigVerts = value;
             }
         }
@@ -686,12 +686,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or set list of bigTris 
          * \param[in] List of the bigTris
          */
-        public virtual bhkCMSDBigTris[] BigTris
+        public virtual IList<bhkCMSDBigTris> BigTris
         {
             get => bigTris;
             set
             {
-                numBigTris = (uint)value.Length;
+                numBigTris = (uint)value.Count;
                 bigTris = value;
             }
         }
@@ -710,12 +710,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or sets list of chunks 
          * \param[in] List of the chunks
          */
-        public virtual bhkCMSDChunk[] Chunks
+        public virtual IList<bhkCMSDChunk> Chunks
         {
             get => chunks;
             set
             {
-                numChunks = (uint)value.Length;
+                numChunks = (uint)value.Count;
                 chunks = value;
             }
         }

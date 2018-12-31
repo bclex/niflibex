@@ -21,11 +21,11 @@ public class NiTriShapeSkinController : NiTimeController {
 	/*! The number of node bones referenced as influences. */
 	internal uint numBones;
 	/*! The number of vertex weights stored for each bone. */
-	internal uint[] vertexCounts;
+	internal IList<uint> vertexCounts;
 	/*! List of all armature bones. */
-	internal NiBone[] bones;
+	internal IList<NiBone> bones;
 	/*! Contains skin weight data for each node that this skin is influenced by. */
-	internal OldSkinData[][] boneData;
+	internal IList<OldSkinData[]> boneData;
 
 	public NiTriShapeSkinController() {
 	numBones = (uint)0;
@@ -50,16 +50,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numBones, s, info);
 	vertexCounts = new uint[numBones];
-	for (var i1 = 0; i1 < vertexCounts.Length; i1++) {
+	for (var i1 = 0; i1 < vertexCounts.Count; i1++) {
 		Nif.NifStream(out vertexCounts[i1], s, info);
 	}
 	bones = new *[numBones];
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	boneData = new OldSkinData[numBones];
-	for (var i1 = 0; i1 < boneData.Length; i1++) {
+	for (var i1 = 0; i1 < boneData.Count; i1++) {
 		boneData[i1].Resize(vertexCounts[i1]);
 		for (var i2 = 0; i2 < vertexCounts[i1]; i2++) {
 			Nif.NifStream(out boneData[i1][i2].vertexWeight, s, info);
@@ -74,17 +74,17 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	for (var i1 = 0; i1 < boneData.Length; i1++)
-		vertexCounts[i1] = (uint)boneData[i1].Length;
-	numBones = (uint)vertexCounts.Length;
+	for (var i1 = 0; i1 < boneData.Count; i1++)
+		vertexCounts[i1] = (uint)boneData[i1].Count;
+	numBones = (uint)vertexCounts.Count;
 	Nif.NifStream(numBones, s, info);
-	for (var i1 = 0; i1 < vertexCounts.Length; i1++) {
+	for (var i1 = 0; i1 < vertexCounts.Count; i1++) {
 		Nif.NifStream(vertexCounts[i1], s, info);
 	}
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		WriteRef((NiObject)bones[i1], s, info, link_map, missing_link_stack);
 	}
-	for (var i1 = 0; i1 < boneData.Length; i1++) {
+	for (var i1 = 0; i1 < boneData.Count; i1++) {
 		for (var i2 = 0; i2 < vertexCounts[i1]; i2++) {
 			Nif.NifStream(boneData[i1][i2].vertexWeight, s, info);
 			Nif.NifStream(boneData[i1][i2].vertexIndex, s, info);
@@ -104,12 +104,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	for (var i1 = 0; i1 < boneData.Length; i1++)
-		vertexCounts[i1] = (uint)boneData[i1].Length;
-	numBones = (uint)vertexCounts.Length;
+	for (var i1 = 0; i1 < boneData.Count; i1++)
+		vertexCounts[i1] = (uint)boneData[i1].Count;
+	numBones = (uint)vertexCounts.Count;
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vertexCounts.Length; i1++) {
+	for (var i1 = 0; i1 < vertexCounts.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -121,7 +121,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -133,7 +133,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < boneData.Length; i1++) {
+	for (var i1 = 0; i1 < boneData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -152,7 +152,7 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		bones[i1] = FixLink<NiBone>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -161,7 +161,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 	}
 	return refs;
 }
@@ -169,7 +169,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (bones[i1] != null)
 			ptrs.Add((NiObject)bones[i1]);
 	}

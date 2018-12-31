@@ -19,11 +19,11 @@ public class NiPSysData : NiParticlesData {
 	//Definition of TYPE constant
 	public static readonly Type_ TYPE = new Type_("NiPSysData", NiParticlesData.TYPE);
 	/*!  */
-	internal ParticleDesc[] particleDescriptions;
+	internal IList<ParticleDesc> particleDescriptions;
 	/*!  */
 	internal bool hasRotationSpeeds;
 	/*!  */
-	internal float[] rotationSpeeds;
+	internal IList<float> rotationSpeeds;
 	/*!  */
 	internal ushort numAddedParticles;
 	/*!  */
@@ -53,7 +53,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
 		particleDescriptions = new ParticleDesc[numVertices];
-		for (var i2 = 0; i2 < particleDescriptions.Length; i2++) {
+		for (var i2 = 0; i2 < particleDescriptions.Count; i2++) {
 			Nif.NifStream(out particleDescriptions[i2].translation, s, info);
 			if (info.version <= 0x0A040001) {
 				for (var i4 = 0; i4 < 3; i4++) {
@@ -72,7 +72,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((info.version >= 0x14000002) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotationSpeeds) {
 			rotationSpeeds = new float[numVertices];
-			for (var i3 = 0; i3 < rotationSpeeds.Length; i3++) {
+			for (var i3 = 0; i3 < rotationSpeeds.Count; i3++) {
 				Nif.NifStream(out rotationSpeeds[i3], s, info);
 			}
 		}
@@ -89,7 +89,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 
 	base.Write(s, link_map, missing_link_stack, info);
 	if ((!((info.version == 0x14020007) && (info.userVersion2 > 0)))) {
-		for (var i2 = 0; i2 < particleDescriptions.Length; i2++) {
+		for (var i2 = 0; i2 < particleDescriptions.Count; i2++) {
 			Nif.NifStream(particleDescriptions[i2].translation, s, info);
 			if (info.version <= 0x0A040001) {
 				for (var i4 = 0; i4 < 3; i4++) {
@@ -107,7 +107,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x14000002) && ((!((info.version == 0x14020007) && (info.userVersion2 > 0))))) {
 		if (hasRotationSpeeds) {
-			for (var i3 = 0; i3 < rotationSpeeds.Length; i3++) {
+			for (var i3 = 0; i3 < rotationSpeeds.Count; i3++) {
 				Nif.NifStream(rotationSpeeds[i3], s, info);
 			}
 		}
@@ -130,7 +130,7 @@ public override string AsString(bool verbose = false) {
 	uint array_output_count = 0;
 	s.Append(base.AsString());
 	array_output_count = 0;
-	for (var i1 = 0; i1 < particleDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < particleDescriptions.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -156,7 +156,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Rotation Speeds:  {hasRotationSpeeds}");
 	if (hasRotationSpeeds) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rotationSpeeds.Length; i2++) {
+		for (var i2 = 0; i2 < rotationSpeeds.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

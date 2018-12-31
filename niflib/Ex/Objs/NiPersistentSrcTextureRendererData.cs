@@ -25,7 +25,7 @@ public class NiPersistentSrcTextureRendererData : NiPixelFormat {
 	/*!  */
 	internal uint bytesPerPixel;
 	/*!  */
-	internal MipMap[] mipmaps;
+	internal IList<MipMap> mipmaps;
 	/*!  */
 	internal uint numPixels;
 	/*!  */
@@ -37,7 +37,7 @@ public class NiPersistentSrcTextureRendererData : NiPixelFormat {
 	/*!  */
 	internal RendererID renderer;
 	/*!  */
-	internal byte[] pixelData;
+	internal IList<byte> pixelData;
 
 	public NiPersistentSrcTextureRendererData() {
 	palette = null;
@@ -72,7 +72,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numMipmaps, s, info);
 	Nif.NifStream(out bytesPerPixel, s, info);
 	mipmaps = new MipMap[numMipmaps];
-	for (var i1 = 0; i1 < mipmaps.Length; i1++) {
+	for (var i1 = 0; i1 < mipmaps.Count; i1++) {
 		Nif.NifStream(out mipmaps[i1].width, s, info);
 		Nif.NifStream(out mipmaps[i1].height, s, info);
 		Nif.NifStream(out mipmaps[i1].offset, s, info);
@@ -89,7 +89,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out renderer, s, info);
 	}
 	pixelData = new byte[(numPixels * numFaces)];
-	for (var i1 = 0; i1 < pixelData.Length; i1++) {
+	for (var i1 = 0; i1 < pixelData.Count; i1++) {
 		Nif.NifStream(out pixelData[i1], s, info);
 	}
 
@@ -99,11 +99,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numMipmaps = (uint)mipmaps.Length;
+	numMipmaps = (uint)mipmaps.Count;
 	WriteRef((NiObject)palette, s, info, link_map, missing_link_stack);
 	Nif.NifStream(numMipmaps, s, info);
 	Nif.NifStream(bytesPerPixel, s, info);
-	for (var i1 = 0; i1 < mipmaps.Length; i1++) {
+	for (var i1 = 0; i1 < mipmaps.Count; i1++) {
 		Nif.NifStream(mipmaps[i1].width, s, info);
 		Nif.NifStream(mipmaps[i1].height, s, info);
 		Nif.NifStream(mipmaps[i1].offset, s, info);
@@ -119,7 +119,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x1E010001) {
 		Nif.NifStream(renderer, s, info);
 	}
-	for (var i1 = 0; i1 < pixelData.Length; i1++) {
+	for (var i1 = 0; i1 < pixelData.Count; i1++) {
 		Nif.NifStream(pixelData[i1], s, info);
 	}
 
@@ -135,12 +135,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numMipmaps = (uint)mipmaps.Length;
+	numMipmaps = (uint)mipmaps.Count;
 	s.AppendLine($"  Palette:  {palette}");
 	s.AppendLine($"  Num Mipmaps:  {numMipmaps}");
 	s.AppendLine($"  Bytes Per Pixel:  {bytesPerPixel}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < mipmaps.Length; i1++) {
+	for (var i1 = 0; i1 < mipmaps.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -155,7 +155,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Platform:  {platform}");
 	s.AppendLine($"  Renderer:  {renderer}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < pixelData.Length; i1++) {
+	for (var i1 = 0; i1 < pixelData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

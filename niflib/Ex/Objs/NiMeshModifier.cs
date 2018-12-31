@@ -21,11 +21,11 @@ public class NiMeshModifier : NiObject {
 	/*!  */
 	internal uint numSubmitPoints;
 	/*! The sync points supported by this mesh modifier for SubmitTasks. */
-	internal SyncPoint[] submitPoints;
+	internal IList<SyncPoint> submitPoints;
 	/*!  */
 	internal uint numCompletePoints;
 	/*! The sync points supported by this mesh modifier for CompleteTasks. */
-	internal SyncPoint[] completePoints;
+	internal IList<SyncPoint> completePoints;
 
 	public NiMeshModifier() {
 	numSubmitPoints = (uint)0;
@@ -50,12 +50,12 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numSubmitPoints, s, info);
 	submitPoints = new SyncPoint[numSubmitPoints];
-	for (var i1 = 0; i1 < submitPoints.Length; i1++) {
+	for (var i1 = 0; i1 < submitPoints.Count; i1++) {
 		Nif.NifStream(out submitPoints[i1], s, info);
 	}
 	Nif.NifStream(out numCompletePoints, s, info);
 	completePoints = new SyncPoint[numCompletePoints];
-	for (var i1 = 0; i1 < completePoints.Length; i1++) {
+	for (var i1 = 0; i1 < completePoints.Count; i1++) {
 		Nif.NifStream(out completePoints[i1], s, info);
 	}
 
@@ -65,14 +65,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numCompletePoints = (uint)completePoints.Length;
-	numSubmitPoints = (uint)submitPoints.Length;
+	numCompletePoints = (uint)completePoints.Count;
+	numSubmitPoints = (uint)submitPoints.Count;
 	Nif.NifStream(numSubmitPoints, s, info);
-	for (var i1 = 0; i1 < submitPoints.Length; i1++) {
+	for (var i1 = 0; i1 < submitPoints.Count; i1++) {
 		Nif.NifStream(submitPoints[i1], s, info);
 	}
 	Nif.NifStream(numCompletePoints, s, info);
-	for (var i1 = 0; i1 < completePoints.Length; i1++) {
+	for (var i1 = 0; i1 < completePoints.Count; i1++) {
 		Nif.NifStream(completePoints[i1], s, info);
 	}
 
@@ -88,11 +88,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numCompletePoints = (uint)completePoints.Length;
-	numSubmitPoints = (uint)submitPoints.Length;
+	numCompletePoints = (uint)completePoints.Count;
+	numSubmitPoints = (uint)submitPoints.Count;
 	s.AppendLine($"  Num Submit Points:  {numSubmitPoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < submitPoints.Length; i1++) {
+	for (var i1 = 0; i1 < submitPoints.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -105,7 +105,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Complete Points:  {numCompletePoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < completePoints.Length; i1++) {
+	for (var i1 = 0; i1 < completePoints.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

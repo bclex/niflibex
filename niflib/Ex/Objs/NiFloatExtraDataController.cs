@@ -26,7 +26,7 @@ public class NiFloatExtraDataController : NiExtraDataController {
 	/*! Unknown. */
 	internal Array7<byte> unknownBytes;
 	/*! Unknown. */
-	internal byte[] unknownExtraBytes;
+	internal IList<byte> unknownExtraBytes;
 	/*!  */
 	internal NiFloatData data;
 
@@ -58,7 +58,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out unknownBytes[i2], s, info);
 		}
 		unknownExtraBytes = new byte[numExtraBytes];
-		for (var i2 = 0; i2 < unknownExtraBytes.Length; i2++) {
+		for (var i2 = 0; i2 < unknownExtraBytes.Count; i2++) {
 			Nif.NifStream(out unknownExtraBytes[i2], s, info);
 		}
 	}
@@ -73,13 +73,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numExtraBytes = (byte)unknownExtraBytes.Length;
+	numExtraBytes = (byte)unknownExtraBytes.Count;
 	if (info.version <= 0x0A010000) {
 		Nif.NifStream(numExtraBytes, s, info);
 		for (var i2 = 0; i2 < 7; i2++) {
 			Nif.NifStream(unknownBytes[i2], s, info);
 		}
-		for (var i2 = 0; i2 < unknownExtraBytes.Length; i2++) {
+		for (var i2 = 0; i2 < unknownExtraBytes.Count; i2++) {
 			Nif.NifStream(unknownExtraBytes[i2], s, info);
 		}
 	}
@@ -99,7 +99,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numExtraBytes = (byte)unknownExtraBytes.Length;
+	numExtraBytes = (byte)unknownExtraBytes.Count;
 	s.AppendLine($"  Num Extra Bytes:  {numExtraBytes}");
 	array_output_count = 0;
 	for (var i1 = 0; i1 < 7; i1++) {
@@ -114,7 +114,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownExtraBytes.Length; i1++) {
+	for (var i1 = 0; i1 < unknownExtraBytes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

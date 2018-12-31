@@ -27,7 +27,7 @@ public class NiVertWeightsExtraData : NiExtraData {
 	/*! Number of vertices. */
 	internal ushort numVertices;
 	/*! The vertex weights. */
-	internal float[] weight;
+	internal IList<float> weight;
 
 	public NiVertWeightsExtraData() {
 	numBytes = (uint)0;
@@ -53,7 +53,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numBytes, s, info);
 	Nif.NifStream(out numVertices, s, info);
 	weight = new float[numVertices];
-	for (var i1 = 0; i1 < weight.Length; i1++) {
+	for (var i1 = 0; i1 < weight.Count; i1++) {
 		Nif.NifStream(out weight[i1], s, info);
 	}
 
@@ -63,10 +63,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVertices = (ushort)weight.Length;
+	numVertices = (ushort)weight.Count;
 	Nif.NifStream(numBytes, s, info);
 	Nif.NifStream(numVertices, s, info);
-	for (var i1 = 0; i1 < weight.Length; i1++) {
+	for (var i1 = 0; i1 < weight.Count; i1++) {
 		Nif.NifStream(weight[i1], s, info);
 	}
 
@@ -82,11 +82,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVertices = (ushort)weight.Length;
+	numVertices = (ushort)weight.Count;
 	s.AppendLine($"  Num Bytes:  {numBytes}");
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < weight.Length; i1++) {
+	for (var i1 = 0; i1 < weight.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

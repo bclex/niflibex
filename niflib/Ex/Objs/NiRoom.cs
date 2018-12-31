@@ -21,19 +21,19 @@ public class NiRoom : NiNode {
 	/*!  */
 	internal int numWalls;
 	/*!  */
-	internal NiPlane[] wallPlanes;
+	internal IList<NiPlane> wallPlanes;
 	/*!  */
 	internal uint numInPortals;
 	/*! The portals which see into the room. */
-	internal NiPortal[] inPortals;
+	internal IList<NiPortal> inPortals;
 	/*!  */
 	internal uint numOutPortals;
 	/*! The portals which see out of the room. */
-	internal NiPortal[] outPortals;
+	internal IList<NiPortal> outPortals;
 	/*!  */
 	internal uint numFixtures;
 	/*! All geometry associated with the room. */
-	internal NiAVObject[] fixtures;
+	internal IList<NiAVObject> fixtures;
 
 	public NiRoom() {
 	numWalls = (int)0;
@@ -61,25 +61,25 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numWalls, s, info);
 	wallPlanes = new NiPlane[numWalls];
-	for (var i1 = 0; i1 < wallPlanes.Length; i1++) {
+	for (var i1 = 0; i1 < wallPlanes.Count; i1++) {
 		Nif.NifStream(out wallPlanes[i1].normal, s, info);
 		Nif.NifStream(out wallPlanes[i1].constant, s, info);
 	}
 	Nif.NifStream(out numInPortals, s, info);
 	inPortals = new *[numInPortals];
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numOutPortals, s, info);
 	outPortals = new *[numOutPortals];
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numFixtures, s, info);
 	fixtures = new *[numFixtures];
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -90,25 +90,25 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numFixtures = (uint)fixtures.Length;
-	numOutPortals = (uint)outPortals.Length;
-	numInPortals = (uint)inPortals.Length;
-	numWalls = (int)wallPlanes.Length;
+	numFixtures = (uint)fixtures.Count;
+	numOutPortals = (uint)outPortals.Count;
+	numInPortals = (uint)inPortals.Count;
+	numWalls = (int)wallPlanes.Count;
 	Nif.NifStream(numWalls, s, info);
-	for (var i1 = 0; i1 < wallPlanes.Length; i1++) {
+	for (var i1 = 0; i1 < wallPlanes.Count; i1++) {
 		Nif.NifStream(wallPlanes[i1].normal, s, info);
 		Nif.NifStream(wallPlanes[i1].constant, s, info);
 	}
 	Nif.NifStream(numInPortals, s, info);
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 		WriteRef((NiObject)inPortals[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numOutPortals, s, info);
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 		WriteRef((NiObject)outPortals[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numFixtures, s, info);
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 		WriteRef((NiObject)fixtures[i1], s, info, link_map, missing_link_stack);
 	}
 
@@ -124,13 +124,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numFixtures = (uint)fixtures.Length;
-	numOutPortals = (uint)outPortals.Length;
-	numInPortals = (uint)inPortals.Length;
-	numWalls = (int)wallPlanes.Length;
+	numFixtures = (uint)fixtures.Count;
+	numOutPortals = (uint)outPortals.Count;
+	numInPortals = (uint)inPortals.Count;
+	numWalls = (int)wallPlanes.Count;
 	s.AppendLine($"  Num Walls:  {numWalls}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < wallPlanes.Length; i1++) {
+	for (var i1 = 0; i1 < wallPlanes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -140,7 +140,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num In Portals:  {numInPortals}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -153,7 +153,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Out Portals:  {numOutPortals}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -166,7 +166,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Fixtures:  {numFixtures}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -185,13 +185,13 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 		inPortals[i1] = FixLink<NiPortal>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 		outPortals[i1] = FixLink<NiPortal>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 		fixtures[i1] = FixLink<NiAVObject>(objects, link_stack, missing_link_stack, info);
 	}
 
@@ -200,11 +200,11 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 	}
 	return refs;
 }
@@ -212,15 +212,15 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < inPortals.Length; i1++) {
+	for (var i1 = 0; i1 < inPortals.Count; i1++) {
 		if (inPortals[i1] != null)
 			ptrs.Add((NiObject)inPortals[i1]);
 	}
-	for (var i1 = 0; i1 < outPortals.Length; i1++) {
+	for (var i1 = 0; i1 < outPortals.Count; i1++) {
 		if (outPortals[i1] != null)
 			ptrs.Add((NiObject)outPortals[i1]);
 	}
-	for (var i1 = 0; i1 < fixtures.Length; i1++) {
+	for (var i1 = 0; i1 < fixtures.Count; i1++) {
 		if (fixtures[i1] != null)
 			ptrs.Add((NiObject)fixtures[i1]);
 	}

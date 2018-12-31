@@ -36,7 +36,7 @@ public class NiParticleSystem : NiParticles {
 	/*! The number of modifier references. */
 	internal uint numModifiers;
 	/*! The list of particle modifiers. */
-	internal NiPSysModifier[] modifiers;
+	internal IList<NiPSysModifier> modifiers;
 
 	public NiParticleSystem() {
 	farBegin = (ushort)0;
@@ -79,7 +79,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out worldSpace, s, info);
 		Nif.NifStream(out numModifiers, s, info);
 		modifiers = new Ref[numModifiers];
-		for (var i2 = 0; i2 < modifiers.Length; i2++) {
+		for (var i2 = 0; i2 < modifiers.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -91,7 +91,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numModifiers = (uint)modifiers.Length;
+	numModifiers = (uint)modifiers.Count;
 	if ((info.userVersion2 >= 83)) {
 		Nif.NifStream(farBegin, s, info);
 		Nif.NifStream(farEnd, s, info);
@@ -104,7 +104,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x0A010000) {
 		Nif.NifStream(worldSpace, s, info);
 		Nif.NifStream(numModifiers, s, info);
-		for (var i2 = 0; i2 < modifiers.Length; i2++) {
+		for (var i2 = 0; i2 < modifiers.Count; i2++) {
 			WriteRef((NiObject)modifiers[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -121,7 +121,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numModifiers = (uint)modifiers.Length;
+	numModifiers = (uint)modifiers.Count;
 	s.AppendLine($"  Far Begin:  {farBegin}");
 	s.AppendLine($"  Far End:  {farEnd}");
 	s.AppendLine($"  Near Begin:  {nearBegin}");
@@ -130,7 +130,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  World Space:  {worldSpace}");
 	s.AppendLine($"  Num Modifiers:  {numModifiers}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -153,7 +153,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		data = FixLink<NiPSysData>(objects, link_stack, missing_link_stack, info);
 	}
 	if (info.version >= 0x0A010000) {
-		for (var i2 = 0; i2 < modifiers.Length; i2++) {
+		for (var i2 = 0; i2 < modifiers.Count; i2++) {
 			modifiers[i2] = FixLink<NiPSysModifier>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -165,7 +165,7 @@ internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
 	if (data != null)
 		refs.Add((NiObject)data);
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 		if (modifiers[i1] != null)
 			refs.Add((NiObject)modifiers[i1]);
 	}
@@ -175,7 +175,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < modifiers.Length; i1++) {
+	for (var i1 = 0; i1 < modifiers.Count; i1++) {
 	}
 	return ptrs;
 }

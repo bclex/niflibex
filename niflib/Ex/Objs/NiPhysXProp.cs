@@ -23,15 +23,15 @@ public class NiPhysXProp : NiObjectNET {
 	/*!  */
 	internal uint numSources;
 	/*!  */
-	internal NiObject[] sources;
+	internal IList<NiObject> sources;
 	/*!  */
 	internal int numDests;
 	/*!  */
-	internal NiPhysXDest[] dests;
+	internal IList<NiPhysXDest> dests;
 	/*!  */
 	internal uint numModifiedMeshes;
 	/*!  */
-	internal NiMesh[] modifiedMeshes;
+	internal IList<NiMesh> modifiedMeshes;
 	/*!  */
 	internal IndexString tempName;
 	/*!  */
@@ -68,20 +68,20 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out physxToWorldScale, s, info);
 	Nif.NifStream(out numSources, s, info);
 	sources = new Ref[numSources];
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numDests, s, info);
 	dests = new Ref[numDests];
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	if (info.version >= 0x14040000) {
 		Nif.NifStream(out numModifiedMeshes, s, info);
 		modifiedMeshes = new Ref[numModifiedMeshes];
-		for (var i2 = 0; i2 < modifiedMeshes.Length; i2++) {
+		for (var i2 = 0; i2 < modifiedMeshes.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -99,21 +99,21 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numModifiedMeshes = (uint)modifiedMeshes.Length;
-	numDests = (int)dests.Length;
-	numSources = (uint)sources.Length;
+	numModifiedMeshes = (uint)modifiedMeshes.Count;
+	numDests = (int)dests.Count;
+	numSources = (uint)sources.Count;
 	Nif.NifStream(physxToWorldScale, s, info);
 	Nif.NifStream(numSources, s, info);
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		WriteRef((NiObject)sources[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numDests, s, info);
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 		WriteRef((NiObject)dests[i1], s, info, link_map, missing_link_stack);
 	}
 	if (info.version >= 0x14040000) {
 		Nif.NifStream(numModifiedMeshes, s, info);
-		for (var i2 = 0; i2 < modifiedMeshes.Length; i2++) {
+		for (var i2 = 0; i2 < modifiedMeshes.Count; i2++) {
 			WriteRef((NiObject)modifiedMeshes[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -135,13 +135,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numModifiedMeshes = (uint)modifiedMeshes.Length;
-	numDests = (int)dests.Length;
-	numSources = (uint)sources.Length;
+	numModifiedMeshes = (uint)modifiedMeshes.Count;
+	numDests = (int)dests.Count;
+	numSources = (uint)sources.Count;
 	s.AppendLine($"  PhysX to World Scale:  {physxToWorldScale}");
 	s.AppendLine($"  Num Sources:  {numSources}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -154,7 +154,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Dests:  {numDests}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -167,7 +167,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Modified Meshes:  {numModifiedMeshes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < modifiedMeshes.Length; i1++) {
+	for (var i1 = 0; i1 < modifiedMeshes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -189,14 +189,14 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		sources[i1] = FixLink<NiObject>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 		dests[i1] = FixLink<NiPhysXDest>(objects, link_stack, missing_link_stack, info);
 	}
 	if (info.version >= 0x14040000) {
-		for (var i2 = 0; i2 < modifiedMeshes.Length; i2++) {
+		for (var i2 = 0; i2 < modifiedMeshes.Count; i2++) {
 			modifiedMeshes[i2] = FixLink<NiMesh>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -207,15 +207,15 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 		if (sources[i1] != null)
 			refs.Add((NiObject)sources[i1]);
 	}
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 		if (dests[i1] != null)
 			refs.Add((NiObject)dests[i1]);
 	}
-	for (var i1 = 0; i1 < modifiedMeshes.Length; i1++) {
+	for (var i1 = 0; i1 < modifiedMeshes.Count; i1++) {
 		if (modifiedMeshes[i1] != null)
 			refs.Add((NiObject)modifiedMeshes[i1]);
 	}
@@ -227,11 +227,11 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < sources.Length; i1++) {
+	for (var i1 = 0; i1 < sources.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < dests.Length; i1++) {
+	for (var i1 = 0; i1 < dests.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < modifiedMeshes.Length; i1++) {
+	for (var i1 = 0; i1 < modifiedMeshes.Count; i1++) {
 	}
 	return ptrs;
 }

@@ -21,14 +21,14 @@ public class NiTriStripsData : NiTriBasedGeomData {
 	/*! Number of OpenGL triangle strips that are present. */
 	internal ushort numStrips;
 	/*! The number of points in each triangle strip. */
-	internal ushort[] stripLengths;
+	internal IList<ushort> stripLengths;
 	/*! Do we have strip point data? */
 	internal bool hasPoints;
 	/*!
 	 * The points in the Triangle strips.  Size is the sum of all entries in Strip
 	 * Lengths.
 	 */
-	internal ushort[][] points;
+	internal IList<ushort[]> points;
 
 	public NiTriStripsData() {
 	numStrips = (ushort)0;
@@ -53,7 +53,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numStrips, s, info);
 	stripLengths = new ushort[numStrips];
-	for (var i1 = 0; i1 < stripLengths.Length; i1++) {
+	for (var i1 = 0; i1 < stripLengths.Count; i1++) {
 		Nif.NifStream(out stripLengths[i1], s, info);
 	}
 	if (info.version >= 0x0A000103) {
@@ -61,7 +61,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if (info.version <= 0x0A000102) {
 		points = new ushort[numStrips];
-		for (var i2 = 0; i2 < points.Length; i2++) {
+		for (var i2 = 0; i2 < points.Count; i2++) {
 			points[i2].Resize(stripLengths[i2]);
 			for (var i3 = 0; i3 < stripLengths[i2]; i3++) {
 				Nif.NifStream(out points[i2][i3], s, info);
@@ -71,7 +71,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x0A000103) {
 		if (hasPoints) {
 			points = new ushort[numStrips];
-			for (var i3 = 0; i3 < points.Length; i3++) {
+			for (var i3 = 0; i3 < points.Count; i3++) {
 				points[i3].Resize(stripLengths[i3]);
 				for (var i4 = 0; i4 < stripLengths[i3]; i4++) {
 					Nif.NifStream(out (ushort)points[i3][i4], s, info);
@@ -86,18 +86,18 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	for (var i1 = 0; i1 < points.Length; i1++)
-		stripLengths[i1] = (ushort)points[i1].Length;
-	numStrips = (ushort)stripLengths.Length;
+	for (var i1 = 0; i1 < points.Count; i1++)
+		stripLengths[i1] = (ushort)points[i1].Count;
+	numStrips = (ushort)stripLengths.Count;
 	Nif.NifStream(numStrips, s, info);
-	for (var i1 = 0; i1 < stripLengths.Length; i1++) {
+	for (var i1 = 0; i1 < stripLengths.Count; i1++) {
 		Nif.NifStream(stripLengths[i1], s, info);
 	}
 	if (info.version >= 0x0A000103) {
 		Nif.NifStream(hasPoints, s, info);
 	}
 	if (info.version <= 0x0A000102) {
-		for (var i2 = 0; i2 < points.Length; i2++) {
+		for (var i2 = 0; i2 < points.Count; i2++) {
 			for (var i3 = 0; i3 < stripLengths[i2]; i3++) {
 				Nif.NifStream(points[i2][i3], s, info);
 			}
@@ -105,7 +105,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if (info.version >= 0x0A000103) {
 		if (hasPoints) {
-			for (var i3 = 0; i3 < points.Length; i3++) {
+			for (var i3 = 0; i3 < points.Count; i3++) {
 				for (var i4 = 0; i4 < stripLengths[i3]; i4++) {
 					Nif.NifStream((ushort)points[i3][i4], s, info);
 				}
@@ -125,12 +125,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	for (var i1 = 0; i1 < points.Length; i1++)
-		stripLengths[i1] = (ushort)points[i1].Length;
-	numStrips = (ushort)stripLengths.Length;
+	for (var i1 = 0; i1 < points.Count; i1++)
+		stripLengths[i1] = (ushort)points[i1].Count;
+	numStrips = (ushort)stripLengths.Count;
 	s.AppendLine($"  Num Strips:  {numStrips}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < stripLengths.Length; i1++) {
+	for (var i1 = 0; i1 < stripLengths.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -143,7 +143,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Has Points:  {hasPoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < points.Length; i1++) {
+	for (var i1 = 0; i1 < points.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -37,11 +37,11 @@ public class NiClodData : NiTriBasedGeomData {
 	/*! Unknown. */
 	internal ushort unknownShort;
 	/*! Unknown. */
-	internal Array6<ushort>[] unknownClodShorts1;
+	internal IList<Array6<ushort>> unknownClodShorts1;
 	/*! Unknown. */
-	internal ushort[] unknownClodShorts2;
+	internal IList<ushort> unknownClodShorts2;
 	/*! Unknown. */
-	internal Array6<ushort>[] unknownClodShorts3;
+	internal IList<Array6<ushort>> unknownClodShorts3;
 
 	public NiClodData() {
 	unknownShorts = (ushort)0;
@@ -75,17 +75,17 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownFloat, s, info);
 	Nif.NifStream(out unknownShort, s, info);
 	unknownClodShorts1 = new ushort[unknownCount1];
-	for (var i1 = 0; i1 < unknownClodShorts1.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts1.Count; i1++) {
 		for (var i2 = 0; i2 < 6; i2++) {
 			Nif.NifStream(out unknownClodShorts1[i1][i2], s, info);
 		}
 	}
 	unknownClodShorts2 = new ushort[unknownCount2];
-	for (var i1 = 0; i1 < unknownClodShorts2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts2.Count; i1++) {
 		Nif.NifStream(out unknownClodShorts2[i1], s, info);
 	}
 	unknownClodShorts3 = new ushort[unknownCount3];
-	for (var i1 = 0; i1 < unknownClodShorts3.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts3.Count; i1++) {
 		for (var i2 = 0; i2 < 6; i2++) {
 			Nif.NifStream(out unknownClodShorts3[i1][i2], s, info);
 		}
@@ -97,24 +97,24 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	unknownCount3 = (ushort)unknownClodShorts3.Length;
-	unknownCount2 = (ushort)unknownClodShorts2.Length;
-	unknownCount1 = (ushort)unknownClodShorts1.Length;
+	unknownCount3 = (ushort)unknownClodShorts3.Count;
+	unknownCount2 = (ushort)unknownClodShorts2.Count;
+	unknownCount1 = (ushort)unknownClodShorts1.Count;
 	Nif.NifStream(unknownShorts, s, info);
 	Nif.NifStream(unknownCount1, s, info);
 	Nif.NifStream(unknownCount2, s, info);
 	Nif.NifStream(unknownCount3, s, info);
 	Nif.NifStream(unknownFloat, s, info);
 	Nif.NifStream(unknownShort, s, info);
-	for (var i1 = 0; i1 < unknownClodShorts1.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts1.Count; i1++) {
 		for (var i2 = 0; i2 < 6; i2++) {
 			Nif.NifStream(unknownClodShorts1[i1][i2], s, info);
 		}
 	}
-	for (var i1 = 0; i1 < unknownClodShorts2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts2.Count; i1++) {
 		Nif.NifStream(unknownClodShorts2[i1], s, info);
 	}
-	for (var i1 = 0; i1 < unknownClodShorts3.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts3.Count; i1++) {
 		for (var i2 = 0; i2 < 6; i2++) {
 			Nif.NifStream(unknownClodShorts3[i1][i2], s, info);
 		}
@@ -132,9 +132,9 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	unknownCount3 = (ushort)unknownClodShorts3.Length;
-	unknownCount2 = (ushort)unknownClodShorts2.Length;
-	unknownCount1 = (ushort)unknownClodShorts1.Length;
+	unknownCount3 = (ushort)unknownClodShorts3.Count;
+	unknownCount2 = (ushort)unknownClodShorts2.Count;
+	unknownCount1 = (ushort)unknownClodShorts1.Count;
 	s.AppendLine($"  Unknown Shorts:  {unknownShorts}");
 	s.AppendLine($"  Unknown Count 1:  {unknownCount1}");
 	s.AppendLine($"  Unknown Count 2:  {unknownCount2}");
@@ -142,7 +142,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Unknown Float:  {unknownFloat}");
 	s.AppendLine($"  Unknown Short:  {unknownShort}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownClodShorts1.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts1.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -156,7 +156,7 @@ public override string AsString(bool verbose = false) {
 		}
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownClodShorts2.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts2.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -168,7 +168,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < unknownClodShorts3.Length; i1++) {
+	for (var i1 = 0; i1 < unknownClodShorts3.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

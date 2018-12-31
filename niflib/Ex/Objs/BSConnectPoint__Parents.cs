@@ -21,7 +21,7 @@ public class BSConnectPoint__Parents : NiExtraData {
 	/*!  */
 	internal uint numConnectPoints;
 	/*!  */
-	internal BSConnectPoint[] connectPoints;
+	internal IList<BSConnectPoint> connectPoints;
 
 	public BSConnectPoint__Parents() {
 	numConnectPoints = (uint)0;
@@ -45,7 +45,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numConnectPoints, s, info);
 	connectPoints = new BSConnectPoint[numConnectPoints];
-	for (var i1 = 0; i1 < connectPoints.Length; i1++) {
+	for (var i1 = 0; i1 < connectPoints.Count; i1++) {
 		Nif.NifStream(out connectPoints[i1].parent, s, info);
 		Nif.NifStream(out connectPoints[i1].name, s, info);
 		Nif.NifStream(out connectPoints[i1].rotation, s, info);
@@ -59,9 +59,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numConnectPoints = (uint)connectPoints.Length;
+	numConnectPoints = (uint)connectPoints.Count;
 	Nif.NifStream(numConnectPoints, s, info);
-	for (var i1 = 0; i1 < connectPoints.Length; i1++) {
+	for (var i1 = 0; i1 < connectPoints.Count; i1++) {
 		Nif.NifStream(connectPoints[i1].parent, s, info);
 		Nif.NifStream(connectPoints[i1].name, s, info);
 		Nif.NifStream(connectPoints[i1].rotation, s, info);
@@ -81,10 +81,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numConnectPoints = (uint)connectPoints.Length;
+	numConnectPoints = (uint)connectPoints.Count;
 	s.AppendLine($"  Num Connect Points:  {numConnectPoints}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < connectPoints.Length; i1++) {
+	for (var i1 = 0; i1 < connectPoints.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

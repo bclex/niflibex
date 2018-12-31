@@ -21,7 +21,7 @@ public class NiRotatingParticlesData : NiParticlesData {
 	/*! Is the particle rotation array present? */
 	internal bool hasRotations2;
 	/*! The individual particle rotations. */
-	internal Quaternion[] rotations2;
+	internal IList<Quaternion> rotations2;
 
 	public NiRotatingParticlesData() {
 	hasRotations2 = false;
@@ -47,7 +47,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out hasRotations2, s, info);
 		if (hasRotations2) {
 			rotations2 = new Quaternion[numVertices];
-			for (var i3 = 0; i3 < rotations2.Length; i3++) {
+			for (var i3 = 0; i3 < rotations2.Count; i3++) {
 				Nif.NifStream(out rotations2[i3], s, info);
 			}
 		}
@@ -62,7 +62,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version <= 0x04020200) {
 		Nif.NifStream(hasRotations2, s, info);
 		if (hasRotations2) {
-			for (var i3 = 0; i3 < rotations2.Length; i3++) {
+			for (var i3 = 0; i3 < rotations2.Count; i3++) {
 				Nif.NifStream(rotations2[i3], s, info);
 			}
 		}
@@ -83,7 +83,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Rotations 2:  {hasRotations2}");
 	if (hasRotations2) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rotations2.Length; i2++) {
+		for (var i2 = 0; i2 < rotations2.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

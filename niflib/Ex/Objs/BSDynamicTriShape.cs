@@ -21,7 +21,7 @@ public class BSDynamicTriShape : BSTriShape {
 	/*!  */
 	internal uint vertexDataSize;
 	/*!  */
-	internal Vector4[] vertices;
+	internal IList<Vector4> vertices;
 
 	public BSDynamicTriShape() {
 	vertexDataSize = (uint)0;
@@ -46,7 +46,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out vertexDataSize, s, info);
 	if ((vertexDataSize > 0)) {
 		vertices = new Vector4[numVertices];
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			Nif.NifStream(out vertices[i2], s, info);
 		}
 	}
@@ -59,7 +59,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	base.Write(s, link_map, missing_link_stack, info);
 	Nif.NifStream(vertexDataSize, s, info);
 	if ((vertexDataSize > 0)) {
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			Nif.NifStream(vertices[i2], s, info);
 		}
 	}
@@ -79,7 +79,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Vertex Data Size:  {vertexDataSize}");
 	if ((vertexDataSize > 0)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

@@ -24,9 +24,9 @@ public class NiScreenElementsData : NiTriShapeData {
 	/*!  */
 	internal ushort maxPolygons;
 	/*!  */
-	internal Polygon[] polygons;
+	internal IList<Polygon> polygons;
 	/*!  */
-	internal ushort[] polygonIndices;
+	internal IList<ushort> polygonIndices;
 	/*!  */
 	internal ushort polygonGrowBy;
 	/*!  */
@@ -68,14 +68,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out maxPolygons, s, info);
 	polygons = new Polygon[maxPolygons];
-	for (var i1 = 0; i1 < polygons.Length; i1++) {
+	for (var i1 = 0; i1 < polygons.Count; i1++) {
 		Nif.NifStream(out polygons[i1].numVertices, s, info);
 		Nif.NifStream(out polygons[i1].vertexOffset, s, info);
 		Nif.NifStream(out polygons[i1].numTriangles, s, info);
 		Nif.NifStream(out polygons[i1].triangleOffset, s, info);
 	}
 	polygonIndices = new ushort[maxPolygons];
-	for (var i1 = 0; i1 < polygonIndices.Length; i1++) {
+	for (var i1 = 0; i1 < polygonIndices.Count; i1++) {
 		Nif.NifStream(out polygonIndices[i1], s, info);
 	}
 	Nif.NifStream(out polygonGrowBy, s, info);
@@ -91,15 +91,15 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	maxPolygons = (ushort)polygons.Length;
+	maxPolygons = (ushort)polygons.Count;
 	Nif.NifStream(maxPolygons, s, info);
-	for (var i1 = 0; i1 < polygons.Length; i1++) {
+	for (var i1 = 0; i1 < polygons.Count; i1++) {
 		Nif.NifStream(polygons[i1].numVertices, s, info);
 		Nif.NifStream(polygons[i1].vertexOffset, s, info);
 		Nif.NifStream(polygons[i1].numTriangles, s, info);
 		Nif.NifStream(polygons[i1].triangleOffset, s, info);
 	}
-	for (var i1 = 0; i1 < polygonIndices.Length; i1++) {
+	for (var i1 = 0; i1 < polygonIndices.Count; i1++) {
 		Nif.NifStream(polygonIndices[i1], s, info);
 	}
 	Nif.NifStream(polygonGrowBy, s, info);
@@ -121,10 +121,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	maxPolygons = (ushort)polygons.Length;
+	maxPolygons = (ushort)polygons.Count;
 	s.AppendLine($"  Max Polygons:  {maxPolygons}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < polygons.Length; i1++) {
+	for (var i1 = 0; i1 < polygons.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -135,7 +135,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Triangle Offset:  {polygons[i1].triangleOffset}");
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < polygonIndices.Length; i1++) {
+	for (var i1 = 0; i1 < polygonIndices.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

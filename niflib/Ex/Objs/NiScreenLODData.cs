@@ -28,7 +28,7 @@ public class NiScreenLODData : NiLODData {
 	/*!  */
 	internal uint numProportions;
 	/*!  */
-	internal float[] proportionLevels;
+	internal IList<float> proportionLevels;
 
 	public NiScreenLODData() {
 	numProportions = (uint)0;
@@ -56,7 +56,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out worldBound.radius, s, info);
 	Nif.NifStream(out numProportions, s, info);
 	proportionLevels = new float[numProportions];
-	for (var i1 = 0; i1 < proportionLevels.Length; i1++) {
+	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
 		Nif.NifStream(out proportionLevels[i1], s, info);
 	}
 
@@ -66,13 +66,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numProportions = (uint)proportionLevels.Length;
+	numProportions = (uint)proportionLevels.Count;
 	Nif.NifStream(bound.center, s, info);
 	Nif.NifStream(bound.radius, s, info);
 	Nif.NifStream(worldBound.center, s, info);
 	Nif.NifStream(worldBound.radius, s, info);
 	Nif.NifStream(numProportions, s, info);
-	for (var i1 = 0; i1 < proportionLevels.Length; i1++) {
+	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
 		Nif.NifStream(proportionLevels[i1], s, info);
 	}
 
@@ -88,14 +88,14 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numProportions = (uint)proportionLevels.Length;
+	numProportions = (uint)proportionLevels.Count;
 	s.AppendLine($"  Center:  {bound.center}");
 	s.AppendLine($"  Radius:  {bound.radius}");
 	s.AppendLine($"  Center:  {worldBound.center}");
 	s.AppendLine($"  Radius:  {worldBound.radius}");
 	s.AppendLine($"  Num Proportions:  {numProportions}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < proportionLevels.Length; i1++) {
+	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

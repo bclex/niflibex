@@ -32,13 +32,13 @@ public class NiDataStream : NiObject {
 	 * The regions in the mesh. Regions can be used to mark off submeshes which are
 	 * independent draw calls.
 	 */
-	internal Region[] regions;
+	internal IList<Region> regions;
 	/*! Number of components of the data (matches corresponding field in MeshData). */
 	internal uint numComponents;
 	/*! The format of each component in this data stream. */
-	internal ComponentFormat[] componentFormats;
+	internal IList<ComponentFormat> componentFormats;
 	/*!  */
-	internal byte[] data;
+	internal IList<byte> data;
 	/*!  */
 	internal bool streamable;
 
@@ -72,17 +72,17 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out cloningBehavior, s, info);
 	Nif.NifStream(out numRegions, s, info);
 	regions = new Region[numRegions];
-	for (var i1 = 0; i1 < regions.Length; i1++) {
+	for (var i1 = 0; i1 < regions.Count; i1++) {
 		Nif.NifStream(out regions[i1].startIndex, s, info);
 		Nif.NifStream(out regions[i1].numIndices, s, info);
 	}
 	Nif.NifStream(out numComponents, s, info);
 	componentFormats = new ComponentFormat[numComponents];
-	for (var i1 = 0; i1 < componentFormats.Length; i1++) {
+	for (var i1 = 0; i1 < componentFormats.Count; i1++) {
 		Nif.NifStream(out componentFormats[i1], s, info);
 	}
 	data = new byte[numBytes];
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		Nif.NifStream(out data[i1], s, info);
 	}
 	Nif.NifStream(out streamable, s, info);
@@ -93,21 +93,21 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numComponents = (uint)componentFormats.Length;
-	numRegions = (uint)regions.Length;
-	numBytes = (uint)data.Length;
+	numComponents = (uint)componentFormats.Count;
+	numRegions = (uint)regions.Count;
+	numBytes = (uint)data.Count;
 	Nif.NifStream(numBytes, s, info);
 	Nif.NifStream(cloningBehavior, s, info);
 	Nif.NifStream(numRegions, s, info);
-	for (var i1 = 0; i1 < regions.Length; i1++) {
+	for (var i1 = 0; i1 < regions.Count; i1++) {
 		Nif.NifStream(regions[i1].startIndex, s, info);
 		Nif.NifStream(regions[i1].numIndices, s, info);
 	}
 	Nif.NifStream(numComponents, s, info);
-	for (var i1 = 0; i1 < componentFormats.Length; i1++) {
+	for (var i1 = 0; i1 < componentFormats.Count; i1++) {
 		Nif.NifStream(componentFormats[i1], s, info);
 	}
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		Nif.NifStream(data[i1], s, info);
 	}
 	Nif.NifStream(streamable, s, info);
@@ -124,16 +124,16 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numComponents = (uint)componentFormats.Length;
-	numRegions = (uint)regions.Length;
-	numBytes = (uint)data.Length;
+	numComponents = (uint)componentFormats.Count;
+	numRegions = (uint)regions.Count;
+	numBytes = (uint)data.Count;
 	s.AppendLine($"  Usage:  {usage}");
 	s.AppendLine($"  Access:  {access}");
 	s.AppendLine($"  Num Bytes:  {numBytes}");
 	s.AppendLine($"  Cloning Behavior:  {cloningBehavior}");
 	s.AppendLine($"  Num Regions:  {numRegions}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < regions.Length; i1++) {
+	for (var i1 = 0; i1 < regions.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -143,7 +143,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Components:  {numComponents}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < componentFormats.Length; i1++) {
+	for (var i1 = 0; i1 < componentFormats.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -155,7 +155,7 @@ public override string AsString(bool verbose = false) {
 		array_output_count++;
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < data.Length; i1++) {
+	for (var i1 = 0; i1 < data.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -15,7 +15,7 @@ public class MatchGroup {
 	/*! Number of vertices in this group. */
 	internal ushort numVertices;
 	/*! The vertex indices. */
-	internal ushort[] vertexIndices;
+	internal IList<ushort> vertexIndices;
 	//Constructor
 	public MatchGroup() { unchecked {
 	numVertices = (ushort)0;

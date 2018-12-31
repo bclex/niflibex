@@ -28,11 +28,11 @@ public class DataStreamRef {
 	 */
 	internal ushort numSubmeshes;
 	/*!  */
-	internal ushort[] submeshToRegionMap;
+	internal IList<ushort> submeshToRegionMap;
 	/*!  */
 	internal uint numComponents;
 	/*! Describes the semantic of each component. */
-	internal SemanticData[] componentSemantics;
+	internal IList<SemanticData> componentSemantics;
 	//Constructor
 	public DataStreamRef() { unchecked {
 	stream = null;

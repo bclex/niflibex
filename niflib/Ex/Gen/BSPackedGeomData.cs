@@ -31,13 +31,13 @@ public class BSPackedGeomData {
 	/*!  */
 	internal uint numCombined;
 	/*!  */
-	internal BSPackedGeomDataCombined[] combined;
+	internal IList<BSPackedGeomDataCombined> combined;
 	/*!  */
 	internal BSVertexDesc vertexDesc;
 	/*!  */
-	internal BSVertexData[] vertexData;
+	internal IList<BSVertexData> vertexData;
 	/*!  */
-	internal Triangle[] triangles;
+	internal IList<Triangle> triangles;
 	//Constructor
 	public BSPackedGeomData() { unchecked {
 	numVerts = (uint)0;

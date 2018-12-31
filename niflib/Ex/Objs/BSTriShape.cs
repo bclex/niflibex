@@ -35,15 +35,15 @@ public class BSTriShape : NiAVObject {
 	/*!  */
 	internal uint dataSize;
 	/*!  */
-	internal BSVertexData[] vertexData;
+	internal IList<BSVertexData> vertexData;
 	/*!  */
-	internal Triangle[] triangles;
+	internal IList<Triangle> triangles;
 	/*!  */
 	internal uint particleDataSize;
 	/*!  */
-	internal Vector3[] vertices;
+	internal IList<Vector3> vertices;
 	/*!  */
-	internal Triangle[] trianglesCopy;
+	internal IList<Triangle> trianglesCopy;
 
 	public BSTriShape() {
 	skin = null;
@@ -98,7 +98,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.userVersion2 == 130) {
 		if ((dataSize > 0)) {
 			vertexData = new BSVertexData[numVertices];
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(out vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
@@ -106,14 +106,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.userVersion2 == 100) {
 		if ((dataSize > 0)) {
 			vertexData = new BSVertexData[numVertices];
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(out vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
 	}
 	if ((dataSize > 0)) {
 		triangles = new Triangle[numTriangles];
-		for (var i2 = 0; i2 < triangles.Length; i2++) {
+		for (var i2 = 0; i2 < triangles.Count; i2++) {
 			Nif.NifStream(out triangles[i2], s, info);
 		}
 	}
@@ -121,11 +121,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out particleDataSize, s, info);
 		if ((particleDataSize > 0)) {
 			vertices = new Vector3[numVertices];
-			for (var i3 = 0; i3 < vertices.Length; i3++) {
+			for (var i3 = 0; i3 < vertices.Count; i3++) {
 				Nif.NifStream(out vertices[i3], s, info);
 			}
 			trianglesCopy = new Triangle[numTriangles];
-			for (var i3 = 0; i3 < trianglesCopy.Length; i3++) {
+			for (var i3 = 0; i3 < trianglesCopy.Count; i3++) {
 				Nif.NifStream(out trianglesCopy[i3], s, info);
 			}
 		}
@@ -137,8 +137,8 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVertices = (ushort)vertexData.Length;
-	numTriangles = (uint)triangles.Length;
+	numVertices = (ushort)vertexData.Count;
+	numTriangles = (uint)triangles.Count;
 	Nif.NifStream(boundingSphere.center, s, info);
 	Nif.NifStream(boundingSphere.radius, s, info);
 	WriteRef((NiObject)skin, s, info, link_map, missing_link_stack);
@@ -161,30 +161,30 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(dataSize, s, info);
 	if (info.userVersion2 == 130) {
 		if ((dataSize > 0)) {
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
 	}
 	if (info.userVersion2 == 100) {
 		if ((dataSize > 0)) {
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
 	}
 	if ((dataSize > 0)) {
-		for (var i2 = 0; i2 < triangles.Length; i2++) {
+		for (var i2 = 0; i2 < triangles.Count; i2++) {
 			Nif.NifStream(triangles[i2], s, info);
 		}
 	}
 	if (info.userVersion2 == 100) {
 		Nif.NifStream(particleDataSize, s, info);
 		if ((particleDataSize > 0)) {
-			for (var i3 = 0; i3 < vertices.Length; i3++) {
+			for (var i3 = 0; i3 < vertices.Count; i3++) {
 				Nif.NifStream(vertices[i3], s, info);
 			}
-			for (var i3 = 0; i3 < trianglesCopy.Length; i3++) {
+			for (var i3 = 0; i3 < trianglesCopy.Count; i3++) {
 				Nif.NifStream(trianglesCopy[i3], s, info);
 			}
 		}
@@ -202,8 +202,8 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVertices = (ushort)vertexData.Length;
-	numTriangles = (uint)triangles.Length;
+	numVertices = (ushort)vertexData.Count;
+	numTriangles = (uint)triangles.Count;
 	s.AppendLine($"  Center:  {boundingSphere.center}");
 	s.AppendLine($"  Radius:  {boundingSphere.radius}");
 	s.AppendLine($"  Skin:  {skin}");
@@ -221,7 +221,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Data Size:  {dataSize}");
 	if ((dataSize > 0)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertexData.Length; i2++) {
+		for (var i2 = 0; i2 < vertexData.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -233,7 +233,7 @@ public override string AsString(bool verbose = false) {
 			array_output_count++;
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < triangles.Length; i2++) {
+		for (var i2 = 0; i2 < triangles.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -248,7 +248,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Particle Data Size:  {particleDataSize}");
 	if ((particleDataSize > 0)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -260,7 +260,7 @@ public override string AsString(bool verbose = false) {
 			array_output_count++;
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < trianglesCopy.Length; i2++) {
+		for (var i2 = 0; i2 < trianglesCopy.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

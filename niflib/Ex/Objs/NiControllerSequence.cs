@@ -53,7 +53,7 @@ public class NiControllerSequence : NiSequence {
 	/*!  */
 	internal ushort numAnimNoteArrays;
 	/*!  */
-	internal BSAnimNotes[] animNoteArrays;
+	internal IList<BSAnimNotes> animNoteArrays;
 
 	public NiControllerSequence() {
 	weight = 1.0f;
@@ -124,7 +124,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if ((info.version >= 0x14020007) && ((info.userVersion2 > 28))) {
 		Nif.NifStream(out numAnimNoteArrays, s, info);
 		animNoteArrays = new Ref[numAnimNoteArrays];
-		for (var i2 = 0; i2 < animNoteArrays.Length; i2++) {
+		for (var i2 = 0; i2 < animNoteArrays.Count; i2++) {
 			Nif.NifStream(out block_num, s, info);
 			link_stack.Add(block_num);
 		}
@@ -136,7 +136,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numAnimNoteArrays = (ushort)animNoteArrays.Length;
+	numAnimNoteArrays = (ushort)animNoteArrays.Count;
 	if (info.version >= 0x0A01006A) {
 		Nif.NifStream(weight, s, info);
 		WriteRef((NiObject)textKeys, s, info, link_map, missing_link_stack);
@@ -168,7 +168,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	if ((info.version >= 0x14020007) && ((info.userVersion2 > 28))) {
 		Nif.NifStream(numAnimNoteArrays, s, info);
-		for (var i2 = 0; i2 < animNoteArrays.Length; i2++) {
+		for (var i2 = 0; i2 < animNoteArrays.Count; i2++) {
 			WriteRef((NiObject)animNoteArrays[i2], s, info, link_map, missing_link_stack);
 		}
 	}
@@ -185,7 +185,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numAnimNoteArrays = (ushort)animNoteArrays.Length;
+	numAnimNoteArrays = (ushort)animNoteArrays.Count;
 	s.AppendLine($"  Weight:  {weight}");
 	s.AppendLine($"  Text Keys:  {textKeys}");
 	s.AppendLine($"  Cycle Type:  {cycleType}");
@@ -201,7 +201,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Anim Notes:  {animNotes}");
 	s.AppendLine($"  Num Anim Note Arrays:  {numAnimNoteArrays}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < animNoteArrays.Length; i1++) {
+	for (var i1 = 0; i1 < animNoteArrays.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -231,7 +231,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 		animNotes = FixLink<BSAnimNotes>(objects, link_stack, missing_link_stack, info);
 	}
 	if ((info.version >= 0x14020007) && ((info.userVersion2 > 28))) {
-		for (var i2 = 0; i2 < animNoteArrays.Length; i2++) {
+		for (var i2 = 0; i2 < animNoteArrays.Count; i2++) {
 			animNoteArrays[i2] = FixLink<BSAnimNotes>(objects, link_stack, missing_link_stack, info);
 		}
 	}
@@ -247,7 +247,7 @@ internal override List<NiObject> GetRefs() {
 		refs.Add((NiObject)stringPalette);
 	if (animNotes != null)
 		refs.Add((NiObject)animNotes);
-	for (var i1 = 0; i1 < animNoteArrays.Length; i1++) {
+	for (var i1 = 0; i1 < animNoteArrays.Count; i1++) {
 		if (animNoteArrays[i1] != null)
 			refs.Add((NiObject)animNoteArrays[i1]);
 	}
@@ -259,7 +259,7 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	if (manager != null)
 		ptrs.Add((NiObject)manager);
-	for (var i1 = 0; i1 < animNoteArrays.Length; i1++) {
+	for (var i1 = 0; i1 < animNoteArrays.Count; i1++) {
 	}
 	return ptrs;
 }

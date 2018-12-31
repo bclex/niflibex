@@ -23,7 +23,7 @@ public class NiRotData : NiObject {
 	/*!  */
 	internal KeyType rotationType;
 	/*!  */
-	internal Key<Quaternion>[] quaternionKeys;
+	internal IList<Key<Quaternion>> quaternionKeys;
 	/*!  */
 	internal Array3<KeyGroup<float>> xyzRotations;
 
@@ -54,7 +54,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((rotationType != 4)) {
 		quaternionKeys = new Key[numRotationKeys];
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			Nif.NifStream(out quaternionKeys[i2], s, info, rotationType);
 		}
 	}
@@ -65,7 +65,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 				Nif.NifStream(out xyzRotations[i2].interpolation, s, info);
 			}
 			xyzRotations[i2].keys = new Key[xyzRotations[i2].numKeys];
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				Nif.NifStream(out xyzRotations[i2].keys[i3], s, info, xyzRotations[i2].interpolation);
 			}
 		}
@@ -77,24 +77,24 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numRotationKeys = (uint)quaternionKeys.Length;
+	numRotationKeys = (uint)quaternionKeys.Count;
 	Nif.NifStream(numRotationKeys, s, info);
 	if ((numRotationKeys != 0)) {
 		Nif.NifStream(rotationType, s, info);
 	}
 	if ((rotationType != 4)) {
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			Nif.NifStream(quaternionKeys[i2], s, info, rotationType);
 		}
 	}
 	if ((rotationType == 4)) {
 		for (var i2 = 0; i2 < 3; i2++) {
-			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Length;
+			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Count;
 			Nif.NifStream(xyzRotations[i2].numKeys, s, info);
 			if ((xyzRotations[i2].numKeys != 0)) {
 				Nif.NifStream(xyzRotations[i2].interpolation, s, info);
 			}
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				Nif.NifStream(xyzRotations[i2].keys[i3], s, info, xyzRotations[i2].interpolation);
 			}
 		}
@@ -112,14 +112,14 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numRotationKeys = (uint)quaternionKeys.Length;
+	numRotationKeys = (uint)quaternionKeys.Count;
 	s.AppendLine($"  Num Rotation Keys:  {numRotationKeys}");
 	if ((numRotationKeys != 0)) {
 		s.AppendLine($"    Rotation Type:  {rotationType}");
 	}
 	if ((rotationType != 4)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < quaternionKeys.Length; i2++) {
+		for (var i2 = 0; i2 < quaternionKeys.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -138,13 +138,13 @@ public override string AsString(bool verbose = false) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Length;
+			xyzRotations[i2].numKeys = (uint)xyzRotations[i2].keys.Count;
 			s.AppendLine($"      Num Keys:  {xyzRotations[i2].numKeys}");
 			if ((xyzRotations[i2].numKeys != 0)) {
 				s.AppendLine($"        Interpolation:  {xyzRotations[i2].interpolation}");
 			}
 			array_output_count = 0;
-			for (var i3 = 0; i3 < xyzRotations[i2].keys.Length; i3++) {
+			for (var i3 = 0; i3 < xyzRotations[i2].keys.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;

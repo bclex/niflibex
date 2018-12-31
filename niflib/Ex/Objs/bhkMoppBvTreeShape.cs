@@ -41,7 +41,7 @@ public class bhkMoppBvTreeShape : bhkBvTreeShape {
 	/*! Tells if MOPP Data was organized into smaller chunks (PS3) or not (PC) */
 	internal MoppDataBuildType buildType;
 	/*! The tree of bounding volume data. */
-	internal byte[] moppData;
+	internal IList<byte> moppData;
 
 	public bhkMoppBvTreeShape() {
 	shape = null;
@@ -83,7 +83,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out buildType, s, info);
 	}
 	moppData = new byte[moppDataSize];
-	for (var i1 = 0; i1 < moppData.Length; i1++) {
+	for (var i1 = 0; i1 < moppData.Count; i1++) {
 		Nif.NifStream(out moppData[i1], s, info);
 	}
 
@@ -107,7 +107,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if ((info.userVersion2 > 34)) {
 		Nif.NifStream(buildType, s, info);
 	}
-	for (var i1 = 0; i1 < moppData.Length; i1++) {
+	for (var i1 = 0; i1 < moppData.Count; i1++) {
 		Nif.NifStream(moppData[i1], s, info);
 	}
 
@@ -142,7 +142,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Scale:  {scale}");
 	s.AppendLine($"  Build Type:  {buildType}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < moppData.Length; i1++) {
+	for (var i1 = 0; i1 < moppData.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

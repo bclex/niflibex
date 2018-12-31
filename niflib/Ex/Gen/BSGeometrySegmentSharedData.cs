@@ -17,13 +17,13 @@ public class BSGeometrySegmentSharedData {
 	/*!  */
 	internal uint totalSegments;
 	/*!  */
-	internal uint[] segmentStarts;
+	internal IList<uint> segmentStarts;
 	/*!  */
-	internal BSGeometryPerSegmentSharedData[] perSegmentData;
+	internal IList<BSGeometryPerSegmentSharedData> perSegmentData;
 	/*!  */
 	internal ushort ssfLength;
 	/*!  */
-	internal byte[] ssfFile;
+	internal IList<byte> ssfFile;
 	//Constructor
 	public BSGeometrySegmentSharedData() { unchecked {
 	numSegments = (uint)0;

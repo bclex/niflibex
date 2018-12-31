@@ -24,19 +24,19 @@ public class NiPSSimulatorGeneralStep : NiPSSimulatorStep {
 	/*!  */
 	internal byte numSizeKeys;
 	/*! The particle size keys. */
-	internal Key<float>[] sizeKeys;
+	internal IList<Key<float>> sizeKeys;
 	/*! The loop behavior for the size keys. */
 	internal PSLoopBehavior sizeLoopBehavior;
 	/*!  */
 	internal byte numColorKeys;
 	/*! The particle color keys. */
-	internal Key<ByteColor4>[] colorKeys;
+	internal IList<Key<ByteColor4>> colorKeys;
 	/*! The loop behavior for the color keys. */
 	internal PSLoopBehavior colorLoopBehavior;
 	/*!  */
 	internal byte numRotationKeys;
 	/*! The particle rotation keys. */
-	internal Key<Quaternion>[] rotationKeys;
+	internal IList<Key<Quaternion>> rotationKeys;
 	/*! The loop behavior for the rotation keys. */
 	internal PSLoopBehavior rotationLoopBehavior;
 	/*!
@@ -93,21 +93,21 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version >= 0x14060100) {
 		Nif.NifStream(out numSizeKeys, s, info);
 		sizeKeys = new Key[numSizeKeys];
-		for (var i2 = 0; i2 < sizeKeys.Length; i2++) {
+		for (var i2 = 0; i2 < sizeKeys.Count; i2++) {
 			Nif.NifStream(out sizeKeys[i2], s, info, 1);
 		}
 		Nif.NifStream(out sizeLoopBehavior, s, info);
 	}
 	Nif.NifStream(out numColorKeys, s, info);
 	colorKeys = new Key[numColorKeys];
-	for (var i1 = 0; i1 < colorKeys.Length; i1++) {
+	for (var i1 = 0; i1 < colorKeys.Count; i1++) {
 		Nif.NifStream(out colorKeys[i1], s, info, 1);
 	}
 	if (info.version >= 0x14060100) {
 		Nif.NifStream(out colorLoopBehavior, s, info);
 		Nif.NifStream(out numRotationKeys, s, info);
 		rotationKeys = new Key[numRotationKeys];
-		for (var i2 = 0; i2 < rotationKeys.Length; i2++) {
+		for (var i2 = 0; i2 < rotationKeys.Count; i2++) {
 			Nif.NifStream(out rotationKeys[i2], s, info, 1);
 		}
 		Nif.NifStream(out rotationLoopBehavior, s, info);
@@ -123,24 +123,24 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numRotationKeys = (byte)rotationKeys.Length;
-	numColorKeys = (byte)colorKeys.Length;
-	numSizeKeys = (byte)sizeKeys.Length;
+	numRotationKeys = (byte)rotationKeys.Count;
+	numColorKeys = (byte)colorKeys.Count;
+	numSizeKeys = (byte)sizeKeys.Count;
 	if (info.version >= 0x14060100) {
 		Nif.NifStream(numSizeKeys, s, info);
-		for (var i2 = 0; i2 < sizeKeys.Length; i2++) {
+		for (var i2 = 0; i2 < sizeKeys.Count; i2++) {
 			Nif.NifStream(sizeKeys[i2], s, info, 1);
 		}
 		Nif.NifStream(sizeLoopBehavior, s, info);
 	}
 	Nif.NifStream(numColorKeys, s, info);
-	for (var i1 = 0; i1 < colorKeys.Length; i1++) {
+	for (var i1 = 0; i1 < colorKeys.Count; i1++) {
 		Nif.NifStream(colorKeys[i1], s, info, 1);
 	}
 	if (info.version >= 0x14060100) {
 		Nif.NifStream(colorLoopBehavior, s, info);
 		Nif.NifStream(numRotationKeys, s, info);
-		for (var i2 = 0; i2 < rotationKeys.Length; i2++) {
+		for (var i2 = 0; i2 < rotationKeys.Count; i2++) {
 			Nif.NifStream(rotationKeys[i2], s, info, 1);
 		}
 		Nif.NifStream(rotationLoopBehavior, s, info);
@@ -162,12 +162,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numRotationKeys = (byte)rotationKeys.Length;
-	numColorKeys = (byte)colorKeys.Length;
-	numSizeKeys = (byte)sizeKeys.Length;
+	numRotationKeys = (byte)rotationKeys.Count;
+	numColorKeys = (byte)colorKeys.Count;
+	numSizeKeys = (byte)sizeKeys.Count;
 	s.AppendLine($"  Num Size Keys:  {numSizeKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < sizeKeys.Length; i1++) {
+	for (var i1 = 0; i1 < sizeKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -181,7 +181,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Size Loop Behavior:  {sizeLoopBehavior}");
 	s.AppendLine($"  Num Color Keys:  {numColorKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < colorKeys.Length; i1++) {
+	for (var i1 = 0; i1 < colorKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -195,7 +195,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Color Loop Behavior:  {colorLoopBehavior}");
 	s.AppendLine($"  Num Rotation Keys:  {numRotationKeys}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < rotationKeys.Length; i1++) {
+	for (var i1 = 0; i1 < rotationKeys.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

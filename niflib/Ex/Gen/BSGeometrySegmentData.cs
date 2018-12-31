@@ -30,7 +30,7 @@ public class BSGeometrySegmentData {
 	/*!  */
 	internal uint numSubSegments;
 	/*!  */
-	internal BSGeometrySubSegment[] subSegment;
+	internal IList<BSGeometrySubSegment> subSegment;
 	//Constructor
 	public BSGeometrySegmentData() { unchecked {
 	flags = (byte)0;

@@ -28,11 +28,11 @@ public class bhkPoseArray : NiObject {
 	/*!  */
 	internal int numBones;
 	/*!  */
-	internal IndexString[] bones;
+	internal IList<IndexString> bones;
 	/*!  */
 	internal int numPoses;
 	/*!  */
-	internal BonePose[] poses;
+	internal IList<BonePose> poses;
 
 	public bhkPoseArray() {
 	numBones = (int)0;
@@ -57,15 +57,15 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numBones, s, info);
 	bones = new IndexString[numBones];
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		Nif.NifStream(out bones[i1], s, info);
 	}
 	Nif.NifStream(out numPoses, s, info);
 	poses = new BonePose[numPoses];
-	for (var i1 = 0; i1 < poses.Length; i1++) {
+	for (var i1 = 0; i1 < poses.Count; i1++) {
 		Nif.NifStream(out poses[i1].numTransforms, s, info);
 		poses[i1].transforms = new BoneTransform[poses[i1].numTransforms];
-		for (var i2 = 0; i2 < poses[i1].transforms.Length; i2++) {
+		for (var i2 = 0; i2 < poses[i1].transforms.Count; i2++) {
 			Nif.NifStream(out poses[i1].transforms[i2].translation, s, info);
 			Nif.NifStream(out poses[i1].transforms[i2].rotation.x, s, info);
 			Nif.NifStream(out poses[i1].transforms[i2].rotation.y, s, info);
@@ -81,17 +81,17 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numPoses = (int)poses.Length;
-	numBones = (int)bones.Length;
+	numPoses = (int)poses.Count;
+	numBones = (int)bones.Count;
 	Nif.NifStream(numBones, s, info);
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		Nif.NifStream(bones[i1], s, info);
 	}
 	Nif.NifStream(numPoses, s, info);
-	for (var i1 = 0; i1 < poses.Length; i1++) {
-		poses[i1].numTransforms = (uint)poses[i1].transforms.Length;
+	for (var i1 = 0; i1 < poses.Count; i1++) {
+		poses[i1].numTransforms = (uint)poses[i1].transforms.Count;
 		Nif.NifStream(poses[i1].numTransforms, s, info);
-		for (var i2 = 0; i2 < poses[i1].transforms.Length; i2++) {
+		for (var i2 = 0; i2 < poses[i1].transforms.Count; i2++) {
 			Nif.NifStream(poses[i1].transforms[i2].translation, s, info);
 			Nif.NifStream(poses[i1].transforms[i2].rotation.x, s, info);
 			Nif.NifStream(poses[i1].transforms[i2].rotation.y, s, info);
@@ -113,11 +113,11 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numPoses = (int)poses.Length;
-	numBones = (int)bones.Length;
+	numPoses = (int)poses.Count;
+	numBones = (int)bones.Count;
 	s.AppendLine($"  Num Bones:  {numBones}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < bones.Length; i1++) {
+	for (var i1 = 0; i1 < bones.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -130,15 +130,15 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Poses:  {numPoses}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < poses.Length; i1++) {
+	for (var i1 = 0; i1 < poses.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		poses[i1].numTransforms = (uint)poses[i1].transforms.Length;
+		poses[i1].numTransforms = (uint)poses[i1].transforms.Count;
 		s.AppendLine($"    Num Transforms:  {poses[i1].numTransforms}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < poses[i1].transforms.Length; i2++) {
+		for (var i2 = 0; i2 < poses[i1].transforms.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;

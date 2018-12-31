@@ -25,7 +25,7 @@ public class bhkMultiSphereShape : bhkSphereRepShape {
 	/*! The number of spheres in this multi sphere shape. */
 	internal uint numSpheres;
 	/*! This array holds the spheres which make up the multi sphere shape. */
-	internal NiBound[] spheres;
+	internal IList<NiBound> spheres;
 
 	public bhkMultiSphereShape() {
 	unknownFloat1 = 0.0f;
@@ -53,7 +53,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out unknownFloat2, s, info);
 	Nif.NifStream(out numSpheres, s, info);
 	spheres = new NiBound[numSpheres];
-	for (var i1 = 0; i1 < spheres.Length; i1++) {
+	for (var i1 = 0; i1 < spheres.Count; i1++) {
 		Nif.NifStream(out spheres[i1].center, s, info);
 		Nif.NifStream(out spheres[i1].radius, s, info);
 	}
@@ -64,11 +64,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSpheres = (uint)spheres.Length;
+	numSpheres = (uint)spheres.Count;
 	Nif.NifStream(unknownFloat1, s, info);
 	Nif.NifStream(unknownFloat2, s, info);
 	Nif.NifStream(numSpheres, s, info);
-	for (var i1 = 0; i1 < spheres.Length; i1++) {
+	for (var i1 = 0; i1 < spheres.Count; i1++) {
 		Nif.NifStream(spheres[i1].center, s, info);
 		Nif.NifStream(spheres[i1].radius, s, info);
 	}
@@ -85,12 +85,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSpheres = (uint)spheres.Length;
+	numSpheres = (uint)spheres.Count;
 	s.AppendLine($"  Unknown Float 1:  {unknownFloat1}");
 	s.AppendLine($"  Unknown Float 2:  {unknownFloat2}");
 	s.AppendLine($"  Num Spheres:  {numSpheres}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < spheres.Length; i1++) {
+	for (var i1 = 0; i1 < spheres.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -21,7 +21,7 @@ public class bhkPackedNiTriStripsShape : bhkShapeCollection {
 	/*!  */
 	internal ushort numSubShapes;
 	/*!  */
-	internal OblivionSubShape[] subShapes;
+	internal IList<OblivionSubShape> subShapes;
 	/*!  */
 	internal uint userData;
 	/*! Looks like a memory pointer and may be garbage. */
@@ -71,7 +71,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	if (info.version <= 0x14000005) {
 		Nif.NifStream(out numSubShapes, s, info);
 		subShapes = new OblivionSubShape[numSubShapes];
-		for (var i2 = 0; i2 < subShapes.Length; i2++) {
+		for (var i2 = 0; i2 < subShapes.Count; i2++) {
 			if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 				Nif.NifStream(out subShapes[i2].havokFilter.layer_ob, s, info);
 			}
@@ -114,10 +114,10 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSubShapes = (ushort)subShapes.Length;
+	numSubShapes = (ushort)subShapes.Count;
 	if (info.version <= 0x14000005) {
 		Nif.NifStream(numSubShapes, s, info);
-		for (var i2 = 0; i2 < subShapes.Length; i2++) {
+		for (var i2 = 0; i2 < subShapes.Count; i2++) {
 			if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 				Nif.NifStream(subShapes[i2].havokFilter.layer_ob, s, info);
 			}
@@ -165,10 +165,10 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSubShapes = (ushort)subShapes.Length;
+	numSubShapes = (ushort)subShapes.Count;
 	s.AppendLine($"  Num Sub Shapes:  {numSubShapes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

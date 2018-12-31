@@ -28,11 +28,11 @@ public class NiShadowGenerator : NiObject {
 	/*!  */
 	internal uint numShadowCasters;
 	/*!  */
-	internal NiNode[] shadowCasters;
+	internal IList<NiNode> shadowCasters;
 	/*!  */
 	internal uint numShadowReceivers;
 	/*!  */
-	internal NiNode[] shadowReceivers;
+	internal IList<NiNode> shadowReceivers;
 	/*!  */
 	internal NiDynamicEffect target;
 	/*!  */
@@ -79,13 +79,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out flags, s, info);
 	Nif.NifStream(out numShadowCasters, s, info);
 	shadowCasters = new Ref[numShadowCasters];
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
 	Nif.NifStream(out numShadowReceivers, s, info);
 	shadowReceivers = new Ref[numShadowReceivers];
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -105,16 +105,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numShadowReceivers = (uint)shadowReceivers.Length;
-	numShadowCasters = (uint)shadowCasters.Length;
+	numShadowReceivers = (uint)shadowReceivers.Count;
+	numShadowCasters = (uint)shadowCasters.Count;
 	Nif.NifStream(name, s, info);
 	Nif.NifStream(flags, s, info);
 	Nif.NifStream(numShadowCasters, s, info);
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 		WriteRef((NiObject)shadowCasters[i1], s, info, link_map, missing_link_stack);
 	}
 	Nif.NifStream(numShadowReceivers, s, info);
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 		WriteRef((NiObject)shadowReceivers[i1], s, info, link_map, missing_link_stack);
 	}
 	WriteRef((NiObject)target, s, info, link_map, missing_link_stack);
@@ -138,13 +138,13 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numShadowReceivers = (uint)shadowReceivers.Length;
-	numShadowCasters = (uint)shadowCasters.Length;
+	numShadowReceivers = (uint)shadowReceivers.Count;
+	numShadowCasters = (uint)shadowCasters.Count;
 	s.AppendLine($"  Name:  {name}");
 	s.AppendLine($"  Flags:  {flags}");
 	s.AppendLine($"  Num Shadow Casters:  {numShadowCasters}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -157,7 +157,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Shadow Receivers:  {numShadowReceivers}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -182,10 +182,10 @@ public override string AsString(bool verbose = false) {
 internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 		shadowCasters[i1] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 	}
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 		shadowReceivers[i1] = FixLink<NiNode>(objects, link_stack, missing_link_stack, info);
 	}
 	target = FixLink<NiDynamicEffect>(objects, link_stack, missing_link_stack, info);
@@ -195,11 +195,11 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 		if (shadowCasters[i1] != null)
 			refs.Add((NiObject)shadowCasters[i1]);
 	}
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 		if (shadowReceivers[i1] != null)
 			refs.Add((NiObject)shadowReceivers[i1]);
 	}
@@ -209,9 +209,9 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < shadowCasters.Length; i1++) {
+	for (var i1 = 0; i1 < shadowCasters.Count; i1++) {
 	}
-	for (var i1 = 0; i1 < shadowReceivers.Length; i1++) {
+	for (var i1 = 0; i1 < shadowReceivers.Count; i1++) {
 	}
 	if (target != null)
 		ptrs.Add((NiObject)target);

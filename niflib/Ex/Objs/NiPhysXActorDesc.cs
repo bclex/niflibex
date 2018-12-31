@@ -23,7 +23,7 @@ public class NiPhysXActorDesc : NiObject {
 	/*!  */
 	internal uint numPoses;
 	/*!  */
-	internal Matrix34[] poses;
+	internal IList<Matrix34> poses;
 	/*!  */
 	internal NiPhysXBodyDesc bodyDesc;
 	/*!  */
@@ -43,7 +43,7 @@ public class NiPhysXActorDesc : NiObject {
 	/*!  */
 	internal uint numShapeDescs;
 	/*!  */
-	internal NiPhysXShapeDesc[] shapeDescriptions;
+	internal IList<NiPhysXShapeDesc> shapeDescriptions;
 	/*!  */
 	internal NiPhysXActorDesc actorParent;
 	/*!  */
@@ -87,7 +87,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out actorName, s, info);
 	Nif.NifStream(out numPoses, s, info);
 	poses = new Matrix34[numPoses];
-	for (var i1 = 0; i1 < poses.Length; i1++) {
+	for (var i1 = 0; i1 < poses.Count; i1++) {
 		Nif.NifStream(out poses[i1], s, info);
 	}
 	Nif.NifStream(out block_num, s, info);
@@ -105,7 +105,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	Nif.NifStream(out numShapeDescs, s, info);
 	shapeDescriptions = new Ref[numShapeDescs];
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 		Nif.NifStream(out block_num, s, info);
 		link_stack.Add(block_num);
 	}
@@ -122,11 +122,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numShapeDescs = (uint)shapeDescriptions.Length;
-	numPoses = (uint)poses.Length;
+	numShapeDescs = (uint)shapeDescriptions.Count;
+	numPoses = (uint)poses.Count;
 	Nif.NifStream(actorName, s, info);
 	Nif.NifStream(numPoses, s, info);
-	for (var i1 = 0; i1 < poses.Length; i1++) {
+	for (var i1 = 0; i1 < poses.Count; i1++) {
 		Nif.NifStream(poses[i1], s, info);
 	}
 	WriteRef((NiObject)bodyDesc, s, info, link_map, missing_link_stack);
@@ -142,7 +142,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(dummy, s, info);
 	}
 	Nif.NifStream(numShapeDescs, s, info);
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 		WriteRef((NiObject)shapeDescriptions[i1], s, info, link_map, missing_link_stack);
 	}
 	WriteRef((NiObject)actorParent, s, info, link_map, missing_link_stack);
@@ -161,12 +161,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numShapeDescs = (uint)shapeDescriptions.Length;
-	numPoses = (uint)poses.Length;
+	numShapeDescs = (uint)shapeDescriptions.Count;
+	numPoses = (uint)poses.Count;
 	s.AppendLine($"  Actor Name:  {actorName}");
 	s.AppendLine($"  Num Poses:  {numPoses}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < poses.Length; i1++) {
+	for (var i1 = 0; i1 < poses.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -187,7 +187,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Dummy:  {dummy}");
 	s.AppendLine($"  Num Shape Descs:  {numShapeDescs}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -210,7 +210,7 @@ internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> l
 
 	base.FixLinks(objects, link_stack, missing_link_stack, info);
 	bodyDesc = FixLink<NiPhysXBodyDesc>(objects, link_stack, missing_link_stack, info);
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 		shapeDescriptions[i1] = FixLink<NiPhysXShapeDesc>(objects, link_stack, missing_link_stack, info);
 	}
 	actorParent = FixLink<NiPhysXActorDesc>(objects, link_stack, missing_link_stack, info);
@@ -224,7 +224,7 @@ internal override List<NiObject> GetRefs() {
 	var refs = base.GetRefs();
 	if (bodyDesc != null)
 		refs.Add((NiObject)bodyDesc);
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 		if (shapeDescriptions[i1] != null)
 			refs.Add((NiObject)shapeDescriptions[i1]);
 	}
@@ -240,7 +240,7 @@ internal override List<NiObject> GetRefs() {
 /*! NIFLIB_HIDDEN function.  For internal use only. */
 internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
-	for (var i1 = 0; i1 < shapeDescriptions.Length; i1++) {
+	for (var i1 = 0; i1 < shapeDescriptions.Count; i1++) {
 	}
 	return ptrs;
 }

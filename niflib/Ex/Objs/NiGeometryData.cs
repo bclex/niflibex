@@ -31,7 +31,7 @@ public class NiGeometryData : NiObject {
 	/*! Is the vertex array present? (Always non-zero.) */
 	internal bool hasVertices;
 	/*! The mesh vertices. */
-	internal Vector3[] vertices;
+	internal IList<Vector3> vertices;
 	/*!  */
 	internal VectorFlags vectorFlags;
 	/*!  */
@@ -44,11 +44,11 @@ public class NiGeometryData : NiObject {
 	 */
 	internal bool hasNormals;
 	/*! The lighting normals. */
-	internal Vector3[] normals;
+	internal IList<Vector3> normals;
 	/*! Tangent vectors. */
-	internal Vector3[] tangents;
+	internal IList<Vector3> tangents;
 	/*! Bitangent vectors. */
-	internal Vector3[] bitangents;
+	internal IList<Vector3> bitangents;
 	/*!
 	 * Center of the bounding box (smallest box that contains all vertices) of the
 	 * mesh.
@@ -73,7 +73,7 @@ public class NiGeometryData : NiObject {
 	 */
 	internal bool hasVertexColors;
 	/*! The vertex colors. */
-	internal Color4[] vertexColors;
+	internal IList<Color4> vertexColors;
 	/*!
 	 * The lower 6 (or less?) bits of this field represent the number of UV texture
 	 * sets. The other bits are probably flag bits. For versions 10.1.0.0 and up, if
@@ -91,7 +91,7 @@ public class NiGeometryData : NiObject {
 	 * The UV texture coordinates. They follow the OpenGL standard: some programs may
 	 * require you to flip the second coordinate.
 	 */
-	internal TexCoord[][] uvSets;
+	internal IList<TexCoord[]> uvSets;
 	/*! Consistency Flags */
 	internal ConsistencyType consistencyFlags;
 	/*! Unknown. */
@@ -156,7 +156,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out hasVertices, s, info);
 	if (hasVertices) {
 		vertices = new Vector3[numVertices];
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			Nif.NifStream(out vertices[i2], s, info);
 		}
 	}
@@ -172,18 +172,18 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out hasNormals, s, info);
 	if (hasNormals) {
 		normals = new Vector3[numVertices];
-		for (var i2 = 0; i2 < normals.Length; i2++) {
+		for (var i2 = 0; i2 < normals.Count; i2++) {
 			Nif.NifStream(out normals[i2], s, info);
 		}
 	}
 	if (info.version >= 0x0A010000) {
 		if ((hasNormals && ((vectorFlags | bsVectorFlags) & 4096))) {
 			tangents = new Vector3[numVertices];
-			for (var i3 = 0; i3 < tangents.Length; i3++) {
+			for (var i3 = 0; i3 < tangents.Count; i3++) {
 				Nif.NifStream(out tangents[i3], s, info);
 			}
 			bitangents = new Vector3[numVertices];
-			for (var i3 = 0; i3 < bitangents.Length; i3++) {
+			for (var i3 = 0; i3 < bitangents.Count; i3++) {
 				Nif.NifStream(out bitangents[i3], s, info);
 			}
 		}
@@ -198,7 +198,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out hasVertexColors, s, info);
 	if (hasVertexColors) {
 		vertexColors = new Color4[numVertices];
-		for (var i2 = 0; i2 < vertexColors.Length; i2++) {
+		for (var i2 = 0; i2 < vertexColors.Count; i2++) {
 			Nif.NifStream(out vertexColors[i2], s, info);
 		}
 	}
@@ -209,9 +209,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out hasUv, s, info);
 	}
 	uvSets = new TexCoord[((numUvSets & 63) | ((vectorFlags & 63) | (bsVectorFlags & 1)))];
-	for (var i1 = 0; i1 < uvSets.Length; i1++) {
+	for (var i1 = 0; i1 < uvSets.Count; i1++) {
 		uvSets[i1].Resize(numVertices);
-		for (var i2 = 0; i2 < uvSets[i1].Length; i2++) {
+		for (var i2 = 0; i2 < uvSets[i1].Count; i2++) {
 			Nif.NifStream(out uvSets[i1][i2], s, info);
 		}
 	}
@@ -229,7 +229,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numVertices = (ushort)vertices.Length;
+	numVertices = (ushort)vertices.Count;
 	if (info.version >= 0x0A010072) {
 		Nif.NifStream(groupId, s, info);
 	}
@@ -252,7 +252,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	Nif.NifStream(hasVertices, s, info);
 	if (hasVertices) {
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			Nif.NifStream(vertices[i2], s, info);
 		}
 	}
@@ -267,16 +267,16 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	Nif.NifStream(hasNormals, s, info);
 	if (hasNormals) {
-		for (var i2 = 0; i2 < normals.Length; i2++) {
+		for (var i2 = 0; i2 < normals.Count; i2++) {
 			Nif.NifStream(normals[i2], s, info);
 		}
 	}
 	if (info.version >= 0x0A010000) {
 		if ((hasNormals && ((vectorFlags | bsVectorFlags) & 4096))) {
-			for (var i3 = 0; i3 < tangents.Length; i3++) {
+			for (var i3 = 0; i3 < tangents.Count; i3++) {
 				Nif.NifStream(tangents[i3], s, info);
 			}
-			for (var i3 = 0; i3 < bitangents.Length; i3++) {
+			for (var i3 = 0; i3 < bitangents.Count; i3++) {
 				Nif.NifStream(bitangents[i3], s, info);
 			}
 		}
@@ -290,7 +290,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	}
 	Nif.NifStream(hasVertexColors, s, info);
 	if (hasVertexColors) {
-		for (var i2 = 0; i2 < vertexColors.Length; i2++) {
+		for (var i2 = 0; i2 < vertexColors.Count; i2++) {
 			Nif.NifStream(vertexColors[i2], s, info);
 		}
 	}
@@ -300,8 +300,8 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version <= 0x04000002) {
 		Nif.NifStream(hasUv, s, info);
 	}
-	for (var i1 = 0; i1 < uvSets.Length; i1++) {
-		for (var i2 = 0; i2 < uvSets[i1].Length; i2++) {
+	for (var i1 = 0; i1 < uvSets.Count; i1++) {
+		for (var i2 = 0; i2 < uvSets[i1].Count; i2++) {
 			Nif.NifStream(uvSets[i1][i2], s, info);
 		}
 	}
@@ -324,7 +324,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numVertices = (ushort)vertices.Length;
+	numVertices = (ushort)vertices.Count;
 	s.AppendLine($"  Group ID:  {groupId}");
 	if ((!IsDerivedType(NiPSysData.TYPE))) {
 		s.AppendLine($"    Num Vertices:  {numVertices}");
@@ -337,7 +337,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Vertices:  {hasVertices}");
 	if (hasVertices) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertices.Length; i2++) {
+		for (var i2 = 0; i2 < vertices.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -355,7 +355,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Normals:  {hasNormals}");
 	if (hasNormals) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < normals.Length; i2++) {
+		for (var i2 = 0; i2 < normals.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -369,7 +369,7 @@ public override string AsString(bool verbose = false) {
 	}
 	if ((hasNormals && ((vectorFlags | bsVectorFlags) & 4096))) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < tangents.Length; i2++) {
+		for (var i2 = 0; i2 < tangents.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -381,7 +381,7 @@ public override string AsString(bool verbose = false) {
 			array_output_count++;
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < bitangents.Length; i2++) {
+		for (var i2 = 0; i2 < bitangents.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -410,7 +410,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Has Vertex Colors:  {hasVertexColors}");
 	if (hasVertexColors) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertexColors.Length; i2++) {
+		for (var i2 = 0; i2 < vertexColors.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -425,12 +425,12 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num UV Sets:  {numUvSets}");
 	s.AppendLine($"  Has UV:  {hasUv}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < uvSets.Length; i1++) {
+	for (var i1 = 0; i1 < uvSets.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		for (var i2 = 0; i2 < uvSets[i1].Length; i2++) {
+		for (var i2 = 0; i2 < uvSets[i1].Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				break;
 			}

@@ -39,7 +39,7 @@ public class NiPhysXJointDesc : NiObject {
 	/*!  */
 	internal uint numLimits;
 	/*!  */
-	internal NiPhysXJointLimit[] limits;
+	internal IList<NiPhysXJointLimit> limits;
 
 	public NiPhysXJointDesc() {
 	jointType = (NxJointType)0;
@@ -87,7 +87,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out limitPoint, s, info);
 	Nif.NifStream(out numLimits, s, info);
 	limits = new NiPhysXJointLimit[numLimits];
-	for (var i1 = 0; i1 < limits.Length; i1++) {
+	for (var i1 = 0; i1 < limits.Count; i1++) {
 		Nif.NifStream(out limits[i1].limitPlaneNormal, s, info);
 		Nif.NifStream(out limits[i1].limitPlaneD, s, info);
 		if (info.version >= 0x14040000) {
@@ -101,7 +101,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numLimits = (uint)limits.Length;
+	numLimits = (uint)limits.Count;
 	Nif.NifStream(jointType, s, info);
 	Nif.NifStream(jointName, s, info);
 	for (var i1 = 0; i1 < 2; i1++) {
@@ -119,7 +119,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	Nif.NifStream(jointFlags, s, info);
 	Nif.NifStream(limitPoint, s, info);
 	Nif.NifStream(numLimits, s, info);
-	for (var i1 = 0; i1 < limits.Length; i1++) {
+	for (var i1 = 0; i1 < limits.Count; i1++) {
 		Nif.NifStream(limits[i1].limitPlaneNormal, s, info);
 		Nif.NifStream(limits[i1].limitPlaneD, s, info);
 		if (info.version >= 0x14040000) {
@@ -139,7 +139,7 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numLimits = (uint)limits.Length;
+	numLimits = (uint)limits.Count;
 	s.AppendLine($"  Joint Type:  {jointType}");
 	s.AppendLine($"  Joint Name:  {jointName}");
 	array_output_count = 0;
@@ -161,7 +161,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Limit Point:  {limitPoint}");
 	s.AppendLine($"  Num Limits:  {numLimits}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < limits.Length; i1++) {
+	for (var i1 = 0; i1 < limits.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

@@ -28,9 +28,9 @@ public class NiRawImageData : NiObject {
 	/*! The format of the raw image data. */
 	internal ImageType imageType;
 	/*! Image pixel data. */
-	internal ByteColor3[][] rgbImageData;
+	internal IList<ByteColor3[]> rgbImageData;
 	/*! Image pixel data. */
-	internal ByteColor4[][] rgbaImageData;
+	internal IList<ByteColor4[]> rgbaImageData;
 
 	public NiRawImageData() {
 	width = (uint)0;
@@ -59,9 +59,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out imageType, s, info);
 	if ((imageType == 1)) {
 		rgbImageData = new ByteColor3[width];
-		for (var i2 = 0; i2 < rgbImageData.Length; i2++) {
+		for (var i2 = 0; i2 < rgbImageData.Count; i2++) {
 			rgbImageData[i2].Resize(height);
-			for (var i3 = 0; i3 < rgbImageData[i2].Length; i3++) {
+			for (var i3 = 0; i3 < rgbImageData[i2].Count; i3++) {
 				Nif.NifStream(out rgbImageData[i2][i3].r, s, info);
 				Nif.NifStream(out rgbImageData[i2][i3].g, s, info);
 				Nif.NifStream(out rgbImageData[i2][i3].b, s, info);
@@ -70,9 +70,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	}
 	if ((imageType == 2)) {
 		rgbaImageData = new ByteColor4[width];
-		for (var i2 = 0; i2 < rgbaImageData.Length; i2++) {
+		for (var i2 = 0; i2 < rgbaImageData.Count; i2++) {
 			rgbaImageData[i2].Resize(height);
-			for (var i3 = 0; i3 < rgbaImageData[i2].Length; i3++) {
+			for (var i3 = 0; i3 < rgbaImageData[i2].Count; i3++) {
 				Nif.NifStream(out rgbaImageData[i2][i3].r, s, info);
 				Nif.NifStream(out rgbaImageData[i2][i3].g, s, info);
 				Nif.NifStream(out rgbaImageData[i2][i3].b, s, info);
@@ -87,14 +87,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	height = (uint)((rgbImageData.Length > 0) ? rgbImageData[0].Length : 0);
-	width = (uint)rgbImageData.Length;
+	height = (uint)((rgbImageData.Count > 0) ? rgbImageData[0].Count : 0);
+	width = (uint)rgbImageData.Count;
 	Nif.NifStream(width, s, info);
 	Nif.NifStream(height, s, info);
 	Nif.NifStream(imageType, s, info);
 	if ((imageType == 1)) {
-		for (var i2 = 0; i2 < rgbImageData.Length; i2++) {
-			for (var i3 = 0; i3 < rgbImageData[i2].Length; i3++) {
+		for (var i2 = 0; i2 < rgbImageData.Count; i2++) {
+			for (var i3 = 0; i3 < rgbImageData[i2].Count; i3++) {
 				Nif.NifStream(rgbImageData[i2][i3].r, s, info);
 				Nif.NifStream(rgbImageData[i2][i3].g, s, info);
 				Nif.NifStream(rgbImageData[i2][i3].b, s, info);
@@ -102,8 +102,8 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		}
 	}
 	if ((imageType == 2)) {
-		for (var i2 = 0; i2 < rgbaImageData.Length; i2++) {
-			for (var i3 = 0; i3 < rgbaImageData[i2].Length; i3++) {
+		for (var i2 = 0; i2 < rgbaImageData.Count; i2++) {
+			for (var i3 = 0; i3 < rgbaImageData[i2].Count; i3++) {
 				Nif.NifStream(rgbaImageData[i2][i3].r, s, info);
 				Nif.NifStream(rgbaImageData[i2][i3].g, s, info);
 				Nif.NifStream(rgbaImageData[i2][i3].b, s, info);
@@ -124,19 +124,19 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	height = (uint)((rgbImageData.Length > 0) ? rgbImageData[0].Length : 0);
-	width = (uint)rgbImageData.Length;
+	height = (uint)((rgbImageData.Count > 0) ? rgbImageData[0].Count : 0);
+	width = (uint)rgbImageData.Count;
 	s.AppendLine($"  Width:  {width}");
 	s.AppendLine($"  Height:  {height}");
 	s.AppendLine($"  Image Type:  {imageType}");
 	if ((imageType == 1)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rgbImageData.Length; i2++) {
+		for (var i2 = 0; i2 < rgbImageData.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			for (var i3 = 0; i3 < rgbImageData[i2].Length; i3++) {
+			for (var i3 = 0; i3 < rgbImageData[i2].Count; i3++) {
 				s.AppendLine($"        r:  {rgbImageData[i2][i3].r}");
 				s.AppendLine($"        g:  {rgbImageData[i2][i3].g}");
 				s.AppendLine($"        b:  {rgbImageData[i2][i3].b}");
@@ -145,12 +145,12 @@ public override string AsString(bool verbose = false) {
 	}
 	if ((imageType == 2)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < rgbaImageData.Length; i2++) {
+		for (var i2 = 0; i2 < rgbaImageData.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			for (var i3 = 0; i3 < rgbaImageData[i2].Length; i3++) {
+			for (var i3 = 0; i3 < rgbaImageData[i2].Count; i3++) {
 				s.AppendLine($"        r:  {rgbaImageData[i2][i3].r}");
 				s.AppendLine($"        g:  {rgbaImageData[i2][i3].g}");
 				s.AppendLine($"        b:  {rgbaImageData[i2][i3].b}");

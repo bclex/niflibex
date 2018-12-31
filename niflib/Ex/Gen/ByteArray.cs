@@ -15,7 +15,7 @@ public class ByteArray {
 	/*! The number of bytes in this array */
 	internal uint dataSize;
 	/*! The bytes which make up the array */
-	internal byte[] data;
+	internal IList<byte> data;
 	//Constructor
 	public ByteArray() { unchecked {
 	dataSize = (uint)0;

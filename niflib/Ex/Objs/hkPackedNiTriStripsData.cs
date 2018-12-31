@@ -21,17 +21,17 @@ public class hkPackedNiTriStripsData : bhkShapeCollection {
 	/*!  */
 	internal uint numTriangles;
 	/*!  */
-	internal TriangleData[] triangles;
+	internal IList<TriangleData> triangles;
 	/*!  */
 	internal uint numVertices;
 	/*! Unknown. */
 	internal byte unknownByte1;
 	/*!  */
-	internal Vector3[] vertices;
+	internal IList<Vector3> vertices;
 	/*! Number of subparts. */
 	internal ushort numSubShapes;
 	/*! The subparts. */
-	internal OblivionSubShape[] subShapes;
+	internal IList<OblivionSubShape> subShapes;
 
 	public hkPackedNiTriStripsData() {
 	numTriangles = (uint)0;
@@ -58,7 +58,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	base.Read(s, link_stack, info);
 	Nif.NifStream(out numTriangles, s, info);
 	triangles = new TriangleData[numTriangles];
-	for (var i1 = 0; i1 < triangles.Length; i1++) {
+	for (var i1 = 0; i1 < triangles.Count; i1++) {
 		Nif.NifStream(out triangles[i1].triangle, s, info);
 		Nif.NifStream(out triangles[i1].weldingInfo, s, info);
 		if (info.version <= 0x14000005) {
@@ -70,13 +70,13 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out unknownByte1, s, info);
 	}
 	vertices = new Vector3[numVertices];
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(out vertices[i1], s, info);
 	}
 	if (info.version >= 0x14020007) {
 		Nif.NifStream(out numSubShapes, s, info);
 		subShapes = new OblivionSubShape[numSubShapes];
-		for (var i2 = 0; i2 < subShapes.Length; i2++) {
+		for (var i2 = 0; i2 < subShapes.Count; i2++) {
 			if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 				Nif.NifStream(out subShapes[i2].havokFilter.layer_ob, s, info);
 			}
@@ -110,11 +110,11 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSubShapes = (ushort)subShapes.Length;
-	numVertices = (uint)vertices.Length;
-	numTriangles = (uint)triangles.Length;
+	numSubShapes = (ushort)subShapes.Count;
+	numVertices = (uint)vertices.Count;
+	numTriangles = (uint)triangles.Count;
 	Nif.NifStream(numTriangles, s, info);
-	for (var i1 = 0; i1 < triangles.Length; i1++) {
+	for (var i1 = 0; i1 < triangles.Count; i1++) {
 		Nif.NifStream(triangles[i1].triangle, s, info);
 		Nif.NifStream(triangles[i1].weldingInfo, s, info);
 		if (info.version <= 0x14000005) {
@@ -125,12 +125,12 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 	if (info.version >= 0x14020007) {
 		Nif.NifStream(unknownByte1, s, info);
 	}
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		Nif.NifStream(vertices[i1], s, info);
 	}
 	if (info.version >= 0x14020007) {
 		Nif.NifStream(numSubShapes, s, info);
-		for (var i2 = 0; i2 < subShapes.Length; i2++) {
+		for (var i2 = 0; i2 < subShapes.Count; i2++) {
 			if ((info.version <= 0x14000005) && ((info.userVersion2 < 16))) {
 				Nif.NifStream(subShapes[i2].havokFilter.layer_ob, s, info);
 			}
@@ -170,12 +170,12 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSubShapes = (ushort)subShapes.Length;
-	numVertices = (uint)vertices.Length;
-	numTriangles = (uint)triangles.Length;
+	numSubShapes = (ushort)subShapes.Count;
+	numVertices = (uint)vertices.Count;
+	numTriangles = (uint)triangles.Count;
 	s.AppendLine($"  Num Triangles:  {numTriangles}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < triangles.Length; i1++) {
+	for (var i1 = 0; i1 < triangles.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -187,7 +187,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  Num Vertices:  {numVertices}");
 	s.AppendLine($"  Unknown Byte 1:  {unknownByte1}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < vertices.Length; i1++) {
+	for (var i1 = 0; i1 < vertices.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
@@ -200,7 +200,7 @@ public override string AsString(bool verbose = false) {
 	}
 	s.AppendLine($"  Num Sub Shapes:  {numSubShapes}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < subShapes.Length; i1++) {
+	for (var i1 = 0; i1 < subShapes.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;

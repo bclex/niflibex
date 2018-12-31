@@ -25,7 +25,7 @@ public class NiSkinPartition : NiObject {
 	/*!  */
 	internal uint numSkinPartitionBlocks;
 	/*! Skin partition objects. */
-	internal SkinPartition[] skinPartitionBlocks;
+	internal IList<SkinPartition> skinPartitionBlocks;
 	/*!  */
 	internal uint dataSize;
 	/*!  */
@@ -33,9 +33,9 @@ public class NiSkinPartition : NiObject {
 	/*!  */
 	internal BSVertexDesc vertexDesc;
 	/*!  */
-	internal BSVertexData[] vertexData;
+	internal IList<BSVertexData> vertexData;
 	/*!  */
-	internal SkinPartition[] partition;
+	internal IList<SkinPartition> partition;
 
 	public NiSkinPartition() {
 	numSkinPartitionBlocks = (uint)0;
@@ -62,14 +62,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 	Nif.NifStream(out numSkinPartitionBlocks, s, info);
 	if ((!((info.version == 0x14020007) && (info.userVersion2 == 100)))) {
 		skinPartitionBlocks = new SkinPartition[numSkinPartitionBlocks];
-		for (var i2 = 0; i2 < skinPartitionBlocks.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks.Count; i2++) {
 			Nif.NifStream(out skinPartitionBlocks[i2].numVertices, s, info);
 			Nif.NifStream(out skinPartitionBlocks[i2].numTriangles, s, info);
 			Nif.NifStream(out skinPartitionBlocks[i2].numBones, s, info);
 			Nif.NifStream(out skinPartitionBlocks[i2].numStrips, s, info);
 			Nif.NifStream(out skinPartitionBlocks[i2].numWeightsPerVertex, s, info);
 			skinPartitionBlocks[i2].bones = new ushort[skinPartitionBlocks[i2].numBones];
-			for (var i3 = 0; i3 < skinPartitionBlocks[i2].bones.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i2].bones.Count; i3++) {
 				Nif.NifStream(out skinPartitionBlocks[i2].bones[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -77,14 +77,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			}
 			if (info.version <= 0x0A000102) {
 				skinPartitionBlocks[i2].vertexMap = new ushort[skinPartitionBlocks[i2].numVertices];
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexMap.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexMap.Count; i4++) {
 					Nif.NifStream(out skinPartitionBlocks[i2].vertexMap[i4], s, info);
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (skinPartitionBlocks[i2].hasVertexMap) {
 					skinPartitionBlocks[i2].vertexMap = new ushort[skinPartitionBlocks[i2].numVertices];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexMap.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexMap.Count; i5++) {
 						Nif.NifStream(out (ushort)skinPartitionBlocks[i2].vertexMap[i5], s, info);
 					}
 				}
@@ -92,9 +92,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			}
 			if (info.version <= 0x0A000102) {
 				skinPartitionBlocks[i2].vertexWeights = new float[skinPartitionBlocks[i2].numVertices];
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexWeights.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexWeights.Count; i4++) {
 					skinPartitionBlocks[i2].vertexWeights[i4].Resize(skinPartitionBlocks[i2].numWeightsPerVertex);
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights[i4].Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights[i4].Count; i5++) {
 						Nif.NifStream(out skinPartitionBlocks[i2].vertexWeights[i4][i5], s, info);
 					}
 				}
@@ -102,16 +102,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if (skinPartitionBlocks[i2].hasVertexWeights) {
 					skinPartitionBlocks[i2].vertexWeights = new float[skinPartitionBlocks[i2].numVertices];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights.Count; i5++) {
 						skinPartitionBlocks[i2].vertexWeights[i5].Resize(skinPartitionBlocks[i2].numWeightsPerVertex);
-						for (var i6 = 0; i6 < skinPartitionBlocks[i2].vertexWeights[i5].Length; i6++) {
+						for (var i6 = 0; i6 < skinPartitionBlocks[i2].vertexWeights[i5].Count; i6++) {
 							Nif.NifStream(out (float)skinPartitionBlocks[i2].vertexWeights[i5][i6], s, info);
 						}
 					}
 				}
 			}
 			skinPartitionBlocks[i2].stripLengths = new ushort[skinPartitionBlocks[i2].numStrips];
-			for (var i3 = 0; i3 < skinPartitionBlocks[i2].stripLengths.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i2].stripLengths.Count; i3++) {
 				Nif.NifStream(out skinPartitionBlocks[i2].stripLengths[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -120,7 +120,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version <= 0x0A000102) {
 				if ((skinPartitionBlocks[i2].numStrips != 0)) {
 					skinPartitionBlocks[i2].strips = new ushort[skinPartitionBlocks[i2].numStrips];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Count; i5++) {
 						skinPartitionBlocks[i2].strips[i5].Resize(skinPartitionBlocks[i2].stripLengths[i5]);
 						for (var i6 = 0; i6 < skinPartitionBlocks[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(out skinPartitionBlocks[i2].strips[i5][i6], s, info);
@@ -131,7 +131,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if ((skinPartitionBlocks[i2].hasFaces && (skinPartitionBlocks[i2].numStrips != 0))) {
 					skinPartitionBlocks[i2].strips = new ushort[skinPartitionBlocks[i2].numStrips];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Count; i5++) {
 						skinPartitionBlocks[i2].strips[i5].Resize(skinPartitionBlocks[i2].stripLengths[i5]);
 						for (var i6 = 0; i6 < skinPartitionBlocks[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(out (ushort)skinPartitionBlocks[i2].strips[i5][i6], s, info);
@@ -142,7 +142,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version <= 0x0A000102) {
 				if ((skinPartitionBlocks[i2].numStrips == 0)) {
 					skinPartitionBlocks[i2].triangles = new Triangle[skinPartitionBlocks[i2].numTriangles];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Count; i5++) {
 						Nif.NifStream(out skinPartitionBlocks[i2].triangles[i5], s, info);
 					}
 				}
@@ -150,7 +150,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if ((skinPartitionBlocks[i2].hasFaces && (skinPartitionBlocks[i2].numStrips == 0))) {
 					skinPartitionBlocks[i2].triangles = new Triangle[skinPartitionBlocks[i2].numTriangles];
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Count; i5++) {
 						Nif.NifStream(out (Triangle)skinPartitionBlocks[i2].triangles[i5], s, info);
 					}
 				}
@@ -158,9 +158,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out skinPartitionBlocks[i2].hasBoneIndices, s, info);
 			if (skinPartitionBlocks[i2].hasBoneIndices) {
 				skinPartitionBlocks[i2].boneIndices = new byte[skinPartitionBlocks[i2].numVertices];
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].boneIndices.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].boneIndices.Count; i4++) {
 					skinPartitionBlocks[i2].boneIndices[i4].Resize(skinPartitionBlocks[i2].numWeightsPerVertex);
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].boneIndices[i4].Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].boneIndices[i4].Count; i5++) {
 						Nif.NifStream(out skinPartitionBlocks[i2].boneIndices[i4][i5], s, info);
 					}
 				}
@@ -177,7 +177,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 				Nif.NifStream(out skinPartitionBlocks[i2].vertexDesc.vertexAttributes, s, info);
 				Nif.NifStream(out skinPartitionBlocks[i2].vertexDesc.vf8, s, info);
 				skinPartitionBlocks[i2].trianglesCopy = new Triangle[skinPartitionBlocks[i2].numTriangles];
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].trianglesCopy.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].trianglesCopy.Count; i4++) {
 					Nif.NifStream(out skinPartitionBlocks[i2].trianglesCopy[i4], s, info);
 				}
 			}
@@ -195,19 +195,19 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 		Nif.NifStream(out vertexDesc.vf8, s, info);
 		if ((dataSize > 0)) {
 			vertexData = new BSVertexData[(dataSize / vertexSize)];
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(out vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
 		partition = new SkinPartition[numSkinPartitionBlocks];
-		for (var i2 = 0; i2 < partition.Length; i2++) {
+		for (var i2 = 0; i2 < partition.Count; i2++) {
 			Nif.NifStream(out partition[i2].numVertices, s, info);
 			Nif.NifStream(out partition[i2].numTriangles, s, info);
 			Nif.NifStream(out partition[i2].numBones, s, info);
 			Nif.NifStream(out partition[i2].numStrips, s, info);
 			Nif.NifStream(out partition[i2].numWeightsPerVertex, s, info);
 			partition[i2].bones = new ushort[partition[i2].numBones];
-			for (var i3 = 0; i3 < partition[i2].bones.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i2].bones.Count; i3++) {
 				Nif.NifStream(out partition[i2].bones[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -215,14 +215,14 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			}
 			if (info.version <= 0x0A000102) {
 				partition[i2].vertexMap = new ushort[partition[i2].numVertices];
-				for (var i4 = 0; i4 < partition[i2].vertexMap.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].vertexMap.Count; i4++) {
 					Nif.NifStream(out partition[i2].vertexMap[i4], s, info);
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (partition[i2].hasVertexMap) {
 					partition[i2].vertexMap = new ushort[partition[i2].numVertices];
-					for (var i5 = 0; i5 < partition[i2].vertexMap.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].vertexMap.Count; i5++) {
 						Nif.NifStream(out (ushort)partition[i2].vertexMap[i5], s, info);
 					}
 				}
@@ -230,9 +230,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			}
 			if (info.version <= 0x0A000102) {
 				partition[i2].vertexWeights = new float[partition[i2].numVertices];
-				for (var i4 = 0; i4 < partition[i2].vertexWeights.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].vertexWeights.Count; i4++) {
 					partition[i2].vertexWeights[i4].Resize(partition[i2].numWeightsPerVertex);
-					for (var i5 = 0; i5 < partition[i2].vertexWeights[i4].Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].vertexWeights[i4].Count; i5++) {
 						Nif.NifStream(out partition[i2].vertexWeights[i4][i5], s, info);
 					}
 				}
@@ -240,16 +240,16 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if (partition[i2].hasVertexWeights) {
 					partition[i2].vertexWeights = new float[partition[i2].numVertices];
-					for (var i5 = 0; i5 < partition[i2].vertexWeights.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].vertexWeights.Count; i5++) {
 						partition[i2].vertexWeights[i5].Resize(partition[i2].numWeightsPerVertex);
-						for (var i6 = 0; i6 < partition[i2].vertexWeights[i5].Length; i6++) {
+						for (var i6 = 0; i6 < partition[i2].vertexWeights[i5].Count; i6++) {
 							Nif.NifStream(out (float)partition[i2].vertexWeights[i5][i6], s, info);
 						}
 					}
 				}
 			}
 			partition[i2].stripLengths = new ushort[partition[i2].numStrips];
-			for (var i3 = 0; i3 < partition[i2].stripLengths.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i2].stripLengths.Count; i3++) {
 				Nif.NifStream(out partition[i2].stripLengths[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -258,7 +258,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version <= 0x0A000102) {
 				if ((partition[i2].numStrips != 0)) {
 					partition[i2].strips = new ushort[partition[i2].numStrips];
-					for (var i5 = 0; i5 < partition[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].strips.Count; i5++) {
 						partition[i2].strips[i5].Resize(partition[i2].stripLengths[i5]);
 						for (var i6 = 0; i6 < partition[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(out partition[i2].strips[i5][i6], s, info);
@@ -269,7 +269,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if ((partition[i2].hasFaces && (partition[i2].numStrips != 0))) {
 					partition[i2].strips = new ushort[partition[i2].numStrips];
-					for (var i5 = 0; i5 < partition[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].strips.Count; i5++) {
 						partition[i2].strips[i5].Resize(partition[i2].stripLengths[i5]);
 						for (var i6 = 0; i6 < partition[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(out (ushort)partition[i2].strips[i5][i6], s, info);
@@ -280,7 +280,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version <= 0x0A000102) {
 				if ((partition[i2].numStrips == 0)) {
 					partition[i2].triangles = new Triangle[partition[i2].numTriangles];
-					for (var i5 = 0; i5 < partition[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].triangles.Count; i5++) {
 						Nif.NifStream(out partition[i2].triangles[i5], s, info);
 					}
 				}
@@ -288,7 +288,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			if (info.version >= 0x0A010000) {
 				if ((partition[i2].hasFaces && (partition[i2].numStrips == 0))) {
 					partition[i2].triangles = new Triangle[partition[i2].numTriangles];
-					for (var i5 = 0; i5 < partition[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].triangles.Count; i5++) {
 						Nif.NifStream(out (Triangle)partition[i2].triangles[i5], s, info);
 					}
 				}
@@ -296,9 +296,9 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 			Nif.NifStream(out partition[i2].hasBoneIndices, s, info);
 			if (partition[i2].hasBoneIndices) {
 				partition[i2].boneIndices = new byte[partition[i2].numVertices];
-				for (var i4 = 0; i4 < partition[i2].boneIndices.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].boneIndices.Count; i4++) {
 					partition[i2].boneIndices[i4].Resize(partition[i2].numWeightsPerVertex);
-					for (var i5 = 0; i5 < partition[i2].boneIndices[i4].Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].boneIndices[i4].Count; i5++) {
 						Nif.NifStream(out partition[i2].boneIndices[i4][i5], s, info);
 					}
 				}
@@ -315,7 +315,7 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 				Nif.NifStream(out partition[i2].vertexDesc.vertexAttributes, s, info);
 				Nif.NifStream(out partition[i2].vertexDesc.vf8, s, info);
 				partition[i2].trianglesCopy = new Triangle[partition[i2].numTriangles];
-				for (var i4 = 0; i4 < partition[i2].trianglesCopy.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].trianglesCopy.Count; i4++) {
 					Nif.NifStream(out partition[i2].trianglesCopy[i4], s, info);
 				}
 			}
@@ -328,58 +328,58 @@ internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
 internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
 
 	base.Write(s, link_map, missing_link_stack, info);
-	numSkinPartitionBlocks = (uint)skinPartitionBlocks.Length;
+	numSkinPartitionBlocks = (uint)skinPartitionBlocks.Count;
 	Nif.NifStream(numSkinPartitionBlocks, s, info);
 	if ((!((info.version == 0x14020007) && (info.userVersion2 == 100)))) {
-		for (var i2 = 0; i2 < skinPartitionBlocks.Length; i2++) {
-			for (var i3 = 0; i3 < skinPartitionBlocks[i2].strips.Length; i3++)
-				skinPartitionBlocks[i2].stripLengths[i3] = (ushort)skinPartitionBlocks[i2].strips[i3].Length;
-			skinPartitionBlocks[i2].numWeightsPerVertex = (ushort)((skinPartitionBlocks[i2].vertexWeights.Length > 0) ? skinPartitionBlocks[i2].vertexWeights[0].Length : 0);
-			skinPartitionBlocks[i2].numStrips = (ushort)skinPartitionBlocks[i2].stripLengths.Length;
-			skinPartitionBlocks[i2].numBones = (ushort)skinPartitionBlocks[i2].bones.Length;
+		for (var i2 = 0; i2 < skinPartitionBlocks.Count; i2++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i2].strips.Count; i3++)
+				skinPartitionBlocks[i2].stripLengths[i3] = (ushort)skinPartitionBlocks[i2].strips[i3].Count;
+			skinPartitionBlocks[i2].numWeightsPerVertex = (ushort)((skinPartitionBlocks[i2].vertexWeights.Count > 0) ? skinPartitionBlocks[i2].vertexWeights[0].Count : 0);
+			skinPartitionBlocks[i2].numStrips = (ushort)skinPartitionBlocks[i2].stripLengths.Count;
+			skinPartitionBlocks[i2].numBones = (ushort)skinPartitionBlocks[i2].bones.Count;
 			skinPartitionBlocks[i2].numTriangles = skinPartitionBlocks[i2].numTrianglesCalc(info);
-			skinPartitionBlocks[i2].numVertices = (ushort)skinPartitionBlocks[i2].vertexMap.Length;
+			skinPartitionBlocks[i2].numVertices = (ushort)skinPartitionBlocks[i2].vertexMap.Count;
 			Nif.NifStream(skinPartitionBlocks[i2].numVertices, s, info);
 			Nif.NifStream(skinPartitionBlocks[i2].numTriangles, s, info);
 			Nif.NifStream(skinPartitionBlocks[i2].numBones, s, info);
 			Nif.NifStream(skinPartitionBlocks[i2].numStrips, s, info);
 			Nif.NifStream(skinPartitionBlocks[i2].numWeightsPerVertex, s, info);
-			for (var i3 = 0; i3 < skinPartitionBlocks[i2].bones.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i2].bones.Count; i3++) {
 				Nif.NifStream(skinPartitionBlocks[i2].bones[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
 				Nif.NifStream(skinPartitionBlocks[i2].hasVertexMap, s, info);
 			}
 			if (info.version <= 0x0A000102) {
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexMap.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexMap.Count; i4++) {
 					Nif.NifStream(skinPartitionBlocks[i2].vertexMap[i4], s, info);
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (skinPartitionBlocks[i2].hasVertexMap) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexMap.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexMap.Count; i5++) {
 						Nif.NifStream((ushort)skinPartitionBlocks[i2].vertexMap[i5], s, info);
 					}
 				}
 				Nif.NifStream(skinPartitionBlocks[i2].hasVertexWeights, s, info);
 			}
 			if (info.version <= 0x0A000102) {
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexWeights.Length; i4++) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights[i4].Length; i5++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].vertexWeights.Count; i4++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights[i4].Count; i5++) {
 						Nif.NifStream(skinPartitionBlocks[i2].vertexWeights[i4][i5], s, info);
 					}
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (skinPartitionBlocks[i2].hasVertexWeights) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights.Length; i5++) {
-						for (var i6 = 0; i6 < skinPartitionBlocks[i2].vertexWeights[i5].Length; i6++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].vertexWeights.Count; i5++) {
+						for (var i6 = 0; i6 < skinPartitionBlocks[i2].vertexWeights[i5].Count; i6++) {
 							Nif.NifStream((float)skinPartitionBlocks[i2].vertexWeights[i5][i6], s, info);
 						}
 					}
 				}
 			}
-			for (var i3 = 0; i3 < skinPartitionBlocks[i2].stripLengths.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i2].stripLengths.Count; i3++) {
 				Nif.NifStream(skinPartitionBlocks[i2].stripLengths[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -387,7 +387,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version <= 0x0A000102) {
 				if ((skinPartitionBlocks[i2].numStrips != 0)) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Count; i5++) {
 						for (var i6 = 0; i6 < skinPartitionBlocks[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(skinPartitionBlocks[i2].strips[i5][i6], s, info);
 						}
@@ -396,7 +396,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version >= 0x0A010000) {
 				if ((skinPartitionBlocks[i2].hasFaces && (skinPartitionBlocks[i2].numStrips != 0))) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].strips.Count; i5++) {
 						for (var i6 = 0; i6 < skinPartitionBlocks[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream((ushort)skinPartitionBlocks[i2].strips[i5][i6], s, info);
 						}
@@ -405,22 +405,22 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version <= 0x0A000102) {
 				if ((skinPartitionBlocks[i2].numStrips == 0)) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Count; i5++) {
 						Nif.NifStream(skinPartitionBlocks[i2].triangles[i5], s, info);
 					}
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if ((skinPartitionBlocks[i2].hasFaces && (skinPartitionBlocks[i2].numStrips == 0))) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].triangles.Count; i5++) {
 						Nif.NifStream((Triangle)skinPartitionBlocks[i2].triangles[i5], s, info);
 					}
 				}
 			}
 			Nif.NifStream(skinPartitionBlocks[i2].hasBoneIndices, s, info);
 			if (skinPartitionBlocks[i2].hasBoneIndices) {
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].boneIndices.Length; i4++) {
-					for (var i5 = 0; i5 < skinPartitionBlocks[i2].boneIndices[i4].Length; i5++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].boneIndices.Count; i4++) {
+					for (var i5 = 0; i5 < skinPartitionBlocks[i2].boneIndices[i4].Count; i5++) {
 						Nif.NifStream(skinPartitionBlocks[i2].boneIndices[i4][i5], s, info);
 					}
 				}
@@ -436,7 +436,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 				Nif.NifStream(skinPartitionBlocks[i2].vertexDesc.vf5, s, info);
 				Nif.NifStream(skinPartitionBlocks[i2].vertexDesc.vertexAttributes, s, info);
 				Nif.NifStream(skinPartitionBlocks[i2].vertexDesc.vf8, s, info);
-				for (var i4 = 0; i4 < skinPartitionBlocks[i2].trianglesCopy.Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i2].trianglesCopy.Count; i4++) {
 					Nif.NifStream(skinPartitionBlocks[i2].trianglesCopy[i4], s, info);
 				}
 			}
@@ -453,59 +453,59 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 		Nif.NifStream(vertexDesc.vertexAttributes, s, info);
 		Nif.NifStream(vertexDesc.vf8, s, info);
 		if ((dataSize > 0)) {
-			for (var i3 = 0; i3 < vertexData.Length; i3++) {
+			for (var i3 = 0; i3 < vertexData.Count; i3++) {
 				Nif.NifStream(vertexData[i3], s, info, vertexDesc.vertexAttributes);
 			}
 		}
-		for (var i2 = 0; i2 < partition.Length; i2++) {
-			for (var i3 = 0; i3 < partition[i2].strips.Length; i3++)
-				partition[i2].stripLengths[i3] = (ushort)partition[i2].strips[i3].Length;
-			partition[i2].numWeightsPerVertex = (ushort)((partition[i2].vertexWeights.Length > 0) ? partition[i2].vertexWeights[0].Length : 0);
-			partition[i2].numStrips = (ushort)partition[i2].stripLengths.Length;
-			partition[i2].numBones = (ushort)partition[i2].bones.Length;
+		for (var i2 = 0; i2 < partition.Count; i2++) {
+			for (var i3 = 0; i3 < partition[i2].strips.Count; i3++)
+				partition[i2].stripLengths[i3] = (ushort)partition[i2].strips[i3].Count;
+			partition[i2].numWeightsPerVertex = (ushort)((partition[i2].vertexWeights.Count > 0) ? partition[i2].vertexWeights[0].Count : 0);
+			partition[i2].numStrips = (ushort)partition[i2].stripLengths.Count;
+			partition[i2].numBones = (ushort)partition[i2].bones.Count;
 			partition[i2].numTriangles = partition[i2].numTrianglesCalc(info);
-			partition[i2].numVertices = (ushort)partition[i2].vertexMap.Length;
+			partition[i2].numVertices = (ushort)partition[i2].vertexMap.Count;
 			Nif.NifStream(partition[i2].numVertices, s, info);
 			Nif.NifStream(partition[i2].numTriangles, s, info);
 			Nif.NifStream(partition[i2].numBones, s, info);
 			Nif.NifStream(partition[i2].numStrips, s, info);
 			Nif.NifStream(partition[i2].numWeightsPerVertex, s, info);
-			for (var i3 = 0; i3 < partition[i2].bones.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i2].bones.Count; i3++) {
 				Nif.NifStream(partition[i2].bones[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
 				Nif.NifStream(partition[i2].hasVertexMap, s, info);
 			}
 			if (info.version <= 0x0A000102) {
-				for (var i4 = 0; i4 < partition[i2].vertexMap.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].vertexMap.Count; i4++) {
 					Nif.NifStream(partition[i2].vertexMap[i4], s, info);
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (partition[i2].hasVertexMap) {
-					for (var i5 = 0; i5 < partition[i2].vertexMap.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].vertexMap.Count; i5++) {
 						Nif.NifStream((ushort)partition[i2].vertexMap[i5], s, info);
 					}
 				}
 				Nif.NifStream(partition[i2].hasVertexWeights, s, info);
 			}
 			if (info.version <= 0x0A000102) {
-				for (var i4 = 0; i4 < partition[i2].vertexWeights.Length; i4++) {
-					for (var i5 = 0; i5 < partition[i2].vertexWeights[i4].Length; i5++) {
+				for (var i4 = 0; i4 < partition[i2].vertexWeights.Count; i4++) {
+					for (var i5 = 0; i5 < partition[i2].vertexWeights[i4].Count; i5++) {
 						Nif.NifStream(partition[i2].vertexWeights[i4][i5], s, info);
 					}
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if (partition[i2].hasVertexWeights) {
-					for (var i5 = 0; i5 < partition[i2].vertexWeights.Length; i5++) {
-						for (var i6 = 0; i6 < partition[i2].vertexWeights[i5].Length; i6++) {
+					for (var i5 = 0; i5 < partition[i2].vertexWeights.Count; i5++) {
+						for (var i6 = 0; i6 < partition[i2].vertexWeights[i5].Count; i6++) {
 							Nif.NifStream((float)partition[i2].vertexWeights[i5][i6], s, info);
 						}
 					}
 				}
 			}
-			for (var i3 = 0; i3 < partition[i2].stripLengths.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i2].stripLengths.Count; i3++) {
 				Nif.NifStream(partition[i2].stripLengths[i3], s, info);
 			}
 			if (info.version >= 0x0A010000) {
@@ -513,7 +513,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version <= 0x0A000102) {
 				if ((partition[i2].numStrips != 0)) {
-					for (var i5 = 0; i5 < partition[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].strips.Count; i5++) {
 						for (var i6 = 0; i6 < partition[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream(partition[i2].strips[i5][i6], s, info);
 						}
@@ -522,7 +522,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version >= 0x0A010000) {
 				if ((partition[i2].hasFaces && (partition[i2].numStrips != 0))) {
-					for (var i5 = 0; i5 < partition[i2].strips.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].strips.Count; i5++) {
 						for (var i6 = 0; i6 < partition[i2].stripLengths[i5]; i6++) {
 							Nif.NifStream((ushort)partition[i2].strips[i5][i6], s, info);
 						}
@@ -531,22 +531,22 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 			}
 			if (info.version <= 0x0A000102) {
 				if ((partition[i2].numStrips == 0)) {
-					for (var i5 = 0; i5 < partition[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].triangles.Count; i5++) {
 						Nif.NifStream(partition[i2].triangles[i5], s, info);
 					}
 				}
 			}
 			if (info.version >= 0x0A010000) {
 				if ((partition[i2].hasFaces && (partition[i2].numStrips == 0))) {
-					for (var i5 = 0; i5 < partition[i2].triangles.Length; i5++) {
+					for (var i5 = 0; i5 < partition[i2].triangles.Count; i5++) {
 						Nif.NifStream((Triangle)partition[i2].triangles[i5], s, info);
 					}
 				}
 			}
 			Nif.NifStream(partition[i2].hasBoneIndices, s, info);
 			if (partition[i2].hasBoneIndices) {
-				for (var i4 = 0; i4 < partition[i2].boneIndices.Length; i4++) {
-					for (var i5 = 0; i5 < partition[i2].boneIndices[i4].Length; i5++) {
+				for (var i4 = 0; i4 < partition[i2].boneIndices.Count; i4++) {
+					for (var i5 = 0; i5 < partition[i2].boneIndices[i4].Count; i5++) {
 						Nif.NifStream(partition[i2].boneIndices[i4][i5], s, info);
 					}
 				}
@@ -562,7 +562,7 @@ internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, Lis
 				Nif.NifStream(partition[i2].vertexDesc.vf5, s, info);
 				Nif.NifStream(partition[i2].vertexDesc.vertexAttributes, s, info);
 				Nif.NifStream(partition[i2].vertexDesc.vf8, s, info);
-				for (var i4 = 0; i4 < partition[i2].trianglesCopy.Length; i4++) {
+				for (var i4 = 0; i4 < partition[i2].trianglesCopy.Count; i4++) {
 					Nif.NifStream(partition[i2].trianglesCopy[i4], s, info);
 				}
 			}
@@ -581,27 +581,27 @@ public override string AsString(bool verbose = false) {
 	var s = new System.Text.StringBuilder();
 	uint array_output_count = 0;
 	s.Append(base.AsString());
-	numSkinPartitionBlocks = (uint)skinPartitionBlocks.Length;
+	numSkinPartitionBlocks = (uint)skinPartitionBlocks.Count;
 	s.AppendLine($"  Num Skin Partition Blocks:  {numSkinPartitionBlocks}");
 	array_output_count = 0;
-	for (var i1 = 0; i1 < skinPartitionBlocks.Length; i1++) {
+	for (var i1 = 0; i1 < skinPartitionBlocks.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].strips.Length; i2++)
-			skinPartitionBlocks[i1].stripLengths[i2] = (ushort)skinPartitionBlocks[i1].strips[i2].Length;
-		skinPartitionBlocks[i1].numWeightsPerVertex = (ushort)((skinPartitionBlocks[i1].vertexWeights.Length > 0) ? skinPartitionBlocks[i1].vertexWeights[0].Length : 0);
-		skinPartitionBlocks[i1].numStrips = (ushort)skinPartitionBlocks[i1].stripLengths.Length;
-		skinPartitionBlocks[i1].numBones = (ushort)skinPartitionBlocks[i1].bones.Length;
-		skinPartitionBlocks[i1].numVertices = (ushort)skinPartitionBlocks[i1].vertexMap.Length;
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].strips.Count; i2++)
+			skinPartitionBlocks[i1].stripLengths[i2] = (ushort)skinPartitionBlocks[i1].strips[i2].Count;
+		skinPartitionBlocks[i1].numWeightsPerVertex = (ushort)((skinPartitionBlocks[i1].vertexWeights.Count > 0) ? skinPartitionBlocks[i1].vertexWeights[0].Count : 0);
+		skinPartitionBlocks[i1].numStrips = (ushort)skinPartitionBlocks[i1].stripLengths.Count;
+		skinPartitionBlocks[i1].numBones = (ushort)skinPartitionBlocks[i1].bones.Count;
+		skinPartitionBlocks[i1].numVertices = (ushort)skinPartitionBlocks[i1].vertexMap.Count;
 		s.AppendLine($"    Num Vertices:  {skinPartitionBlocks[i1].numVertices}");
 		s.AppendLine($"    Num Triangles:  {skinPartitionBlocks[i1].numTriangles}");
 		s.AppendLine($"    Num Bones:  {skinPartitionBlocks[i1].numBones}");
 		s.AppendLine($"    Num Strips:  {skinPartitionBlocks[i1].numStrips}");
 		s.AppendLine($"    Num Weights Per Vertex:  {skinPartitionBlocks[i1].numWeightsPerVertex}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].bones.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].bones.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -614,7 +614,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Has Vertex Map:  {skinPartitionBlocks[i1].hasVertexMap}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].vertexMap.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].vertexMap.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -627,12 +627,12 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Has Vertex Weights:  {skinPartitionBlocks[i1].hasVertexWeights}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].vertexWeights.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].vertexWeights.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			for (var i3 = 0; i3 < skinPartitionBlocks[i1].vertexWeights[i2].Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i1].vertexWeights[i2].Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					break;
 				}
@@ -641,7 +641,7 @@ public override string AsString(bool verbose = false) {
 			}
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].stripLengths.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].stripLengths.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -655,7 +655,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Has Faces:  {skinPartitionBlocks[i1].hasFaces}");
 		if ((skinPartitionBlocks[i1].numStrips != 0)) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < skinPartitionBlocks[i1].strips.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i1].strips.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -671,7 +671,7 @@ public override string AsString(bool verbose = false) {
 		}
 		if ((skinPartitionBlocks[i1].numStrips == 0)) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < skinPartitionBlocks[i1].triangles.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i1].triangles.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -686,12 +686,12 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Has Bone Indices:  {skinPartitionBlocks[i1].hasBoneIndices}");
 		if (skinPartitionBlocks[i1].hasBoneIndices) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < skinPartitionBlocks[i1].boneIndices.Length; i3++) {
+			for (var i3 = 0; i3 < skinPartitionBlocks[i1].boneIndices.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
 				}
-				for (var i4 = 0; i4 < skinPartitionBlocks[i1].boneIndices[i3].Length; i4++) {
+				for (var i4 = 0; i4 < skinPartitionBlocks[i1].boneIndices[i3].Count; i4++) {
 					if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 						break;
 					}
@@ -709,7 +709,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Vertex Attributes:  {skinPartitionBlocks[i1].vertexDesc.vertexAttributes}");
 		s.AppendLine($"    VF8:  {skinPartitionBlocks[i1].vertexDesc.vf8}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < skinPartitionBlocks[i1].trianglesCopy.Length; i2++) {
+		for (var i2 = 0; i2 < skinPartitionBlocks[i1].trianglesCopy.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -732,7 +732,7 @@ public override string AsString(bool verbose = false) {
 	s.AppendLine($"  VF8:  {vertexDesc.vf8}");
 	if ((dataSize > 0)) {
 		array_output_count = 0;
-		for (var i2 = 0; i2 < vertexData.Length; i2++) {
+		for (var i2 = 0; i2 < vertexData.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -745,24 +745,24 @@ public override string AsString(bool verbose = false) {
 		}
 	}
 	array_output_count = 0;
-	for (var i1 = 0; i1 < partition.Length; i1++) {
+	for (var i1 = 0; i1 < partition.Count; i1++) {
 		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 			break;
 		}
-		for (var i2 = 0; i2 < partition[i1].strips.Length; i2++)
-			partition[i1].stripLengths[i2] = (ushort)partition[i1].strips[i2].Length;
-		partition[i1].numWeightsPerVertex = (ushort)((partition[i1].vertexWeights.Length > 0) ? partition[i1].vertexWeights[0].Length : 0);
-		partition[i1].numStrips = (ushort)partition[i1].stripLengths.Length;
-		partition[i1].numBones = (ushort)partition[i1].bones.Length;
-		partition[i1].numVertices = (ushort)partition[i1].vertexMap.Length;
+		for (var i2 = 0; i2 < partition[i1].strips.Count; i2++)
+			partition[i1].stripLengths[i2] = (ushort)partition[i1].strips[i2].Count;
+		partition[i1].numWeightsPerVertex = (ushort)((partition[i1].vertexWeights.Count > 0) ? partition[i1].vertexWeights[0].Count : 0);
+		partition[i1].numStrips = (ushort)partition[i1].stripLengths.Count;
+		partition[i1].numBones = (ushort)partition[i1].bones.Count;
+		partition[i1].numVertices = (ushort)partition[i1].vertexMap.Count;
 		s.AppendLine($"    Num Vertices:  {partition[i1].numVertices}");
 		s.AppendLine($"    Num Triangles:  {partition[i1].numTriangles}");
 		s.AppendLine($"    Num Bones:  {partition[i1].numBones}");
 		s.AppendLine($"    Num Strips:  {partition[i1].numStrips}");
 		s.AppendLine($"    Num Weights Per Vertex:  {partition[i1].numWeightsPerVertex}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < partition[i1].bones.Length; i2++) {
+		for (var i2 = 0; i2 < partition[i1].bones.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -775,7 +775,7 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Has Vertex Map:  {partition[i1].hasVertexMap}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < partition[i1].vertexMap.Length; i2++) {
+		for (var i2 = 0; i2 < partition[i1].vertexMap.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -788,12 +788,12 @@ public override string AsString(bool verbose = false) {
 		}
 		s.AppendLine($"    Has Vertex Weights:  {partition[i1].hasVertexWeights}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < partition[i1].vertexWeights.Length; i2++) {
+		for (var i2 = 0; i2 < partition[i1].vertexWeights.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
 			}
-			for (var i3 = 0; i3 < partition[i1].vertexWeights[i2].Length; i3++) {
+			for (var i3 = 0; i3 < partition[i1].vertexWeights[i2].Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					break;
 				}
@@ -802,7 +802,7 @@ public override string AsString(bool verbose = false) {
 			}
 		}
 		array_output_count = 0;
-		for (var i2 = 0; i2 < partition[i1].stripLengths.Length; i2++) {
+		for (var i2 = 0; i2 < partition[i1].stripLengths.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
@@ -816,7 +816,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Has Faces:  {partition[i1].hasFaces}");
 		if ((partition[i1].numStrips != 0)) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < partition[i1].strips.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i1].strips.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -832,7 +832,7 @@ public override string AsString(bool verbose = false) {
 		}
 		if ((partition[i1].numStrips == 0)) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < partition[i1].triangles.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i1].triangles.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
@@ -847,12 +847,12 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Has Bone Indices:  {partition[i1].hasBoneIndices}");
 		if (partition[i1].hasBoneIndices) {
 			array_output_count = 0;
-			for (var i3 = 0; i3 < partition[i1].boneIndices.Length; i3++) {
+			for (var i3 = 0; i3 < partition[i1].boneIndices.Count; i3++) {
 				if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 					s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 					break;
 				}
-				for (var i4 = 0; i4 < partition[i1].boneIndices[i3].Length; i4++) {
+				for (var i4 = 0; i4 < partition[i1].boneIndices[i3].Count; i4++) {
 					if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 						break;
 					}
@@ -870,7 +870,7 @@ public override string AsString(bool verbose = false) {
 		s.AppendLine($"    Vertex Attributes:  {partition[i1].vertexDesc.vertexAttributes}");
 		s.AppendLine($"    VF8:  {partition[i1].vertexDesc.vf8}");
 		array_output_count = 0;
-		for (var i2 = 0; i2 < partition[i1].trianglesCopy.Length; i2++) {
+		for (var i2 = 0; i2 < partition[i1].trianglesCopy.Count; i2++) {
 			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
 				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
 				break;
