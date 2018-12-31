@@ -98,10 +98,12 @@ import io
 import re
 import types
 
-
 LISTARRAYS = [
     'bhkConstraint::entities',
-    'NiAVObjects::properties'
+    'NiAVObjects::properties',
+    'NodeSet::nodes',
+    'NiBoneLODController::nodeGroups',
+    'NiBSplineData::floatControlPoints'
 ]
 
 #
