@@ -116,6 +116,39 @@ public class NiBoolData : NiObject {
 		return ptrs;
 	}
 
+	//--BEGIN:FILE FOOT--//
+        /*! Gets or sets the type of boolean interpolation being used.  Does not affect existing key data.
+         * \param t The new boolean key type specifing the type of interpolation to be used.
+         * \sa NiBoolData::GetKeyType
+         */
+        public KeyType KeyType
+        {
+            get => data.interpolation;
+            set => data.interpolation = value;
+        }
+
+        /*! Gets or sets the boolean key data.
+         * \param keys A vector containing new Key<unsigned char> data which will replace any existing data.
+         * \sa NiBoolData::GetKeys, Key
+         */
+        public IList<Key<byte>> Keys
+        {
+            get => data.keys;
+            set => data.keys = value;
+        }
+
+        /*!
+         * This function will adjust the times in all the keys stored in this data
+         * object such that phase will equal 0 and frequency will equal one.  In
+         * other words, it will cause the key times to be in seconds starting from
+         * zero.
+         * \param[in] frequency The frequency to normalize to 1.0 for any keys
+         * stored in this object
+         * \param[in] phase The phase shift to remove from any keys stored in this
+         * object.
+         */
+        public virtual void NormalizeKeys(float phase, float frequency) => Key.NormalizeKeyVector(data.keys, phase, frequency);
+	//--END:CUSTOM--//
 
 }
 

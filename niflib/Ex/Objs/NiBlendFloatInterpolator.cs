@@ -86,6 +86,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the floating point value stored in this object.  Perhaps this is the current interpolated value.
+         * \param[in] value The new floating point value to store in this object.
+         */
+        public float FloatValue
+        {
+            get => value;
+            set => this.value = value;
+        }
+//--END:CUSTOM--//
 
 }
 

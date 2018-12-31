@@ -144,6 +144,281 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+#if false
+        /*!
+        * Gets or sets the base translation when a translate curve is not defined.
+        * \param[in] value The new base translation.
+        */
+        public Vector3 Translation
+        {
+            get => transform.translation;
+            set => transform.translation = value;
+        }
+
+        /*!
+        * Gets or sets the translation offset for the control points in the NiSplineData
+        * \param[in] The new translation offset
+        */
+        public int TranslationOffset
+        {
+            get => translationOffset;
+            set => translationOffset = value;
+        }
+
+        /*!
+        * Gets or sets the base rotation when a translate curve is not defined.
+        * \param[in] value The new base rotation.
+        */
+        public Quaternion Rotation
+        {
+            get => transform.rotation;
+            set => transform.rotation = value;
+        }
+
+        /*!
+        * Gets or sets the rotation offset for the control points in the NiSplineData
+        * \param[in] The new rotation offset
+        */
+        public int RotationOffset
+        {
+            get => rotationOffset;
+            set => rotationOffset = value;
+        }
+
+        /*!
+        * Gets or sets the base scale when a translate curve is not defined.
+        * \param[in] value The new base scale.
+        */
+        public float Scale
+        {
+            get => transform.scale;
+            set => transform.scale = value;
+        }
+
+        /*!
+        * Gets or sets the scale offset for the control points in the NiSplineData
+        * \param[in] The new scale offset
+        */
+        public int ScaleOffset
+        {
+            get => scaleOffset;
+            set => scaleOffset = value;
+        }
+
+
+        /*!
+        * Retrieves the control quaternion rotation data.
+        * \return A vector containing control Quaternion data which specify rotation over time.
+        */
+        public virtual IList<Quaternion> GetQuatRotateControlData()
+        {
+            vector<Quaternion> value;
+            if ((rotationOffset != USHRT_MAX) && splineData && basisData)
+            { // has rotation data
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofQuat;
+                vector<float> points = splineData->GetFloatControlPointRange(rotationOffset, npts);
+                value.reserve(nctrl);
+                for (int i = 0; i < npts;)
+                {
+                    Quaternion key;
+                    key.w = float(points[i++]);
+                    key.x = float(points[i++]);
+                    key.y = float(points[i++]);
+                    key.z = float(points[i++]);
+                    value.push_back(key);
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the control translation data.
+        * \return A vector containing control Vector3 data which specify translation over time.
+        */
+        public virtual IList<Vector3> GetTranslateControlData()
+        {
+            vector<Vector3> value;
+            if ((translationOffset != USHRT_MAX) && splineData && basisData)
+            { // has translation data
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofTrans;
+                vector<float> points = splineData->GetFloatControlPointRange(translationOffset, npts);
+                value.reserve(nctrl);
+                for (int i = 0; i < npts;)
+                {
+                    Vector3 key;
+                    key.x = float(points[i++]);
+                    key.y = float(points[i++]);
+                    key.z = float(points[i++]);
+                    value.push_back(key);
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the scale key data.
+        * \return A vector containing control float data which specify scale over time.
+        */
+        public virtual IList<float> GetScaleControlData()
+        {
+            vector<float> value;
+            if ((scaleOffset != USHRT_MAX) && splineData && basisData)
+            { // has translation data
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofScale;
+                vector<float> points = splineData->GetFloatControlPointRange(scaleOffset, npts);
+                value.reserve(nctrl);
+                for (int i = 0; i < npts;)
+                {
+                    float data = float(points[i++]);
+                    value.push_back(data);
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the sampled quaternion rotation key data between start and stop time.
+        * \param npoints The number of data points to sample between start and stop time.
+        * \param degree N-th order degree of polynomial used to fit the data.
+        * \return A vector containing Key<Quaternion> data which specify rotation over time.
+        */
+        public virtual IList<Key<Quaternion>> SampleQuatRotateKeys(int npoints, int degree)
+        {
+            vector<Key<Quaternion>> value;
+            if ((rotationOffset != USHRT_MAX) && splineData && basisData)
+            { // has rotation data
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofQuat;
+                vector<float> points = splineData->GetFloatControlPointRange(rotationOffset, npts);
+                vector<float> control(npts);
+                vector<float> output(npoints* SizeofQuat);
+                for (int i = 0, j = 0; i < nctrl; ++i)
+                {
+                    for (int k = 0; k < SizeofQuat; ++k)
+                        control[i * SizeofQuat + k] = float(points[j++]);
+                }
+                if (degree >= nctrl)
+                    degree = nctrl - 1;
+                // fit data
+                bspline(nctrl - 1, degree + 1, SizeofQuat, &control[0], &output[0], npoints);
+
+                // copy to key
+                float time = GetStartTime();
+                float incr = (GetStopTime() - GetStartTime()) / float(npoints);
+                value.reserve(npoints);
+                for (int i = 0, j = 0; i < npoints; i++)
+                {
+                    Key<Quaternion> key;
+                    key.time = time;
+                    key.backward_tangent.Set(1.0f, 0.0f, 0.0f, 0.0f);
+                    key.forward_tangent.Set(1.0f, 0.0f, 0.0f, 0.0f);
+                    key.data.w = output[j++];
+                    key.data.x = output[j++];
+                    key.data.y = output[j++];
+                    key.data.z = output[j++];
+                    value.push_back(key);
+                    time += incr;
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the sampled scale key data between start and stop time.
+        * \param npoints The number of data points to sample between start and stop time.
+        * \param degree N-th order degree of polynomial used to fit the data.
+        * \return A vector containing Key<Vector3> data which specify translation over time.
+        */
+        public virtual IList<Key<Vector3>> SampleTranslateKeys(int npoints, int degree)
+        {
+            vector<Key<Vector3>> value;
+            if ((translationOffset != USHRT_MAX) && splineData && basisData)
+            { // has rotation data
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofTrans;
+                vector<float> points = splineData->GetFloatControlPointRange(translationOffset, npts);
+                vector<float> control(npts);
+                vector<float> output(npoints* SizeofTrans);
+                for (int i = 0, j = 0; i < nctrl; ++i)
+                {
+                    for (int k = 0; k < SizeofTrans; ++k)
+                        control[i * SizeofTrans + k] = float(points[j++]);
+                }
+                // fit data
+                bspline(nctrl - 1, degree + 1, SizeofTrans, &control[0], &output[0], npoints);
+
+                // copy to key
+                float time = GetStartTime();
+                float incr = (GetStopTime() - GetStartTime()) / float(npoints);
+                value.reserve(npoints);
+                for (int i = 0, j = 0; i < npoints; i++)
+                {
+                    Key<Vector3> key;
+                    key.time = time;
+                    key.backward_tangent.Set(0.0f, 0.0f, 0.0f);
+                    key.forward_tangent.Set(0.0f, 0.0f, 0.0f);
+                    key.data.x = output[j++];
+                    key.data.y = output[j++];
+                    key.data.z = output[j++];
+                    value.push_back(key);
+                    time += incr;
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the sampled scale key data between start and stop time.
+        * \param npoints The number of data points to sample between start and stop time.
+        * \param degree N-th order degree of polynomial used to fit the data.
+        * \return A vector containing Key<float> data which specify scale over time.
+        */
+        public virtual IList<Key<float>> SampleScaleKeys(int npoints, int degree)
+        {
+            vector<Key<float>> value;
+            if ((scaleOffset != USHRT_MAX) && splineData && basisData) // has rotation data
+            {
+                int nctrl = basisData->GetNumControlPoints();
+                int npts = nctrl * SizeofScale;
+                vector<float> points = splineData->GetFloatControlPointRange(scaleOffset, npts);
+                vector<float> control(npts);
+                vector<float> output(npoints* SizeofScale);
+                for (int i = 0, j = 0; i < nctrl; ++i)
+                {
+                    control[i] = float(points[j++]) / float(32767);
+                }
+                // fit data
+                bspline(nctrl - 1, degree + 1, SizeofScale, &control[0], &output[0], npoints);
+
+                // copy to key
+                float time = GetStartTime();
+                float incr = (GetStopTime() - GetStartTime()) / float(npoints);
+                value.reserve(npoints);
+                for (int i = 0, j = 0; i < npoints; i++)
+                {
+                    Key<float> key;
+                    key.time = time;
+                    key.backward_tangent = 0.0f;
+                    key.forward_tangent = 0.0f;
+                    key.data = output[j++];
+                    value.push_back(key);
+                    time += incr;
+                }
+            }
+            return value;
+        }
+
+        /*!
+        * Retrieves the number of control points used in the spline curve.
+        * \return The number of control points used in the spline curve.
+        */
+        public virtual uint NumControlPoints => basisData != null ? basisData.NumControlPoints : 0;
+#endif
+//--END:CUSTOM--//
 
 }
 

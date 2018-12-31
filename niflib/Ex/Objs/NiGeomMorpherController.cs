@@ -232,8 +232,49 @@ internal override List<NiObject> GetPtrs() {
 	}
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
 
+        //TODO: Lots of unknown data in this object
 
-}
+        /*!
+         * This function will adjust the times in all the keys in the data objects
+         * referenced by this controller and any of its interpolators such that the
+         * phase will equal 0 and frequency will equal one.  In other words, it
+         * will cause the key times to be in seconds starting from zero.
+         */
+        NIFLIB_API virtual void NormalizeKeys();
+
+        /*!
+         * Retrives a list of the interpolators used by this controller.
+         * \return The interpolators.
+         */
+        NIFLIB_API vector<Ref<NiInterpolator> > GetInterpolators() const;
+
+        /*!
+         * Sets the list of the interpolators used by this controller.
+         * \param[in] n The new interpolators.
+         */
+        NIFLIB_API void SetInterpolators( const vector<Ref<NiInterpolator>> & n );
+
+	/*!
+	 * Retrives the morph data used by this controller.
+	 * \return The morph data.
+	 */
+	NIFLIB_API Ref<NiMorphData> GetData() const;
+
+        /*!
+         * Sets the morph data used by this controller.
+         * \param[in] n The new morph data.
+         */
+        NIFLIB_API void SetData(NiMorphData* n);
+
+        /*!
+        * Update the Model Bounds
+        */
+        NIFLIB_API void UpdateModelBound();
+
+        //--END:CUSTOM--//
+
+    }
 
 }

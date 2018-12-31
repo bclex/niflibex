@@ -206,8 +206,8 @@ namespace Niflib
         // The function is an implementation of the Blow and Binstock algorithm,
         // extended for the case where the polygon is a surface (set parameter
         // solid = False).
-        static void CalcMassPropertiesPolyhedron(List<Vector3> vertices,
-            List<Triangle> triangles,
+        public static void CalcMassPropertiesPolyhedron(IList<Vector3> vertices,
+            IList<Triangle> triangles,
             float density, bool solid,
             out float mass, out float volume, out Vector3 center, out InertiaMatrix inertia)
         {
@@ -341,21 +341,21 @@ namespace Niflib
         }
 
         /*! Combine mass properties for a number of objects */
-        static void CombineMassProperties(float[] masses,
-            float[] volumes, Vector3[] centers, InertiaMatrix[] inertias, Matrix44[] transforms,
+        public static void CombineMassProperties(IList<float> masses,
+            IList<float> volumes, IList<Vector3> centers, IList<InertiaMatrix> inertias, IList<Matrix44> transforms,
             ref float mass, ref float volume, ref Vector3 center, ref InertiaMatrix inertia)
         {
             if (extCombineMassPropertiesRoutine != null)
             {
-                extCombineMassPropertiesRoutine((int)masses.Length,
+                extCombineMassPropertiesRoutine((int)masses.Count,
                     masses[0], volumes[0], centers[0], inertias[0], transforms[0],
                     out mass, out volume, out center, out inertia);
                 return;
             }
-            for (var i = 0; i < masses.Length; ++i)
+            for (var i = 0; i < masses.Count; ++i)
                 mass += masses[i];
             // TODO: doubt this inertia calculation is even remotely close
-            for (var i = 0; i < masses.Length; ++i)
+            for (var i = 0; i < masses.Count; ++i)
             {
                 center += centers[i] * (masses[i] / mass);
                 inertia *= inertias[i];

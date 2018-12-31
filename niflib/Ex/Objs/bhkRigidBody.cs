@@ -708,23 +708,17 @@ internal override List<NiObject> GetPtrs() {
         /*!
          * Removes a constraint from this bhkRigidBody.
          */
-        public void RemoveConstraint(bhkSerializable obj)
-        {
-            //Search Effect list for the one to remove
-            foreach (var it in constraints)
-                if (it == obj)
-                    it = constraints.erase(it);
-        }
+        public void RemoveConstraint(bhkSerializable obj) => constraints.Remove(obj);
 
         /*!
          * Removes all constraints from this bhkRigidBody.
          */
-        public void ClearConstraints() => constraints.clear();
+        public void ClearConstraints() => constraints.Clear();
 
         /*!
          * Retrieves all the constraints attached to this bhkRigidBody.
          */
-        public List<bhkSerializable> Constraints => constraints;
+        public IList<bhkSerializable> Constraints => constraints;
 
         // Apply scale factor <scale> on data.
         // \param[in] scale Factor to scale by

@@ -99,7 +99,18 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-
-}
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Returns the NiNode that this collision object is connected to, if any.
+         * \return The NiNode that this collision object is connected to, or NULL if it is not connected to any nodes.
+         */
+        public NiAVObject Target
+        {
+            get => target;
+            /*! NIFLIB_HIDDEN function.  For internal use only */
+            internal set => target = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

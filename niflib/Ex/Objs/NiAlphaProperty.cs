@@ -138,6 +138,116 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*! Used to specify the source and destination blending functions.  The function of each value is equivalent to the OpenGL blending function of similar name. */
+        public enum BlendFunc
+        {
+            BF_ONE = 0,
+            BF_ZERO = 1,
+            BF_SRC_COLOR = 2,
+            BF_ONE_MINUS_SRC_COLOR = 3,
+            BF_DST_COLOR = 4,
+            BF_ONE_MINUS_DST_COLOR = 5,
+            BF_SRC_ALPHA = 6,
+            BF_ONE_MINUS_SRC_ALPHA = 7,
+            BF_DST_ALPHA = 8,
+            BF_ONE_MINUS_DST_ALPHA = 9,
+            BF_SRC_ALPHA_SATURATE = 10
+        }
+
+        /*! Used to set the alpha test function.  The function of each value is equivalent to the OpenGL test function of similar name. */
+        public enum TestFunc_
+        {
+            TF_ALWAYS = 0,
+            TF_LESS = 1,
+            TF_EQUAL = 2,
+            TF_LEQUAL = 3,
+            TF_GREATER = 4,
+            TF_NOTEQUAL = 5,
+            TF_GEQUAL = 6,
+            TF_NEVER = 7
+        }
+
+        /*!
+         * Gets or sets the alpha blending state.  If alpha blending is turned on, the blending functions will be used to mix the values based on the alpha component of each pixel in the texture.
+         * \param[in] value True to enable alpha blending, false to disable it.
+         */
+        public bool BlendState
+        {
+            get => Nif.UnpackFlag(flags, 0);
+            set => Nif.PackFlag(flags, value, 0);
+        }
+
+        /*!
+         * Gets or sets the source blend function which determines how alpha blending occurs if it is enabled.
+         * \param[in] value The new soucre blend function.
+         */
+        public BlendFunc SourceBlendFunc
+        {
+            get => (BlendFunc)Nif.UnpackField(flags, 1, 4);
+            set => Nif.PackField(flags, (ushort)value, 1, 4);
+        }
+
+        /*!
+         * Gets or sets the destination blend function which determines how alpha blending occurs if it is enabled.
+         * \param[in] value The new destination blend function.
+         */
+        public BlendFunc DestBlendFunc
+        {
+            get => (BlendFunc)Nif.UnpackField(flags, 5, 4);
+            set => Nif.PackField(flags, (ushort)value, 5, 4);
+        }
+
+        /*!
+         * Gets or sets the alpha testing state.  If alpha testing is turned on, the alpha test function will be used to compare each pixel's alpha value to the threshold.  If the function is true, the pixel will be drawn, otherwise it will not.
+         * \param[in] value True to enable alpha testing, false to disable it.
+         */
+        public bool TestState
+        {
+            get => Nif.UnpackFlag(flags, 9);
+            set => Nif.PackFlag(flags, value, 9);
+        }
+
+        /*!
+         * Gets or sets the alpha test function which determines the cut-off alpha value between fully transparent and fully opaque parts of a texture.
+         * \param[in] value The new alpha test function.
+         */
+        public TestFunc_ TestFunc
+        {
+            get => (TestFunc_)Nif.UnpackField(flags, 10, 3);
+            set => Nif.PackField(flags, (ushort)value, 10, 3);
+        }
+
+        /*!
+         * Gets or sets the threshold value that will be used with the alpha test function to determine whether a particular pixel will be drawn.
+         * \param[in] n The new alpha test threshold.
+         */
+        public byte Threshold
+        {
+            get => threshold;
+            set => threshold = value;
+        }
+
+        /*!
+         * Gets or sets the triangle sort mode.  If triangle sorting is enabled, the triangles that make up an object will be sorted based on distance, and drawn from farthest away to closest.  This reduces errors when using alpha blending.
+         * \param[in] value True to enable triangle sorting, false to disable it.
+         */
+        public bool TriangleSortMode
+        {
+            get => Nif.UnpackFlag(flags, 13);
+            set => Nif.PackFlag(flags, value, 13);
+        }
+
+        /*!
+         * Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+         * \param[in] n The new flag data.  Will overwrite any existing flag data.
+         */
+        public ushort Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
+//--END:CUSTOM--//
 
 }
 

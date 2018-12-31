@@ -176,17 +176,17 @@ internal override List<NiObject> GetPtrs() {
         * Returns the number of vertices that make up this mesh.  This is also the number of normals, colors, and UV coordinates if these are used.
         * \return The number of vertices that make up this mesh.
         */
-        public int VertexCount => vertices.Length;
+        public int VertexCount => vertices.Count;
 
         /*! 
         * Used to retrieve the vertices used by this mesh.  The size of the vector will be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
         * \return A vector containing the vertices used by this mesh.
         */
-        public List<Vector3> GetVertices()
+        public IList<Vector3> GetVertices()
         {
             //Remove any bad triangles
             var good_vertices = new List<Vector3>();
-            for (var i = 0; i < vertices.Length; ++i)
+            for (var i = 0; i < vertices.Count; ++i)
             {
                 var t = vertices[i];
                 var v = new Vector3(t[0], t[1], t[2]);
@@ -199,11 +199,11 @@ internal override List<NiObject> GetPtrs() {
         * Used to retrieve the normals used by this mesh.  The size of the vector will either be zero if no normals are used, or be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
         * \return A vector containing the normals used by this mesh, if any.
         */
-        public List<Vector3> GetNormals()
+        public IList<Vector3> GetNormals()
         {
             //Remove any bad triangles
             var good_normals = new List<Vector3>();
-            for (var i = 0; i < normals.Length; ++i)
+            for (var i = 0; i < normals.Count; ++i)
             {
                 var t = normals[i];
                 var v = new Vector3(t[0], t[1], t[2]);
@@ -216,11 +216,11 @@ internal override List<NiObject> GetPtrs() {
         * Used to retrieve the distance to center for vertices.  The size of the vector will either be zero if no normals are used, or be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
         * \return A vector containing the normals used by this mesh, if any.
         */
-        public List<float> GetDistToCenter()
+        public IList<float> GetDistToCenter()
         {
             //Remove any bad triangles
             var good_dist = new List<float>();
-            for (var i = 0; i < normals.Length; ++i)
+            for (var i = 0; i < normals.Count; ++i)
                 good_dist.Add(normals[i][3]);
             return good_dist;
         }
@@ -229,10 +229,10 @@ internal override List<NiObject> GetPtrs() {
         * Used to set the vertex data used by this mesh.  Calling this function will clear all other data in this object.
         * \param in A vector containing the vertices to replace those in the mesh with.  Note that there is no way to set vertices one at a time, they must be sent in one batch.
         */
-        public void SetVertices(List<Vector3> s)
+        public void SetVertices(IList<Vector3> s)
         {
             var size = s.Count;
-            Array.Resize(ref vertices, size);
+            vertices.Resize(size);
             for (var i = 0; i < size; ++i)
             {
                 var f = vertices[i];
@@ -248,10 +248,10 @@ internal override List<NiObject> GetPtrs() {
         * Used to set the normal data used by this mesh.  The size of the vector must either be zero, or the same as the vertex count retrieved with the IShapeData::GetVertexCount function or the function will throw an exception.
         * \param in A vector containing the normals to replace those in the mesh with.  Note that there is no way to set normals one at a time, they must be sent in one batch.  Use an empty vector to signify that this mesh will not be using normals.
         */
-        public void SetNormals(List<Vector3> s)
+        public void SetNormals(IList<Vector3> s)
         {
             var size = s.Count;
-            Array.Resize(ref normals, size);
+            normals.Resize(size);
             for (var i = 0; i < size; ++i)
             {
                 var f = normals[i];
@@ -267,12 +267,12 @@ internal override List<NiObject> GetPtrs() {
         * Used to sets the distance to center for vertices.  The size of the vector must either be zero, or the same as the vertex count retrieved with the IShapeData::GetVertexCount function or the function will throw an exception.
         * \param in A vector containing the normals to replace those in the mesh with.  Note that there is no way to set normals one at a time, they must be sent in one batch.  Use an empty vector to signify that this mesh will not be using normals.
         */
-        public void SetDistToCenter(List<float> s)
+        public void SetDistToCenter(IList<float> s)
         {
-            if (s.Count != normals.Length)
+            if (s.Count != normals.Count)
                 throw new Exception("Distance vector size does not match normal size.");
             var size = s.Count;
-            Array.Resize(ref normals, size);
+            normals.Resize(size);
             for (var i = 0; i < size; ++i)
             {
                 var f = normals[i];
@@ -283,7 +283,7 @@ internal override List<NiObject> GetPtrs() {
         /*! 
         * Gets or sets the normal and the distance to center for vertices.  The size of the vector will either be zero if no normals are used, or be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
         */
-        public Vector4[] NormalsAndDist
+        public IList<Vector4> NormalsAndDist
         {
             get => normals;
             set => normals = value;
@@ -304,7 +304,8 @@ internal override List<NiObject> GetPtrs() {
             inertia = InertiaMatrix.IDENTITY;
             var verts = GetVertices();
             var tris = new List<Triangle>(); // no tris mean convex
-            Inertia.CalcMassPropertiesPolyhedron(verts, tris, density, solid, out mass, out volume, out center, out inertia);
+            Inertia.CalcMassPropertiesPolyhedron(verts, tris, density, solid,
+                out mass, out volume, out center, out inertia);
         }
 //--END:CUSTOM--//
 

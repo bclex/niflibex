@@ -376,6 +376,146 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+
+        /*!
+         * Returns the number of node groups (each group a sequence of bones).
+         * \return The number of node groups.
+         */
+        public int NodeGroupCount => nodeGroups.Count;
+
+        /*!
+         * Returns a specific node group (each group a sequence of bones).
+         * \param[in] index The index of the node group to return the data for.  This must be >= 0 and < the result of ABoneLODController::GetNodeGroupCount.
+         * \return The specified node group.
+         */
+        public IList<NiNode> GetNodeGroup(int index)
+        {
+            if (index < 0 || index >= nodeGroups.Count)
+                throw new Exception("Invalid index referenced.");
+            var value = new List<NiNode>();
+            var nodes = nodeGroups[index].nodes;
+            foreach (var itr in nodes)
+                value.Add(itr);
+            return value;
+        }
+
+        /*!
+         * Adds a single node to the specified group. The group list will expand if necessary.
+         * \param[in] index The index of the node group to add a node to.  This must be >= 0 and < the result of ABoneLODController::GetNodeGroupCount.
+         * \param[in] node The node to add to the group.
+         */
+        public void AddNodeToGroup(int index, NiNode node)
+        {
+            while (index >= nodeGroups.Count)
+                nodeGroups.Add(new NodeSet());
+            numNodeGroups = (uint)nodeGroups.Count;
+            var nodes = nodeGroups[index].nodes;
+            if (!nodes.Contains(node))
+                nodes.Add(node);
+        }
+
+        /*!
+         * Remove a single node from the specified node group. 
+         * \param[in] index The index of the node group to remove a node from.  This must be >= 0 and < the result of ABoneLODController::GetNodeGroupCount.
+         * \param[in] node The node remove from the group.
+         */
+        public void RemoveNodeFromGroup(int index, NiNode node)
+        {
+            if (index < 0 || index >= nodeGroups.Count)
+                throw new Exception("Invalid index referenced.");
+            var nodes = nodeGroups[index].nodes;
+            if (!nodes.Contains(node))
+                return;
+            nodes.Remove(node);
+        }
+
+        /*!
+         * Assigns an entire node group, replacing any nodes that were in the group before.
+         * \param[in] index The index of the node group to assign a list of nodes to.  This must be >= 0 and < the result of ABoneLODController::GetNodeGroupCount.
+         * \param[in] group The list of nodes to assign to the specified node group.
+         */
+        public void SetNodeGroup(int index, IList<NiNode> group)
+        {
+            while (index >= nodeGroups.Count)
+                nodeGroups.Add(new NodeSet());
+            numNodeGroups = (uint)nodeGroups.Count;
+            nodeGroups[index].nodes = group;
+        }
+
+
+        /*!
+         * Removes an entire node group.  This will cause the indices of any subsequent node groups to shift.
+         * \param[in] index The index of the node group to remove.  This must be >= 0 and < the result of ABoneLODController::GetNodeGroupCount.
+         */
+        public void RemoveNodeGroup(int index)
+        {
+            if (index < 0 || index >= nodeGroups.Count)
+                throw new Exception("Invalid index referenced.");
+            var itr = nodeGroups[index];
+            nodeGroups.Remove(itr);
+            numNodeGroups = (uint)nodeGroups.Count;
+        }
+
+        /*!
+         * Clears all node groups.
+         */
+        public void ClearNodeGroups()
+        {
+            nodeGroups.Clear();
+            numNodeGroups = (uint)nodeGroups.Count;
+        }
+
+        /*!
+         * Adds a single shape to the specified group. The group list will expand if necessary.
+         * \param[in] shape The shape to add to the group.
+         */
+        public bool AddShapeToGroup(NiTriBasedGeom shape)
+        {
+            var shapes = shapeGroups2;
+            if (!shapes.Contains(shape))
+            {
+                shapes.Add(shape);
+                numShapeGroups2++;
+                return true;
+            }
+            return false;
+        }
+
+        /*!
+         * Remove a single shape from the specified shape group.
+         * \param[in] shape The shape remove from the group.
+         */
+        public bool RemoveShapeFromGroup(NiTriBasedGeom shape)
+        {
+            var shapes = shapeGroups2;
+            if (shapes.Contains(shape))
+            {
+                shapes.Remove(shape);
+                numShapeGroups2--;
+                return true;
+            }
+            return false;
+        }
+
+        /*!
+         * Replace a single shape by another in the specified shape group.
+         * \param[in] newshape The shape put from the group.
+         * \param[in] oldshape The shape remove from the group.
+         */
+        public bool ReplaceShapeInGroup(NiTriBasedGeom newshape, NiTriBasedGeom oldshape)
+        {
+            var shapes = shapeGroups2;
+            var itr = shapes.IndexOf(oldshape);
+            if (itr != -1)
+            {
+                shapes.RemoveAt(itr);
+                shapes.Insert(itr, newshape);
+                return true;
+            }
+            return false;
+        }
+//--END:CUSTOM--//
 
 }
 

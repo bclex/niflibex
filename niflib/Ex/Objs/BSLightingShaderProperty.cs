@@ -448,6 +448,292 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or Sets the value of the shader flags used by Skyrim
+         * \param[in] The new value of the shader flags
+         */
+        public SkyrimShaderPropertyFlags1 ShaderFlags1_Sk
+        {
+            get => shaderFlags1_sk;
+            set => shaderFlags1_sk = value;
+        }
+
+
+        /*!
+         * Gets or sets the value of the second set of skyrim shader flags
+         * \param[in] the value of the second set of flags
+         */
+        public SkyrimShaderPropertyFlags2 ShaderFlags2_Sk
+        {
+            get => shaderFlags2_sk;
+            set => shaderFlags2_sk = value;
+        }
+
+        /*!
+         * Gets or Sets the value of the shader flags used by Fallout 4
+         * \param[in] The new value of the shader flags
+         */
+        public Fallout4ShaderPropertyFlags1 ShaderFlags1_Fo4
+        {
+            get => shaderFlags1_fo4;
+            set => shaderFlags1_fo4 = value;
+        }
+
+        /*!
+         * Gets or sets the value of the second set of Fallout 4 shader flags
+         * \param[in] the value of the second set of flags
+         */
+        public Fallout4ShaderPropertyFlags2 ShaderFlags2_Fo4
+        {
+            get => shaderFlags2_fo4;
+            set => shaderFlags2_fo4 = value;
+        }
+
+        /*!
+         * Gets or Sets the value of the texture offset of the uv's
+         * \param[in] The new value of the uv offsets
+         */
+        public TexCoord UVOffset
+        {
+            get => uvOffset;
+            set => uvOffset = value;
+        }
+
+        /*!
+         * Gets or sets the second texture offsets
+         * \param[in] The second texture offsets
+         */
+        public TexCoord UVScale
+        {
+            get => uvScale;
+            set => uvScale = value;
+        }
+
+        /*!
+         * Gets or sets the texture set used by this material
+         * \param[in] A reference to the texture set
+         */
+        public BSShaderTextureSet TextureSet
+        {
+            get => textureSet;
+            set => textureSet = value;
+        }
+
+        /*!
+         * Gets or sets the emissive color of this material
+         * \param[in] The new emissive color
+         */
+        public Color3 EmissiveColor
+        {
+            get => emissiveColor;
+            set => emissiveColor = value;
+        }
+
+        /*!
+         * Gets or sets the emissive saturation of the material
+         * \param[in] The new emissive saturation value
+         */
+        public float EmissiveMultiple
+       {
+            get => emissiveMultiple;
+            set => emissiveMultiple = value;
+        }
+
+        /*!
+         * Gets or Sets the unknown int7 of this material
+         * \param[in] The new value
+         */
+        public TexClampMode TextureClampMode
+        {
+            get => textureClampMode;
+            set => textureClampMode = value;
+        }
+
+        /*!
+         * Gets or sets the transparency or alpha of this material
+         * \param[in] The new alpha value
+         */
+        public float Alpha
+        {
+            get => alpha;
+            set => alpha = value;
+        }
+
+        /*!
+         * Gets or sets the refraction strength of the material
+         * \param[in] The new refraction strength value
+         */
+        public float RefractionStrength
+        {
+            get => refractionStrength;
+            set => refractionStrength = value;
+        }
+
+        /*!
+         * Gets or sets the glossiness of the material
+         * \param[in] The new glossiness value
+         */
+        public float Glossiness
+        {
+            get => glossiness;
+            set => glossiness = value;
+        }
+
+        /*!
+         * Gets or sets the specular color of the material
+         * \param[in] The new specular color 
+         */
+        public Color3 SpecularColor
+        {
+            get => specularColor;
+            set => specularColor = value;
+        }
+
+        /*!
+         * Gets or sets the specular strength of the material
+         * \param[in] The new specular strength value
+         */
+        public float SpecularStrength
+        {
+            get => specularStrength;
+            set => specularStrength = value;
+        }
+
+        /*!
+         * Gets or sets the lightning effect1 of the material
+         * \param[in] The new lighting effect1 value
+         */
+        public float LightingEffect1
+        {
+            get => lightingEffect1;
+            set => lightingEffect1 = value;
+        }
+
+        /*!
+         * Gets or sets the lighting effect2 of the material
+         * \param[in] The new lighting effect2 of the material
+         */
+        public float LightingEffect2
+        {
+            get => lightingEffect2;
+            set => lightingEffect2 = value;
+        }
+
+        /*!
+         * Gets or Sets the environment map strength of the material
+         * \param[in] The new environment map strength value
+         */
+        public float EnvironmentMapScale
+        {
+            get => environmentMapScale;
+            set => environmentMapScale = value;
+        }
+
+        // Tints the base texture. Overridden by game settings.
+        // \param[in] value The new value.
+        public Color3 SkinTintColor
+        {
+            get => skinTintColor;
+            set => skinTintColor = value;
+        }
+
+        // Tints the base texture. Overridden by game settings.
+        // \param[in] value The new value.
+        public Color3 HairTintColor
+        {
+            get => hairTintColor;
+            set => hairTintColor = value;
+        }
+
+        // Max Passes
+        // \param[in] value The new value.
+        public float MaxPasses
+        {
+            get => maxPasses;
+            set => maxPasses = value;
+        }
+
+        // Scale
+        // \param[in] value The new value.
+        public float Scale
+        {
+            get => scale;
+            set => scale = value;
+        }
+
+        // How far from the surface the inner layer appears to be.
+        // \param[in] value The new value.
+        public float ParallaxInnerLayerThickness
+        {
+            get => parallaxInnerLayerThickness;
+            set => parallaxInnerLayerThickness = value;
+        }
+
+        // Depth of inner parallax layer effect.
+        // \param[in] value The new value.
+        public float ParallaxRefractionScale
+        {
+            get => parallaxRefractionScale;
+            set => parallaxRefractionScale = value;
+        }
+
+        // Scales the inner parallax layer texture.
+        // \param[in] value The new value.
+        public TexCoord ParallaxInnerLayerTextureScale
+        {
+            get => parallaxInnerLayerTextureScale;
+            set => parallaxInnerLayerTextureScale = value;
+        }
+
+        // How strong the environment/cube map is. (0-??)
+        // \param[in] value The new value.
+        public float ParallaxEnvmapStrength
+        {
+            get => parallaxEnvmapStrength;
+            set => parallaxEnvmapStrength = value;
+        }
+
+        /*!
+         * Gets or sets the unknown float set5 of the material
+         * \param[in] The new unknown float set5 value
+         */
+        public Vector4 SparkleParameters
+        {
+            get => sparkleParameters;
+            set => sparkleParameters = value;
+        }
+
+        /*!
+         * Gets or sets the eye cubemap scale
+         * \param[in] The new eye cubemap scale value
+         */
+        public float EyeCubemapScale
+        {
+            get => eyeCubemapScale;
+            set => eyeCubemapScale = value;
+        }
+
+        /*!
+         * Gets or Sets the left eye reflection center
+         * \param[in] The new left eye reflection center value
+         */
+        public Vector3 LeftEyeReflectionCenter
+        {
+            get => leftEyeReflectionCenter;
+            set => leftEyeReflectionCenter = value;
+        }
+
+        /*!
+         * Gets or sets the right eye reflection center
+         * \param[in] The new right eye reflection center value
+         */
+        public Vector3 RightEyeReflectionCenter
+        {
+            get => rightEyeReflectionCenter;
+            set => rightEyeReflectionCenter = value;
+        }
+//--END:CUSTOM--//
 
 }
 

@@ -132,6 +132,21 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or Sets the furniture marker positions.  These are markers that show where the character will end up if he/she sits or lies on this object.
+         * \return The new furniture marker positions.
+         */
+        public IList<FurniturePosition> Positions
+        {
+            get => positions;
+            set
+            {
+                numPositions = (uint)value.Count;
+                positions = value;
+            }
+        }
+//--END:CUSTOM--//
 
 }
 

@@ -126,12 +126,12 @@ internal override List<NiObject> GetPtrs() {
          * Gets or sets the spheres which make up the multi sphere shape.
          * \param[in] value The new spheres which will make up the multi sphere shape.
          */
-        public NiBound[] Spheres
+        public IList<NiBound> Spheres
         {
             get => spheres;
             set
             {
-                numSpheres = (uint)value.Length;
+                numSpheres = (uint)value.Count;
                 spheres = value;
             }
         }

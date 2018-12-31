@@ -90,6 +90,27 @@ public class BSBound : NiExtraData {
 		return ptrs;
 	}
 
+	//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the center point of the bounding box.
+         * \param[in] value The new center point of the bounding box.
+         */
+        public Vector3 Center
+        {
+            get => center;
+            set => center = value;
+        }
+
+        /*!
+         * Gets or sets the dimensions of the bounding box from center.  The three radii.
+         * \param[in] value The new radius of the bounding box along each axis.
+         */
+        public Vector3 Dimensions
+        {
+            get => dimensions;
+            set => dimensions = value;
+        }
+	//--END:CUSTOM--//
 
 }
 

@@ -86,6 +86,16 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or set which float variable in BSLightingShaderProperty to animate
+         */
+        public LightingShaderControlledVariable TypeOfControlledVariable
+        {
+            get => typeOfControlledVariable;
+            set => typeOfControlledVariable = value;
+        }
+//--END:CUSTOM--//
 
 }
 

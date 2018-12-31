@@ -108,6 +108,39 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        // Unknown
+        // \param[in] value The new value.
+        public ushort Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
+
+        // Unknown (Set to 0x21 for NoLighting, 0x11 for Water)
+        // \param[in] value The new value.
+        public BSShaderType ShaderType
+        {
+            get => shaderType;
+            set => shaderType = value;
+        }
+
+        // Shader Property Flags
+        // \param[in] value The new value.
+        public BSShaderFlags ShaderFlags
+            {
+            get => shaderFlags;
+            set => shaderFlags = value;
+        }
+
+        // Unknown
+        // \param[in] value The new value.
+        public float EnvironmentMapScale
+        {
+            get => environmentMapScale;
+            set => environmentMapScale = value;
+        }
+//--END:CUSTOM--//
 
 }
 

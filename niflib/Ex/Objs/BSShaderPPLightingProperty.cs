@@ -135,6 +135,15 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        // Texture Set
+        // \param[in] value The new value.
+        public BSShaderTextureSet TextureSet
+        {
+            get => textureSet;
+            set => textureSet = value;
+        }
+//--END:CUSTOM--//
 
 }
 

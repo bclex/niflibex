@@ -198,7 +198,33 @@ internal override List<NiObject> GetPtrs() {
 	}
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
 
+        /*!
+         * Gets the current switch state for this effect.  Perhaps this turns effect on and off?
+         * \return The current switch state for this object.
+         */
+        NIFLIB_API bool GetSwitchState() const;
+
+        /*!
+         * Sets the current switch state for this effect.  Perhaps this turns effect on and off?
+         * \param[in] value The new switch state for this object.
+         */
+        NIFLIB_API void SetSwitchState(bool value);
+
+        /*!
+         * Retrieves what appears to be a list of the nodes that will be affected by this effect.
+         * \return A list of the nodes that will be affected by this effect.
+         */
+        NIFLIB_API vector<Ref<NiAVObject > > GetAffectedNodes() const;
+
+        /*!
+         * Sets what appears to be a list of the nodes that will be affected by this effect.
+         * \param[in] value A list of the new nodes that will be affected by this effect.
+         */
+        NIFLIB_API void SetAffectedNodes( const vector<Ref<NiAVObject>>& value );
+
+	//--END:CUSTOM--//
 
 }
 

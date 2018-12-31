@@ -97,6 +97,39 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the boolean value stored in this object.  Perhaps this is the current interpolated value, the value when posed, or at time index 0.
+         * \param[in] value The new boolean value to store in this object.
+         */
+        public bool BoolValue
+        {
+            get => value;
+            set => this.value = value;
+        }
+
+        /*!
+         * Gets or sets the NiBoolData object that this interpolator links to, if any.
+         * \return The NiBoolData object that this interpolator should now link to, or NULL to clear the current one.
+         */
+        public NiBoolData Data
+        {
+            get => data;
+            set => data = value;
+        }
+
+        /*!
+         * This function will adjust the times in all the keys stored in the data
+         * objects referenced by this interpolator such that phase will equal 0 and
+         * frequency will equal one.  In other words, it will cause the key times
+         * to be in seconds starting from zero.
+         * \param[in] phase The phase shift to remove from any keys stored in this
+         * object.
+         * \param[in] frequency The frequency to normalize to 1.0 for any keys
+         * stored in this object
+         */
+        public virtual void NormalizeKeys(float phase, float frequency) { if (data != null) data.NormalizeKeys(phase, frequency); }
+//--END:CUSTOM--//
 
 }
 

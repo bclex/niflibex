@@ -107,6 +107,21 @@ public class NiBinaryExtraData : NiExtraData {
 		return ptrs;
 	}
 
+	//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the binary data stored in this object.  Removes any previous data.
+         * \param[in] n The new binary data to store in this object.
+         */
+        public IList<byte> Data
+        {
+            get => binaryData.data;
+            set
+            {
+                binaryData.dataSize = (uint)value.Count;
+                binaryData.data = value;
+            }
+        }
+	//--END:CUSTOM--//
 
 }
 

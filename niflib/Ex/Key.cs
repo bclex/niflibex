@@ -35,9 +35,9 @@ Continuity:  {continuity}\n";
          * \param[in] frequency The original frequency of the keys which will be
          * normalized to 1.
          */
-        public static void NormalizeKeyVector<T>(Key<T>[] keys, float phase, float frequency)
+        public static void NormalizeKeyVector<T>(IList<Key<T>> keys, float phase, float frequency)
         {
-            for (var i = 0; i < keys.Length; ++i)
+            for (var i = 0; i < keys.Count; ++i)
                 keys[i].time = (keys[i].time - phase) / frequency;
         }
 
@@ -45,7 +45,7 @@ Continuity:  {continuity}\n";
          * A function to extract key values for a certain amount of time.  Values will be
          * duplicated if necessary when cycle_type is CYCLE_LOOP or CYCLE_REVERSE.
          */
-        public static List<Key<T>> ExtractKeySlice<T>(List<Key<T>> keys, float slice_start, float slice_stop, float keys_start, float keys_stop, CycleType cycle = CycleType.CYCLE_CLAMP)
+        public static IList<Key<T>> ExtractKeySlice<T>(IList<Key<T>> keys, float slice_start, float slice_stop, float keys_start, float keys_stop, CycleType cycle = CycleType.CYCLE_CLAMP)
         {
             var o = new List<Key<T>>();
             //Get first set of keys

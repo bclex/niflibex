@@ -120,6 +120,34 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        // Textures
+        // \param[in] value The new value.
+        public IList<string> Textures
+        {
+            get => textures;
+            set => textures = value;
+        }
+
+        // Textures
+        // \return The current value.
+        public string GetTexture(int i)
+        {
+            if (i >= textures.Count)
+                throw new Exception("Invalid Texture Index specified");
+            return textures[i];
+        }
+    
+        // Textures
+        // \param[in] i Index of texture to set
+        // \param[in] value The new value.
+        public void SetTexture(int i, string value)
+        {
+            if (i >= textures.Count)
+                textures.Resize(i + 1);
+            textures[i] = value;
+        }
+//--END:CUSTOM--//
 
 }
 

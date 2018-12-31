@@ -142,6 +142,104 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+        * Gets or sets the float control points representing the spline data
+        * \param[in] The new float control points to replace the current ones
+        */
+        public IList<float> FloatControlPoints
+        {
+            get => floatControlPoints;
+            set
+            {
+                numFloatControlPoints = (uint)value.Count;
+                floatControlPoints = value;
+            }
+        }
+        /*!
+        * Adds float control points at the end of the float control points collection 
+        * \param[in] The float points to add at the end of the collection
+        */
+        public void AppendFloatControlPoints(IList<float> value)
+        {
+            numFloatControlPoints += (uint)value.Count;
+            for (var i = 0; i < value.Count; i++)
+                floatControlPoints.Add(value[i]);
+        }
+
+        /*!
+        * Get the number of float control points stored in the data
+        * \return The number of float control points
+        */
+        public int NumFloatControlPoints => (int)numFloatControlPoints;
+
+        /*!
+         * Get Range of signed shorts representing the data scaled by SHRT_MAX.
+         * \param[in] offset The start of the range.
+         * \param[in] count The number of control points to get.
+         * \return The control points that fall within the specified range.
+         */
+        public IList<float> GetFloatControlPointRange(int offset, int count)
+        {
+            var value = new List<float>();
+            if (offset < 0 || count < 0 || offset + count > floatControlPoints.Count)
+                throw new Exception("Invalid offset or count.");
+            throw new NotImplementedException();
+            //vector<float>::const_iterator srcbeg = floatControlPoints.begin(), srcend = floatControlPoints.begin();
+            //std::advance(srcbeg, offset);
+            //std::advance(srcend, offset + count);
+            //return vector<float>(srcbeg, srcend);
+        }
+
+        /*!
+        * Gets or sets the short control points representing the spline data
+        * \param[in] The new short control points to replace the current ones
+        */
+        public IList<short> CompactControlPoints
+        {
+            get => compactControlPoints;
+            set
+            {
+                numCompactControlPoints = (uint)value.Count;
+                compactControlPoints = value;
+            }
+        }
+
+        /*!
+        * Adds short control points at the end of the short control points collection 
+        * \param[in] The short points to add at the end of the collection
+        */
+        public void AppendCompactControlPoints(IList<short> value)
+        {
+            numCompactControlPoints += (uint)value.Count;
+            for (var  i = 0; i < value.Count; i++)
+                compactControlPoints.Add(value[i]);
+        }
+
+        /*!
+        * Get the number of short control points stored in the data
+        * \return The number of short control points
+        */
+        public int NumCompactControlPoints => (int)numCompactControlPoints;
+
+        /*!
+         * Get Range of signed shorts representing the data scaled by SHRT_MAX.
+         * \param[in] offset The start of the range.
+         * \param[in] count The number of control points to get.
+         * \return The control points that fall within the specified range.
+         */
+        public IList<short> GetCompactControlPointRange(int offset, int count)
+        {
+                var value = new List<short> ();
+                if (offset < 0 || count < 0 || offset + count > compactControlPoints.Count)
+                throw new Exception("Invalid offset or count.");
+            throw new NotImplementedException();
+            //vector<short>::const_iterator srcbeg = compactControlPoints.begin(), srcend = compactControlPoints.begin();
+            //std::advance(srcbeg, offset);
+            //std::advance(srcend, offset + count);
+            //return vector<short>(srcbeg, srcend);
+        }
+//--END:CUSTOM--//
 
 }
 

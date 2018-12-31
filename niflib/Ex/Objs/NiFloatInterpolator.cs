@@ -97,7 +97,46 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
 
-}
+        /*!
+         * Gets the floating point value stored in this object.  Perhaps this is the current interpolated value, the value when posed, or at time index 0.
+         * \return The floating point value stored in this object.
+         */
+        NIFLIB_API float GetFloatValue() const;
+
+        /*!
+         * Sets the floating point value stored in this object.  Perhaps this is the current interpolated value, the value when posed, or at time index 0.
+         * \param[in] value The new floating point value to store in this object.
+         */
+        NIFLIB_API void SetFloatValue(float value);
+
+        /*!
+         * Gets the NiFloatData object that this interpolator links to, if any.
+         * \return The NiFloatData object that this interpolator links to, or NULL if one is not linked.
+         */
+        NIFLIB_API Ref<NiFloatData> GetData() const;
+
+        /*!
+         * Sets the NiFloatData object that this interpolator links to, if any.
+         * \return The NiFloatData object that this interpolator should now link to, or NULL to clear the current one.
+         */
+        NIFLIB_API void SetData(NiFloatData* value);
+
+        /*!
+         * This function will adjust the times in all the keys stored in the data
+         * objects referenced by this interpolator such that phase will equal 0 and
+         * frequency will equal one.  In other words, it will cause the key times
+         * to be in seconds starting from zero.
+         * \param[in] frequency The frequency to normalize to 1.0 for any keys
+         * stored in this object
+         * \param[in] phase The phase shift to remove from any keys stored in this
+         * object.
+         */
+        NIFLIB_API virtual void NormalizeKeys(float phase, float frequency);
+
+
+        //--END:CUSTOM--//
+    }
 
 }

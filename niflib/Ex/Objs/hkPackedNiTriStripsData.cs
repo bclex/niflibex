@@ -239,6 +239,144 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Returns the triangle faces that make up this mesh.
+         * \return A vector containing the triangle faces that make up this mesh.
+         * \sa hkPackedNiTriStripsData::SetTriangles
+         */
+        public virtual IList<Triangle> GetTriangles()
+        {
+            //Remove any bad triangles
+            var good_triangles = new List<Triangle>();
+            for (var i = 0; i < triangles.Count; ++i)
+            {
+                var t = triangles[i].triangle;
+                if (t.v1 != t.v2 && t.v2 != t.v3 && t.v1 != t.v3)
+                    good_triangles.Add(t);
+            }
+            return good_triangles;
+        }
+
+        /*!
+         * Returns the triangle data that make up this mesh.
+         * \return A vector containing the triangle data that make up this mesh.
+         * \sa hkPackedNiTriStripsData::SetTriangles
+         */
+        public virtual IList<TriangleData> GetHavokTriangles()
+        {
+            //Remove any bad triangles
+            var good_triangles = new List<TriangleData>();
+            for (var i = 0; i < triangles.Count; ++i)
+            {
+                var t = triangles[i];
+                if (t.triangle.v1 != t.triangle.v2 && t.triangle.v2 != t.triangle.v3 && t.triangle.v1 != t.triangle.v3)
+                    good_triangles.Add(t);
+            }
+            return good_triangles;
+        }
+
+        /*! 
+         * Returns the number of vertices that make up this mesh.  This is also the number of normals, colors, and UV coordinates if these are used.
+         * \return The number of vertices that make up this mesh.
+         */
+        public int VertexCount => vertices.Count;
+
+        /*! 
+         * Used to retrieve the vertices used by this mesh.  The size of the vector will be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
+         * \return A vector containing the vertices used by this mesh.
+         */
+        public IList<Vector3> GetVertices() => vertices;
+
+        /*! 
+         * Used to retrieve the normals used by this mesh.  The size of the vector will either be zero if no normals are used, or be the same as the vertex count retrieved with the IShapeData::GetVertexCount function.
+         * \return A vector containing the normals used by this mesh, if any.
+         */
+        public IList<Vector3> GetNormals()
+        {
+            //Remove any bad triangles
+            var good_normals = new List<Vector3>();
+            for (var i = 0; i < triangles.Count; ++i)
+            {
+                var t = triangles[i].normal;
+                good_normals.Add(t);
+            }
+            return good_normals;
+        }
+
+        /*! Gets or sets the number of vertices that make up this mesh.
+        * \param value The number of faces that make up this mesh.
+        */
+        public virtual int NumFaces
+        {
+            get => triangles.Count;
+            set
+            {
+                if (value > 65535 || value < 0)
+                    throw new Exception("Invalid Face Count: must be between 0 and 65535.");
+                triangles.Resize(value);
+            }
+        }
+
+        /*! Replaces the triangle face data in this mesh with new data.
+        * \param in A vector containing the new face data.  Maximum size is 65,535.
+        * \sa ITriShapeData::GetTriangles
+        */
+        public virtual void SetTriangles(IList<Triangle> value)
+        {
+            if (triangles.Count != value.Count)
+                throw new Exception("Invalid Face Count: triangle count must be same as face count.");
+            for (var i = 0; i < triangles.Count; ++i)
+                triangles[i].triangle = value[i];
+        }
+
+        /*! Replaces the triangle face data in this mesh with new data.
+        * \param in A vector containing the new face data.  Maximum size is 65,535.
+        * \sa ITriShapeData::GetHavokTriangles
+        */
+        public virtual void SetHavokTriangles(List<TriangleData> value)
+        {
+            if (value.Count > 65535 || value.Count < 0)
+                throw new Exception("Invalid Face Count: must be between 0 and 65535.");
+            triangles = value;
+        }
+
+        /*! Replaces the face normal data in this mesh with new data.
+        * \param in A vector containing the new face normal data.
+        */
+        public virtual void SetNormals(IList<Vector3> value)
+        {
+            if (triangles.Count != value.Count)
+                throw new Exception("Invalid Face Count: normal count must be same as face count.");
+            for (var i = 0; i < triangles.Count; ++i)
+                triangles[i].normal = value[i];
+        }
+
+
+        /*! Replaces the vertex data in this mesh with new data.
+        * \param in A vector containing the new vertex data.
+        */
+        public virtual void SetVertices(IList<Vector3> value)
+        {
+            if (value.Count > 65535 || value.Count < 0)
+                throw new Exception("Invalid Vertex Count: must be between 0 and 65535.");
+            vertices = value;
+        }
+
+        /*!
+        * Gets or Sets the subshape data object used by this geometry node. 
+        * \param[in] value The subshape data.
+        */
+        public IList<OblivionSubShape> SubShapes
+        {
+            get => subShapes;
+            set
+            {
+                numSubShapes = (ushort)value.Count;
+                subShapes = value;
+            }
+        }
+//--END:CUSTOM--//
 
 }
 

@@ -12,111 +12,167 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*! Wrapper for 1D (one-dimensional) floating point animation keys. */
-public class NiFloatData : NiObject {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("NiFloatData", NiObject.TYPE);
-	/*! The keys. */
-	internal KeyGroup<float> data;
+    /*! Wrapper for 1D (one-dimensional) floating point animation keys. */
+    public class NiFloatData : NiObject
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("NiFloatData", NiObject.TYPE);
+        /*! The keys. */
+        internal KeyGroup<float> data;
 
-	public NiFloatData() {
-	}
+        public NiFloatData()
+        {
+        }
 
-	/*!
-	 * Used to determine the type of a particular instance of this object.
-	 * \return The type constant for the actual type of the object.
-	 */
-	public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-	/*!
-	 * A factory function used during file reading to create an instance of this type of object.
-	 * \return A pointer to a newly allocated instance of this type of object.
-	 */
-	public static NiObject Create() => new NiFloatData();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new NiFloatData();
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
-		base.Read(s, link_stack, info);
-		Nif.NifStream(out data.numKeys, s, info);
-		if ((data.numKeys != 0)) {
-			Nif.NifStream(out data.interpolation, s, info);
-		}
-		data.keys = new Key[data.numKeys];
-		for (var i2 = 0; i2 < data.keys.Count; i2++) {
-			Nif.NifStream(out data.keys[i2], s, info, data.interpolation);
-		}
+            base.Read(s, link_stack, info);
+            Nif.NifStream(out data.numKeys, s, info);
+            if ((data.numKeys != 0))
+            {
+                Nif.NifStream(out data.interpolation, s, info);
+            }
+            data.keys = new Key[data.numKeys];
+            for (var i2 = 0; i2 < data.keys.Count; i2++)
+            {
+                Nif.NifStream(out data.keys[i2], s, info, data.interpolation);
+            }
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.Write(s, link_map, missing_link_stack, info);
-		data.numKeys = (uint)data.keys.Count;
-		Nif.NifStream(data.numKeys, s, info);
-		if ((data.numKeys != 0)) {
-			Nif.NifStream(data.interpolation, s, info);
-		}
-		for (var i2 = 0; i2 < data.keys.Count; i2++) {
-			Nif.NifStream(data.keys[i2], s, info, data.interpolation);
-		}
+            base.Write(s, link_map, missing_link_stack, info);
+            data.numKeys = (uint)data.keys.Count;
+            Nif.NifStream(data.numKeys, s, info);
+            if ((data.numKeys != 0))
+            {
+                Nif.NifStream(data.interpolation, s, info);
+            }
+            for (var i2 = 0; i2 < data.keys.Count; i2++)
+            {
+                Nif.NifStream(data.keys[i2], s, info, data.interpolation);
+            }
 
-	}
+        }
 
-	/*!
-	 * Summarizes the information contained in this object in English.
-	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
-	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
-	 */
-	public override string AsString(bool verbose = false) {
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-		var s = new System.Text.StringBuilder();
-		uint array_output_count = 0;
-		s.Append(base.AsString());
-		data.numKeys = (uint)data.keys.Count;
-		s.AppendLine($"    Num Keys:  {data.numKeys}");
-		if ((data.numKeys != 0)) {
-			s.AppendLine($"      Interpolation:  {data.interpolation}");
-		}
-		array_output_count = 0;
-		for (var i2 = 0; i2 < data.keys.Count; i2++) {
-			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
-				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
-				break;
-			}
-			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
-				break;
-			}
-			s.AppendLine($"      Keys[{i2}]:  {data.keys[i2]}");
-			array_output_count++;
-		}
-		return s.ToString();
+            var s = new System.Text.StringBuilder();
+            uint array_output_count = 0;
+            s.Append(base.AsString());
+            data.numKeys = (uint)data.keys.Count;
+            s.AppendLine($"    Num Keys:  {data.numKeys}");
+            if ((data.numKeys != 0))
+            {
+                s.AppendLine($"      Interpolation:  {data.interpolation}");
+            }
+            array_output_count = 0;
+            for (var i2 = 0; i2 < data.keys.Count; i2++)
+            {
+                if (!verbose && (array_output_count > Nif.MAXARRAYDUMP))
+                {
+                    s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
+                    break;
+                }
+                if (!verbose && (array_output_count > Nif.MAXARRAYDUMP))
+                {
+                    break;
+                }
+                s.AppendLine($"      Keys[{i2}]:  {data.keys[i2]}");
+                array_output_count++;
+            }
+            return s.ToString();
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.FixLinks(objects, link_stack, missing_link_stack, info);
+            base.FixLinks(objects, link_stack, missing_link_stack, info);
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetRefs() {
-		var refs = base.GetRefs();
-		return refs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            var refs = base.GetRefs();
+            return refs;
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetPtrs() {
-		var ptrs = base.GetPtrs();
-		return ptrs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            var ptrs = base.GetPtrs();
+            return ptrs;
+        }
+        //--BEGIN:FILE FOOT--//
+
+        /*! Retrieves the type of float interpolation being used.
+         * \return The float key type specifing the type of interpolation being used.
+         * \sa NiFloatData::SetKeyType
+         */
+        public KeyType GetKeyType();
+
+        /*! Sets the type of float interpolation being used.  Does not affect existing key data.
+         * \param t The new float key type specifing the type of interpolation to be used.
+         * \sa NiFloatData::GetKeyType
+         */
+        public void SetKeyType(KeyType t);
+
+        /*! Retrieves the float key data.
+         * \return A vector containing Key<float> data which specify float values over time.
+         * \sa NiFloatData::SetKeys, Key
+         */
+        public IList<Key<float>> GetKeys();
+
+        /*! Sets the float key data.
+         * \param keys A vector containing new Key<float> data which will replace any existing data.
+         * \sa NiFloatData::GetKeys, Key
+         */
+        public void SetKeys(IList<Key<float>> keys);
+
+        /*!
+         * This function will adjust the times in all the keys stored in this data
+         * object such that phase will equal 0 and frequency will equal one.  In
+         * other words, it will cause the key times to be in seconds starting from
+         * zero.
+         * \param[in] frequency The frequency to normalize to 1.0 for any keys
+         * stored in this object
+         * \param[in] phase The phase shift to remove from any keys stored in this
+         * object.
+         */
+        NIFLIB_API virtual void NormalizeKeys(float phase, float frequency);
 
 
-}
+        //--END:CUSTOM--//
+
+    }
 
 }

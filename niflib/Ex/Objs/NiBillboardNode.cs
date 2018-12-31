@@ -111,6 +111,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the bilboard mode of this bilboard node.  This determines how it will cause the node to face the camera.
+         * \param[in] value The new bilboard mode.
+         */
+        public BillboardMode BillboardMode
+        {
+            get => billboardMode;
+            set => billboardMode = value;
+        }
+//--END:CUSTOM--//
 
 }
 

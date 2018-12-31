@@ -266,7 +266,7 @@ internal override List<NiObject> GetPtrs() {
             set
             {
                 numStripsData = value;
-                Array.Resize(ref stripsData, (int)value);
+                stripsData.Resize((int)value);
             }
         }
 
@@ -303,7 +303,7 @@ internal override List<NiObject> GetPtrs() {
             set
             {
                 numDataLayers = value;
-                Array.Resize(ref dataLayers, (int)value);
+                dataLayers.Resize((int)value);
             }
         }
 
@@ -311,20 +311,20 @@ internal override List<NiObject> GetPtrs() {
          * Gets the OblivionLayer referenced for the filter at the specified index.
          * \param[in] index The index at which the given OblivionLayer will be referenced.  Should be lower than the value set with bhkNiTriStripsShape::SetNumDataLayers.
          */
-        public Fallout3Layer GetFallout3Layer(uint index) => dataLayers[index].layer_fo;
-        public OblivionLayer GetOblivionLayer(uint index) => dataLayers[index].layer_ob;
-        public SkyrimLayer GetSkyrimLayer(uint index) => dataLayers[index].layer_sk;
+        public Fallout3Layer GetFallout3Layer(uint index) => dataLayers[(int)index].layer_fo;
+        public OblivionLayer GetOblivionLayer(uint index) => dataLayers[(int)index].layer_ob;
+        public SkyrimLayer GetSkyrimLayer(uint index) => dataLayers[(int)index].layer_sk;
 
         /*!
          * Sets the OblivionLayer referenced for the filter at the specified index.
          * \param[in] index The index at which the given OblivionLayer will be referenced.  Should be lower than the value set with bhkNiTriStripsShape::SetNumDataLayers.
          */
-        public void SetFallout3Layer(uint index, Fallout3Layer layer) => dataLayers[index].layer_fo = layer;
-        public void SetOblivionLayer(uint index, OblivionLayer layer) => dataLayers[index].layer_ob = layer;
-        public void SetSkyrimLayer(uint index, SkyrimLayer layer) => dataLayers[index].layer_sk = layer;
+        public void SetFallout3Layer(uint index, Fallout3Layer layer) => dataLayers[(int)index].layer_fo = layer;
+        public void SetOblivionLayer(uint index, OblivionLayer layer) => dataLayers[(int)index].layer_ob = layer;
+        public void SetSkyrimLayer(uint index, SkyrimLayer layer) => dataLayers[(int)index].layer_sk = layer;
 
-        //public byte GetOblivionFilter(uint index) => dataLayers[index].colFilter;
-        //public void SetOblivionFilter(uint index, byte filter) => dataLayers[index].colFilter = filter;
+        //public byte GetOblivionFilter(int index) => dataLayers[index].colFilter;
+        //public void SetOblivionFilter(int index, byte filter) => dataLayers[index].colFilter = filter;
 
         /*! Helper routine for calculating mass properties.
          *  \param[in]  density Uniform density of object

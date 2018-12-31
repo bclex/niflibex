@@ -86,6 +86,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the 3D point value stored in this object.  Perhaps this is the current interpolated value.
+         * \param[in] value The new 3D point value to store in this object.
+         */
+        public Vector3 PointValue
+        {
+            get => value;
+            set => this.value = value;
+        }
+//--END:CUSTOM--//
 
 }
 

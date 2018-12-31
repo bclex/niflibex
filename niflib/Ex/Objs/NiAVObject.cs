@@ -316,6 +316,232 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        protected NiNode parent;
+
+        /*!
+         * Clears all embedded bounding box information.  Older NIF files can have a bounding box specified in them which will be used for collision detection instead of evaluating the triangles.
+         */
+        public void ClearBoundingVolume() => hasBoundingVolume = false;
+
+        /*!
+         * Gets or sets new embedded bounding box information.  Older NIF files can have a bounding box specified in them which will be used for collision detection instead of evaluating the triangles.
+         * \param[in] n The new bounding box dimentions.
+         */
+        public BoundingVolume BoundingVolume
+        {
+            get
+            {
+                if (hasBoundingVolume)
+                    return boundingVolume;
+                throw new Exception("This NIAVObject has no Bounding Box.");
+            }
+            set
+            {
+                boundingVolume = value;
+                hasBoundingVolume = true;
+            }
+        }
+
+        /*!
+         * Determines whether this object has embedded bounding box information.  Older NIF files can have a bounding box specified in them which will be used for collision detection instead of evaluating the triangles.
+         * \return True if this object has an embedded bounding box, false otherwise.
+         */
+        public bool HasBoundingVolume => hasBoundingVolume;
+
+        /*! 
+         * This is a conveniance function that allows you to retrieve the full 4x4 matrix transform of a node.  It accesses the "Rotation," "Translation," and "Scale" attributes and builds a complete 4x4 transformation matrix from them.
+         * \return A 4x4 transformation matrix built from the node's transform attributes.
+         * \sa INode::GetWorldTransform
+         */
+        public Matrix44 GetLocalTransform() => new Matrix44(translation, rotation, scale);
+
+        /*! 
+         * This is a conveniance function that allows you to set the rotation, scale, and translation of an AV object with a 4x4 matrix transform.
+         * \n A 4x4 transformation matrix to set the AVObject's transform attributes with.
+         * \sa INode::GetLocalTransform
+         */
+        public void SetLocalTransform(Matrix44 value) => value.Decompose(translation, rotation, scale);
+
+        /*! 
+         * This function will return a transform matrix that represents the location of this node in world space.  In other words, it concatenates all parent transforms up to the root of the scene to give the ultimate combined transform from the origin for this node.
+         * \return The 4x4 world transform matrix of this node.
+         * \sa INode::GetLocalTransform
+         */
+        public Matrix44 GetWorldTransform()
+        {
+            //Get Parent Transform if there is one
+            var par = Parent;
+            //Multipy local matrix and parent world matrix for result
+            //No parent transform, simply return local transform
+            return par != null ? GetLocalTransform() * par.GetWorldTransform() : GetLocalTransform();
+        }
+
+        /*!
+         * Returns the parent of this object in the scene graph.  May be NULL.
+         * \return The parent of this object in the scene graph.
+         */
+        public NiNode Parent
+        {
+            get => parent;
+            // Called by NiNode during the addition of new children.
+            internal set => parent = value;
+        }
+
+        /*!
+         * Adds a property to this object.  Properties specify various charactaristics of the object that affect rendering.  They may be shared among objects.
+         * \param[in] obj The new property that is to affect this object.
+         */
+        public void AddProperty(NiProperty obj) => properties.Add(obj);
+
+        /*!
+         * Removes a property from this object.  Properties specify various charactaristics of the object that affect rendering.  They may be shared among objects.
+         * \param[in] obj The property that is no longer to affect this object.
+         */
+        public void RemoveProperty(NiProperty obj) => properties.Remove(obj);
+
+        /*!
+         * Removes all properties from this object.  Properties specify various charactaristics of the object that affect rendering.  They may be shared among objects.
+         */
+        public void ClearProperties() => properties.Clear();
+
+        /*!
+         * Retrieves a list of all properties that affect this object.  Properties specify various charactaristics of the object that affect rendering.  They may be shared among objects.
+         * \return All the properties that affect this object.
+         */
+        public IList<NiProperty> Properties => properties;
+
+        /*!
+         * Retrieves the property that matches the specified type, if there is one.  A valid object should not have more than one property of the same type.  Properties specify various charactaristics of the object that affect rendering.  They may be shared among objects.
+         * \param[in] compare_to The type constant of the desired property type.
+         * \return The property that matches the specified type, or NULL if there isn't a match.
+         * \sa NiObject::TypeConst
+         */
+        public NiProperty GetPropertyByType(Type_ compare_to) =>
+
+        /*!
+         * Can be used to set the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+         * \param[in] n The new flag data.  Will overwrite any existing flag data.
+         */
+        public uint Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
+
+        /*!
+         * Gets or sets the local rotation matrix for this object.  This is a 3x3 matrix that should not include scale or translation components.
+         * \param[in] n The new local 3x3 rotation matrix for this object.
+         */
+        public Matrix33 LocalRotation
+        {
+            get => rotation;
+            set => rotation = value;
+        }
+
+        /*!
+         * Gets or sets the local translation vector for this object.  This determines the object's offset from its parent.
+         * \param[in] n The new local translation vector for this object.
+         */
+        public Vector3 LocalTranslation
+        {
+            get => translation;
+            set => translation = value;
+        }
+
+        /*!
+         * Gets or sets the local scale factor for this object.  The NIF format does not support separate scales along different axis, and many games do not react well to scale factors other than 1.0.
+         * \param[in] n The new local scale factor for this object.
+         */
+        public float LocalScale
+        {
+            get => scale;
+            set => scale = value;
+        }
+
+        /*!
+         * Gets or sets the velocity vector for this object.  This vector exists in older NIF files and seems to have no function.
+         * \param[in] n The new velocity vector for this object.
+         */
+        public Vector3 Velocity
+        {
+            get => velocity;
+            set => velocity = value;
+        }
+
+        /*!
+         * Gets or sets the current visibility of this object by altering its flag data.
+         * \param[in] n Whether or not the object will now be visible.  True if visible, false otherwise.
+         */
+        public bool Visibility
+        {
+            get => (flags & 1) != 0;
+            //Only do anything if the value is different from what it already is, Flip the bit
+            set { if (Visibility != value) flags ^= 1; }
+        }
+
+        /*!
+         * Gets or sets the collision object for this object.  Usually a bounding box.  In Oblivion this links to the Havok objects.
+         * \param[in] value The new collision object to use.
+         */
+        public NiCollisionObject CollisionObject
+        {
+            get => collisionObject;
+            set
+            {
+                if (value != null)
+                {
+                    if (value.Target != null)
+                        throw new Exception("You have attempted to add a collision object to a NiAVObject which is already attached to another NiAVObject.");
+                    value.Target = this;
+                }
+                //Remove unlink previous collision object from this node
+                if (collisionObject != null)
+                    collisionObject.Target = null;
+                collisionObject = value;
+            }
+        }
+
+        /*!
+         * Used to get and set the collision type of a NiAVObject.
+         */
+        public enum CollisionType
+        {
+            /*! No collision */
+            CT_NONE = 0,
+            /*! Collision detection will use the triangles themselves.  Possibly incompatible with triangle strips. */
+            CT_TRIANGLES = 1,
+            /*! Collision detection will use the embedded bounding box information. */
+            CT_BOUNDINGBOX = 2,
+            /*! Collision detection will continue on to the lower objects in the scene graph. */
+            CT_CONTINUE = 3
+        }
+
+        /*!
+         * Gets or sets the current collision detection setting in the object's flag data.
+         * \param[in] value The new collision detection setting for this object.
+         */
+        public CollisionType CollisionMode
+        {
+            get
+            {
+                //Mask off the 2 significant bits
+                var temp = flags & 0x6;
+                //Shift the result one right
+                return (CollisionType)(temp >> 1);
+            }
+            set
+            {
+                var temp = (ushort)value;
+                //Shift one left
+                temp = (ushort)(temp << 1);
+                //Zero out the values in the flags for the 2 significant bits
+                flags = flags & 0xFFF9;
+                //Now combine values
+                flags = flags | temp;
+            }
+        }
+//--END:CUSTOM--//
 
 }
 

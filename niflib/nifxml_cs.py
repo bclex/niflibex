@@ -98,6 +98,12 @@ import io
 import re
 import types
 
+
+LISTARRAYS = [
+    'bhkConstraint::entities',
+    'NiAVObjects::properties'
+]
+
 #
 # global data
 #
@@ -169,10 +175,6 @@ ACTION_FIXLINKS = 3
 ACTION_GETREFS = 4
 ACTION_GETPTRS = 5
 
-
-LISTARRAYS = [
-    'bhkConstraint::entities',
-]
         
 #
 # C# code formatting functions

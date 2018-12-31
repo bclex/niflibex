@@ -85,7 +85,20 @@ public class NiColorExtraData : NiExtraData {
 		return ptrs;
 	}
 
+        //--BEGIN:FILE FOOT--//
 
+        /*!
+         * Retrieves the RGBA color value stored in this object.
+         * \return The RGBA color value stored in this object.
+         */
+        NIFLIB_API Color4 GetData() const;
+
+        /*!
+         * Sets the RGBA color value stored in this object.
+         * \param[in] n The new RGBA color value to store in this object.
+         */
+        NIFLIB_API void SetData( const Color4 & n );
+	    //--END:CUSTOM--//
 }
 
 }

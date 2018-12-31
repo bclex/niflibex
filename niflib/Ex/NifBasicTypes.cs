@@ -2,6 +2,7 @@
 All rights reserved.  Please see niflib.h for license. */
 
 using System;
+using System.Collections.Generic;
 
 namespace Niflib
 {
@@ -121,5 +122,51 @@ namespace Niflib
         public T[] data = new T[7];
         public Array8(T t0 = default(T), T t1 = default(T), T t2 = default(T), T t3 = default(T), T t4 = default(T), T t5 = default(T), T t6 = default(T)) { data[0] = t0; data[1] = t1; data[2] = t2; data[3] = t3; data[4] = t4; data[5] = t5; data[6] = t6; data[7] = default(T); }
         public T this[int x] { get => data[x]; set => data[x] = value; }
+    }
+
+    static partial class Nif
+    {
+        public static void Resize<T>(this IList<T> s, int newSize) { var v = (T[])s; Array.Resize(ref v, newSize); }
+
+        //-- BitField Helper functions --//
+        public static bool UnpackFlag(ushort src, int lshift)
+        {
+            //Generate mask
+            var mask = (ushort)(1 << lshift);
+            return ((src & mask) >> lshift) != 0;
+        }
+
+        public static void PackFlag(ushort dest, bool new_value, int lshift)
+        {
+            //Generate mask
+            var mask = (ushort)(1 << lshift);
+            //Clear current value of requested flag
+            dest &= (ushort)~mask;
+            //Pack in the new value
+            dest |= (ushort)((new_value ? 1 : 0 << lshift) & mask);
+        }
+
+        public static ushort UnpackField(ushort src, int lshift, int num_bits)
+        {
+            //Generate mask
+            ushort mask = 0;
+            for (var i = lshift; i < num_bits + lshift; ++i)
+                mask |= (ushort)(1 << i);
+            return (ushort)((src & mask) >> lshift);
+        }
+
+        public static void PackField(ushort dest, ushort new_value, int lshift, int num_bits)
+        {
+            //Generate Mask
+            ushort mask = 0;
+            for (var i = lshift; i < num_bits + lshift; ++i)
+                mask |= (ushort)(1 << i);
+            //Clear current value of requested field
+            dest &= (ushort)~mask;
+            //Pack in the new value
+            dest |= (ushort)((new_value << lshift) & mask);
+        }
+
+
     }
 }

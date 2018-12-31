@@ -119,6 +119,117 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+#if false
+        /*!
+         * Gets or sets translate bias.
+         * \param[in] value The new translate bias.
+         */
+        public float TranslateBias
+        {
+            get => ;
+            set => ;
+        }
+
+        /*!
+         * Gets or sets translate multiplier.
+         * \param[in] value The new translate bias.
+         */
+        public float TranslateMultiplier
+        {
+            get => ;
+            set => ;
+        }
+
+        /*!
+         * Gets or sets rotation bias.
+         * \param[in] value The new rotation bias.
+         */
+        public float RotationBias
+        {
+            get => ;
+            set => ;
+        }
+
+        /*!
+         * Gets or sets rotation multiplier.
+         * \param[in] value The new translate bias.
+         */
+        public float RotationMultiplier
+        {
+            get => ;
+            set => ;
+        }
+
+        /*!
+         * Gets or sets scale bias.
+         * \param[in] value The new scale bias.
+         */
+        public float ScaleBias
+        {
+            get => ;
+            set => ;
+        }
+        
+        /*!
+         * Gets or sets scale multiplier.
+         * \param[in] value The new scale multiplier.
+         */
+        public float ScaleMultiplier
+        {
+            get => ;
+            set => ;
+        }
+
+        /*!
+         * Retrieves the control quaternion rotation data.
+         * \return A vector containing control Quaternion data which specify rotation over time.
+         */
+        NIFLIB_API vector<Quaternion> GetQuatRotateControlData() const;
+
+        /*!
+         * Retrieves the control translation data.
+         * \return A vector containing control Vector3 data which specify translation over time.
+         */
+        NIFLIB_API vector<Vector3> GetTranslateControlData() const;
+
+        /*!
+         * Retrieves the scale key data.
+         * \return A vector containing control float data which specify scale over time.
+         */
+        NIFLIB_API vector< float > GetScaleControlData() const;
+
+        /*!
+         * Retrieves the sampled quaternion rotation key data between start and stop time.
+         * \param npoints The number of data points to sample between start and stop time.
+         * \param degree N-th order degree of polynomial used to fit the data.
+         * \return A vector containing Key<Quaternion> data which specify rotation over time.
+         */
+        NIFLIB_API vector<Key<Quaternion> > SampleQuatRotateKeys(int npoints, int degree) const;
+
+        /*!
+         * Retrieves the sampled scale key data between start and stop time.
+         * \param npoints The number of data points to sample between start and stop time.
+         * \param degree N-th order degree of polynomial used to fit the data.
+         * \return A vector containing Key<Vector3> data which specify translation over time.
+         */
+        NIFLIB_API vector<Key<Vector3> > SampleTranslateKeys(int npoints, int degree) const;
+
+        /*!
+         * Retrieves the sampled scale key data between start and stop time.
+         * \param npoints The number of data points to sample between start and stop time.
+         * \param degree N-th order degree of polynomial used to fit the data.
+         * \return A vector containing Key<float> data which specify scale over time.
+         */
+        NIFLIB_API vector<Key<float> > SampleScaleKeys(int npoints, int degree) const;
+
+        /*!
+         * Retrieves the number of control points used in the spline curve.
+         * \return The number of control points used in the spline curve.
+         */
+        public int NumControlPoints => ;
+#endif
+//--END:CUSTOM--//
 
 }
 

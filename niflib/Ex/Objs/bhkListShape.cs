@@ -215,14 +215,14 @@ internal override List<NiObject> GetPtrs() {
         * Gets or sets the child shape objects that this body is using.
         * \param[in] shapes The shape objects being used by this body.
         */
-        public bhkShape[] SubShapes
+        public List<bhkShape> SubShapes
         {
             get => subShapes;
             set
             {
                 subShapes = value;
                 // Becuase this vector matches the subshape vector
-                Array.Resize<ref unknownInts, subShapes.Length);
+                unknownInts.Resize(subShapes.Count);
             }
         }
 
@@ -268,7 +268,7 @@ internal override List<NiObject> GetPtrs() {
             }
             Inertia.CombineMassProperties(
                 masses, volumes, centers, inertias, transforms,
-                mass, volume, center, inertia);
+                ref mass, ref volume, ref center, ref inertia);
         }
 //--END:CUSTOM--//
 

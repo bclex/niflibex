@@ -86,6 +86,16 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or Set which float variable in BSEffectShaderProperty to animate
+         */
+        public EffectShaderControlledVariable TypeOfControlledVariable
+        {
+            get => typeOfControlledVariable;
+            set => typeOfControlledVariable = value;
+        }
+//--END:CUSTOM--//
 
 }
 

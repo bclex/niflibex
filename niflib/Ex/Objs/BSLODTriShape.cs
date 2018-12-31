@@ -98,6 +98,11 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        //public virtual uint GetLODLevelSize(uint level) =>
+
+        //public virtual void SetLODLevelSize(uint level, uint size) =>
+//--END:CUSTOM--//
 
 }
 

@@ -86,6 +86,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the boolean value stored in this object.  Perhaps this is the current interpolated value.
+         * \param[in] value The new boolean value to store in this object.
+         */
+        public bool BoolValue
+        {
+            get => value !=  0;
+            set => this.value = (byte)(value ? 1 : 0);
+        }
+//--END:CUSTOM--//
 
 }
 

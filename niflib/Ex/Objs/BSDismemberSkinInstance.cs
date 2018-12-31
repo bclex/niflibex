@@ -109,6 +109,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the dismemberment partition list
+         * \param[in] value The new value.
+         */
+        public IList<BodyPartList> Partitions
+        {
+            get => partitions;
+            set => partitions = value;
+        }
+//--END:CUSTOM--//
 
 }
 

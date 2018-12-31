@@ -105,42 +105,6 @@ namespace Niflib
             else WriteByte(val ? (byte)1 : (byte)0, s);
         }
 
-        ////-- BitField Helper functions --//
-        //public static bool UnpackFlag<storage>(storage src, int lshift)
-        //{
-        //    //Generate mask
-        //    storage mask = 1 << lshift;
-        //    return ((src & mask) >> lshift) != 0;
-        //}
-        //public static void PackFlag<storage>(storage dest, bool new_value, int lshift)
-        //{
-        //    //Generate mask
-        //    storage mask = 1 << lshift;
-        //    //Clear current value of requested flag
-        //    dest &= ~mask;
-        //    //Pack in the new value
-        //    dest |= (((storage)new_value << lshift) & mask);
-        //}
-        //public static storage UnpackField<storage>(storage src, int lshift, int num_bits)
-        //{
-        //    //Generate mask
-        //    storage mask = 0;
-        //    for (int i = lshift; i < num_bits + lshift; ++i)
-        //        mask |= (1 << i);
-        //    return (storage)((src & mask) >> lshift);
-        //}
-        //public static void PackField<storage, T>(storage dest, T new_value, int lshift, int num_bits)
-        //{
-        //    //Generate Mask
-        //    storage mask = 0;
-        //    for (size_t i = lshift; i < num_bits + lshift; ++i)
-        //        mask |= (1 << i);
-        //    //Clear current value of requested field
-        //    dest &= ~mask;
-        //    //Pack in the new value
-        //    dest |= (((storage)new_value << lshift) & mask);
-        //}
-
         //-- NifStream And OStream Functions --//
 
         // The NifStream functions allow each built-in type to be streamed to and from a file.

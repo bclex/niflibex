@@ -86,6 +86,16 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets which color in BSLightingShaderProperty to animate
+         */
+        public LightingShaderControlledColor TypeOfControlledColor
+        {
+            get => typeOfControlledColor;
+            set => typeOfControlledColor = value;
+        }
+//--END:CUSTOM--//
 
 }
 

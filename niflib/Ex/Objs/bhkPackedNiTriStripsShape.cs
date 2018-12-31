@@ -233,12 +233,12 @@ internal override List<NiObject> GetPtrs() {
     * Get or sets the subshape data object used by this geometry node. 
     * \param[in] value The subshape data.
     */
-    public OblivionSubShape[] SubShapes
+    public IList<OblivionSubShape> SubShapes
     {
         get => subShapes;
         set
         {
-            numSubShapes = (ushort)value.Length;
+            numSubShapes = (ushort)value.Count;
             subShapes = value;
         }
     }

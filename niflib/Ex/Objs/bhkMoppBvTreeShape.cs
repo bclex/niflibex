@@ -194,22 +194,22 @@ internal override List<NiObject> GetPtrs() {
          * Gets or Sets the shape's material.  This determines the type of noises the object makes as it collides in Oblivion.
          * \param[in] value The new material for this shape to use.
          */
-        public HavokMaterial Material
-        {
-            get => material;
-            set => material = value;
-        }
+        //public HavokMaterial Material
+        //{
+        //    get => material;
+        //    set => material = value;
+        //}
 
         /*!
         * Gets or sets the shape's bounding volume code.  The code is specific to the Havok Physics engine.
         * \param[in] value A byte vector containing the code representing the MOPP.
         */
-        public byte[] MoppCode
+        public IList<byte> MoppCode
         {
             get => moppData;
             set
             {
-                moppDataSize = (uint)value.Length;
+                moppDataSize = (uint)value.Count;
                 moppData = value;
             }
         }
@@ -262,7 +262,7 @@ internal override List<NiObject> GetPtrs() {
             set => buildType = value;
         }
 
-        uint moppDataSizeCalc(NifInfo info) => info.version <= 0x0A000100 ? (uint)(oldMoppData.Length + 1) : (uint)moppData.Length;
+        //uint moppDataSizeCalc(NifInfo info) => info.version <= 0x0A000100 ? (uint)(oldMoppData.Length + 1) : (uint)moppData.Count;
 //--END:CUSTOM--//
 
 }

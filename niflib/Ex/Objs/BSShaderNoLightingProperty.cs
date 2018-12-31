@@ -114,6 +114,15 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        // The texture glow map.
+        // \param[in] value The new value.
+        public string FileName
+        {
+            get => fileName;
+            set => fileName = value;
+        }
+//--END:CUSTOM--//
 
 }
 

@@ -89,6 +89,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the number of spline control points.  This is usually the number of frames for animation.
+         * \param[in] value The new number of spline control points.
+         */
+        public uint NumControlPoints
+        {
+            get => numControlPoints;
+            set => numControlPoints = value;
+        }
+//--END:CUSTOM--//
 
 }
 

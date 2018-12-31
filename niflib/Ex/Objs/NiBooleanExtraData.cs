@@ -86,6 +86,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+//--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the boolean value stored in this object.
+         * \param[in] n The new boolean value to store in this object.
+         */
+        public bool Data
+        {
+            get => booleanData != 0;
+            set => booleanData = (byte)(value ? 1 : 0);
+        }
+//--END:CUSTOM--//
 
 }
 

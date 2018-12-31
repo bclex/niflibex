@@ -140,8 +140,63 @@ internal override List<NiObject> GetPtrs() {
 	}
 	return ptrs;
 }
+        //--BEGIN MISC CUSTOM CODE--//
 
+        /*!
+         *  Used to determine whether or not the animation sequences are cumulative.
+         * \return True if animation sequences are cumulative, false otherwise.
+         */
+        NIFLIB_API bool GetCumulative() const;
 
-}
+        /*!
+         *  Used to set whether or not the animation sequences are cumulative.
+         * \param[in] value True if animation sequences are to be cumulative, false otherwise.
+         */
+        NIFLIB_API void SetCumulative(bool value);
+
+        /*!
+         * Retrives the list of controller sequences that this controller manager references.
+         * \return The controller sequences.
+         */
+        NIFLIB_API vector<Ref<NiControllerSequence> > GetControllerSequences() const;
+
+        /*!
+         * Sets the list of controller sequences that this controller manager references.
+         * \param[in] value The new controller sequences.
+         */
+        NIFLIB_API void SetControllerSequences( const vector<Ref<NiControllerSequence>> & value );
+
+	/*!
+	 * Adds a new controller sequence to this controller manager.
+	 * \param[in] obj The new controller sequence to add.
+	 */
+	NIFLIB_API void AddSequence(NiControllerSequence* obj);
+
+        /*!
+         * Removes a single controller sequence from this controller manager.
+         * \param[in] obj The controller sequence to remove.
+         */
+        NIFLIB_API void RemoveSequence(NiControllerSequence* obj);
+
+        /*!
+         * Removes all controller sequences from this controller manager.
+         */
+        NIFLIB_API void ClearSequences();
+
+        /*!
+         * Retrives the oject pallete object used by this controller manager.
+         * \return The object pallete.
+         */
+        NIFLIB_API Ref<NiDefaultAVObjectPalette> GetObjectPalette() const;
+
+        /*!
+         * Sets the object pallete object used by this controller manager.
+         * \param[in] value The new object pallete.
+         */
+        NIFLIB_API void SetObjectPalette(NiDefaultAVObjectPalette* value);
+
+        //--END CUSTOM CODE--//
+
+    }
 
 }
