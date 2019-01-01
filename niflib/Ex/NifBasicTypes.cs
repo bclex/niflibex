@@ -30,7 +30,7 @@ namespace Niflib
         //public IndexString() { val = null; }
         public IndexString(IndexString r) { val = r.val; }
         public IndexString(string r) { val = r; }
-        //public static implicit operator string(IndexString r) => r.val;
+        public static implicit operator string(IndexString r) => r.val;
         public static implicit operator IndexString(string r) => new IndexString(r);
     }
 

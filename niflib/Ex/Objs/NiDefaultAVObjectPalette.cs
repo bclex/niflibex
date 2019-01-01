@@ -151,33 +151,77 @@ namespace Niflib
          * Gets the AV Objects stored in this palette.
          * \return The AV Objects stored in this palette.
          */
-        public IList<NiAVObject> GetObjs();
+        public IList<NiAVObject> GetObjs()
+        {
+            var objRefs = new List<NiAVObject>();
+            foreach (var itr in objs)
+                objRefs.Add(itr.avObject);
+            return objRefs;
+        }
 
         /*!
          * Sets the AV Objects stored in this palette.
          * \return The new AV Objects to be stored in this palette.
          */
-        public void SetObjs(IList<NiAVObject> value);
+        public void SetObjs(IList<NiAVObject> value)
+        {
+            objs.Clear();
+            foreach (var itr in value)
+            {
+                var obj = new AVObject();
+                obj.name = itr.Name;
+                obj.avObject = itr;
+                objs.Add(obj);
+            }
+        }
 
         /*!
          * Adds a single object to the collection. The collection will expand if necessary.
          * \param[in] mesh The object to add to the collection.
          */
-        public bool AddObj(NiAVObject obj);
+        public bool AddObj(NiAVObject obj)
+        {
+            foreach (var itr in objs)
+                if (itr.avObject == obj)
+                    return false;
+            var avo = new AVObject();
+            avo.name = obj.Name;
+            avo.avObject = obj;
+            objs.Add(avo);
+            numObjs++;
+            return false;
+        }
 
         /*!
          * Remove a single object from the collection.
          * \param[in] mesh The object remove from the collection.
          */
-        public bool RemoveObj(NiAVObject obj);
+        public bool RemoveObj(NiAVObject obj)
+        {
+            foreach (var itr in objs.ToList())
+                if (itr.avObject == obj)
+                {
+                    objs.Remove(itr);
+                    numObjs--;
+                    return true;
+                }
+            return false;
+        }
 
         /*!
          * Replace a single object by another in the collection.
          * \param[in] newobj The object put into the collection.
          * \param[in] oldobj The object remove from the collection.
          */
-        public void ReplaceObj(NiAVObject newobj, NiAVObject oldobj);
-
+        public void ReplaceObj(NiAVObject newobj, NiAVObject oldobj)
+        {
+            foreach (var itr in objs)
+                if (itr.avObject == oldobj)
+                {
+                    itr.name = newobj.Name;
+                    itr.avObject = newobj;
+                }
+        }
         //--END:CUSTOM--//
 
     }

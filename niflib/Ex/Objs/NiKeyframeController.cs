@@ -99,8 +99,18 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the keyframe data used by this controller.
+         * \param[in] n The new morph data.
+         */
+        public NiKeyframeData Data
+        {
+            get => data;
+            set => data = value;
+        }
+        //--END:CUSTOM--//
 
-
-}
+    }
 
 }

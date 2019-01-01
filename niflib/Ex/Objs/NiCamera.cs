@@ -204,144 +204,124 @@ internal override List<NiObject> GetPtrs() {
 }
         //--BEGIN:FILE FOOT--//
         /*!
-         * Retrieves the frustum left value.
-         * \return The frstum left value.
-         */
-        NIFLIB_API float GetFrustumLeft() const;
-
-        /*!
-         * Sets the frustum left value.
+         * Gets or sets the frustum left value.
          * \param[in] value The new frstum left value.
          */
-        NIFLIB_API void SetFrustumLeft(float value);
+        public float FrustumLeft
+        {
+            get => frustumLeft;
+            set => frustumLeft = value;
+        }
 
         /*!
-         * Retrieves the frustum right value.
-         * \return The frstum right value.
-         */
-        NIFLIB_API float GetFrustumRight() const;
-
-        /*!
-         * Sets the frustum right value.
+         * Gets or sets the frustum right value.
          * \param[in] value The new frstum right value.
          */
-        NIFLIB_API void SetFrustumRight(float value);
+        public float FrustumRight
+        {
+            get => frustumRight;
+            set => frustumRight = value;
+        }
 
         /*!
-         * Retrieves the frustum top value.
+         * Gets or sets the frustum top value.
          * \return The frstum top value.
          */
-        NIFLIB_API float GetFrustumTop() const;
-        NIFLIB_API void SetFrustumTop(float value);
+        public float FrustumTop
+        {
+            get => frustumTop;
+            set => frustumTop = value;
+        }
 
         /*!
-         * Retrieves the frustum bottom value.
-         * \return The frstum bottom value.
-         */
-        NIFLIB_API float GetFrustumBottom() const;
-
-        /*!
-         * Sets the frustum top value.
+         * Gets or sets the frustum top value.
          * \param[in] value The new frstum top value.
          */
-        NIFLIB_API void SetFrustumBottom(float value);
+        public float FrustumBottom
+        {
+            get => frustumBottom;
+            set => frustumBottom = value;
+        }
 
         /*!
-         * Retrieves the frustum near value.
-         * \return The frstum near value.
-         */
-        NIFLIB_API float GetFrustumNear() const;
-
-        /*!
-         * Sets the frustum near value.
+         * Gets or sets the frustum near value.
          * \param[in] value The new frstum near value.
          */
-        NIFLIB_API void SetFrustumNear(float value);
+        public float FrustumNear
+        {
+            get => frustumNear;
+            set => frustumNear = value;
+        }
 
         /*!
-         * Retrieves the frustum far value.
-         * \return The frstum far value.
-         */
-        NIFLIB_API float GetFrustumFar() const;
-
-        /*!
-         * Sets the frustum far value.
+         * Gets or sets the frustum far value.
          * \param[in] value The new frstum far value.
          */
-        NIFLIB_API void SetFrustumFar(float value);
+        public float FrustumFar
+        {
+            get => frustumFar;
+            set => frustumFar = value;
+        }
 
         /*!
-         * Determines whether perspective is used.  Orthographic means no perspective.
-         * \return True if projection is orthographic, false otherwise.
-         */
-        NIFLIB_API bool GetUseOrthographicProjection() const;
-
-        /*!
-         * Sets whether perspective is used.  Orthographic means no perspective.
+         * Gets or sets whether perspective is used.  Orthographic means no perspective.
          * \param[in] value True if projection is to be orthographic, false otherwise.
          */
-        NIFLIB_API void SetUseOrthographicProjection(bool value);
+        public bool UseOrthographicProjection
+        {
+            get => useOrthographicProjection;
+            set => useOrthographicProjection = value;
+        }
 
         /*!
-         * Retrieves the viewport left value.
-         * \return The viewport left value.
-         */
-        NIFLIB_API float GetViewportLeft() const;
-
-        /*!
-         * Sets the viewport left value.
+         * Gets or sets the viewport left value.
          * \param[in] value The new viewport left value.
          */
-        NIFLIB_API void SetViewportLeft(float value);
+        public float ViewportLeft
+        {
+            get => viewportLeft;
+            set => viewportLeft = value;
+        }
 
         /*!
-         * Retrieves the viewport right value.
-         * \return The viewport right value.
-         */
-        NIFLIB_API float GetViewportRight() const;
-
-        /*!
-         * Sets the viewport right value.
+         * Gets or sets the viewport right value.
          * \param[in] value The new viewport right value.
          */
-        NIFLIB_API void SetViewportRight(float value);
+        public float ViewportRight
+        {
+            get => viewportRight;
+            set => viewportRight = value;
+        }
 
         /*!
-         * Retrieves the viewport top value.
-         * \return The viewport top value.
-         */
-        NIFLIB_API float GetViewportTop() const;
-
-        /*!
-         * Sets the viewport top value.
+         * Gets or sets the viewport top value.
          * \param[in] value The new viewport top value.
          */
-        NIFLIB_API void SetViewportTop(float value);
+        public float ViewportTop
+        {
+            get => viewportTop;
+            set => viewportTop = value;
+        }
 
         /*!
-         * Retrieves the viewport bottom value.
-         * \return The viewport bottom value.
-         */
-        NIFLIB_API float GetViewportBottom() const;
-
-        /*!
-         * Sets the viewport bottom value.
+         * Gets or sets the viewport bottom value.
          * \param[in] value The new viewport bottom value.
          */
-        NIFLIB_API void SetViewportBottom(float value);
+        public float ViewportBottom
+        {
+            get => viewportBottom;
+            set => viewportBottom = value;
+        }
 
         /*!
-         * Retrieves the level of detail adjustment value.
-         * \return The LOD adjustment value.
-         */
-        NIFLIB_API float GetLodAdjust() const;
-
-        /*!
-         * Sets the level of detail adjustment value.
+         * Gets or sets the level of detail adjustment value.
          * \param[in] value The new LOD adjustment value.
          */
-        NIFLIB_API void SetLodAdjust(float value);
-
+        public float LodAdjust
+        {
+            get => lodAdjust;
+            set => lodAdjust = value;
+        }
         //--END:CUSTOM--//
 
     }

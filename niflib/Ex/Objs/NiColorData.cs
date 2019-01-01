@@ -117,30 +117,25 @@ public class NiColorData : NiObject {
 	}
 
         //--BEGIN:FILE FOOT--//
-
-        /*! Retrieves the type of color interpolation being used.
-         * \return The color key type specifing the type of interpolation being used.
-         * \sa NiColorData::SetKeyType
-         */
-        NIFLIB_API KeyType GetKeyType() const;
-
-        /*! Sets the type of color interpolation being used.  Does not affect existing key data.
+        /*! Gets or sets the type of color interpolation being used.  Does not affect existing key data.
          * \param t The new color key type specifing the type of interpolation to be used.
          * \sa NiColorData::GetKeyType
          */
-        NIFLIB_API void SetKeyType(KeyType t);
+        public KeyType KeyType
+        {
+            get => data.interpolation;
+            set => data.interpolation = value;
+        }
 
-        /*! Retrieves the color key data.
-         * \return A vector containing Key<Color4> data which specify color over time.
-         * \sa NiColorData::SetKeys, Key
-         */
-        NIFLIB_API vector<Key<Color4> > GetKeys() const;
-
-        /*! Sets the color key data.
+        /*! Gets or sets the color key data.
          * \param keys A vector containing new Key<Color4> data which will replace any existing data.
          * \sa NiColorData::GetKeys, Key
          */
-        NIFLIB_API void SetKeys(vector<Key<Color4>> const & keys );
+        public IList<Key<Color4>> Keys
+        {
+            get => data.keys;
+            set => data.keys = value;
+        }
 	    //--END:CUSTOM--//
 }
 

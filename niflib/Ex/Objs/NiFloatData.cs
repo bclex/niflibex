@@ -133,30 +133,25 @@ namespace Niflib
             return ptrs;
         }
         //--BEGIN:FILE FOOT--//
-
-        /*! Retrieves the type of float interpolation being used.
-         * \return The float key type specifing the type of interpolation being used.
-         * \sa NiFloatData::SetKeyType
-         */
-        public KeyType GetKeyType();
-
-        /*! Sets the type of float interpolation being used.  Does not affect existing key data.
+        /*! Gets or sets the type of float interpolation being used.  Does not affect existing key data.
          * \param t The new float key type specifing the type of interpolation to be used.
          * \sa NiFloatData::GetKeyType
          */
-        public void SetKeyType(KeyType t);
+        public KeyType KeyType
+        {
+            get => data.interpolation;
+            set => data.interpolation = value;
+        }
 
-        /*! Retrieves the float key data.
-         * \return A vector containing Key<float> data which specify float values over time.
-         * \sa NiFloatData::SetKeys, Key
-         */
-        public IList<Key<float>> GetKeys();
-
-        /*! Sets the float key data.
+        /*! Gets or sets the float key data.
          * \param keys A vector containing new Key<float> data which will replace any existing data.
          * \sa NiFloatData::GetKeys, Key
          */
-        public void SetKeys(IList<Key<float>> keys);
+        public IList<Key<float>>  Keys
+        {
+            get => data.keys;
+            set => data.keys = value;
+        }
 
         /*!
          * This function will adjust the times in all the keys stored in this data
@@ -168,9 +163,7 @@ namespace Niflib
          * \param[in] phase The phase shift to remove from any keys stored in this
          * object.
          */
-        NIFLIB_API virtual void NormalizeKeys(float phase, float frequency);
-
-
+        public virtual void NormalizeKeys(float phase, float frequency) => Key.NormalizeKeyVector(data.keys, phase, frequency);
         //--END:CUSTOM--//
 
     }

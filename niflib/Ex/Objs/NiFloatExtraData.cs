@@ -86,19 +86,15 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
         //--BEGIN:FILE FOOT--//
-
         /*!
-         * Retrieves the floating point value stored in this object.
-         * \return The floating point value stored in this object.
-         */
-        NIFLIB_API float GetData() const;
-
-        /*!
-         * Sets the floating point value stored in this object.
+         * Gets or sets the floating point value stored in this object.
          * \param[in] n The new floating point value to store in this object.
          */
-        NIFLIB_API void SetData(float n);
-
+        public float Data
+        {
+            get => floatData;
+            set => floatData = value;
+        }
         //--END:CUSTOM--//
 
     }

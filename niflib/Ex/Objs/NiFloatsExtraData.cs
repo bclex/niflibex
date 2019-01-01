@@ -111,19 +111,19 @@ internal override List<NiObject> GetPtrs() {
 }
 
         //--BEGIN:FILE FOOT--//
-
         /*!
-         * Retrieves the floating point values stored in this object.
-         * \return The floating point values stored in this object.
-         */
-        NIFLIB_API vector<float> GetData() const;
-
-        /*!
-         * Sets the floating point values stored in this object.
+         * Gets or sets the floating point values stored in this object.
          * \param[in] n The new floating point values to store in this object.
          */
-        NIFLIB_API void SetData( const vector<float> & n );
-
+        public IList<float> Data
+        {
+            get => data;
+            set
+            {
+                numFloats = (uint)value.Count;
+                data = value;
+            }
+        }
 	//--END:CUSTOM--//
 }
 

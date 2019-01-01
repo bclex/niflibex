@@ -110,43 +110,35 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
         //--BEGIN:FILE FOOT--//
-
         /*!
-         * Can be used to get the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
-         * \return The flag data.
-         */
-        NIFLIB_API unsigned short GetFlags() const;
-
-        /*!
-         * Can be used to set the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
+         * Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
          * \param[in] n The new flag data.  Will overwrite any existing flag data.
          */
-        NIFLIB_API void SetFlags(unsigned short n);
+        public ushort Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
 
         /*!
-         * Used to get the current distance when fog begins to appear, also known as fog density.
-         * \return The current fog depth.
-         */
-        NIFLIB_API float GetFogDepth() const;
-
-        /*!
-         * Used to set the distance when fog begins to appear, also known as fog density.
+         * Gets or sets the distance when fog begins to appear, also known as fog density.
          * \param[in] value The new fog depth.
          */
-        NIFLIB_API void SetFogDepth(float value);
+        public float FogDepth
+        {
+            get => fogDepth;
+            set => fogDepth = value;
+        }
 
         /*!
-         * Used to get the current color of the fog.
-         * \return The current fog color.
-         */
-        NIFLIB_API Color3 GetFogColor() const;
-
-        /*!
-         * Used to set the color of the fog.
+         * Gets or sets the color of the fog.
          * \param[in] value The new fog color.
          */
-        NIFLIB_API void SetFogColor(Color3 value);
-
+        public Color3 FogColor
+        {
+            get => fogColor;
+            set => fogColor = value;
+        }
         //--END:CUSTOM--//
 
     }

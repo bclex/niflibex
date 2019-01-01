@@ -177,7 +177,47 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the node that this interpolator will focus on.
+         * \return The new node that the interpolator will focus on, or NULL to clear the current one.
+         */
+        public NiNode LookAt
+        {
+            get => lookAt;
+            set => lookAt = value;
+        }
 
-}
+        /*!
+         * Gets or sets the translation of the interpolator.  Could be the necessary value to point at the referenced node in the current pose.
+         * \param[in] value The new translation for the interpolator.
+         */
+        public Vector3 Translation
+        {
+            get => transform.translation;
+            set => transform.translation = value;
+        }
+
+        /*!
+         * Gets or sets the rotation of the interpolator.  Could be the necessary value to point at the referenced node in the current pose.
+         * \param[in] value The new rotation for the interpolator.
+         */
+        public Quaternion Rotation
+        {
+            get => transform.rotation;
+            set => transform.rotation = value;
+        }
+
+        /*!
+         * Gets or sets the scale of the interpolator.  Could be the necessary value to point at the referenced node in the current pose.
+         * \param[in] value The new scale for the interpolator.
+         */
+        public float Scale
+        {
+            get => transform.scale;
+            set => transform.scale = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

@@ -132,44 +132,34 @@ namespace Niflib
 
         //--BEGIN:FILE FOOT--//
         /*!
-         * Retrieve the name of this NiExtraData object.  Names are only stored
-         * in later version NIF files so this may not be necessary depending on
-         * the target version.
-         * \return The name of this NiExtraData object.
-         */
-        public string GetName();
-
-        /*!
-         * Sets the name of this NiExtraData object.  Will only be written to later
+         * Gets or sets the name of this NiExtraData object.  Will only be written to later
          * version NIF files.
          * \param new_name The new name for this NiExtraData object.
          */
-        public void SetName(string new_name);
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
 
         /*!
          * Formats a human readable string that includes the type of the object
          * \return A string in the form:  address(type) {name}
          */
-        public virtual string GetIDString();
-
-        /*! 
-         * NIFLIB HIDDEN function.  For internal use only.
-         * Returns a reference to the next extra data used in early version NIF
-         * files which store extra data in a linked list.  This function should
-         * only be called by NiObjectNET as it is not always meaningful.
-         * \return A reference to the next extra data in early version NIF files.  May not always be meaningful.
-         */
-        internal NiExtraData GetNextExtraData();
+        public virtual string IDString => $"{base.IDString} {{name}}";
 
         /*!
-         * NIFLIB HIDDEN function.  For internal use only.
-         * Sets the next extra data in early version NIF files which store extra
+         * Get or sets the next extra data in early version NIF files which store extra
          * data in a linked list.  This function should only be called by
          * NiObjectNET.
          * \param obj A reference to the object to set as the one after this in the chain.
          */
-        internal void SetNextExtraData(NiExtraData obj);
-        //--END:CUSTOM--//
-    }
+        internal NiExtraData NextExtraData
+        {
+            get => nextExtraData;
+            set => nextExtraData = value;
+        }
+    //--END:CUSTOM--//
+}
 
 }
