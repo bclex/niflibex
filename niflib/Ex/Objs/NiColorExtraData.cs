@@ -85,7 +85,7 @@ public class NiColorExtraData : NiExtraData {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the RGBA color value stored in this object.
          * \param[in] n The new RGBA color value to store in this object.
@@ -95,7 +95,8 @@ public class NiColorExtraData : NiExtraData {
             get => data;
             set => data = value;
         }
-	    //--END:CUSTOM--//
+	//--END:CUSTOM--//
+
 }
 
 }

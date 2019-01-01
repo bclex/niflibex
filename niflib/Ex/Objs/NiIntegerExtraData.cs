@@ -85,7 +85,8 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the integer value stored in this object.
          * \param[in] n The new integer value to store in this object.
@@ -95,8 +96,8 @@ internal override List<NiObject> GetPtrs() {
             get => integerData;
             set => integerData = value;
         }
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }

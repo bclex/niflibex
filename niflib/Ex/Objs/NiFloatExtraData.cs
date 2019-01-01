@@ -85,7 +85,8 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the floating point value stored in this object.
          * \param[in] n The new floating point value to store in this object.
@@ -95,8 +96,8 @@ internal override List<NiObject> GetPtrs() {
             get => floatData;
             set => floatData = value;
         }
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }

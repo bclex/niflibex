@@ -198,7 +198,8 @@ internal override List<NiObject> GetPtrs() {
 	}
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the current switch state for this effect.  Perhaps this turns effect on and off?
          * \param[in] value The new switch state for this object.
@@ -218,8 +219,8 @@ internal override List<NiObject> GetPtrs() {
             get => affectedNodes;
             set => affectedNodes = value;
         }
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }

@@ -12,69 +12,95 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*! Abstract object type. */
-public class NiObject : RefObject {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("NiObject", RefObject.TYPE);
+    /*! Abstract object type. */
+    public class NiObject : RefObject
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("NiObject", RefObject.TYPE);
 
-	public NiObject() {
-	}
+        public NiObject()
+        {
+        }
 
-	/*!
-	 * Used to determine the type of a particular instance of this object.
-	 * \return The type constant for the actual type of the object.
-	 */
-	public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-	/*!
-	 * A factory function used during file reading to create an instance of this type of object.
-	 * \return A pointer to a newly allocated instance of this type of object.
-	 */
-	public static NiObject Create() => new NiObject();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new NiObject();
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
-
-
-	}
-
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
 
-	}
+        }
 
-	/*!
-	 * Summarizes the information contained in this object in English.
-	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
-	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
-	 */
-	public override string AsString(bool verbose = false) {
-
-		var s = new System.Text.StringBuilder();
-		return s.ToString();
-
-	}
-
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetRefs() {
-		return refs;
-	}
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetPtrs() {
-		return ptrs;
-	}
+            var s = new System.Text.StringBuilder();
+            return s.ToString();
+
+        }
+
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
 
-}
+        }
+
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            return refs;
+        }
+
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            return ptrs;
+        }
+
+        //--BEGIN:FILE FOOT--//
+        /*! Returns A new object that contains all the same data that this object does,
+         * but occupies a different part of memory.  The data stored in a NIF file varies
+         * from version to version.  Usually you are safe with the default option
+         * (the highest availiable version) but you may need to use an earlier version
+         * if you need to clone an obsolete piece of information.
+         * \param[in] version The version number to use in the memory streaming operation.  Default is the highest version availiable.
+         * \param[in] user_version The game-specific version number extention.
+         * \return A cloned copy of this object as a new object.
+         */
+        public NiObject Clone(uint version = 0xFFFFFFFF, uint user_version = 0)
+        {
+
+        }
+
+        /*! Block number in the nif file. Only set when you read blocks from the file. */
+        public int internal_block_number;
+        //--END:CUSTOM--//
+    }
 
 }

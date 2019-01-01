@@ -83,7 +83,7 @@ public class NiKeyBasedInterpolator : NiInterpolator {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
         /*!
          * This function will adjust the times in all the keys stored in the data
          * objects referenced by this interpolator such that phase will equal 0 and
@@ -95,7 +95,8 @@ public class NiKeyBasedInterpolator : NiInterpolator {
          * stored in this object
          */
         public virtual void NormalizeKeys(float phase, float frequency) { } //Do Nothing
-        //--END:CUSTOM--//
-    }
+	//--END:CUSTOM--//
+
+}
 
 }

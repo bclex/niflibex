@@ -116,7 +116,7 @@ public class NiColorData : NiObject {
 		return ptrs;
 	}
 
-        //--BEGIN:FILE FOOT--//
+	//--BEGIN:FILE FOOT--//
         /*! Gets or sets the type of color interpolation being used.  Does not affect existing key data.
          * \param t The new color key type specifing the type of interpolation to be used.
          * \sa NiColorData::GetKeyType
@@ -136,7 +136,8 @@ public class NiColorData : NiObject {
             get => data.keys;
             set => data.keys = value;
         }
-	    //--END:CUSTOM--//
+	//--END:CUSTOM--//
+
 }
 
 }

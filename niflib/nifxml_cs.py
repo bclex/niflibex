@@ -103,7 +103,12 @@ LISTARRAYS = [
     'NiAVObjects::properties',
     'NodeSet::nodes',
     'NiBoneLODController::nodeGroups',
-    'NiBSplineData::floatControlPoints'
+    'NiBSplineData::floatControlPoints',
+    'NiControllerManager::controllerSequences',
+    'NiControllerSequence::controlledBlocks',
+    'NiDefaultAVObjectPalette::objs',
+    'NiNode::children',
+    'NiNode::effects'
 ]
 
 #

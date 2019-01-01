@@ -88,7 +88,8 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the data stored in the flags field for this object.  It is usually better to call more specific flag-toggle functions if they are availiable.
          * \param[in] n The new flag data.  Will overwrite any existing flag data.
@@ -98,8 +99,8 @@ internal override List<NiObject> GetPtrs() {
             get => flags;
             set => flags = value;
         }
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }

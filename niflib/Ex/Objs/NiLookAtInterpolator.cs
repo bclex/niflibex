@@ -177,7 +177,7 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-        //--BEGIN:FILE FOOT--//
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the node that this interpolator will focus on.
          * \return The new node that the interpolator will focus on, or NULL to clear the current one.
@@ -217,7 +217,8 @@ internal override List<NiObject> GetPtrs() {
             get => transform.scale;
             set => transform.scale = value;
         }
-        //--END:CUSTOM--//
-    }
+//--END:CUSTOM--//
+
+}
 
 }

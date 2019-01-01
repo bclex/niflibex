@@ -110,7 +110,7 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-        //--BEGIN:FILE FOOT--//
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the floating point values stored in this object.
          * \param[in] n The new floating point values to store in this object.
@@ -124,7 +124,8 @@ internal override List<NiObject> GetPtrs() {
                 data = value;
             }
         }
-	//--END:CUSTOM--//
+//--END:CUSTOM--//
+
 }
 
 }

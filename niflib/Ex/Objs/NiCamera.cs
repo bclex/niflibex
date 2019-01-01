@@ -202,7 +202,8 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
-        //--BEGIN:FILE FOOT--//
+
+//--BEGIN:FILE FOOT--//
         /*!
          * Gets or sets the frustum left value.
          * \param[in] value The new frstum left value.
@@ -322,8 +323,8 @@ internal override List<NiObject> GetPtrs() {
             get => lodAdjust;
             set => lodAdjust = value;
         }
-        //--END:CUSTOM--//
+//--END:CUSTOM--//
 
-    }
+}
 
 }
