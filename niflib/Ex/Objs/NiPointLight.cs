@@ -97,8 +97,38 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the constant attenuation of this point light.
+         * \param[in] value The new constant attentuation.
+         */
+        public float ConstantAttenuation
+        {
+            get => constantAttenuation;
+            set => constantAttenuation = value;
+        }
 
+        /*!
+         * Gets or sets the linear attenuation of this point light.
+         * \param[in] value The new linear attentuation.
+         */
+        public float LinearAttenuation
+        {
+            get => linearAttenuation;
+            set => linearAttenuation = value;
+        }
 
-}
+        /*!
+         * Gets or sets the quadratic attenuation of this point light.
+         * \param[in] value The new quadratic attentuation.
+         */
+        public float QuadraticAttenuation
+        {
+            get => quadraticAttenuation;
+            set => quadraticAttenuation = value;
+        }
+        //--END:CUSTOM--//
+
+    }
 
 }

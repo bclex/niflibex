@@ -208,8 +208,87 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Used to check whether the texture referenced by this object is an external file.
+         * \return True if the texture is stored in an external file, false if it is stored within this NIF file.
+         */
+        public bool IsTextureExternal => useExternal != 0;
 
+        /*!
+         * Sets a new external file texture.  Removes any existing texture references, whether internal or external.
+         * \param[in] file_name The file name of the external texture.  Often needs to follow game guidlines to be found.
+         */
+        public void SetExternalTexture(string file_name)
+        {
+            useExternal = 1;
+            pixelData = null;
+            fileName = file_name;
+            unknownLink = null;
+        }
 
-}
+        /*!
+         * Sets a new internal file texture.  Removes any existing texture references, whether internal or external.
+         * \param[in] original_file_name The original file name of the texture.  This may be optional.
+         * \param[in] pixel_data The NiPixelData object that contains the texture image data.
+         */
+        public void SetInternalTexture(string original_file_name, NiPixelData pixel_data)
+        {
+            useExternal = 0;
+            fileName = string.Empty;
+
+            //TODO: Fix name problem with Unknown Byte in XML
+            unknownByte = 0;
+            fileName = original_file_name;
+            pixelData = pixel_data;
+        }
+
+        /*!
+         * Returns either the file name of the external texture, or the original file name of the internal one.
+         * \return The name of the texture file.
+         */
+        public string TextureFileName
+        {
+            get => fileName;
+        }
+
+        /*!
+         * Returns a reference to the texture image data object used by this texture, if any.
+         * \return The iamge data object referenced by this texture, or NULL if one is not being used.
+         */
+        public NiPixelData PixelData => pixelData as NiPixelData;
+
+        /*!
+         * Gets or sets the pixel layout of this texture.  This is the image format, usually the color depth.
+         * \param[in] n The new pixel layout of this texture.
+         */
+        public PixelLayout PixelLayout
+        {
+            get => formatPrefs.pixelLayout;
+            set => formatPrefs.pixelLayout = value;
+        }
+
+        /*!
+         * Gets or sets the mip map format of this texture.  Specifies whether or not the texture contains mipmaps which are smaller versions of the texture that will be displayed on far away objects that use it.
+         * \param[in] n The new mip map format of this texture.
+         */
+        public MipMapFormat MipMapFormat
+        {
+            get => formatPrefs.useMipmaps;
+            set => formatPrefs.useMipmaps = value;
+        }
+
+        /*!
+         * Gets or sets the alpha format of this texture.  Specifies whether and how the texture uses alpha transparency.
+         * \param[in] n The new alpha format of this texture.
+         */
+        public AlphaFormat AlphaFormat
+        {
+            get => formatPrefs.alphaFormat;
+            set => formatPrefs.alphaFormat = value;
+        }
+        //--END:CUSTOM--//
+
+    }
 
 }

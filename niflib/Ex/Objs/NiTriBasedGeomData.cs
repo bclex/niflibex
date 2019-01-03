@@ -85,8 +85,19 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the triangle face data in this mesh with new data.
+         * \param in A vector containing the new face data.  Maximum size is 65,535.
+         * \sa GetTriangles
+         */
+        public virtual IList<Triangle> Triangles
+        {
+            get => new List<Triangle>();
+            set => throw new Exception("SetTriangles is not implemented for this object.");
+        }
+        //--END:CUSTOM--//
 
-
-}
+    }
 
 }

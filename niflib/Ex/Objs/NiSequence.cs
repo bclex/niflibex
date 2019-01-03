@@ -282,7 +282,42 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        // Name of this object. This is also the name of the action associated with this
+        // file. For instance, if the original NIF file is called "demon.nif" and this
+        // animation file contains an attack sequence, then the file would be called
+        // "demon_attack1.kf" and this field would contain the string "attack1".
+        // \param[in] value The new value.
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
 
+        // Name of following referenced NiTextKeyExtraData class.
+        // \param[in] value The new value.
+        public string AccumRootName
+        {
+            get => accumRootName;
+            set => accumRootName = value;
+        }
+
+        // Link to NiTextKeyExtraData.
+        // \param[in] value The new value.
+        public NiTextKeyExtraData TextKeys
+        {
+            get => textKeys;
+            set => textKeys = value;
+        }
+
+        // Refers to controlled objects.
+        // \param[in] value The new value.
+        public IList<ControlledBlock> ControlledBlocks
+        {
+            get => controlledBlocks;
+            set => controlledBlocks = value;
+        }
+	//--END:CUSTOM--//
 }
 
 }

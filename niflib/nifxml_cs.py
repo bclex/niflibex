@@ -108,7 +108,9 @@ LISTARRAYS = [
     'NiControllerSequence::controlledBlocks',
     'NiDefaultAVObjectPalette::objs',
     'NiNode::children',
-    'NiNode::effects'
+    'NiNode::effects',
+    'NiObjectNet::extraDataList',
+    'NiPSysMeshEmitter::emitterMeshes'
 ]
 
 #

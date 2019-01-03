@@ -385,7 +385,7 @@ namespace Niflib
                 var shapeColors = new Color4[compVerts.Count];
                 var shapeTCs = new TexCoord[][] { };
                 var shapeTexCoordSets = new List<int>();
-                Dictionary<NiNode, List<SkinWeight>> shapeWeights;
+                Dictionary<NiNode, List<BoneVertData>> shapeWeights;
 
                 //Search for a NiTexturingProperty to build list of
                 //texture coordinates sets to create
@@ -426,7 +426,7 @@ namespace Niflib
                             shapeTCs[tex_index][vert_index] = cv->texCoords[TexType(tex)];
                         tex_index++;
                     }
-                    SkinWeight sk;
+                    BoneVertData sk;
                     foreach (var wt in weights)
                     {
                         //Only record influences that make a noticable contribution
@@ -435,7 +435,7 @@ namespace Niflib
                             sk.index = vert_index;
                             sk.weight = wt->second;
                             if (shapeWeights.find(wt.first) == shapeWeights.end())
-                                shapeWeights[wt->first] = new List<SkinWeight>();
+                                shapeWeights[wt->first] = new List<BoneVertData>();
                             shapeWeights[wt->first].Add(sk);
                         }
                     }
@@ -818,7 +818,7 @@ namespace Niflib
                         //Get influence list
                         List<NiNodeRef> shapeBones = skinInst.GetBones();
                         //Get weights
-                        List<SkinWeight> shapeWeights;
+                        List<BoneVertData> shapeWeights;
                         for (uint b = 0; b < shapeBones.Count; ++b)
                         {
                             shapeWeights = skinData.GetBoneWeights(b);

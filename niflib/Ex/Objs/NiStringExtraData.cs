@@ -104,6 +104,21 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Sets the string value stored in this object.
+         * \param[in] n The new string value to store in this object.
+         */
+        public string Data
+        {
+            get => stringData;
+            set
+            {
+                stringData = value;
+                bytesRemaining = (uint)(value.Length + 4);
+            }
+        }
+	//--END:CUSTOM--//
 
 }
 

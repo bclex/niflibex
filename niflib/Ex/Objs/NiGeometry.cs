@@ -419,7 +419,7 @@ internal override List<NiObject> GetPtrs() {
         }
 
         // Calculate bounding sphere using minimum-volume axis-align bounding box.  Its fast but not a very good fit.
-        static void CalcAxisAlignedBox(IList<SkinWeight> n, IList<Vector3> vertices, out Vector3 center, out float radius)
+        static void CalcAxisAlignedBox(IList<BoneVertData> n, IList<Vector3> vertices, out Vector3 center, out float radius)
         {
             //--Calculate center & radius--//
 
@@ -458,7 +458,7 @@ internal override List<NiObject> GetPtrs() {
         }
 
         // Calculate bounding sphere using average position of the points.  Better fit but slower.
-        static void CalcCenteredSphere(IList<SkinWeight> n, IList<Vector3> vertices, out Vector3 center, out float radius)
+        static void CalcCenteredSphere(IList<BoneVertData> n, IList<Vector3> vertices, out Vector3 center, out float radius)
         {
             var nv = n.Count;
             var sum = new Vector3();
@@ -479,7 +479,7 @@ internal override List<NiObject> GetPtrs() {
          * The version on this class calculates the center and radius of
          * each set of affected vertices automatically.
          */
-        public void SetBoneWeights(uint bone_index, IList<SkinWeight> value)
+        public void SetBoneWeights(uint bone_index, IList<BoneVertData> value)
         {
             if (value.Count == 0)
                 throw new Exception("You must specify at least one weight value.");

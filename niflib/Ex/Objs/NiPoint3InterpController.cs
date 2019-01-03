@@ -83,7 +83,18 @@ public class NiPoint3InterpController : NiSingleInterpController {
 		return ptrs;
 	}
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the pos data used by this controller.
+         * \param[in] value The new pos data.
+         */
+        public NiPosData Data
+        {
+            get => data;
+            set => data = value;
+        }
+        //--END:CUSTOM--//
 
-}
+    }
 
 }

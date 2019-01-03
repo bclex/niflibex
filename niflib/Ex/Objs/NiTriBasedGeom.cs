@@ -12,75 +12,306 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*! Describes a mesh, built from triangles. */
-public class NiTriBasedGeom : NiGeometry {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("NiTriBasedGeom", NiGeometry.TYPE);
+    /*! Describes a mesh, built from triangles. */
+    public class NiTriBasedGeom : NiGeometry
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("NiTriBasedGeom", NiGeometry.TYPE);
 
-	public NiTriBasedGeom() {
-	}
+        public NiTriBasedGeom()
+        {
+        }
 
-	/*!
-	 * Used to determine the type of a particular instance of this object.
-	 * \return The type constant for the actual type of the object.
-	 */
-	public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-	/*!
-	 * A factory function used during file reading to create an instance of this type of object.
-	 * \return A pointer to a newly allocated instance of this type of object.
-	 */
-	public static NiObject Create() => new NiTriBasedGeom();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new NiTriBasedGeom();
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
-		base.Read(s, link_stack, info);
+            base.Read(s, link_stack, info);
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.Write(s, link_map, missing_link_stack, info);
+            base.Write(s, link_map, missing_link_stack, info);
 
-	}
+        }
 
-	/*!
-	 * Summarizes the information contained in this object in English.
-	 * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
-	 * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
-	 */
-	public override string AsString(bool verbose = false) {
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-		var s = new System.Text.StringBuilder();
-		s.Append(base.AsString());
-		return s.ToString();
+            var s = new System.Text.StringBuilder();
+            s.Append(base.AsString());
+            return s.ToString();
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-		base.FixLinks(objects, link_stack, missing_link_stack, info);
+            base.FixLinks(objects, link_stack, missing_link_stack, info);
 
-	}
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetRefs() {
-		var refs = base.GetRefs();
-		return refs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            var refs = base.GetRefs();
+            return refs;
+        }
 
-	/*! NIFLIB_HIDDEN function.  For internal use only. */
-	internal override List<NiObject> GetPtrs() {
-		var ptrs = base.GetPtrs();
-		return ptrs;
-	}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            var ptrs = base.GetPtrs();
+            return ptrs;
+        }
 
+        //--BEGIN MISC CUSTOM CODE--//
 
-}
+        /*!
+         * This generates skin data for hardware acceleration.  Specifically, it creates a NiSkinPartition object based on the current skin weights.  This splits up the mesh into smaller parts that are affected by fewer bones so that they can be processed by 3D accelerator hardware.
+         * \param[in] max_bones_per_partition The maximum number of bones that can affect a skin partition, i.e. a sub-mesh generated by chopping up the original mesh.  Proper value is game dependent.
+         * \param[in] max_bones_per_vertex The maximum number of bones that can affect any one vertex.  Vertices affected by more bones than this will have the bone witht he smallest affect removed and the remaining bones will be normalized.
+         */
+        public void GenHardwareSkinInfo(int max_bones_per_partition = 4, int max_bones_per_vertex = 4, bool bStrippify = true, int face2PartMap = null)
+        {
+            var skinPart = max_bones_per_partition == 0 ?
+                new NiSkinPartition(this) :
+                new NiSkinPartition(this, max_bones_per_partition, max_bones_per_vertex, bStrippify, face2PartMap);
+            // Set the partition info in both places and it will be handled when exported.
+            var skinInst = SkinInstance;
+            if (skinInst != null)
+            {
+                skinInst.SkinPartition = skinPart;
+                var skinData = skinInst.SkinData;
+                if (skinData != null)
+                    skinData.SkinPartition = skinPart;
+            }
+        }
+
+        /*!
+         * This clears any hardware acceleration skin data that was previously created.
+         */
+        public void ClearHardareSkinInfo()
+        {
+            // Clear the partition info in both places.
+            var skinInst = SkinInstance;
+            if (skinInst != null)
+            {
+                skinInst.SkinPartition = null;
+                var skinData = skinInst.SkinData;
+                if (skinData != null)
+                    skinData.SkinPartition = null;
+            }
+        }
+
+        /*!
+         * Generate or update a NiStringExtraData object with precalculated
+         * tangent and binormal data (Oblivion specific)
+         * \param[in] method Calculation method. [0 - Nifskope; 1 - Obsidian]
+         */
+        public void UpdateTangentSpace(int method = 0)
+        {
+            var niTriGeomData = data as NiTriBasedGeomData;
+            /* No data, no tangent space */
+            if (niTriGeomData == null)
+                throw new Exception("There is no NiTriBasedGeomData attached the NiGeometry upon which UpdateTangentSpace was called.");
+
+            //Check if there are any UVs or Vertices before trying to retrive them
+            if (niTriGeomData.UVSetCount == 0)
+                //There are no UVs, do nothing
+                return;
+
+            if (niTriGeomData.VertexCount == 0)
+                //There are no Vertices, do nothing
+                return;
+            //Get mesh data from data object
+            var verts = niTriGeomData.Vertices;
+            var norms = niTriGeomData.Normals;
+            var tris = niTriGeomData.GetTriangles();
+            var uvs = niTriGeomData.GetUVSet(0);
+
+            /* check for data validity */
+            if (verts.Count != norms.Count || verts.Count != uvs.Count || tris.empty())
+                //Do nothing, there is no shape in this data.
+                return;
+
+            var tangents = new Vector3[verts.Count];
+            var bitangents = new Vector3[verts.Count];
+            if (method == 0) // Nifskope algorithm
+            {
+                for (int t = 0; t < (int)tris.size(); t++)
+                {
+                    var tri = tris[t];
+                    var i1 = tri[0];
+                    var i2 = tri[1];
+                    var i3 = tri[2];
+                    var v1 = verts[i1];
+                    var v2 = verts[i2];
+                    var v3 = verts[i3];
+                    var w1 = uvs[i1];
+                    var w2 = uvs[i2];
+                    var w3 = uvs[i3];
+                    var v2v1 = v2 - v1;
+                    var v3v1 = v3 - v1;
+
+                    var w2w1 = new TexCoord(w2.u - w1.u, w2.v - w1.v);
+                    var w3w1 = new TexCoord(w3.u - w1.u, w3.v - w1.v);
+                    var r = w2w1.u * w3w1.v - w3w1.u * w2w1.v;
+                    r = (r >= 0.0f ? +1.0f : -1.0f);
+                    var sdir = new Vector3(
+                        (w3w1.v * v2v1.x - w2w1.v * v3v1.x) * r,
+                        (w3w1.v * v2v1.y - w2w1.v * v3v1.y) * r,
+                        (w3w1.v * v2v1.z - w2w1.v * v3v1.z) * r);
+                    var tdir = new Vector3(
+                        (w2w1.u * v3v1.x - w3w1.u * v2v1.x) * r,
+                        (w2w1.u * v3v1.y - w3w1.u * v2v1.y) * r,
+                        (w2w1.u * v3v1.z - w3w1.u * v2v1.z) * r);
+                    sdir = sdir.Normalized();
+                    tdir = tdir.Normalized();
+
+                    // no duplication, just smoothing
+                    for (var j = 0; j < 3; j++)
+                    {
+                        var i = tri[j];
+                        tangents[i] += tdir;
+                        bitangents[i] += sdir;
+                    }
+                }
+
+                // for each vertex calculate tangent and binormal
+                for (var i = 0; i < verts.Count; i++)
+                {
+                    var n = norms[i];
+                    var t = tangents[i];
+                    var b = bitangents[i];
+                    if (t == new Vector3() || b == new Vector3())
+                    {
+                        t.x = n.y;
+                        t.y = n.z;
+                        t.z = n.x;
+                        b = n.CrossProduct(t);
+                    }
+                    else
+                    {
+                        t = t.Normalized();
+                        t = (t - n * n.DotProduct(t));
+                        t = t.Normalized();
+                        b = b.Normalized();
+                        b = (b - n * n.DotProduct(b));
+                        b = (b - t * t.DotProduct(b));
+                        b = b.Normalized();
+                    }
+                }
+            }
+            else if (method == 1) // Obsidian Algorithm
+            {
+                for (var faceNo = 0; faceNo < tris.Count; ++faceNo)   // for each face
+                {
+                    var t = tris[faceNo];  // get face
+                    int i0 = t[0], i1 = t[1], i2 = t[2];        // get vertex numbers
+                    var side_0 = verts[i0] - verts[i1];
+                    var side_1 = verts[i2] - verts[i1];
+
+                    var delta_U_0 = uvs[i0].u - uvs[i1].u;
+                    var delta_U_1 = uvs[i2].u - uvs[i1].u;
+                    var delta_V_0 = uvs[i0].v - uvs[i1].v;
+                    var delta_V_1 = uvs[i2].v - uvs[i1].v;
+
+                    var face_tangent = (side_0 * delta_V_1 - side_1 * delta_V_0).Normalized();
+                    var face_bi_tangent = (side_0 * delta_U_1 - side_1 * delta_U_0).Normalized();
+                    var face_normal = (side_0 ^ side_1).Normalized();
+
+                    // no duplication, just smoothing
+                    for (var j = 0; j <= 2; j++)
+                    {
+                        var i = t[j];
+                        tangents[i] += face_tangent;
+                        bitangents[i] += face_bi_tangent;
+                    }
+                }
+
+                // for each.getPosition(), normalize the Tangent and Binormal
+                for (var i = 0; i < verts.Count; i++)
+                {
+                    bitangents[i] = bitangents[i].Normalized();
+                    tangents[i] = tangents[i].Normalized();
+                }
+            }
+
+            if ((niTriGeomData.TspaceFlag & 0xF0) == 0)
+            {
+                // generate the byte data
+                var vCount = verts.Count;
+                var fSize = sizeof(float) * 3;
+                var binData = new byte[2 * vCount * fSize];
+                for (var i = 0; i < verts.Count; i++)
+                {
+                    float[] tan_xyz = new float[3], bin_xyz = new float[3];
+                    tan_xyz[0] = tangents[i].x;
+                    tan_xyz[1] = tangents[i].y;
+                    tan_xyz[2] = tangents[i].z;
+                    bin_xyz[0] = bitangents[i].x;
+                    bin_xyz[1] = bitangents[i].y;
+                    bin_xyz[2] = bitangents[i].z;
+
+                    var tan_Bytes = BitConverter.GetBytes(tan_xyz);
+                    var bin_Bytes = BitConverter.GetBytes(bin_xyz);
+                    for (var j = 0; j < fSize; j++)
+                    {
+                        binData[i * fSize + j] = tan_Bytes[j];
+                        binData[(i + vCount) * fSize + j] = bin_Bytes[j];
+                    }
+                }
+
+                // update or create the tangent space extra data
+                NiBinaryExtraData tspaceRef = null;
+                var props = GetExtraData();
+                foreach (var prop in props)
+                    if (prop.Name == "Tangent space (binormal & tangent vectors)")
+                    {
+                        tspaceRef = prop as NiBinaryExtraData;
+                        break;
+                    }
+                if (tspaceRef == null)
+                {
+                    tspaceRef = new NiBinaryExtraData();
+                    tspaceRef.Name = "Tangent space (binormal & tangent vectors)";
+                    AddExtraData((NiExtraData)tspaceRef);
+                }
+                tspaceRef.Data = binData;
+            }
+            else
+            {
+                // swap bitangents and tangents: [ niftools-Bugs-2466995 ]
+                niTriGeomData.Tangents = bitangents;
+                niTriGeomData.Bitangents = tangents;
+            }
+        }
+        //--END:CUSTOM--//
+    }
 
 }

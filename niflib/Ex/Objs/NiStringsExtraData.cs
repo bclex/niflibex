@@ -110,7 +110,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the string values stored in this object.
+         * \param[in] n The new string values to store in this object.
+         */
+        public IList<string> Data
+        {
+            get => data; //: was cloning
+            set => data = value; //: was cloning
+        }
+	//--END:CUSTOM--//
 }
 
 }

@@ -200,7 +200,117 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the model projection matrix of this effect.  This always seems to be set to the identity.
+         * \param[in] value The new model projection matrix.
+         */
+        public Matrix33 ModelProjectionMatrix
+        {
+            get => modelProjectionMatrix;
+            set => modelProjectionMatrix = value;
+        }
 
-}
+        /*!
+         * Gets or sets the model projection transform of this effect.  This always seems to be set to (0,0,0).
+         * \param[in] value The new model projection transform.
+         */
+        public Vector3 ModelProjectionTransform
+        {
+            get => modelProjectionTransform;
+            set => modelProjectionTransform = value;
+        }
+
+        /*!
+         * Gets or sets the texture filtering mode used by this effect.
+         * \param[in] value The new texture filtering mode.
+         */
+        public TexFilterMode TextureFiltering
+        {
+            get => textureFiltering;
+            set => textureFiltering = value;
+        }
+        
+        /*!
+         * Gets or sets the texture clamping mode used by this effect.
+         * \param[in] value The new texture clamping mode.
+         */
+        public TexClampMode TextureClamping
+        {
+            get => textureClamping;
+            set => textureClamping = value;
+        }
+
+        /*!
+         * Gets or sets the texture type used by this effect.  Valid values are:
+         * 0: PROJECTED_LIGHT
+         * 1: PROJECTED_SHADOW
+         * 2: ENVIRONMENT_MAP (Usual value)
+         * 3: FOG_MAP
+         * \param[in] value The new texture type.
+         */
+        public TextureType TextureType
+        {
+            get => textureType;
+            set => textureType = value;
+        }
+
+        /*!
+         * Gets or sets the texture coordinate generation mode.  Valid values are:
+         * 0: WORLD_PARALLEL
+         * 1: WORLD_PERSPECTIVE
+         * 2: SPHERE_MAP (Usual value)
+         * 3: SPECULAR_CUBE_MAP
+         * 4: DIFFUSE_CUBE_MAP
+         * \return The new texture coordinate generation mode.
+         */
+        public CoordGenType CoordinateGenerationType
+        {
+            get => coordinateGenerationType;
+            set => coordinateGenerationType = value;
+        }
+
+        /*!
+         * Gets or sets the source texture index.
+         * \param[in] value The new source texture index.
+         */
+        public NiSourceTexture SourceTexture
+        {
+            get => sourceTexture;
+            set => sourceTexture = value;
+        }
+
+        /*!
+         * Gets or sets the clipping plane behavior.  Valid values are:
+         * 0: Disabled (Usual value)
+         * 1: Enabled
+         * \param[in] value The new clipping plane behavior.
+         */
+        public byte EnablePlane
+        {
+            get => enablePlane;
+            set => enablePlane = value;
+        }
+        /*!
+         * Gets or sets a Playstation 2 - specific value.  Can just be left at the default of 0.
+         * \param[in] value The new PS2 L value.
+         */
+        public short Ps2L
+        {
+            get => ps2L;
+            set => ps2L = value;
+        }
+
+        /*!
+         * Gets or sets a Playstation 2 - specific value.  Can just be left at the default of 0xFFB5.
+         * \param[in] value The new PS2 K value.
+         */
+        public short Ps2K
+        {
+            get => ps2K;
+            set => ps2K = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

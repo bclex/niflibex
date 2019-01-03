@@ -12,138 +12,191 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*!
- * NiPalette objects represent mappings from 8-bit indices to 24-bit RGB or 32-bit
- * RGBA colors.
- */
-public class NiPalette : NiObject {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("NiPalette", NiObject.TYPE);
-	/*!  */
-	internal byte hasAlpha;
-	/*! The number of palette entries. Always 256 but can also be 16. */
-	internal uint numEntries;
-	/*! The color palette. */
-	internal Array16<ByteColor4> palette;
+    /*!
+     * NiPalette objects represent mappings from 8-bit indices to 24-bit RGB or 32-bit
+     * RGBA colors.
+     */
+    public class NiPalette : NiObject
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("NiPalette", NiObject.TYPE);
+        /*!  */
+        internal byte hasAlpha;
+        /*! The number of palette entries. Always 256 but can also be 16. */
+        internal uint numEntries;
+        /*! The color palette. */
+        internal Array16<ByteColor4> palette;
 
-	public NiPalette() {
-	hasAlpha = (byte)0;
-	numEntries = (uint)256;
-}
+        public NiPalette()
+        {
+            hasAlpha = (byte)0;
+            numEntries = (uint)256;
+        }
 
-/*!
- * Used to determine the type of a particular instance of this object.
- * \return The type constant for the actual type of the object.
- */
-public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-/*!
- * A factory function used during file reading to create an instance of this type of object.
- * \return A pointer to a newly allocated instance of this type of object.
- */
-public static NiObject Create() => new NiPalette();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new NiPalette();
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
-	base.Read(s, link_stack, info);
-	Nif.NifStream(out hasAlpha, s, info);
-	Nif.NifStream(out numEntries, s, info);
-	if ((numEntries == 16)) {
-		for (var i2 = 0; i2 < 16; i2++) {
-			Nif.NifStream(out palette[i2].r, s, info);
-			Nif.NifStream(out palette[i2].g, s, info);
-			Nif.NifStream(out palette[i2].b, s, info);
-			Nif.NifStream(out palette[i2].a, s, info);
-		}
-	}
-	if ((numEntries != 16)) {
-		for (var i2 = 0; i2 < 256; i2++) {
-			Nif.NifStream(out palette[i2].r, s, info);
-			Nif.NifStream(out palette[i2].g, s, info);
-			Nif.NifStream(out palette[i2].b, s, info);
-			Nif.NifStream(out palette[i2].a, s, info);
-		}
-	}
+            base.Read(s, link_stack, info);
+            Nif.NifStream(out hasAlpha, s, info);
+            Nif.NifStream(out numEntries, s, info);
+            if ((numEntries == 16))
+            {
+                for (var i2 = 0; i2 < 16; i2++)
+                {
+                    Nif.NifStream(out palette[i2].r, s, info);
+                    Nif.NifStream(out palette[i2].g, s, info);
+                    Nif.NifStream(out palette[i2].b, s, info);
+                    Nif.NifStream(out palette[i2].a, s, info);
+                }
+            }
+            if ((numEntries != 16))
+            {
+                for (var i2 = 0; i2 < 256; i2++)
+                {
+                    Nif.NifStream(out palette[i2].r, s, info);
+                    Nif.NifStream(out palette[i2].g, s, info);
+                    Nif.NifStream(out palette[i2].b, s, info);
+                    Nif.NifStream(out palette[i2].a, s, info);
+                }
+            }
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-	base.Write(s, link_map, missing_link_stack, info);
-	Nif.NifStream(hasAlpha, s, info);
-	Nif.NifStream(numEntries, s, info);
-	if ((numEntries == 16)) {
-		for (var i2 = 0; i2 < 16; i2++) {
-			Nif.NifStream(palette[i2].r, s, info);
-			Nif.NifStream(palette[i2].g, s, info);
-			Nif.NifStream(palette[i2].b, s, info);
-			Nif.NifStream(palette[i2].a, s, info);
-		}
-	}
-	if ((numEntries != 16)) {
-		for (var i2 = 0; i2 < 256; i2++) {
-			Nif.NifStream(palette[i2].r, s, info);
-			Nif.NifStream(palette[i2].g, s, info);
-			Nif.NifStream(palette[i2].b, s, info);
-			Nif.NifStream(palette[i2].a, s, info);
-		}
-	}
+            base.Write(s, link_map, missing_link_stack, info);
+            Nif.NifStream(hasAlpha, s, info);
+            Nif.NifStream(numEntries, s, info);
+            if ((numEntries == 16))
+            {
+                for (var i2 = 0; i2 < 16; i2++)
+                {
+                    Nif.NifStream(palette[i2].r, s, info);
+                    Nif.NifStream(palette[i2].g, s, info);
+                    Nif.NifStream(palette[i2].b, s, info);
+                    Nif.NifStream(palette[i2].a, s, info);
+                }
+            }
+            if ((numEntries != 16))
+            {
+                for (var i2 = 0; i2 < 256; i2++)
+                {
+                    Nif.NifStream(palette[i2].r, s, info);
+                    Nif.NifStream(palette[i2].g, s, info);
+                    Nif.NifStream(palette[i2].b, s, info);
+                    Nif.NifStream(palette[i2].a, s, info);
+                }
+            }
 
-}
+        }
 
-/*!
- * Summarizes the information contained in this object in English.
- * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
- * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
- */
-public override string AsString(bool verbose = false) {
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-	var s = new System.Text.StringBuilder();
-	uint array_output_count = 0;
-	s.Append(base.AsString());
-	s.AppendLine($"  Has Alpha:  {hasAlpha}");
-	s.AppendLine($"  Num Entries:  {numEntries}");
-	if ((numEntries == 16)) {
-		array_output_count = 0;
-		for (var i2 = 0; i2 < 16; i2++) {
-			if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
-				s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
-				break;
-			}
-			s.AppendLine($"      r:  {palette[i2].r}");
-			s.AppendLine($"      g:  {palette[i2].g}");
-			s.AppendLine($"      b:  {palette[i2].b}");
-			s.AppendLine($"      a:  {palette[i2].a}");
-		}
-	}
-	return s.ToString();
+            var s = new System.Text.StringBuilder();
+            uint array_output_count = 0;
+            s.Append(base.AsString());
+            s.AppendLine($"  Has Alpha:  {hasAlpha}");
+            s.AppendLine($"  Num Entries:  {numEntries}");
+            if ((numEntries == 16))
+            {
+                array_output_count = 0;
+                for (var i2 = 0; i2 < 16; i2++)
+                {
+                    if (!verbose && (array_output_count > Nif.MAXARRAYDUMP))
+                    {
+                        s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
+                        break;
+                    }
+                    s.AppendLine($"      r:  {palette[i2].r}");
+                    s.AppendLine($"      g:  {palette[i2].g}");
+                    s.AppendLine($"      b:  {palette[i2].b}");
+                    s.AppendLine($"      a:  {palette[i2].a}");
+                }
+            }
+            return s.ToString();
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-	base.FixLinks(objects, link_stack, missing_link_stack, info);
+            base.FixLinks(objects, link_stack, missing_link_stack, info);
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override List<NiObject> GetRefs() {
-	var refs = base.GetRefs();
-	return refs;
-}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            var refs = base.GetRefs();
+            return refs;
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override List<NiObject> GetPtrs() {
-	var ptrs = base.GetPtrs();
-	return ptrs;
-}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            var ptrs = base.GetPtrs();
+            return ptrs;
+        }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the palette data for this palette object.
+         * \param new_pal A vector containing the the new colors to be stored in the palette.
+         * \sa NiPalette::GetPalette
+         */
+        public IList<Color4> Palette
+        {
+            get
+            {
+                var color_pal = new Color4[256];
+                for (var i = 0; i < 256; ++i)
+                {
+                    color_pal[i].r = (float)(palette[i].r) / 255.0f;
+                    color_pal[i].g = (float)(palette[i].g) / 255.0f;
+                    color_pal[i].b = (float)(palette[i].b) / 255.0f;
+                    color_pal[i].a = (float)(palette[i].a) / 255.0f;
+                }
+                return color_pal;
+            }
+            set
+            {
+                if (value.Count != 256)
+                    throw new Exception("Palette size must be 256");
+                for (var i = 0; i < 256; ++i)
+                {
+                    palette[i].r = (int)(value[i].r * 255.0f);
+                    palette[i].g = (int)(value[i].g * 255.0f);
+                    palette[i].b = (int)(value[i].b * 255.0f);
+                    palette[i].a = (int)(value[i].a * 255.0f);
+                }
+            }
+        }
+        //--END:CUSTOM--//
 
-
-}
+    }
 
 }

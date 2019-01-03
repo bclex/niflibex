@@ -131,7 +131,45 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the NiPosData object that this interpolator links to, if any.
+         * \return The NiPosData object that this interpolator should now link to, or NULL to clear the current one.
+         */
+        public NiPosData PosData
+        {
+            get => posData;
+            set => posData = value;
+        }
 
-}
+        /*!
+         * Gets or sets the NiFloatData object that this interpolator links to, if any.
+         * \return The NiFloatData object that this interpolator should now link to, or NULL to clear the current one.
+         */
+        public NiFloatData FloatData
+        {
+            get => floatData;
+            set => floatData = value;
+        }
+
+        /*!
+         * This function will adjust the times in all the keys stored in the data
+         * objects referenced by this interpolator such that phase will equal 0 and
+         * frequency will equal one.  In other words, it will cause the key times
+         * to be in seconds starting from zero.
+         * \param[in] phase The phase shift to remove from any keys stored in this
+         * object.
+         * \param[in] frequency The frequency to normalize to 1.0 for any keys
+         * stored in this object
+         */
+        public virtual void NormalizeKeys(float phase, float frequency)
+        {
+            if (posData != null)
+                posData.NormalizeKeys(phase, frequency);
+            if (floatData != null)
+                floatData.NormalizeKeys(phase, frequency);
+        }
+        //--END:CUSTOM--//
+    }
 
 }

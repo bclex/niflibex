@@ -160,8 +160,8 @@ internal override List<NiObject> GetPtrs() {
 		ptrs.Add((NiObject)emitterObject);
 	return ptrs;
 }
+       
 
-
-}
+    }
 
 }

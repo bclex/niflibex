@@ -121,8 +121,56 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*
+         * Gets or sets the texture slot that will be the target of this texture transform controller.
+         * \param[in] n The new texture slot that will be animated by this controller.
+         */
+        public TexType TargetTextureSlot
+        {
+            get => textureSlot;
+            set => textureSlot = value;
+        }
 
+        /*
+         * Gets or sets the type of texture transformation that this controller applies.
+         * \param[in] n The new way that this controller will animate the target texture.
+         */
+        public TransformMember TextureTransformType
+        {
+            get => operation;
+            set => operation = value;
+        }
 
-}
+        /*!
+         * Gets or sets the float data used by this controller.
+         * \param[in] n The new float data.
+         */
+        public NiFloatData Data
+        {
+            get => data;
+            set => data = value;
+        }
+
+        /*!
+         * This function will adjust the times in all the keys in the data objects
+         * referenced by this controller and any of its interpolators such that the
+         * phase will equal 0 and frequency will equal one.  In other words, it
+         * will cause the key times to be in seconds starting from zero.
+         */
+        public virtual void NormalizeKeys()
+        {
+            // If data is not the same as The interpolator data, which will be
+            // normalized by the call to NiSingleInterpController's version of
+            // this function, then normalize it here.
+            var interp = interpolator as NiFloatInterpolator;
+            if (interp.Data != data && data != null)
+                data.NormalizeKeys(phase, frequency);
+            //Call the parent version of this function to finish up
+            base.NormalizeKeys();
+        }
+        //--END:CUSTOM--//
+
+    }
 
 }

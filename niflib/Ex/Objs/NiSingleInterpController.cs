@@ -96,8 +96,35 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Sets the interpolator used by this controller.
+         * \param[in] value The new interpolator.
+         */
+        public NiInterpolator Interpolator
+        {
+            get => interpolator;
+            set => interpolator = value;
+        }
 
+        /*!
+         * This function will adjust the times in all the keys in the data objects
+         * referenced by this controller and any of its interpolators such that the
+         * phase will equal 0 and frequency will equal one.  In other words, it
+         * will cause the key times to be in seconds starting from zero.
+         */
+        public virtual void NormalizeKeys()
+        {
+            //If this interpolator is key-based, normalize its keys
+            var keyBased = interpolator as NiKeyBasedInterpolator;
+            if (keyBased != null)
+                keyBased.NormalizeKeys(phase, frequency);
+            //Call the NiTimeController version of this function to normalize the start
+            //and stop times and reset the phase and frequency
+            NiTimeController.NormalizeKeys();
+        }
+        //--END:CUSTOM--//
 
-}
+    }
 
 }

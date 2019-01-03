@@ -118,7 +118,7 @@ internal override List<NiObject> GetPtrs() {
 * \param keys A vector containing new visibility data which will replace any existing data.
 * \sa NiBoolData::GetKeys, Key
 */
-public Key<byte>[] Keys
+public IList<Key<byte>> Keys
 {
     get => keys;
     set => keys = value;

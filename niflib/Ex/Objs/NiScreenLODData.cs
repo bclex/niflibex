@@ -12,124 +12,188 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Niflib {
+namespace Niflib
+{
 
-/*!
- * NiScreenLODData controls switching LOD levels based on proportion of the screen
- * that a bound would include.
- */
-public class NiScreenLODData : NiLODData {
-	//Definition of TYPE constant
-	public static readonly Type_ TYPE = new Type_("NiScreenLODData", NiLODData.TYPE);
-	/*!  */
-	internal NiBound bound;
-	/*!  */
-	internal NiBound worldBound;
-	/*!  */
-	internal uint numProportions;
-	/*!  */
-	internal IList<float> proportionLevels;
+    /*!
+     * NiScreenLODData controls switching LOD levels based on proportion of the screen
+     * that a bound would include.
+     */
+    public class NiScreenLODData : NiLODData
+    {
+        //Definition of TYPE constant
+        public static readonly Type_ TYPE = new Type_("NiScreenLODData", NiLODData.TYPE);
+        /*!  */
+        internal NiBound bound;
+        /*!  */
+        internal NiBound worldBound;
+        /*!  */
+        internal uint numProportions;
+        /*!  */
+        internal IList<float> proportionLevels;
 
-	public NiScreenLODData() {
-	numProportions = (uint)0;
-}
+        public NiScreenLODData()
+        {
+            numProportions = (uint)0;
+        }
 
-/*!
- * Used to determine the type of a particular instance of this object.
- * \return The type constant for the actual type of the object.
- */
-public override Type_ GetType() => TYPE;
+        /*!
+         * Used to determine the type of a particular instance of this object.
+         * \return The type constant for the actual type of the object.
+         */
+        public override Type_ GetType() => TYPE;
 
-/*!
- * A factory function used during file reading to create an instance of this type of object.
- * \return A pointer to a newly allocated instance of this type of object.
- */
-public static NiObject Create() => new NiScreenLODData();
+        /*!
+         * A factory function used during file reading to create an instance of this type of object.
+         * \return A pointer to a newly allocated instance of this type of object.
+         */
+        public static NiObject Create() => new NiScreenLODData();
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void Read(IStream s, List<uint> link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Read(IStream s, List<uint> link_stack, NifInfo info)
+        {
 
-	base.Read(s, link_stack, info);
-	Nif.NifStream(out bound.center, s, info);
-	Nif.NifStream(out bound.radius, s, info);
-	Nif.NifStream(out worldBound.center, s, info);
-	Nif.NifStream(out worldBound.radius, s, info);
-	Nif.NifStream(out numProportions, s, info);
-	proportionLevels = new float[numProportions];
-	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
-		Nif.NifStream(out proportionLevels[i1], s, info);
-	}
+            base.Read(s, link_stack, info);
+            Nif.NifStream(out bound.center, s, info);
+            Nif.NifStream(out bound.radius, s, info);
+            Nif.NifStream(out worldBound.center, s, info);
+            Nif.NifStream(out worldBound.radius, s, info);
+            Nif.NifStream(out numProportions, s, info);
+            proportionLevels = new float[numProportions];
+            for (var i1 = 0; i1 < proportionLevels.Count; i1++)
+            {
+                Nif.NifStream(out proportionLevels[i1], s, info);
+            }
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void Write(OStream s, Dictionary<NiObject, uint> link_map, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-	base.Write(s, link_map, missing_link_stack, info);
-	numProportions = (uint)proportionLevels.Count;
-	Nif.NifStream(bound.center, s, info);
-	Nif.NifStream(bound.radius, s, info);
-	Nif.NifStream(worldBound.center, s, info);
-	Nif.NifStream(worldBound.radius, s, info);
-	Nif.NifStream(numProportions, s, info);
-	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
-		Nif.NifStream(proportionLevels[i1], s, info);
-	}
+            base.Write(s, link_map, missing_link_stack, info);
+            numProportions = (uint)proportionLevels.Count;
+            Nif.NifStream(bound.center, s, info);
+            Nif.NifStream(bound.radius, s, info);
+            Nif.NifStream(worldBound.center, s, info);
+            Nif.NifStream(worldBound.radius, s, info);
+            Nif.NifStream(numProportions, s, info);
+            for (var i1 = 0; i1 < proportionLevels.Count; i1++)
+            {
+                Nif.NifStream(proportionLevels[i1], s, info);
+            }
 
-}
+        }
 
-/*!
- * Summarizes the information contained in this object in English.
- * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
- * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
- */
-public override string AsString(bool verbose = false) {
+        /*!
+         * Summarizes the information contained in this object in English.
+         * \param[in] verbose Determines whether or not detailed information about large areas of data will be printed cs.
+         * \return A string containing a summary of the information within the object in English.  This is the function that Niflyze calls to generate its analysis, so the output is the same.
+         */
+        public override string AsString(bool verbose = false)
+        {
 
-	var s = new System.Text.StringBuilder();
-	uint array_output_count = 0;
-	s.Append(base.AsString());
-	numProportions = (uint)proportionLevels.Count;
-	s.AppendLine($"  Center:  {bound.center}");
-	s.AppendLine($"  Radius:  {bound.radius}");
-	s.AppendLine($"  Center:  {worldBound.center}");
-	s.AppendLine($"  Radius:  {worldBound.radius}");
-	s.AppendLine($"  Num Proportions:  {numProportions}");
-	array_output_count = 0;
-	for (var i1 = 0; i1 < proportionLevels.Count; i1++) {
-		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
-			s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
-			break;
-		}
-		if (!verbose && (array_output_count > Nif.MAXARRAYDUMP)) {
-			break;
-		}
-		s.AppendLine($"    Proportion Levels[{i1}]:  {proportionLevels[i1]}");
-		array_output_count++;
-	}
-	return s.ToString();
+            var s = new System.Text.StringBuilder();
+            uint array_output_count = 0;
+            s.Append(base.AsString());
+            numProportions = (uint)proportionLevels.Count;
+            s.AppendLine($"  Center:  {bound.center}");
+            s.AppendLine($"  Radius:  {bound.radius}");
+            s.AppendLine($"  Center:  {worldBound.center}");
+            s.AppendLine($"  Radius:  {worldBound.radius}");
+            s.AppendLine($"  Num Proportions:  {numProportions}");
+            array_output_count = 0;
+            for (var i1 = 0; i1 < proportionLevels.Count; i1++)
+            {
+                if (!verbose && (array_output_count > Nif.MAXARRAYDUMP))
+                {
+                    s.AppendLine("<Data Truncated. Use verbose mode to see complete listing.>");
+                    break;
+                }
+                if (!verbose && (array_output_count > Nif.MAXARRAYDUMP))
+                {
+                    break;
+                }
+                s.AppendLine($"    Proportion Levels[{i1}]:  {proportionLevels[i1]}");
+                array_output_count++;
+            }
+            return s.ToString();
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info) {
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override void FixLinks(Dictionary<uint, NiObject> objects, List<uint> link_stack, List<NiObject> missing_link_stack, NifInfo info)
+        {
 
-	base.FixLinks(objects, link_stack, missing_link_stack, info);
+            base.FixLinks(objects, link_stack, missing_link_stack, info);
 
-}
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override List<NiObject> GetRefs() {
-	var refs = base.GetRefs();
-	return refs;
-}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetRefs()
+        {
+            var refs = base.GetRefs();
+            return refs;
+        }
 
-/*! NIFLIB_HIDDEN function.  For internal use only. */
-internal override List<NiObject> GetPtrs() {
-	var ptrs = base.GetPtrs();
-	return ptrs;
-}
+        /*! NIFLIB_HIDDEN function.  For internal use only. */
+        internal override List<NiObject> GetPtrs()
+        {
+            var ptrs = base.GetPtrs();
+            return ptrs;
+        }
 
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the center of the bounding sphere?
+         * \param[in] bound_center The new center of the bounding sphere?
+         */
+        public Vector3 BoundCenter
+        {
+            get => bound.center;
+            set => bound.center = value;
+        }
 
-}
+        /*!
+         * Gets or sets the radius of the bounding sphere?
+         * \param[in] value The new radius of the bounding sphere?
+         */
+        public float BoundRadius
+        {
+            get => bound.radius;
+            set => bound.radius = value;
+        }
+
+        /*!
+         * Gets or sets the center of the bounding sphere in world space?
+         * \param[in] value The new center of the bounding sphere in world space?
+         */
+        public Vector3 WorldCenter
+        {
+            get => worldBound.center;
+            set => worldBound.center = value;
+        }
+
+        /*!
+         * Gets or sets the radius of the bounding sphere in world space?
+         * \param[in] value The new radius of the bounding sphere in world space?
+         */
+        public float WorldRadius
+        {
+            get => worldBound.radius;
+            set => worldBound.radius = value;
+        }
+
+        /*!
+         * Gets or sets the LOD levels based on proportion of screen size?
+         * \param[in] value The LOD levels based on proportion of screen size?
+         */
+        public IList<float> ProportionLevels
+        {
+            get => proportionLevels;
+            set => proportionLevels = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }

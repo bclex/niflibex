@@ -150,7 +150,17 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
-
-}
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Sets the image object used by this texture property, if any.
+         * \return The new image to be used by this property, or NULL to clear the existing one.
+         */
+        public NiImage Image
+        {
+            get => image;
+            set => image = value;
+        }
+        //--END:CUSTOM--//
+        }
 
 }

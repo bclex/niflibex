@@ -99,8 +99,19 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        //TODO:  This class has an unknown member
+        /*!
+         * Gets or sets the UV data used by this controller.
+         * \param[in] n The new UV data.
+         */
+        public NiUVData Data
+        {
+            get => data;
+            set => data = value;
+        }
+        //--END:CUSTOM--//
 
-
-}
+    }
 
 }

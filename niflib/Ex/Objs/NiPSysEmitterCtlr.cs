@@ -117,8 +117,28 @@ internal override List<NiObject> GetPtrs() {
 	var ptrs = base.GetPtrs();
 	return ptrs;
 }
+        //--BEGIN:FILE FOOT--//
+        /*!
+         * Gets or sets the data object used by this controller.
+         * \param[in] value The new data object.
+         */
+        public NiPSysEmitterCtlrData Data
+        {
+            get => data;
+            set => data = value;
+        }
 
+        /*!
+         * Gets or sets the visibility interpolator used by this controller.
+         * \param[in] value The new visibility interpolator.
+         */
+        public NiInterpolator VisibilityInterpolator
+        {
+            get => visibilityInterpolator;
+            set => visibilityInterpolator = value;
+        }
+        //--END:CUSTOM--//
 
-}
+    }
 
 }

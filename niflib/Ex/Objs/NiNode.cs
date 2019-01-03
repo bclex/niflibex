@@ -325,7 +325,7 @@ internal override List<NiObject> GetPtrs() {
             foreach (var it in skins)
             {
                 //Get Bone list and Skin Data
-                var bone_nodes = it.Bones;
+                var bone_nodes = it.GetBones();
                 var skin_data = it.SkinData;
                 if (skin_data == null)
                     //There's no skin data for this skin instance; skip it.
@@ -342,17 +342,17 @@ internal override List<NiObject> GetPtrs() {
                     var parent_offset = skin_data.GetBoneTransform(i);
                     //Loop through all bones again, checking for any that have this bone as a parent
                     for (var j = 0; j < bone_nodes.Count; ++j)
-                        if (bone_nodes[j]->Parent == bone_nodes[i])
+                        if (bone_nodes[j].Parent == bone_nodes[i])
                         {
                             //Node 2 has node 1 as a parent
                             //Get child offset Matrix33
                             var child_offset = skin_data.GetBoneTransform(j);
                             //Do calculation to get correct bone postion in relation to parent
                             var child_pos = child_offset.Inverse() * parent_offset;
-                            //bones[j].SetWorldBindPos( child_pos );
-                            bone_nodes[j].SetLocalRotation(child_pos.GetRotation());
-                            bone_nodes[j].SetLocalScale(1.0f);
-                            bone_nodes[j].SetLocalTranslation(child_pos.GetTranslation());
+                            //bone_nodes[j].WorldBindPos = child_pos;
+                            bone_nodes[j].LocalRotation = child_pos.GetRotation();
+                            bone_nodes[j].LocalScale = 1.0f;
+                            bone_nodes[j].LocalTranslation = child_pos.GetTranslation();
                         }
                 }
             }
@@ -376,30 +376,30 @@ internal override List<NiObject> GetPtrs() {
          * NIFLIB_HIDDEN function.  For internal use only.
          * Should only be called by NiTriBasedGeom.  Adds a new SkinInstance to the specified mesh.  The bones must be below this node in the scene graph tree
          */
-        public void AddSkin(NiSkinInstance skin_inst) => skins.Add(skin_inst);
+        internal void AddSkin(NiSkinInstance skin_inst) => skins.Add(skin_inst);
 
         /*! 
          * NIFLIB_HIDDEN function.  For internal use only.
          * Should only be called by NiTriBasedGeom.  Detaches the skin associated with a child mesh.
          */
-        public void RemoveSkin(NiSkinInstance skin_inst)
+        internal void RemoveSkin(NiSkinInstance skin_inst)
         {
             //Remove the reference
             skins.Remove(skin_inst);
 
             //Ensure that any multiply referenced bone nodes still
             //have their skin flag set
-            List<NiNode> bones;
+            IList<NiNode> bones;
             foreach (var it in skins)
             {
-                bones = it.Bones;
+                bones = it.GetBones();
                 for (var i = 0; i < bones.Count; ++i)
                     bones[i].SetSkinFlag(true);
             }
         }
 
         /*! NIFLIB_HIDDEN function.  For internal use only. */
-        public void SetSkinFlag(bool n)
+        internal void SetSkinFlag(bool n)
         {
             //Already set to the requested value
             if (IsSkinInfluence == n) return;

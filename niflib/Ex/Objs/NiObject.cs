@@ -95,7 +95,31 @@ namespace Niflib
          */
         public NiObject Clone(uint version = 0xFFFFFFFF, uint user_version = 0)
         {
+            //Create a string stream to temporarily hold the state-save of this object
+            var tmp = new OStream();
 
+            //Create a new object of the same type
+            var clone = ObjectRegistry.CreateObject(GetType().GetTypeName());
+
+            //Dummy map
+            var link_map = new Dictionary<NiObject, uint>();
+
+            //Write this object's data to the stream
+            var info = new NifInfo(version, user_version);
+            var missing_link_stack = new List<NiObject>();
+            Write(tmp, link_map, missing_link_stack, info);
+
+            //Dummy stack
+            var link_stack = new List<uint>();
+
+            //Read the data back from the stream into the clone
+            clone.Read(tmp, link_stack, info);
+
+            //We don't fix the links, causing the clone to be a copy of all
+            //data but have none of the linkage of the original.
+
+            //return new object
+            return clone;
         }
 
         /*! Block number in the nif file. Only set when you read blocks from the file. */

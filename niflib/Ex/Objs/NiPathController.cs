@@ -139,7 +139,28 @@ internal override List<NiObject> GetPtrs() {
 	return ptrs;
 }
 
+        //--BEGIN:FILE FOOT--//
+        //TODO:  This class has a lot of unknown data
+        /*!
+         * Sets the float data used by this controller.
+         * \param[in] n The new float data.
+         */
+        public NiFloatData FloatData
+        {
+            get => floatData;
+            set => floatData = value;
+        }
 
-}
+        /*!
+         * Sets the pos data used by this controller.
+         * \param[in] n The new pos data.
+         */
+        public NiPosData PosData
+        {
+            get => posData;
+            set => posData = value;
+        }
+        //--END:CUSTOM--//
+    }
 
 }
